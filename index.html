@@ -406,6 +406,8 @@ body{
 .rh-bar{height:7px;border-radius:999px;background:rgba(0,0,0,.38);overflow:hidden;margin:9px 0 7px}
 .rh-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(92deg,#a78bfa,#f9a8d4);transition:width .3s}
 .rh-note{margin:0;font-size:10.5px;color:var(--muted2);line-height:1.65}
+.rh-qz{margin:8px 0 0;font-size:10.5px;font-weight:800;color:#fde68a;line-height:1.5}
+.rh-qz b{color:#fff8dd;font-variant-numeric:tabular-nums}
 .seg{display:flex;gap:5px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:9px}
 .seg button{flex:1;min-width:0;border:0;border-radius:11px;padding:9px 3px;background:transparent;color:var(--muted);
   font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -436,7 +438,7 @@ body{
 .m-head .m-prog{margin-left:auto;font-size:10px;font-weight:800;color:var(--muted2);font-variant-numeric:tabular-nums}
 .m-sub{display:block;font-size:10.5px;color:var(--muted2);margin:4px 0 8px;line-height:1.55}
 .lec-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.lec{display:flex;align-items:stretch;gap:5px}
+.lec{display:flex;align-items:stretch;gap:5px;flex-wrap:wrap}
 .lec-go{flex:1;min-width:0;display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;
   border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:8px 9px;background:rgba(0,0,0,.2)}
 .lec-go:active{transform:scale(.99)}
@@ -454,6 +456,26 @@ body{
 .fb-yt{display:inline-flex;align-items:center;gap:5px;margin-top:9px;border:1px solid rgba(251,191,36,.45);
   background:rgba(251,191,36,.12);color:#fde68a;border-radius:11px;padding:7px 11px;
   font-size:11.5px;font-weight:800;text-decoration:none;line-height:1.35}
+/* ---------- 📜 12강 연계 퀴즈 (강의별 퀴즈 버튼 · 문제 강 배지 · 해설) ---------- */
+.lec-qzrow{flex:0 0 100%}
+.lec-qz{display:flex;width:100%;align-items:center;gap:6px;border:1px dashed rgba(251,191,36,.42);
+  background:rgba(251,191,36,.10);color:#fde68a;border-radius:11px;padding:6px 10px;font-family:inherit;
+  font-size:10.5px;font-weight:800;cursor:pointer;line-height:1.35;text-align:left}
+.lec-qz .lq-t{font-weight:900;white-space:nowrap}
+.lec-qz .lq-s{margin-left:auto;font-size:9.5px;color:#c4b5fd;font-weight:800;font-variant-numeric:tabular-nums}
+.lec-qz.done{border-style:solid;border-color:rgba(52,211,153,.46);background:rgba(52,211,153,.13);color:#a7f3d0}
+.lec-qz.done .lq-s{color:#6ee7b7}
+.lec-qz:active{transform:scale(.99)}
+.qlec{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.ql-n{font-size:10px;font-weight:900;color:#17102e;background:linear-gradient(92deg,#fcd34d,#f9a8d4);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.ql-t{font-size:10.5px;font-weight:800;color:#c4b5fd;line-height:1.4}
+.qexp{margin-top:7px;padding:8px 10px;border-radius:10px;background:rgba(139,92,246,.15);
+  border-left:3px solid rgba(167,139,250,.65);font-size:11.5px;line-height:1.6;color:#ddd3fb}
+.res-next{margin:14px 0 10px;display:flex;flex-direction:column;gap:8px}
+.cta.next{background:linear-gradient(92deg,#fcd34d 0%,#f9a8d4 55%,#f472b6 100%);color:#1b1035;
+  box-shadow:0 14px 30px -14px rgba(249,168,212,.9);font-size:15px;line-height:1.3;padding:0 12px}
+.cta.mini2{min-height:46px;font-size:12px;font-weight:800;line-height:1.35;padding:0 12px}
+a.cta{display:flex;align-items:center;justify-content:center;text-decoration:none}
 .quick-card{border:1px solid rgba(251,191,36,.34);border-radius:16px;padding:11px 12px 12px;margin-bottom:12px;
   background:linear-gradient(150deg,rgba(251,191,36,.14),rgba(139,92,246,.18) 72%)}
 .qc-h{margin-bottom:8px}
@@ -638,6 +660,7 @@ body{
     <div class="room-hero">
       <div class="rh-row"><span class="rh-badge">2개월</span><span id="roomCount">0 / 84강</span></div>
       <div class="rh-bar"><i id="roomBar" style="width:0%"></i></div>
+      <p class="rh-qz" id="roomQz">📝 역사 퀴즈 0 / 24강 완료</p>
       <p class="rh-note">하루 10분 · 이번 강 영상 보기 → 핵심 한 줄 읽기 → 문제 풀기 (옥토 학습 루틴)</p>
     </div>
 
@@ -645,7 +668,7 @@ body{
     <div class="seg seg-sub" id="roomSubTabs"></div>
     <div id="roomBody"></div>
 
-    <p class="room-legend">▶ 누르면 유튜브에서 그 강의를 바로 찾아 열어요 · ✓를 누르면 수강 완료 기록</p>
+    <p class="room-legend">▶ 누르면 유튜브 강의 · 📝 누르면 그 강의 퀴즈(1강 끝나면 다음 강으로) · ✓ 를 누르면 수강 완료 기록</p>
     <p class="foot">강의 제목은 옥토(성장·공부) 학습자료와 2026년 현행 기준이에요<br>진도는 이 폰에만 저장돼요</p>
   </section>
 
@@ -699,6 +722,7 @@ body{
         <div class="wl-t">📝 오답 노트에 저장했어요</div>
         <ul id="resWrongList"></ul>
       </div>
+      <div id="resNextBox"></div>
       <button class="cta" id="resAgain" type="button">한 번 더 💜</button>
       <div style="height:9px"></div>
       <button class="cta ghost" id="resHome" type="button">🏠 홈으로</button>
@@ -1008,69 +1032,393 @@ var LISTEN = [
    k:'d2t' = 설명 → 용어 / k:'t2d' = 용어·질문 → 설명
    ============================================================ */
 var SENSE = [
-/* ---------- 1단계 한국사 ---------- */
-{st:1,term:"고조선",k:"d2t",line:"기원전 2333년 단군왕검이 세웠다고 전해지는 한반도 최초의 국가.",
- q:"단군왕검이 세웠다고 전해지는 한반도 최초의 국가는?",opts:["고조선","고구려","백제","신라"],a:0,
- tip:"'가장 고(古)것' = 고조선. 찬우에게 물어보기: \"단군 할아버지가 뭘 세웠게?\""},
-{st:1,term:"삼국 시대",k:"d2t",line:"고구려·백제·신라가 한반도를 나눠 다스린 시기.",
- q:"고구려·백제·신라 세 나라를 함께 부르는 말은?",opts:["삼국 시대","남북국 시대","고려 시대","조선 시대"],a:0,
- tip:"세 나라 = 삼국. 남북국 시대는 통일신라+발해를 말해요."},
-{st:1,term:"세종대왕",k:"d2t",line:"1446년 훈민정음(한글)을 반포한 조선의 왕.",
- q:"1446년 훈민정음을 반포한 왕은?",opts:["세종대왕","태조 이성계","정조","영조"],a:0,
- tip:"한글은 '누구나 쉽게 읽게' 만든 문자. 기자에게도 원조 활자 정신이에요."},
-{st:1,term:"이순신",k:"d2t",line:"1592년 임진왜란 때 한산도 대첩에서 크게 이긴 장군.",
- q:"임진왜란 때 한산도에서 일본 수군을 물리친 장군은?",opts:["이순신","권율","김시민","강감찬"],a:0,
- tip:"거북선 = 이순신. '한산도'만 들리면 이순신으로 3초."},
-{st:1,term:"이성계",k:"d2t",line:"1392년 고려를 무너뜨리고 조선을 세운 인물.",
- q:"1392년 조선을 건국한 인물은?",opts:["이성계","왕건","정도전","이방원"],a:0,
- tip:"고려는 왕건, 조선은 이성계. 1392는 '이성계가 나라 세운 해'로 통째로."},
-{st:1,term:"4·19 혁명",k:"d2t",line:"1960년 부정선거에 항의하며 일어난 민주화 운동.",
- q:"1960년 부정선거에 항의해 일어난 민주화 운동은?",opts:["4·19 혁명","5·18 민주화운동","6월 민주항쟁","3·1 운동"],a:0,
- tip:"연도와 숫자를 붙여 외우면 끝! 1960 = 4·19."},
-{st:1,term:"6·25 전쟁",k:"d2t",line:"1950년 6월 25일 시작된 한국전쟁.",
- q:"1950년 6월 25일에 시작된 전쟁은?",opts:["6·25 전쟁(한국전쟁)","베트남 전쟁","제1차 세계대전","임진왜란"],a:0,
- tip:"날짜가 곧 이름이에요. 찬우에게: \"우리 할머니가 어릴 때 난 전쟁 이름은?\""},
-{st:1,term:"5·18 민주화운동",k:"t2d",line:"1980년 5월 광주에서 일어난 민주화 운동. '광주 민주화운동'이라고도 한다.",
- q:"5·18 민주화운동이 일어난 도시는?",opts:["광주","부산","대구","서울"],a:0,
- tip:"1980 = 5·18 = 광주. 숫자-도시를 한 세트로 붙여 두세요."},
-{st:1,term:"6월 민주항쟁",k:"d2t",line:"1987년 대통령 직선제 개헌을 이끌어낸 시민 항쟁.",
- q:"1987년 대통령 직선제 개헌을 이끌어낸 항쟁은?",opts:["6월 민주항쟁","4·19 혁명","5·18 민주화운동","3·1 운동"],a:0,
- tip:"1987 = 6월 민주항쟁 = 대통령 직선제. '직선제'가 나오면 1987!"},
-{st:1,term:"팔만대장경",k:"d2t",line:"몽골 침입기에 만들어져 지금도 해인사에 보관된 목판 불교 경전.",
- q:"몽골 침입기에 만들어져 해인사에 보관된 목판 경전은?",opts:["팔만대장경","삼국사기","훈민정음","직지심체 요절"],a:0,
- tip:"8만 장 = 팔'만'대장경. 해인사에 있어요."},
+/* ---------- 1단계 한국사 (12강 연계 · 1강→12강 순서) ---------- */
+/* 1강 */
+{st:1,track:"korea",lec:1,lecTitle:"고조선과 여러 나라",term:"고조선 8조법",k:"d2t",
+ q:"고조선에 '사람을 죽인 자는 사형에 처한다' 같은 8조법이 있었다는 기록이 남아 있는데, 이 법이 있던 나라는?",
+ opts:["고조선","부여","옥저","삼한"],a:0,
+ tip:"8조법 = 고조선. 지금 전하는 건 3조뿐!",
+ exp:"『한서』 지리지에 3개 조항만 전해져요 — 살인은 사형, 남에게 상해를 입히면 곡식으로 배상, 도둑질은 노비가 되는 것. '법이 있는 나라 = 고조선'으로 기억하면 돼요."},
+{st:1,track:"korea",lec:1,lecTitle:"고조선과 여러 나라",term:"위만 조선 멸망",k:"d2t",
+ q:"중국 한(漢) 무제가 침공해 고조선을 멸망시킨 해는?",
+ opts:["기원전 108년","기원전 2333년","기원후 108년","기원전 37년"],a:0,
+ tip:"건국 BC 2333 · 멸망 BC 108.",
+ exp:"단군의 고조선이 여러 나라로 나뉘었다가 위만이 왕이 된 뒤, 한 무제의 공격으로 기원전 108년에 무너졌어요. 그 뒤 한반도 북부에는 여러 나라가 자리를 잡습니다."},
+{st:1,track:"korea",lec:1,lecTitle:"고조선과 여러 나라",term:"서옥제",k:"d2t",
+ q:"혼인 풍습으로 '서옥제(데릴사위제)'가 있었던 나라는?",
+ opts:["고구려","부여","동예","삼한"],a:0,
+ tip:"고구려 = 서옥제, 부여 = 형사취수제.",
+ exp:"고구려는 신랑이 신부 집 뒤에 작은 집(서옥)을 짓고 살다가 자식이 커지면 본집으로 데려왔어요. 부여의 형사취수제와 짝지어 외우면 안 헷갈립니다."},
+/* 2강 */
+{st:1,track:"korea",lec:2,lecTitle:"삼국의 성립과 경쟁",term:"백제 건국",k:"d2t",
+ q:"기원전 18년 한강 유역에 나라를 세운 온조는 어느 나라의 시조인가?",
+ opts:["백제","신라","고구려","가야"],a:0,
+ tip:"온조 = 백제, 한강 유역.",
+ exp:"고구려 주몽의 아들 온조가 남쪽으로 내려와 백제를 세웠어요. 백제는 한강을 차지하며 중국과 교류했고, 4세기 근초고왕 때 전성기를 맞았습니다."},
+{st:1,track:"korea",lec:2,lecTitle:"삼국의 성립과 경쟁",term:"광개토대왕",k:"d2t",
+ q:"'영락'이라는 연호를 쓰며 만주와 한반도에서 영토를 크게 넓힌 고구려 왕은?",
+ opts:["광개토대왕","장수왕","소수림왕","을지문덕"],a:0,
+ tip:"영락 = 광개토대왕, 평양 천도 = 장수왕.",
+ exp:"광개토대왕은 스스로 '영락대왕'이라 불렀어요. 장수왕은 수도를 평양으로 옮겨 남쪽으로 힘을 뻗었죠. 영토 확장(광개토) → 남진(장수) 순서로 기억하세요."},
+{st:1,track:"korea",lec:2,lecTitle:"삼국의 성립과 경쟁",term:"골품제",k:"d2t",
+ q:"신라에서 태어날 때의 신분에 따라 관직 승진을 제한한 제도는?",
+ opts:["골품제","음서제","과거제","9주 5소경"],a:0,
+ tip:"신라 = 골품제(성골·진골).",
+ exp:"성골·진골·6두품으로 나뉘어 진골 위로는 올라갈 수 없었어요. 6두품 출신 최치원이 크게 좌절한 이유도 이 제도 때문입니다."},
+/* 3강 */
+{st:1,track:"korea",lec:3,lecTitle:"삼국통일",term:"황산벌 전투",k:"d2t",
+ q:"660년 나·당 연합군이 백제를 멸망시킬 때 황산벌에서 끝까지 싸운 백제 장군은?",
+ opts:["계백","김유신","을지문덕","연개소문"],a:0,
+ tip:"660 백제 멸망 = 황산벌 계백.",
+ exp:"계백이 결사대 5천으로 맞섰지만 황산벌에서 패하고 백제는 무너졌어요. 660(백제) → 668(고구려) → 676(나당전쟁 승리) 세 연도만 줄 세우면 삼국통일이 정리됩니다."},
+{st:1,track:"korea",lec:3,lecTitle:"삼국통일",term:"나당 전쟁",k:"d2t",
+ q:"신라가 당을 몰아내고 676년에 삼국통일을 이룬 전쟁은?",
+ opts:["나당 전쟁","고구려-당 전쟁","백제 부흥운동","살수 대첩"],a:0,
+ tip:"676 = 나당 전쟁 승리 = 삼국통일.",
+ exp:"백제와 고구려를 멸한 뒤 당이 한반도 전체를 차지하려 하자 신라가 힘을 모아 676년 당군을 몰아냈어요. '삼국통일 = 676년' 하나만 붙잡으면 됩니다."},
+{st:1,track:"korea",lec:3,lecTitle:"삼국통일",term:"안시성 싸움",k:"d2t",
+ q:"645년 당 태종의 침공 때 안시성에서 88일을 버텨낸 성주는?",
+ opts:["양만춘","연개소문","을지문덕","강감찬"],a:0,
+ tip:"안시성 = 양만춘, 살수 대첩 = 을지문덕.",
+ exp:"당 태종이 직접 군대를 끌고 왔는데도 안시성은 88일을 버텼어요. 성주 양만춘은 눈에 화살을 맞고도 지휘를 멈추지 않았다고 전해집니다."},
+/* 4강 */
+{st:1,track:"korea",lec:4,lecTitle:"남북국시대",term:"발해 건국",k:"d2t",
+ q:"698년 고구려 유민과 말갈인이 힘을 합쳐 세운 나라는?",
+ opts:["발해","고려","후백제","금"],a:0,
+ tip:"698 발해 = 대조영.",
+ exp:"고구려가 멸망한 뒤 대조영이 동모산에서 발해를 세웠어요. 발해는 고구려를 이었다는 뜻으로 스스로 '고려국'이라 부르기도 했습니다."},
+{st:1,track:"korea",lec:4,lecTitle:"남북국시대",term:"해동성국",k:"d2t",
+ q:"발해가 전성기를 맞아 중국에서 '바다 동쪽의 번성한 나라'라 불린 시기의 왕은?",
+ opts:["선왕","대조영","문왕","무왕"],a:0,
+ tip:"해동성국 = 선왕.",
+ exp:"선왕 때 발해는 5경 15부 62주로 제도를 정비하고 영토를 넓혀 '해동성국' 소리를 들었어요. 발해를 통일신라와 함께 '남북국'이라 부르는 이유입니다."},
+{st:1,track:"korea",lec:4,lecTitle:"남북국시대",term:"청해진",k:"d2t",
+ q:"장보고가 해상 무역을 장악하려고 완도에 설치한 것은?",
+ opts:["청해진","별무반","집현전","9주 5소경"],a:0,
+ tip:"완도 = 청해진 = 장보고.",
+ exp:"장보고는 당과 일본을 잇는 해상 무역으로 큰 부를 쌓았어요. '바다의 왕'이 만든 청해진은 지금의 완도에 있었습니다."},
+/* 5강 */
+{st:1,track:"korea",lec:5,lecTitle:"고려의 건국",term:"고려 건국",k:"d2t",
+ q:"918년 궁예를 몰아내고 고려를 세운 인물은?",
+ opts:["왕건","견훤","궁예","이성계"],a:0,
+ tip:"918 고려 = 왕건, 1392 조선 = 이성계.",
+ exp:"918년 왕건이 고려를 세우고 936년 후백제를 합쳐 후삼국을 통일했어요. '고려'라는 이름에는 고구려를 잇는다는 뜻이 담겨 있습니다."},
+{st:1,track:"korea",lec:5,lecTitle:"고려의 건국",term:"광종의 개혁",k:"d2t",
+ q:"고려 광종이 신분보다 실력으로 인재를 뽑으려고 958년에 도입한 제도는?",
+ opts:["과거제","골품제","음서제","9품중정제"],a:0,
+ tip:"광종 = 노비안검법 + 과거제.",
+ exp:"광종은 노비안검법으로 억울하게 노비가 된 사람을 풀어 주고, 과거제로 새 인재를 뽑았어요. 왕권을 단단히 하려는 개혁이었습니다."},
+{st:1,track:"korea",lec:5,lecTitle:"고려의 건국",term:"국자감",k:"d2t",
+ q:"고려가 개경에 세운 최고 교육 기관은?",
+ opts:["국자감","집현전","성균관","사부학당"],a:0,
+ tip:"고려 = 국자감, 조선 = 성균관.",
+ exp:"국자감은 고려의 최고 교육 기관이에요. 조선은 한양에 성균관을 두었고, 세종 때는 집현전에서 학문을 연구했죠. 나라별 이름을 세트로 기억하세요."},
+/* 6강 */
+{st:1,track:"korea",lec:6,lecTitle:"거란·여진의 침입",term:"귀주 대첩",k:"d2t",
+ q:"1019년 거란의 3차 침입을 귀주에서 크게 물리친 고려 장군은?",
+ opts:["강감찬","서희","윤관","척준경"],a:0,
+ tip:"귀주 대첩 = 강감찬, 담판 = 서희.",
+ exp:"강감찬이 귀주에서 거란군을 거의 전멸시켰어요. 앞서 서희는 거란 장수 소손녕과 담판해 강동 6주를 얻었죠. '싸움은 강감찬, 말은 서희'로 묶어 두세요."},
+{st:1,track:"korea",lec:6,lecTitle:"거란·여진의 침입",term:"별무반",k:"d2t",
+ q:"여진을 정벌하려고 윤관이 만든 특별 부대는?",
+ opts:["별무반","삼별초","9주 5소경","별무사"],a:0,
+ tip:"여진 정벌 = 윤관의 별무반 → 동북 9성.",
+ exp:"윤관은 기병에 약한 고려군을 보완하려 별무반(신기군·신보군·항마군)을 만들었어요. 여진을 밀어내고 동북 9성을 쌓았지만 이후 돌려주게 됩니다."},
+{st:1,track:"korea",lec:6,lecTitle:"거란·여진의 침입",term:"팔만대장경",k:"d2t",
+ q:"몽골 침입 때 부처의 힘으로 나라를 지키려고 만든 목판 불교 경전은?",
+ opts:["팔만대장경","삼국사기","직지심체요절","훈민정음"],a:0,
+ tip:"몽골 침입 = 팔만대장경 = 해인사.",
+ exp:"몽골의 침입이 이어지던 13세기, 강화도에서 16년에 걸쳐 새긴 목판이에요. 지금도 합천 해인사 장경판전에 보관돼 있고 유네스코 세계기록유산입니다."},
+/* 7강 */
+{st:1,track:"korea",lec:7,lecTitle:"조선의 건국",term:"조선 건국",k:"d2t",
+ q:"1392년 고려를 무너뜨리고 조선을 세운 인물은?",
+ opts:["이성계","왕건","정도전","이방원"],a:0,
+ tip:"1392 = 이성계, 918 = 왕건.",
+ exp:"위화도 회군으로 권력을 잡은 이성계가 1392년 조선을 세웠어요. 새 나라의 설계도는 정도전이 그렸습니다."},
+{st:1,track:"korea",lec:7,lecTitle:"조선의 건국",term:"조선의 통치 이념",k:"d2t",
+ q:"조선이 나라를 다스리는 기본 이념으로 삼은 사상은?",
+ opts:["성리학(유교)","불교","도교","이슬람교"],a:0,
+ tip:"고려 = 불교, 조선 = 성리학.",
+ exp:"조선은 임금과 신하, 부모와 자식의 질서를 중시하는 성리학을 나라의 뼈대로 삼았어요. 그래서 고려의 불교 문화와 분위기가 확 달라집니다."},
+{st:1,track:"korea",lec:7,lecTitle:"조선의 건국",term:"왕자의 난",k:"d2t",
+ q:"1398년과 1400년 두 차례 일어나 이방원이 권력을 잡은 사건은?",
+ opts:["왕자의 난","무오사화","위화도 회군","인조반정"],a:0,
+ tip:"1398·1400 = 왕자의 난 = 태종 이방원.",
+ exp:"이방원은 두 차례 왕자의 난으로 권력을 잡고 태종이 됐어요. 태종은 왕권을 단단히 하려 6조가 직접 임금에게 업무를 보고하게 했습니다."},
+/* 8강 */
+{st:1,track:"korea",lec:8,lecTitle:"세종대의 문물 정비",term:"훈민정음",k:"d2t",
+ q:"1446년 세종이 백성이 쉽게 글을 익히도록 반포한 문자는?",
+ opts:["훈민정음(한글)","이두","향찰","설형문자"],a:0,
+ tip:"1446 = 훈민정음 반포.",
+ exp:"세종은 1443년에 문자를 만들고 1446년에 반포했어요. '백성을 가르치는 바른 소리'라는 뜻입니다. 오늘 우리가 쓰는 한글의 시작이죠."},
+{st:1,track:"korea",lec:8,lecTitle:"세종대의 문물 정비",term:"자격루",k:"d2t",
+ q:"세종 때 장영실이 만든, 물이 떨어지는 힘으로 시간을 알려 준 시계는?",
+ opts:["자격루","측우기","앙부일구","혼천의"],a:0,
+ tip:"물시계 자격루 · 해시계 앙부일구 · 비 측정 측우기.",
+ exp:"자격루는 정해진 시각에 종과 북이 저절로 울려 시간을 알렸어요. 같은 시기 앙부일구(해시계)와 측우기(강우량계)도 만들어졌습니다."},
+{st:1,track:"korea",lec:8,lecTitle:"세종대의 문물 정비",term:"4군 6진",k:"d2t",
+ q:"세종 때 압록강·두만강 방면으로 영토를 넓히며 설치한 것은?",
+ opts:["4군 6진","9주 5소경","5경 15부","동북 9성"],a:0,
+ tip:"세종 = 4군 6진(최윤덕·김종서).",
+ exp:"최윤덕이 4군, 김종서가 6진을 개척해 오늘날 우리 영토의 북쪽 경계가 거의 이때 만들어졌어요. '4군 6진 = 세종의 북방 개척'으로 외우면 끝!"},
+/* 9강 */
+{st:1,track:"korea",lec:9,lecTitle:"임진왜란·병자호란",term:"한산도 대첩",k:"d2t",
+ q:"1592년 임진왜란 때 한산도에서 일본 수군을 크게 물리친 장군은?",
+ opts:["이순신","권율","김시민","곽재우"],a:0,
+ tip:"한산도 = 이순신, 행주 = 권율, 진주 = 김시민.",
+ exp:"이순신은 거북선과 학익진으로 한산도 앞바다에서 압승했어요. 세 대첩(한산도·행주·진주)을 장군과 세트로 외우면 흔들리지 않습니다."},
+{st:1,track:"korea",lec:9,lecTitle:"임진왜란·병자호란",term:"행주 대첩",k:"d2t",
+ q:"1593년 행주산성에서 왜군을 물리친 장군은?",
+ opts:["권율","이순신","김시민","사명당"],a:0,
+ tip:"행주산성 = 권율.",
+ exp:"권율은 관군과 백성, 승병까지 모아 행주산성에서 크게 이겼어요. 여성들이 치마로 돌을 나르며 도왔다는 이야기가 유명합니다."},
+{st:1,track:"korea",lec:9,lecTitle:"임진왜란·병자호란",term:"병자호란",k:"d2t",
+ q:"1636년 청의 침입으로 인조가 남한산성에서 항복한 사건은?",
+ opts:["병자호란","임진왜란","정묘호란","을사늑약"],a:0,
+ tip:"1636 = 병자호란 = 삼전도의 굴욕.",
+ exp:"1636년 청 태종이 침입해 남한산성을 45일간 에워쌌고, 이듬해 인조가 삼전도에서 항복했어요. 아들 소현세자는 청에 볼모로 끌려갔습니다."},
+/* 10강 */
+{st:1,track:"korea",lec:10,lecTitle:"개항",term:"강화도 조약",k:"d2t",
+ q:"1876년 운요호 사건을 계기로 일본과 맺은 우리나라 최초의 근대적 조약은?",
+ opts:["강화도 조약","을사늑약","한일병합조약","제물포 조약"],a:0,
+ tip:"1876 = 강화도 조약.",
+ exp:"강화도 조약은 '조선은 자주 나라'라는 문구를 넣었지만 불평등 조약이었어요. 부산·원산·인천을 열고 일본의 치외법권까지 인정했습니다."},
+{st:1,track:"korea",lec:10,lecTitle:"개항",term:"동학 농민 운동",k:"d2t",
+ q:"1894년 '보국안민'을 내세우며 전봉준이 이끈 농민 봉기는?",
+ opts:["동학 농민 운동","갑오개혁","독립협회 운동","3·1 운동"],a:0,
+ tip:"1894 = 동학 농민 운동 = 전봉준.",
+ exp:"전봉준은 탐관오리 처벌과 부패 청산을 요구했어요. 정부가 청군을 끌어들이자 일본군도 들어와 전쟁으로 번졌고, 그 틈에 갑오개혁이 추진됐습니다."},
+{st:1,track:"korea",lec:10,lecTitle:"개항",term:"국권 피탈",k:"d2t",
+ q:"1910년 일본이 대한제국의 국권을 빼앗은 사건은?",
+ opts:["한일병합조약(경술국치)","을사늑약","강화도 조약","제1차 한일협약"],a:0,
+ tip:"1905 을사늑약(외교권) → 1910 한일병합(국권).",
+ exp:"1905년 을사늑약으로 외교권을 빼앗기고 1910년 한일병합조약으로 국권까지 잃었어요. 이날을 '경술국치'라고 부릅니다. 1919년 3·1운동의 배경이 됩니다."},
+/* 11강 */
+{st:1,track:"korea",lec:11,lecTitle:"3·1운동과 독립운동",term:"3·1 운동",k:"d2t",
+ q:"1919년 3월 1일 전국에서 만세 시위가 일어난 민족 운동은?",
+ opts:["3·1 운동","4·19 혁명","5·18 민주화운동","6월 민주항쟁"],a:0,
+ tip:"1919 = 3·1 운동.",
+ exp:"민족대표 33인이 독립선언서를 읽고 만세 시위가 전국으로 퍼졌어요. 평화적 시위였지만 일제의 무력 진압으로 많은 이가 희생됐습니다."},
+{st:1,track:"korea",lec:11,lecTitle:"3·1운동과 독립운동",term:"대한민국 임시정부",k:"d2t",
+ q:"3·1 운동 직후인 1919년 중국 상하이에 세워진 정부는?",
+ opts:["대한민국 임시정부","조선총독부","만주국","상하이 조계정부"],a:0,
+ tip:"1919 상하이 = 대한민국 임시정부.",
+ exp:"임시정부는 '대한민국'이라는 이름과 민주공화제를 처음 내건 정부예요. 상하이에서 출발해 충칭까지 옮겨 다니며 독립운동을 이끌었습니다."},
+{st:1,track:"korea",lec:11,lecTitle:"3·1운동과 독립운동",term:"청산리 대첩",k:"d2t",
+ q:"1920년 김좌진이 이끄는 독립군이 일본군을 크게 물리친 전투는?",
+ opts:["청산리 대첩","봉오동 전투","3·1 운동","의열단 거사"],a:0,
+ tip:"1920 청산리 = 김좌진, 봉오동 = 홍범도.",
+ exp:"청산리 계곡에서 김좌진의 북로군정서가 일본군을 상대로 큰 승리를 거뒀어요. 그 직후 일제의 보복으로 간도 참변이 일어났습니다."},
+/* 12강 */
+{st:1,track:"korea",lec:12,lecTitle:"광복과 현대사",term:"광복(1945년)",k:"d2t",
+ q:"1945년 태평양전쟁이 끝나며 우리나라가 일제 강점기에서 벗어난 해는?",
+ opts:["1945년","1910년","1950년","1987년"],a:0,
+ tip:"1910 국권 피탈 → 1945 광복.",
+ exp:"1945년 8월 15일 일본이 항복하며 35년 강점기가 끝났어요. 하지만 38선으로 갈라지고 남북에 각각 정부가 서면서 분단의 시간이 시작됩니다."},
+{st:1,track:"korea",lec:12,lecTitle:"광복과 현대사",term:"6·25 전쟁",k:"d2t",
+ q:"1950년 6월 25일에 시작된 전쟁은?",
+ opts:["6·25 전쟁(한국전쟁)","베트남 전쟁","걸프 전쟁","제1차 세계대전"],a:0,
+ tip:"1950 = 6·25 = 유엔군 참전.",
+ exp:"북한의 남침으로 시작돼 유엔군이 참전했고, 1953년 정전협정으로 휴전 상태가 이어지고 있어요. '끝난 게 아니라 멈춰 있는 전쟁'이라는 점이 중요합니다."},
+{st:1,track:"korea",lec:12,lecTitle:"광복과 현대사",term:"6월 민주항쟁",k:"d2t",
+ q:"1987년 대통령 직선제 개헌을 이끌어낸 시민 항쟁은?",
+ opts:["6월 민주항쟁","4·19 혁명","5·18 민주화운동","3·1 운동"],a:0,
+ tip:"1960 = 4·19 / 1980 = 5·18 / 1987 = 6월 민주항쟁.",
+ exp:"박종철 고문치사 사건과 이한열 피격을 계기로 전국에서 시위가 일어났고, 그해 6·29 선언으로 직선제 개헌이 이뤄졌어요. 세 숫자를 순서대로!"},
 
-/* ---------- 2단계 세계사 ---------- */
-{st:2,term:"트로이의 목마",k:"d2t",line:"그리스군이 병사를 숨긴 나무 말을 성 안에 들여 트로이를 함락시킨 작전.",
- q:"병사를 숨긴 나무 말을 성 안에 들여 트로이를 함락시킨 작전은?",opts:["트로이의 목마","스파르타 방패벽","그리스 화염","카르타고 원정"],a:0,
- tip:"'선물처럼 보이는 것이 덫' = 트로이의 목마. 기사에서 '속임수' 비유로 자주 나와요."},
-{st:2,term:"마그나 카르타",k:"d2t",line:"1215년 영국에서 왕권을 제한한 문서. '대헌장'이라고도 한다.",
- q:"1215년 영국에서 왕권을 제한한 문서는?",opts:["마그나 카르타","독립선언문","권리장전","나폴레옹 법전"],a:0,
- tip:"왕도 법 아래에! = 마그나 카르타. 1215 한 숫자만 붙잡으면 돼요."},
-{st:2,term:"프랑스 혁명",k:"d2t",line:"1789년 바스티유 감옥 습격으로 시작된 혁명.",
- q:"1789년 바스티유 감옥 습격으로 시작된 혁명은?",opts:["프랑스 혁명","산업혁명","미국 독립혁명","러시아 혁명"],a:0,
- tip:"1789 = 바스티유 = 프랑스 혁명. 숫자만 기억!"},
-{st:2,term:"산업혁명",k:"d2t",line:"18세기 영국에서 증기기관과 기계로 생산 방식이 바뀐 변화.",
- q:"18세기 영국에서 증기기관으로 생산 방식이 바뀐 변화는?",opts:["산업혁명","르네상스","종교개혁","프랑스 혁명"],a:0,
- tip:"증기기관 = 산업혁명. '공장'이 생겨난 그 변화예요."},
-{st:2,term:"미국 독립선언문",k:"d2t",line:"1776년 7월 4일 발표된 미국의 독립 문서.",
- q:"1776년 7월 4일 발표된 미국의 문서는?",opts:["독립선언문","마그나 카르타","헌법 수정 제1조","게티즈버그 연설"],a:0,
- tip:"미국 독립기념일 7월 4일의 그 문서, 1776!"},
-{st:2,term:"로마",k:"d2t",line:"'모든 길은 로마로 통한다'는 말이 나온 고대 제국의 수도.",
- q:"'모든 길은 ○○로 통한다'의 그 도시는?",opts:["로마","아테네","카이로","이스탄불"],a:0,
- tip:"길을 깔고 도로망을 만든 제국 = 로마."},
-{st:2,term:"르네상스",k:"d2t",line:"14~16세기 이탈리아에서 시작된 예술·학문의 부흥.",
- q:"14~16세기 이탈리아에서 시작된 예술·학문의 부흥은?",opts:["르네상스","중세 암흑기","산업혁명","낭만주의"],a:0,
- tip:"레오나르도 다빈치·미켈란젤로가 활약한 '다시 태어난' 시대."},
-{st:2,term:"제1차 세계대전",k:"d2t",line:"1914년 사라예보 사건으로 시작되어 1918년 끝난 전쟁.",
- q:"1914년 사라예보 사건으로 시작된 전쟁은?",opts:["제1차 세계대전","제2차 세계대전","크림 전쟁","냉전"],a:0,
- tip:"1914 = 사라예보 = 1차 대전. 2차는 1939년이에요."},
-{st:2,term:"만리장성",k:"d2t",line:"중국 북방 민족의 침입을 막기 위해 쌓은 거대한 성벽.",
- q:"중국 북방 침입을 막기 위해 쌓은 성벽은?",opts:["만리장성","베를린 장벽","콜로세움","하드리아누스 방벽"],a:0,
- tip:"'만 리'가 이름에 있으니 길이로 기억!"},
-{st:2,term:"광복(1945년)",k:"t2d",line:"1945년 태평양전쟁이 끝나며 우리나라가 일제 강점기에서 벗어난 해.",
- q:"우리나라가 일제 강점기에서 벗어난 해는?",opts:["1945년","1910년","1950년","1987년"],a:0,
- tip:"1910 국권 피탈 → 1945 광복. 35년 만의 귀환이에요. 8·15 광복절!"},
+/* ---------- 2단계 세계사 (12강 연계 · 1강→12강 순서) ---------- */
+/* 1강 */
+{st:2,track:"world",lec:1,lecTitle:"4대 문명",term:"메소포타미아 문명",k:"d2t",
+ q:"메소포타미아 문명이 발생한 강은?",
+ opts:["티그리스·유프라테스강","나일강","인더스강","황허강"],a:0,
+ tip:"메소포타미아 = 티그리스·유프라테스강.",
+ exp:"큰 강이 있어 물을 대고 곡식을 저장할 수 있어야 도시와 국가가 생겨요. 나일=이집트, 인더스=인도, 황허=중국. 강과 문명을 세트로 기억하세요."},
+{st:2,track:"world",lec:1,lecTitle:"4대 문명",term:"설형문자",k:"d2t",
+ q:"메소포타미아에서 쐐기 모양으로 진흙판에 새긴 인류 최초의 문자는?",
+ opts:["설형문자","상형문자","알파벳","갑골문"],a:0,
+ tip:"메소포타미아 = 설형문자(쐐기).",
+ exp:"설형문자는 '쐐기 모양 글자'라는 뜻이에요. 이집트는 그림 같은 상형문자, 중국은 거북 껍질에 새긴 갑골문을 썼습니다."},
+{st:2,track:"world",lec:1,lecTitle:"4대 문명",term:"함무라비 법전",k:"d2t",
+ q:"바빌로니아 왕이 돌기둥에 새겨 만든, '눈에는 눈' 원칙이 담긴 법전은?",
+ opts:["함무라비 법전","마그나 카르타","12표법","나폴레옹 법전"],a:0,
+ tip:"함무라비 법전 = 최초의 성문법.",
+ exp:"함무라비 법전은 누구나 볼 수 있게 돌에 새긴 법이에요. 다만 신분에 따라 처벌이 달랐습니다. 로마의 12표법과 헷갈리지 마세요!"},
+/* 2강 */
+{st:2,track:"world",lec:2,lecTitle:"고대 그리스와 로마",term:"페리클레스",k:"d2t",
+ q:"기원전 5세기 아테네 민주정이 절정에 이르렀을 때 정치를 이끈 인물은?",
+ opts:["페리클레스","알렉산드로스","카이사르","솔론"],a:0,
+ tip:"아테네 민주정 전성기 = 페리클레스.",
+ exp:"페리클레스 때 시민이 민회에서 직접 투표로 결정했어요. 다만 여성·노예·외국인은 시민이 아니었죠. '누구의 민주주의였나'를 함께 보세요."},
+{st:2,track:"world",lec:2,lecTitle:"고대 그리스와 로마",term:"로마 제정",k:"d2t",
+ q:"기원전 27년 아우구스투스가 세운, 로마가 공화정에서 바뀐 체제는?",
+ opts:["제정","공화정","봉건제","민주정"],a:0,
+ tip:"BC 27 = 로마 제정 시작 = 아우구스투스.",
+ exp:"카이사르 암살 뒤 혼란이 이어지다 아우구스투스가 권력을 잡으며 제정이 시작됐어요. '모든 길은 로마로 통한다'는 말도 이 제국의 도로망에서 나왔습니다."},
+{st:2,track:"world",lec:2,lecTitle:"고대 그리스와 로마",term:"트로이의 목마",k:"d2t",
+ q:"병사를 숨긴 나무 말을 성 안에 들여 트로이를 함락시킨 작전은?",
+ opts:["트로이의 목마","스파르타 방패벽","그리스의 불","카르타고 원정"],a:0,
+ tip:"속임수 = 트로이의 목마. 호메로스 《일리아스》.",
+ exp:"그리스군은 나무 말을 남기고 배를 숨겼고, 트로이 사람들이 말을 성 안으로 끌고 들어가자 병사들이 나와 성문을 열었어요. '선물처럼 보이는 것이 덫'이라는 비유로 기사에도 자주 나옵니다."},
+/* 3강 */
+{st:2,track:"world",lec:3,lecTitle:"이슬람 문명의 성장",term:"무함마드",k:"d2t",
+ q:"610년경 이슬람교를 창시한 인물은?",
+ opts:["무함마드","예수","부처","알리"],a:0,
+ tip:"610 이슬람 창시 = 무함마드.",
+ exp:"무함마드는 메카에서 계시를 받았다고 전해지며 이슬람교를 세웠어요. '알라는 하나'라는 가르침이 아라비아반도를 하나로 묶었습니다."},
+{st:2,track:"world",lec:3,lecTitle:"이슬람 문명의 성장",term:"쿠란",k:"d2t",
+ q:"이슬람교의 경전 이름은?",
+ opts:["쿠란","성경","탈무드","베다"],a:0,
+ tip:"이슬람 경전 = 쿠란.",
+ exp:"쿠란은 무함마드가 받은 계시를 모은 책이에요. 무슬림은 하루 다섯 번 기도, 라마단 금식 등 다섯 가지 의무를 지킵니다."},
+{st:2,track:"world",lec:3,lecTitle:"이슬람 문명의 성장",term:"아라비아 숫자",k:"d2t",
+ q:"이슬람 학자들이 인도에서 받아들여 수학·천문학에 활용하고 유럽으로 전한 숫자 체계는?",
+ opts:["아라비아 숫자(0 포함)","로마 숫자","이집트 숫자","설형 숫자"],a:0,
+ tip:"0과 자릿값 = 이슬람을 거쳐 유럽으로.",
+ exp:"0과 자릿값 덕분에 계산이 훨씬 쉬워졌어요. 알콰리즈미의 이름에서 '알고리즘'이라는 말도 나왔습니다. 르네상스 과학의 밑바탕이 여기서 시작됐어요."},
+/* 4강 */
+{st:2,track:"world",lec:4,lecTitle:"중세 유럽 봉건사회",term:"봉건제",k:"d2t",
+ q:"중세 유럽에서 영주가 땅(봉토)을 주고 충성을 받는 관계를 무엇이라 하나?",
+ opts:["봉건제(주종관계)","장원제","길드","십자군"],a:0,
+ tip:"봉건제 = 주종관계(땅 ↔ 충성).",
+ exp:"왕도 영주에게 의지해야 했던 시대예요. '땅을 주면 충성을 받는다'는 계약이 피라미드처럼 쌓여 왕권은 생각보다 약했습니다."},
+{st:2,track:"world",lec:4,lecTitle:"중세 유럽 봉건사회",term:"장원제",k:"d2t",
+ q:"영주의 땅에서 농노가 경작하며 살아가는 중세 유럽의 경제 단위는?",
+ opts:["장원","도시","길드","국가"],a:0,
+ tip:"장원 = 농노가 일하는 영주의 땅.",
+ exp:"장원은 거의 자급자족 경제였어요. 농노는 땅에 묶여 살며 노동과 세금을 바쳐야 했습니다. 이 구조가 흔들리는 지점이 대항해와 도시의 성장입니다."},
+{st:2,track:"world",lec:4,lecTitle:"중세 유럽 봉건사회",term:"십자군 전쟁",k:"d2t",
+ q:"11세기 말 유럽이 예루살렘을 되찾으려고 일으킨 원정은?",
+ opts:["십자군 전쟁","백년 전쟁","장미 전쟁","페르시아 전쟁"],a:0,
+ tip:"십자군 전쟁 = 예루살렘 + 교황의 호소.",
+ exp:"교황 우르바누스 2세의 호소로 시작된 전쟁이 200년 가까이 이어졌어요. 결과적으로 실패했지만 동방의 물자와 학문이 유럽으로 흘러들어 르네상스의 씨앗이 됐습니다."},
+/* 5강 */
+{st:2,track:"world",lec:5,lecTitle:"르네상스·종교개혁",term:"르네상스",k:"d2t",
+ q:"14세기 이탈리아 피렌체에서 시작된 예술·학문의 부흥은?",
+ opts:["르네상스","종교개혁","계몽주의","낭만주의"],a:0,
+ tip:"르네상스 = '다시 태어남' = 피렌체.",
+ exp:"십자군 전쟁과 교역으로 동방의 학문과 예술이 들어왔고, 메디치 가문 같은 후원자들이 예술가를 키웠어요. '인간'을 다시 보기 시작한 시대입니다."},
+{st:2,track:"world",lec:5,lecTitle:"르네상스·종교개혁",term:"레오나르도 다빈치",k:"d2t",
+ q:"《모나리자》와 《최후의 만찬》을 그린 르네상스 예술가는?",
+ opts:["레오나르도 다빈치","미켈란젤로","라파엘로","단테"],a:0,
+ tip:"모나리자 = 다빈치, 천지창조 = 미켈란젤로.",
+ exp:"다빈치는 화가이자 해부학자·발명가였어요. 르네상스 사람들이 '관찰하고 실험하자'고 생각하기 시작한 대표 인물입니다."},
+{st:2,track:"world",lec:5,lecTitle:"르네상스·종교개혁",term:"종교개혁",k:"d2t",
+ q:"1517년 95개조 반박문을 발표하며 종교개혁을 시작한 인물은?",
+ opts:["마르틴 루터","칼뱅","에라스무스","헨리 8세"],a:0,
+ tip:"1517 = 루터 95개조 = 종교개혁.",
+ exp:"루터는 면벌부 판매를 비판하며 '성경으로 돌아가자'고 했어요. 인쇄술이 이 글을 유럽 전역에 퍼뜨렸고, 가톨릭과 개신교가 갈라지게 됩니다."},
+/* 6강 */
+{st:2,track:"world",lec:6,lecTitle:"대항해시대",term:"콜럼버스",k:"d2t",
+ q:"1492년 대서양을 건너 아메리카에 도착한 항해자는?",
+ opts:["콜럼버스","마젤란","바스쿠 다 가마","마르코 폴로"],a:0,
+ tip:"1492 = 콜럼버스 = 아메리카.",
+ exp:"콜럼버스는 인도로 가려다 아메리카에 닿았고 끝까지 인도인 줄 알았어요. 이 항해로 유럽·아메리카·아프리카 사이의 '대교류'가 시작됐습니다."},
+{st:2,track:"world",lec:6,lecTitle:"대항해시대",term:"바스쿠 다 가마",k:"d2t",
+ q:"1498년 아프리카를 돌아 인도 항로를 처음 연 포르투갈 항해자는?",
+ opts:["바스쿠 다 가마","콜럼버스","마젤란","허드슨"],a:0,
+ tip:"1498 인도 항로 = 바스쿠 다 가마.",
+ exp:"포르투갈은 이 항로로 향료를 직접 사들여 큰 이익을 냈어요. '동쪽으로 돌아 인도에 가는 길'을 열었다는 점이 핵심입니다."},
+{st:2,track:"world",lec:6,lecTitle:"대항해시대",term:"마젤란",k:"d2t",
+ q:"1519년 출발한 인류 최초의 세계 일주 항해를 이끈 항해자는?",
+ opts:["마젤란","콜럼버스","바스쿠 다 가마","쿡"],a:0,
+ tip:"최초 세계 일주 = 마젤란(1519~1522).",
+ exp:"마젤란은 도중에 숨졌고 엘카노가 지휘를 이어받아 1522년 스페인으로 돌아왔어요. 지구가 둥글다는 것을 몸으로 증명한 항해였습니다."},
+/* 7강 */
+{st:2,track:"world",lec:7,lecTitle:"3대 시민혁명",term:"마그나 카르타",k:"d2t",
+ q:"1215년 영국에서 귀족들이 왕권을 제한한 문서는?",
+ opts:["마그나 카르타","독립선언문","권리장전","나폴레옹 법전"],a:0,
+ tip:"1215 = 마그나 카르타(대헌장).",
+ exp:"귀족들이 왕에게 '함부로 세금을 걷지 말라'고 요구해 얻어낸 문서예요. '왕도 법 아래'라는 원칙이 여기서 시작됩니다."},
+{st:2,track:"world",lec:7,lecTitle:"3대 시민혁명",term:"미국 독립선언문",k:"d2t",
+ q:"1776년 7월 4일 발표된 미국의 독립 문서는?",
+ opts:["미국 독립선언문","마그나 카르타","게티즈버그 연설","권리장전"],a:0,
+ tip:"1776.7.4 = 미국 독립선언문.",
+ exp:"'모든 사람은 평등하게 태어났다'는 문장으로 유명해요. 7월 4일이 미국 독립기념일인 이유입니다."},
+{st:2,track:"world",lec:7,lecTitle:"3대 시민혁명",term:"프랑스 혁명",k:"d2t",
+ q:"1789년 바스티유 감옥 습격으로 시작된 혁명은?",
+ opts:["프랑스 혁명","미국 독립혁명","러시아 혁명","산업혁명"],a:0,
+ tip:"1789 = 바스티유 = 프랑스 혁명.",
+ exp:"시민들이 감옥을 공격하며 시작됐고, '자유·평등·박애'와 인간의 권리 선언으로 이어졌어요. 1215(영국) → 1776(미국) → 1789(프랑스) 순서로!"},
+/* 8강 */
+{st:2,track:"world",lec:8,lecTitle:"산업혁명",term:"제임스 와트",k:"d2t",
+ q:"18세기 증기기관을 개량해 공장과 기차의 힘을 만든 인물은?",
+ opts:["제임스 와트","토머스 에디슨","뉴턴","스티븐슨"],a:0,
+ tip:"증기기관 개량 = 제임스 와트.",
+ exp:"와트가 증기기관을 효율적으로 개량하면서 기계를 힘으로 돌릴 수 있게 됐어요. 기계가 사람 손을 대신하기 시작한 순간입니다."},
+{st:2,track:"world",lec:8,lecTitle:"산업혁명",term:"산업혁명의 발상지",k:"d2t",
+ q:"18세기 후반 산업혁명이 가장 먼저 시작된 나라는?",
+ opts:["영국","프랑스","미국","독일"],a:0,
+ tip:"산업혁명 = 영국 = 면직물 공업부터.",
+ exp:"영국은 석탄과 철이 가까이 있고 식민지 시장도 넓었어요. 면직물 공업에서 시작해 철도와 조선으로 퍼졌습니다."},
+{st:2,track:"world",lec:8,lecTitle:"산업혁명",term:"산업혁명의 두 계급",k:"d2t",
+ q:"산업혁명으로 생산수단을 가진 쪽과 노동력을 파는 쪽으로 갈라진 두 계급은?",
+ opts:["자본가와 노동자","영주와 농노","왕과 귀족","길드와 상인"],a:0,
+ tip:"산업혁명 → 자본가 vs 노동자.",
+ exp:"기계를 가진 자본가와 공장에서 일하는 노동자가 생겨났어요. 도시에 빈민가가 생기고 아이들이 공장에서 일하는 문제도 이때 나타났습니다."},
+/* 9강 */
+{st:2,track:"world",lec:9,lecTitle:"제국주의",term:"베를린 회의",k:"d2t",
+ q:"1884년 유럽 열강이 아프리카를 나눠 갖기 위해 연 회의는?",
+ opts:["베를린 회의","빈 회의","베르사유 회의","얄타 회담"],a:0,
+ tip:"1884 베를린 회의 = 아프리카 분할.",
+ exp:"지도 위에 자를 대듯 국경을 그어 아프리카를 나눴어요. 그렇게 그어진 국경이 오늘날 아프리카 분쟁의 원인이 됐습니다."},
+{st:2,track:"world",lec:9,lecTitle:"제국주의",term:"아편전쟁",k:"d2t",
+ q:"1840년 아편 밀매를 막겠다던 중국을 공격해 홍콩을 차지한 나라는?",
+ opts:["영국","프랑스","일본","미국"],a:0,
+ tip:"1840 아편전쟁 = 영국 → 난징조약.",
+ exp:"중국은 난징조약으로 홍콩을 넘기고 5개 항구를 열어야 했어요. 이때부터 서구 열강에 문이 열리는 시기가 본격화됩니다."},
+{st:2,track:"world",lec:9,lecTitle:"제국주의",term:"세포이 항쟁",k:"d2t",
+ q:"1857년 영국 동인도회사에 맞서 인도인이 일으킨 대규모 반영 항쟁은?",
+ opts:["세포이 항쟁","봉오동 전투","마타람 반란","타이핑 반란"],a:0,
+ tip:"1857 세포이 항쟁 → 1858 영국의 인도 직접 통치.",
+ exp:"소총 탄피에 기름을 발라 물어 뜯어야 했다는 소문이 도화선이 됐어요. 이후 영국은 동인도회사를 없애고 인도를 직접 통치하기 시작했습니다."},
+/* 10강 */
+{st:2,track:"world",lec:10,lecTitle:"1차 세계대전",term:"사라예보 사건",k:"d2t",
+ q:"제1차 세계대전의 도화선이 된 1914년 사라예보 사건에서 암살된 인물은?",
+ opts:["오스트리아-헝가리 황태자 부부","러시아 황제 니콜라이 2세","독일 황제 빌헬름 2세","영국 수상 처칠"],a:0,
+ tip:"1914 사라예보 → 1차 대전.",
+ exp:"황태자 부부가 암살되자 동맹국과 협상국이 줄줄이 뛰어들었어요. 한 발의 총성이 세계를 전쟁으로 몰아넣은 셈입니다."},
+{st:2,track:"world",lec:10,lecTitle:"1차 세계대전",term:"미국 참전",k:"d2t",
+ q:"1917년 미국이 제1차 세계대전에 참전하게 된 직접 계기는?",
+ opts:["독일의 무제한 잠수함 작전","진주만 공격","사라예보 사건","베르사유 조약"],a:0,
+ tip:"1917 미국 참전 = 무제한 잠수함.",
+ exp:"독일 잠수함이 미국 배까지 공격하자 미국이 참전했고, 이때부터 전세가 결정적으로 기울었어요. 진주만(1941)과 헷갈리지 마세요!"},
+{st:2,track:"world",lec:10,lecTitle:"1차 세계대전",term:"베르사유 조약",k:"d2t",
+ q:"1919년 파리강화회의에서 승전국들이 독일과 맺은 조약은?",
+ opts:["베르사유 조약","베를린 회의","얄타 협정","난징조약"],a:0,
+ tip:"1919 베르사유 조약 → 독일에 막대한 배상금.",
+ exp:"독일에 막대한 배상금과 영토 상실을 물렸어요. 이 굴욕이 훗날 히틀러 등장의 배경이 됩니다. 같은 회의에서 '민족자결' 원칙이 밝혀져 3·1운동에도 영향을 줬습니다."},
+/* 11강 */
+{st:2,track:"world",lec:11,lecTitle:"2차 세계대전",term:"2차 세계대전 발발",k:"d2t",
+ q:"1939년 독일이 어느 나라를 침공하며 제2차 세계대전이 시작됐나?",
+ opts:["폴란드","프랑스","영국","소련"],a:0,
+ tip:"1939 독일의 폴란드 침공 = 2차 대전 시작.",
+ exp:"독일이 폴란드를 침공하자 영국과 프랑스가 선전포고했어요. 1차는 1914년 사라예보, 2차는 1939년 폴란드. 시작점을 세트로 기억하세요."},
+{st:2,track:"world",lec:11,lecTitle:"2차 세계대전",term:"진주만 공격",k:"d2t",
+ q:"1941년 일본이 미국의 태평양 함대를 기습 공격한 곳은?",
+ opts:["진주만","미드웨이","오키나와","괌"],a:0,
+ tip:"1941 진주만 → 미국 참전.",
+ exp:"일본의 기습 공격으로 미국이 참전하며 전쟁은 세계 규모가 됐어요. 이후 태평양 전선이 본격화됩니다."},
+{st:2,track:"world",lec:11,lecTitle:"2차 세계대전",term:"원자폭탄 투하",k:"d2t",
+ q:"1945년 8월 일본의 항복을 이끌어 낸 미국의 공격은?",
+ opts:["히로시마·나가사키 원자폭탄","도쿄 대공습","진주만 공격","노르망디 상륙작전"],a:0,
+ tip:"1945.8 원자폭탄 → 일본 항복 → 광복.",
+ exp:"원자폭탄 두 발 뒤 일본이 항복하며 전쟁이 끝났고, 우리나라는 1945년 8월 15일 광복을 맞았어요. 핵무기의 참혹함도 이때 세상에 드러났습니다."},
+/* 12강 */
+{st:2,track:"world",lec:12,lecTitle:"냉전",term:"냉전",k:"d2t",
+ q:"제2차 세계대전 뒤 미국과 소련이 직접 부딪히지 않고 대립한 상태를 무엇이라 하나?",
+ opts:["냉전","열전","화해","비동맹"],a:0,
+ tip:"냉전 = 미국 vs 소련, '차가운 전쟁'.",
+ exp:"핵무기를 가진 두 나라가 직접 싸우면 큰일이 나니, 대신 동맹·군비 경쟁·우주 개발·대리전쟁으로 힘을 겨뤘어요. 그래서 '차가운 전쟁'입니다."},
+{st:2,track:"world",lec:12,lecTitle:"냉전",term:"NATO",k:"d2t",
+ q:"1949년 미국을 중심으로 서유럽이 만든 군사 동맹은?",
+ opts:["북대서양조약기구(NATO)","바르샤바 조약기구","유럽연합","국제연합"],a:0,
+ tip:"1949 NATO ↔ 1955 바르샤바 조약.",
+ exp:"소련 진영은 이에 맞서 1955년 바르샤바 조약기구를 만들었어요. 유럽이 두 군사 블록으로 갈라진 구조가 냉전의 뼈대입니다."},
+{st:2,track:"world",lec:12,lecTitle:"냉전",term:"소련 해체",k:"d2t",
+ q:"1991년 해체되며 냉전이 끝났다고 평가되는 나라는?",
+ opts:["소련","동독","체코슬로바키아","유고슬라비아"],a:0,
+ tip:"1989 베를린 장벽 붕괴 → 1991 소련 해체.",
+ exp:"1989년 베를린 장벽이 무너지고 1991년 소련이 해체되며 냉전 구도가 끝났어요. '장벽이 먼저, 소련이 나중'으로 순서를 기억하세요."},
 
 /* ---------- 3단계 시사상식 ---------- */
 {st:3,term:"국회",k:"d2t",line:"법을 만들고 예산을 심의·확정하는 입법 기관.",
@@ -1136,19 +1484,7 @@ var SENSE = [
  q:"가격이 오르면 수요는 줄고 공급은 늘어나는 원리는?",opts:["수요와 공급의 법칙","기회비용의 법칙","규모의 경제","인플레이션"],a:0,
  tip:"딸기 값이 오르면 덜 사고, 농가가 더 키워요. 그게 이 법칙!"},
 
-/* ---------- 추가: 옥토 오늘의 테스트 (2026-11-20) ---------- */
-{st:1,term:"민족자결주의",k:"d2t",line:"제1차 세계대전 뒤 우드로 윌슨이 내세운 원칙. 민족은 스스로 운명을 정할 권리가 있다는 것.",
- q:"1919년 3·1 운동에 영향을 준, 우드로 윌슨이 주창한 원칙은?",opts:["민족자결주의","집단안전보장","세력균형론","문호개방주의"],a:0,
- tip:"파리강화회의의 '민족자결'이 식민지 조선에 희망으로 퍼졌어요. 1919 = 3·1 = 윌슨!"},
-{st:1,term:"3·1 운동",k:"d2t",line:"1919년 3월 1일, 일제의 무단 통치에 맞서 전국에서 일어난 만세 시위.",
- q:"1919년 3월 1일 전국에서 일어난 만세 시위는?",opts:["3·1 운동","4·19 혁명","5·18 민주화운동","6월 민주항쟁"],a:0,
- tip:"1919 = 3·1 운동. 독립선언과 만세 시위가 전국으로, 이듬해 임시정부로 이어졌어요."},
-{st:1,term:"대한민국 임시정부",k:"d2t",line:"3·1 운동 직후인 1919년 중국 상하이에서 수립된 임시 정부.",
- q:"3·1 운동 직후 중국 상하이에 수립된 정부는?",opts:["대한민국 임시정부","조선총독부","만주국","상하이 조계정부"],a:0,
- tip:"1919 상하이 = 대한민국 임시정부. '상하이'가 나오면 임시정부로 3초!"},
-{st:2,term:"사라예보 사건",k:"d2t",line:"1914년 오스트리아-헝가리 제국의 황태자 부부가 암살된 사건. 제1차 세계대전의 직접적 도화선.",
- q:"제1차 세계대전의 도화선이 된 1914년 사라예보 사건에서 암살된 인물은?",opts:["오스트리아-헝가리 황태자 부부","러시아 황제 니콜라이 2세","독일 황제 빌헬름 2세","영국 수상 처칠"],a:0,
- tip:"사라예보에서 죽은 건 오스트리아-헝가리 황태자 부부. 그 한 발이 세계대전을 열었어요."},
+/* ---------- 추가: 옥토 오늘의 테스트에서 살아남은 시사·경제 (역사는 12강 연계로 통합) ---------- */
 {st:3,term:"파레토 법칙",k:"d2t",line:"결과의 80%는 원인 20%에서 나온다는 법칙. '80/20 법칙'이라고도 한다.",
  q:"'결과의 80%는 원인 20%에서 나온다'는 이 법칙의 이름은?",opts:["파레토 법칙(80/20 법칙)","파킨슨 법칙","무어의 법칙","오컴의 면도날"],a:0,
  tip:"상식 한 조각에서 만난 그 개념! 일의 20%가 성과의 80%를 만듭니다."},
@@ -1246,7 +1582,7 @@ var CATS = [
  {id:"grammar",emoji:"⚡",name:"3초 문법 퍼즐",desc:"빈칸 앞뒤만 보면 끝",c1:"#22d3ee",c2:"#6366f1"},
  {id:"reading",emoji:"📖",name:"한 줄 해석",desc:"토익 빈출 문장 16",c1:"#fbbf24",c2:"#f97316"},
  {id:"listening",emoji:"🎧",name:"듣기(발음)",desc:"듣고 고르기 16",c1:"#34d399",c2:"#10b981"},
- {id:"sense",emoji:"🌍",name:"한국사·세계사·상식",desc:"한국사/세계사/시사/경제·재테크",c1:"#fb7185",c2:"#f43f5e",showStages:true}
+ {id:"sense",emoji:"🌍",name:"한국사·세계사·상식",desc:"한국사 12강 · 세계사 12강 연계 퀴즈",c1:"#fb7185",c2:"#f43f5e",showStages:true}
 ];
 
 var STAGE_DEFS = {
@@ -1256,8 +1592,8 @@ var STAGE_DEFS = {
     {n:3,name:"Day 7~9",sub:"계약·업무·보고 구간",days:[7,8,9]}
   ],
   sense:[
-    {n:1,name:"1단계 한국사",sub:"고조선부터 민주화운동까지",st:1},
-    {n:2,name:"2단계 세계사",sub:"트로이의 목마부터 광복까지",st:2},
+    {n:1,name:"1단계 한국사",sub:"12강 · 1강 고조선 → 12강 현대사 순서",st:1},
+    {n:2,name:"2단계 세계사",sub:"12강 · 1강 4대 문명 → 12강 냉전 순서",st:2},
     {n:3,name:"3단계 시사상식",sub:"국회·예산·조달·인구",st:3},
     {n:4,name:"4단계 경제",sub:"금리·환율 + 2026 재테크 8문항",st:4}
   ]
@@ -1643,6 +1979,41 @@ function subjOfKey(key){
    · tmq_state_v1·단계 클리어 기록은 이 앱에 없어(포획 수만 남음) 포획으로 대신함
    · tmq_room_v1·tmq_btsdeck_v1은 과목별 통계가 아니라 카드 상단 칩으로 보여 줌 */
 function roomDoneN(){ var n=0,id; for(id in roomDone){ if(roomDone[id] && ROOM_LEC[id]) n++; } return n; }
+/* ---------------- 🔁 한국사·세계사 문제 개편(12강 연계) 오답 노트 이전 ----------------
+   문제 배열이 통째로 바뀌어 예전 "s:번호" 오답은 다른 문제를 가리키게 됩니다.
+   오답 노트에 남은 용어 이름으로 새 문제를 찾아 다시 연결합니다(폰당 1회).
+   이름이 맞는 문제가 없으면 그대로 두고 지우지 않습니다. */
+var LS_HISTV="tmq_hist_migrate_v1";
+function migrateSenseWrong(){
+  try{
+    if(localStorage.getItem(LS_HISTV)) return;
+    var byTerm={}, i, j, changed=false;
+    for(i=0;i<SENSE.length;i++){ if(SENSE[i].term) byTerm[SENSE[i].term]=i; }
+    for(var k in wrong){
+      if(!wrong[k] || k.indexOf("s:")!==0) continue;
+      var lab=String(wrong[k].label||"");
+      if(!lab) continue;                          /* 이름이 없는 기록은 그대로 둠 */
+      var ni=byTerm[lab];
+      if(ni===undefined){
+        for(j=0;j<SENSE.length;j++){
+          var t=SENSE[j].term||"";
+          if(t && (t.indexOf(lab+" ")===0 || lab.indexOf(t+" ")===0)){ ni=j; break; }
+        }
+      }
+      if(ni===undefined) continue;                /* 대응 문제 없음 → 지우지 않고 남김 */
+      var nk="s:"+ni;
+      if(nk===k) continue;
+      if(!wrong[nk]){
+        wrong[nk]={key:nk,mode:"sense",label:SENSE[ni].term,kw:SENSE[ni].term,
+          at:wrong[k].at||Date.now(),tries:wrong[k].tries||1};
+      }
+      delete wrong[k];
+      changed=true;
+    }
+    if(changed) save(LS_WRONG,wrong);
+    localStorage.setItem(LS_HISTV,"1");
+  }catch(e){}
+}
 function backfillSubj(){
   ensureSubj();
   var bf=(subjStats.bf && typeof subjStats.bf==="object") ? subjStats.bf : (subjStats.bf={});
@@ -1925,7 +2296,7 @@ function renderStages(){
   $("stageList").innerHTML=html;
   $("stageNote").textContent = state.catId==="words"
     ? "Day 1~9 실제 발송 단어 전량 · 복습 단어는 해당 회차에 포함"
-    : "한국사 "+senseCount(1)+" · 세계사 "+senseCount(2)+" · 시사상식 "+senseCount(3)+" · 경제 "+senseCount(4)+" (기회비용·트로이의 목마 포함)";
+    : "한국사 "+senseCount(1)+"(12강) · 세계사 "+senseCount(2)+"(12강) · 시사상식 "+senseCount(3)+" · 경제 "+senseCount(4)+" — 1·2단계는 1강부터 12강 순서로 출제돼요";
 }
 
 /* ---------------- 훑어보기 ---------------- */
@@ -1962,9 +2333,10 @@ function renderStudy(){
       +'<div class="box story"><span class="lab">3초 암기 썰</span>'+esc(it.s)+'</div>'
       +'<div class="box chunk"><span class="lab">2단어 짝꿍</span><b>'+esc(it.c)+'</b></div>';
   } else {
-    var sl=ytForTerm(it.term);
+    var sl=ytForSense(it);
     html='<div class="badge-row"><span class="badge day">'+esc(state.stage.name)+'</span>'
-      +(it.cat?'<span class="badge gold">'+esc(it.cat)+'</span>':'')
+      +(it.lec?('<span class="badge gold">'+it.lec+'강</span><span class="badge">'+esc(it.lecTitle||"")+'</span>')
+             :(it.cat?'<span class="badge gold">'+esc(it.cat)+'</span>':''))
       +'<span class="badge">핵심 1줄</span></div>'
       +'<div class="word small">'+esc(it.term)+'</div>'
       +'<div class="box story"><span class="lab">핵심 1줄 설명</span>'+esc(it.line)+'</div>'
@@ -2033,11 +2405,21 @@ function qListen(i){
 function qSense(i){
   var s=SENSE[i], opts=[];
   for(var k=0;k<s.opts.length;k++) opts.push({t:s.opts[k], ok:(k===s.a)});
-  var html='<div class="qmean">'+esc(s.q)+'</div>';
-  var lec=ytForTerm(s.term);
-  var tn = s.cat ? ("경제 · "+s.cat) : stageNameSense(s.st);
+  var badge="", tn, html;
+  if(s.track && s.lec){
+    tn=(s.track==="korea"?"한국사":"세계사");
+    badge='<div class="qlec"><span class="ql-n">'+s.lec+'강</span><span class="ql-t">'+esc(tn)+" · "+esc(s.lecTitle||"")+'</span></div>';
+    html=badge+'<div class="qmean">'+esc(s.q)+'</div>';
+    tn=tn+" "+s.lec+"강";
+  } else {
+    tn = s.cat ? ("경제 · "+s.cat) : stageNameSense(s.st);
+    html='<div class="qmean">'+esc(s.q)+'</div>';
+  }
+  var lec=ytForSense(s);
+  var tip=esc(s.tip||"")+(s.exp?('<div class="qexp">'+esc(s.exp)+'</div>'):"");
   return {key:"s:"+i, mode:"sense", tag:"SENSE · "+tn, label:s.term, kw:s.term,
-    html:html, sub:esc(tn)+" 문제", opts:opts, tip:s.tip, speak:null, answerText:s.opts[s.a],
+    html:html, sub:(s.track? "정답을 고르면 강의 연결 해설이 나와요" : esc(tn)+" 문제"),
+    opts:(typeof shuffle==="function"?shuffle(opts):opts), tip:tip, speak:null, answerText:s.opts[s.a],
     yt:(lec?ytLinkHtml(lec):"")};
 }
 function stageNameSense(st){
@@ -2075,7 +2457,7 @@ function refillBagWords(b){
   var pool=b.items;
   return shuffle(pool);
 }
-function startBattleForPool(mode, catId, cat, items, label, target){
+function startBattleForPool(mode, catId, cat, items, label, target, ordered){
   var make;
   if(mode==="words"){ make=function(w){ return qWords(w, WORDS); }; }
   else if(mode==="grammar"){ make=function(i){ return qGrammar(i); }; }
@@ -2083,8 +2465,10 @@ function startBattleForPool(mode, catId, cat, items, label, target){
   else if(mode==="listening"){ make=function(i){ return qListen(i); }; }
   else { make=function(i){ return qSense(i); }; }
   var b=mkBattle({mode:mode, cat:catId, label:label, items:items, make:make, target:target});
-  b.bag=shuffle(items.slice());
+  b.ordered=!!ordered;
+  b.bag= b.ordered ? items.slice().reverse() : shuffle(items.slice());
   state.battle=b;
+  resetResultExtras();
   show("battle");
   $("battleMode").textContent=label;
   updateBattleChrome();
@@ -2116,10 +2500,12 @@ function startBattleForStage(catId, stageN){
   if(catId==="words"){
     startBattleForPool("words",catId,cat,pool,label,3);
   } else {
-    /* sense: 인덱스 배열로 변환 */
+    /* sense: 인덱스 배열로 변환 — 1·2단계는 1강부터 강의 순서 그대로 출제 */
     var idxs=[];
     for(var j=0;j<SENSE.length;j++){ if(SENSE[j].st===st.st) idxs.push(j); }
-    startBattleForPool("sense",catId,cat,idxs,label,3);
+    var ord=(st.n===1 || st.n===2);
+    startBattleForPool("sense",catId,cat,idxs,label,3,ord);
+    if(state.battle) state.battle.stageQuiz={catId:catId, stageN:st.n};
   }
 }
 function startReview(){
@@ -2132,6 +2518,7 @@ function startReview(){
   });
   b.bag=shuffle(keys);
   state.battle=b;
+  resetResultExtras();
   show("battle");
   $("battleMode").textContent="📝 오답 복습 · "+keys.length+"문제";
   updateBattleChrome();
@@ -2187,23 +2574,27 @@ function paintHp(){
     }
   }
   $("monsterHpTxt").textContent="💜 "+b.heart+" / "+b.heartMax;
-  $("monsterQn").textContent=(b.qn||1)+"번째 문제";
-  $("battleCaught").textContent="💜 "+b.caught+"/"+b.target;
+  $("monsterQn").textContent = b.lecQuiz ? ("문제 "+(b.qn||1)+" / "+b.lecQuiz.total) : ((b.qn||1)+"번째 문제");
+  $("battleCaught").textContent = b.lecQuiz ? ("📝 "+b.asked+"/"+b.lecQuiz.total) : ("💜 "+b.caught+"/"+b.target);
   var cb=$("battleCombo");
   if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; }
   else cb.classList.add("hidden");
 }
 function updateBattleChrome(){
   var b=state.battle;
-  $("battleCaught").textContent="💜 "+b.caught+"/"+b.target;
+  $("battleCaught").textContent = b.lecQuiz ? ("📝 "+b.asked+"/"+b.lecQuiz.total) : ("💜 "+b.caught+"/"+b.target);
   var cb=$("battleCombo");
   if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; } else cb.classList.add("hidden");
 }
 function nextQuestionObj(){
   var b=state.battle;
   if(!b.bag.length){
+    if(b.lecQuiz) return null;                    /* 강의 퀴즈 = 그 강의 문제만 한 바퀴 */
     if(b.mode==="review"){
       b.bag=refillReviewBag(b);
+      if(!b.bag.length) return null;
+    } else if(b.ordered){
+      b.bag=b.items.slice().reverse();            /* 강의 순서 유지: 다시 1강부터 */
       if(!b.bag.length) return null;
     } else {
       b.bag=shuffle(b.items.slice());
@@ -2393,6 +2784,10 @@ function nextStep(){
 }
 
 /* ---------------- 결과 ---------------- */
+function resetResultExtras(){
+  var nb=$("resNextBox"); if(nb) nb.innerHTML="";
+  var ra=$("resAgain"); if(ra) ra.textContent="한 번 더 💜";
+}
 function finishBattle(ranOut){
   var b=state.battle;
   if(!b||b.ended) return;
@@ -2443,6 +2838,39 @@ function finishBattle(ranOut){
   else if(b.asked>=40) note="오늘은 여기까지. 조금씩 쌓이면 돼요.";
   else note="틀린 건 오답 노트에 자동 저장됐어요. 홈에서 다시 잡으러 갈 수 있어요.";
   $("resFoot").textContent=note;
+
+  /* 📝 강의별 퀴즈 · 단계 완주 → '다음 강/다음 단계로 넘어가기' */
+  if(b.lecQuiz){
+    var t=b.lecQuiz, nmL=(t.track==="korea"?"한국사":"세계사"), allOk=(total>0 && b.correct===total);
+    markLecQuiz(b);
+    $("resEmoji").textContent = allOk ? "🏆" : (acc>=67?"💜":"💪");
+    $("resTitle").textContent = (t.track==="korea"?"🇰🇷 ":"🌏 ")+nmL+" "+t.n+"강 완료!";
+    $("resSub").textContent = t.n+"강 "+(t.title||"")+" · "+total+"문제 중 "+b.correct+"개 정답 · 정답률 "+acc+"%";
+    var nx=t.n+1, nb="", nextFoot="";
+    if(nx<=12 && lecQuizOf(t.track,nx).length){
+      var L2=ROOM_LEC[t.track+"-"+nx], c2=lecQuizOf(t.track,nx).length;
+      nb+='<button class="cta next" type="button" data-lecqnext="'+t.track+"-"+nx+'">➡️ 다음 '+nx+'강으로 넘어가기 · 퀴즈 '+c2+'문제</button>';
+      if(L2) nb+='<a class="cta ghost mini2" href="'+esc(L2.url)+'" target="_blank" rel="noopener noreferrer">📺 '+nx+'강 강의 먼저 보기 · '+esc(L2.topic)+'</a>';
+      nextFoot="다음은 "+nx+"강 "+(L2?L2.topic:"")+" — 방금 흐른 그대로 이어서 풀면 돼요.";
+    } else {
+      var sqN=(t.track==="korea"?1:2);
+      nb+='<button class="cta next" type="button" data-qzstage="'+sqN+'">🎉 '+nmL+' 12강 전체 퀴즈로 마무리</button>';
+      nextFoot=nmL+" 12강을 다 돌았어요! 전체 퀴즈로 한 번 더 확인해 봐요.";
+    }
+    nb+='<button class="cta ghost mini2" type="button" data-roomgo="1">📺 공부방으로 (강의 목록)</button>';
+    $("resNextBox").innerHTML='<div class="res-next">'+nb+'</div>';
+    $("resAgain").textContent="📝 "+t.n+"강 다시 풀기";
+    $("resFoot").textContent=(allOk?"완벽해요. 단어 아닌 흐름으로 기억하는 게 진짜 실력이에요. ":"")+nextFoot;
+  } else if(b.stageQuiz && b.cat==="sense" && (b.stageQuiz.stageN===1 || b.stageQuiz.stageN===2)){
+    var sn=b.stageQuiz.stageN, nmS=(sn===1?"한국사":"세계사"), nxS=sn+1, nd=null, di;
+    for(di=0;di<STAGE_DEFS.sense.length;di++){ if(STAGE_DEFS.sense[di].n===nxS) nd=STAGE_DEFS.sense[di]; }
+    var sb="";
+    if(nd) sb+='<button class="cta next" type="button" data-qzstage="'+nxS+'">➡️ 다음 '+esc(nd.name)+'로 넘어가기</button>';
+    sb+='<button class="cta ghost mini2" type="button" data-roomgo="1">📺 공부방에서 '+nmS+' 12강 보기</button>';
+    $("resNextBox").innerHTML='<div class="res-next">'+sb+'</div>';
+    if(nd) $("resFoot").textContent=nmS+" 단계를 1강부터 강의 순서대로 풀었어요. 이어서 "+nd.name+"로 넘어가 볼까요?";
+  }
+
   if(perfect) sfx("win");
   renderHome();
   show("result");
@@ -2450,6 +2878,7 @@ function finishBattle(ranOut){
 function restartBattle(){
   var b=state.battle; if(!b) return;
   var mode=b.mode, defs, i;
+  if(b.lecQuiz){ startLectureQuiz(b.lecQuiz.track, b.lecQuiz.n); return; }
   if(mode==="review"){ startReview(); return; }
   if(mode==="words"){
     defs=STAGE_DEFS.words;
@@ -2485,6 +2914,79 @@ var ROOM_LEC={}, ROOM_TOTAL=0;
   }
 })();
 function ytForTerm(term){ var id=SENSE_YT[term]; return id ? (ROOM_LEC[id]||null) : null; }
+
+/* ---------------- 📝 강의별 퀴즈 (12강 연계 · 강별 진행률 저장) ---------------- */
+var LS_LECQ="tmq_lecquiz_v1";
+var lecQuiz = load(LS_LECQ,{}) || {};
+if(typeof lecQuiz!=="object" || !lecQuiz) lecQuiz={};
+function lecQuizOf(track,n){
+  var out=[];
+  for(var i=0;i<SENSE.length;i++){ var s=SENSE[i]; if(s.track===track && s.lec===n) out.push(i); }
+  return out;
+}
+function lecQuizLectures(track){
+  var out=[], seen={};
+  for(var i=0;i<SENSE.length;i++){
+    var s=SENSE[i]; if(s.track!==track) continue;
+    if(seen[s.lec]) continue; seen[s.lec]=1; out.push(s.lec);
+  }
+  return out.sort(function(a,b){ return a-b; });
+}
+function markLecQuiz(b){
+  if(!b || !b.lecQuiz) return;
+  var t=b.lecQuiz, k=t.track+"-"+t.n, total=t.total||lecQuizOf(t.track,t.n).length;
+  var rec=lecQuiz[k]||{n:0,ok:0,total:total,done:false,best:0,at:0};
+  rec.total=total;
+  rec.n=Math.max(rec.n||0, b.asked||0);
+  rec.ok=Math.max(rec.ok||0, b.correct||0);
+  rec.best=Math.max(rec.best||0, b.correct||0);
+  if((b.asked||0)>=total) rec.done=true;      /* 그 강의 문제를 끝까지 풀었으면 완료 */
+  rec.at=Date.now();
+  lecQuiz[k]=rec; save(LS_LECQ,lecQuiz);
+}
+function lecQuizDoneCount(track){
+  var done=0, seen={};
+  for(var i=0;i<SENSE.length;i++){
+    var s=SENSE[i]; if(s.track!==track || seen[s.lec]) continue;
+    seen[s.lec]=1;
+    var rec=lecQuiz[s.track+"-"+s.lec];
+    if(rec && rec.done) done++;
+  }
+  return done;
+}
+function lecQuizTotalLectures(){
+  return lecQuizLectures("korea").length + lecQuizLectures("world").length;
+}
+function startLectureQuiz(track,n){
+  var idxs=lecQuizOf(track,n);
+  if(!idxs.length){ toast("이 강의 퀴즈는 곧 준비할게요"); return; }
+  var L=ROOM_LEC[track+"-"+n];
+  var cat=byId(CATS,"sense");
+  var nm=(track==="korea"?"🇰🇷 한국사":"🌏 세계사");
+  var label=nm+" "+n+"강"+(L?" · "+L.topic:"")+" 퀴즈";
+  startBattleForPool("sense","sense",cat,idxs,label,idxs.length,true);
+  var b=state.battle; if(!b) return;
+  b.lecQuiz={track:track,n:n,title:(L?L.topic:""),total:idxs.length};
+  b.target=1;
+  b.heartMax=idxs.length;       /* 하트 = 그 강의 문제 수 (다 맞히면 BTS 포획) */
+  b.heart=0;
+  $("battleMode").textContent="📝 "+label;
+  paintHp(); updateBattleChrome();
+}
+function lecQuizRow(L){
+  var qz=lecQuizOf(L.track,L.n);
+  if(!qz.length) return "";
+  var rec=lecQuiz[L.id]||null;
+  var st = rec ? (rec.done ? ("완료 "+(rec.ok||0)+"/"+(rec.total||qz.length)) : ("이어서 "+(rec.n||0)+"/"+qz.length)) : "시작 전";
+  return '<div class="lec-qzrow"><button class="lec-qz'+(rec&&rec.done?" done":"")+'" type="button" data-lecq="'+L.id+'" aria-label="'+esc(L.topic)+' 퀴즈 '+qz.length+'문제 풀기">'
+    +'<span class="lq-i">📝</span><span class="lq-t">퀴즈 ('+qz.length+'문제)</span>'
+    +'<span class="lq-s">'+st+'</span></button></div>';
+}
+/* 강(lecture) 정보가 붙은 역사 문제는 그 강의 유튜브 링크로 바로 연결 */
+function ytForSense(s){
+  if(s && s.track && s.lec){ var L=ROOM_LEC[s.track+"-"+s.lec]; if(L) return L; }
+  return s ? ytForTerm(s.term) : null;
+}
 function ytLinkHtml(lec){
   if(!lec) return "";
   return '<a class="fb-yt" href="'+esc(lec.url)+'" target="_blank" rel="noopener noreferrer">📺 관련 유튜브 강의 보기 · '+lec.n+'강 '+esc(lec.topic)+'</a>';
@@ -2512,6 +3014,11 @@ function roomProgress(){
   for(id in roomDone){ if(roomDone[id] && ROOM_LEC[id]) done++; }
   $("roomCount").textContent=done+" / "+ROOM_TOTAL+"강";
   $("roomBar").style.width=(ROOM_TOTAL? Math.round(done/ROOM_TOTAL*100):0)+"%";
+  var qb=$("roomQz");
+  if(qb){
+    var qn=lecQuizDoneCount("korea")+lecQuizDoneCount("world"), qt=lecQuizTotalLectures();
+    qb.innerHTML="📝 역사 퀴즈 <b>"+qn+"</b> / "+qt+"강 완료 · 1강 끝나면 다음 강으로";
+  }
 }
 function renderRoomBody(){
   var g=ROOM[roomState.g]; if(!g) return;
@@ -2559,6 +3066,7 @@ function renderRoomBody(){
         +'<span class="lec-t"><b>'+esc(L.topic)+'</b><span>'+esc(L.title)+(L.ch?" · "+esc(L.ch):"")+'</span></span>'
         +'<span class="lec-play">▶</span></a>'
         +'<button class="lec-chk" type="button" data-done="'+L.id+'" aria-label="'+esc(L.topic)+' 수강 완료 표시">'+(on?"완료":"✓")+'</button>'
+        +lecQuizRow(L)
         +'</li>';
     }
     html+='</ol></div>';
@@ -2580,7 +3088,7 @@ function toggleRoomDone(id){
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
@@ -2593,6 +3101,10 @@ document.addEventListener("click", function(ev){
     roomState.t=parseInt(t.getAttribute("data-rsub"),10); renderRoom(); return;
   }
   if(t.hasAttribute && t.hasAttribute("data-done")){ toggleRoomDone(t.getAttribute("data-done")); return; }
+  if(t.hasAttribute && t.hasAttribute("data-lecq")){ roomLecFrom(t.getAttribute("data-lecq")); return; }
+  if(t.hasAttribute && t.hasAttribute("data-lecqnext")){ roomLecFrom(t.getAttribute("data-lecqnext")); return; }
+  if(t.hasAttribute && t.hasAttribute("data-qzstage")){ startBattleForStage("sense", parseInt(t.getAttribute("data-qzstage"),10)); return; }
+  if(t.hasAttribute && t.hasAttribute("data-roomgo")){ openRoom(); return; }
   if(t.hasAttribute && t.hasAttribute("data-subj-quiz")){ startSubjQuiz(t.getAttribute("data-subj-quiz")); return; }
   if(t.hasAttribute && t.hasAttribute("data-subj-review")){ startReview(); return; }
 
@@ -2616,6 +3128,12 @@ document.addEventListener("click", function(ev){
   if(t.hasAttribute && t.hasAttribute("data-opt")){ chooseAnswer(parseInt(t.getAttribute("data-opt"),10)); return; }
 });
 
+/* 결과 화면·공부방의 'korea-3' 같은 강의 키 → 그 강의 퀴즈 시작 */
+function roomLecFrom(key){
+  var p=String(key||"").split("-"), n=parseInt(p[1],10);
+  if(!p[0] || !n) return;
+  startLectureQuiz(p[0], n);
+}
 function openCat(id){
   var cat=byId(CATS,id); if(!cat) return;
   state.catId=id; state.cat=cat;
@@ -2645,6 +3163,7 @@ $("battleQuit").addEventListener("click", function(){
     /* 중간에 나가도 잡은 멤버는 반영 */
     var st=catStat(b.cat); st.total+=b.caught; if(b.caught>st.best) st.best=b.caught;
     save(LS_STATS,stats); b.ended=true;
+    if(b.lecQuiz){ markLecQuiz(b); }   /* 강의 퀴즈는 푼 만큼 진도로 남김 */
   }
   renderHome(); show("home");
 });
@@ -2662,7 +3181,7 @@ document.addEventListener("keydown", function(ev){
 });
 
 /* 저장소 첫 방문 초기화 + 이 폰에 이미 쌓인 학습 기록을 과목별 리포트로 복원 */
-save(LS_STATS,stats); save(LS_WRONG,wrong); ensureSubj(); backfillSubj();
+save(LS_STATS,stats); save(LS_WRONG,wrong); ensureSubj(); migrateSenseWrong(); backfillSubj();
 
 /* 날짜가 바뀐 채로 앱을 다시 열면 '오늘' 카운터·날짜 배지를 새로 고침 */
 document.addEventListener("visibilitychange", function(){
