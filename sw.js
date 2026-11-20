@@ -1,6 +1,19 @@
 /* 초희의 토익 BTS 잡기 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용) */
-const CACHE = 'toeic-bts-v1';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'toeic-bts-v2';
+const SHELL = [
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './icon-192.png',
+  './icon-512.png',
+  './members/rm.jpg',
+  './members/jin.jpg',
+  './members/suga.jpg',
+  './members/jhope.jpg',
+  './members/jimin.jpg',
+  './members/v.jpg',
+  './members/jungkook.jpg'
+];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();

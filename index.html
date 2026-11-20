@@ -108,7 +108,22 @@ body{
 .deck-cell .de{font-size:17px;line-height:1.15}
 .deck-cell .dn{font-size:8.5px;font-weight:700;color:var(--muted);margin-top:1px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deck-cell:not(.on) .dn{color:var(--muted)}
 .deck-cell.on .dn{color:#f5e8ff}
+.deck-cell{padding:5px 1px 4px}
+.deck-cell .dphoto{position:relative;width:100%;max-width:52px;aspect-ratio:1/1;margin:0 auto;
+  border-radius:50%;overflow:hidden;background:#0b0818;border:1.5px solid rgba(255,255,255,.16);
+  transition:border-color .25s, box-shadow .3s}
+.deck-cell .dphoto img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;
+  filter:grayscale(1) brightness(.66);transition:filter .3s}
+.deck-cell.on .dphoto{border-color:rgba(251,191,36,.8);
+  box-shadow:0 0 12px -1px rgba(167,139,250,.9),0 0 0 2px rgba(251,191,36,.30)}
+.deck-cell.on .dphoto img{filter:none}
+.dbadge{position:absolute;right:-1px;bottom:-1px;width:15px;height:15px;border-radius:50%;
+  display:grid;place-items:center;font-size:8px;line-height:1;
+  background:rgba(10,7,22,.94);border:1px solid rgba(255,255,255,.2)}
+.deck-cell.on .dbadge{background:linear-gradient(150deg,#fbbf24,#f472b6);
+  border-color:rgba(255,255,255,.55);box-shadow:0 0 8px rgba(251,191,36,.7)}
 
 /* ---------- wrong note button ---------- */
 .wrong-btn{
@@ -259,6 +274,16 @@ body{
   100%{transform:scale(1.06);filter:drop-shadow(0 0 18px rgba(196,181,253,.9))}
 }
 .monster-name{font-size:12.5px;font-weight:800;color:#e9d5ff;margin-top:2px}
+/* 멤버 실제 대표 사진 프레임 */
+.mframe{position:relative;width:116px;height:116px;border-radius:50%;overflow:hidden;
+  margin:2px auto 0;background:#0b0818;border:2.5px solid var(--m1,#8b5cf6);
+  box-shadow:0 0 0 3px rgba(255,255,255,.10),0 0 26px -4px var(--m1,#8b5cf6),
+    0 0 42px -12px var(--m2,#f472b6),0 14px 26px -14px rgba(0,0,0,.9)}
+.mframe img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.mframe::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.22);
+  background:linear-gradient(155deg,rgba(255,255,255,.16),transparent 45%)}
+.mframe .m-emoji{display:block;text-align:center;line-height:110px;font-size:56px}
 .monster-name small{color:var(--muted2);font-weight:700}
 .monster-say{font-size:11.5px;color:var(--muted2);margin-top:2px;min-height:17px;line-height:1.4}
 .hp-wrap{margin:9px auto 0;max-width:320px}
@@ -350,6 +375,8 @@ body{
   background:linear-gradient(150deg,rgba(139,92,246,.4),rgba(244,114,182,.24));
   font-size:12.5px;font-weight:800;color:#f5e8ff;animation:badgeIn .42s ease both}
 .catch-badge .be{font-size:19px;line-height:1}
+.catch-badge .cbp{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:center 20%;
+  display:block;border:1px solid rgba(255,255,255,.28)}
 @keyframes badgeIn{from{opacity:0;transform:translateY(8px) scale(.85)}to{opacity:1;transform:none}}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
 .stat{border:1px solid var(--line);border-radius:15px;padding:11px 6px;background:rgba(255,255,255,.045)}
@@ -381,6 +408,8 @@ body{
   .app{max-width:600px;padding:22px 20px 40px}
   .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
   .monster-emoji{font-size:74px}
+  .mframe{width:132px;height:132px}
+  .mframe .m-emoji{line-height:126px;font-size:64px}
 }
 </style>
 </head>
@@ -463,7 +492,7 @@ body{
     </div>
 
     <div class="monster-zone" id="monsterZone">
-      <div class="monster-emoji" id="monsterEmoji">🐨</div>
+      <div class="monster-emoji" id="monsterEmoji"><div class="mframe"><img src="./members/rm.jpg" alt="RM" decoding="async"></div></div>
       <div class="monster-name" id="monsterName">RM</div>
       <div class="monster-say" id="memberSay"></div>
       <div class="hp-wrap">
@@ -946,37 +975,37 @@ var SENSE = [
    (문제를 맞혀 하트를 채우면 그 멤버가 내 편이 된다)
    ============================================================ */
 var BTS_MEMBERS = [
-  {id:"rm", n:"RM", e:"🐨",
+  {id:"rm", n:"RM", e:"🐨", img:"./members/rm.jpg", c1:"#8b5cf6", c2:"#6366f1",
    say:"일단 문제부터 보자. 같이 가자!",
    cheer:["좋아, 이 흐름이야.","리더가 인정했어."],
    oops:"괜찮아, 한 번 더 보면 돼.",
    catch:"리더는 내 편. 이제 안 흔들려."},
-  {id:"jin", n:"진", e:"🐹",
+  {id:"jin", n:"진", e:"🐹", img:"./members/jin.jpg", c1:"#f9a8d4", c2:"#fb7185",
    say:"형이 왔어요~ 😄",
    cheer:["잘했어요!","오, 센스 있는데요?"],
    oops:"어? 아깝다! 다시 해봐요.",
    catch:"월드와이드 핸섬, 내 편 완료."},
-  {id:"suga", n:"슈가", e:"🐱",
+  {id:"suga", n:"슈가", e:"🐱", img:"./members/suga.jpg", c1:"#22d3ee", c2:"#34d399",
    say:"…뭐, 해봐.",
    cheer:["그렇지.","나쁘지 않아."],
    oops:"…천천히. 다시.",
    catch:"말수는 적어도 내 편은 확실해."},
-  {id:"jhope", n:"제이홉", e:"🐿️",
+  {id:"jhope", n:"제이홉", e:"🐿️", img:"./members/jhope.jpg", c1:"#fbbf24", c2:"#34d399",
    say:"우리 희망이 왔다!",
    cheer:["선샤인!","분위기 좋아!"],
    oops:"괜찮아! 다음에 맞히면 돼!",
    catch:"분위기 메이커, 접수 완료."},
-  {id:"jimin", n:"지민", e:"🐥",
+  {id:"jimin", n:"지민", e:"🐥", img:"./members/jimin.jpg", c1:"#f472b6", c2:"#ec4899",
    say:"하트 준비됐어?",
    cheer:["완벽해!","딱 맞았어!"],
    oops:"아깝다~ 한 번 더!",
    catch:"지민이 하트까지 내 거."},
-  {id:"v", n:"뷔", e:"🐯",
+  {id:"v", n:"뷔", e:"🐯", img:"./members/v.jpg", c1:"#10b981", c2:"#22d3ee",
    say:"오늘도 컴포즈 한 잔?",
    cheer:["좋아, 딱 맞았어.","그거지!"],
    oops:"이런, 조금만 더!",
    catch:"뷔가 내 편이래 — 오늘 최고 💜"},
-  {id:"jungkook", n:"정국", e:"🐰",
+  {id:"jungkook", n:"정국", e:"🐰", img:"./members/jungkook.jpg", c1:"#a78bfa", c2:"#fbbf24",
    say:"황금막내 왔다!",
    cheer:["그 정도면 합격!","오케이!"],
    oops:"괜찮아요, 다시 가면 되죠!",
@@ -1034,7 +1063,12 @@ function renderDeck(){
   for(var i=0;i<BTS_MEMBERS.length;i++){
     var m=BTS_MEMBERS[i], got=!!deck[m.id];
     html+='<div class="deck-cell'+(got?' on':'')+'">'
-      +'<div class="de">'+m.e+'</div><div class="dn">'+esc(m.n)+'</div></div>';
+      +'<div class="dphoto">'
+      + (m.img ? '<img src="'+m.img+'" alt="'+esc(m.n)+'" loading="lazy" decoding="async">'
+              : '<span class="de">'+m.e+'</span>')
+      + '<span class="dbadge">'+(got?'💜':'🔒')+'</span>'
+      +'</div>'
+      +'<div class="dn">'+esc(m.n)+'</div></div>';
   }
   row.innerHTML=html;
   var dc=$("deckCount"); if(dc) dc.textContent=deckCount()+" / "+BTS_MEMBERS.length;
@@ -1396,6 +1430,16 @@ function refillReviewBag(b){
   var keys=[]; for(var k in wrong){ if(wrong[k]) keys.push(k); }
   return shuffle(keys);
 }
+function paintMonster(m){
+  var em=$("monsterEmoji"); if(!em||!m) return;
+  em.className="monster-emoji";
+  em.style.setProperty("--m1", m.c1||"#8b5cf6");
+  em.style.setProperty("--m2", m.c2||"#f472b6");
+  em.innerHTML='<div class="mframe">'
+    + (m.img ? '<img src="'+m.img+'" alt="'+esc(m.n)+'" decoding="async">'
+             : '<span class="m-emoji">'+m.e+'</span>')
+    + '</div>';
+}
 function nextMember(){
   var b=state.battle, i, m;
   var pool=[];
@@ -1411,9 +1455,7 @@ function nextMember(){
   m = fresh.length ? pick(fresh) : pick(pool);
   b.member=m;
   b.heart=0;
-  var em=$("monsterEmoji");
-  em.className="monster-emoji";
-  em.textContent=m.e;
+  paintMonster(m);
   $("monsterName").innerHTML=esc(m.n)+' <small>· '+(b.caught+1)+'번째</small>';
   var sy=$("memberSay"); if(sy) sy.textContent=m.say;
   paintHp();
@@ -1656,7 +1698,9 @@ function finishBattle(ranOut){
     for(i2=0;i2<b.caughtIds.length;i2++){
       var mm=byId(BTS_MEMBERS,b.caughtIds[i2]);
       if(!mm) continue;
-      mh+='<span class="catch-badge"><span class="be">'+mm.e+'</span>'+esc(mm.n)+'</span>';
+      mh+='<span class="catch-badge">'
+        + (mm.img ? '<img class="cbp" src="'+mm.img+'" alt="" loading="lazy" decoding="async">' : '<span class="be">'+mm.e+'</span>')
+        + esc(mm.n)+'</span>';
     }
     mb.innerHTML=mh;
   }
