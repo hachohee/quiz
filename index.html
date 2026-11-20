@@ -467,6 +467,48 @@ body{
   background:linear-gradient(92deg,#fcd34d,#f9a8d4);box-shadow:0 8px 18px -12px #000}
 .qc-btn:active{transform:scale(.985)}
 .room-legend{margin:2px 0 10px;font-size:10px;color:var(--muted2);line-height:1.7;text-align:center}
+/* ---------- 📊 과목별 내 실력 리포트 ---------- */
+.srept{border:1px solid rgba(196,181,253,.30);border-radius:18px;padding:12px 12px 11px;margin:14px 0 0;
+  background:linear-gradient(155deg,rgba(139,92,246,.22),rgba(244,114,182,.10) 62%,rgba(0,0,0,.24));
+  box-shadow:0 12px 30px -24px #000}
+.sr-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.sr-head h3{margin:0;font-size:13.5px;font-weight:900;color:#ede9fe;letter-spacing:.01em;line-height:1.35}
+.sr-badge{flex:0 0 auto;max-width:46%;text-align:right;font-size:8.5px;font-weight:800;color:#c4b5fd;
+  border:1px solid rgba(196,181,253,.36);background:rgba(139,92,246,.18);border-radius:11px;
+  padding:3px 6px;line-height:1.45;letter-spacing:.01em}
+.sr-sum{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px;font-size:10.5px;color:var(--muted);margin-bottom:9px}
+.sr-sum b{color:#fde68a;font-variant-numeric:tabular-nums;font-size:12px;font-weight:900}
+.sr-sum i{color:var(--muted2);font-style:normal}
+.sr-block{border-radius:13px;padding:8px 10px;margin-bottom:7px;background:rgba(0,0,0,.22);border:1px solid var(--line)}
+.sr-block .sb-t{font-size:10.5px;font-weight:900;letter-spacing:.02em;margin-bottom:2px}
+.sr-block .sb-b{font-size:11px;color:#dcd3ff;line-height:1.55}
+.sr-block .sb-b b{color:#fff;font-weight:800}
+.sr-block.sr-strong .sb-t{color:#fcd34d}
+.sr-block.sr-weak .sb-t{color:#f9a8d4}
+.sr-block.sr-tip .sb-t{color:#7dd3fc}
+.sr-block.sr-tip .sb-b{color:#dbeafe}
+.sr-go{display:inline-flex;align-items:center;gap:3px;margin-top:6px;border:1px solid rgba(249,168,212,.45);
+  background:rgba(249,168,212,.15);color:#fbcfe8;border-radius:999px;padding:4px 9px;
+  font-family:inherit;font-size:10.5px;font-weight:900;cursor:pointer;line-height:1.3}
+.sr-go:active{transform:scale(.97)}
+.sr-rows{margin-top:8px;border-top:1px dashed rgba(255,255,255,.13);padding-top:6px}
+.sr-row{display:flex;align-items:center;gap:8px;padding:6px 0}
+.sr-row+.sr-row{border-top:1px solid rgba(255,255,255,.06)}
+.sr-em{flex:0 0 26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:13.5px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.sr-main{flex:1 1 auto;min-width:0}
+.sr-nl{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px;font-size:11.5px;font-weight:800;color:#eee9ff;line-height:1.3}
+.sr-nl small{font-size:9.5px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.sr-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin:3px 0 2px}
+.sr-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#8b5cf6,#f9a8d4);transition:width .35s}
+.sr-row.ok .sr-bar i{background:linear-gradient(90deg,#34d399,#a7f3d0)}
+.sr-meta{font-size:9px;color:var(--muted2);line-height:1.45;overflow-wrap:anywhere}
+.sr-meta b{color:#fbcfe8;font-weight:800}
+.sr-pill{flex:0 0 auto;font-size:9px;font-weight:900;border-radius:999px;padding:3px 6px;white-space:nowrap;border:1px solid transparent}
+.sr-pill.strong{color:#a7f3d0;background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.42)}
+.sr-pill.grow{color:#fde68a;background:rgba(251,191,36,.14);border-color:rgba(251,191,36,.38)}
+.sr-pill.retry{color:#fbcfe8;background:rgba(249,168,212,.15);border-color:rgba(249,168,212,.42)}
+.sr-pill.seed{color:var(--muted);background:rgba(255,255,255,.05);border-color:var(--line)}
 .foot{text-align:center;font-size:10.5px;color:var(--muted2);margin:16px 0 0;line-height:1.7}
 .credit{text-align:center;font-size:9px;color:var(--muted2);margin:6px 0 0;opacity:.7}
 .toast{
@@ -531,6 +573,9 @@ body{
     </button>
 
     <div class="cats" id="catList"></div>
+
+    <!-- 📊 과목별 내 실력 리포트 (매 답안마다 실시간 갱신) -->
+    <div class="srept" id="subjReport"></div>
 
     <p class="foot">찬우 몰래 몰컴은 안 되고, 같이 하면 두 배 😆<br>인터넷 없어도 · 폰에서도 그대로 돌아가요</p>
     <p class="credit">사진: Dispatch · 티비텐 / Wikimedia Commons · CC BY 3.0</p>
@@ -1420,12 +1465,15 @@ var SENSE_YT = {
 
 /* ---------------- 저장소 ---------------- */
 var LS_STATS="tmq_stats_v1", LS_WRONG="tmq_wrong_v1", LS_SOUND="tmq_sound_v1", LS_DECK="tmq_btsdeck_v1";
+var LS_SUBJ="tmq_subj_stats_v1";
 function load(k,d){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
 function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 var stats = load(LS_STATS,{}) || {};
 var wrong = load(LS_WRONG,{}) || {};
 var soundOn = load(LS_SOUND,true)!==false;
 var deck = load(LS_DECK,{}) || {};
+var subjStats = load(LS_SUBJ,null);
+if(!subjStats || typeof subjStats!=="object") subjStats={day:"",today:{},all:{}};
 
 function catStat(id){
   if(!stats[id]||typeof stats[id]!=="object") stats[id]={total:0,best:0};
@@ -1535,6 +1583,207 @@ function show(name){
 
 var state = { catId:null, cat:null, stage:null, deck:[], deckIdx:0, battle:null };
 
+/* ---------------- 📊 과목별 내 실력 리포트 ---------------- */
+var SUBJ_DEFS=[
+  {id:"WORD",    em:"📘", name:"도파민 단어",       sub:"단어 → 뜻"},
+  {id:"GRAMMAR", em:"⚡", name:"3초 문법",          sub:"빈칸 앞뒤"},
+  {id:"READ",    em:"📖", name:"한 줄 해석",         sub:"영문 → 해석"},
+  {id:"LISTEN",  em:"🎧", name:"발음 듣기",          sub:"듣고 고르기"},
+  {id:"HIST",    em:"📜", name:"한국사·세계사·시사", sub:"역사·시사"},
+  {id:"MONEY",   em:"💎", name:"경제·재테크",        sub:"경제·절세"}
+];
+function pad2(n){ return (n<10?"0":"")+n; }
+function todayKey(){ var d=new Date(); return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
+function mdLabel(){ var d=new Date(); return d.getMonth()+1+"/"+d.getDate(); }
+function subjZeros(){ return {n:0,ok:0}; }
+function ensureSubj(){
+  if(!subjStats || typeof subjStats!=="object") subjStats={day:"",today:{},all:{}};
+  if(!subjStats.all || typeof subjStats.all!=="object") subjStats.all={};
+  if(!subjStats.today || typeof subjStats.today!=="object") subjStats.today={};
+  var dk=todayKey(), dirty=false, i, id;
+  if(subjStats.day!==dk){ subjStats.day=dk; subjStats.today={}; dirty=true; }
+  for(i=0;i<SUBJ_DEFS.length;i++){
+    id=SUBJ_DEFS[i].id;
+    if(!subjStats.all[id] || typeof subjStats.all[id].n!=="number"){ subjStats.all[id]=subjZeros(); dirty=true; }
+    if(!subjStats.today[id] || typeof subjStats.today[id].n!=="number"){ subjStats.today[id]=subjZeros(); dirty=true; }
+  }
+  if(dirty) save(LS_SUBJ,subjStats);
+  return subjStats;
+}
+function subjOfKey(key){
+  var p=String(key||"").split(":");
+  if(p[0]==="w") return "WORD";
+  if(p[0]==="g") return "GRAMMAR";
+  if(p[0]==="r") return "READ";
+  if(p[0]==="l") return "LISTEN";
+  if(p[0]==="s"){
+    var s=SENSE[parseInt(p[1],10)];
+    if(!s) return "HIST";
+    return (s.cat==="재테크" || s.st===4) ? "MONEY" : "HIST";
+  }
+  return null;
+}
+function recordSubject(q, ok){
+  if(!q) return;
+  var id=q.subj || subjOfKey(q.key);
+  if(!id) return;
+  ensureSubj();
+  if(!subjStats.all[id]) subjStats.all[id]=subjZeros();
+  if(!subjStats.today[id]) subjStats.today[id]=subjZeros();
+  subjStats.all[id].n++; if(ok) subjStats.all[id].ok++;
+  subjStats.today[id].n++; if(ok) subjStats.today[id].ok++;
+  save(LS_SUBJ,subjStats);
+  renderSubjReport();
+}
+function wrongKw(e){
+  if(!e) return "";
+  if(e.kw) return String(e.kw);
+  var l=String(e.label||"");
+  if(e.mode==="words") return l.split(" (")[0];
+  var i=l.indexOf(" · ");
+  return i>=0 ? l.slice(i+3) : l;
+}
+function wrongBySubject(){
+  var out={}, k, e, id;
+  for(k in wrong){
+    e=wrong[k]; if(!e) continue;
+    id=subjOfKey(k); if(!id) continue;
+    if(!out[id]) out[id]=[];
+    out[id].push({kw:wrongKw(e), at:e.at||0});
+  }
+  for(id in out) out[id].sort(function(a,b){ return (b.at||0)-(a.at||0); });
+  return out;
+}
+function subjRowData(){
+  var wb=wrongBySubject(), rows=[], i, d, a, t, ws;
+  for(i=0;i<SUBJ_DEFS.length;i++){
+    d=SUBJ_DEFS[i];
+    a=subjStats.all[d.id]||subjZeros();
+    t=subjStats.today[d.id]||subjZeros();
+    ws=wb[d.id]||[];
+    rows.push({def:d, n:a.n||0, ok:a.ok||0, acc:(a.n?Math.round((a.ok||0)/a.n*100):0),
+      tn:t.n||0, wc:ws.length, misses:ws.slice(0,2)});
+  }
+  return rows;
+}
+function subjPill(r){
+  if(!r.n) return {t:"🌱 시작 전", cls:"seed"};
+  if(r.acc>=85 && r.wc===0) return {t:"🌟 탄탄", cls:"strong"};
+  if(r.acc>=65 && r.wc<=2) return {t:"📈 성장 중", cls:"grow"};
+  return {t:"💡 한 번 더", cls:"retry"};
+}
+function adviceFor(strong, weak, totalWrong){
+  if(!strong) return '📘 <b>도파민 단어 3문제</b>로 시작해 보세요. 1분이면 오늘의 강점이 하나 생겨요.';
+  var id=weak.def.id, acc=weak.acc, miss=weak.misses.length?weak.misses[0].kw:"";
+  var head="";
+  if(acc>=85 && totalWrong===0) head="지금 흐름 최고예요! 5분만 <b>오답 복습</b>으로 마무리하면 오늘 몫은 끝이에요.";
+  else if(id==="GRAMMAR") head="'3초 문법'이 "+acc+"% — <b>a/the + [형용사] + 명사</b> 공식만 3문제 더. 빈칸 앞뒤만 보면 답이 보여요.";
+  else if(id==="MONEY"){
+    var lec = miss ? ytForTerm(miss) : null;
+    if(lec) head="'경제·재테크'는 틀린 <b>"+esc(miss)+"</b> — 공부방 <b>재테크 "+lec.n+"강</b>에서 5분만 확인해 보세요.";
+    else head="'경제·재테크'는 <b>2026년 현행 숫자</b>(비과세 한도·세액공제)만 정리하면 한 번에 잡혀요.";
+  }
+  else if(id==="WORD") head="'도파민 단어'가 "+acc+"% — "+(miss?"<b>"+esc(miss)+"</b>부터 ":"")+"3개만 다시 잡으면 금방 돌아와요. 뜻보다 소리(썰)로 기억!";
+  else if(id==="READ") head="'한 줄 해석'은 <b>주어+동사</b>만 먼저 찾는 습관이 약점을 지워요. "+(miss?"「"+esc(miss)+"」 문장부터 한 번 더.":"");
+  else if(id==="LISTEN") head="'발음 듣기'는 <b>다시 듣기</b> 한 번 더 — 한 글자 차이(confirm/conform)만 잡으면 돼요.";
+  else head="'한국사·세계사·시사'는 사건을 <b>왜 → 무엇이 바뀌었나</b> 한 줄로 이어 붙이면 오래 남아요.";
+  if(totalWrong) head += ' <span style="color:#a89ddb">오답 '+totalWrong+'개는 📝 오답 복습에서 바로 지울 수 있어요.</span>';
+  return head;
+}
+function renderSubjReport(){
+  var box=$("subjReport"); if(!box) return;
+  ensureSubj();
+  var rows=subjRowData(), i, totN=0, totOk=0, todayN=0;
+  for(i=0;i<rows.length;i++){ totN+=rows[i].n; totOk+=rows[i].ok; todayN+=rows[i].tn; }
+  var accAll = totN? Math.round(totOk/totN*100) : 0;
+  var solved=[], totalWrong=0;
+  for(i=0;i<rows.length;i++){ totalWrong+=rows[i].wc; if(rows[i].n>0) solved.push(rows[i]); }
+  var strong=null, weak=null;
+  for(i=0;i<solved.length;i++){
+    if(!strong || solved[i].acc>strong.acc || (solved[i].acc===strong.acc && solved[i].n>strong.n)) strong=solved[i];
+    if(!weak || solved[i].acc<weak.acc || (solved[i].acc===weak.acc && solved[i].wc>weak.wc)) weak=solved[i];
+  }
+
+  var h='<div class="sr-head"><h3>📊 과목별 내 실력 리포트</h3>'
+    +'<span class="sr-badge">오늘('+mdLabel()+') 기준<br>강점 · 보완점 · 조언</span></div>';
+  h+='<div class="sr-sum">오늘 <b>'+todayN+'문제</b><i>·</i>누적 정답률 <b>'+accAll+'%</b><i>·</i>누적 '+totN+'문제</div>';
+
+  /* 🌟 강점 */
+  var strongHtml;
+  if(!strong) strongHtml='아직 푼 문제가 없어요! 한 문제만 풀어도 과목별 실력이 바로 보여요 🌱';
+  else if(solved.length===1) strongHtml='<b>'+esc(strong.def.em+" "+strong.def.name)+'</b> '+strong.acc+'% — 오늘 첫 과목이에요. 하나 더 풀면 강점이 확실해져요!';
+  else strongHtml='<b>'+esc(strong.def.em+" "+strong.def.name)+'</b> <b>'+strong.acc+'%</b> — 지금 가장 든든한 과목이에요.';
+  h+='<div class="sr-block sr-strong"><div class="sb-t">🌟 강점</div><div class="sb-b">'+strongHtml+'</div></div>';
+
+  /* 💡 보완점 */
+  var weakHtml, weakBtn='';
+  if(!weak){
+    weakHtml='첫 문제를 풀면 여기에 <b>💡 한 번 더 보면 딱!</b> 포인트가 떠요.';
+    weakBtn='<button class="sr-go" type="button" data-subj-quiz="WORD">📘 단어 3문제로 시작 ›</button>';
+  } else if(solved.length===1){
+    var nextDef=null;
+    for(i=0;i<rows.length;i++){ if(rows[i].n===0){ nextDef=rows[i].def; break; } }
+    weakHtml='아직 한 과목만 풀었어요. '+(nextDef?('<b>'+esc(nextDef.em+" "+nextDef.name)+'</b>도 한 문제만 풀어보면 비교가 돼요.'):'조금 더 풀면 비교가 돼요.');
+    if(nextDef) weakBtn='<button class="sr-go" type="button" data-subj-quiz="'+nextDef.id+'">'+esc(nextDef.em+" "+nextDef.name)+' 한 문제 ›</button>';
+  } else {
+    var weakName='<b>'+esc(weak.def.em+" "+weak.def.name)+'</b>';
+    if(weak.acc>=85 && totalWrong===0){
+      weakHtml=weakName+' '+weak.acc+'% — 85% 이상이라 오늘은 다 탄탄해요! 이 흐름만 유지하면 돼요.';
+    } else {
+      weakHtml=weakName+' '+weak.acc+'% — <b>💡 한 번 더 보면 딱!</b>'+(weak.wc?(' (오답 '+weak.wc+'개)'):'');
+      if(weak.wc) weakBtn='<button class="sr-go" type="button" data-subj-review>📝 약점 바로 복습 ›</button>';
+      else weakBtn='<button class="sr-go" type="button" data-subj-quiz="'+weak.def.id+'">'+esc(weak.def.em+" 3문제 더 풀기")+' ›</button>';
+    }
+  }
+  h+='<div class="sr-block sr-weak"><div class="sb-t">💡 보완점</div><div class="sb-b">'+weakHtml+weakBtn+'</div></div>';
+
+  /* 💬 오늘의 조언 */
+  h+='<div class="sr-block sr-tip"><div class="sb-t">💬 오늘의 조언</div><div class="sb-b">'+adviceFor(strong,weak,totalWrong)+'</div></div>';
+
+  /* 과목별 줄 */
+  h+='<div class="sr-rows">';
+  for(i=0;i<rows.length;i++){
+    var r=rows[i], pill=subjPill(r), meta;
+    if(r.n){
+      meta='정답률 <b>'+r.acc+'%</b> · 오답 <b>'+r.wc+'개</b>';
+      if(r.misses.length){
+        var ks=[];
+        for(var j=0;j<r.misses.length;j++) ks.push(esc(r.misses[j].kw));
+        meta+=' · 최근 오답: '+ks.join(", ");
+      }
+    } else {
+      meta='아직 기록 없음 · '+esc(r.def.sub);
+    }
+    h+='<div class="sr-row'+(pill.cls==="strong"?" ok":"")+'">'
+      +'<span class="sr-em">'+r.def.em+'</span>'
+      +'<div class="sr-main">'
+        +'<div class="sr-nl"><span>'+esc(r.def.name)+'</span><small>'+r.n+'문제'+(r.tn?' · 오늘 '+r.tn:'')+'</small></div>'
+        +'<div class="sr-bar"><i style="width:'+r.acc+'%"></i></div>'
+        +'<div class="sr-meta">'+meta+'</div>'
+      +'</div>'
+      +'<span class="sr-pill '+pill.cls+'">'+pill.t+'</span>'
+    +'</div>';
+  }
+  h+='</div>';
+  box.innerHTML=h;
+}
+function startSubjQuiz(id){
+  if(id==="WORD"){ startBattleForCat("words"); return; }
+  if(id==="GRAMMAR"){ startBattleForCat("grammar"); return; }
+  if(id==="READ"){ startBattleForCat("reading"); return; }
+  if(id==="LISTEN"){ startBattleForCat("listening"); return; }
+  var idxs=[], i, s, money;
+  for(i=0;i<SENSE.length;i++){
+    s=SENSE[i]; money=(s.cat==="재테크" || s.st===4);
+    if(id==="MONEY" && money) idxs.push(i);
+    else if(id==="HIST" && !money) idxs.push(i);
+  }
+  if(!idxs.length) return;
+  var cat=byId(CATS,"sense");
+  var label=(id==="MONEY") ? "💎 경제·재테크" : "📜 한국사·세계사·시사";
+  startBattleForPool("sense","sense",cat,idxs,label,3);
+}
+
 /* ---------------- 홈 ---------------- */
 function renderHome(){
   $("homeKills").textContent = totalKills();
@@ -1557,6 +1806,7 @@ function renderHome(){
       +'</button>';
   }
   $("catList").innerHTML=html;
+  renderSubjReport();
 }
 
 /* ---------------- 단계 목록 ---------------- */
@@ -1677,13 +1927,13 @@ function qWords(w, pool){
     opts.push({t:w.m, ok:true});
     for(i=0;i<others.length;i++) opts.push({t:others[i].m, ok:false});
     var html='<div class="qword">'+esc(w.w)+'</div><div class="qpron">['+esc(w.p)+'] · '+esc(w.pos)+'</div>';
-    return {key:"w:"+w.w, mode:"words", tag:"WORD · 뜻 고르기", label:labelWords(w),
+    return {key:"w:"+w.w, mode:"words", tag:"WORD · 뜻 고르기", label:labelWords(w), kw:w.w,
       html:html, sub:"이 단어의 뜻은?", opts:shuffle(opts), tip:w.s+" / "+w.c, speak:null, answerText:w.m};
   }
   opts.push({t:w.w, ok:true});
   for(i=0;i<others.length;i++) opts.push({t:others[i].w, ok:false});
   var html2='<div class="qmean">'+esc(w.m)+'</div><div class="qpron">'+esc(w.pos)+'</div>';
-  return {key:"w:"+w.w, mode:"words", tag:"WORD · 단어 고르기", label:labelWords(w),
+  return {key:"w:"+w.w, mode:"words", tag:"WORD · 단어 고르기", label:labelWords(w), kw:w.w,
     html:html2, sub:"이 뜻에 맞는 단어는?", opts:shuffle(opts), tip:w.s+" / "+w.c, speak:null, answerText:w.w};
 }
 function qGrammar(i){
@@ -1691,20 +1941,20 @@ function qGrammar(i){
   var opts=[];
   for(var k=0;k<g.opts.length;k++) opts.push({t:g.opts[k], ok:(k===g.a)});
   var html='<div class="qen">'+esc(g.q).replace(/___/g,'<span class="qblank">＿＿＿</span>')+'</div>';
-  return {key:"g:"+i, mode:"grammar", tag:"GRAMMAR · "+g.tag, label:"문법 · "+g.tag,
+  return {key:"g:"+i, mode:"grammar", tag:"GRAMMAR · "+g.tag, label:"문법 · "+g.tag, kw:g.tag,
     html:html, sub:"빈칸 앞뒤만 보세요. 3초!", opts:opts, tip:g.tip, speak:null, answerText:g.opts[g.a]};
 }
 function qReading(i){
   var r=READING[i], opts=[];
   for(var k=0;k<r.opts.length;k++) opts.push({t:r.opts[k], ok:(k===r.a)});
-  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…",
+  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…", kw:r.en.split(/\s+/).slice(0,3).join(" "),
     html:'<div class="qen">'+esc(r.en)+'</div>', sub:"가장 알맞은 해석은?", opts:opts, tip:r.tip, speak:null, answerText:r.opts[r.a]};
 }
 function qListen(i){
   var l=LISTEN[i], opts=[];
   for(var k=0;k<l.opts.length;k++) opts.push({t:l.opts[k], ok:(k===l.a)});
   var sub = l.kind==="spell" ? "들은 단어의 철자를 고르세요." : "들은 문장의 뜻을 고르세요.";
-  return {key:"l:"+i, mode:"listening", tag:"LISTENING · "+(l.kind==="spell"?"철자":"문장 뜻"), label:"듣기 · "+l.say,
+  return {key:"l:"+i, mode:"listening", tag:"LISTENING · "+(l.kind==="spell"?"철자":"문장 뜻"), label:"듣기 · "+l.say, kw:l.say,
     html:'<div class="qmean">🔊 '+esc(sub)+'</div>', sub:"", opts:opts, tip:l.tip, speak:l.say, answerText:l.opts[l.a]};
 }
 function qSense(i){
@@ -1713,7 +1963,7 @@ function qSense(i){
   var html='<div class="qmean">'+esc(s.q)+'</div>';
   var lec=ytForTerm(s.term);
   var tn = s.cat ? ("경제 · "+s.cat) : stageNameSense(s.st);
-  return {key:"s:"+i, mode:"sense", tag:"SENSE · "+tn, label:s.term,
+  return {key:"s:"+i, mode:"sense", tag:"SENSE · "+tn, label:s.term, kw:s.term,
     html:html, sub:esc(tn)+" 문제", opts:opts, tip:s.tip, speak:null, answerText:s.opts[s.a],
     yt:(lec?ytLinkHtml(lec):"")};
 }
@@ -1955,6 +2205,7 @@ function chooseAnswer(idx){
 }
 function onCorrect(q){
   var b=state.battle;
+  recordSubject(q,true);
   b.correct++; b.combo++;
   if(b.combo>b.best) b.best=b.combo;
   if(wrong[q.key]){ delete wrong[q.key]; save(LS_WRONG,wrong); b.cleared++; }
@@ -2002,11 +2253,13 @@ function onCorrect(q){
 }
 function onWrong(q, idx){
   var b=state.battle;
+  recordSubject(q,false);
   b.combo=0;
   if(!wrong[q.key]){
-    wrong[q.key]={key:q.key, mode:q.mode, label:q.label, at:Date.now(), tries:1};
+    wrong[q.key]={key:q.key, mode:q.mode, label:q.label, kw:(q.kw||""), at:Date.now(), tries:1};
   } else {
     wrong[q.key].at=Date.now(); wrong[q.key].tries=(wrong[q.key].tries||1)+1;
+    if(q.kw) wrong[q.key].kw=q.kw;
   }
   var cnt=0; for(var k in wrong){ if(wrong[k]) cnt++; }
   if(cnt>120){
@@ -2254,7 +2507,7 @@ function toggleRoomDone(id){
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
@@ -2267,6 +2520,8 @@ document.addEventListener("click", function(ev){
     roomState.t=parseInt(t.getAttribute("data-rsub"),10); renderRoom(); return;
   }
   if(t.hasAttribute && t.hasAttribute("data-done")){ toggleRoomDone(t.getAttribute("data-done")); return; }
+  if(t.hasAttribute && t.hasAttribute("data-subj-quiz")){ startSubjQuiz(t.getAttribute("data-subj-quiz")); return; }
+  if(t.hasAttribute && t.hasAttribute("data-subj-review")){ startReview(); return; }
 
   if(t.hasAttribute && t.hasAttribute("data-say")){
     var sw=t.getAttribute("data-say");
@@ -2334,7 +2589,14 @@ document.addEventListener("keydown", function(ev){
 });
 
 /* 저장소 첫 방문 초기화 */
-save(LS_STATS,stats); save(LS_WRONG,wrong);
+save(LS_STATS,stats); save(LS_WRONG,wrong); ensureSubj();
+
+/* 날짜가 바뀐 채로 앱을 다시 열면 '오늘' 카운터·날짜 배지를 새로 고침 */
+document.addEventListener("visibilitychange", function(){
+  if(document.visibilityState!=="visible") return;
+  var home=$("screen-home");
+  if(home && home.classList.contains("on")) renderSubjReport();
+});
 
 /* 시작 */
 renderHome();
