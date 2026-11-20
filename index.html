@@ -1672,6 +1672,13 @@ function subjPill(r){
   if(r.acc>=65 && r.wc<=2) return {t:"📈 성장 중", cls:"grow"};
   return {t:"💡 한 번 더", cls:"retry"};
 }
+function roomGroupName(trackId){
+  for(var i=0;i<ROOM.length;i++){
+    var g=ROOM[i];
+    for(var j=0;j<g.tracks.length;j++){ if(g.tracks[j].id===trackId) return g.name; }
+  }
+  return "";
+}
 function adviceFor(strong, weak, totalWrong){
   if(!strong) return '📘 <b>도파민 단어 3문제</b>로 시작해 보세요. 1분이면 오늘의 강점이 하나 생겨요.';
   var id=weak.def.id, acc=weak.acc, miss=weak.misses.length?weak.misses[0].kw:"";
@@ -1680,7 +1687,7 @@ function adviceFor(strong, weak, totalWrong){
   else if(id==="GRAMMAR") head="'3초 문법'이 "+acc+"% — <b>a/the + [형용사] + 명사</b> 공식만 3문제 더. 빈칸 앞뒤만 보면 답이 보여요.";
   else if(id==="MONEY"){
     var lec = miss ? ytForTerm(miss) : null;
-    if(lec) head="'경제·재테크'는 틀린 <b>"+esc(miss)+"</b> — 공부방 <b>재테크 "+lec.n+"강</b>에서 5분만 확인해 보세요.";
+    if(lec) head="'경제·재테크'는 틀린 <b>"+esc(miss)+"</b> — 공부방 <b>"+esc(roomGroupName(lec.track)||"경제")+" "+lec.n+"강</b>에서 5분만 확인하면 딱이에요.";
     else head="'경제·재테크'는 <b>2026년 현행 숫자</b>(비과세 한도·세액공제)만 정리하면 한 번에 잡혀요.";
   }
   else if(id==="WORD") head="'도파민 단어'가 "+acc+"% — "+(miss?"<b>"+esc(miss)+"</b>부터 ":"")+"3개만 다시 잡으면 금방 돌아와요. 뜻보다 소리(썰)로 기억!";
@@ -1947,7 +1954,7 @@ function qGrammar(i){
 function qReading(i){
   var r=READING[i], opts=[];
   for(var k=0;k<r.opts.length;k++) opts.push({t:r.opts[k], ok:(k===r.a)});
-  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…", kw:r.en.split(/\s+/).slice(0,3).join(" "),
+  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…", kw:r.en.split(/\s+/).slice(0,3).join(" ")+"…",
     html:'<div class="qen">'+esc(r.en)+'</div>', sub:"가장 알맞은 해석은?", opts:opts, tip:r.tip, speak:null, answerText:r.opts[r.a]};
 }
 function qListen(i){
