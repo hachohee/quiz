@@ -387,6 +387,69 @@ body{
 .wrong-list .wl-t{font-size:11px;font-weight:900;color:#fcd34d;margin-bottom:6px;letter-spacing:.03em}
 .wrong-list ul{margin:0;padding-left:16px}
 .wrong-list li{margin:2px 0;color:var(--muted)}
+/* ---------- 📺 2개월 공부방 ---------- */
+.room-entry{display:flex;align-items:center;gap:11px;width:100%;text-align:left;cursor:pointer;
+  border:1px solid rgba(251,191,36,.36);border-radius:16px;padding:12px 14px;margin:0 0 12px;
+  background:linear-gradient(150deg,rgba(251,191,36,.16),rgba(139,92,246,.20) 72%);
+  color:var(--ink);font-family:inherit}
+.room-entry:active{transform:scale(.985)}
+.room-entry .re-emoji{font-size:23px;line-height:1}
+.room-entry .re-t{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.room-entry .re-t b{font-size:13.5px;font-weight:800;color:#fde68a;letter-spacing:.01em}
+.room-entry .re-t span{font-size:10.5px;color:var(--muted);line-height:1.4}
+.room-entry .re-go{font-size:20px;color:#fcd34d;font-weight:900;line-height:1}
+.room-hero{border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:12px;
+  background:linear-gradient(150deg,rgba(139,92,246,.20),rgba(255,255,255,.03))}
+.rh-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#ddd6fe}
+.rh-badge{background:linear-gradient(92deg,#8b5cf6,#f472b6);color:#fff;border-radius:999px;padding:2px 9px;
+  font-size:10.5px;letter-spacing:.06em;font-weight:900}
+.rh-bar{height:7px;border-radius:999px;background:rgba(0,0,0,.38);overflow:hidden;margin:9px 0 7px}
+.rh-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(92deg,#a78bfa,#f9a8d4);transition:width .3s}
+.rh-note{margin:0;font-size:10.5px;color:var(--muted2);line-height:1.65}
+.seg{display:flex;gap:5px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:9px}
+.seg button{flex:1;min-width:0;border:0;border-radius:11px;padding:9px 3px;background:transparent;color:var(--muted);
+  font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg button.on{background:linear-gradient(150deg,rgba(139,92,246,.9),rgba(244,114,182,.72));color:#fff;
+  box-shadow:0 6px 16px -10px #000}
+.seg.seg-sub{background:rgba(255,255,255,.03)}
+.seg.seg-sub button{font-size:11.5px;padding:7px 3px}
+.tr-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:4px 0 2px}
+.tr-head b{font-size:15px;color:#f5e8ff;font-weight:900}
+.tr-head span{font-size:10px;color:var(--muted2);font-weight:800}
+.tr-pitch{margin:0 0 11px;font-size:11.5px;color:var(--muted);line-height:1.6}
+.tr-sec{margin-bottom:12px}
+.tr-sec h4{margin:0 0 6px;font-size:10.5px;font-weight:900;color:#fcd34d;letter-spacing:.06em}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:10.5px;color:#e4dcff;border:1px solid rgba(196,181,253,.28);background:rgba(139,92,246,.14);
+  border-radius:999px;padding:4px 9px;line-height:1.35}
+.flow{display:flex;flex-direction:column;gap:5px}
+.flow-row{display:flex;gap:8px;align-items:baseline;border-left:2px solid rgba(167,139,250,.45);padding:1px 0 1px 9px}
+.flow-row b{flex:0 0 76px;font-size:10.5px;color:#c4b5fd;font-weight:800;line-height:1.4}
+.flow-row span{font-size:11px;color:var(--muted);line-height:1.45}
+.month{border:1px solid var(--line);border-radius:16px;padding:11px 10px 7px;margin-bottom:11px;background:rgba(255,255,255,.035)}
+.m-head{display:flex;align-items:center;gap:7px}
+.m-badge{font-size:10px;font-weight:900;color:#17102e;background:linear-gradient(92deg,#fcd34d,#f9a8d4);border-radius:999px;padding:2px 8px;letter-spacing:.03em}
+.m-head .m-prog{margin-left:auto;font-size:10px;font-weight:800;color:var(--muted2);font-variant-numeric:tabular-nums}
+.m-sub{display:block;font-size:10.5px;color:var(--muted2);margin:4px 0 8px;line-height:1.55}
+.lec-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.lec{display:flex;align-items:stretch;gap:5px}
+.lec-go{flex:1;min-width:0;display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;
+  border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:8px 9px;background:rgba(0,0,0,.2)}
+.lec-go:active{transform:scale(.99)}
+.lec-n{flex:0 0 24px;text-align:center;font-size:10.5px;font-weight:900;color:#fcd34d;font-variant-numeric:tabular-nums}
+.lec-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.lec-t b{font-size:12.5px;color:#f2ecff;font-weight:800;line-height:1.3}
+.lec-t span{font-size:10.5px;color:var(--muted);line-height:1.45;overflow-wrap:anywhere}
+.lec-play{flex:0 0 auto;font-size:11px;color:#f9a8d4;font-weight:900}
+.lec.done .lec-go{background:linear-gradient(150deg,rgba(52,211,153,.16),rgba(0,0,0,.18));border-color:rgba(52,211,153,.42)}
+.lec.done .lec-t b{color:#a7f3d0}
+.lec-chk{flex:0 0 38px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);
+  color:var(--muted2);font-size:10px;font-weight:900;font-family:inherit;cursor:pointer}
+.lec.done .lec-chk{background:linear-gradient(150deg,#34d399,#10b981);color:#04140f;border-color:transparent}
+.fb-yt{display:inline-flex;align-items:center;gap:5px;margin-top:9px;border:1px solid rgba(251,191,36,.45);
+  background:rgba(251,191,36,.12);color:#fde68a;border-radius:11px;padding:7px 11px;
+  font-size:11.5px;font-weight:800;text-decoration:none;line-height:1.35}
+.room-legend{margin:2px 0 10px;font-size:10px;color:var(--muted2);line-height:1.7;text-align:center}
 .foot{text-align:center;font-size:10.5px;color:var(--muted2);margin:16px 0 0;line-height:1.7}
 .credit{text-align:center;font-size:9px;color:var(--muted2);margin:6px 0 0;opacity:.7}
 .toast{
@@ -444,6 +507,12 @@ body{
       <span>📝 오답 복습</span><span id="wrongCount">(0문제)</span>
     </button>
 
+    <button id="btnRoom" class="room-entry" type="button" data-room="open">
+      <span class="re-emoji">📺</span>
+      <span class="re-t"><b>2개월 공부방 (역사 · 경제 · 시사상식)</b><span>세계사·한국사·경제·시사 12강씩 · 유튜브 60강 바로 보기</span></span>
+      <span class="re-go">›</span>
+    </button>
+
     <div class="cats" id="catList"></div>
 
     <p class="foot">찬우 몰래 몰컴은 안 되고, 같이 하면 두 배 😆<br>인터넷 없어도 · 폰에서도 그대로 돌아가요</p>
@@ -482,6 +551,30 @@ body{
       <button class="nav-btn" id="studyNext" type="button">다음 ▶</button>
     </div>
     <button class="cta" id="studyFight" type="button">💜 잡으러 가기!</button>
+  </section>
+
+  <!-- ================= 📺 2개월 공부방 ================= -->
+  <section id="screen-studyroom" class="screen">
+    <div class="subhead">
+      <button class="back" type="button" data-go="home" aria-label="뒤로">←</button>
+      <div class="t">
+        <h2 id="roomTitle">📺 2개월 공부방</h2>
+        <p id="roomSub">세계사·한국사·경제·시사상식을 2개월 안에 흐름 잡기</p>
+      </div>
+    </div>
+
+    <div class="room-hero">
+      <div class="rh-row"><span class="rh-badge">2개월</span><span id="roomCount">0 / 60강</span></div>
+      <div class="rh-bar"><i id="roomBar" style="width:0%"></i></div>
+      <p class="rh-note">하루 10분 · 이번 강 영상 보기 → 핵심 한 줄 읽기 → 문제 풀기 (옥토 학습 루틴)</p>
+    </div>
+
+    <div class="seg" id="roomTabs"></div>
+    <div class="seg seg-sub" id="roomSubTabs"></div>
+    <div id="roomBody"></div>
+
+    <p class="room-legend">▶ 누르면 유튜브에서 그 강의를 바로 찾아 열어요 · ✓를 누르면 수강 완료 기록</p>
+    <p class="foot">강의 제목은 옥토(성장·공부) 학습자료 기준이에요<br>진도는 이 폰에만 저장돼요</p>
   </section>
 
   <!-- ================= BATTLE ================= -->
@@ -969,7 +1062,43 @@ var SENSE = [
  tip:"'관세 폭탄' 뉴스의 그 세금. 수입 물건 값을 올려요."},
 {st:4,term:"수요와 공급",k:"d2t",line:"가격이 오르면 수요는 줄고 공급은 늘어나는 시장의 기본 원리.",
  q:"가격이 오르면 수요는 줄고 공급은 늘어나는 원리는?",opts:["수요와 공급의 법칙","기회비용의 법칙","규모의 경제","인플레이션"],a:0,
- tip:"딸기 값이 오르면 덜 사고, 농가가 더 키워요. 그게 이 법칙!"}
+ tip:"딸기 값이 오르면 덜 사고, 농가가 더 키워요. 그게 이 법칙!"},
+
+/* ---------- 추가: 옥토 오늘의 테스트 (2026-11-20) ---------- */
+{st:1,term:"민족자결주의",k:"d2t",line:"제1차 세계대전 뒤 우드로 윌슨이 내세운 원칙. 민족은 스스로 운명을 정할 권리가 있다는 것.",
+ q:"1919년 3·1 운동에 영향을 준, 우드로 윌슨이 주창한 원칙은?",opts:["민족자결주의","집단안전보장","세력균형론","문호개방주의"],a:0,
+ tip:"파리강화회의의 '민족자결'이 식민지 조선에 희망으로 퍼졌어요. 1919 = 3·1 = 윌슨!"},
+{st:1,term:"3·1 운동",k:"d2t",line:"1919년 3월 1일, 일제의 무단 통치에 맞서 전국에서 일어난 만세 시위.",
+ q:"1919년 3월 1일 전국에서 일어난 만세 시위는?",opts:["3·1 운동","4·19 혁명","5·18 민주화운동","6월 민주항쟁"],a:0,
+ tip:"1919 = 3·1 운동. 독립선언과 만세 시위가 전국으로, 이듬해 임시정부로 이어졌어요."},
+{st:1,term:"대한민국 임시정부",k:"d2t",line:"3·1 운동 직후인 1919년 중국 상하이에서 수립된 임시 정부.",
+ q:"3·1 운동 직후 중국 상하이에 수립된 정부는?",opts:["대한민국 임시정부","조선총독부","만주국","상하이 조계정부"],a:0,
+ tip:"1919 상하이 = 대한민국 임시정부. '상하이'가 나오면 임시정부로 3초!"},
+{st:2,term:"사라예보 사건",k:"d2t",line:"1914년 오스트리아-헝가리 제국의 황태자 부부가 암살된 사건. 제1차 세계대전의 직접적 도화선.",
+ q:"제1차 세계대전의 도화선이 된 1914년 사라예보 사건에서 암살된 인물은?",opts:["오스트리아-헝가리 황태자 부부","러시아 황제 니콜라이 2세","독일 황제 빌헬름 2세","영국 수상 처칠"],a:0,
+ tip:"사라예보에서 죽은 건 오스트리아-헝가리 황태자 부부. 그 한 발이 세계대전을 열었어요."},
+{st:3,term:"파레토 법칙",k:"d2t",line:"결과의 80%는 원인 20%에서 나온다는 법칙. '80/20 법칙'이라고도 한다.",
+ q:"'결과의 80%는 원인 20%에서 나온다'는 이 법칙의 이름은?",opts:["파레토 법칙(80/20 법칙)","파킨슨 법칙","무어의 법칙","오컴의 면도날"],a:0,
+ tip:"상식 한 조각에서 만난 그 개념! 일의 20%가 성과의 80%를 만듭니다."},
+{st:3,term:"탄소중립",k:"d2t",line:"배출한 탄소를 흡수·상쇄해 순배출량을 0으로 만드는 것. '넷제로'라고도 한다.",
+ q:"배출한 탄소를 흡수·상쇄해 순배출을 0으로 만드는 목표는?",opts:["탄소중립(넷제로)","디플레이션","공급망 재편","금본위제"],a:0,
+ tip:"2050 탄소중립 = 넷제로. '배출 0'이 아니라 '순배출 0'이에요."},
+{st:4,term:"재정정책과 통화정책",k:"d2t",line:"경제안정화정책의 두 축. 재정정책은 정부(세금·지출), 통화정책은 중앙은행(금리·통화량)이 맡는다.",
+ q:"경제안정화정책의 두 축인 재정정책과 통화정책을 담당하는 주체를 각각 옳게 짝지은 것은?",
+ opts:["재정정책=정부, 통화정책=중앙은행","재정정책=중앙은행, 통화정책=정부","둘 다 정부가 전담","둘 다 중앙은행이 전담"],a:0,
+ tip:"돈을 직접 쓰는 건 정부(재정), 금리를 만지는 건 중앙은행(통화). 이 둘을 구분하는 게 기사 읽기의 기본!"},
+{st:4,term:"HBM(고대역폭 메모리)",k:"d2t",line:"AI 서버에 들어가는 고대역폭 메모리. 2026년 반도체 섹터의 핵심 키워드.",
+ q:"2026년 국내 증시 전망에서 반도체 섹터와 관련해 자주 언급되는 최신 트렌드 키워드는?",
+ opts:["HBM(고대역폭 메모리)·AI 관련 수요","1970년대 오일쇼크","금본위제 부활","가격통제 정책"],a:0,
+ tip:"AI가 커질수록 HBM이 필요해요. 반도체 기사에 HBM이 보이면 'AI 수요'로 읽기!"},
+{st:4,term:"조정과 반등",k:"d2t",line:"조정=상승하던 주가의 일시적 하락, 반등=하락하던 주가가 다시 오름.",
+ q:"'미국 증시가 조정을 받은 뒤 반등했다'는 뉴스에서 '조정'과 '반등'의 뜻으로 옳은 것은?",
+ opts:["조정=상승하던 주가의 일시적 하락, 반등=하락하던 주가가 다시 오름","조정=주가 폭등, 반등=거래 중단","조정=시장 폐장, 반등=신규 상장","조정=금리 인상, 반등=금리 인하"],a:0,
+ tip:"조정은 '숨 고르기', 반등은 '다시 올라섬'. 방향이 반대예요."},
+{st:4,term:"경기순환",k:"d2t",line:"경제활동이 회복 → 호황 → 침체 → 불황의 네 국면을 돌고 도는 것.",
+ q:"경기순환에서 경제활동이 순환하는 국면의 순서로 옳은 것은?",
+ opts:["회복 → 호황 → 침체 → 불황","호황 → 회복 → 불황 → 침체","불황 → 호황 → 회복 → 침체","침체 → 불황 → 호황 → 회복"],a:0,
+ tip:"회복해서 호황, 식으면 침체, 바닥이 불황. 시계방향으로 외우면 안 헷갈려요."}
 ];
 
 /* ============================================================
@@ -1034,6 +1163,148 @@ var STAGE_DEFS = {
     {n:3,name:"3단계 시사상식",sub:"국회·예산·조달·인구",st:3},
     {n:4,name:"4단계 경제",sub:"금리·환율·인플레·레버리지",st:4}
   ]
+};
+
+/* ============================================================
+   📺 2개월 공부방 (역사 · 경제 · 시사상식)
+   - 옥토(OHTO) '성장·공부' 12주 커리큘럼을 1개월차(1~6강)·2개월차(7~12강)로 압축
+   - 주제·강의 제목·추천 채널은 옥토 학습자료 화면 그대로 (2026-11 기준)
+   - 강의마다 유튜브 검색 링크 = 제목 그대로 검색 (죽은 링크 없음)
+   ============================================================ */
+var YT_SEARCH = "https://www.youtube.com/results?search_query=";
+var ROOM = [
+  {id:"hist", emoji:"📜", name:"역사", sub:"세계사 · 한국사", tracks:[
+    {id:"world", name:"세계사", emoji:"🌏",
+     pitch:"4대 문명에서 냉전까지 — '왜 일어났고 무엇이 바뀌었나'로 이어 붙이기",
+     concepts:["문명의 발생 조건(큰 강 유역, 농업)","그리스 폴리스와 직접 민주정","로마 제국의 팽창과 분열","봉건제(주종관계, 장원제)"],
+     flows:[["기원전 3000년경","메소포타미아·이집트 문명 성립"],["기원전 5세기","아테네 민주정 전성기(페리클레스)"],["기원전 27년","로마 제정 시작(아우구스투스)"],["610년경","무함마드, 이슬람교 창시"],["800년","샤를마뉴 서로마 황제 대관"]],
+     months:[
+      {label:"1개월차", sub:"1~6강 · 고대 문명 → 그리스·로마 → 이슬람 → 중세 → 르네상스·대항해", lec:[
+        {n:1,topic:"4대 문명",title:"[세계사강의] 02강 인류의 진화와 고대문명",ch:"류성완"},
+        {n:2,topic:"고대 그리스와 로마",title:"그리스부터 로마 제국까지",ch:"차이나는 클라스"},
+        {n:3,topic:"이슬람 문명의 성장",title:"[세계사강의] 16강 서아시아사(2)",ch:"류성완"},
+        {n:4,topic:"중세 유럽 봉건사회",title:"세 개의 장면, 세계의 민주주의",ch:"국회방송"},
+        {n:5,topic:"르네상스·종교개혁",title:"[뉴탐스런 세계사] 20강",ch:"류성완"},
+        {n:6,topic:"대항해시대",title:"[세계사강의] 27강 신항로의 개척",ch:"류성완"}
+      ]},
+      {label:"2개월차", sub:"7~12강 · 시민혁명 → 산업혁명 → 제국주의 → 세계대전 → 냉전", lec:[
+        {n:7,topic:"3대 시민혁명",title:"중2 역사 한번에 정리",ch:""},
+        {n:8,topic:"산업혁명",title:"영국 산업혁명의 계기와 발달",ch:"별거벗은 세계사"},
+        {n:9,topic:"제국주의",title:"[세계사강의] 36강 자본주의 발달과 제국주의",ch:"류성완"},
+        {n:10,topic:"1차 세계대전",title:"[세계사강의] 37강 1차 세계대전과 러시아 혁명",ch:"류성완"},
+        {n:11,topic:"2차 세계대전",title:"[세계사강의] 38강 2차 세계대전",ch:"류성완"},
+        {n:12,topic:"냉전",title:"[세계사강의] 39강 냉전의 형성과 붕괴",ch:"류성완"}
+      ]}
+     ]},
+    {id:"korea", name:"한국사", emoji:"🇰🇷",
+     pitch:"고조선에서 현대사까지 — 사건-인물-연도를 한 줄로 꿰기",
+     concepts:["고조선과 여러 나라의 성장","삼국의 경쟁과 신라의 삼국통일","고려의 건국과 대외관계(거란·여진)","조선의 건국과 세종대의 문물 정비"],
+     flows:[["기원전 2333년","고조선 건국(단군왕검)"],["676년","신라의 삼국통일"],["918년","고려 건국(왕건)"],["1392년","조선 건국(이성계)"],["1919년","3·1 운동 → 대한민국 임시정부"],["1945년","광복"]],
+     months:[
+      {label:"1개월차", sub:"1~6강 · 고조선 → 삼국 → 남북국 → 고려", lec:[
+        {n:1,topic:"고조선과 여러 나라",title:"1-4 여러나라의 성장",ch:"최태성 1TV"},
+        {n:2,topic:"삼국의 성립과 경쟁",title:"2-2 삼국의 성장",ch:"최태성 1TV"},
+        {n:3,topic:"삼국통일",title:"2-3 삼국의 항쟁과 신라의 삼국 통일",ch:"최태성 1TV"},
+        {n:4,topic:"남북국시대",title:"2-4 통일 신라와 발해의 발전",ch:"최태성 1TV"},
+        {n:5,topic:"고려의 건국",title:"4-1 고려의 건국과 통치 체제의 정비",ch:"최태성 1TV"},
+        {n:6,topic:"거란·여진의 침입",title:"5-1 고려의 대외 관계",ch:"최태성 1TV"}
+      ]},
+      {label:"2개월차", sub:"7~12강 · 조선 → 두 전란 → 개항 → 3·1운동 → 광복·현대", lec:[
+        {n:7,topic:"조선의 건국",title:"6-1 조선의 건국과 통치 체제의 정비",ch:"최태성 1TV"},
+        {n:8,topic:"세종대의 문물 정비",title:"10분으로 보는 조선 4대 왕 세종대왕",ch:"최태성 1TV"},
+        {n:9,topic:"임진왜란·병자호란",title:"6-3 조선의 대외 관계",ch:"최태성 1TV"},
+        {n:10,topic:"개항",title:"9-1 조선의 개항",ch:"최태성 1TV"},
+        {n:11,topic:"3·1운동과 독립운동",title:"15-2 3·1 운동",ch:"최태성 1TV"},
+        {n:12,topic:"광복과 현대사",title:"18-1 광복과 통일 정부 수립 노력",ch:"최태성 1TV"}
+      ]}
+     ]}
+  ]},
+  {id:"econ", emoji:"💰", name:"경제", sub:"기초경제 · 최신트렌드", tracks:[
+    {id:"basic", name:"기초경제", emoji:"📗",
+     pitch:"희소성에서 경기순환까지 — 뉴스 속 경제 용어의 뿌리",
+     concepts:["희소성: 자원은 한정, 욕구는 무한","기회비용: 선택의 대가","수요법칙 / 공급법칙","시장경제와 계획경제의 차이"],
+     flows:[["희소성","자원은 유한, 욕구는 무한 — 모든 경제문제의 출발점"],["기회비용","하나를 선택하면 포기해야 하는 것 중 가장 큰 가치"],["수요법칙","가격이 오르면 수요량은 줄어든다"],["공급법칙","가격이 오르면 공급량은 늘어난다"]],
+     months:[
+      {label:"1개월차", sub:"1~6강 · 희소성 → 수요·공급 → 시장경제 → 가격 → 금리 → 물가", lec:[
+        {n:1,topic:"희소성과 기회비용",title:"자원의 희소성과 합리적 선택",ch:"한국은행 한은런"},
+        {n:2,topic:"수요와 공급 법칙",title:"수요와 공급",ch:"한국은행 한은런"},
+        {n:3,topic:"시장경제 vs 계획경제",title:"자본주의 VS 사회주의 뭐가 다를까?",ch:""},
+        {n:4,topic:"가격의 역할",title:"수요공급과 가격의 의미",ch:"경제학팡 박사"},
+        {n:5,topic:"금리란 무엇인가",title:"금리 환율 쉽게 설명",ch:"지식인사이드, 오건영"},
+        {n:6,topic:"인플레이션과 디플레이션",title:"물가와 인플레이션",ch:"한국은행 알경 10편"}
+      ]},
+      {label:"2개월차", sub:"7~12강 · 환율 → 주식·채권 → GDP → 고용 → 재정·통화정책 → 경기순환", lec:[
+        {n:7,topic:"환율의 원리",title:"환율 결정과 변동 요인",ch:"한국은행 한은런"},
+        {n:8,topic:"주식과 채권의 차이",title:"주식과 채권",ch:"3분차이"},
+        {n:9,topic:"GDP란 무엇인가",title:"국내총생산(GDP)이란?",ch:"만화로 보는 펭귄의 경제학"},
+        {n:10,topic:"실업률과 고용",title:"헷갈리는 고용률 취업률",ch:"EBS"},
+        {n:11,topic:"재정정책과 통화정책",title:"통화정책과 재정정책",ch:"한국은행 알경 9편"},
+        {n:12,topic:"경기순환",title:"침체일까 회복일까?",ch:"한국은행"}
+      ]}
+     ]},
+    {id:"trend", name:"최신트렌드", emoji:"📈",
+     pitch:"금리·물가·환율 뉴스를 스스로 해석하고, 내 살림·투자에 연결하기",
+     concepts:["금리 인상/인하가 가계에 미치는 영향","물가상승률 '둔화'의 의미","기준금리와 대출금리의 관계"],
+     flows:[["기준금리 동결","이전 수준 그대로 유지, 오르지도 내리지도 않음"],["물가상승률 둔화","물가는 계속 오르지만 오르는 속도가 느려짐"]],
+     months:[
+      {label:"1개월차", sub:"1~6강 · 금리·물가·대출 뉴스 → 이달 이슈 → 환율 → 원화 약세", lec:[
+        {n:1,topic:"기준금리 뉴스 읽는 법",title:"한은 기준금리 2.5% 8회 연속 동결",ch:"KBS"},
+        {n:2,topic:"물가상승률 발표 이해하기",title:"10월 소비자물가 2.4%↑",ch:"KBS"},
+        {n:3,topic:"내 대출·예금에 미치는 영향",title:"기준금리 내렸는데 대출금리는 왜 오를까",ch:"YTN"},
+        {n:4,topic:"이번 달 경제 이슈 정리",title:"환율 1480원, 물가·양극화 위기",ch:"KBS"},
+        {n:5,topic:"환율이 오른다/내린다",title:"환율이 이상하다",ch:"전인구경제연구소"},
+        {n:6,topic:"원화 약세와 수출입",title:"고환율에 수입 수출 물가 상승 순서",ch:"YTN 사이언스"}
+      ]},
+      {label:"2개월차", sub:"7~12강 · 무역수지 → 미국 금리 → 코스피 → 펀드 → 시장 용어 → 분기 전망", lec:[
+        {n:7,topic:"무역수지 흑자/적자",title:"무역수지·경상수지 차이",ch:"YTN"},
+        {n:8,topic:"미국 금리와 한국 경제",title:"美 기준금리 인하, 우리 경제는?",ch:"KBS"},
+        {n:9,topic:"코스피/코스닥이란",title:"코스피와 코스닥 차이",ch:"3분차이"},
+        {n:10,topic:"펀드와 분산투자",title:"주식·ETF·펀드 투자 전에 이것부터",ch:""},
+        {n:11,topic:"시장 용어(조정·반등 등)",title:"왕초보를 위한 주식기초용어 총정리",ch:"이효석아카데미"},
+        {n:12,topic:"이번 분기 투자 이슈",title:"2026 증시 1분기대전망",ch:"한국경제TV"}
+      ]}
+     ]}
+  ]},
+  {id:"cur", emoji:"📰", name:"시사상식", sub:"AI·기후 · 인구 · 지정학 · 법과 언론", tracks:[
+    {id:"now", name:"시사상식", emoji:"📰",
+     pitch:"기자가 알아야 할 세상 돌아가는 축 — AI·기후·인구·지정학·헌법·언론·인문학을 2개월에",
+     concepts:["AI 반도체(HBM)와 산업 패권","기후위기·탄소중립(넷제로)","저출생·고령화·연금개혁","미중 패권과 공급망","삼권분립(국회·정부·법원)","저널리즘의 기본: 사실과 해석의 구분"],
+     flows:[["1개월차 테마","AI·기후·인구 — 지금 우리를 바꾸는 것들"],["2개월차 테마","지정학·법·언론·인문학 — 세상을 읽는 틀"],["매일 연결","'상식 한 조각'의 트로이의 목마·80/20 파레토 법칙이 12강과 이어져요"],["퀴즈 연결","시사상식 문제를 틀리면 설명 아래 '📺 관련 유튜브 강의 보기' 버튼"]],
+     months:[
+      {label:"1개월차", sub:"1~6강 · AI 반도체 · 플랫폼 규제 · 기후·탄소중립 · 에너지 · 저출생·고령화 · 연금개혁", lec:[
+        {n:1,topic:"AI 반도체와 산업 패권",title:"AI 반도체 전쟁의 승자는?",ch:"슈카월드"},
+        {n:2,topic:"플랫폼·빅테크 규제",title:"플랫폼 규제, 독점을 어떻게 볼까",ch:"삼프로TV"},
+        {n:3,topic:"기후위기와 탄소중립",title:"기후위기, 숫자로 보는 현실",ch:"KBS 시사기획 창"},
+        {n:4,topic:"에너지 전환과 전력",title:"AI 시대의 전력 대란",ch:"슈카월드"},
+        {n:5,topic:"저출생과 고령화",title:"저출생, 왜 이렇게 됐나",ch:"차이나는 클라스"},
+        {n:6,topic:"연금개혁",title:"연금개혁, 내 노후는 어떻게",ch:"삼프로TV"}
+      ]},
+      {label:"2개월차", sub:"7~12강 · 미중 패권 · 공급망 · 헌법·삼권분립 · 재판 · 언론·저널리즘 · 신화·철학·문화유산", lec:[
+        {n:7,topic:"미중 패권 경쟁",title:"미중 패권 경쟁의 역사",ch:"차이나는 클라스"},
+        {n:8,topic:"공급망과 자원 무기화",title:"공급망 재편, 희토류 전쟁",ch:"사피엔스 스튜디오"},
+        {n:9,topic:"헌법과 삼권분립",title:"헌법이 뭐길래",ch:"지식채널e"},
+        {n:10,topic:"재판과 사법",title:"재판은 어떻게 이뤄지나",ch:"지식채널e"},
+        {n:11,topic:"언론과 저널리즘",title:"팩트체크, 저널리즘이란 무엇인가",ch:"KBS 시사기획 창"},
+        {n:12,topic:"신화·철학·문화유산",title:"트로이의 목마, 실재했을까",ch:"사피엔스 스튜디오"}
+      ]}
+     ]}
+  ]}
+];
+
+/* 문제 설명 → 관련 강의 (term 키) */
+var SENSE_YT = {
+  "고조선":"korea-1", "삼국 시대":"korea-2", "세종대왕":"korea-8", "이순신":"korea-9", "이성계":"korea-7",
+  "4·19 혁명":"korea-12", "6·25 전쟁":"korea-12", "5·18 민주화운동":"korea-12", "6월 민주항쟁":"korea-12",
+  "팔만대장경":"korea-5", "3·1 운동":"korea-11", "민족자결주의":"korea-11", "대한민국 임시정부":"korea-11",
+  "트로이의 목마":"world-2", "마그나 카르타":"world-4", "프랑스 혁명":"world-7", "산업혁명":"world-8",
+  "미국 독립선언문":"world-7", "로마":"world-2", "르네상스":"world-5", "제1차 세계대전":"world-10",
+  "사라예보 사건":"world-10", "만리장성":"world-1", "광복(1945년)":"world-11",
+  "국회":"cur-9", "사법부(법원)":"cur-9", "예산":"cur-9", "공공조달":"cur-9", "국정감사":"cur-9",
+  "인구 절벽":"cur-5", "초고령사회":"cur-5", "COP(당사국총회)":"cur-3", "표본오차":"cur-11",
+  "재보궐선거":"cur-9", "파레토 법칙":"cur-12", "탄소중립":"cur-3",
+  "기회비용":"basic-1", "금리":"basic-5", "환율":"basic-7", "인플레이션":"basic-6", "디플레이션":"basic-6",
+  "GDP(국내총생산)":"basic-9", "채권":"basic-8", "레버리지":"basic-10", "관세":"basic-3", "수요와 공급":"basic-2",
+  "재정정책과 통화정책":"basic-11", "HBM(고대역폭 메모리)":"cur-1", "조정과 반등":"trend-11", "경기순환":"basic-12"
 };
 </script>
 <script>
@@ -1145,7 +1416,7 @@ function speak(text){
 try{ if(speechOK){ window.speechSynthesis.getVoices(); if(window.speechSynthesis.onvoiceschanged!==undefined){ window.speechSynthesis.onvoiceschanged=function(){ try{window.speechSynthesis.getVoices();}catch(e){} }; } } }catch(e){}
 
 /* ---------------- 화면 ---------------- */
-var SCREENS=["home","stages","study","battle","result"];
+var SCREENS=["home","stages","study","battle","result","studyroom"];
 function show(name){
   for(var i=0;i<SCREENS.length;i++){
     var el=$("screen-"+SCREENS[i]);
@@ -1224,7 +1495,7 @@ function renderStages(){
   $("stageList").innerHTML=html;
   $("stageNote").textContent = state.catId==="words"
     ? "Day 1~9 실제 발송 단어 전량 · 복습 단어는 해당 회차에 포함"
-    : "한국사 10 · 세계사 10 · 시사 10 · 경제 10 (기회비용·트로이의 목마 포함)";
+    : "한국사 "+senseCount(1)+" · 세계사 "+senseCount(2)+" · 시사상식 "+senseCount(3)+" · 경제 "+senseCount(4)+" (기회비용·트로이의 목마 포함)";
 }
 
 /* ---------------- 훑어보기 ---------------- */
@@ -1261,11 +1532,13 @@ function renderStudy(){
       +'<div class="box story"><span class="lab">3초 암기 썰</span>'+esc(it.s)+'</div>'
       +'<div class="box chunk"><span class="lab">2단어 짝꿍</span><b>'+esc(it.c)+'</b></div>';
   } else {
+    var sl=ytForTerm(it.term);
     html='<div class="badge-row"><span class="badge day">'+esc(state.stage.name)+'</span>'
       +'<span class="badge">핵심 1줄</span></div>'
       +'<div class="word small">'+esc(it.term)+'</div>'
       +'<div class="box story"><span class="lab">핵심 1줄 설명</span>'+esc(it.line)+'</div>'
-      +'<div class="box chunk"><span class="lab">기억 한 줄</span>'+esc(it.tip)+'</div>';
+      +'<div class="box chunk"><span class="lab">기억 한 줄</span>'+esc(it.tip)+'</div>'
+      +(sl?('<div style="margin-top:11px">'+ytLinkHtml(sl)+'</div>'):'');
   }
   $("studyCard").innerHTML=html;
   var n=state.deck.length, cur=state.deckIdx+1;
@@ -1330,11 +1603,16 @@ function qSense(i){
   var s=SENSE[i], opts=[];
   for(var k=0;k<s.opts.length;k++) opts.push({t:s.opts[k], ok:(k===s.a)});
   var html='<div class="qmean">'+esc(s.q)+'</div>';
+  var lec=ytForTerm(s.term);
   return {key:"s:"+i, mode:"sense", tag:"SENSE · "+stageNameSense(s.st), label:s.term,
-    html:html, sub:esc(stageNameSense(s.st))+" 문제", opts:opts, tip:s.tip, speak:null, answerText:s.opts[s.a]};
+    html:html, sub:esc(stageNameSense(s.st))+" 문제", opts:opts, tip:s.tip, speak:null, answerText:s.opts[s.a],
+    yt:(lec?ytLinkHtml(lec):"")};
 }
 function stageNameSense(st){
   var d=STAGE_DEFS.sense; for(var i=0;i<d.length;i++){ if(d[i].st===st) return d[i].name; } return "상식";
+}
+function senseCount(st){
+  var n=0; for(var i=0;i<SENSE.length;i++){ if(SENSE[i].st===st) n++; } return n;
 }
 function questionFromKey(key){
   var p=key.split(":"), i=parseInt(p[1],10), k;
@@ -1606,7 +1884,7 @@ function onCorrect(q){
     head = crit ? "⚡ 크리티컬! 하트 +"+added+" 💜" : "💜 하트 +"+added+"  ("+b.heart+"/"+b.heartMax+")";
     body = '<b>'+esc(b.member.n)+'</b>: '+esc(pick(b.member.cheer))+'<br>'+q.tip;
   }
-  showFb(true, head, body);
+  showFb(true, head, body, q.yt||"");
   var cont=$("btnContinue");
   cont.classList.remove("hidden");
   if(b.caught>=b.target) cont.textContent="🏆 결과 보기";
@@ -1636,13 +1914,13 @@ function onWrong(q, idx){
   var em=$("monsterEmoji");
   em.classList.remove("spark","caught"); void em.offsetWidth; em.classList.add("spark");
   updateBattleChrome();
-  showFb(false,"아쉬워요! 정답은 <b>"+esc(q.answerText)+"</b>","📝 오답 노트에 저장했어요.<br>"+q.tip+(b.member?("<br><b>"+esc(b.member.n)+"</b>: "+esc(b.member.oops)):""));
+  showFb(false,"아쉬워요! 정답은 <b>"+esc(q.answerText)+"</b>","📝 오답 노트에 저장했어요.<br>"+q.tip+(b.member?("<br><b>"+esc(b.member.n)+"</b>: "+esc(b.member.oops)):""), q.yt||"");
   var cont=$("btnContinue");
   cont.classList.remove("hidden");
   cont.textContent = (b.caught>=b.target) ? "🏆 결과 보기" : "계속 💜";
 }
-function showFb(ok, head, body){
-  $("fbSlot").innerHTML='<div class="fb '+(ok?"ok":"no")+'"><div class="fb-t">'+head+'</div><div class="fb-b">'+body+'</div></div>';
+function showFb(ok, head, body, extra){
+  $("fbSlot").innerHTML='<div class="fb '+(ok?"ok":"no")+'"><div class="fb-t">'+head+'</div><div class="fb-b">'+body+(extra||"")+'</div></div>';
 }
 function floatHeart(txt, crit){
   var z=$("monsterZone");
@@ -1750,13 +2028,122 @@ function restartBattle(){
   startBattleForCat(mode);
 }
 
+/* ---------------- 📺 2개월 공부방 ---------------- */
+var LS_ROOM="tmq_room_v1";
+var roomDone = load(LS_ROOM,{}) || {};
+var ROOM_LEC={}, ROOM_TOTAL=0;
+(function buildRoomIndex(){
+  for(var i=0;i<ROOM.length;i++){
+    var g=ROOM[i];
+    for(var j=0;j<g.tracks.length;j++){
+      var tr=g.tracks[j];
+      for(var m=0;m<tr.months.length;m++){
+        var mo=tr.months[m];
+        for(var k=0;k<mo.lec.length;k++){
+          var L=mo.lec[k], id=tr.id+"-"+L.n;
+          L.id=id; L.track=tr.id; L.group=g.id; L.month=m;
+          L.url=YT_SEARCH+encodeURIComponent(L.title+(L.ch?" "+L.ch:""));
+          ROOM_LEC[id]=L; ROOM_TOTAL++;
+        }
+      }
+    }
+  }
+})();
+function ytForTerm(term){ var id=SENSE_YT[term]; return id ? (ROOM_LEC[id]||null) : null; }
+function ytLinkHtml(lec){
+  if(!lec) return "";
+  return '<a class="fb-yt" href="'+esc(lec.url)+'" target="_blank" rel="noopener noreferrer">📺 관련 유튜브 강의 보기 · '+lec.n+'강 '+esc(lec.topic)+'</a>';
+}
+var roomState={g:0,t:0};
+function renderRoomTabs(){
+  var gh="", i, g=ROOM[roomState.g];
+  for(i=0;i<ROOM.length;i++){
+    gh+='<button type="button" data-rseg="'+i+'" class="'+(roomState.g===i?"on":"")+'">'+ROOM[i].emoji+' '+esc(ROOM[i].name)+'</button>';
+  }
+  $("roomTabs").innerHTML=gh;
+  var box=$("roomSubTabs");
+  if(g && g.tracks.length>1){
+    var sh="";
+    for(i=0;i<g.tracks.length;i++){
+      sh+='<button type="button" data-rsub="'+i+'" class="'+(roomState.t===i?"on":"")+'">'+g.tracks[i].emoji+' '+esc(g.tracks[i].name)+'</button>';
+    }
+    box.innerHTML=sh; box.style.display="";
+  } else {
+    box.innerHTML=""; box.style.display="none";
+  }
+}
+function roomProgress(){
+  var done=0, id;
+  for(id in roomDone){ if(roomDone[id] && ROOM_LEC[id]) done++; }
+  $("roomCount").textContent=done+" / "+ROOM_TOTAL+"강";
+  $("roomBar").style.width=(ROOM_TOTAL? Math.round(done/ROOM_TOTAL*100):0)+"%";
+}
+function renderRoomBody(){
+  var g=ROOM[roomState.g]; if(!g) return;
+  if(roomState.t>=g.tracks.length) roomState.t=0;
+  var tr=g.tracks[roomState.t], html="", i, j;
+  html+='<div class="tr-head"><b>'+tr.emoji+' '+esc(tr.name)+'</b><span>12강 · 2개월</span></div>';
+  html+='<p class="tr-pitch">'+esc(tr.pitch)+'</p>';
+  if(tr.concepts && tr.concepts.length){
+    html+='<div class="tr-sec"><h4>핵심 개념</h4><div class="chips">';
+    for(i=0;i<tr.concepts.length;i++) html+='<span class="chip">'+esc(tr.concepts[i])+'</span>';
+    html+='</div></div>';
+  }
+  if(tr.flows && tr.flows.length){
+    html+='<div class="tr-sec"><h4>핵심 흐름</h4><div class="flow">';
+    for(i=0;i<tr.flows.length;i++){
+      html+='<div class="flow-row"><b>'+esc(tr.flows[i][0])+'</b><span>'+esc(tr.flows[i][1])+'</span></div>';
+    }
+    html+='</div></div>';
+  }
+  for(i=0;i<tr.months.length;i++){
+    var mo=tr.months[i], dn=0;
+    for(j=0;j<mo.lec.length;j++){ if(roomDone[mo.lec[j].id]) dn++; }
+    html+='<div class="month"><div class="m-head"><span class="m-badge">'+esc(mo.label)+'</span>'
+      +'<span class="m-prog">'+dn+'/'+mo.lec.length+'</span></div>'
+      +'<span class="m-sub">'+esc(mo.sub)+'</span><ol class="lec-list">';
+    for(j=0;j<mo.lec.length;j++){
+      var L=mo.lec[j], on=!!roomDone[L.id];
+      html+='<li class="lec'+(on?" done":"")+'">'
+        +'<a class="lec-go" href="'+esc(L.url)+'" target="_blank" rel="noopener noreferrer">'
+        +'<span class="lec-n">'+(L.n<10?"0":"")+L.n+'</span>'
+        +'<span class="lec-t"><b>'+esc(L.topic)+'</b><span>'+esc(L.title)+(L.ch?" · "+esc(L.ch):"")+'</span></span>'
+        +'<span class="lec-play">▶</span></a>'
+        +'<button class="lec-chk" type="button" data-done="'+L.id+'" aria-label="'+esc(L.topic)+' 수강 완료 표시">'+(on?"완료":"✓")+'</button>'
+        +'</li>';
+    }
+    html+='</ol></div>';
+  }
+  $("roomBody").innerHTML=html;
+}
+function renderRoom(){
+  renderRoomTabs(); renderRoomBody(); roomProgress();
+}
+function openRoom(){ renderRoom(); show("studyroom"); }
+function toggleRoomDone(id){
+  var L=ROOM_LEC[id]; if(!L) return;
+  if(roomDone[id]) delete roomDone[id]; else roomDone[id]=Date.now();
+  save(LS_ROOM,roomDone);
+  renderRoomBody(); roomProgress();
+  toast(roomDone[id] ? "✓ "+L.n+"강 완료! ("+L.topic+")" : "완료 취소 — 다시 볼 수 있어요");
+}
+
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
+
+  if(t.hasAttribute && t.hasAttribute("data-room")){ openRoom(); return; }
+  if(t.hasAttribute && t.hasAttribute("data-rseg")){
+    roomState.g=parseInt(t.getAttribute("data-rseg"),10); roomState.t=0; renderRoom(); return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-rsub")){
+    roomState.t=parseInt(t.getAttribute("data-rsub"),10); renderRoom(); return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-done")){ toggleRoomDone(t.getAttribute("data-done")); return; }
 
   if(t.hasAttribute && t.hasAttribute("data-say")){
     var sw=t.getAttribute("data-say");
