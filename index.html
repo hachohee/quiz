@@ -3504,8 +3504,14 @@ function revealText(auto){
   var q=b.current;
   var body = q.script || q.speak || "";
   if(!body) return;
+  /* 같은 버튼을 다시 누르면 스크립트 닫기 (토글) */
+  if(!auto && b.textShown){
+    b.textShown=false;
+    $("qSub").innerHTML=q.sub||"";
+    return;
+  }
   b.textShown=true;
-  var note = auto ? "이 기기에서는 영어 음성이 안 나와요. 스크립트로 풀어 보세요 👇" : "스크립트";
+  var note = auto ? "이 기기에서는 영어 음성이 안 나와요. 스크립트로 풀어 보세요 👇" : "스크립트 (다시 누르면 닫혀요)";
   var extra = q.sub ? ('<div style="margin-top:6px;font-size:11.5px;color:#b7a9e8">'+q.sub+'</div>') : "";
   $("qSub").innerHTML='<div class="qscript"><b>'+esc(note)+'</b><br>'+esc(body).replace(/\n/g,"<br>")+'</div>'+extra;
 }
@@ -3528,6 +3534,8 @@ function chooseAnswer(idx){
   }
   if(picked.ok) onCorrect(q);
   else onWrong(q, idx);
+  /* Part 2는 정답을 고른 뒤 질문 스크립트를 자동으로 열어 준다 */
+  if(q.hideQ && !b.textShown) revealText(false);
 }
 function onCorrect(q){
   var b=state.battle;
