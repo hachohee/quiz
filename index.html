@@ -2694,7 +2694,7 @@ var SUBJ_DEFS=[
   {id:"WORD",    em:"📘", name:"도파민 단어",       sub:"단어 → 뜻"},
   {id:"GRAMMAR", em:"⚡", name:"3초 문법",          sub:"빈칸 앞뒤"},
   {id:"READ",    em:"📖", name:"한 줄 해석",         sub:"영문 → 해석"},
-  {id:"LISTEN",  em:"🎧", name:"발음 듣기",          sub:"듣고 고르기"},
+  {id:"LISTEN",  em:"🎧", name:"실전 LC 듣기",      sub:"Part 1~4"},
   {id:"HIST",    em:"📜", name:"한국사·세계사·시사", sub:"역사·시사"},
   {id:"MONEY",   em:"💎", name:"경제·재테크",        sub:"경제·절세"}
 ];
@@ -2877,7 +2877,7 @@ function adviceFor(strong, weak, totalWrong){
   }
   else if(id==="WORD") head="'도파민 단어'가 "+acc+"% — "+(miss?"<b>"+esc(miss)+"</b>부터 ":"")+"3개만 다시 잡으면 금방 돌아와요. 뜻보다 소리(썰)로 기억!";
   else if(id==="READ") head="'한 줄 해석'은 <b>주어+동사</b>만 먼저 찾는 습관이 약점을 지워요. "+(miss?"「"+esc(miss)+"」 문장부터 한 번 더.":"");
-  else if(id==="LISTEN") head="'발음 듣기'는 <b>다시 듣기</b> 한 번 더 — 한 글자 차이(confirm/conform)만 잡으면 돼요.";
+  else if(id==="LISTEN") head="'실전 LC'는 <b>질문·대화를 끝까지 듣는 것</b>이 먼저예요. Part 2는 특히 의문사(Who/Where/When) 한 단어만 잡히면 3초예요. "+(miss?"「"+esc(miss)+"」부터 한 번 더.":"");
   else head="'한국사·세계사·시사'는 사건을 <b>왜 → 무엇이 바뀌었나</b> 한 줄로 이어 붙이면 오래 남아요.";
   if(totalWrong) head += ' <span style="color:#a89ddb">오답 '+totalWrong+'개는 📝 오답 복습에서 바로 지울 수 있어요.</span>';
   return head;
