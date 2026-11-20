@@ -64,11 +64,11 @@ body{
 .hidden{display:none !important}
 
 /* ---------- header ---------- */
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 14px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 3px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .logo{font-size:30px;line-height:1;filter:drop-shadow(0 0 12px rgba(139,92,246,.85))}
 .brand h1{margin:0;font-size:19px;letter-spacing:.06em;font-weight:800;color:#e9d5ff}
-.brand .sub{margin:1px 0 0;font-size:11.5px;color:var(--muted2);letter-spacing:.02em}
+.slogan{margin:0 0 14px 40px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.01em;line-height:1.45}
 .icon-btn{
   flex:0 0 auto;width:42px;height:42px;border-radius:14px;border:1px solid var(--line);
   background:rgba(255,255,255,.05);color:var(--ink);font-size:18px;cursor:pointer;
@@ -576,13 +576,11 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
     <header class="top">
       <div class="brand">
         <span class="logo">💜</span>
-        <div>
-          <h1>똑똑핫초</h1>
-          <p class="sub">토익 → BTS 잡기 · 2개월 공부방</p>
-        </div>
+        <h1>똑똑핫초</h1>
       </div>
       <button id="btnSound" class="icon-btn" type="button" aria-label="소리 켜기/끄기">🔊</button>
     </header>
+    <p class="slogan">매일 공부하고 매일 더 똑똑해진다!!</p>
 
     <div class="hero">
       <div class="hero-num"><span id="homeKills">0</span><small>명 잡음</small></div>
