@@ -1979,6 +1979,36 @@ function subjOfKey(key){
    · tmq_state_v1·단계 클리어 기록은 이 앱에 없어(포획 수만 남음) 포획으로 대신함
    · tmq_room_v1·tmq_btsdeck_v1은 과목별 통계가 아니라 카드 상단 칩으로 보여 줌 */
 function roomDoneN(){ var n=0,id; for(id in roomDone){ if(roomDone[id] && ROOM_LEC[id]) n++; } return n; }
+/* ---------------- 🔁 한국사·세계사 문제 개편(12강 연계) 오답 노트 이전 ----------------
+   문제 배열이 통째로 바뀌어 예전 "s:번호" 오답은 다른 문제를 가리키게 됩니다.
+   오답 노트에 남은 용어 이름으로 새 문제를 다시 찾아 연결하고,
+   이름이 맞는 문제가 없으면 그때만 비움(폰당 1회). */
+var LS_HISTV="tmq_hist_migrate_v1";
+function migrateSenseWrong(){
+  try{
+    if(localStorage.getItem(LS_HISTV)) return;
+    var byTerm={}, i, j, changed=false;
+    for(i=0;i<SENSE.length;i++){ if(SENSE[i].term) byTerm[SENSE[i].term]=i; }
+    for(var k in wrong){
+      if(!wrong[k] || k.indexOf("s:")!==0) continue;
+      var lab=String(wrong[k].label||""), ni=byTerm[lab];
+      if(ni===undefined){
+        for(j=0;j<SENSE.length;j++){
+          var t=SENSE[j].term||"";
+          if(t && (t.indexOf(lab+" ")===0 || lab.indexOf(t+" ")===0)){ ni=j; break; }
+        }
+      }
+      var at=wrong[k].at||Date.now(), tries=wrong[k].tries||1;
+      delete wrong[k];
+      changed=true;
+      if(ni===undefined) continue;               /* 대응 문제 없음 → 정리 */
+      var nk="s:"+ni;
+      if(!wrong[nk]) wrong[nk]={key:nk,mode:"sense",label:SENSE[ni].term,kw:SENSE[ni].term,at:at,tries:tries};
+    }
+    if(changed) save(LS_WRONG,wrong);
+    localStorage.setItem(LS_HISTV,"1");
+  }catch(e){}
+}
 function backfillSubj(){
   ensureSubj();
   var bf=(subjStats.bf && typeof subjStats.bf==="object") ? subjStats.bf : (subjStats.bf={});
@@ -3146,7 +3176,7 @@ document.addEventListener("keydown", function(ev){
 });
 
 /* 저장소 첫 방문 초기화 + 이 폰에 이미 쌓인 학습 기록을 과목별 리포트로 복원 */
-save(LS_STATS,stats); save(LS_WRONG,wrong); ensureSubj(); backfillSubj();
+save(LS_STATS,stats); save(LS_WRONG,wrong); ensureSubj(); migrateSenseWrong(); backfillSubj();
 
 /* 날짜가 바뀐 채로 앱을 다시 열면 '오늘' 카운터·날짜 배지를 새로 고침 */
 document.addEventListener("visibilitychange", function(){
