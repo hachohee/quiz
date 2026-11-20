@@ -1,0 +1,31 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<title>seed</title>
+<script>
+/* 임시 검증용 — 기존 localStorage 기록을 심고 앱으로 이동 (검증 후 삭제) */
+(function(){
+  var q=location.search||"", now=Date.now();
+  if(q.indexOf("empty")>=0){ try{ localStorage.clear(); }catch(e){} }
+  else{
+    var stats={words:{total:6,best:3},grammar:{total:3,best:2},reading:{total:2,best:1},listening:{total:1,best:1},sense:{total:3,best:2}};
+    var wrong={
+      "w:resolve":{key:"w:resolve",mode:"words",label:"resolve",kw:"resolve",at:now-1000,tries:2},
+      "w:invoice":{key:"w:invoice",mode:"words",label:"invoice",kw:"invoice",at:now-2000,tries:1},
+      "g:3":{key:"g:3",mode:"grammar",label:"⚡ 3초 문법 · a/the + 형용사",kw:"a/the + 형용사",at:now-3000,tries:1},
+      "s:0":{key:"s:0",mode:"sense",label:"📜 1단계 한국사 · 고조선",kw:"고조선",at:now-4000,tries:1},
+      "s:30":{key:"s:30",mode:"sense",label:"💎 4단계 경제 · 기회비용",kw:"기회비용",at:now-5000,tries:1}
+    };
+    var room={"toeic800-1":true,"toeic800-2":true,"korea-1":true,"world-2":true,"economy-3":true,"news-4":true,"money-5":true,"zzz-bogus":true};
+    var deck={"rm":now,"jin":now,"suga":now,"jhope":now};
+    try{
+      localStorage.setItem("tmq_stats_v1",JSON.stringify(stats));
+      localStorage.setItem("tmq_wrong_v1",JSON.stringify(wrong));
+      localStorage.setItem("tmq_room_v1",JSON.stringify(room));
+      localStorage.setItem("tmq_btsdeck_v1",JSON.stringify(deck));
+      localStorage.removeItem("tmq_subj_stats_v1");
+    }catch(e){}
+  }
+  location.replace("./");
+})();
+</script>
