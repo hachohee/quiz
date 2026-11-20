@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#140c2b">
+<title>💜 초희의 토익 BTS 잡기 💜</title>
+<meta name="description" content="토익 단어와 문법을 BTS 몬스터 배틀로 잡는 초희의 10분 영어 훈련 웹앱">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="application-name" content="토익 BTS">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="토익 BTS">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{
+  --bg:#0c0819;
+  --bg2:#170f33;
+  --card:#1e143f;
+  --card2:#2a1c5a;
+  --line:rgba(255,255,255,.10);
+  --ink:#f4efff;
+  --muted:#a89ddb;
+  --muted2:#7f74b3;
+  --violet:#8b5cf6;
+  --pink:#f472b6;
+  --gold:#fbbf24;
+  --green:#34d399;
+  --red:#fb7185;
+  --cyan:#22d3ee;
+  --ok:#34d399;
+  --no:#fb7185;
+  --radius:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","맑은 고딕","Noto Sans KR","Segoe UI",Roboto,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 520px at 15% -8%, rgba(139,92,246,.30), transparent 62%),
+    radial-gradient(760px 460px at 92% 4%, rgba(244,114,182,.16), transparent 60%),
+    radial-gradient(900px 700px at 50% 108%, rgba(34,211,238,.10), transparent 62%),
+    linear-gradient(180deg,#150d2e 0%, #0c0819 46%, #0a0716 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  min-height:100dvh;
+  line-height:1.5;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
+.app{
+  max-width:520px;
+  margin:0 auto;
+  padding:16px 14px calc(28px + env(safe-area-inset-bottom));
+}
+.screen{display:none;animation:fade .22s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hidden{display:none !important}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 14px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logo{font-size:30px;line-height:1;filter:drop-shadow(0 0 12px rgba(139,92,246,.85))}
+.brand h1{margin:0;font-size:19px;letter-spacing:.06em;font-weight:800;color:#e9d5ff}
+.brand .sub{margin:1px 0 0;font-size:11.5px;color:var(--muted2);letter-spacing:.02em}
+.icon-btn{
+  flex:0 0 auto;width:42px;height:42px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:var(--ink);font-size:18px;cursor:pointer;
+}
+.icon-btn:active{transform:scale(.94)}
+
+/* ---------- home hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(150deg,rgba(139,92,246,.22),rgba(30,20,63,.9) 55%);
+  padding:14px 16px;margin-bottom:12px;
+}
+.hero:after{content:"";position:absolute;inset:auto -30px -60px auto;width:150px;height:150px;
+  background:radial-gradient(circle,rgba(244,114,182,.35),transparent 68%);pointer-events:none}
+.hero-num{display:flex;align-items:baseline;gap:5px}
+.hero-num span{font-size:30px;font-weight:900;color:#fde68a;text-shadow:0 0 18px rgba(251,191,36,.45)}
+.hero-num small{font-size:12px;color:var(--muted);font-weight:600}
+.hero-sub{font-size:11.5px;color:var(--muted2);text-align:right;max-width:52%}
+
+/* ---------- BTS 도감 ---------- */
+.deck{
+  border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:12px;
+  background:linear-gradient(150deg,rgba(139,92,246,.16),rgba(255,255,255,.03));
+}
+.deck-t{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:11.5px;font-weight:800;color:#ddd6fe;margin-bottom:8px;letter-spacing:.01em}
+.deck-t b{color:#f9a8d4;font-size:12px;font-variant-numeric:tabular-nums}
+.deck-row{display:flex;gap:5px}
+.deck-cell{flex:1 1 0;min-width:0;text-align:center;border-radius:11px;padding:6px 1px 5px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.22);
+  opacity:.32;filter:grayscale(.85);transition:opacity .25s, filter .25s}
+.deck-cell.on{opacity:1;filter:none;border-color:rgba(196,181,253,.55);
+  background:linear-gradient(160deg,rgba(139,92,246,.38),rgba(244,114,182,.22));
+  box-shadow:0 0 12px -2px rgba(167,139,250,.65)}
+.deck-cell .de{font-size:17px;line-height:1.15}
+.deck-cell .dn{font-size:8.5px;font-weight:700;color:var(--muted);margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.deck-cell.on .dn{color:#f5e8ff}
+
+/* ---------- wrong note button ---------- */
+.wrong-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:7px;
+  min-height:52px;margin:0 0 12px;border-radius:16px;cursor:pointer;
+  border:1px solid rgba(251,191,36,.45);
+  background:linear-gradient(150deg,rgba(251,191,36,.18),rgba(244,114,182,.13));
+  color:#fde68a;font-size:15px;font-weight:800;font-family:inherit;
+}
+.wrong-btn:active{transform:scale(.985)}
+.wrong-btn #wrongCount{font-weight:700;color:#fbcfe8;font-size:13px}
+.wrong-btn.empty{border-color:var(--line);background:rgba(255,255,255,.035);color:var(--muted)}
+
+/* ---------- category cards ---------- */
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.cat{
+  --c1:#8b5cf6;--c2:#f472b6;
+  position:relative;overflow:hidden;cursor:pointer;text-align:left;
+  font-family:inherit;color:var(--ink);
+  border:1px solid var(--line);border-radius:18px;
+  background:
+    linear-gradient(158deg, rgba(255,255,255,.055), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg,#241850,#190f38);
+  padding:13px 13px 12px;min-height:146px;
+  display:flex;flex-direction:column;gap:5px;
+  box-shadow:0 10px 22px -16px rgba(0,0,0,.9);
+}
+.cat:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2))}
+.cat:after{content:"";position:absolute;right:-26px;top:-24px;width:88px;height:88px;border-radius:50%;
+  background:radial-gradient(circle,var(--c1),transparent 66%);opacity:.30;pointer-events:none}
+.cat:active{transform:scale(.975)}
+.cat .c-emoji{font-size:27px;line-height:1;filter:drop-shadow(0 3px 8px rgba(0,0,0,.55))}
+.cat .c-name{font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.28;margin-top:2px}
+.cat .c-desc{font-size:10.5px;color:var(--muted2);line-height:1.35}
+.cat .c-stat{margin-top:auto;padding-top:9px;font-size:10.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:5px;align-items:center;line-height:1.4}
+.cat .c-stat b{color:#ede9fe;font-weight:800}
+.cat .c-stat .dot{width:3px;height:3px;border-radius:50%;background:var(--muted2)}
+.cat .c-go{position:absolute;right:12px;top:11px;font-size:14px;font-weight:900;color:#c4b5fd;opacity:.8}
+@media(max-width:639px){.cats .cat:last-child{grid-column:1 / -1;min-height:118px}}
+
+/* ---------- sub page head ---------- */
+.subhead{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.back{width:40px;height:40px;flex:0 0 auto;border-radius:13px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:var(--ink);font-size:17px;cursor:pointer;font-family:inherit}
+.back:active{transform:scale(.94)}
+.subhead .t{min-width:0}
+.subhead h2{margin:0;font-size:17px;font-weight:800}
+.subhead p{margin:1px 0 0;font-size:11.5px;color:var(--muted2)}
+
+/* ---------- stage list ---------- */
+.stage{
+  display:block;width:100%;text-align:left;font-family:inherit;color:var(--ink);
+  border:1px solid var(--line);border-radius:18px;padding:14px;
+  background:linear-gradient(160deg,rgba(42,28,90,.95),rgba(23,15,51,.95));
+  margin-bottom:10px;cursor:pointer;position:relative;overflow:hidden;
+}
+.stage:active{transform:scale(.99)}
+.stage .s-row{display:flex;align-items:center;gap:10px}
+.stage .s-num{flex:0 0 auto;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;
+  font-size:13px;font-weight:900;background:linear-gradient(145deg,rgba(139,92,246,.5),rgba(244,114,182,.35));
+  border:1px solid rgba(255,255,255,.14)}
+.stage .s-t{flex:1 1 auto;min-width:0}
+.stage .s-t b{display:block;font-size:15px;font-weight:800}
+.stage .s-t span{display:block;font-size:11.5px;color:var(--muted2);margin-top:2px}
+.stage .s-arrow{color:var(--muted2);font-size:16px}
+.stage .s-btns{display:flex;gap:8px;margin-top:11px}
+.mini{
+  flex:1 1 auto;min-height:42px;border-radius:12px;cursor:pointer;font-family:inherit;
+  font-size:12.5px;font-weight:800;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05);color:#e9d5ff;
+}
+.mini.solid{background:linear-gradient(135deg,#7c3aed,#db2777);border-color:transparent;color:#fff}
+.mini:active{transform:scale(.97)}
+
+/* ---------- study (flashcards) ---------- */
+.study-progress{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.study-progress .bar{flex:1 1 auto;height:7px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.study-progress .bar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#a78bfa,#f472b6);transition:width .25s}
+.study-progress .cnt{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px 17px;
+  background:linear-gradient(165deg,rgba(48,32,102,.96),rgba(22,14,48,.98));
+  box-shadow:0 18px 40px -28px #000;margin-bottom:12px;min-height:270px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.card .badge-row{display:flex;flex-wrap:wrap;gap:6px}
+.badge{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:99px;
+  background:rgba(139,92,246,.22);border:1px solid rgba(167,139,250,.35);color:#ddd6fe}
+.badge.gold{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.4);color:#fde68a}
+.badge.day{background:rgba(34,211,238,.14);border-color:rgba(34,211,238,.34);color:#a5f3fc}
+.card .word{font-size:29px;font-weight:900;letter-spacing:-.02em;line-height:1.15;color:#f7f3ff}
+.card .word.small{font-size:23px}
+.card .pron{font-size:13px;color:var(--muted);margin-top:-6px}
+.soundchip{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;border-radius:11px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;border:1px solid rgba(34,211,238,.35);background:rgba(34,211,238,.12);color:#c9f9ff}
+.soundchip:active{transform:scale(.96)}
+.card .mean{font-size:16px;font-weight:700;color:#fef3c7}
+.box{border-radius:14px;padding:11px 12px;font-size:13.5px;line-height:1.62}
+.box.story{background:rgba(244,114,182,.10);border:1px solid rgba(244,114,182,.28);color:#ffe4f1}
+.box.chunk{background:rgba(34,211,238,.09);border:1px solid rgba(34,211,238,.26);color:#d7fbff}
+.box .lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:.04em;margin-bottom:3px;opacity:.75}
+.study-nav{display:flex;gap:9px;margin-bottom:12px}
+.nav-btn{
+  flex:1 1 0;min-height:48px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:800;
+  border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;
+}
+.nav-btn:disabled{opacity:.35}
+.nav-btn:active:not(:disabled){transform:scale(.97)}
+.cta{
+  display:block;width:100%;min-height:56px;border-radius:16px;border:0;cursor:pointer;
+  font-family:inherit;font-size:16px;font-weight:900;letter-spacing:.01em;color:#fff;
+  background:linear-gradient(135deg,#7c3aed 0%,#c026d3 52%,#db2777 100%);
+  box-shadow:0 12px 30px -12px rgba(192,38,211,.85);
+}
+.cta:active{transform:scale(.985)}
+.cta.ghost{background:rgba(255,255,255,.05);border:1px solid var(--line);box-shadow:none;color:#e9d5ff}
+
+/* ---------- battle ---------- */
+.battle-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.battle-top .mode{flex:1 1 auto;font-size:12px;font-weight:800;color:#d8ccff;letter-spacing:.02em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill{font-size:11px;font-weight:900;padding:4px 10px;border-radius:99px;white-space:nowrap;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);color:#e9d5ff;font-variant-numeric:tabular-nums}
+.pill.hot{background:linear-gradient(135deg,rgba(251,191,36,.28),rgba(244,114,182,.28));
+  border-color:rgba(251,191,36,.55);color:#fff7d6;animation:pulse .45s ease}
+@keyframes pulse{0%{transform:scale(1)}45%{transform:scale(1.16)}100%{transform:scale(1)}}
+
+.monster-zone{
+  position:relative;border:1px solid var(--line);border-radius:var(--radius);
+  background:radial-gradient(120% 90% at 50% 0%,rgba(139,92,246,.30),rgba(20,12,43,.2) 62%),rgba(255,255,255,.02);
+  padding:10px 14px 12px;margin-bottom:11px;text-align:center;overflow:hidden;
+}
+.monster-emoji{font-size:62px;line-height:1;display:inline-block;position:relative;
+  animation:bob 2.6s ease-in-out infinite;filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}
+.monster-emoji.spark{animation:spark .5s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes spark{
+  0%{transform:scale(1) rotate(0)}
+  30%{transform:scale(1.14) rotate(-3deg);filter:brightness(1.5) saturate(1.25) drop-shadow(0 0 20px rgba(196,181,253,.95))}
+  65%{transform:scale(1.03) rotate(3deg);filter:brightness(1.15)}
+  100%{transform:scale(1) rotate(0)}
+}
+.monster-emoji.caught{animation:catchanim .9s ease forwards}
+@keyframes catchanim{
+  0%{transform:scale(1);filter:drop-shadow(0 10px 14px rgba(0,0,0,.55))}
+  30%{transform:scale(1.42);filter:brightness(1.7) saturate(1.3) drop-shadow(0 0 26px rgba(244,114,182,.95))}
+  65%{transform:scale(1.12);filter:drop-shadow(0 0 22px rgba(196,181,253,.9))}
+  100%{transform:scale(1.06);filter:drop-shadow(0 0 18px rgba(196,181,253,.9))}
+}
+.monster-name{font-size:12.5px;font-weight:800;color:#e9d5ff;margin-top:2px}
+.monster-name small{color:var(--muted2);font-weight:700}
+.monster-say{font-size:11.5px;color:var(--muted2);margin-top:2px;min-height:17px;line-height:1.4}
+.hp-wrap{margin:9px auto 0;max-width:320px}
+.hearts{display:flex;justify-content:center;gap:7px}
+.heart{width:34px;height:32px;border-radius:11px;display:grid;place-items:center;font-size:17px;
+  background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.10);opacity:.45;
+  transform:scale(.96);transition:opacity .2s, background .2s, border-color .2s}
+.heart.on{opacity:1;transform:scale(1);border-color:rgba(216,180,254,.85);
+  background:radial-gradient(circle at 50% 32%,rgba(244,114,182,.5),rgba(139,92,246,.4));
+  box-shadow:0 0 16px rgba(167,139,250,.75);animation:heartPop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes heartPop{0%{transform:scale(.45)}55%{transform:scale(1.28)}100%{transform:scale(1)}}
+.hp-meta{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.dmg{position:absolute;left:50%;top:26px;transform:translateX(-50%);font-size:23px;font-weight:900;
+  color:#f0abfc;text-shadow:0 2px 12px rgba(0,0,0,.8),0 0 16px rgba(244,114,182,.6);
+  animation:rise .95s ease-out forwards;pointer-events:none;white-space:nowrap}
+.dmg.crit{font-size:26px;color:#fdf4ff}
+@keyframes rise{0%{opacity:0;transform:translate(-50%,10px) scale(.6)}
+  25%{opacity:1;transform:translate(-50%,-6px) scale(1.18)}
+  100%{opacity:0;transform:translate(-50%,-46px) scale(1)}}
+.burst{position:absolute;top:44px;font-size:18px;font-weight:900;pointer-events:none;
+  animation:burstUp 1.25s ease-out forwards}
+@keyframes burstUp{0%{opacity:0;transform:translateY(6px) scale(.55)}
+  22%{opacity:1;transform:translateY(0) scale(1.05)}
+  100%{opacity:0;transform:translateY(-54px) scale(1.2) rotate(14deg)}}
+
+.qcard{
+  border:1px solid var(--line);border-radius:var(--radius);padding:15px 15px 13px;
+  background:linear-gradient(165deg,rgba(46,31,98,.97),rgba(21,13,46,.98));
+  margin-bottom:11px;box-shadow:0 16px 36px -28px #000;
+}
+.qtag{font-size:10.5px;font-weight:900;letter-spacing:.05em;color:#c4b5fd;margin-bottom:7px;text-transform:uppercase}
+.qtext{font-size:17px;font-weight:700;line-height:1.6;letter-spacing:-.01em}
+.qtext .blank{display:inline-block;min-width:74px;border-bottom:2.5px solid var(--pink);color:transparent;
+  transform:translateY(-2px)}
+.qsub{font-size:12px;color:var(--muted);margin-top:6px}
+.qword{font-size:27px;font-weight:900;letter-spacing:-.02em;color:#fff;line-height:1.2}
+.qpron{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:3px}
+.qmean{font-size:18px;font-weight:800;color:#fef3c7;line-height:1.55;letter-spacing:-.01em}
+.qen{font-weight:700;line-height:1.68}
+.qblank{display:inline-block;min-width:60px;border-bottom:2.5px solid var(--pink);color:transparent}
+.speak-row{display:flex;gap:8px;margin-top:10px}
+.speak-btn{
+  flex:1 1 auto;min-height:46px;border-radius:13px;font-family:inherit;font-size:13.5px;font-weight:800;
+  cursor:pointer;border:1px solid rgba(52,211,153,.42);
+  background:linear-gradient(140deg,rgba(52,211,153,.20),rgba(34,211,238,.12));color:#c9ffe9;
+}
+.speak-btn:active{transform:scale(.97)}
+.speak-btn.alt{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#d8ccff;flex:0 0 auto;padding:0 13px}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
+.opt{
+  display:flex;align-items:center;gap:11px;width:100%;min-height:56px;padding:11px 13px;
+  border-radius:15px;cursor:pointer;text-align:left;font-family:inherit;
+  font-size:15px;font-weight:700;line-height:1.4;color:var(--ink);
+  border:1px solid rgba(255,255,255,.13);
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  transition:transform .12s ease, border-color .16s, background .16s;
+}
+.opt .key{
+  flex:0 0 auto;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;
+  font-size:12px;font-weight:900;background:rgba(139,92,246,.28);border:1px solid rgba(167,139,250,.4);color:#ede9fe;
+}
+.opt .otxt{flex:1 1 auto;min-width:0}
+.opt:active{transform:scale(.985)}
+.opt.ok{border-color:var(--ok);background:linear-gradient(160deg,rgba(52,211,153,.26),rgba(52,211,153,.10))}
+.opt.ok .key{background:rgba(52,211,153,.5);border-color:var(--ok);color:#052e1c}
+.opt.no{border-color:var(--no);background:linear-gradient(160deg,rgba(251,113,133,.24),rgba(251,113,133,.08))}
+.opt.no .key{background:rgba(251,113,133,.5);border-color:var(--no);color:#3b0416}
+.opt.dim{opacity:.5}
+.opt:disabled{cursor:default}
+
+.fb{border-radius:16px;padding:13px 14px;margin-bottom:12px;border:1px solid var(--line);
+  background:var(--card);animation:fade .2s ease}
+.fb.ok{border-color:rgba(52,211,153,.55);background:linear-gradient(160deg,rgba(52,211,153,.14),rgba(20,12,43,.6))}
+.fb.no{border-color:rgba(251,113,133,.55);background:linear-gradient(160deg,rgba(251,113,133,.14),rgba(20,12,43,.6))}
+.fb .fb-t{font-size:14px;font-weight:900;margin-bottom:4px}
+.fb.ok .fb-t{color:#a7f3d0}
+.fb.no .fb-t{color:#fecdd3}
+.fb .fb-b{font-size:12.8px;line-height:1.62;color:#e4dcff}
+.fb .fb-b b{color:#fde68a}
+
+/* ---------- result ---------- */
+.result{text-align:center;padding:8px 2px 0}
+.result .emo{font-size:70px;line-height:1;animation:bob 2.4s ease-in-out infinite}
+.result h2{margin:8px 0 2px;font-size:22px;font-weight:900;color:#fde68a}
+.result .rsub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.catch-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.catch-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:14px;
+  border:1px solid rgba(196,181,253,.55);
+  background:linear-gradient(150deg,rgba(139,92,246,.4),rgba(244,114,182,.24));
+  font-size:12.5px;font-weight:800;color:#f5e8ff;animation:badgeIn .42s ease both}
+.catch-badge .be{font-size:19px;line-height:1}
+@keyframes badgeIn{from{opacity:0;transform:translateY(8px) scale(.85)}to{opacity:1;transform:none}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+.stat{border:1px solid var(--line);border-radius:15px;padding:11px 6px;background:rgba(255,255,255,.045)}
+.stat b{display:block;font-size:20px;font-weight:900;color:#fde68a;font-variant-numeric:tabular-nums}
+.stat span{font-size:10.5px;color:var(--muted2);font-weight:700}
+.wrong-list{border:1px solid var(--line);border-radius:15px;padding:11px 12px;background:rgba(255,255,255,.035);
+  text-align:left;margin-bottom:14px;font-size:12.5px;color:#e4dcff}
+.wrong-list .wl-t{font-size:11px;font-weight:900;color:#fcd34d;margin-bottom:6px;letter-spacing:.03em}
+.wrong-list ul{margin:0;padding-left:16px}
+.wrong-list li{margin:2px 0;color:var(--muted)}
+.foot{text-align:center;font-size:10.5px;color:var(--muted2);margin:16px 0 0;line-height:1.7}
+.toast{
+  position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,14px);
+  background:rgba(20,12,43,.96);border:1px solid rgba(255,255,255,.2);color:#f4efff;
+  padding:11px 16px;border-radius:14px;font-size:13px;font-weight:700;z-index:99;
+  opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;max-width:88vw;text-align:center;
+  box-shadow:0 12px 30px -12px #000;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .brand h1{background:linear-gradient(92deg,#c4b5fd,#f9a8d4 55%,#fcd34d);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .card .word{background:linear-gradient(92deg,#ffffff,#e9d5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  .result h2{background:linear-gradient(92deg,#fde68a,#f9a8d4);
+    -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+}
+@media(min-width:640px){
+  .app{max-width:600px;padding:22px 20px 40px}
+  .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .monster-emoji{font-size:74px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ================= HOME ================= -->
+  <section id="screen-home" class="screen on">
+    <header class="top">
+      <div class="brand">
+        <span class="logo">💜</span>
+        <div>
+          <h1>초희의 토익 BTS 잡기</h1>
+          <p class="sub">문제를 맞혀서 BTS를 내 편으로!</p>
+        </div>
+      </div>
+      <button id="btnSound" class="icon-btn" type="button" aria-label="소리 켜기/끄기">🔊</button>
+    </header>
+
+    <div class="hero">
+      <div class="hero-num"><span id="homeKills">0</span><small>명 잡음</small></div>
+      <div class="hero-sub">문제를 맞혀서<br>BTS를 내 편으로 잡아라! 💜</div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-t"><span>💜 내가 잡은 BTS 도감</span><b id="deckCount">0 / 7</b></div>
+      <div class="deck-row" id="deckRow"></div>
+    </div>
+
+    <button id="btnWrong" class="wrong-btn empty" type="button">
+      <span>📝 오답 복습</span><span id="wrongCount">(0문제)</span>
+    </button>
+
+    <div class="cats" id="catList"></div>
+
+    <p class="foot">찬우 몰래 몰컴은 안 되고, 같이 하면 두 배 😆<br>인터넷 없어도 · 폰에서도 그대로 돌아가요</p>
+  </section>
+
+  <!-- ================= STAGE PICK ================= -->
+  <section id="screen-stages" class="screen">
+    <div class="subhead">
+      <button class="back" type="button" data-go="home" aria-label="뒤로">←</button>
+      <div class="t">
+        <h2 id="stageTitle">단계 선택</h2>
+        <p id="stageSub"></p>
+      </div>
+    </div>
+    <div id="stageList"></div>
+    <p class="foot" id="stageNote"></p>
+  </section>
+
+  <!-- ================= STUDY ================= -->
+  <section id="screen-study" class="screen">
+    <div class="subhead">
+      <button class="back" type="button" data-go="stages" aria-label="뒤로">←</button>
+      <div class="t">
+        <h2 id="studyTitle">훑어보기</h2>
+        <p id="studySub">한 장씩 넘겨 보세요</p>
+      </div>
+    </div>
+    <div class="study-progress">
+      <div class="bar"><i id="studyBar" style="width:0%"></i></div>
+      <div class="cnt" id="studyCnt">1 / 1</div>
+    </div>
+    <div id="studyCard" class="card"></div>
+    <div class="study-nav">
+      <button class="nav-btn" id="studyPrev" type="button">◀ 이전</button>
+      <button class="nav-btn" id="studyNext" type="button">다음 ▶</button>
+    </div>
+    <button class="cta" id="studyFight" type="button">💜 잡으러 가기!</button>
+  </section>
+
+  <!-- ================= BATTLE ================= -->
+  <section id="screen-battle" class="screen">
+    <div class="battle-top">
+      <button class="back" type="button" id="battleQuit" aria-label="그만두기">←</button>
+      <div class="mode" id="battleMode">BTS 잡기</div>
+      <div class="pill" id="battleCaught">💜 0/3</div>
+      <div class="pill hot hidden" id="battleCombo">🔥 x2</div>
+    </div>
+
+    <div class="monster-zone" id="monsterZone">
+      <div class="monster-emoji" id="monsterEmoji">🐨</div>
+      <div class="monster-name" id="monsterName">RM</div>
+      <div class="monster-say" id="memberSay"></div>
+      <div class="hp-wrap">
+        <div class="hearts" id="heartBar"></div>
+        <div class="hp-meta"><span id="monsterHpTxt">💜 0 / 4</span><span id="monsterQn">1번째 문제</span></div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qtag" id="qTag">QUESTION</div>
+      <div class="qtext" id="qText">…</div>
+      <div class="qsub" id="qSub"></div>
+      <div class="speak-row hidden" id="speakRow">
+        <button class="speak-btn" id="btnReplay" type="button">🔊 다시 듣기</button>
+        <button class="speak-btn alt" id="btnShowText" type="button">👀 글자로</button>
+      </div>
+    </div>
+
+    <div class="opts" id="optList"></div>
+    <div id="fbSlot"></div>
+    <button class="cta hidden" id="btnContinue" type="button">계속 💜</button>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section id="screen-result" class="screen">
+    <div class="result">
+      <div class="emo" id="resEmoji">🏆</div>
+      <h2 id="resTitle">BTS 포획 성공!</h2>
+      <div class="rsub" id="resSub"></div>
+      <div class="catch-row" id="resMembers"></div>
+      <div class="stats">
+        <div class="stat"><b id="resCaught">0</b><span>잡은 BTS</span></div>
+        <div class="stat"><b id="resAcc">0%</b><span>정답률</span></div>
+        <div class="stat"><b id="resCombo">0</b><span>최고 콤보</span></div>
+      </div>
+      <div class="wrong-list hidden" id="resWrongBox">
+        <div class="wl-t">📝 오답 노트에 저장했어요</div>
+        <ul id="resWrongList"></ul>
+      </div>
+      <button class="cta" id="resAgain" type="button">한 번 더 💜</button>
+      <div style="height:9px"></div>
+      <button class="cta ghost" id="resHome" type="button">🏠 홈으로</button>
+    </div>
+    <p class="foot" id="resFoot"></p>
+  </section>
+
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* ============================================================
+   초희의 토익 BTS 잡기 — 데이터
+   Day 1~9 (2026-11-12 ~ 11-20) 실제 발송 단어 전량 + 3초 공식 + 상식
+   ============================================================ */
+
+var WORDS = [
+/* ---------- DAY 1 (11/12) ---------- */
+{d:1,w:"require",p:"리콰이어",pos:"동사",m:"요구하다, 필요로 하다",s:"입구에서 경비원이 \"리콰이어~\" 하며 이름을 확인해요. 없으면 못 들어가게 '요구하다'.",c:"require approval (승인을 요구하다)"},
+{d:1,w:"submit",p:"서브밋",pos:"동사",m:"제출하다",s:"공을 서브(sub)하듯 서류를 툭 밀어 넣어요. 책상 위로 '제출'!",c:"submit a report (보고서를 제출하다)"},
+{d:1,w:"confirm",p:"컨펌",pos:"동사",m:"확인하다, 확정하다",s:"단톡방에 \"컨펌!\" 한 글자만 올라와도 예약이 딱 '확정'돼요.",c:"confirm the reservation (예약을 확정하다)"},
+{d:1,w:"annual",p:"애뉴얼",pos:"형용사",m:"연례의, 매년의",s:"매년 '애' 같은 '뉴'를 '얼'까지 반복하는 회사 송년회. 그래서 annual = 매년.",c:"annual meeting (연례 회의)"},
+{d:1,w:"expire",p:"익스파이어",pos:"동사",m:"만료되다",s:"익스프레스 커피가 파이어(불)처럼 확 타 버려 맛이 끝나요. 유효기간 '만료'.",c:"expire next month (다음 달에 만료되다)"},
+{d:1,w:"available",p:"어베일러블",pos:"형용사",m:"이용 가능한, 구할 수 있는",s:"\"어, 베일\"을 벗겨 보니 안이 다 보여요. 숨김없이 '이용 가능한' 상태.",c:"available now (지금 이용 가능한)"},
+{d:1,w:"notify",p:"노티파이",pos:"동사",m:"알리다, 통지하다",s:"노트(note)에 파이(π)를 얹어 붙인 알림 쪽지. 그래서 '알리다'.",c:"notify the customer (고객에게 알리다)"},
+{d:1,w:"frequently",p:"프리퀀틀리",pos:"부사",m:"자주, 빈번하게",s:"공짜(프리) 커피를 퀀틀리(양껏) '자주' 타 마시는 사무실.",c:"frequently asked (자주 묻는)"},
+{d:1,w:"proposal",p:"프로포절",pos:"명사",m:"제안서, 제안",s:"프러포즈(proposal)처럼 무릎 꿇고 건네는 종이 한 장, '제안서'.",c:"submit a proposal (제안서를 제출하다)"},
+{d:1,w:"receipt",p:"리시트",pos:"명사",m:"영수증",s:"\"리시트\" 하고 받아 리시(챙기)듯 주머니에 넣는 종잇조각, '영수증'.",c:"keep the receipt (영수증을 보관하다)"},
+
+/* ---------- DAY 2 (11/13) ---------- */
+{d:2,w:"postpone",p:"포스트폰",pos:"동사",m:"연기하다, 미루다",s:"포스트잇(post)을 폰(postpone)에 붙여 '나중에 하자' 하고 '연기'.",c:"postpone the meeting (회의를 연기하다)"},
+{d:2,w:"renovate",p:"레노베이트",pos:"동사",m:"개조하다, 보수하다",s:"낡은 집을 '레노(새로) 베이트(덧대)' 새집처럼 '개조'해요.",c:"renovate the office (사무실을 보수하다)"},
+{d:2,w:"reliable",p:"릴라이어블",pos:"형용사",m:"믿을 만한",s:"거짓말(lie)을 두 번(re) 확인하는 사람은 '믿을 만한' 사람.",c:"a reliable source (믿을 만한 출처)"},
+{d:2,w:"inspect",p:"인스펙트",pos:"동사",m:"점검하다",s:"안(in)을 스펙(spect)처럼 쭉 훑어 내려가며 '점검'.",c:"inspect the building (건물을 점검하다)"},
+{d:2,w:"temporary",p:"템퍼러리",pos:"형용사",m:"임시의, 일시적인",s:"텐트(tem)를 펴서(pa) 잠깐 쓰는 숙소. 그래서 '임시'의.",c:"a temporary worker (임시 직원)"},
+{d:2,w:"reimburse",p:"리임버스",pos:"동사",m:"상환하다, 환급하다",s:"'리(다시)' 어카운트에서 버스비를 돌려받아요. 그래서 '환급'.",c:"reimburse the expenses (비용을 환급하다)"},
+{d:2,w:"efficient",p:"이피션트",pos:"형용사",m:"효율적인",s:"생선(fish) 한 마리로 온 가족 저녁 해결. '효율적인' 살림!",c:"an efficient system (효율적인 시스템)"},
+{d:2,w:"exceed",p:"익시드",pos:"동사",m:"초과하다, 넘다",s:"익스(ex) 속도로 달려 '시드(선)'를 넘어 버려요. '초과'.",c:"exceed the budget (예산을 초과하다)"},
+{d:2,w:"submit",p:"서브밋",pos:"동사",m:"제출하다",s:"(복습) 공을 서브하듯 서류를 툭, '제출'!",c:"submit an application (신청서를 제출하다)",r:1},
+{d:2,w:"expire",p:"익스파이어",pos:"동사",m:"만료되다",s:"(복습) 커피가 불(파이어)처럼 타서 맛이 끝나는 순간, '만료'.",c:"expire next month (다음 달에 만료되다)",r:1},
+
+/* ---------- DAY 3 (11/14) ---------- */
+{d:3,w:"schedule",p:"스케줄",pos:"명사",m:"일정, 스케줄",s:"스케치(ske)를 줄(dule)로 그어 하루를 칸칸이 나눠요. 그래서 '일정'.",c:"on schedule (일정대로)"},
+{d:3,w:"purchase",p:"퍼체이스",pos:"동사",m:"구매하다",s:"지갑(퍼스)을 체이스처럼 쫓아가서 물건을 '구매'!",c:"purchase an item (물품을 구매하다)"},
+{d:3,w:"attend",p:"어텐드",pos:"동사",m:"참석하다",s:"어텐션(attention) 집중해서 자리에 앉아요. '참석'!",c:"attend the meeting (회의에 참석하다)"},
+{d:3,w:"complete",p:"컴플리트",pos:"동사",m:"완료하다",s:"컴퓨터(com) 화면에 플리(끝) 표시가 뜨면 '완료' 도장!",c:"complete the task (업무를 완료하다)"},
+{d:3,w:"immediately",p:"이미디엇리",pos:"부사",m:"즉시, 바로",s:"\"이미 디(했)어엇!\" 소리 나오기 전에 끝내는 '즉시'.",c:"respond immediately (즉시 응답하다)"},
+{d:3,w:"approve",p:"어프루브",pos:"동사",m:"승인하다, 찬성하다",s:"상사가 고개를 끄덕(어프루브)이며 사인하면 '승인'.",c:"approve the plan (계획을 승인하다)"},
+{d:3,w:"equipment",p:"이퀴프먼트",pos:"명사",m:"장비, 설비",s:"이큅(equip)하고 무장한 탐험대의 가방 속 '장비'.",c:"office equipment (사무 장비)"},
+{d:3,w:"significant",p:"시그니피컨트",pos:"형용사",m:"중요한, 상당한",s:"사인(sign)이 크게(ficant) 보이는 만큼 '중요한' 일.",c:"a significant increase (상당한 증가)"},
+{d:3,w:"postpone",p:"포스트폰",pos:"동사",m:"연기하다",s:"(복습) 포스트잇 붙여 '나중에 하자' → '연기'.",c:"postpone the event (행사를 연기하다)",r:1},
+{d:3,w:"reliable",p:"릴라이어블",pos:"형용사",m:"믿을 만한",s:"(복습) 두 번 확인하는 사람 = '믿을 만한' 사람.",c:"reliable information (믿을 만한 정보)",r:1},
+
+/* ---------- DAY 4 (11/15) ---------- */
+{d:4,w:"announce",p:"어나운스",pos:"동사",m:"발표하다, 알리다",s:"큰 마이크 앞에서 \"나운스!\" 하고 외치는 '발표'.",c:"announce the results (결과를 발표하다)"},
+{d:4,w:"budget",p:"버짓",pos:"명사",m:"예산",s:"버스(bus) 요금도 버짓 안에서. 통장 칸칸이 '예산' 계산.",c:"within budget (예산 안에서)"},
+{d:4,w:"cancel",p:"캔슬",pos:"동사",m:"취소하다",s:"캔(can)을 슬(슬쩍) 비우고 예약을 '취소'.",c:"cancel the order (주문을 취소하다)"},
+{d:4,w:"deadline",p:"데드라인",pos:"명사",m:"마감 기한",s:"데드(dead)처럼 늘어져 있어도 결국 넘어오는 선, '마감'.",c:"meet the deadline (마감을 지키다)"},
+{d:4,w:"essential",p:"에센셜",pos:"형용사",m:"필수적인, 본질적인",s:"향수에 에센스 한 방울은 '필수'. 그래서 essential = 필수.",c:"essential items (필수 품목)"},
+{d:4,w:"offer",p:"오퍼",pos:"명사",m:"제안, 특가",s:"\"오, 퍼(주겠다)\" 하며 내미는 조건, '제안'.",c:"offer a discount (할인을 제안하다)"},
+{d:4,w:"prepare",p:"프리페어",pos:"동사",m:"준비하다",s:"프리(미리) + 페어(짝) 맞춰 놓으면 '준비' 끝.",c:"prepare a report (보고서를 준비하다)"},
+{d:4,w:"recently",p:"리슨틀리",pos:"부사",m:"최근에",s:"방금 만든 새 동전(센트)처럼 반짝이는 '최근에'.",c:"recently announced (최근 발표된)"},
+{d:4,w:"approve",p:"어프루브",pos:"동사",m:"승인하다",s:"(복습) 끄덕이며 사인 → '승인'.",c:"approve the request (요청을 승인하다)",r:1},
+{d:4,w:"confirm",p:"컨펌",pos:"동사",m:"확인하다, 확정하다",s:"(복습) \"컨펌!\" 한 마디에 '확정'.",c:"confirm the schedule (일정을 확정하다)",r:1},
+
+/* ---------- DAY 5 (11/16) ---------- */
+{d:5,w:"expand",p:"익스팬드",pos:"동사",m:"확장하다",s:"부채(fan)를 확 펼치듯 공간을 넓혀요. '확장'.",c:"expand the business (사업을 확장하다)"},
+{d:5,w:"provide",p:"프로바이드",pos:"동사",m:"제공하다",s:"프로가 옆(by)에 살짝 놓아 주는 '제공'.",c:"provide information (정보를 제공하다)"},
+{d:5,w:"reduce",p:"리듀스",pos:"동사",m:"줄이다, 감소시키다",s:"테니스 듀스 점수도 '줄여' 40:30 만들기. '줄이다'.",c:"reduce costs (비용을 줄이다)"},
+{d:5,w:"maintain",p:"메인테인",pos:"동사",m:"유지하다, 관리하다",s:"메인(main) 길을 탄탄하게(테인) 깔아 놓아야 '유지'.",c:"maintain quality (품질을 유지하다)"},
+{d:5,w:"responsible",p:"리스폰서블",pos:"형용사",m:"책임이 있는",s:"리스폰스(response)를 받으려면 '책임'부터 져야 해요.",c:"responsible for (…에 책임이 있는)"},
+{d:5,w:"appropriate",p:"어프로프리엇",pos:"형용사",m:"적절한, 알맞은",s:"프로가 상황에 딱 맞게 고른 복장, '적절한'.",c:"appropriate attire (적절한 복장)"},
+{d:5,w:"customer",p:"커스터머",pos:"명사",m:"고객",s:"커스텀(custom) 맞춤으로 찾아오는 사람, '고객'.",c:"customer service (고객 서비스)"},
+{d:5,w:"department",p:"디파트먼트",pos:"명사",m:"부서",s:"회사를 파트(part)별로 나눈 칸, '부서'.",c:"sales department (영업부)"},
+{d:5,w:"efficient",p:"이피션트",pos:"형용사",m:"효율적인",s:"(복습) 생선 한 마리로 가족 저녁, '효율적'.",c:"efficient work (효율적인 업무)",r:1},
+{d:5,w:"significant",p:"시그니피컨트",pos:"형용사",m:"중요한, 상당한",s:"(복습) 사인이 크게 보이는 '중요한' 일.",c:"significant change (상당한 변화)",r:1},
+
+/* ---------- DAY 6 (11/17) ---------- */
+{d:6,w:"recommend",p:"레커멘드",pos:"동사",m:"추천하다",s:"\"이 레코드, 맨드(먼저) 들어 봐\" 하고 권하는 '추천'.",c:"recommend a book (책을 추천하다)"},
+{d:6,w:"participate",p:"파티시페이트",pos:"동사",m:"참가하다",s:"파티(parti)에 음료수 들고 '참가'!",c:"participate in (…에 참가하다)"},
+{d:6,w:"survey",p:"서베이",pos:"명사",m:"설문조사",s:"바닷가(베이)에서 만난 사람들에게 물어보는 '설문'.",c:"conduct a survey (설문조사를 하다)"},
+{d:6,w:"instruction",p:"인스트럭션",pos:"명사",m:"지시, 사용 설명서",s:"순서대로 구조(structure)를 짜 놓은 '지시문'.",c:"follow the instructions (지시를 따르다)"},
+{d:6,w:"request",p:"리퀘스트",pos:"명사",m:"요청, 요청 사항",s:"퀘스트(quest)를 다시(re) 받아 달라는 '요청'.",c:"make a request (요청하다)"},
+{d:6,w:"facility",p:"퍼실리티",pos:"명사",m:"시설",s:"편하게(퍼실) 쓸 수 있는 곳, '시설'.",c:"facility tour (시설 견학)"},
+{d:6,w:"refund",p:"리펀드",pos:"명사",m:"환불",s:"펀드(fund)에 넣은 돈이 다시(re) 돌아오는 '환불'.",c:"request a refund (환불을 요청하다)"},
+{d:6,w:"accurate",p:"액큐릿",pos:"형용사",m:"정확한",s:"당구 큐를 45도로 정확히 쳐야 공이 들어가요. '정확한'.",c:"accurate data (정확한 데이터)"},
+{d:6,w:"budget",p:"버짓",pos:"명사",m:"예산",s:"(복습) 버짓 안에서만 쓰는 '예산'.",c:"budget plan (예산 계획)",r:1},
+{d:6,w:"maintain",p:"메인테인",pos:"동사",m:"유지하다",s:"(복습) 메인 길을 탄탄하게, '유지'.",c:"maintain the system (시스템을 유지하다)",r:1},
+
+/* ---------- DAY 7 (11/18) ---------- */
+{d:7,w:"arrange",p:"어레인지",pos:"동사",m:"정리하다, 마련하다",s:"꽃꽂이(arrange)처럼 가지런히 '정리'하고 자리도 '마련'.",c:"arrange a meeting (회의를 마련하다)"},
+{d:7,w:"contract",p:"컨트랙트",pos:"명사",m:"계약, 계약서",s:"정해진 트랙(선)을 따라 걷는 약속, '계약'.",c:"sign a contract (계약서에 서명하다)"},
+{d:7,w:"deliver",p:"딜리버",pos:"동사",m:"배달하다, 전달하다",s:"\"딜리버~\" 노크 소리와 함께 오는 '배달'.",c:"deliver the package (소포를 배달하다)"},
+{d:7,w:"evaluate",p:"이밸류에이트",pos:"동사",m:"평가하다",s:"값(value)을 매기듯 따져 보는 '평가'.",c:"evaluate performance (실적을 평가하다)"},
+{d:7,w:"negotiate",p:"니고시에이트",pos:"동사",m:"협상하다",s:"\"니 가, 고 가\" 주고받으며 앉아서 하는 '협상'.",c:"negotiate a price (가격을 협상하다)"},
+{d:7,w:"priority",p:"프라이오리티",pos:"명사",m:"우선순위, 우선 사항",s:"먼저(프라이) 줄 서는 순서, '우선순위'.",c:"top priority (최우선 순위)"},
+{d:7,w:"replacement",p:"리플레이스먼트",pos:"명사",m:"교체, 대체품",s:"같은 자리에 다시(re) 놓는 것, '교체'.",c:"a replacement part (교체 부품)"},
+{d:7,w:"thorough",p:"써러",pos:"형용사",m:"철저한, 빈틈없는",s:"구석까지 쓸어(써) 러(러) 닦아 내는 '철저한' 청소.",c:"a thorough review (철저한 검토)"},
+{d:7,w:"expand",p:"익스팬드",pos:"동사",m:"확장하다",s:"(복습) 부채를 확 펼치듯 '확장'.",c:"expand the market (시장을 확장하다)",r:1},
+{d:7,w:"recommend",p:"레커멘드",pos:"동사",m:"추천하다",s:"(복습) \"이거 들어 봐\" 권하는 '추천'.",c:"recommend a product (제품을 추천하다)",r:1},
+
+/* ---------- DAY 8 (11/19) ---------- */
+{d:8,w:"effective",p:"이펙티브",pos:"형용사",m:"효과적인",s:"이(e) + 펙트(effect) = 효과가 확실한 '효과적인' 방법.",c:"an effective method (효과적인 방법)"},
+{d:8,w:"delay",p:"딜레이",pos:"명사",m:"지연, 지연 시간",s:"거래(deal)가 레이(늦게) 끝나 버린 '지연'.",c:"a flight delay (항공편 지연)"},
+{d:8,w:"attach",p:"어태치",pos:"동사",m:"첨부하다, 붙이다",s:"테이프(tape)로 딱 붙이듯 파일을 '첨부'.",c:"attach a file (파일을 첨부하다)"},
+{d:8,w:"benefit",p:"베너핏",pos:"명사",m:"혜택, 이익",s:"좋은(bene) 것이 몸에 딱 맞는(fit) '혜택'.",c:"employee benefits (직원 복지)"},
+{d:8,w:"regularly",p:"레귤얼리",pos:"부사",m:"정기적으로, 규칙적으로",s:"레귤러 커피처럼 늘 같은 시간에, '정기적으로'.",c:"check regularly (정기적으로 점검하다)"},
+{d:8,w:"creative",p:"크리에이티브",pos:"형용사",m:"창의적인",s:"없던 것을 크리에(창조) 하는 '창의적인' 생각.",c:"creative ideas (창의적 아이디어)"},
+{d:8,w:"reserve",p:"리저브",pos:"동사",m:"예약하다, 보류하다",s:"자리를 미리(re) 잡아(저브) 두는 '예약'.",c:"reserve a table (테이블을 예약하다)"},
+{d:8,w:"notice",p:"노티스",pos:"명사",m:"공지, 안내문",s:"게시판에 붙은 노트 한 장, '공지'.",c:"public notice (공고)"},
+{d:8,w:"negotiate",p:"니고시에이트",pos:"동사",m:"협상하다",s:"(복습) \"니 가, 고 가\" 주고받는 '협상'.",c:"negotiate a contract (계약을 협상하다)",r:1},
+{d:8,w:"priority",p:"프라이오리티",pos:"명사",m:"우선순위",s:"(복습) 먼저 줄 서는 '우선순위'.",c:"a high priority (높은 우선순위)",r:1},
+
+/* ---------- DAY 9 (11/20) ---------- */
+{d:9,w:"productive",p:"프로덕티브",pos:"형용사",m:"생산적인, 성과가 많은",s:"공장에서 물건(product)을 쉴 새 없이 뽑아내는 '생산적인' 모습!",c:"a productive meeting (성과가 많은 회의)"},
+{d:9,w:"register",p:"레지스터",pos:"동사",m:"등록하다, 접수하다",s:"계산대(캐시 레지스터)에 바코드를 삑 찍어 '등록'.",c:"register online (온라인으로 등록하다)"},
+{d:9,w:"expense",p:"익스펜스",pos:"명사",m:"비용, 경비",s:"밖으로(익스) 나가는 돈(펜스) = '경비'.",c:"travel expenses (여행 경비)"},
+{d:9,w:"resolve",p:"리졸브",pos:"동사",m:"해결하다",s:"엉킨 매듭을 다시(re) 풀어(졸브) '해결'.",c:"resolve an issue (문제를 해결하다)"},
+{d:9,w:"convenient",p:"컨비니언트",pos:"형용사",m:"편리한, 편한",s:"편의점(convenience store)처럼 언제나 '편리한'.",c:"a convenient location (편리한 위치)"},
+{d:9,w:"assign",p:"어사인",pos:"동사",m:"배정하다, 할당하다",s:"사인(sign)해서 임무를 딱 '배정'.",c:"assign a task (업무를 배정하다)"},
+{d:9,w:"previously",p:"프리비어슬리",pos:"부사",m:"이전에, 앞서",s:"전(pre)에 보았던(비어스) 일, '이전에'.",c:"previously mentioned (앞서 언급된)"},
+{d:9,w:"feature",p:"피처",pos:"명사",m:"특징, 기능",s:"잡지 표지(feature)처럼 돋보이는 '특징'.",c:"key features (주요 기능)"},
+{d:9,w:"thorough",p:"써러",pos:"형용사",m:"철저한",s:"(복습) 구석까지 쓸어 내는 '철저한' 점검.",c:"a thorough inspection (철저한 점검)",r:1},
+{d:9,w:"attach",p:"어태치",pos:"동사",m:"첨부하다",s:"(복습) 테이프로 딱 붙이는 '첨부'.",c:"attach the receipt (영수증을 첨부하다)",r:1}
+];
+</script>
+<script>
+/* ============================================================
+   ⚡ 3초 문법 퍼즐 — 빈칸 앞뒤 모양만 보고 품사를 고른다
+   ============================================================ */
+var GRAMMAR = [
+{tag:"a / the + [ ] + 명사",q:"Please submit a ___ report by Friday.",
+ opts:["detail","detailed","details","detailing"],a:1,
+ tip:"a 다음, report(명사) 앞 = 꾸며 주는 말. -ed로 끝나는 <b>detailed</b>가 정답. 공식: <b>a/the + [형용사] + 명사</b>"},
+{tag:"a / the + [ ] + 명사",q:"The manager gave the ___ proposal to the client.",
+ opts:["final","finally","finalize","finalist"],a:0,
+ tip:"the와 proposal 사이는 꾸미는 말 자리. -ly는 동사를 꾸미는 부사, -ize는 동사, finalist는 사람 명사라 안 돼요. <b>final</b>!"},
+{tag:"a / the + [ ] + 명사",q:"We received a ___ reply from the supplier.",
+ opts:["prompt","promptly","promptness","prompting"],a:0,
+ tip:"a + [빈칸] + reply(명사). 꾸미는 말은 형용사 <b>prompt</b>. -ly 붙은 promptly는 동사 꾸미는 부사예요."},
+{tag:"a / the + [ ] + 명사",q:"She made an ___ decision to change the venue.",
+ opts:["import","important","importance","importantly"],a:1,
+ tip:"an + [빈칸] + decision(명사) → 형용사 <b>important</b>. -ance는 명사, -ly는 부사라 자리가 안 맞아요."},
+{tag:"a / the + [ ] + 명사",q:"This is the ___ choice for our budget.",
+ opts:["economy","economical","economize","economically"],a:1,
+ tip:"the + [빈칸] + choice(명사) → 형용사 <b>economical</b>. economy는 명사, economize는 동사, -ly는 부사!"},
+{tag:"will + [ ] + 동사원형",q:"The director will ___ approve the plan.",
+ opts:["immediate","immediately","immediacy","immediateness"],a:1,
+ tip:"will과 approve(동사) 사이 = 동사를 꾸미는 자리 → 부사 <b>immediately</b>. 이게 Day 3에 낚였던 함정이에요!"},
+{tag:"has + [ ] + p.p.",q:"The team has ___ completed the project.",
+ opts:["recent","recently","recency","recentness"],a:1,
+ tip:"has + [빈칸] + completed(p.p.). 완료시제 샌드위치 안은 부사 자리 → <b>recently</b>. Day 4에 14초 만에 맞힌 그 공식!"},
+{tag:"be + [ ] + 전치사",q:"All employees are ___ for the safety training.",
+ opts:["response","responsible","responsibly","responsiveness"],a:1,
+ tip:"be동사 뒤, for 앞 = 형용사 자리 → <b>responsible</b>. 'be responsible for' 통째로 외워 두면 3초예요."},
+{tag:"타동사 뒤 = 목적어 자리",q:"The company will provide ___ about the new policy.",
+ opts:["inform","information","informative","informatively"],a:1,
+ tip:"provide(타동사) 뒤에는 목적어가 와야 해요 → 명사 <b>information</b>. -tion으로 끝나면 명사 꼬리표!"},
+{tag:"전치사 뒤 = 명사 자리",q:"For further ___ , please contact the sales team.",
+ opts:["assist","assistance","assistant","assisting"],a:1,
+ tip:"For(전치사) 뒤는 명사 자리 → <b>assistance</b>. -ance도 명사 꼬리표예요."},
+{tag:"문장 맨 앞 = 주어 자리",q:"___ was delayed because of heavy snow.",
+ opts:["Deliver","Delivery","Delivered","Delivering"],a:1,
+ tip:"문장 맨 앞, 동사(was) 앞 = 주어 자리 → 명사 <b>Delivery</b>. '배달이 지연되었다'가 자연스러워요."},
+{tag:"주어-동사 수일치",q:"The list of attendees ___ posted online yesterday.",
+ opts:["was","were","have","be"],a:0,
+ tip:"주어는 <b>The list</b>(단수)! of attendees는 주어를 설명하는 덧붙임이에요. 그래서 was."},
+{tag:"주어-동사 수일치",q:"Each of the employees ___ a new badge.",
+ opts:["receive","receives","are receiving","have received"],a:1,
+ tip:"Each(각각)는 항상 단수 취급 → <b>receives</b>. 'each of the 복수명사'가 나와도 동사는 단수!"},
+{tag:"모자 팀(전치사) vs 연결고리 팀(접속사)",q:"___ the bad weather, the event was held as planned.",
+ opts:["Despite","Although","Because","However"],a:0,
+ tip:"빈칸 뒤가 'the bad weather'라는 명사 덩어리 → 모자 팀 <b>Despite</b>. Although·Because는 뒤에 주어+동사가 와야 해요."},
+{tag:"모자 팀(전치사) vs 연결고리 팀(접속사)",q:"___ the shipment arrived late, we extended the deadline.",
+ opts:["Despite","Although","Because of","Due to"],a:1,
+ tip:"빈칸 뒤에 'the shipment arrived(주어+동사)' → 연결고리 팀 <b>Although</b>. Due to·Because of는 명사만 데려가요."},
+{tag:"전치사구로 이유 말하기",q:"The meeting was postponed ___ the CEO's absence.",
+ opts:["because","because of","although","however"],a:1,
+ tip:"뒤에 명사(the CEO's absence)만 있으니 모자 팀 <b>because of</b>. because는 주어+동사가 필요해요."},
+{tag:"동사 꾸미는 말 = -ly",q:"The machine operates ___ without any problems.",
+ opts:["smooth","smoothness","smoothly","smoother"],a:2,
+ tip:"operates(동사)를 꾸미는 자리 → 부사 <b>smoothly</b>. 동사 뒤 빈칸은 우선 -ly를 의심하세요."},
+{tag:"[ ] + 명사 = 꾸미는 말",q:"We need ___ staff to finish the work on time.",
+ opts:["add","addition","additional","additionally"],a:2,
+ tip:"staff(명사) 앞 → 형용사 <b>additional</b>. add는 동사, addition은 명사, -ly는 부사예요."},
+{tag:"조동사 + 동사원형",q:"All visitors must ___ at the front desk.",
+ opts:["registration","register","registered","registering"],a:1,
+ tip:"must 뒤는 무조건 동사원형 → <b>register</b>. 조동사(must·will·can) 뒤에는 -ed도 -ing도 못 와요."},
+{tag:"to + 동사원형",q:"The company plans to ___ its operations next year.",
+ opts:["expansion","expand","expanded","expanding"],a:1,
+ tip:"to부정사 to 뒤는 동사원형 → <b>expand</b>. plans to 다음에는 명사가 못 와요."},
+{tag:"the + [ ] + 명사",q:"Ms. Kim will attend the ___ in Busan next week.",
+ opts:["confer","conference","conferenced","conferring"],a:1,
+ tip:"the + [빈칸] + 전치사(in Busan) → 명사 <b>conference</b>. '행사 이름'이 들어갈 자리예요."},
+{tag:"숫자·복수 표현 뒤 = 복수 명사",q:"Several ___ were submitted before the deadline.",
+ opts:["propose","proposal","proposals","proposed"],a:2,
+ tip:"Several(여러) + 동사 were(복수) → 복수 명사 <b>proposals</b>. 명사 뒤 -s는 '복수'라는 표시!"},
+{tag:"비교급 앞 = 부사",q:"The results were ___ better than we expected.",
+ opts:["significant","significantly","significance","signify"],a:1,
+ tip:"better(비교급)를 꾸미는 자리 → 부사 <b>significantly</b>. 비교급 앞에는 -ly 부사가 와요."},
+{tag:"전치사 to + 동명사",q:"We look forward to ___ from you soon.",
+ opts:["hear","hearing","heard","hears"],a:1,
+ tip:"look forward to의 to는 전치사! 전치사 뒤에는 동명사 → <b>hearing</b>. 통째로 외우면 3초."}
+];
+
+/* ============================================================
+   📖 한 줄 해석
+   ============================================================ */
+var READING = [
+{en:"Please submit your expense report by Friday.",a:0,
+ opts:["금요일까지 경비 보고서를 제출하세요.","금요일에 경비 보고서를 받았습니다.","금요일까지 보고서를 검토하겠습니다.","금요일에는 보고서를 작성하지 마세요."],
+ tip:"submit = 제출하다, by Friday = 금요일까지. 'by'가 붙으면 '그때까지'예요."},
+{en:"The meeting has been postponed until next Tuesday.",a:1,
+ opts:["회의가 지난 화요일에 끝났습니다.","회의가 다음 주 화요일로 연기되었습니다.","회의는 다음 주 화요일에 시작합니다.","회의는 화요일마다 열립니다."],
+ tip:"postpone = 연기하다, until = …까지(계속). has been postponed는 '연기된 상태'예요."},
+{en:"All employees are required to wear ID badges at all times.",a:2,
+ opts:["모든 직원은 사원증을 신청할 수 있습니다.","모든 직원은 사원증을 반납해야 합니다.","모든 직원은 항상 사원증을 착용해야 합니다.","모든 직원은 사원증을 새로 발급받았습니다."],
+ tip:"be required to = …하도록 요구되다, at all times = 항상."},
+{en:"We are pleased to announce the opening of our new branch.",a:1,
+ opts:["새 지점이 곧 문을 닫습니다.","새 지점 개설을 알리게 되어 기쁩니다.","새 지점에서 행사를 열어 달라는 부탁입니다.","새 지점을 인수할 회사를 찾고 있습니다."],
+ tip:"be pleased to = 기쁘게 …하다, announce = 발표하다, branch = 지점."},
+{en:"The shipment will arrive within three business days.",a:0,
+ opts:["배송은 영업일 기준 3일 이내에 도착할 것입니다.","배송은 3일 늦게 도착할 것입니다.","배송은 3일 동안 멈춰 있을 것입니다.","배송은 3일마다 한 번씩 옵니다."],
+ tip:"within = …이내에, business day = 영업일(주말·휴일 제외)."},
+{en:"Please note that the office will be closed on Monday.",a:3,
+ opts:["월요일에 사무실을 청소합니다.","월요일에는 사무실이 붐빕니다.","월요일에 사무실이 새로 문을 엽니다.","월요일에는 사무실이 문을 닫는다는 점을 유의하세요."],
+ tip:"Please note that ~ = ~을 유의하세요, be closed = 문을 닫다."},
+{en:"Customers who spend over $50 will receive a free gift.",a:2,
+ opts:["50달러를 낸 고객은 환불을 받을 수 있습니다.","50달러짜리 선물을 판매합니다.","50달러 이상 지출한 고객에게 무료 선물을 드립니다.","50달러 이상 사면 배송이 늦어집니다."],
+ tip:"who spend over $50 = 50달러 넘게 쓰는 (고객), receive = 받다."},
+{en:"The annual report must be completed by the end of this month.",a:1,
+ opts:["연례 보고서는 다음 달에 시작됩니다.","연례 보고서는 이번 달 말까지 완성되어야 합니다.","연례 보고서를 이번 달에 버려야 합니다.","연례 보고서는 매달 다시 씁니다."],
+ tip:"annual = 연례의, by the end of = …말까지, must be completed = 완성되어야 한다."},
+{en:"Due to the renovation, the parking lot is temporarily unavailable.",a:0,
+ opts:["보수 공사로 인해 주차장을 일시적으로 이용할 수 없습니다.","주차장 공사가 곧 시작됩니다.","주차장을 새로 만들었으니 이용하세요.","보수 공사 때문에 주차 요금이 올랐습니다."],
+ tip:"Due to = …때문에, temporarily = 일시적으로, unavailable = 이용할 수 없는."},
+{en:"Please contact the HR department if you have any questions.",a:2,
+ opts:["질문이 있으면 인사부서를 방문하지 마세요.","인사부서에서 질문을 받아 시험을 봅니다.","질문이 있으시면 인사부서로 연락하세요.","인사부서가 질문지를 배포합니다."],
+ tip:"contact = 연락하다, if you have any questions = 질문이 있으면."},
+{en:"The new policy will take effect on January 1.",a:3,
+ opts:["새 정책이 1월 1일에 폐지됩니다.","새 정책을 1월 1일까지 신청하세요.","새 정책은 1월 1일에 발표만 됩니다.","새 정책은 1월 1일부터 시행됩니다."],
+ tip:"take effect = 시행되다(효력을 발생하다)."},
+{en:"All applications must be submitted no later than June 15.",a:0,
+ opts:["모든 지원서는 늦어도 6월 15일까지 제출해야 합니다.","6월 15일 이후에만 지원할 수 있습니다.","6월 15일에 지원서를 돌려받습니다.","지원서는 6월 15일에 작성합니다."],
+ tip:"no later than = 늦어도 …까지."},
+{en:"The company provides free lunch to all employees.",a:1,
+ opts:["회사가 점심값을 직원에게 청구합니다.","회사는 모든 직원에게 무료 점심을 제공합니다.","직원들이 회사에 점심을 제공합니다.","무료 점심은 신청자에게만 제공됩니다."],
+ tip:"provide A to B = B에게 A를 제공하다."},
+{en:"We apologize for the inconvenience caused by the delay.",a:2,
+ opts:["지연을 막아 주셔서 감사합니다.","지연된 물건을 다시 보내 드립니다.","지연으로 불편을 드려 죄송합니다.","지연에 대한 보상금을 청구하세요."],
+ tip:"apologize for = …에 대해 사과하다, inconvenience = 불편."},
+{en:"The equipment must be inspected regularly for safety.",a:3,
+ opts:["장비를 안전하게 보관하는 방법을 알려 드립니다.","장비는 매일 새것으로 교체됩니다.","장비를 안전교육 때만 점검합니다.","장비는 안전을 위해 정기적으로 점검해야 합니다."],
+ tip:"be inspected = 점검되어야 한다, regularly = 정기적으로."},
+{en:"The workshop is designed for employees with limited experience.",a:0,
+ opts:["이 워크숍은 경험이 적은 직원을 위해 마련되었습니다.","이 워크숍은 경력이 많은 직원만 들을 수 있습니다.","이 워크숍은 경험을 쌓은 뒤에 신청하세요.","이 워크숍은 직원 가족을 위한 것입니다."],
+ tip:"be designed for = …을 위해 설계되다, limited experience = 경험이 적은."}
+];
+
+/* ============================================================
+   🎧 듣기(발음) 퀴즈 — speechSynthesis
+   kind:'spell' = 들은 단어의 철자 고르기 / kind:'meaning' = 들은 문장의 뜻 고르기
+   ============================================================ */
+var LISTEN = [
+{kind:"spell",say:"confirm",a:0,opts:["confirm","conform","confine","confide"],
+ tip:"confirm = 확인하다. 두 번째 소리가 '펌'이면 confirm, '폼'이면 conform(따르다)!"},
+{kind:"spell",say:"receipt",a:2,opts:["recipe","recite","receipt","respect"],
+ tip:"receipt = 영수증. '리시트'로 들리면 receipt, '레서피'로 들리면 recipe예요."},
+{kind:"spell",say:"purchase",a:1,opts:["purpose","purchase","pursue","persuade"],
+ tip:"purchase = 구매. '퍼-' 뒤에 '체이스'가 들리면 purchase!"},
+{kind:"spell",say:"schedule",a:0,opts:["schedule","skeleton","sketch","scholarship"],
+ tip:"schedule = 일정. '스케줄'로 들리면 schedule. 나머지는 '스켈'·'스케치'·'스칼라'예요."},
+{kind:"spell",say:"available",a:3,opts:["valuable","variable","unavoidable","available"],
+ tip:"available = 이용 가능한. '어베일러블'로 들리면 available, '밸류어블'은 valuable(귀중한)."},
+{kind:"spell",say:"negotiate",a:1,opts:["navigate","negotiate","negative","neglect"],
+ tip:"negotiate = 협상하다. '니고-시에이트'가 들리면 negotiate!"},
+{kind:"spell",say:"efficient",a:2,opts:["sufficient","deficient","efficient","proficient"],
+ tip:"efficient = 효율적인. 앞이 '이-'로 시작하면 efficient, '서-'면 sufficient(충분한)."},
+{kind:"spell",say:"temporary",a:0,opts:["temporary","contemporary","temperature","temperate"],
+ tip:"temporary = 임시의. '템퍼러리'로 끝나면 temporary, '컨템퍼러리'는 contemporary(동시대의)."},
+{kind:"spell",say:"expire",a:3,opts:["inspire","aspire","acquire","expire"],
+ tip:"expire = 만료되다. '익스-'로 시작하면 expire, '인-'은 inspire(영감을 주다)."},
+{kind:"spell",say:"priority",a:1,opts:["privacy","priority","property","prosperity"],
+ tip:"priority = 우선순위. '프라이오리티'가 들리면 priority!"},
+{kind:"meaning",say:"Please submit the report by Friday.",a:0,
+ opts:["금요일까지 보고서를 제출하세요.","금요일에 보고서를 받아 가세요.","보고서를 금요일에 작성합니다.","금요일에는 보고서를 내지 마세요."],
+ tip:"submit = 제출하다, by = …까지."},
+{kind:"meaning",say:"The meeting is scheduled for three o'clock.",a:2,
+ opts:["회의는 3시에 끝났습니다.","회의는 3시간 동안 열립니다.","회의는 3시로 예정되어 있습니다.","회의를 3시에 취소합니다."],
+ tip:"be scheduled for = …로 예정되어 있다."},
+{kind:"meaning",say:"Your order has been shipped.",a:1,
+ opts:["주문이 취소되었습니다.","주문하신 상품이 발송되었습니다.","주문을 다시 확인해 주세요.","주문이 아직 접수되지 않았습니다."],
+ tip:"be shipped = 발송되다. has been + p.p. = 완료된 상태!"},
+{kind:"meaning",say:"We apologize for the delay.",a:3,
+ opts:["지연이 곧 시작됩니다.","지연에 대해 보상해 드립니다.","지연된 상품을 보내 드립니다.","지연에 대해 사과드립니다."],
+ tip:"apologize for = …에 대해 사과하다, delay = 지연."},
+{kind:"meaning",say:"Thank you for your patience.",a:0,
+ opts:["기다려 주셔서 감사합니다.","환자를 돌봐 주셔서 감사합니다.","참아 주셔서 미안합니다.","다시 와 주셔서 감사합니다."],
+ tip:"patience = 인내, 기다려 줌. 콜센터에서 제일 많이 듣는 문장이에요."},
+{kind:"meaning",say:"The office is closed on weekends.",a:2,
+ opts:["사무실은 주말에 문을 엽니다.","사무실은 주말에만 운영합니다.","사무실은 주말에 문을 닫습니다.","사무실은 주말에 청소합니다."],
+ tip:"be closed = 문을 닫다, on weekends = 주말에."}
+];
+</script>
+<script>
+/* ============================================================
+   🌍 한국사 · 세계사 · 시사상식 · 경제
+   k:'d2t' = 설명 → 용어 / k:'t2d' = 용어·질문 → 설명
+   ============================================================ */
+var SENSE = [
+/* ---------- 1단계 한국사 ---------- */
+{st:1,term:"고조선",k:"d2t",line:"기원전 2333년 단군왕검이 세웠다고 전해지는 한반도 최초의 국가.",
+ q:"단군왕검이 세웠다고 전해지는 한반도 최초의 국가는?",opts:["고조선","고구려","백제","신라"],a:0,
+ tip:"'가장 고(古)것' = 고조선. 찬우에게 물어보기: \"단군 할아버지가 뭘 세웠게?\""},
+{st:1,term:"삼국 시대",k:"d2t",line:"고구려·백제·신라가 한반도를 나눠 다스린 시기.",
+ q:"고구려·백제·신라 세 나라를 함께 부르는 말은?",opts:["삼국 시대","남북국 시대","고려 시대","조선 시대"],a:0,
+ tip:"세 나라 = 삼국. 남북국 시대는 통일신라+발해를 말해요."},
+{st:1,term:"세종대왕",k:"d2t",line:"1446년 훈민정음(한글)을 반포한 조선의 왕.",
+ q:"1446년 훈민정음을 반포한 왕은?",opts:["세종대왕","태조 이성계","정조","영조"],a:0,
+ tip:"한글은 '누구나 쉽게 읽게' 만든 문자. 기자에게도 원조 활자 정신이에요."},
+{st:1,term:"이순신",k:"d2t",line:"1592년 임진왜란 때 한산도 대첩에서 크게 이긴 장군.",
+ q:"임진왜란 때 한산도에서 일본 수군을 물리친 장군은?",opts:["이순신","권율","김시민","강감찬"],a:0,
+ tip:"거북선 = 이순신. '한산도'만 들리면 이순신으로 3초."},
+{st:1,term:"이성계",k:"d2t",line:"1392년 고려를 무너뜨리고 조선을 세운 인물.",
+ q:"1392년 조선을 건국한 인물은?",opts:["이성계","왕건","정도전","이방원"],a:0,
+ tip:"고려는 왕건, 조선은 이성계. 1392는 '이성계가 나라 세운 해'로 통째로."},
+{st:1,term:"4·19 혁명",k:"d2t",line:"1960년 부정선거에 항의하며 일어난 민주화 운동.",
+ q:"1960년 부정선거에 항의해 일어난 민주화 운동은?",opts:["4·19 혁명","5·18 민주화운동","6월 민주항쟁","3·1 운동"],a:0,
+ tip:"연도와 숫자를 붙여 외우면 끝! 1960 = 4·19."},
+{st:1,term:"6·25 전쟁",k:"d2t",line:"1950년 6월 25일 시작된 한국전쟁.",
+ q:"1950년 6월 25일에 시작된 전쟁은?",opts:["6·25 전쟁(한국전쟁)","베트남 전쟁","제1차 세계대전","임진왜란"],a:0,
+ tip:"날짜가 곧 이름이에요. 찬우에게: \"우리 할머니가 어릴 때 난 전쟁 이름은?\""},
+{st:1,term:"5·18 민주화운동",k:"t2d",line:"1980년 5월 광주에서 일어난 민주화 운동. '광주 민주화운동'이라고도 한다.",
+ q:"5·18 민주화운동이 일어난 도시는?",opts:["광주","부산","대구","서울"],a:0,
+ tip:"1980 = 5·18 = 광주. 숫자-도시를 한 세트로 붙여 두세요."},
+{st:1,term:"6월 민주항쟁",k:"d2t",line:"1987년 대통령 직선제 개헌을 이끌어낸 시민 항쟁.",
+ q:"1987년 대통령 직선제 개헌을 이끌어낸 항쟁은?",opts:["6월 민주항쟁","4·19 혁명","5·18 민주화운동","3·1 운동"],a:0,
+ tip:"1987 = 6월 민주항쟁 = 대통령 직선제. '직선제'가 나오면 1987!"},
+{st:1,term:"팔만대장경",k:"d2t",line:"몽골 침입기에 만들어져 지금도 해인사에 보관된 목판 불교 경전.",
+ q:"몽골 침입기에 만들어져 해인사에 보관된 목판 경전은?",opts:["팔만대장경","삼국사기","훈민정음","직지심체 요절"],a:0,
+ tip:"8만 장 = 팔'만'대장경. 해인사에 있어요."},
+
+/* ---------- 2단계 세계사 ---------- */
+{st:2,term:"트로이의 목마",k:"d2t",line:"그리스군이 병사를 숨긴 나무 말을 성 안에 들여 트로이를 함락시킨 작전.",
+ q:"병사를 숨긴 나무 말을 성 안에 들여 트로이를 함락시킨 작전은?",opts:["트로이의 목마","스파르타 방패벽","그리스 화염","카르타고 원정"],a:0,
+ tip:"'선물처럼 보이는 것이 덫' = 트로이의 목마. 기사에서 '속임수' 비유로 자주 나와요."},
+{st:2,term:"마그나 카르타",k:"d2t",line:"1215년 영국에서 왕권을 제한한 문서. '대헌장'이라고도 한다.",
+ q:"1215년 영국에서 왕권을 제한한 문서는?",opts:["마그나 카르타","독립선언문","권리장전","나폴레옹 법전"],a:0,
+ tip:"왕도 법 아래에! = 마그나 카르타. 1215 한 숫자만 붙잡으면 돼요."},
+{st:2,term:"프랑스 혁명",k:"d2t",line:"1789년 바스티유 감옥 습격으로 시작된 혁명.",
+ q:"1789년 바스티유 감옥 습격으로 시작된 혁명은?",opts:["프랑스 혁명","산업혁명","미국 독립혁명","러시아 혁명"],a:0,
+ tip:"1789 = 바스티유 = 프랑스 혁명. 숫자만 기억!"},
+{st:2,term:"산업혁명",k:"d2t",line:"18세기 영국에서 증기기관과 기계로 생산 방식이 바뀐 변화.",
+ q:"18세기 영국에서 증기기관으로 생산 방식이 바뀐 변화는?",opts:["산업혁명","르네상스","종교개혁","프랑스 혁명"],a:0,
+ tip:"증기기관 = 산업혁명. '공장'이 생겨난 그 변화예요."},
+{st:2,term:"미국 독립선언문",k:"d2t",line:"1776년 7월 4일 발표된 미국의 독립 문서.",
+ q:"1776년 7월 4일 발표된 미국의 문서는?",opts:["독립선언문","마그나 카르타","헌법 수정 제1조","게티즈버그 연설"],a:0,
+ tip:"미국 독립기념일 7월 4일의 그 문서, 1776!"},
+{st:2,term:"로마",k:"d2t",line:"'모든 길은 로마로 통한다'는 말이 나온 고대 제국의 수도.",
+ q:"'모든 길은 ○○로 통한다'의 그 도시는?",opts:["로마","아테네","카이로","이스탄불"],a:0,
+ tip:"길을 깔고 도로망을 만든 제국 = 로마."},
+{st:2,term:"르네상스",k:"d2t",line:"14~16세기 이탈리아에서 시작된 예술·학문의 부흥.",
+ q:"14~16세기 이탈리아에서 시작된 예술·학문의 부흥은?",opts:["르네상스","중세 암흑기","산업혁명","낭만주의"],a:0,
+ tip:"레오나르도 다빈치·미켈란젤로가 활약한 '다시 태어난' 시대."},
+{st:2,term:"제1차 세계대전",k:"d2t",line:"1914년 사라예보 사건으로 시작되어 1918년 끝난 전쟁.",
+ q:"1914년 사라예보 사건으로 시작된 전쟁은?",opts:["제1차 세계대전","제2차 세계대전","크림 전쟁","냉전"],a:0,
+ tip:"1914 = 사라예보 = 1차 대전. 2차는 1939년이에요."},
+{st:2,term:"만리장성",k:"d2t",line:"중국 북방 민족의 침입을 막기 위해 쌓은 거대한 성벽.",
+ q:"중국 북방 침입을 막기 위해 쌓은 성벽은?",opts:["만리장성","베를린 장벽","콜로세움","하드리아누스 방벽"],a:0,
+ tip:"'만 리'가 이름에 있으니 길이로 기억!"},
+{st:2,term:"광복(1945년)",k:"t2d",line:"1945년 태평양전쟁이 끝나며 우리나라가 일제 강점기에서 벗어난 해.",
+ q:"우리나라가 일제 강점기에서 벗어난 해는?",opts:["1945년","1910년","1950년","1987년"],a:0,
+ tip:"1910 국권 피탈 → 1945 광복. 35년 만의 귀환이에요. 8·15 광복절!"},
+
+/* ---------- 3단계 시사상식 ---------- */
+{st:3,term:"국회",k:"d2t",line:"법을 만들고 예산을 심의·확정하는 입법 기관.",
+ q:"법을 만들고 예산을 심의하는 대한민국의 입법 기관은?",opts:["국회","법원","행정부","헌법재판소"],a:0,
+ tip:"법 만드는 곳 = 국회(여의도). 취재에서 '국회 통과'가 나오면 이 뜻!"},
+{st:3,term:"사법부(법원)",k:"d2t",line:"재판을 통해 법을 해석하고 다툼을 해결하는 기관.",
+ q:"재판을 통해 법을 해석하는 기관은?",opts:["법원(사법부)","국회","감사원","경찰청"],a:0,
+ tip:"만들기(국회) · 집행(정부) · 판단(법원), 삼권분립 3초 정리!"},
+{st:3,term:"예산",k:"d2t",line:"정부가 1년 동안 쓸 돈을 미리 짜 놓은 계획. 국회가 심의해 확정한다.",
+ q:"정부가 1년 동안 쓸 돈을 미리 짜 놓은 계획은?",opts:["예산","결산","세금","기금"],a:0,
+ tip:"예산은 '쓰기 전' 계획, 결산은 '쓴 뒤' 정리. 초희 취재의 단골 단어예요."},
+{st:3,term:"공공조달",k:"d2t",line:"정부·공공기관이 물품이나 공사를 사는 공식 절차(나라장터).",
+ q:"정부·공공기관이 물품이나 공사를 사는 공식 절차는?",opts:["공공조달","민간위탁","세출예산","수의계약"],a:0,
+ tip:"'나라장터'에서 입찰하는 그 절차. 수의계약은 이 안의 예외예요."},
+{st:3,term:"국정감사",k:"d2t",line:"국회가 매년 가을 정부 기관을 점검하는 제도.",
+ q:"국회가 매년 가을 정부 기관을 점검하는 제도는?",opts:["국정감사","국정조사","청문회","예산심의"],a:0,
+ tip:"매년 가을 = 국정감사. 특정 사건만 파고들면 국정조사!"},
+{st:3,term:"인구 절벽",k:"d2t",line:"출생아 수가 급격히 줄어드는 현상.",
+ q:"출생아 수가 급격히 줄어드는 현상을 부르는 말은?",opts:["인구 절벽","인구 고령화","베이비붐","인구 유출"],a:0,
+ tip:"출생아가 '뚝' 떨어져 절벽처럼 보이는 그래프에서 나온 말이에요."},
+{st:3,term:"초고령사회",k:"d2t",line:"65세 이상 인구가 전체의 20%를 넘는 사회.",
+ q:"65세 이상 인구가 전체의 20%를 넘는 사회는?",opts:["초고령사회","고령화사회","고령사회","청년사회"],a:0,
+ tip:"7% 고령화 → 14% 고령사회 → 20% 초고령사회. 숫자 3개만!"},
+{st:3,term:"COP(당사국총회)",k:"t2d",line:"유엔 기후변화협약 당사국총회. 매년 열리는 국제 기후 회의.",
+ q:"COP는 무엇의 약자일까요?",opts:["기후변화 협약 당사국 총회","국제통화기금 총회","세계보건총회","올림픽 조직위원회"],a:0,
+ tip:"기후 기사에 'COP28'처럼 숫자가 붙어 나오면 이 회의예요."},
+{st:3,term:"표본오차",k:"d2t",line:"일부만 조사해 전체 의견을 추정할 때 생기는 오차.",
+ q:"일부만 조사해 전체를 추정할 때 생기는 오차는?",opts:["표본오차","측정오차","신뢰구간","응답률"],a:0,
+ tip:"여론조사 '±3.1%p'가 바로 표본오차. 기사 쓸 때 꼭 붙는 숫자!"},
+{st:3,term:"재보궐선거",k:"d2t",line:"당선자가 사퇴·사망 등으로 빈자리가 생길 때 다시 치르는 선거.",
+ q:"당선자가 사퇴·사망 등으로 빈자리가 생길 때 치르는 선거는?",opts:["재보궐선거","국민투표","비례대표 선거","총선거"],a:0,
+ tip:"'다시' + '빈자리' = 재·보궐. 뉴스에서 '재보선'으로 줄여 써요."},
+
+/* ---------- 4단계 경제 ---------- */
+{st:4,term:"기회비용",k:"d2t",line:"하나를 선택하면서 포기한 다른 선택의 가치.",
+ q:"하나를 선택할 때 포기한 다른 선택의 가치를 무엇이라 할까요?",opts:["기회비용","매몰비용","이자비용","한계비용"],a:0,
+ tip:"영화를 고르면 포기한 건 독서 시간. 그게 기회비용! (11/19 상식 한 조각 그 개념)"},
+{st:4,term:"금리",k:"d2t",line:"돈을 빌리거나 맡길 때 붙는 이자의 비율. 중앙은행의 기준금리가 출발점.",
+ q:"돈을 빌릴 때 붙는 이자의 비율은?",opts:["금리","환율","물가","배당"],a:0,
+ tip:"금리 오르면 대출 이자도 오른다. 기사에서 '기준금리 동결' 자주 나와요."},
+{st:4,term:"환율",k:"d2t",line:"우리 돈과 외국 돈을 바꾸는 비율.",
+ q:"우리 돈과 외국 돈을 바꾸는 비율은?",opts:["환율","금리","수수료","할인율"],a:0,
+ tip:"1달러=1,300원 같은 숫자. 환율 오르면 수입 물가가 올라요."},
+{st:4,term:"인플레이션",k:"d2t",line:"물가가 지속적으로 오르는 현상. 같은 돈으로 살 수 있는 게 줄어든다.",
+ q:"물가가 지속적으로 오르는 현상은?",opts:["인플레이션","디플레이션","스태그플레이션","환율 상승"],a:0,
+ tip:"인플레 = '돈의 값이 내려가는' 것. 장바구니가 가벼워져요."},
+{st:4,term:"디플레이션",k:"d2t",line:"물가가 지속적으로 내려가는 현상. 소비가 미뤄져 경기가 얼어붙는다.",
+ q:"물가가 지속적으로 내려가는 현상은?",opts:["디플레이션","인플레이션","인구 절벽","금리 인상"],a:0,
+ tip:"'디(de) = 아래로' 물가. 싸진다고 다 좋은 게 아니에요."},
+{st:4,term:"GDP(국내총생산)",k:"d2t",line:"한 나라 안에서 일정 기간 새로 생산된 재화·서비스 가치의 합계.",
+ q:"한 나라 안에서 새로 생산된 재화·서비스 가치의 합계는?",opts:["GDP(국내총생산)","GNP","물가상승률","국가부채"],a:0,
+ tip:"'국내에서' 생산 = GDP. 경제 기사 첫 문단에 거의 매번 나와요."},
+{st:4,term:"채권",k:"t2d",line:"돈을 빌리며 발행하는 차용증서. 금리가 오르면 채권 가격은 내려간다.",
+ q:"채권 가격은 금리가 오르면 어떻게 될까요?",opts:["내려간다","올라간다","변하지 않는다","0원이 된다"],a:0,
+ tip:"금리↑ = 새 채권이 더 이자를 주니 옛 채권은 싸져야 팔려요. 그래서 가격↓"},
+{st:4,term:"레버리지",k:"d2t",line:"빌린 돈으로 투자 규모를 키우는 것. 수익도 손실도 커진다.",
+ q:"빌린 돈으로 투자 규모를 키우는 것은?",opts:["레버리지","분산투자","적립식 투자","현물 투자"],a:0,
+ tip:"지렛대(leverage)로 큰 힘을 내는 것. 초희가 읽은 《레버리지》 제목의 그 단어!"},
+{st:4,term:"관세",k:"d2t",line:"수입품에 매기는 세금. 무역 분쟁 기사에 자주 등장한다.",
+ q:"수입품에 매기는 세금은?",opts:["관세","부가가치세","소득세","법인세"],a:0,
+ tip:"'관세 폭탄' 뉴스의 그 세금. 수입 물건 값을 올려요."},
+{st:4,term:"수요와 공급",k:"d2t",line:"가격이 오르면 수요는 줄고 공급은 늘어나는 시장의 기본 원리.",
+ q:"가격이 오르면 수요는 줄고 공급은 늘어나는 원리는?",opts:["수요와 공급의 법칙","기회비용의 법칙","규모의 경제","인플레이션"],a:0,
+ tip:"딸기 값이 오르면 덜 사고, 농가가 더 키워요. 그게 이 법칙!"}
+];
+
+/* ============================================================
+   BTS 7인 · 카테고리 · 단계 설정
+   (문제를 맞혀 하트를 채우면 그 멤버가 내 편이 된다)
+   ============================================================ */
+var BTS_MEMBERS = [
+  {id:"rm", n:"RM", e:"🐨",
+   say:"일단 문제부터 보자. 같이 가자!",
+   cheer:["좋아, 이 흐름이야.","리더가 인정했어."],
+   oops:"괜찮아, 한 번 더 보면 돼.",
+   catch:"리더는 내 편. 이제 안 흔들려."},
+  {id:"jin", n:"진", e:"🐹",
+   say:"형이 왔어요~ 😄",
+   cheer:["잘했어요!","오, 센스 있는데요?"],
+   oops:"어? 아깝다! 다시 해봐요.",
+   catch:"월드와이드 핸섬, 내 편 완료."},
+  {id:"suga", n:"슈가", e:"🐱",
+   say:"…뭐, 해봐.",
+   cheer:["그렇지.","나쁘지 않아."],
+   oops:"…천천히. 다시.",
+   catch:"말수는 적어도 내 편은 확실해."},
+  {id:"jhope", n:"제이홉", e:"🐿️",
+   say:"우리 희망이 왔다!",
+   cheer:["선샤인!","분위기 좋아!"],
+   oops:"괜찮아! 다음에 맞히면 돼!",
+   catch:"분위기 메이커, 접수 완료."},
+  {id:"jimin", n:"지민", e:"🐥",
+   say:"하트 준비됐어?",
+   cheer:["완벽해!","딱 맞았어!"],
+   oops:"아깝다~ 한 번 더!",
+   catch:"지민이 하트까지 내 거."},
+  {id:"v", n:"뷔", e:"🐯",
+   say:"오늘도 컴포즈 한 잔?",
+   cheer:["좋아, 딱 맞았어.","그거지!"],
+   oops:"이런, 조금만 더!",
+   catch:"뷔가 내 편이래 — 오늘 최고 💜"},
+  {id:"jungkook", n:"정국", e:"🐰",
+   say:"황금막내 왔다!",
+   cheer:["그 정도면 합격!","오케이!"],
+   oops:"괜찮아요, 다시 가면 되죠!",
+   catch:"막내까지 접수 완료. 7명 다 모으자!"}
+];
+
+var CATS = [
+ {id:"words",emoji:"📜",name:"도파민 단어",desc:"Day 1~9 · 74단어",c1:"#8b5cf6",c2:"#f472b6",showStages:true},
+ {id:"grammar",emoji:"⚡",name:"3초 문법 퍼즐",desc:"빈칸 앞뒤만 보면 끝",c1:"#22d3ee",c2:"#6366f1"},
+ {id:"reading",emoji:"📖",name:"한 줄 해석",desc:"토익 빈출 문장 16",c1:"#fbbf24",c2:"#f97316"},
+ {id:"listening",emoji:"🎧",name:"듣기(발음)",desc:"듣고 고르기 16",c1:"#34d399",c2:"#10b981"},
+ {id:"sense",emoji:"🌍",name:"한국사·세계사·상식",desc:"한국사/세계사/시사/경제",c1:"#fb7185",c2:"#f43f5e",showStages:true}
+];
+
+var STAGE_DEFS = {
+  words:[
+    {n:1,name:"Day 1~3",sub:"기초 빈출 단어 · 3초 문법 1~2호",days:[1,2,3]},
+    {n:2,name:"Day 4~6",sub:"목적어·수동태 구간",days:[4,5,6]},
+    {n:3,name:"Day 7~9",sub:"계약·업무·보고 구간",days:[7,8,9]}
+  ],
+  sense:[
+    {n:1,name:"1단계 한국사",sub:"고조선부터 민주화운동까지",st:1},
+    {n:2,name:"2단계 세계사",sub:"트로이의 목마부터 광복까지",st:2},
+    {n:3,name:"3단계 시사상식",sub:"국회·예산·조달·인구",st:3},
+    {n:4,name:"4단계 경제",sub:"금리·환율·인플레·레버리지",st:4}
+  ]
+};
+</script>
+<script>
+(function(){
+"use strict";
+
+/* ---------------- 저장소 ---------------- */
+var LS_STATS="tmq_stats_v1", LS_WRONG="tmq_wrong_v1", LS_SOUND="tmq_sound_v1", LS_DECK="tmq_btsdeck_v1";
+function load(k,d){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+var stats = load(LS_STATS,{}) || {};
+var wrong = load(LS_WRONG,{}) || {};
+var soundOn = load(LS_SOUND,true)!==false;
+var deck = load(LS_DECK,{}) || {};
+
+function catStat(id){
+  if(!stats[id]||typeof stats[id]!=="object") stats[id]={total:0,best:0};
+  if(typeof stats[id].total!=="number") stats[id].total=0;
+  if(typeof stats[id].best!=="number") stats[id].best=0;
+  return stats[id];
+}
+function totalKills(){ var n=0; for(var k in stats){ if(stats[k]&&typeof stats[k].total==="number") n+=stats[k].total; } return n; }
+
+/* ---------------- BTS 도감 ---------------- */
+function deckCount(){ var n=0; for(var k in deck){ if(deck[k]&&byId(BTS_MEMBERS,k)) n++; } return n; }
+function renderDeck(){
+  var row=$("deckRow"); if(!row) return;
+  var html="";
+  for(var i=0;i<BTS_MEMBERS.length;i++){
+    var m=BTS_MEMBERS[i], got=!!deck[m.id];
+    html+='<div class="deck-cell'+(got?' on':'')+'">'
+      +'<div class="de">'+m.e+'</div><div class="dn">'+esc(m.n)+'</div></div>';
+  }
+  row.innerHTML=html;
+  var dc=$("deckCount"); if(dc) dc.textContent=deckCount()+" / "+BTS_MEMBERS.length;
+}
+function markDeck(m){
+  if(!m||deck[m.id]) return false;
+  deck[m.id]=Date.now(); save(LS_DECK,deck); renderDeck();
+  return true;
+}
+
+/* ---------------- 유틸 ---------------- */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function shuffle(a){ var r=a.slice(), i, j, t; for(i=r.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=r[i]; r[i]=r[j]; r[j]=t; } return r; }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function byId(list,id){ for(var i=0;i<list.length;i++){ if(list[i].id===id) return list[i]; } return null; }
+var LETTERS=["A","B","C","D","E"];
+var toastT=null;
+function toast(msg){
+  var el=$("toast"); if(!el) return;
+  el.textContent=msg; el.classList.add("on");
+  if(toastT) clearTimeout(toastT);
+  toastT=setTimeout(function(){ el.classList.remove("on"); },2100);
+}
+
+/* ---------------- 소리 ---------------- */
+var AC=null;
+function ac(){
+  if(AC) return AC;
+  try{ var C=window.AudioContext||window.webkitAudioContext; if(!C) return null; AC=new C(); }catch(e){ AC=null; }
+  return AC;
+}
+function tone(freq,t0,dur,type,vol){
+  var c=ac(); if(!c) return;
+  try{
+    if(c.state==="suspended" && c.resume) c.resume();
+    var o=c.createOscillator(), g=c.createGain();
+    o.type=type||"sine"; o.frequency.value=freq;
+    o.connect(g); g.connect(c.destination);
+    var now=c.currentTime+t0;
+    g.gain.setValueAtTime(0.0001,now);
+    g.gain.exponentialRampToValueAtTime(vol||0.07, now+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+dur);
+    o.start(now); o.stop(now+dur+0.03);
+  }catch(e){}
+}
+function sfx(kind){
+  if(!soundOn) return;
+  if(kind==="ok"){ tone(760,0,0.08,"triangle",0.06); tone(1140,0.06,0.10,"triangle",0.05); }
+  else if(kind==="crit"){ tone(880,0,0.07,"square",0.05); tone(1180,0.06,0.07,"square",0.05); tone(1480,0.13,0.10,"square",0.045); }
+  else if(kind==="no"){ tone(210,0,0.16,"sawtooth",0.05); tone(150,0.10,0.18,"sawtooth",0.04); }
+  else if(kind==="kill"){ tone(523,0,0.10,"triangle",0.06); tone(659,0.09,0.10,"triangle",0.06); tone(784,0.18,0.12,"triangle",0.06); tone(1046,0.28,0.16,"triangle",0.05); }
+  else if(kind==="win"){ tone(659,0,0.12,"sine",0.06); tone(880,0.11,0.12,"sine",0.06); tone(1318,0.23,0.22,"sine",0.05); }
+}
+function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+
+/* ---------------- 영어 음성 ---------------- */
+var speechOK = (typeof window!=="undefined") && ("speechSynthesis" in window) && ("SpeechSynthesisUtterance" in window);
+function speak(text){
+  if(!speechOK) return false;
+  try{
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang="en-US"; u.rate=0.85; u.pitch=1; u.volume=1;
+    var vs=[];
+    try{ vs=window.speechSynthesis.getVoices()||[]; }catch(e){ vs=[]; }
+    for(var i=0;i<vs.length;i++){ if(String(vs[i].lang||"").toLowerCase().indexOf("en")===0){ u.voice=vs[i]; break; } }
+    if(window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+    return true;
+  }catch(e){ return false; }
+}
+try{ if(speechOK){ window.speechSynthesis.getVoices(); if(window.speechSynthesis.onvoiceschanged!==undefined){ window.speechSynthesis.onvoiceschanged=function(){ try{window.speechSynthesis.getVoices();}catch(e){} }; } } }catch(e){}
+
+/* ---------------- 화면 ---------------- */
+var SCREENS=["home","stages","study","battle","result"];
+function show(name){
+  for(var i=0;i<SCREENS.length;i++){
+    var el=$("screen-"+SCREENS[i]);
+    if(!el) continue;
+    if(SCREENS[i]===name) el.classList.add("on"); else el.classList.remove("on");
+  }
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+
+var state = { catId:null, cat:null, stage:null, deck:[], deckIdx:0, battle:null };
+
+/* ---------------- 홈 ---------------- */
+function renderHome(){
+  $("homeKills").textContent = totalKills();
+  var wc=0; for(var k in wrong){ if(wrong[k]) wc++; }
+  $("wrongCount").textContent="("+wc+"문제)";
+  var wb=$("btnWrong");
+  if(wc>0) wb.classList.remove("empty"); else wb.classList.add("empty");
+  $("btnSound").textContent = soundOn?"🔊":"🔇";
+  renderDeck();
+
+  var html="";
+  for(var i=0;i<CATS.length;i++){
+    var c=CATS[i], st=catStat(c.id);
+    html+='<button class="cat" type="button" data-cat="'+c.id+'" style="--c1:'+c.c1+';--c2:'+c.c2+'">'
+      +'<span class="c-go">›</span>'
+      +'<div class="c-emoji">'+c.emoji+'</div>'
+      +'<div class="c-name">'+esc(c.name)+'</div>'
+      +'<div class="c-desc">'+esc(c.desc)+'</div>'
+      +'<div class="c-stat">지금까지 <b>'+st.total+'명</b><span class="dot"></span>최고 <b>'+st.best+'명</b></div>'
+      +'</button>';
+  }
+  $("catList").innerHTML=html;
+}
+
+/* ---------------- 단계 목록 ---------------- */
+function stagePool(catId, st){
+  if(catId==="words"){
+    var days=st.days, seen={}, out=[];
+    for(var i=0;i<WORDS.length;i++){
+      var w=WORDS[i];
+      if(days.indexOf(w.d)<0) continue;
+      if(seen[w.w]) continue;
+      seen[w.w]=1;
+      out.push(w);
+    }
+    return out;
+  }
+  if(catId==="sense"){
+    var s=[];
+    for(var j=0;j<SENSE.length;j++){ if(SENSE[j].st===st.st) s.push(SENSE[j]); }
+    return s;
+  }
+  return [];
+}
+function poolCount(catId, st){ return stagePool(catId, st).length; }
+
+function renderStages(){
+  var c=state.cat, defs=STAGE_DEFS[state.catId]||[];
+  $("stageTitle").textContent=c.emoji+" "+c.name;
+  $("stageSub").textContent = state.catId==="words" ? "먼저 훑어본 뒤 BTS를 잡으러!" : "1줄 설명으로 공부하고 바로 BTS 잡기!";
+  var html="";
+  for(var i=0;i<defs.length;i++){
+    var d=defs[i], n=poolCount(state.catId,d);
+    html+='<div class="stage" data-study="'+d.n+'">'
+      +'<div class="s-row">'
+        +'<div class="s-num">'+d.n+'</div>'
+        +'<div class="s-t"><b>'+esc(d.name)+'</b><span>'+esc(d.sub)+' · '+n+'개</span></div>'
+        +'<div class="s-arrow">›</div>'
+      +'</div>'
+      +'<div class="s-btns">'
+        +'<button class="mini" type="button" data-study="'+d.n+'">📖 훑어보기</button>'
+        +'<button class="mini solid" type="button" data-quiz="'+d.n+'">💜 잡으러 가기</button>'
+      +'</div></div>';
+  }
+  $("stageList").innerHTML=html;
+  $("stageNote").textContent = state.catId==="words"
+    ? "Day 1~9 실제 발송 단어 전량 · 복습 단어는 해당 회차에 포함"
+    : "한국사 10 · 세계사 10 · 시사 10 · 경제 10 (기회비용·트로이의 목마 포함)";
+}
+
+/* ---------------- 훑어보기 ---------------- */
+function buildDeck(catId, stageDef){
+  var pool=stagePool(catId, stageDef), deck=[];
+  for(var i=0;i<pool.length;i++){
+    deck.push({catId:catId, st:stageDef.n, item:pool[i]});
+  }
+  return deck;
+}
+function openStudy(stageN){
+  var defs=STAGE_DEFS[state.catId], st=null;
+  for(var i=0;i<defs.length;i++){ if(defs[i].n===stageN) st=defs[i]; }
+  if(!st) return;
+  state.stage=st;
+  state.deck=buildDeck(state.catId,st);
+  state.deckIdx=0;
+  $("studyTitle").textContent = state.cat.emoji+" "+st.name;
+  $("studySub").textContent = state.catId==="words" ? "3초 암기 썰 + 짝꿍 덩어리" : "핵심 1줄 설명";
+  renderStudy();
+  show("study");
+}
+function renderStudy(){
+  var d=state.deck[state.deckIdx]; if(!d){ return; }
+  var it=d.item, html="";
+  if(d.catId==="words"){
+    html='<div class="badge-row"><span class="badge day">Day '+it.d+'</span>'
+      +(it.r?'<span class="badge gold">복습</span>':'<span class="badge">신규</span>')
+      +'<span class="badge">'+esc(it.pos)+'</span></div>'
+      +'<div class="word">'+esc(it.w)+'</div>'
+      +'<div class="pron">['+esc(it.p)+']</div>'
+      +'<button class="soundchip" type="button" data-say="'+esc(it.w)+'">🔊 발음 듣기</button>'
+      +'<div class="mean">'+esc(it.m)+'</div>'
+      +'<div class="box story"><span class="lab">3초 암기 썰</span>'+esc(it.s)+'</div>'
+      +'<div class="box chunk"><span class="lab">2단어 짝꿍</span><b>'+esc(it.c)+'</b></div>';
+  } else {
+    html='<div class="badge-row"><span class="badge day">'+esc(state.stage.name)+'</span>'
+      +'<span class="badge">핵심 1줄</span></div>'
+      +'<div class="word small">'+esc(it.term)+'</div>'
+      +'<div class="box story"><span class="lab">핵심 1줄 설명</span>'+esc(it.line)+'</div>'
+      +'<div class="box chunk"><span class="lab">기억 한 줄</span>'+esc(it.tip)+'</div>';
+  }
+  $("studyCard").innerHTML=html;
+  var n=state.deck.length, cur=state.deckIdx+1;
+  $("studyCnt").textContent = cur+" / "+n;
+  $("studyBar").style.width = (n? (cur/n*100):0)+"%";
+  $("studyPrev").disabled = state.deckIdx<=0;
+  $("studyNext").disabled = state.deckIdx>=n-1;
+}
+
+/* ---------------- 문제 만들기 ---------------- */
+function distractorPoolWords(pool, w){
+  var out=[];
+  for(var i=0;i<pool.length;i++){
+    var o=pool[i];
+    if(o.w===w.w) continue;
+    if(o.m===w.m) continue;
+    out.push(o);
+  }
+  return out;
+}
+function labelWords(w){ return w.w+" ("+w.m+")"; }
+
+function qWords(w, pool){
+  var type = Math.random()<0.5 ? "m" : "r";
+  var others = shuffle(distractorPoolWords(pool,w)).slice(0,3);
+  var opts=[], i;
+  if(type==="m"){
+    opts.push({t:w.m, ok:true});
+    for(i=0;i<others.length;i++) opts.push({t:others[i].m, ok:false});
+    var html='<div class="qword">'+esc(w.w)+'</div><div class="qpron">['+esc(w.p)+'] · '+esc(w.pos)+'</div>';
+    return {key:"w:"+w.w, mode:"words", tag:"WORD · 뜻 고르기", label:labelWords(w),
+      html:html, sub:"이 단어의 뜻은?", opts:shuffle(opts), tip:w.s+" / "+w.c, speak:null, answerText:w.m};
+  }
+  opts.push({t:w.w, ok:true});
+  for(i=0;i<others.length;i++) opts.push({t:others[i].w, ok:false});
+  var html2='<div class="qmean">'+esc(w.m)+'</div><div class="qpron">'+esc(w.pos)+'</div>';
+  return {key:"w:"+w.w, mode:"words", tag:"WORD · 단어 고르기", label:labelWords(w),
+    html:html2, sub:"이 뜻에 맞는 단어는?", opts:shuffle(opts), tip:w.s+" / "+w.c, speak:null, answerText:w.w};
+}
+function qGrammar(i){
+  var g=GRAMMAR[i];
+  var opts=[];
+  for(var k=0;k<g.opts.length;k++) opts.push({t:g.opts[k], ok:(k===g.a)});
+  var html='<div class="qen">'+esc(g.q).replace(/___/g,'<span class="qblank">＿＿＿</span>')+'</div>';
+  return {key:"g:"+i, mode:"grammar", tag:"GRAMMAR · "+g.tag, label:"문법 · "+g.tag,
+    html:html, sub:"빈칸 앞뒤만 보세요. 3초!", opts:opts, tip:g.tip, speak:null, answerText:g.opts[g.a]};
+}
+function qReading(i){
+  var r=READING[i], opts=[];
+  for(var k=0;k<r.opts.length;k++) opts.push({t:r.opts[k], ok:(k===r.a)});
+  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…",
+    html:'<div class="qen">'+esc(r.en)+'</div>', sub:"가장 알맞은 해석은?", opts:opts, tip:r.tip, speak:null, answerText:r.opts[r.a]};
+}
+function qListen(i){
+  var l=LISTEN[i], opts=[];
+  for(var k=0;k<l.opts.length;k++) opts.push({t:l.opts[k], ok:(k===l.a)});
+  var sub = l.kind==="spell" ? "들은 단어의 철자를 고르세요." : "들은 문장의 뜻을 고르세요.";
+  return {key:"l:"+i, mode:"listening", tag:"LISTENING · "+(l.kind==="spell"?"철자":"문장 뜻"), label:"듣기 · "+l.say,
+    html:'<div class="qmean">🔊 '+esc(sub)+'</div>', sub:"", opts:opts, tip:l.tip, speak:l.say, answerText:l.opts[l.a]};
+}
+function qSense(i){
+  var s=SENSE[i], opts=[];
+  for(var k=0;k<s.opts.length;k++) opts.push({t:s.opts[k], ok:(k===s.a)});
+  var html='<div class="qmean">'+esc(s.q)+'</div>';
+  return {key:"s:"+i, mode:"sense", tag:"SENSE · "+stageNameSense(s.st), label:s.term,
+    html:html, sub:esc(stageNameSense(s.st))+" 문제", opts:opts, tip:s.tip, speak:null, answerText:s.opts[s.a]};
+}
+function stageNameSense(st){
+  var d=STAGE_DEFS.sense; for(var i=0;i<d.length;i++){ if(d[i].st===st) return d[i].name; } return "상식";
+}
+function questionFromKey(key){
+  var p=key.split(":"), i=parseInt(p[1],10), k;
+  if(p[0]==="w"){
+    for(k=0;k<WORDS.length;k++){ if(WORDS[k].w===p[1]) return qWords(WORDS[k], WORDS); }
+    return null;
+  }
+  if(p[0]==="g"){ return GRAMMAR[i]?qGrammar(i):null; }
+  if(p[0]==="r"){ return READING[i]?qReading(i):null; }
+  if(p[0]==="l"){ return LISTEN[i]?qListen(i):null; }
+  if(p[0]==="s"){ return SENSE[i]?qSense(i):null; }
+  return null;
+}
+
+/* ---------------- 대결 ---------------- */
+function mkBattle(cfg){
+  var b={
+    mode:cfg.mode, label:cfg.label, cat:cfg.cat,
+    items:cfg.items, make:cfg.make, refill:cfg.refill,
+    bag:[], target:cfg.target||3, heartMax:4,
+    member:null, heart:0, caughtIds:[],
+    caught:0, asked:0, correct:0, cleared:0, combo:0, best:0,
+    locked:true, ended:false, wrongNew:[], current:null, textShown:false, qn:0
+  };
+  return b;
+}
+function refillBagWords(b){
+  var pool=b.items;
+  return shuffle(pool);
+}
+function startBattleForPool(mode, catId, cat, items, label, target){
+  var make;
+  if(mode==="words"){ make=function(w){ return qWords(w, WORDS); }; }
+  else if(mode==="grammar"){ make=function(i){ return qGrammar(i); }; }
+  else if(mode==="reading"){ make=function(i){ return qReading(i); }; }
+  else if(mode==="listening"){ make=function(i){ return qListen(i); }; }
+  else { make=function(i){ return qSense(i); }; }
+  var b=mkBattle({mode:mode, cat:catId, label:label, items:items, make:make, target:target});
+  b.bag=shuffle(items.slice());
+  state.battle=b;
+  show("battle");
+  $("battleMode").textContent=label;
+  updateBattleChrome();
+  nextMember();
+  askNext();
+}
+function startBattleForCat(catId){
+  var cat=byId(CATS,catId);
+  if(catId==="words"){
+    var all=[]; for(var i=0;i<WORDS.length;i++) all.push(WORDS[i]);
+    startBattleForPool("words",catId,cat,all,cat.emoji+" 도파민 단어 · 전체",3);
+  } else if(catId==="grammar"){
+    var gi=[]; for(var j=0;j<GRAMMAR.length;j++) gi.push(j);
+    startBattleForPool("grammar",catId,cat,gi,cat.emoji+" 3초 문법 퍼즐",3);
+  } else if(catId==="reading"){
+    var ri=[]; for(var k=0;k<READING.length;k++) ri.push(k);
+    startBattleForPool("reading",catId,cat,ri,cat.emoji+" 한 줄 해석",3);
+  } else if(catId==="listening"){
+    var li=[]; for(var m=0;m<LISTEN.length;m++) li.push(m);
+    startBattleForPool("listening",catId,cat,li,cat.emoji+" 듣기(발음)",3);
+  }
+}
+function startBattleForStage(catId, stageN){
+  var defs=STAGE_DEFS[catId], st=null;
+  for(var i=0;i<defs.length;i++){ if(defs[i].n===stageN) st=defs[i]; }
+  if(!st) return;
+  var pool=stagePool(catId,st), cat=byId(CATS,catId);
+  var label=cat.emoji+" "+st.name;
+  if(catId==="words"){
+    startBattleForPool("words",catId,cat,pool,label,3);
+  } else {
+    /* sense: 인덱스 배열로 변환 */
+    var idxs=[];
+    for(var j=0;j<SENSE.length;j++){ if(SENSE[j].st===st.st) idxs.push(j); }
+    startBattleForPool("sense",catId,cat,idxs,label,3);
+  }
+}
+function startReview(){
+  var keys=[]; for(var k in wrong){ if(wrong[k]) keys.push(k); }
+  if(!keys.length){ toast("오답이 없어요. 먼저 퀴즈를 한 판!"); return; }
+  var b=mkBattle({
+    mode:"review", cat:"review", label:"📝 오답 복습",
+    items:keys, make:function(key){ return questionFromKey(key); },
+    target: keys.length<=3 ? 2 : 3
+  });
+  b.bag=shuffle(keys);
+  state.battle=b;
+  show("battle");
+  $("battleMode").textContent="📝 오답 복습 · "+keys.length+"문제";
+  updateBattleChrome();
+  nextMember();
+  askNext();
+}
+function refillReviewBag(b){
+  var keys=[]; for(var k in wrong){ if(wrong[k]) keys.push(k); }
+  return shuffle(keys);
+}
+function nextMember(){
+  var b=state.battle, i, m;
+  var pool=[];
+  for(i=0;i<BTS_MEMBERS.length;i++){
+    m=BTS_MEMBERS[i];
+    if(b.caughtIds.indexOf(m.id)>=0) continue;
+    pool.push(m);
+  }
+  if(!pool.length) pool=BTS_MEMBERS.slice();
+  /* 아직 도감에 없는 멤버를 먼저 불러요 */
+  var fresh=[];
+  for(i=0;i<pool.length;i++){ if(!deck[pool[i].id]) fresh.push(pool[i]); }
+  m = fresh.length ? pick(fresh) : pick(pool);
+  b.member=m;
+  b.heart=0;
+  var em=$("monsterEmoji");
+  em.className="monster-emoji";
+  em.textContent=m.e;
+  $("monsterName").innerHTML=esc(m.n)+' <small>· '+(b.caught+1)+'번째</small>';
+  var sy=$("memberSay"); if(sy) sy.textContent=m.say;
+  paintHp();
+}
+function paintHp(){
+  var b=state.battle; if(!b) return;
+  var hb=$("heartBar");
+  if(hb){
+    while(hb.children.length>b.heartMax) hb.removeChild(hb.children[hb.children.length-1]);
+    while(hb.children.length<b.heartMax){
+      var c=document.createElement("div"); c.className="heart"; c.textContent="🤍"; hb.appendChild(c);
+    }
+    for(var i=0;i<hb.children.length;i++){
+      var el=hb.children[i], on=(i<b.heart);
+      if(on && !el.classList.contains("on")){ el.classList.add("on"); el.textContent="💜"; }
+      else if(!on && el.classList.contains("on")){ el.classList.remove("on"); el.textContent="🤍"; }
+    }
+  }
+  $("monsterHpTxt").textContent="💜 "+b.heart+" / "+b.heartMax;
+  $("monsterQn").textContent=(b.qn||1)+"번째 문제";
+  $("battleCaught").textContent="💜 "+b.caught+"/"+b.target;
+  var cb=$("battleCombo");
+  if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; }
+  else cb.classList.add("hidden");
+}
+function updateBattleChrome(){
+  var b=state.battle;
+  $("battleCaught").textContent="💜 "+b.caught+"/"+b.target;
+  var cb=$("battleCombo");
+  if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; } else cb.classList.add("hidden");
+}
+function nextQuestionObj(){
+  var b=state.battle;
+  if(!b.bag.length){
+    if(b.mode==="review"){
+      b.bag=refillReviewBag(b);
+      if(!b.bag.length) return null;
+    } else {
+      b.bag=shuffle(b.items.slice());
+      if(!b.bag.length) return null;
+    }
+  }
+  var item=b.bag.pop(), q=null, guard=0;
+  while(item!==undefined && guard<8){
+    q=b.make(item);
+    if(q) break;
+    q=null;
+    item=b.bag.pop(); guard++;
+  }
+  return q;
+}
+function askNext(){
+  var b=state.battle;
+  if(b.caught>=b.target){ return finishBattle(false); }
+  if(b.asked>=40){ return finishBattle(true); }
+  var q=nextQuestionObj();
+  if(!q){ return finishBattle(true); }
+  b.current=q; b.locked=false; b.textShown=false;
+  b.qn=(b.qn||0)+1;
+  renderQuestion(q);
+  paintHp();
+}
+function renderQuestion(q){
+  $("qTag").textContent=q.tag;
+  $("qText").innerHTML=q.html;
+  $("qSub").innerHTML=q.sub||"";
+  var sr=$("speakRow");
+  if(q.speak){ sr.classList.remove("hidden"); } else { sr.classList.add("hidden"); }
+  $("fbSlot").innerHTML="";
+  $("btnContinue").classList.add("hidden");
+  var list=$("optList"), html="";
+  for(var i=0;i<q.opts.length;i++){
+    html+='<button class="opt" type="button" data-opt="'+i+'">'
+      +'<span class="key">'+LETTERS[i]+'</span><span class="otxt">'+esc(q.opts[i].t)+'</span></button>';
+  }
+  list.innerHTML=html;
+  if(q.speak){
+    var ok=speak(q.speak);
+    if(!ok) revealText(true);
+  }
+  try{ list.scrollIntoView({block:"nearest"}); }catch(e){}
+}
+function revealText(auto){
+  var b=state.battle;
+  if(!b||!b.current||!b.current.speak) return;
+  b.textShown=true;
+  var note = auto ? "이 기기에서는 영어 음성이 안 나와요. 글자로 풀어 보세요 👇" : "글자 모드";
+  $("qSub").innerHTML='<span style="color:#fde68a">'+esc(b.current.speak)+'</span><br><span style="font-size:11px;color:#a89ddb">'+esc(note)+'</span>';
+}
+
+function chooseAnswer(idx){
+  var b=state.battle;
+  if(!b||b.locked||!b.current) return;
+  b.locked=true;
+  var q=b.current, picked=q.opts[idx];
+  if(!picked) return;
+  b.asked++;
+  var btns=$("optList").children;
+  for(var i=0;i<btns.length;i++){
+    var btn=btns[i];
+    btn.disabled=true;
+    if(q.opts[i].ok) btn.classList.add("ok");
+    else if(i===idx) btn.classList.add("no");
+    else btn.classList.add("dim");
+  }
+  if(picked.ok) onCorrect(q);
+  else onWrong(q, idx);
+}
+function onCorrect(q){
+  var b=state.battle;
+  b.correct++; b.combo++;
+  if(b.combo>b.best) b.best=b.combo;
+  if(wrong[q.key]){ delete wrong[q.key]; save(LS_WRONG,wrong); b.cleared++; }
+
+  var crit=(b.combo%3===0);
+  var before=b.heart;
+  b.heart=Math.min(b.heartMax, b.heart+(crit?2:1));
+  var added=b.heart-before;
+  var em=$("monsterEmoji");
+  em.classList.remove("spark","caught");
+  void em.offsetWidth;
+  em.classList.add("spark");
+  floatHeart("+"+added+(crit?" 💜💜":" 💜"), crit);
+  if(crit) sfx("crit"); else sfx("ok");
+  buzz(25);
+  paintHp();
+  var cb=$("battleCombo");
+  if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; }
+  if(crit){ cb.classList.remove("hot"); void cb.offsetWidth; cb.classList.add("hot"); }
+
+  var caught=(b.heart>=b.heartMax);
+  var head, body;
+  if(caught){
+    b.caught++;
+    if(b.caughtIds.indexOf(b.member.id)<0) b.caughtIds.push(b.member.id);
+    em.classList.remove("spark");
+    em.classList.add("caught");
+    heartBurst();
+    sfx("kill"); buzz([20,40,60]);
+    var fresh=markDeck(b.member);
+    if(fresh) toast("💜 "+b.member.n+" 도감 등록! ("+deckCount()+"/"+BTS_MEMBERS.length+")");
+    head = crit ? "⚡ 크리티컬 포획! 💜" : "💜 "+esc(b.member.n)+" 포획 성공!";
+    body = '<b>'+esc(b.member.n)+'</b>이(가) 내 편이 됐어요. '+esc(b.member.catch)+'<br>'+q.tip;
+    paintHp();
+  } else {
+    head = crit ? "⚡ 크리티컬! 하트 +"+added+" 💜" : "💜 하트 +"+added+"  ("+b.heart+"/"+b.heartMax+")";
+    body = '<b>'+esc(b.member.n)+'</b>: '+esc(pick(b.member.cheer))+'<br>'+q.tip;
+  }
+  showFb(true, head, body);
+  var cont=$("btnContinue");
+  cont.classList.remove("hidden");
+  if(b.caught>=b.target) cont.textContent="🏆 결과 보기";
+  else if(caught) cont.textContent="다음 멤버 💜";
+  else cont.textContent="계속 💜";
+}
+function onWrong(q, idx){
+  var b=state.battle;
+  b.combo=0;
+  if(!wrong[q.key]){
+    wrong[q.key]={key:q.key, mode:q.mode, label:q.label, at:Date.now(), tries:1};
+  } else {
+    wrong[q.key].at=Date.now(); wrong[q.key].tries=(wrong[q.key].tries||1)+1;
+  }
+  var cnt=0; for(var k in wrong){ if(wrong[k]) cnt++; }
+  if(cnt>120){
+    /* 너무 많아지면 가장 오래된 것부터 정리 */
+    var arr=[]; for(var kk in wrong){ if(wrong[kk]) arr.push(wrong[kk]); }
+    arr.sort(function(x,y){ return (x.at||0)-(y.at||0); });
+    while(arr.length>120){ var drop=arr.shift(); delete wrong[drop.key]; }
+    save(LS_WRONG,wrong);
+  } else {
+    save(LS_WRONG,wrong);
+  }
+  if(b.wrongNew.indexOf(q.label)<0) b.wrongNew.push(q.label);
+  sfx("no"); buzz(70);
+  var em=$("monsterEmoji");
+  em.classList.remove("spark","caught"); void em.offsetWidth; em.classList.add("spark");
+  updateBattleChrome();
+  showFb(false,"아쉬워요! 정답은 <b>"+esc(q.answerText)+"</b>","📝 오답 노트에 저장했어요.<br>"+q.tip+(b.member?("<br><b>"+esc(b.member.n)+"</b>: "+esc(b.member.oops)):""));
+  var cont=$("btnContinue");
+  cont.classList.remove("hidden");
+  cont.textContent = (b.caught>=b.target) ? "🏆 결과 보기" : "계속 💜";
+}
+function showFb(ok, head, body){
+  $("fbSlot").innerHTML='<div class="fb '+(ok?"ok":"no")+'"><div class="fb-t">'+head+'</div><div class="fb-b">'+body+'</div></div>';
+}
+function floatHeart(txt, crit){
+  var z=$("monsterZone");
+  if(!z) return;
+  var d=document.createElement("div");
+  d.className="dmg"+(crit?" crit":""); d.textContent=txt;
+  z.appendChild(d);
+  setTimeout(function(){ if(d.parentNode) d.parentNode.removeChild(d); },1000);
+}
+function heartBurst(){
+  var z=$("monsterZone");
+  if(!z) return;
+  for(var i=0;i<7;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="burst"; d.textContent="💜";
+      d.style.left=(26+i*7)+"%";
+      d.style.animationDelay=(i*0.045)+"s";
+      z.appendChild(d);
+      setTimeout(function(){ if(d.parentNode) d.parentNode.removeChild(d); },1500);
+    })(i);
+  }
+}
+function nextStep(){
+  var b=state.battle;
+  if(!b) return;
+  if(b.caught>=b.target){ return finishBattle(false); }
+  $("fbSlot").innerHTML="";
+  $("btnContinue").classList.add("hidden");
+  if(b.heart>=b.heartMax){
+    setTimeout(function(){ nextMember(); askNext(); }, 120);
+  } else {
+    askNext();
+  }
+}
+
+/* ---------------- 결과 ---------------- */
+function finishBattle(ranOut){
+  var b=state.battle;
+  if(!b||b.ended) return;
+  b.ended=true;
+  var st=catStat(b.cat);
+  st.total+=b.caught;
+  if(b.caught>st.best) st.best=b.caught;
+  save(LS_STATS,stats);
+
+  var total=b.asked, acc= total? Math.round(b.correct/total*100):0;
+  $("resCaught").textContent=b.caught;
+  $("resAcc").textContent=acc+"%";
+  $("resCombo").textContent=b.best;
+  $("resSub").textContent=b.label+" · 문제 "+total+"개 · 오답 청산 "+b.cleared+"개";
+  var mb=$("resMembers");
+  if(mb){
+    var mh="", i2;
+    for(i2=0;i2<b.caughtIds.length;i2++){
+      var mm=byId(BTS_MEMBERS,b.caughtIds[i2]);
+      if(!mm) continue;
+      mh+='<span class="catch-badge"><span class="be">'+mm.e+'</span>'+esc(mm.n)+'</span>';
+    }
+    mb.innerHTML=mh;
+  }
+  var wl=$("resWrongBox"), ul=$("resWrongList");
+  if(b.wrongNew.length){
+    wl.classList.remove("hidden");
+    var h="";
+    for(var i=0;i<Math.min(b.wrongNew.length,8);i++) h+="<li>"+esc(b.wrongNew[i])+"</li>";
+    if(b.wrongNew.length>8) h+='<li>… 외 '+(b.wrongNew.length-8)+'개</li>';
+    ul.innerHTML=h;
+  } else {
+    wl.classList.add("hidden"); ul.innerHTML="";
+  }
+  var perfect = (b.caught>=b.target && b.correct===b.asked);
+  var wrongLeft=0; for(var wk in wrong){ if(wrong[wk]) wrongLeft++; }
+  var reviewClear = (b.mode==="review" && wrongLeft===0);
+  $("resEmoji").textContent = b.caught>=b.target ? (perfect?"🏆":"💜") : (reviewClear?"💜":(ranOut?"🥺":"💪"));
+  $("resTitle").textContent = b.caught>=b.target
+    ? "BTS "+b.caught+"명 포획 성공! 💜"
+    : (reviewClear ? "오답 청산 완료! 💜" : (ranOut?"오늘은 여기까지":"조금만 더!"));
+  var note="";
+  if(perfect) note="완벽해요. 이 정도면 초희 토익 800 보인다!";
+  else if(b.caught>=b.target) note="BTS "+b.caught+"명이 내 편이 됐어요. 도감도 확인해 봐 💜";
+  else if(reviewClear) note="틀린 문제를 다 지웠어요. 오답 노트가 비었어요!";
+  else if(b.asked>=40) note="오늘은 여기까지. 조금씩 쌓이면 돼요.";
+  else note="틀린 건 오답 노트에 자동 저장됐어요. 홈에서 다시 잡으러 갈 수 있어요.";
+  $("resFoot").textContent=note;
+  if(perfect) sfx("win");
+  renderHome();
+  show("result");
+}
+function restartBattle(){
+  var b=state.battle; if(!b) return;
+  var mode=b.mode, defs, i;
+  if(mode==="review"){ startReview(); return; }
+  if(mode==="words"){
+    defs=STAGE_DEFS.words;
+    for(i=0;i<defs.length;i++){ if(b.label.indexOf(defs[i].name)>=0){ startBattleForStage("words",defs[i].n); return; } }
+    startBattleForCat("words"); return;
+  }
+  if(mode==="sense"){
+    defs=STAGE_DEFS.sense;
+    for(i=0;i<defs.length;i++){ if(b.label.indexOf(defs[i].name)>=0){ startBattleForStage("sense",defs[i].n); return; } }
+  }
+  startBattleForCat(mode);
+}
+
+/* ---------------- 이벤트 ---------------- */
+document.addEventListener("click", function(ev){
+  var t=ev.target;
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")))){
+    t=t.parentNode;
+  }
+  if(!t || t===document) return;
+
+  if(t.hasAttribute && t.hasAttribute("data-say")){
+    var sw=t.getAttribute("data-say");
+    if(!speak(sw)) toast("이 기기에서는 영어 음성이 안 나와요");
+    return;
+  }
+
+  if(t.hasAttribute && t.hasAttribute("data-cat")){
+    openCat(t.getAttribute("data-cat")); return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-go")){
+    var go=t.getAttribute("data-go");
+    if(go==="home"){ renderHome(); show("home"); }
+    else if(go==="stages"){ renderStages(); show("stages"); }
+    return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-study")){ openStudy(parseInt(t.getAttribute("data-study"),10)); return; }
+  if(t.hasAttribute && t.hasAttribute("data-quiz")){ startBattleForStage(state.catId, parseInt(t.getAttribute("data-quiz"),10)); return; }
+  if(t.hasAttribute && t.hasAttribute("data-opt")){ chooseAnswer(parseInt(t.getAttribute("data-opt"),10)); return; }
+});
+
+function openCat(id){
+  var cat=byId(CATS,id); if(!cat) return;
+  state.catId=id; state.cat=cat;
+  if(cat.showStages){ renderStages(); show("stages"); }
+  else { startBattleForCat(id); }
+}
+
+$("btnSound").addEventListener("click", function(){
+  soundOn=!soundOn; save(LS_SOUND,soundOn);
+  $("btnSound").textContent=soundOn?"🔊":"🔇";
+  toast(soundOn?"소리 켜짐":"소리 꺼짐");
+  if(soundOn) sfx("ok");
+});
+$("btnWrong").addEventListener("click", function(){ startReview(); });
+$("studyPrev").addEventListener("click", function(){ if(state.deckIdx>0){ state.deckIdx--; renderStudy(); } });
+$("studyNext").addEventListener("click", function(){ if(state.deckIdx<state.deck.length-1){ state.deckIdx++; renderStudy(); } });
+$("studyFight").addEventListener("click", function(){ startBattleForStage(state.catId, state.stage.n); });
+$("btnContinue").addEventListener("click", function(){ nextStep(); });
+$("btnReplay").addEventListener("click", function(){
+  var b=state.battle;
+  if(b&&b.current&&b.current.speak){ var ok=speak(b.current.speak); if(!ok) revealText(true); else toast("다시 들려줄게요 🔊"); }
+});
+$("btnShowText").addEventListener("click", function(){ revealText(false); });
+$("battleQuit").addEventListener("click", function(){
+  var b=state.battle;
+  if(b&&!b.ended&&b.asked>0){
+    /* 중간에 나가도 잡은 멤버는 반영 */
+    var st=catStat(b.cat); st.total+=b.caught; if(b.caught>st.best) st.best=b.caught;
+    save(LS_STATS,stats); b.ended=true;
+  }
+  renderHome(); show("home");
+});
+$("resAgain").addEventListener("click", function(){ restartBattle(); });
+$("resHome").addEventListener("click", function(){ renderHome(); show("home"); });
+
+document.addEventListener("keydown", function(ev){
+  var b=state.battle;
+  if(!b) return;
+  if($("screen-battle").classList.contains("on")){
+    if(!b.locked && ev.key>="1" && ev.key<="4"){ chooseAnswer(parseInt(ev.key,10)-1); }
+    else if(ev.key==="Enter" && !$("btnContinue").classList.contains("hidden")){ nextStep(); }
+    else if(ev.key===" " && b.current && b.current.speak){ ev.preventDefault(); speak(b.current.speak); }
+  }
+});
+
+/* 저장소 첫 방문 초기화 */
+save(LS_STATS,stats); save(LS_WRONG,wrong);
+
+/* 시작 */
+renderHome();
+show("home");
+})();
+</script>
+<script>
+/* PWA: 홈 화면 설치 조건 충족용 서비스 워커 등록 (페이지 동작에는 영향 없음) */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

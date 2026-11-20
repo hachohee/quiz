@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="초희의 토익 BTS 잡기">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#241554"/>
+      <stop offset="1" stop-color="#100a24"/>
+    </linearGradient>
+    <linearGradient id="heart" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#d6a6ff"/>
+      <stop offset="1" stop-color="#8b3ff0"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f472b6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="round">
+      <rect x="0" y="0" width="512" height="512" rx="115" ry="115"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <circle cx="215" cy="154" r="133" fill="url(#glow1)"/>
+    <circle cx="369" cy="123" r="72" fill="url(#glow2)"/>
+    <g transform="translate(256 243) scale(3.1744) translate(-50 -50)">
+      <path d="M50 88 C50 88 8 60 8 34 C8 18 20 10 32 10 C41 10 47 15 50 21 C53 15 59 10 68 10 C80 10 92 18 92 34 C92 60 50 88 50 88 Z"
+            fill="url(#heart)" stroke="#ffffff" stroke-opacity="0.24" stroke-width="0.7"/>
+      <ellipse cx="32" cy="24" rx="13" ry="10" fill="url(#shine)"/>
+    </g>
+    <path d="M364 116 l3.5 11 11 3.5 -11 3.5 -3.5 11 -3.5 -11 -11 -3.5 11 -3.5 z" fill="#ffe4f6"/>
+    <path d="M127 272 l2.2 7 7 2.2 -7 2.2 -2.2 7 -2.2 -7 -7 -2.2 7 -2.2 z" fill="#ffffff" opacity="0.85"/>
+    <path d="M310 356 l1.6 5.2 5.2 1.6 -5.2 1.6 -1.6 5.2 -1.6 -5.2 -5.2 -1.6 5.2 -1.6 z" fill="#dcd0ff" opacity="0.85"/>
+  </g>
+</svg>
