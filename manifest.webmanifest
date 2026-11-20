@@ -1,7 +1,7 @@
 {
-  "name": "초희의 토익 BTS 잡기",
-  "short_name": "토익 BTS",
-  "description": "토익 단어와 문법을 BTS 몬스터 배틀로 잡는 초희의 10분 영어 훈련 웹앱",
+  "name": "똑똑핫초",
+  "short_name": "똑똑핫초",
+  "description": "똑똑핫초 — 토익 단어·문법을 BTS 몬스터 배틀로 잡는 10분 영어 훈련 + 2개월 공부방",
   "lang": "ko",
   "dir": "ltr",
   "start_url": "./",
