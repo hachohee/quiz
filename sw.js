@@ -1,5 +1,5 @@
 /* 초희의 토익 BTS 잡기 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용) */
-const CACHE = 'toeic-bts-v6';
+const CACHE = 'toeic-bts-v7';
 const SHELL = [
   './',
   './index.html',
