@@ -332,6 +332,19 @@ body{
 }
 .speak-btn:active{transform:scale(.97)}
 .speak-btn.alt{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:#d8ccff;flex:0 0 auto;padding:0 13px}
+.spd-row{display:flex;align-items:center;gap:6px;margin-top:8px}
+.spd-label{font-size:11px;font-weight:800;color:var(--muted2);margin-right:2px}
+.spd{flex:1 1 0;min-height:34px;border-radius:10px;font-family:inherit;font-size:12px;font-weight:900;
+  cursor:pointer;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);color:#c7bdf0}
+.spd.on{border-color:rgba(167,139,250,.75);background:rgba(139,92,246,.30);color:#fff}
+.qscript{margin-top:9px;padding:10px 11px;border-radius:12px;background:rgba(255,255,255,.05);
+  border:1px dashed rgba(255,255,255,.18);font-size:12.5px;line-height:1.62;color:#ded3ff}
+.qscript b{color:#fde68a}
+.qpart{display:inline-block;font-size:10.5px;font-weight:900;color:#0b1220;background:var(--cyan);
+  border-radius:6px;padding:1px 6px;margin-right:5px;vertical-align:1px}
+.roundbar{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:11.5px;font-weight:800;color:var(--muted);margin:-2px 0 10px}
+.roundbar i{font-style:normal;color:#fde68a}
 .opts{display:flex;flex-direction:column;gap:9px;margin-bottom:12px}
 .opt{
   display:flex;align-items:center;gap:11px;width:100%;min-height:56px;padding:11px 13px;
@@ -695,7 +708,13 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
       <div class="qsub" id="qSub"></div>
       <div class="speak-row hidden" id="speakRow">
         <button class="speak-btn" id="btnReplay" type="button">🔊 다시 듣기</button>
-        <button class="speak-btn alt" id="btnShowText" type="button">👀 글자로</button>
+        <button class="speak-btn alt" id="btnShowText" type="button">👀 스크립트</button>
+      </div>
+      <div class="spd-row hidden" id="spdRow">
+        <span class="spd-label">속도</span>
+        <button class="spd" type="button" data-spd="0.85">0.85x</button>
+        <button class="spd on" type="button" data-spd="1">1.0x</button>
+        <button class="spd" type="button" data-spd="1.15">1.15x</button>
       </div>
     </div>
 
@@ -843,7 +862,309 @@ var WORDS = [
 {d:9,w:"previously",p:"프리비어슬리",pos:"부사",m:"이전에, 앞서",s:"전(pre)에 보았던(비어스) 일, '이전에'.",c:"previously mentioned (앞서 언급된)"},
 {d:9,w:"feature",p:"피처",pos:"명사",m:"특징, 기능",s:"잡지 표지(feature)처럼 돋보이는 '특징'.",c:"key features (주요 기능)"},
 {d:9,w:"thorough",p:"써러",pos:"형용사",m:"철저한",s:"(복습) 구석까지 쓸어 내는 '철저한' 점검.",c:"a thorough inspection (철저한 점검)",r:1},
-{d:9,w:"attach",p:"어태치",pos:"동사",m:"첨부하다",s:"(복습) 테이프로 딱 붙이는 '첨부'.",c:"attach the receipt (영수증을 첨부하다)",r:1}
+{d:9,w:"attach",p:"어태치",pos:"동사",m:"첨부하다",s:"(복습) 테이프로 딱 붙이는 '첨부'.",c:"attach the receipt (영수증을 첨부하다)",r:1},
+{d:10,w:"applicant",p:"애플리컨트",pos:"명사",m:"지원자",s:"애플(Apple)에 컨트(계산)하러 온 사람? 아니, 회사 문을 두드리는 '지원자'.",c:"a job applicant (구직 지원자)"},
+{d:10,w:"recruit",p:"리크루트",pos:"동사",m:"모집하다, 채용하다",s:"리(새) 크루(crew·선원)를 뽑아 배에 태우는 '채용'.",c:"recruit new employees (신입 사원을 채용하다)"},
+{d:10,w:"hire",p:"하이어",pos:"동사",m:"고용하다",s:"하이(high) 점수 받은 사람을 데려오는 '고용'.",c:"hire a manager (관리자를 고용하다)"},
+{d:10,w:"interview",p:"인터뷰",pos:"명사",m:"면접",s:"인(in)터(사이)뷰(보다) — 마주 보고 보는 '면접'.",c:"a job interview (채용 면접)"},
+{d:10,w:"resume",p:"레주메이",pos:"명사",m:"이력서",s:"레(다시) 쥐메(줘매) — 경력을 다시 한 장에 담은 '이력서'.",c:"submit a resume (이력서를 제출하다)"},
+{d:10,w:"candidate",p:"캔디데이트",pos:"명사",m:"후보자",s:"캔디(candy) 데이트처럼 달콤한 자리를 노리는 '후보자'.",c:"a strong candidate (유력한 후보자)"},
+{d:10,w:"personnel",p:"퍼스널",pos:"명사",m:"인사부, 직원 전체",s:"퍼스널(개인) 정보를 다루는 곳 = '인사부'.",c:"personnel department (인사부)"},
+{d:10,w:"retire",p:"리타이어",pos:"동사",m:"은퇴하다",s:"타이어를 다시(re) 갈 때가 된 차처럼 '은퇴'.",c:"retire early (조기 은퇴하다)"},
+{d:10,w:"resign",p:"리자인",pos:"동사",m:"사직하다",s:"다시(re) 사인(sign)해서 회사와 손절하는 '사직'.",c:"resign from the position (직책에서 사직하다)"},
+{d:10,w:"promote",p:"프로모트",pos:"동사",m:"승진시키다, 홍보하다",s:"프로(pro) 모터(motor)를 달아 위로 올라가는 '승진'.",c:"promote an employee (직원을 승진시키다)"},
+{d:10,w:"promotion",p:"프로모션",pos:"명사",m:"승진, 판촉",s:"같은 뿌리로 위로는 '승진', 손님에게는 '판촉'.",c:"earn a promotion (승진하다)"},
+{d:10,w:"salary",p:"샐러리",pos:"명사",m:"급여(연봉)",s:"샐러리(salary)가 셀러리(celery)처럼 가늘어도 매달 나오는 '급여'.",c:"annual salary (연봉)"},
+{d:10,w:"wage",p:"웨이지",pos:"명사",m:"임금(시급)",s:"웨이터(wait)가 시간으로 버는 '임금'.",c:"minimum wage (최저 임금)"},
+{d:10,w:"bonus",p:"보너스",pos:"명사",m:"상여금",s:"이름도 보너스, 뜻도 '상여금'. 그냥 보너스!",c:"year-end bonus (연말 상여금)"},
+{d:10,w:"incentive",p:"인센티브",pos:"명사",m:"장려금, 동기 부여",s:"인(in)센티브(센스) — 센스 있게 일하면 얹어 주는 '장려금'.",c:"a sales incentive (영업 장려금)"},
+{d:10,w:"allowance",p:"얼라운스",pos:"명사",m:"수당, 용돈",s:"얼라(아이)에게 얹어 주는 용돈 같은 '수당'.",c:"a travel allowance (여비 수당)"},
+{d:10,w:"overtime",p:"오버타임",pos:"명사",m:"초과 근무",s:"오버(over) 타임 — 정해진 시간을 넘겨 '초과 근무'.",c:"work overtime (야근하다)"},
+{d:10,w:"shift",p:"시프트",pos:"명사",m:"근무조, 교대",s:"기어를 시프트하듯 바뀌는 '교대 근무'.",c:"the night shift (야간 근무조)"},
+{d:10,w:"workforce",p:"워크포스",pos:"명사",m:"인력, 노동력",s:"일하는 힘(force)을 다 합친 '인력'.",c:"a skilled workforce (숙련 인력)"},
+{d:10,w:"colleague",p:"칼리그",pos:"명사",m:"동료",s:"같이(col) 뛰는 리그(league) 팀원, '동료'.",c:"a close colleague (친한 동료)"},
+{d:10,w:"supervise",p:"수퍼바이즈",pos:"동사",m:"감독하다",s:"수퍼(위에서) 바이즈(보다) = '감독'.",c:"supervise the team (팀을 감독하다)"},
+{d:10,w:"subordinate",p:"서보디네이트",pos:"명사",m:"부하 직원",s:"서브(sub·아래) 오더(order)를 받는 사람, '부하'.",c:"a subordinate staff member (부하 직원)"},
+{d:10,w:"probation",p:"프로베이션",pos:"명사",m:"수습 기간",s:"프로(pro)가 되기 전 베이(be) 하는 '수습 기간'.",c:"on probation (수습 기간 중인)"},
+{d:10,w:"orientation",p:"오리엔테이션",pos:"명사",m:"신입 안내, 오리엔테이션",s:"동서남북(orient) 방향을 잡아 주는 첫 안내.",c:"new employee orientation (신입 사원 오리엔테이션)"},
+{d:10,w:"vacancy",p:"베이컨시",pos:"명사",m:"공석, 빈자리",s:"비어 있는(vacant) 자리, '공석'.",c:"fill a vacancy (공석을 채우다)"},
+{d:10,w:"position",p:"포지션",pos:"명사",m:"직위, 자리",s:"포지션(position) 잡고 서 있는 '자리'.",c:"apply for a position (직위에 지원하다)"},
+{d:10,w:"career",p:"커리어",pos:"명사",m:"경력, 직업",s:"커(re) + 리어(이어) — 계속 이어 가는 '경력'.",c:"career development (경력 개발)"},
+{d:10,w:"qualification",p:"콸리피케이션",pos:"명사",m:"자격 (요건)",s:"퀄리티(quality)를 갖췄다는 증명, '자격'.",c:"meet the qualifications (자격 요건을 충족하다)"},
+{d:10,w:"expertise",p:"엑스퍼티즈",pos:"명사",m:"전문성",s:"엑스퍼트(expert)의 힘, '전문성'.",c:"technical expertise (기술 전문성)"},
+{d:10,w:"appraisal",p:"어프레이절",pos:"명사",m:"평가, 감정",s:"값(appraise)을 매기는 '평가'.",c:"a performance appraisal (성과 평가)"},
+{d:10,w:"attendance",p:"어텐던스",pos:"명사",m:"출근, 참석",s:"attend(참석) + ance = '참석률'.",c:"attendance record (출근 기록)"},
+{d:10,w:"leave",p:"리브",pos:"명사",m:"휴가",s:"짐을 두고(leave) 자리를 비우는 '휴가'.",c:"on annual leave (연차 휴가 중인)"},
+{d:10,w:"dismiss",p:"디스미스",pos:"동사",m:"해고하다, 일축하다",s:"디스(dis) 미스(miss) — 놓아 버리는 '해고'.",c:"dismiss an employee (직원을 해고하다)"},
+{d:10,w:"layoff",p:"레이오프",pos:"명사",m:"정리해고",s:"레이(줄) 오프(끊다) — 줄을 끊는 '정리해고'.",c:"mass layoffs (대량 정리해고)"},
+{d:10,w:"transfer",p:"트랜스퍼",pos:"동사",m:"전근시키다, 옮기다",s:"트랜스(건너) 퍼(옮기다) = '전근'.",c:"transfer to another branch (다른 지점으로 전근 가다)"},
+{d:10,w:"relocate",p:"리로케이트",pos:"동사",m:"이전하다",s:"다시(re) 로케이트(locate) — 자리를 '이전'.",c:"relocate the office (사무실을 이전하다)"},
+{d:10,w:"mentor",p:"멘토",pos:"명사",m:"멘토, 조언자",s:"멘(마음) 토(터) — 마음 터 놓고 이끄는 '멘토'.",c:"assign a mentor (멘토를 지정하다)"},
+{d:10,w:"trainee",p:"트레이니",pos:"명사",m:"연수생, 수습 직원",s:"트레인(train·훈련) 받는 사람, '연수생'.",c:"a new trainee (신입 연수생)"},
+{d:10,w:"aptitude",p:"앱티튜드",pos:"명사",m:"적성",s:"앱(app)을 튜닝하듯 딱 맞는 재능, '적성'.",c:"an aptitude test (적성 검사)"},
+{d:10,w:"headhunt",p:"헤드헌트",pos:"동사",m:"스카우트하다",s:"머리(head)를 사냥(hunt)해 데려오는 '스카우트'.",c:"headhunt a specialist (전문가를 스카우트하다)"},
+{d:11,w:"accounting",p:"어카운팅",pos:"명사",m:"회계",s:"어카운트(계좌)에 팅(툭) 찍어 정리하는 '회계'.",c:"the accounting department (회계부)"},
+{d:11,w:"revenue",p:"레버뉴",pos:"명사",m:"매출, 수익",s:"레버(지렛대)로 뉴(새) 돈을 들어올리는 '매출'.",c:"annual revenue (연간 매출)"},
+{d:11,w:"profit",p:"프라핏",pos:"명사",m:"이익, 수익",s:"프로(전문가)도 핏(fit) 맞게 남기는 '이익'.",c:"net profit (순이익)"},
+{d:11,w:"loss",p:"로스",pos:"명사",m:"손실",s:"로스(loss)컷처럼 잘려 나간 '손실'.",c:"a net loss (순손실)"},
+{d:11,w:"invoice",p:"인보이스",pos:"명사",m:"청구서",s:"인(in)보이스(목소리) — \"돈 내세요\"라고 말하는 '청구서'.",c:"send an invoice (청구서를 보내다)"},
+{d:11,w:"billing",p:"빌링",pos:"명사",m:"청구, 결제",s:"빌(bill·계산서)을 링(묶음)으로 묶는 '청구'.",c:"the billing cycle (청구 주기)"},
+{d:11,w:"transaction",p:"트랜잭션",pos:"명사",m:"거래",s:"트랜스(주고받고) 액션(행동) — 돈이 오가는 '거래'.",c:"an online transaction (온라인 거래)"},
+{d:11,w:"asset",p:"애셋",pos:"명사",m:"자산",s:"애(내) 셋(세 개) — 내가 가진 세 가지 '자산'.",c:"company assets (회사 자산)"},
+{d:11,w:"debt",p:"뎃",pos:"명사",m:"부채, 빚",s:"뎃(debt)은 '데트'로 읽지만 뜻은 빚. 갚아야 할 '부채'.",c:"pay off the debt (부채를 갚다)"},
+{d:11,w:"capital",p:"캐피털",pos:"명사",m:"자본, 수도",s:"캐피털(capital)은 회사의 수도(首都). 돈의 본진 '자본'.",c:"raise capital (자본을 조달하다)"},
+{d:11,w:"invest",p:"인베스트",pos:"동사",m:"투자하다",s:"인(in)베스트(best) — 가장 좋은 곳에 넣는 '투자'.",c:"invest in technology (기술에 투자하다)"},
+{d:11,w:"shareholder",p:"셰어홀더",pos:"명사",m:"주주",s:"주식(share)을 들고(hold) 있는 사람, '주주'.",c:"a major shareholder (대주주)"},
+{d:11,w:"dividend",p:"디비덴드",pos:"명사",m:"배당금",s:"이익을 디바이드(나눠) 주는 '배당금'.",c:"pay a dividend (배당금을 지급하다)"},
+{d:11,w:"audit",p:"오딧",pos:"명사",m:"회계 감사",s:"오(와서) 딛(밟아) 확인하는 '감사'.",c:"an annual audit (연례 감사)"},
+{d:11,w:"ledger",p:"레저",pos:"명사",m:"원장, 장부",s:"레저(여유) 시간에 적어 두는 두꺼운 '장부'.",c:"the general ledger (총계정원장)"},
+{d:11,w:"forecast",p:"포캐스트",pos:"명사",m:"예측, 전망",s:"포(미리) 캐스트(던져 보는) '예측'.",c:"a sales forecast (매출 예측)"},
+{d:11,w:"fiscal",p:"피스컬",pos:"형용사",m:"회계의, 재정의",s:"피스(돈주머니)컬 — 돈주머니 기준의 '회계의'.",c:"the fiscal year (회계 연도)"},
+{d:11,w:"quarter",p:"쿼터",pos:"명사",m:"분기, 4분의 1",s:"1년을 네 쿼터(quarter)로 자른 '분기'.",c:"the third quarter (3분기)"},
+{d:11,w:"margin",p:"마진",pos:"명사",m:"이윤폭, 여백",s:"마진(margin)은 남는 여백 = '이윤폭'.",c:"profit margin (이윤율)"},
+{d:11,w:"deficit",p:"데피싯",pos:"명사",m:"적자, 부족액",s:"데피(defi·부족) 싯 — 모자라서 생긴 '적자'.",c:"a budget deficit (예산 적자)"},
+{d:11,w:"surplus",p:"서플러스",pos:"명사",m:"흑자, 잉여",s:"서퍼(surplus)처럼 넘실넘실 남는 '잉여'.",c:"a trade surplus (무역 흑자)"},
+{d:11,w:"valuation",p:"밸류에이션",pos:"명사",m:"가치 평가",s:"밸류(value)를 매기는 '가치 평가'.",c:"the company's valuation (회사 가치 평가)"},
+{d:11,w:"depreciate",p:"디프리시에이트",pos:"동사",m:"감가상각하다, 가치가 떨어지다",s:"디(down)프리시에이트 — 값이 내려앉는 '감가상각'.",c:"depreciate over time (시간이 지나며 감가되다)"},
+{d:11,w:"amortize",p:"어모타이즈",pos:"동사",m:"분할 상환하다",s:"어(조금씩) 모타이즈(모터) — 나눠 갚는 '분할 상환'.",c:"amortize the loan (대출을 분할 상환하다)"},
+{d:11,w:"collateral",p:"컬래터럴",pos:"명사",m:"담보",s:"컬래(옆에) 터럴 — 옆에 세워 두는 '담보'.",c:"use the building as collateral (건물을 담보로 잡다)"},
+{d:11,w:"credit",p:"크레딧",pos:"명사",m:"신용, 외상",s:"크레딧 카드의 그 크레딧, '신용'.",c:"a credit card (신용카드)"},
+{d:11,w:"receivable",p:"리시버블",pos:"명사",m:"미수금, 받을 돈",s:"리시브(받다)할 수 있는 돈 = '미수금'.",c:"accounts receivable (매출 채권)"},
+{d:11,w:"payable",p:"페이어블",pos:"명사",m:"지급금, 줄 돈",s:"페이(pay)해야 할 돈 = '지급금'.",c:"accounts payable (매입 채무)"},
+{d:11,w:"installment",p:"인스톨먼트",pos:"명사",m:"할부",s:"인스톨(설치)하듯 한 칸씩 나눠 내는 '할부'.",c:"pay in installments (할부로 내다)"},
+{d:11,w:"subsidy",p:"서브시디",pos:"명사",m:"보조금",s:"서브(sub·아래에서) 받쳐 주는 '보조금'.",c:"a government subsidy (정부 보조금)"},
+{d:11,w:"tariff",p:"태리프",pos:"명사",m:"관세",s:"태(사이) 리프(잎) — 국경을 넘을 때 붙는 '관세'.",c:"import tariffs (수입 관세)"},
+{d:11,w:"quotation",p:"쿼테이션",pos:"명사",m:"견적서, 인용",s:"쿼트(quote·값을 말하다)한 종이, '견적서'.",c:"request a quotation (견적을 요청하다)"},
+{d:11,w:"overhead",p:"오버헤드",pos:"명사",m:"간접비, 경상비",s:"머리(overhead) 위에 늘 얹혀 있는 '간접비'.",c:"reduce overhead costs (간접비를 줄이다)"},
+{d:11,w:"remittance",p:"리미턴스",pos:"명사",m:"송금",s:"리(다시) 미트(보내) — 돈을 보내는 '송금'.",c:"confirm the remittance (송금을 확인하다)"},
+{d:11,w:"expenditure",p:"익스펜디처",pos:"명사",m:"지출",s:"익스펜스(expense)의 정식 이름, '지출'.",c:"cut expenditures (지출을 줄이다)"},
+{d:11,w:"allocate",p:"앨로케이트",pos:"동사",m:"배분하다, 할당하다",s:"앨(모두) 로케이트(자리 잡아) 나눠 주는 '배분'.",c:"allocate the budget (예산을 배분하다)"},
+{d:11,w:"reconcile",p:"레컨사일",pos:"동사",m:"조정하다, 장부를 맞추다",s:"레(다시) 컨사일(화해) — 장부와 통장을 화해시키는 '대사'.",c:"reconcile the accounts (계정을 대사하다)"},
+{d:11,w:"equity",p:"에쿼티",pos:"명사",m:"자본, 지분",s:"에쿼(같은) 티 — 똑같이 나눠 가진 '지분'.",c:"shareholders' equity (자기자본)"},
+{d:11,w:"interest",p:"인터레스트",pos:"명사",m:"이자, 관심",s:"돈을 맡긴 데 대한 '관심'이 곧 '이자'.",c:"interest rates (금리)"},
+{d:11,w:"proceeds",p:"프로시즈",pos:"명사",m:"수익금, 매출 대금",s:"프로(앞으로) 시즈(나아가는) 돈 = '수익금'.",c:"the proceeds from the sale (매각 대금)"},
+{d:12,w:"clause",p:"클로즈",pos:"명사",m:"조항",s:"계약서를 클로즈(clause·닫는)하는 작은 칸칸, '조항'.",c:"a confidentiality clause (비밀유지 조항)"},
+{d:12,w:"provision",p:"프로비전",pos:"명사",m:"조항, 규정, 준비",s:"프로(미리) 비전(마련)해 둔 조항, '규정'.",c:"a key provision of the contract (계약의 핵심 조항)"},
+{d:12,w:"breach",p:"브리치",pos:"명사",m:"위반, 위반하다",s:"브리치(breach) 뚫린 성벽처럼 계약을 깨는 '위반'.",c:"breach of contract (계약 위반)"},
+{d:12,w:"violate",p:"바이올레이트",pos:"동사",m:"위반하다",s:"바이올(폭력)처럼 규칙을 짓밟는 '위반'.",c:"violate the regulation (규정을 위반하다)"},
+{d:12,w:"comply",p:"컴플라이",pos:"동사",m:"준수하다, 따르다",s:"컴(함께) 플라이(날아) 규칙 따라 나는 '준수'.",c:"comply with the rules (규칙을 준수하다)"},
+{d:12,w:"obligation",p:"오블리게이션",pos:"명사",m:"의무",s:"오블리(얽매인) 게이션 — 계약에 묶인 '의무'.",c:"fulfill an obligation (의무를 이행하다)"},
+{d:12,w:"liability",p:"라이어빌리티",pos:"명사",m:"법적 책임, 부채",s:"라이(거짓말)도 책임지는 '법적 책임'.",c:"limited liability (유한 책임)"},
+{d:12,w:"warranty",p:"워런티",pos:"명사",m:"보증 (기간)",s:"워런(보증) 티 — 고장 나면 책임지는 '보증'.",c:"a two-year warranty (2년 보증)"},
+{d:12,w:"indemnity",p:"인뎀니티",pos:"명사",m:"배상 (책임)",s:"인뎀(손해 없게) 니티 — 손해를 메워 주는 '배상'.",c:"an indemnity clause (배상 조항)"},
+{d:12,w:"arbitration",p:"아비트레이션",pos:"명사",m:"중재",s:"아(중간에) 비트(판정) — 제3자가 정하는 '중재'.",c:"resolve by arbitration (중재로 해결하다)"},
+{d:12,w:"litigation",p:"리티게이션",pos:"명사",m:"소송",s:"리티(법정) 게이션 — 법정으로 가는 '소송'.",c:"threaten litigation (소송을 제기하겠다고 하다)"},
+{d:12,w:"sue",p:"수",pos:"동사",m:"고소하다, 소송하다",s:"'수' 뭔가 하고 법원에 찍는 '고소'.",c:"sue the company (회사를 고소하다)"},
+{d:12,w:"plaintiff",p:"플레인티프",pos:"명사",m:"원고",s:"플레인(불평)을 먼저 꺼낸 쪽, '원고'.",c:"the plaintiff's claim (원고의 청구)"},
+{d:12,w:"defendant",p:"디펜던트",pos:"명사",m:"피고",s:"디펜드(defend·방어)하는 쪽, '피고'.",c:"the defendant's attorney (피고의 변호사)"},
+{d:12,w:"attorney",p:"어터니",pos:"명사",m:"변호사",s:"어(내) 터니(턴) — 나를 대신해 말하는 '변호사'.",c:"consult an attorney (변호사와 상담하다)"},
+{d:12,w:"regulation",p:"레귤레이션",pos:"명사",m:"규정, 규제",s:"레귤러(regular)하게 지켜야 하는 '규정'.",c:"safety regulations (안전 규정)"},
+{d:12,w:"statute",p:"스태추트",pos:"명사",m:"법령, 법률",s:"스탠드(stand)해 있는 법 조문, '법령'.",c:"by statute (법령에 따라)"},
+{d:12,w:"amend",p:"어멘드",pos:"동사",m:"개정하다",s:"어(다시) 멘드(mend·고치다) = '개정'.",c:"amend the contract (계약을 개정하다)"},
+{d:12,w:"amendment",p:"어멘드먼트",pos:"명사",m:"개정 (조항)",s:"amend + ment = '개정 조항'.",c:"a contract amendment (계약 개정)"},
+{d:12,w:"terminate",p:"터미네이트",pos:"동사",m:"종료하다, 해지하다",s:"터미널(terminal·끝)에서 끝내는 '종료'.",c:"terminate the agreement (계약을 해지하다)"},
+{d:12,w:"termination",p:"터미네이션",pos:"명사",m:"계약 해지, 종료",s:"터미네이트의 명사형, '해지'.",c:"notice of termination (해지 통보)"},
+{d:12,w:"renew",p:"리뉴",pos:"동사",m:"갱신하다",s:"리(다시) 뉴(새로) — 새로 만드는 '갱신'.",c:"renew the lease (임대차를 갱신하다)"},
+{d:12,w:"renewal",p:"리뉴얼",pos:"명사",m:"갱신",s:"리뉴얼(renewal)은 '갱신'.",c:"the renewal date (갱신일)"},
+{d:12,w:"enforce",p:"인포스",pos:"동사",m:"시행하다, 집행하다",s:"인(in)포스(force·힘) — 힘으로 밀어붙이는 '집행'.",c:"enforce the policy (정책을 시행하다)"},
+{d:12,w:"confidential",p:"컨피덴셜",pos:"형용사",m:"기밀의",s:"컨피던스(신뢰)가 필요한 '기밀의'.",c:"confidential information (기밀 정보)"},
+{d:12,w:"disclosure",p:"디스클로저",pos:"명사",m:"공개, 공시",s:"디스(닫힌 것을) 클로즈(열어) 보이는 '공개'.",c:"full disclosure (완전 공개)"},
+{d:12,w:"consent",p:"컨센트",pos:"명사",m:"동의",s:"컨(함께) 센트(느낌) — 마음이 같이 가는 '동의'.",c:"written consent (서면 동의)"},
+{d:12,w:"waiver",p:"웨이버",pos:"명사",m:"면제, 포기 (각서)",s:"웨이브(손 흔들어 보내기) = 권리를 '면제'.",c:"sign a waiver (면제 각서에 서명하다)"},
+{d:12,w:"bind",p:"바인드",pos:"동사",m:"구속하다, 묶다",s:"바인드(bind)는 '묶다' — 계약이 나를 '구속'.",c:"legally binding (법적 구속력이 있는)"},
+{d:12,w:"nullify",p:"널리파이",pos:"동사",m:"무효화하다",s:"널(null·없음)로 만드는 '무효화'.",c:"nullify the agreement (합의를 무효화하다)"},
+{d:12,w:"jurisdiction",p:"주리스딕션",pos:"명사",m:"관할권",s:"주리(법) 딕션(말)이 통하는 범위, '관할권'.",c:"within our jurisdiction (우리 관할 안에서)"},
+{d:12,w:"dispute",p:"디스퓻",pos:"명사",m:"분쟁",s:"디스(서로) 퓻(부딪힘) — 다투는 '분쟁'.",c:"resolve a dispute (분쟁을 해결하다)"},
+{d:13,w:"advertise",p:"애드버타이즈",pos:"동사",m:"광고하다",s:"애드(광고) 버타이즈(번쩍번쩍) — 눈에 띄게 '광고'.",c:"advertise a product (제품을 광고하다)"},
+{d:13,w:"advertisement",p:"애드버타이즈먼트",pos:"명사",m:"광고 (물)",s:"advertise + ment = 광고 그 자체, '광고물'.",c:"a full-page advertisement (전면 광고)"},
+{d:13,w:"brand",p:"브랜드",pos:"명사",m:"브랜드, 상표",s:"가슴에 새기는(brand) 이름, '브랜드'.",c:"a brand image (브랜드 이미지)"},
+{d:13,w:"slogan",p:"슬로건",pos:"명사",m:"표어, 슬로건",s:"슬로(천천히) 건(말) — 기억에 남는 한 줄 '표어'.",c:"a catchy slogan (귀에 붙는 표어)"},
+{d:13,w:"launch",p:"론치",pos:"동사",m:"출시하다, 시작하다",s:"배를 론치(진수)하듯 세상에 내놓는 '출시'.",c:"launch a new product (신제품을 출시하다)"},
+{d:13,w:"consumer",p:"컨슈머",pos:"명사",m:"소비자",s:"컨슘(consum·다 써버리는) 사람, '소비자'.",c:"consumer behavior (소비자 행동)"},
+{d:13,w:"retail",p:"리테일",pos:"명사",m:"소매",s:"리테일(retail)은 손님 한 명씩 파는 '소매'.",c:"retail prices (소매 가격)"},
+{d:13,w:"wholesale",p:"홀세일",pos:"명사",m:"도매",s:"홀(whole·통째) 세일 — 통째로 파는 '도매'.",c:"wholesale distribution (도매 유통)"},
+{d:13,w:"discount",p:"디스카운트",pos:"명사",m:"할인",s:"디스(깎아) 카운트(세는) = '할인'.",c:"a 20% discount (20% 할인)"},
+{d:13,w:"coupon",p:"쿠폰",pos:"명사",m:"쿠폰, 할인권",s:"쿠(coup·한 방) 폰 — 한 방에 깎아 주는 '쿠폰'.",c:"redeem a coupon (쿠폰을 사용하다)"},
+{d:13,w:"subscription",p:"섭스크립션",pos:"명사",m:"구독",s:"서브(아래) 스크립트(적어 두기) — 매달 적어 두는 '구독'.",c:"a monthly subscription (월 구독)"},
+{d:13,w:"loyalty",p:"로열티",pos:"명사",m:"충성도, 단골",s:"로열(왕실)처럼 한결같은 마음, '충성도'.",c:"a loyalty program (멤버십 제도)"},
+{d:13,w:"sponsor",p:"스폰서",pos:"명사",m:"후원자, 후원하다",s:"스폰(돈을 대는) 서 — 뒤에서 대 주는 '후원'.",c:"sponsor an event (행사를 후원하다)"},
+{d:13,w:"endorse",p:"인도스",pos:"동사",m:"보증하다, 추천하다",s:"인(in)도스(등에 써 주기) — 등에 사인해 주는 '보증'.",c:"endorse a product (제품을 보증하다)"},
+{d:13,w:"competitor",p:"컴페티터",pos:"명사",m:"경쟁사, 경쟁자",s:"컴페트(compet·겨루는) 상대, '경쟁자'.",c:"a major competitor (주요 경쟁사)"},
+{d:13,w:"competitive",p:"컴페티티브",pos:"형용사",m:"경쟁력 있는",s:"경쟁(competition)에서 살아남는 '경쟁력 있는'.",c:"competitive prices (경쟁력 있는 가격)"},
+{d:13,w:"outlet",p:"아울렛",pos:"명사",m:"판매점, 배출구",s:"아웃(out) 렛(내보내는 곳) — 물건이 나가는 '판매점'.",c:"a retail outlet (소매점)"},
+{d:13,w:"prospect",p:"프로스펙트",pos:"명사",m:"잠재 고객, 전망",s:"프로(앞) 스펙트(바라봄) — 앞으로 살 사람, '잠재 고객'.",c:"a potential prospect (잠재 고객)"},
+{d:13,w:"lead",p:"리드",pos:"명사",m:"영업 기회, 단서",s:"리드(lead)는 끌고 가는 실마리, '영업 기회'.",c:"generate leads (영업 기회를 만들다)"},
+{d:13,w:"quota",p:"쿼터",pos:"명사",m:"할당량, 목표량",s:"쿼터(quota)만큼 채워야 하는 '목표량'.",c:"meet the sales quota (판매 목표를 채우다)"},
+{d:13,w:"commission",p:"커미션",pos:"명사",m:"수수료, 판매 수당",s:"커(일을 맡긴) 미션(임무)의 대가, '수수료'.",c:"earn a commission (수수료를 받다)"},
+{d:13,w:"showcase",p:"쇼케이스",pos:"동사",m:"전시하다, 선보이다",s:"쇼(show) 케이스(진열장) — 진열장에 '선보이다'.",c:"showcase new products (신제품을 선보이다)"},
+{d:13,w:"exhibit",p:"이그지빗",pos:"동사",m:"전시하다",s:"이그(밖으로) 지빗(내놓기) = '전시'.",c:"exhibit at the fair (박람회에 전시하다)"},
+{d:13,w:"exhibition",p:"엑시비션",pos:"명사",m:"전시회",s:"exhibit의 명사형, '전시회'.",c:"an industry exhibition (산업 전시회)"},
+{d:13,w:"brochure",p:"브로셔",pos:"명사",m:"안내 책자, 브로슈어",s:"브로(펼치는) 셔 — 펼쳐 보는 '안내 책자'.",c:"a product brochure (제품 안내서)"},
+{d:13,w:"catalog",p:"카탈로그",pos:"명사",m:"카탈로그, 목록",s:"카탈로그(catalog)는 물건 목록 그 자체.",c:"order from the catalog (카탈로그에서 주문하다)"},
+{d:13,w:"premium",p:"프리미엄",pos:"명사",m:"프리미엄, 할증료",s:"프리(더) 미엄(얹음) — 더 얹는 '프리미엄'.",c:"a premium brand (프리미엄 브랜드)"},
+{d:13,w:"bundle",p:"번들",pos:"동사",m:"묶음 판매하다",s:"번들(bundle)은 한 묶음 — 끼워 파는 '묶음 판매'.",c:"bundle the services (서비스를 묶어 팔다)"},
+{d:13,w:"referral",p:"리퍼럴",pos:"명사",m:"소개, 추천",s:"리퍼(refer·넘겨 주는) 사람, '소개'.",c:"a customer referral (고객 소개)"},
+{d:13,w:"affiliate",p:"어필리에이트",pos:"명사",m:"제휴사, 계열사",s:"어(같이) 필리(자식처럼) — 한 가족이 된 '제휴사'.",c:"an affiliate company (계열사)"},
+{d:13,w:"publicity",p:"퍼블리시티",pos:"명사",m:"홍보, 평판",s:"퍼블릭(public)하게 알려지는 '홍보'.",c:"gain publicity (홍보 효과를 얻다)"},
+{d:13,w:"segment",p:"세그먼트",pos:"명사",m:"부분, 고객층",s:"세그먼트(segment)로 잘라 나눈 '고객층'.",c:"a market segment (시장 세분화)"},
+{d:13,w:"campaign",p:"캠페인",pos:"명사",m:"(홍보) 캠페인",s:"캠프(camp)에서 다 같이 벌이는 '캠페인'.",c:"a marketing campaign (마케팅 캠페인)"},
+{d:13,w:"target",p:"타깃",pos:"동사",m:"겨냥하다, 목표로 하다",s:"타깃(target)은 과녁 — 손님을 '겨냥하다'.",c:"target young customers (젊은 고객을 겨냥하다)"},
+{d:13,w:"market",p:"마킷",pos:"동사",m:"판매하다, 마케팅하다",s:"마켓(market)에 내놓는 '판매'.",c:"market a new line (신제품군을 판매하다)"},
+{d:13,w:"pitch",p:"피치",pos:"명사",m:"영업 제안, 세일즈 피치",s:"피치(pitch)를 던지듯 내미는 '영업 제안'.",c:"make a sales pitch (영업 제안을 하다)"},
+{d:14,w:"shipment",p:"십먼트",pos:"명사",m:"배송 (물품)",s:"십(ship·배)에 실어 보내는 '배송품'.",c:"track the shipment (배송을 추적하다)"},
+{d:14,w:"freight",p:"프레이트",pos:"명사",m:"화물, 운송료",s:"프레이트(freight)는 배에 실린 무거운 '화물'.",c:"freight charges (운송료)"},
+{d:14,w:"cargo",p:"카고",pos:"명사",m:"화물 (적재물)",s:"카(차)에 고(가득) 실은 '화물'.",c:"a cargo ship (화물선)"},
+{d:14,w:"warehouse",p:"웨어하우스",pos:"명사",m:"창고",s:"웨어(물건) 하우스(집) = '창고'.",c:"the central warehouse (중앙 창고)"},
+{d:14,w:"inventory",p:"인벤토리",pos:"명사",m:"재고 (목록)",s:"인(in)벤토리(목록) — 안에 있는 물건 목록, '재고'.",c:"take inventory (재고 조사하다)"},
+{d:14,w:"stock",p:"스톡",pos:"명사",m:"재고, 주식",s:"스톡(stock)은 쌓아 둔 것 — 물건이면 '재고'.",c:"out of stock (재고 없음)"},
+{d:14,w:"supplier",p:"서플라이어",pos:"명사",m:"공급업체",s:"서플라이(supply·공급)하는 사람, '공급업체'.",c:"a reliable supplier (믿을 만한 공급업체)"},
+{d:14,w:"vendor",p:"벤더",pos:"명사",m:"판매업체, 납품업자",s:"벤드(vend·팔아 넘기는) 사람, '납품업자'.",c:"an approved vendor (승인된 납품업체)"},
+{d:14,w:"procurement",p:"프로큐먼트",pos:"명사",m:"조달, 구매",s:"프로(미리) 큐(줄 서서) 얻는 '조달'.",c:"the procurement team (조달팀)"},
+{d:14,w:"dispatch",p:"디스패치",pos:"동사",m:"발송하다, 파견하다",s:"디스(밖으로) 패치(빠르게) — 급히 '발송'.",c:"dispatch the order (주문품을 발송하다)"},
+{d:14,w:"courier",p:"쿠리어",pos:"명사",m:"택배 기사, 특송",s:"쿠(빠르게) 리어(달리는) 사람, '특송 기사'.",c:"send it by courier (택배로 보내다)"},
+{d:14,w:"tracking",p:"트래킹",pos:"명사",m:"추적, 배송 조회",s:"트랙(track·길)을 따라가는 '추적'.",c:"a tracking number (운송장 번호)"},
+{d:14,w:"customs",p:"커스텀스",pos:"명사",m:"세관",s:"커스텀스(customs)는 국경에서 물건을 검사하는 '세관'.",c:"clear customs (세관을 통과하다)"},
+{d:14,w:"clearance",p:"클리어런스",pos:"명사",m:"통관, 허가",s:"클리어(막힌 것을 뚫는) = '통관'.",c:"customs clearance (세관 통관)"},
+{d:14,w:"import",p:"임포트",pos:"동사",m:"수입하다",s:"임(in·안으로)포트(항구) — 배로 들여오는 '수입'.",c:"import goods (상품을 수입하다)"},
+{d:14,w:"export",p:"엑스포트",pos:"동사",m:"수출하다",s:"엑스(ex·밖으로)포트(항구) — 배로 내보내는 '수출'.",c:"export to Europe (유럽으로 수출하다)"},
+{d:14,w:"distribution",p:"디스트리뷰션",pos:"명사",m:"유통, 배분",s:"디스(곳곳에) 트리뷰트(나눠 주기) = '유통'.",c:"a distribution center (물류 센터)"},
+{d:14,w:"logistics",p:"로지스틱스",pos:"명사",m:"물류",s:"로지(길) 스틱스(짐) — 길 위에서 움직이는 '물류'.",c:"logistics management (물류 관리)"},
+{d:14,w:"packaging",p:"패키징",pos:"명사",m:"포장",s:"패키지(package)로 싸는 '포장'.",c:"eco-friendly packaging (친환경 포장)"},
+{d:14,w:"defective",p:"디펙티브",pos:"형용사",m:"결함이 있는",s:"디(de·나쁜) 펙트(fact) — 흠이 있는 '결함'.",c:"a defective item (결함 상품)"},
+{d:14,w:"durable",p:"듀러블",pos:"형용사",m:"내구성 있는, 오래가는",s:"듀레이션(duration·오래감)이 강한 '내구성'.",c:"durable materials (내구성 있는 재료)"},
+{d:14,w:"assemble",p:"어셈블",pos:"동사",m:"조립하다, 모으다",s:"어(모아) 셈블(한데) = '조립'.",c:"assemble the parts (부품을 조립하다)"},
+{d:14,w:"assembly",p:"어셈블리",pos:"명사",m:"조립, 집회",s:"assemble의 명사형, '조립 (라인)'.",c:"the assembly line (조립 라인)"},
+{d:14,w:"manufacture",p:"매뉴팩처",pos:"동사",m:"제조하다",s:"매뉴(손으로) 팩트(fact·만들기) = '제조'.",c:"manufacture parts (부품을 제조하다)"},
+{d:14,w:"manufacturer",p:"매뉴팩처러",pos:"명사",m:"제조업체",s:"제조(manufacture)하는 회사, '제조업체'.",c:"the leading manufacturer (선도 제조업체)"},
+{d:14,w:"yield",p:"일드",pos:"동사",m:"산출하다, 양보하다",s:"일(일해서) 드(들어오는) 것 = '산출'.",c:"yield good results (좋은 성과를 내다)"},
+{d:14,w:"output",p:"아웃풋",pos:"명사",m:"생산량, 산출물",s:"아웃(out) 풋(나오는 것) = '생산량'.",c:"increase output (생산량을 늘리다)"},
+{d:14,w:"capacity",p:"커패시티",pos:"명사",m:"수용력, 생산 능력",s:"커패(cap·담는) 시티 — 담을 수 있는 '수용력'.",c:"production capacity (생산 능력)"},
+{d:14,w:"shortage",p:"숄티지",pos:"명사",m:"부족 (량)",s:"숄트(short·짧은) — 모자란 '부족'.",c:"a labor shortage (인력 부족)"},
+{d:14,w:"backlog",p:"백로그",pos:"명사",m:"밀린 일, 미처리 주문",s:"백(뒤에) 로그(쌓인 기록) — 밀린 '적체'.",c:"clear the backlog (밀린 주문을 처리하다)"},
+{d:14,w:"turnover",p:"턴오버",pos:"명사",m:"재고 회전, 이직률",s:"턴(돌아) 오버(넘어가는) — 사람이면 '이직률', 물건이면 '회전율'.",c:"a high turnover rate (높은 이직률)"},
+{d:14,w:"consignment",p:"컨사인먼트",pos:"명사",m:"위탁 (화물)",s:"컨사인(맡기는) 물건 = '위탁 화물'.",c:"a consignment of goods (위탁 화물)"},
+{d:15,w:"software",p:"소프트웨어",pos:"명사",m:"소프트웨어",s:"부드러운(soft) 옷(ware)처럼 유연하게 움직이는 프로그램.",c:"install the software (소프트웨어를 설치하다)"},
+{d:15,w:"hardware",p:"하드웨어",pos:"명사",m:"하드웨어",s:"딱딱한(hard) 장비(ware) = '하드웨어'.",c:"hardware upgrades (하드웨어 업그레이드)"},
+{d:15,w:"network",p:"네트워크",pos:"명사",m:"네트워크, 연결망",s:"네트(net·그물) 워크(일) — 그물처럼 이어진 '연결망'.",c:"a secure network (보안 네트워크)"},
+{d:15,w:"server",p:"서버",pos:"명사",m:"서버",s:"서브(serv·섬기는) 하는 컴퓨터, '서버'.",c:"the main server (메인 서버)"},
+{d:15,w:"database",p:"데이터베이스",pos:"명사",m:"데이터베이스",s:"데이터(data)의 본부(base) = '데이터베이스'.",c:"update the database (데이터베이스를 갱신하다)"},
+{d:15,w:"install",p:"인스톨",pos:"동사",m:"설치하다",s:"인(in) 스톨(자리에 넣기) = '설치'.",c:"install the program (프로그램을 설치하다)"},
+{d:15,w:"upgrade",p:"업그레이드",pos:"동사",m:"업그레이드하다",s:"업(위) 그레이드(등급) — 등급을 올리는 '업그레이드'.",c:"upgrade the system (시스템을 업그레이드하다)"},
+{d:15,w:"interface",p:"인터페이스",pos:"명사",m:"인터페이스, 접속부",s:"인터(사이) 페이스(얼굴) — 사람과 기계 사이 '접속부'.",c:"a user-friendly interface (쓰기 쉬운 인터페이스)"},
+{d:15,w:"compatible",p:"컴패티블",pos:"형용사",m:"호환되는",s:"컴패트(함께 어울리는) — 서로 맞는 '호환'.",c:"compatible with most devices (대부분 기기와 호환되는)"},
+{d:15,w:"malfunction",p:"맬펑션",pos:"명사",m:"고장, 오작동",s:"맬(나쁜) 펑션(작동) = '오작동'.",c:"a malfunction in the printer (프린터 고장)"},
+{d:15,w:"troubleshoot",p:"트러블슈트",pos:"동사",m:"문제를 해결하다, 점검하다",s:"트러블(문제) 슈트(쏴서 잡기) = '문제 해결'.",c:"troubleshoot the issue (문제를 해결하다)"},
+{d:15,w:"encrypt",p:"인크립트",pos:"동사",m:"암호화하다",s:"인(in)크립트(비밀 문자) — 안에 숨기는 '암호화'.",c:"encrypt the files (파일을 암호화하다)"},
+{d:15,w:"firewall",p:"파이어월",pos:"명사",m:"방화벽",s:"불(fire)을 막는 벽(wall) = '방화벽'.",c:"behind the firewall (방화벽 안쪽에)"},
+{d:15,w:"device",p:"디바이스",pos:"명사",m:"기기, 장치",s:"디바이스(device)는 손에 쥔 '기기'.",c:"a mobile device (모바일 기기)"},
+{d:15,w:"wireless",p:"와이어리스",pos:"형용사",m:"무선의",s:"와이어(선)가 리스(less·없는) = '무선'.",c:"a wireless connection (무선 연결)"},
+{d:15,w:"diagnose",p:"다이아그노즈",pos:"동사",m:"진단하다",s:"다이아(가로질러) 그노즈(알아내기) = '진단'.",c:"diagnose the problem (문제를 진단하다)"},
+{d:15,w:"calibrate",p:"캘리브레이트",pos:"동사",m:"조정하다, 보정하다",s:"캘리(눈금) 브레이트(맞추기) = '보정'.",c:"calibrate the equipment (장비를 보정하다)"},
+{d:15,w:"obsolete",p:"옵설리트",pos:"형용사",m:"구식의, 더 이상 쓰이지 않는",s:"옵(더 이상) 설리트(쓸모없는) = '구식'.",c:"obsolete technology (구식 기술)"},
+{d:15,w:"outage",p:"아웃티지",pos:"명사",m:"(전력·통신) 중단",s:"아웃(out) + 티지 — 불이 꺼진 '중단'.",c:"a power outage (정전)"},
+{d:15,w:"latency",p:"레이턴시",pos:"명사",m:"지연 (시간)",s:"레이(late·늦은) 턴시 — 늦게 도착하는 '지연'.",c:"reduce network latency (네트워크 지연을 줄이다)"},
+{d:15,w:"cloud",p:"클라우드",pos:"명사",m:"클라우드 (서비스)",s:"구름(cloud) 위에 저장하는 '클라우드'.",c:"cloud storage (클라우드 저장소)"},
+{d:15,w:"prototype",p:"프로토타입",pos:"명사",m:"시제품, 원형",s:"프로토(처음) 타입(모형) = '시제품'.",c:"test the prototype (시제품을 시험하다)"},
+{d:15,w:"automate",p:"오토메이트",pos:"동사",m:"자동화하다",s:"오토(auto·스스로) — 손 안 대고 '자동화'.",c:"automate the process (과정을 자동화하다)"},
+{d:15,w:"algorithm",p:"알고리즘",pos:"명사",m:"알고리즘",s:"알(알아서) 고(고르는) 리즘(규칙) = '알고리즘'.",c:"a search algorithm (검색 알고리즘)"},
+{d:15,w:"platform",p:"플랫폼",pos:"명사",m:"플랫폼, 기반",s:"플랫(평평한) 폼(판) — 올려놓는 '기반'.",c:"an online platform (온라인 플랫폼)"},
+{d:15,w:"glitch",p:"글리치",pos:"명사",m:"일시적 오류",s:"글리(미끄러지는) 치 — 잠깐 삐끗하는 '오류'.",c:"a minor glitch (사소한 오류)"},
+{d:15,w:"specification",p:"스페시피케이션",pos:"명사",m:"사양, 명세서",s:"스펙(spec)을 시피(자세히) 적은 '사양서'.",c:"technical specifications (기술 사양)"},
+{d:15,w:"backup",p:"백업",pos:"명사",m:"백업, 예비",s:"뒤(back)에 세워 두는 예비, '백업'.",c:"make a backup (백업하다)"},
+{d:15,w:"download",p:"다운로드",pos:"동사",m:"내려받다",s:"다운(아래로) 로드(실어 오기) = '내려받기'.",c:"download the file (파일을 내려받다)"},
+{d:15,w:"upload",p:"업로드",pos:"동사",m:"올리다, 업로드하다",s:"업(위로) 로드(실어 보내기) = '업로드'.",c:"upload the data (데이터를 올리다)"},
+{d:16,w:"agenda",p:"어젠다",pos:"명사",m:"안건, 의제",s:"회의 책상 위에 올려놓은 '안건' 목록.",c:"on the agenda (안건에 오른)"},
+{d:16,w:"minutes",p:"미닛츠",pos:"명사",m:"회의록",s:"회의 시간(minutes)을 적어 남긴 '회의록'.",c:"take the minutes (회의록을 작성하다)"},
+{d:16,w:"attendee",p:"어텐디",pos:"명사",m:"참석자",s:"attend(참석)하는 사람, '참석자'.",c:"all attendees (모든 참석자)"},
+{d:16,w:"conference",p:"컨퍼런스",pos:"명사",m:"회의, 학회",s:"컨퍼(함께 모여) 런스 — 큰 '회의'.",c:"a video conference (화상 회의)"},
+{d:16,w:"convention",p:"컨벤션",pos:"명사",m:"대회, 관례",s:"컨벤(모이는) 션 — 사람이 모이는 '대회'.",c:"a trade convention (무역 박람회)"},
+{d:16,w:"seminar",p:"세미나",pos:"명사",m:"세미나",s:"세미(절반) 나(나누는) — 반나절 배우는 '세미나'.",c:"attend a seminar (세미나에 참석하다)"},
+{d:16,w:"workshop",p:"워크숍",pos:"명사",m:"워크숍, 실습",s:"워크(일하며) 숍(배우는 곳) = '워크숍'.",c:"a two-day workshop (이틀 워크숍)"},
+{d:16,w:"session",p:"세션",pos:"명사",m:"회의 (한 차례), 세션",s:"앉아서(session) 한 번에 끝내는 '한 차례 회의'.",c:"the morning session (오전 세션)"},
+{d:16,w:"presentation",p:"프레젠테이션",pos:"명사",m:"발표",s:"프레젠트(내미는) + ation = '발표'.",c:"give a presentation (발표하다)"},
+{d:16,w:"briefing",p:"브리핑",pos:"명사",m:"간단 보고, 브리핑",s:"브리프(brief·짧은)로 끝내는 '간단 보고'.",c:"a press briefing (기자 브리핑)"},
+{d:16,w:"adjourn",p:"어전",pos:"동사",m:"휴회하다, 연기하다",s:"어(잠시) 전(자리를 옮기는) — 회의를 '휴회'.",c:"adjourn the meeting (회의를 휴회하다)"},
+{d:16,w:"punctual",p:"펑추얼",pos:"형용사",m:"시간을 지키는",s:"펑크(punct·점)에 딱 맞춰 오는 '시간 엄수'.",c:"be punctual for meetings (회의에 시간을 지키다)"},
+{d:16,w:"tentative",p:"텐터티브",pos:"형용사",m:"잠정적인, 임시의",s:"텐트(tent)처럼 일단 쳐 놓은 '잠정적'.",c:"a tentative schedule (잠정 일정)"},
+{d:16,w:"reschedule",p:"리스케줄",pos:"동사",m:"일정을 조정하다",s:"일정(schedule)을 다시(re) 잡는 '일정 변경'.",c:"reschedule the meeting (회의 일정을 변경하다)"},
+{d:16,w:"overlap",p:"오버랩",pos:"동사",m:"겹치다",s:"오버(넘어) 랩(겹침) = '겹치다'.",c:"overlap with another event (다른 행사와 겹치다)"},
+{d:16,w:"coordinate",p:"코디네이트",pos:"동사",m:"조정하다, 조율하다",s:"코디(코디네이터)처럼 맞춰 주는 '조율'.",c:"coordinate the schedule (일정을 조율하다)"},
+{d:16,w:"remind",p:"리마인드",pos:"동사",m:"상기시키다",s:"다시(re) 마인드(마음)에 올리는 '상기'.",c:"remind the participants (참가자에게 알리다)"},
+{d:16,w:"reminder",p:"리마인더",pos:"명사",m:"알림, 상기 메시지",s:"remind해 주는 알림 한 줄, '리마인더'.",c:"send a reminder (알림을 보내다)"},
+{d:16,w:"extension",p:"익스텐션",pos:"명사",m:"연장, 내선",s:"익스텐드(늘리는) + ion = '연장'.",c:"a deadline extension (마감 연장)"},
+{d:16,w:"duration",p:"듀레이션",pos:"명사",m:"기간, 지속 시간",s:"듀어(오래) + tion = '기간'.",c:"the duration of the trip (여행 기간)"},
+{d:16,w:"venue",p:"베뉴",pos:"명사",m:"장소, 행사장",s:"베뉴(venue)는 행사가 열리는 '장소'.",c:"change the venue (장소를 바꾸다)"},
+{d:16,w:"itinerary",p:"아이티너러리",pos:"명사",m:"여행 일정표",s:"아이(내) 티너러리(다니는 길) = '일정표'.",c:"a detailed itinerary (자세한 일정표)"},
+{d:16,w:"biannual",p:"바이애뉴얼",pos:"형용사",m:"연 2회의",s:"바이(둘) 애뉴얼(매년) — 1년에 두 번.",c:"a biannual report (연 2회 보고서)"},
+{d:16,w:"simultaneous",p:"사이멀테이너스",pos:"형용사",m:"동시의",s:"사이멀(같은 시간) — '동시에' 일어나는.",c:"simultaneous translation (동시 통역)"},
+{d:16,w:"consecutive",p:"컨세큐티브",pos:"형용사",m:"연속의",s:"컨(이어) 세큐티브(따라오는) = '연속'.",c:"three consecutive days (3일 연속)"},
+{d:16,w:"quarterly",p:"쿼털리",pos:"형용사",m:"분기별의",s:"쿼터(4분의 1)마다 오는 '분기별'.",c:"a quarterly review (분기 검토)"},
+{d:16,w:"monthly",p:"먼슬리",pos:"형용사",m:"매월의",s:"먼스(month)마다 = '매월'.",c:"a monthly report (월간 보고서)"},
+{d:16,w:"slot",p:"슬롯",pos:"명사",m:"시간대, 자리",s:"동전 넣는 슬롯처럼 딱 정해진 '시간대'.",c:"a time slot (시간대)"},
+{d:16,w:"finalize",p:"파이널라이즈",pos:"동사",m:"최종 확정하다",s:"파이널(final)로 만드는 '최종 확정'.",c:"finalize the schedule (일정을 최종 확정하다)"},
+{d:16,w:"timetable",p:"타임테이블",pos:"명사",m:"시간표",s:"시간(time)을 표(table)로 짠 '시간표'.",c:"check the timetable (시간표를 확인하다)"},
+{d:16,w:"cutoff",p:"컷오프",pos:"명사",m:"마감, 기준선",s:"컷(cut)으로 오프(끊는) '마감선'.",c:"the cutoff date (마감일)"},
+{d:16,w:"recess",p:"리세스",pos:"명사",m:"휴회, 쉬는 시간",s:"리(다시) 세스(앉는) — 잠깐 쉬는 '휴회'.",c:"take a short recess (잠깐 휴회하다)"},
+{d:17,w:"maintenance",p:"메인터넌스",pos:"명사",m:"유지 보수",s:"메인(main)을 테넌스(계속 지키는) = '유지 보수'.",c:"routine maintenance (정기 점검)"},
+{d:17,w:"repair",p:"리페어",pos:"동사",m:"수리하다",s:"리(다시) 페어(제대로) 만드는 '수리'.",c:"repair the elevator (엘리베이터를 수리하다)"},
+{d:17,w:"refurbish",p:"리퍼비시",pos:"동사",m:"새로 단장하다",s:"리(다시) 퍼비시(반짝이게) = '단장'.",c:"refurbish the lobby (로비를 새로 단장하다)"},
+{d:17,w:"plumbing",p:"플러밍",pos:"명사",m:"배관 (설비)",s:"플럼(plumb·납으로 잇는) 배관이 '플러밍'.",c:"a plumbing problem (배관 문제)"},
+{d:17,w:"ventilation",p:"벤틸레이션",pos:"명사",m:"환기 (설비)",s:"벤트(vent·바람 구멍) = '환기'.",c:"improve ventilation (환기를 개선하다)"},
+{d:17,w:"heating",p:"히팅",pos:"명사",m:"난방",s:"히트(heat·열)하는 '난방'.",c:"the heating system (난방 시스템)"},
+{d:17,w:"elevator",p:"엘리베이터",pos:"명사",m:"엘리베이터",s:"엘리베이트(올리는) 장치 = '엘리베이터'.",c:"the elevator is out of service (엘리베이터가 운행 중지다)"},
+{d:17,w:"lobby",p:"로비",pos:"명사",m:"로비, 현관",s:"들어와 머무는 '로비'.",c:"the hotel lobby (호텔 로비)"},
+{d:17,w:"corridor",p:"코리도",pos:"명사",m:"복도",s:"코리(달리는) 도(길) = '복도'.",c:"a narrow corridor (좁은 복도)"},
+{d:17,w:"premises",p:"프레미시즈",pos:"명사",m:"구내, 건물 (부지)",s:"프레미스(premise)의 복수 — 건물 전체 '구내'.",c:"on the premises (구내에)"},
+{d:17,w:"lease",p:"리스",pos:"명사",m:"임대차 (계약)",s:"리스(lease)는 빌려 쓰는 기간 '임대차'.",c:"sign a lease (임대차 계약을 하다)"},
+{d:17,w:"tenant",p:"테넌트",pos:"명사",m:"세입자, 임차인",s:"테넌트(tenant)는 들어와 사는 '세입자'.",c:"the current tenant (현 세입자)"},
+{d:17,w:"landlord",p:"랜드로드",pos:"명사",m:"건물주, 임대인",s:"땅(land)의 주인(lord) = '건물주'.",c:"contact the landlord (건물주에게 연락하다)"},
+{d:17,w:"utility",p:"유틸리티",pos:"명사",m:"공공요금, 설비",s:"유틸(쓸모) — 전기·수도 같은 '공공요금'.",c:"utility bills (공과금)"},
+{d:17,w:"sanitation",p:"새니테이션",pos:"명사",m:"위생",s:"새니(sane·깨끗한) = '위생'.",c:"strict sanitation rules (엄격한 위생 규칙)"},
+{d:17,w:"hazard",p:"해저드",pos:"명사",m:"위험 요소",s:"해(害) 자드 — 숨어 있는 '위험'.",c:"a safety hazard (안전 위험 요소)"},
+{d:17,w:"hazardous",p:"해저더스",pos:"형용사",m:"위험한",s:"hazard + ous = '위험한'.",c:"hazardous materials (위험 물질)"},
+{d:17,w:"precaution",p:"프리코션",pos:"명사",m:"예방 조치",s:"프리(미리) 코션(조심) = '예방 조치'.",c:"take precautions (예방 조치를 취하다)"},
+{d:17,w:"evacuate",p:"이밸류에이트",pos:"동사",m:"대피시키다",s:"이(e·밖으로) 밸류(빈 곳) — 사람을 빼는 '대피'.",c:"evacuate the building (건물에서 대피하다)"},
+{d:17,w:"emergency",p:"이머전시",pos:"명사",m:"비상사태",s:"이머지(갑자기 나타나는) = '비상사태'.",c:"an emergency exit (비상구)"},
+{d:17,w:"caution",p:"코션",pos:"명사",m:"주의, 조심",s:"코션(caution) 표지판이 말하는 '주의'.",c:"proceed with caution (주의해서 진행하다)"},
+{d:17,w:"prohibit",p:"프로히빗",pos:"동사",m:"금지하다",s:"프로(앞을) 히빗(막는) = '금지'.",c:"prohibit smoking (흡연을 금지하다)"},
+{d:17,w:"permit",p:"퍼밋",pos:"동사",m:"허가하다",s:"퍼(통과) 밋(만나도 되는) = '허가'.",c:"permit entry (입장을 허가하다)"},
+{d:17,w:"restrict",p:"리스크릭트",pos:"동사",m:"제한하다",s:"리(다시) 스트릭트(strict·엄격) = '제한'.",c:"restrict access (접근을 제한하다)"},
+{d:17,w:"safety",p:"세이프티",pos:"명사",m:"안전",s:"세이프(safe) + ty = '안전'.",c:"safety equipment (안전 장비)"},
+{d:17,w:"guideline",p:"가이드라인",pos:"명사",m:"지침",s:"가이드(안내) 라인(선) = '지침'.",c:"follow the guidelines (지침을 따르다)"},
+{d:17,w:"protection",p:"프로텍션",pos:"명사",m:"보호",s:"프로텍트(protect) + ion = '보호'.",c:"protective equipment (보호 장비)"},
+{d:17,w:"extinguisher",p:"익스팅귀셔",pos:"명사",m:"소화기",s:"익스팅귀시(끄는) 장치 = '소화기'.",c:"a fire extinguisher (소화기)"},
+{d:18,w:"stationery",p:"스테이셔너리",pos:"명사",m:"문구류",s:"스테이션(자리)에 두는 종이·펜, '문구류'.",c:"office stationery (사무용 문구)"},
+{d:18,w:"envelope",p:"엔벨로프",pos:"명사",m:"봉투",s:"엔(안에) 벨로프(감싸는) = '봉투'.",c:"seal the envelope (봉투를 봉하다)"},
+{d:18,w:"folder",p:"폴더",pos:"명사",m:"서류철, 폴더",s:"종이를 폴드(fold·접어) 넣는 '서류철'.",c:"a blue folder (파란 서류철)"},
+{d:18,w:"binder",p:"바인더",pos:"명사",m:"바인더, 서류철",s:"바인드(bind·묶는) 도구 = '바인더'.",c:"a three-ring binder (3공 바인더)"},
+{d:18,w:"duplicate",p:"듀플리케이트",pos:"명사",m:"사본, 복제",s:"듀(둘) 플리케이트(겹친) = '사본'.",c:"make a duplicate (사본을 만들다)"},
+{d:18,w:"draft",p:"드래프트",pos:"명사",m:"초안",s:"드래프트(draft)는 밑그림 같은 '초안'.",c:"a rough draft (대략의 초안)"},
+{d:18,w:"revise",p:"리바이즈",pos:"동사",m:"수정하다",s:"리(다시) 바이즈(보며 고치기) = '수정'.",c:"revise the document (문서를 수정하다)"},
+{d:18,w:"revision",p:"리비전",pos:"명사",m:"수정 (본)",s:"revise + ion = '수정본'.",c:"the second revision (두 번째 수정본)"},
+{d:18,w:"edit",p:"에디트",pos:"동사",m:"편집하다",s:"에디트(edit)는 잘라 다듬는 '편집'.",c:"edit the article (기사를 편집하다)"},
+{d:18,w:"proofread",p:"프루프리드",pos:"동사",m:"교정하다",s:"프루프(증거)를 리드(읽어) 확인하는 '교정'.",c:"proofread the proposal (제안서를 교정하다)"},
+{d:18,w:"summarize",p:"서머라이즈",pos:"동사",m:"요약하다",s:"서머리(summary)로 만드는 '요약'.",c:"summarize the report (보고서를 요약하다)"},
+{d:18,w:"summary",p:"서머리",pos:"명사",m:"요약",s:"서머리(summary)는 한 장 '요약'.",c:"a brief summary (간단한 요약)"},
+{d:18,w:"archive",p:"아카이브",pos:"동사",m:"보관하다",s:"아카이브(archive)에 넣어 '보관'.",c:"archive the records (기록을 보관하다)"},
+{d:18,w:"document",p:"도큐먼트",pos:"명사",m:"문서",s:"도큐(document)는 기록한 '문서'.",c:"a legal document (법적 문서)"},
+{d:18,w:"memo",p:"메모",pos:"명사",m:"메모, 사내 통신문",s:"메모(memo) 한 장이 곧 '사내 공지'.",c:"circulate a memo (메모를 돌리다)"},
+{d:18,w:"correspondence",p:"코레스폰던스",pos:"명사",m:"서신 왕래, 통신",s:"코(함께) 레스폰드(주고받는) = '서신 왕래'.",c:"business correspondence (업무 서신)"},
+{d:18,w:"inquiry",p:"인콰이어리",pos:"명사",m:"문의",s:"인콰이어(inquire·물어보는) = '문의'.",c:"respond to an inquiry (문의에 답하다)"},
+{d:18,w:"reply",p:"리플라이",pos:"동사",m:"답장하다",s:"리(다시) 플라이(날아가는) 답장, '회신'.",c:"reply to the email (이메일에 회신하다)"},
+{d:18,w:"acknowledge",p:"액날리지",pos:"동사",m:"확인하다, 인정하다",s:"액(받아) 날리지(알아차림) = '접수 확인'.",c:"acknowledge receipt (수령을 확인하다)"},
+{d:18,w:"forward",p:"포워드",pos:"동사",m:"전달하다",s:"포(앞으로) 워드(보내기) = '전달'.",c:"forward the message (메시지를 전달하다)"},
+{d:18,w:"enclose",p:"인클로즈",pos:"동사",m:"동봉하다",s:"인(in) 클로즈(닫아 넣기) = '동봉'.",c:"enclose a copy (사본을 동봉하다)"},
+{d:18,w:"retain",p:"리테인",pos:"동사",m:"보유하다, 유지하다",s:"리(계속) 테인(붙잡는) = '보유'.",c:"retain the records (기록을 보관하다)"},
+{d:18,w:"discard",p:"디스카드",pos:"동사",m:"버리다",s:"디스(dis) 카드(카드를 버리듯) = '폐기'.",c:"discard old files (오래된 파일을 버리다)"},
+{d:18,w:"organize",p:"오거나이즈",pos:"동사",m:"정리하다",s:"오거(오거든) 나이즈(나이스하게) = '정리'.",c:"organize the files (파일을 정리하다)"},
+{d:18,w:"consistent",p:"컨시스턴트",pos:"형용사",m:"일관된",s:"컨(같이) 시스턴트(서 있는) = '일관된'.",c:"consistent quality (일관된 품질)"},
+{d:18,w:"meticulous",p:"머티큘러스",pos:"형용사",m:"꼼꼼한",s:"머리카락 한 올(메티큘러스)까지 보는 '꼼꼼함'.",c:"meticulous attention to detail (세심한 주의)"},
+{d:18,w:"precise",p:"프리사이스",pos:"형용사",m:"정확한",s:"프리(미리) 사이스(사이즈)까지 재는 '정확'.",c:"precise figures (정확한 수치)"},
+{d:18,w:"prompt",p:"프롬프트",pos:"형용사",m:"신속한",s:"프롬프트(prompt)는 바로바로, '신속한'.",c:"a prompt reply (신속한 회신)"},
+{d:18,w:"timely",p:"타임리",pos:"형용사",m:"시기적절한",s:"타임(time)에 맞춘 '시기적절한'.",c:"timely delivery (적시 배송)"},
+{d:18,w:"routine",p:"루틴",pos:"명사",m:"일과, 정해진 절차",s:"루틴(routine)은 매일 반복되는 '일과'.",c:"a daily routine (매일의 일과)"},
+{d:18,w:"procedure",p:"프로시저",pos:"명사",m:"절차",s:"프로(앞으로) 시저(가야 할 순서) = '절차'.",c:"follow the procedure (절차를 따르다)"},
+{d:18,w:"protocol",p:"프로토콜",pos:"명사",m:"규약, 절차",s:"프로토(정해진) 콜(부르는 방법) = '규약'.",c:"safety protocol (안전 규약)"}
 ];
 </script>
 <script>
@@ -922,7 +1243,103 @@ var GRAMMAR = [
  tip:"better(비교급)를 꾸미는 자리 → 부사 <b>significantly</b>. 비교급 앞에는 -ly 부사가 와요."},
 {tag:"전치사 to + 동명사",q:"We look forward to ___ from you soon.",
  opts:["hear","hearing","heard","hears"],a:1,
- tip:"look forward to의 to는 전치사! 전치사 뒤에는 동명사 → <b>hearing</b>. 통째로 외우면 3초."}
+ tip:"look forward to의 to는 전치사! 전치사 뒤에는 동명사 → <b>hearing</b>. 통째로 외우면 3초."},
+{tag:"the + [ ] + of = 명사",q:"The ___ of the new policy surprised everyone.",opts:["announce","announcement","announced","announcing"],a:1,
+ tip:"the와 of 사이 = 명사 자리. <b>announcement</b>. -ment는 명사 꼬리표! 동사 announce를 명사로 쓰려면 이 옷을 입혀야 해요."},
+{tag:"[ ] + 명사 = 형용사",q:"All staff must wear ___ clothing in the lab.",opts:["protect","protective","protection","protectively"],a:1,
+ tip:"clothing(명사) 앞은 꾸미는 말 → <b>protective</b>. protection은 명사, -ly는 부사라 명사를 못 꾸며요."},
+{tag:"동사 + [ ] = 부사",q:"The manager spoke ___ about the results.",opts:["confident","confidence","confidently","confide"],a:2,
+ tip:"spoke(동사)를 꾸미는 자리 → 부사 <b>confidently</b>. 동사 뒤에 홀로 남은 빈칸은 일단 -ly를 의심!"},
+{tag:"the + [ ] + of = 명사",q:"We need to improve the ___ of our service.",opts:["efficient","efficiency","efficiently","efficiencies"],a:1,
+ tip:"the + [ ] + of → 명사 <b>efficiency</b>. -cy로 끝나면 명사예요. (efficiencies도 명사지만 '서비스의 효율'은 단수)"},
+{tag:"a + [ ] + 명사 = 형용사",q:"The company reported a ___ increase in sales.",opts:["signify","significance","significant","significantly"],a:2,
+ tip:"a + [ ] + increase(명사) → 형용사 <b>significant</b>. -ance는 명사, -ly는 부사라 자리가 안 맞아요."},
+{tag:"동사 + [ ] = 부사",q:"Please read the instructions ___ before starting.",opts:["care","careful","carefully","carefulness"],a:2,
+ tip:"read(동사)를 꾸미는 자리 → <b>carefully</b>. '동사를 꾸미면 -ly' 하나만 기억하면 3초."},
+{tag:"[ ] + p.p. + 명사",q:"The ___ designed website attracted many users.",opts:["profession","professional","professionally","professionalism"],a:2,
+ tip:"designed(p.p.)를 꾸미는 자리 → 부사 <b>professionally</b>. '부사 + p.p. + 명사'는 토익 단골 세트예요."},
+{tag:"[ ] + to + 명사 = 명사",q:"Their ___ to detail is remarkable.",opts:["attend","attention","attentive","attentively"],a:1,
+ tip:"Their + [ ] + to detail → 명사 <b>attention</b>. 'attention to detail(세심함)'은 통째로 외워 두세요."},
+{tag:"The number of + 복수 = 단수",q:"The number of applicants ___ increasing every year.",opts:["are","is","were","have"],a:1,
+ tip:"주어는 <b>The number</b>(단수)! of applicants는 덧붙임. 그래서 is. 'a number of(많은)'와 헷갈리지 마세요."},
+{tag:"neither A nor B = B에 맞춤",q:"Neither the manager nor the employees ___ available.",opts:["is","was","were","has"],a:2,
+ tip:"nor 뒤 <b>employees</b>(복수)에 동사를 맞춰 were. '가까운 주어를 따라간다'가 3초 공식!"},
+{tag:"A list of + 복수 = 단수",q:"A list of approved vendors ___ on the website.",opts:["are","is","have","were"],a:1,
+ tip:"주어는 <b>A list</b>(단수). of 이하를 다 지워도 문장이 서요 → is."},
+{tag:"Each + 단수명사 = 단수동사",q:"Each department ___ its own budget.",opts:["have","has","are having","were"],a:1,
+ tip:"Each(각각)는 언제나 단수 취급 → <b>has</b>. each·every·either 뒤는 무조건 단수!"},
+{tag:"주어 + 수식어 + [동사]",q:"The equipment in the labs ___ regularly.",opts:["are inspected","is inspected","inspect","have inspected"],a:1,
+ tip:"주어는 <b>The equipment</b>(단수·불가산). in the labs는 꾸밈말이에요. 장비는 '점검되는' 대상 → is inspected."},
+{tag:"시간·거리 = 단수 취급",q:"Ten minutes ___ enough time to finish the form.",opts:["are","is","were","have"],a:1,
+ tip:"Ten minutes를 '하나의 덩어리'로 봐서 단수 → <b>is</b>. 돈·시간·거리는 한 묶음!"},
+{tag:"과거 + by = 과거 수동",q:"The report ___ by the end of last week.",opts:["submitted","was submitted","has submitted","submitting"],a:1,
+ tip:"last week = 과거, 보고서는 '제출되는' 대상 → <b>was submitted</b>. 주어가 당하는 쪽이면 be + p.p."},
+{tag:"since + 과거 = 현재완료",q:"Ms. Park ___ for the Seoul office since 2019.",opts:["works","has worked","worked","is working"],a:1,
+ tip:"since 2019(과거 시작점) → 지금까지 이어짐, <b>has worked</b>. since를 보면 has/have를 먼저 찾으세요."},
+{tag:"미래 + 수동 = will be p.p.",q:"The new system ___ next month.",opts:["installs","will be installed","will install","installing"],a:1,
+ tip:"next month = 미래, 시스템은 '설치되는' 대상 → <b>will be installed</b>. will + be + p.p. 세트!"},
+{tag:"과거보다 더 과거 = had p.p.",q:"By the time the guests arrived, the room ___.",opts:["was cleaned","had been cleaned","has been cleaned","is cleaned"],a:1,
+ tip:"손님이 온 것(arrived)보다 청소가 먼저 → 과거의 과거 <b>had been cleaned</b>. By the time이 신호!"},
+{tag:"조동사 + be + p.p.",q:"All invoices ___ before the end of the month.",opts:["must submit","must be submitted","must be submitting","submitting"],a:1,
+ tip:"청구서는 '제출되는' 대상 → <b>must be submitted</b>. 조동사 뒤 수동은 must be + p.p."},
+{tag:"과거 시점 = 과거동사",q:"The shipment ___ yesterday afternoon.",opts:["arrives","arrived","has arrived","arriving"],a:1,
+ tip:"yesterday afternoon = 콕 집은 과거 → <b>arrived</b>. has arrived는 '지금까지'라 yesterday와 못 써요."},
+{tag:"for + 기간 = 현재완료진행",q:"Our team ___ on the project for three months.",opts:["is working","has been working","works","worked"],a:1,
+ tip:"for three months(지금까지 계속) → <b>has been working</b>. 지금도 하고 있으면 완료진행!"},
+{tag:"at the moment = 현재진행 수동",q:"The meeting room ___ at the moment.",opts:["is being cleaned","is cleaning","cleans","has cleaned"],a:0,
+ tip:"at the moment = 지금 진행 중, 회의실은 '청소되는' 중 → <b>is being cleaned</b>."},
+{tag:"decide to + 동사원형",q:"The company decided ___ its headquarters.",opts:["relocating","to relocate","relocate","relocated"],a:1,
+ tip:"decide는 to부정사를 데려가는 동사 → <b>to relocate</b>. decide/plan/hope/agree + to!"},
+{tag:"분사구문 = , + -ing",q:"___ the report, she emailed it to the client.",opts:["Finish","Finished","Finishing","To finishing"],a:2,
+ tip:"주어 she가 '끝내면서' 동시에 → <b>Finishing</b>. 콤마 앞에서 주어 없이 -ing로 시작하면 분사구문."},
+{tag:"have + 목적어 + p.p.",q:"The manager had the documents ___ by Friday.",opts:["revise","revised","revising","to revise"],a:1,
+ tip:"서류는 '수정되는' 대상 → have + 목적어 + p.p. = <b>revised</b>. '남에게 시키다'의 have!"},
+{tag:"be encouraged to + 동사원형",q:"Employees are encouraged ___ training programs.",opts:["attend","to attend","attending","attended"],a:1,
+ tip:"be encouraged to = …하도록 권장되다 → <b>to attend</b>. 수동 뒤에도 to부정사는 그대로!"},
+{tag:"[ ] + 명사 = 형용사",q:"The ___ application will not be considered.",opts:["incomplete","incompletely","incompletion","incompleting"],a:0,
+ tip:"application(명사) 앞 → 형용사 <b>incomplete</b>(미완성의). -ly는 부사라 명사 못 꾸며요."},
+{tag:"appreciate + 동명사",q:"We appreciate your ___ our proposal.",opts:["consider","considering","considered","to consider"],a:1,
+ tip:"appreciate는 동명사를 데려가요 → <b>considering</b>. appreciate/enjoy/avoid/mind + -ing!"},
+{tag:"avoid + 동명사",q:"Please avoid ___ personal calls during work hours.",opts:["make","to make","making","made"],a:2,
+ tip:"avoid 뒤는 동명사 → <b>making</b>. '피하는' 건 이미 그 일이 있는 상황이니까 -ing."},
+{tag:"전치사 + 명사 (양보)",q:"___ the low price, the product sold poorly.",opts:["Despite","Although","Because","However"],a:0,
+ tip:"뒤가 the low price(명사 덩어리) → 모자 팀 <b>Despite</b>. Although는 주어+동사가 와야 해요."},
+{tag:"접속사 + 주어·동사 (양보)",q:"The proposal was rejected ___ it met all the requirements.",opts:["despite","even though","because of","due to"],a:1,
+ tip:"뒤에 it met(주어+동사) → 연결고리 팀 <b>even though</b>. despite·because of·due to는 명사만!"},
+{tag:"세미콜론 뒤 = 접속부사",q:"Sales rose 10 percent; ___, costs increased.",opts:["therefore","however","moreover","because"],a:1,
+ tip:"오르는데 비용도 늘었다 = 반대 흐름 → <b>however</b>. 세미콜론 뒤에는 접속부사가 와요."},
+{tag:"In spite of + 명사",q:"___ the storm, the flight departed on time.",opts:["In spite of","Although","Because","Unless"],a:0,
+ tip:"the storm(명사)만 있으니 전치사 <b>In spite of</b>. despite와 같은 모자 팀!"},
+{tag:"by = …까지 (완료)",q:"Applications must be sent ___ May 31.",opts:["until","by","since","during"],a:1,
+ tip:"'5월 31일까지 내라'는 마감 → <b>by</b>. until은 '계속 그때까지'라 제출에는 안 어울려요."},
+{tag:"during + 명사",q:"The office will be closed ___ the holiday.",opts:["while","during","whereas","unless"],a:1,
+ tip:"the holiday(명사) → <b>during</b>. while 뒤에는 주어+동사가 와요."},
+{tag:"as soon as + 주어·동사",q:"Call me ___ you arrive.",opts:["While","As soon as","During","Despite"],a:1,
+ tip:"'도착하자마자' → <b>As soon as</b>. 접속사라서 뒤에 you arrive(주어+동사)가 와요."},
+{tag:"사람 + who",q:"The employee ___ conducted the survey is on leave.",opts:["which","who","whom","what"],a:1,
+ tip:"앞이 사람(employee)이고 뒤가 동사(conducted) → 주격 <b>who</b>."},
+{tag:"소유격 whose",q:"The building ___ roof was damaged is being repaired.",opts:["which","whose","who","that"],a:1,
+ tip:"roof(명사) 앞에서 '그 건물의'를 만들어 주는 <b>whose</b>. whose + 명사 세트!"},
+{tag:"전치사 목적격 whom",q:"This is the vendor ___ we signed the contract with.",opts:["who","whom","which","what"],a:1,
+ tip:"with의 목적어이자 사람 → <b>whom</b>. 전치사가 뒤에 남아 있으면 목적격!"},
+{tag:"what = ~한 것",q:"___ impressed the clients was our quick response.",opts:["That","What","Which","Who"],a:1,
+ tip:"문장 맨 앞에서 '~한 것'이라는 명사 덩어리를 만드는 <b>What</b>. 선행사가 없으면 what!"},
+{tag:"장소 + where",q:"The city ___ the factory is located has strict rules.",opts:["which","where","when","what"],a:1,
+ tip:"뒤가 완전한 문장(the factory is located) → 장소 부사격 <b>where</b>. which는 주어·목적어가 빠져야 해요."},
+{tag:"whose + 명사",q:"All candidates ___ applications were received will be contacted.",opts:["who","whose","which","whom"],a:1,
+ tip:"applications(명사) 앞 → <b>whose</b>(그들의). 'whose + 명사'가 나오면 3초 컷!"},
+{tag:"비교급 강조 = much",q:"This model is ___ more efficient than the previous one.",opts:["very","much","too","so"],a:1,
+ tip:"more efficient(비교급)를 강조하는 건 <b>much</b>·far·even. very는 비교급 앞에 못 와요!"},
+{tag:"Had + 주어 + p.p. (가정법 도치)",q:"___ I known about the delay, I would have called.",opts:["If","Had","Should","Were"],a:1,
+ tip:"If I had known → If를 빼면 <b>Had I known</b>. 뒤에 would have가 있으면 가정법 도치!"},
+{tag:"superior to (to 고정)",q:"The new printer is ___ to the old one in speed.",opts:["superior","more superior","superiorly","superiority"],a:0,
+ tip:"superior는 그 자체가 비교급 → more 붙이지 않아요. 그리고 비교 대상은 <b>to</b>로! superior/inferior/prior + to."},
+{tag:"부정어 도치",q:"___ should visitors leave their bags unattended.",opts:["Under no circumstances","In any case","By all means","At any time"],a:0,
+ tip:"'어떤 경우에도 ~않다' <b>Under no circumstances</b> + 조동사 도치(should visitors). 부정어가 앞에 나오면 주어·동사가 뒤집혀요."},
+{tag:"be binding on = 구속력",q:"The terms of the agreement are ___ to both parties.",opts:["bind","binding","bound","binder"],a:1,
+ tip:"be동사 뒤 보어 자리 → <b>binding</b>(구속력 있는). be binding on/upon = …을 구속하다."},
+{tag:"twice those of (복수 대명사)",q:"Our profits this year are twice ___ of last year.",opts:["that","those","this","them"],a:1,
+ tip:"앞의 profits(복수)를 대신 받는 <b>those</b>. 단수 명사를 받을 땐 that!"}
 ];
 
 /* ============================================================
@@ -976,7 +1393,100 @@ var READING = [
  tip:"be inspected = 점검되어야 한다, regularly = 정기적으로."},
 {en:"The workshop is designed for employees with limited experience.",a:0,
  opts:["이 워크숍은 경험이 적은 직원을 위해 마련되었습니다.","이 워크숍은 경력이 많은 직원만 들을 수 있습니다.","이 워크숍은 경험을 쌓은 뒤에 신청하세요.","이 워크숍은 직원 가족을 위한 것입니다."],
- tip:"be designed for = …을 위해 설계되다, limited experience = 경험이 적은."}
+ tip:"be designed for = …을 위해 설계되다, limited experience = 경험이 적은."},
+{en:"Having completed the training, all new hires may access the system.",a:1,
+ opts:["모든 신입 사원은 교육을 마치면 시스템 접속을 신청할 수 있습니다.","교육을 마친 신입 사원은 시스템에 접속할 수 있습니다.","교육을 받는 신입 사원은 시스템을 사용할 수 없습니다.","교육이 끝난 뒤 시스템을 새로 설치합니다."],
+ tip:"Having completed = '마친 뒤' (완료 분사구문). 주어 all new hires가 교육을 마친 사람들이에요."},
+{en:"Not only did the company cut costs, but it also improved quality.",a:2,
+ opts:["회사는 비용을 줄이지 않고 품질만 높였습니다.","회사는 비용을 늘리고 품질도 떨어뜨렸습니다.","회사는 비용을 줄였을 뿐 아니라 품질도 향상시켰습니다.","회사는 비용과 품질 중 하나만 개선할 수 있습니다."],
+ tip:"Not only 도치 + but also = '~뿐 아니라 …도'. did가 앞으로 나오면 뒤는 동사원형!"},
+{en:"It was the marketing team that proposed the new slogan.",a:0,
+ opts:["새 슬로건을 제안한 것은 마케팅팀이었습니다.","마케팅팀은 새 슬로건을 검토하지 않았습니다.","새 슬로건은 마케팅팀이 거절했습니다.","마케팅팀은 새 슬로건을 폐기했습니다."],
+ tip:"It was A that B = 'B한 것은 A다' 강조 구문. 강조된 건 the marketing team."},
+{en:"Had the shipment arrived on time, we would not have missed the deadline.",a:3,
+ opts:["배송이 제시간에 도착해서 마감을 지켰습니다.","배송이 늦어서 마감을 연장했습니다.","배송이 제시간에 오지 않아도 마감은 지켜집니다.","배송이 제시간에 도착했더라면 마감을 놓치지 않았을 것입니다."],
+ tip:"Had + 주어 + p.p. = If … had p.p. (가정법 과거완료). 뒤에 would have가 와요."},
+{en:"The consultant, who joined last month, will lead the project.",a:1,
+ opts:["지난달에 그만둔 컨설턴트가 프로젝트를 맡았습니다.","지난달 합류한 컨설턴트가 그 프로젝트를 이끌 것입니다.","컨설턴트는 다음 달에 프로젝트를 시작합니다.","프로젝트를 이끄는 컨설턴트가 지난달에 교체되었습니다."],
+ tip:"콤마 사이 who절은 '덧붙이는 설명'. 주인공은 The consultant."},
+{en:"However difficult the task may be, the team will finish it by Friday.",a:2,
+ opts:["과제가 어려워서 팀은 금요일까지 끝내지 못할 것입니다.","과제가 쉬워야 팀이 금요일까지 끝낼 수 있습니다.","과제가 아무리 어려워도 팀은 금요일까지 끝낼 것입니다.","팀은 금요일 이후에 과제를 시작할 것입니다."],
+ tip:"However + 형용사 + 주어 + 동사 = '아무리 ~해도'. 양보의 도치 표현이에요."},
+{en:"All expenses must be approved in advance by the department head.",a:0,
+ opts:["모든 경비는 부서장의 사전 승인을 받아야 합니다.","부서장은 경비를 미리 지급받습니다.","모든 경비는 부서장이 직접 사용합니다.","경비 승인은 사후에 받아도 됩니다."],
+ tip:"in advance = 사전에. must be approved = 승인되어야 한다(수동)."},
+{en:"Please be advised that the parking lot will be closed for maintenance.",a:1,
+ opts:["주차장을 새로 지을 예정입니다.","주차장이 유지 보수로 폐쇄될 예정임을 알려 드립니다.","주차장 이용 요금이 인상됩니다.","주차장에서 보수 공사 신청을 받습니다."],
+ tip:"Please be advised that ~ = ~을 알려 드립니다(격식 공지). for maintenance = 보수 때문에."},
+{en:"The warranty covers parts and labor for one year from the purchase date.",a:3,
+ opts:["보증은 구매일로부터 2년간 적용됩니다.","보증은 부품에만 적용되고 수리는 별도입니다.","보증 기간은 제품 수령일부터 시작됩니다.","보증은 구매일로부터 1년간 부품과 인건비를 포함합니다."],
+ tip:"cover A and B = A와 B를 보장하다. labor = (수리) 인건비."},
+{en:"Should you have any questions, please contact our support center.",a:2,
+ opts:["질문이 있으면 지원 센터를 방문하지 마세요.","지원 센터에서 질문을 받아 시험을 봅니다.","질문이 있으시면 지원 센터로 연락해 주십시오.","지원 센터는 질문을 받지 않습니다."],
+ tip:"Should you have ~ = If you have ~ (조건 도치). 격식 이메일 단골 표현!"},
+{en:"The board decided to postpone the merger until the audit is complete.",a:1,
+ opts:["이사회는 감사가 끝난 뒤 합병을 승인했습니다.","이사회는 감사가 끝날 때까지 합병을 연기하기로 했습니다.","이사회는 감사를 중단하고 합병을 진행합니다.","이사회는 합병 후에 감사를 시작합니다."],
+ tip:"postpone A until B = B까지 A를 연기하다. decide to = …하기로 하다."},
+{en:"Applicants are required to submit two letters of recommendation.",a:0,
+ opts:["지원자는 추천서 두 통을 제출해야 합니다.","지원자는 추천서를 두 번 다시 써야 합니다.","추천인 두 명이 지원자를 평가합니다.","추천서는 두 장까지 제출할 수 있습니다."],
+ tip:"be required to = …하도록 요구되다. 두 통은 '의무'예요, 선택이 아니에요."},
+{en:"The seminar is intended for employees who are new to the software.",a:3,
+ opts:["이 세미나는 소프트웨어를 만든 직원을 위한 것입니다.","이 세미나는 모든 직원이 반드시 들어야 합니다.","이 세미나는 소프트웨어 교육을 취소하는 자리입니다.","이 세미나는 소프트웨어가 처음인 직원을 대상으로 합니다."],
+ tip:"be intended for = …을 대상으로 하다. new to = …에 처음인."},
+{en:"Having been notified of the delay, the client requested a refund.",a:2,
+ opts:["지연 소식을 듣지 못한 고객이 환불을 거절했습니다.","고객은 지연을 알리고 환불을 요청받았습니다.","지연 통지를 받은 고객이 환불을 요청했습니다.","지연이 끝난 뒤 고객이 다시 주문했습니다."],
+ tip:"Having been p.p. = '~된 뒤에' (수동 완료 분사구문). 통지받은 쪽은 the client."},
+{en:"Only after the inspection was completed did the factory resume production.",a:1,
+ opts:["공장은 점검을 마치기 전에 생산을 재개했습니다.","점검이 끝난 뒤에야 공장이 생산을 재개했습니다.","점검 때문에 공장이 생산을 중단했습니다.","공장은 점검 없이 생산을 계속했습니다."],
+ tip:"Only after ~ did + 주어 + 동사원형 = '~한 뒤에야 비로소'. 도치 구문!"},
+{en:"Customers who refer a friend receive a 10 percent discount on their next order.",a:0,
+ opts:["친구를 소개한 고객은 다음 주문에서 10퍼센트 할인을 받습니다.","친구와 함께 주문하면 10퍼센트를 더 냅니다.","친구 소개는 할인 대상이 아닙니다.","다음 주문에서만 친구를 소개할 수 있습니다."],
+ tip:"who refer a friend = 친구를 소개하는 (고객). refer = 소개하다."},
+{en:"The equipment should be inspected before each use to prevent accidents.",a:3,
+ opts:["장비는 사고가 난 뒤에 점검합니다.","장비 점검은 1년에 한 번이면 충분합니다.","장비는 사용 후에만 점검합니다.","사고를 막기 위해 장비는 사용할 때마다 점검해야 합니다."],
+ tip:"before each use = 사용할 때마다. to prevent = 막기 위해(목적)."},
+{en:"Despite the increase in production, profits remained unchanged.",a:1,
+ opts:["생산량이 늘어 이익도 함께 늘었습니다.","생산량이 늘었음에도 이익은 그대로였습니다.","생산량이 줄어 이익이 감소했습니다.","이익이 늘어 생산량도 증가했습니다."],
+ tip:"Despite + 명사 = …에도 불구하고. remained unchanged = 변하지 않은 채였다."},
+{en:"The position has been filled, but we will keep your resume on file.",a:2,
+ opts:["그 자리는 아직 비어 있어 지원을 받습니다.","지원서는 모두 폐기되었습니다.","그 자리는 이미 채워졌지만 이력서는 보관하겠습니다.","이력서를 다시 제출해 달라는 요청입니다."],
+ tip:"has been filled = 채워졌다(수동 완료). keep on file = 보관하다."},
+{en:"Please note that the deadline will not be extended under any circumstances.",a:0,
+ opts:["마감은 어떤 경우에도 연장되지 않습니다.","마감은 상황에 따라 연장될 수 있습니다.","마감이 이미 연장되었습니다.","마감일을 정하지 않았습니다."],
+ tip:"under any circumstances = 어떤 경우에도. not과 함께 쓰여 강한 부정!"},
+{en:"The report, written by the research team, will be published next month.",a:2,
+ opts:["연구팀은 다음 달에 보고서를 작성할 예정입니다.","연구팀이 쓴 보고서는 이미 발행되었습니다.","연구팀이 작성한 보고서가 다음 달에 발행됩니다.","보고서는 연구팀이 검토만 합니다."],
+ tip:"콤마 사이 written by ~ = the report를 꾸미는 분사구(수동). 주인공은 The report."},
+{en:"We regret to inform you that your application was not successful.",a:1,
+ opts:["지원이 성공적으로 접수되었습니다.","안타깝지만 귀하의 지원은 받아들여지지 않았음을 알려 드립니다.","지원서를 다시 제출해 주십시오.","지원 결과는 아직 나오지 않았습니다."],
+ tip:"We regret to inform you that ~ = 안타깝게도 ~을 알려 드립니다. 불합격 통보의 정형 표현."},
+{en:"Unless the invoice is paid within 30 days, a late fee will be charged.",a:3,
+ opts:["청구서는 30일 안에 반드시 면제됩니다.","30일이 지나면 청구서가 취소됩니다.","30일 안에 내면 연체료가 붙습니다.","30일 안에 지불하지 않으면 연체료가 부과됩니다."],
+ tip:"Unless = If … not. within 30 days = 30일 이내. late fee = 연체료."},
+{en:"The training session has been moved to Room 302 to accommodate more participants.",a:2,
+ opts:["교육은 참가자가 줄어 취소되었습니다.","교육 장소는 302호에서 다른 곳으로 바뀌었습니다.","더 많은 참가자를 수용하기 위해 교육이 302호로 옮겨졌습니다.","302호에서는 교육을 할 수 없습니다."],
+ tip:"to accommodate = 수용하기 위해(목적). has been moved = 옮겨졌다(수동 완료)."},
+{en:"Employees are reminded that personal use of company vehicles is prohibited.",a:1,
+ opts:["회사 차량은 자유롭게 개인적으로 써도 됩니다.","회사 차량의 개인적 사용이 금지됨을 직원에게 알립니다.","직원은 회사 차량을 구입할 수 있습니다.","회사 차량 사용 신청을 받습니다."],
+ tip:"be reminded that ~ = ~을 다시 알린다. personal use = 개인적 사용."},
+{en:"No sooner had the announcement been made than the phones began to ring.",a:0,
+ opts:["발표가 나오자마자 전화가 울리기 시작했습니다.","발표 전에 전화가 먼저 왔습니다.","발표 후에도 전화는 울리지 않았습니다.","발표를 미루자 전화가 끊겼습니다."],
+ tip:"No sooner had ~ than … = '~하자마자 …했다'. 앞 절은 도치(had + 주어 + p.p.)!"},
+{en:"The new policy applies to all staff members, including part-time workers.",a:3,
+ opts:["새 정책은 정규직에게만 적용됩니다.","시간제 근로자는 새 정책에서 제외됩니다.","새 정책은 퇴사자에게 적용됩니다.","새 정책은 시간제 근로자를 포함한 모든 직원에게 적용됩니다."],
+ tip:"apply to = …에 적용되다. including = …을 포함하여."},
+{en:"Given the current market conditions, we have decided to delay the launch.",a:1,
+ opts:["시장 상황이 좋아 출시를 앞당겼습니다.","현재 시장 상황을 고려해 출시를 미루기로 했습니다.","시장 상황과 무관하게 출시를 강행합니다.","출시가 이미 끝났습니다."],
+ tip:"Given + 명사 = …을 고려하면. delay = 미루다."},
+{en:"The survey results indicate that most customers prefer online ordering.",a:2,
+ opts:["대부분의 고객이 매장 주문을 선호합니다.","설문 결과 온라인 주문이 불가능하다고 나왔습니다.","설문 결과 대부분의 고객이 온라인 주문을 선호하는 것으로 나타났습니다.","설문은 아직 진행 중입니다."],
+ tip:"indicate that ~ = ~을 보여 주다. prefer A = A를 더 좋아하다."},
+{en:"Had it not been for the quick response of the staff, the loss would have been greater.",a:2,
+ opts:["직원들이 늦게 대응해 손실이 커졌습니다.","직원들의 대응은 손실과 관계없었습니다.","직원들의 신속한 대응이 없었다면 손실은 더 컸을 것입니다.","직원들이 신속히 대응해 손실이 더 커졌습니다."],
+ tip:"Had it not been for ~ = '~이 없었다면'(가정법 도치). 뒤에 would have p.p."},
+{en:"Interested candidates should forward their applications to the HR office by June 30.",a:0,
+ opts:["관심 있는 지원자는 6월 30일까지 인사부로 지원서를 전달해야 합니다.","인사부가 6월 30일에 지원자를 선발합니다.","지원서는 6월 30일 이후에만 접수합니다.","관심 있는 지원자는 인사부를 방문해 면접을 봅니다."],
+ tip:"Interested = 관심 있는(수동 분사). forward A to B = A를 B에게 전달하다."}
 ];
 
 /* ============================================================
@@ -1021,7 +1531,199 @@ var LISTEN = [
  tip:"patience = 인내, 기다려 줌. 콜센터에서 제일 많이 듣는 문장이에요."},
 {kind:"meaning",say:"The office is closed on weekends.",a:2,
  opts:["사무실은 주말에 문을 엽니다.","사무실은 주말에만 운영합니다.","사무실은 주말에 문을 닫습니다.","사무실은 주말에 청소합니다."],
- tip:"be closed = 문을 닫다, on weekends = 주말에."}
+ tip:"be closed = 문을 닫다, on weekends = 주말에."},
+{p:1,say:"The man is checking his watch while waiting for the train.",a:2,
+ opts:["남자가 기차 안에서 잠을 자고 있다.","남자가 역무원에게 표를 보여 주고 있다.","남자가 기차를 기다리며 시계를 확인하고 있다.","남자가 시계를 수리하고 있다."],
+ tip:"check one's watch = 시계를 확인하다. '기다리며'라는 while waiting for the train까지 들려야 정답! 시계를 '고친다(fix)'와 구별하세요."},
+{p:1,say:"The woman is handing a document to her colleague.",a:1,
+ opts:["여자가 서류를 복사하고 있다.","여자가 동료에게 서류를 건네고 있다.","여자가 서류를 가방에 넣고 있다.","여자가 동료와 악수하고 있다."],
+ tip:"hand A to B = A를 B에게 건네다. copy(복사)·shake hands(악수)와 소리로 헷갈리게 만드는 함정이에요."},
+{p:1,say:"A customer is trying on a jacket in front of a mirror.",a:0,
+ opts:["손님이 거울 앞에서 재킷을 입어 보고 있다.","손님이 재킷을 세탁소에 맡기고 있다.","점원이 재킷을 포장하고 있다.","손님이 거울을 사고 있다."],
+ tip:"try on = 입어 보다. '입어 보는' 것과 '사는(buy)' 것은 달라요. in front of a mirror까지 잡으세요."},
+{p:1,say:"Several people are waiting in line at the ticket counter.",a:3,
+ opts:["사람들이 표를 환불하고 있다.","사람들이 매표소를 청소하고 있다.","사람들이 기차에서 내리고 있다.","사람들이 매표소 앞에 줄을 서서 기다리고 있다."],
+ tip:"wait in line = 줄을 서다. refund(환불)·clean(청소)은 소리가 비슷하게 들리도록 만든 함정!"},
+{p:1,say:"The clerk is stacking boxes on a shelf.",a:1,
+ opts:["점원이 상자를 열어 확인하고 있다.","점원이 선반 위에 상자를 쌓고 있다.","점원이 상자를 트럭에 싣고 있다.","점원이 선반을 닦고 있다."],
+ tip:"stack = 쌓다. open(열다)·load(싣다)·wipe(닦다)와 구별. on a shelf = 선반 위에."},
+{p:1,say:"A mechanic is repairing a car in the garage.",a:2,
+ opts:["정비사가 차를 세차하고 있다.","정비사가 차를 팔고 있다.","정비사가 차고에서 차를 수리하고 있다.","정비사가 차 문을 열고 있다."],
+ tip:"repair = 수리하다. wash(세차)·sell(판매)와 헷갈리지 마세요. garage = 정비소·차고."},
+{p:1,say:"The waiter is pouring water into a glass.",a:0,
+ opts:["종업원이 유리잔에 물을 따르고 있다.","종업원이 잔을 닦고 있다.","종업원이 주문을 받고 있다.","종업원이 탁자에 음식을 놓고 있다."],
+ tip:"pour A into B = A를 B에 따르다. wipe(닦다)·take an order(주문 받다)와 소리 구별!"},
+{p:1,say:"Passengers are boarding the bus through the front door.",a:2,
+ opts:["승객들이 버스에서 내리고 있다.","승객들이 버스 표를 사고 있다.","승객들이 앞문으로 버스에 타고 있다.","승객들이 버스를 기다리며 앉아 있다."],
+ tip:"board = 타다 / get off = 내리다. 반대 동작을 보기로 섞는 게 Part 1의 기본 함정이에요."},
+{p:1,say:"A man is typing on a laptop at an outdoor table.",a:1,
+ opts:["남자가 노트북을 수리하고 있다.","남자가 야외 탁자에서 노트북으로 타이핑하고 있다.","남자가 노트북을 가방에 넣고 있다.","남자가 야외에서 책을 읽고 있다."],
+ tip:"type on a laptop = 노트북으로 타이핑하다. repair(수리)·read a book(독서)과 구별."},
+{p:1,say:"Workers are paving the road with heavy machinery.",a:3,
+ opts:["근로자들이 길을 청소하고 있다.","근로자들이 길가에 나무를 심고 있다.","근로자들이 도로 공사를 중단하고 있다.","근로자들이 중장비로 도로를 포장하고 있다."],
+ tip:"pave = 포장하다. heavy machinery = 중장비. plant trees(나무 심기)와 헷갈리게 만든 보기!"},
+{p:1,say:"The woman is watering the plants in the lobby.",a:2,
+ opts:["여자가 로비에서 꽃을 사고 있다.","여자가 로비를 청소하고 있다.","여자가 로비에서 화분에 물을 주고 있다.","여자가 로비 의자에 앉아 있다."],
+ tip:"water the plants = 화분에 물을 주다. 물을 '사는(buy)' 것과 구별하세요."},
+{p:1,say:"Two men are shaking hands in front of the office building.",a:0,
+ opts:["두 남자가 사무실 건물 앞에서 악수하고 있다.","두 남자가 사무실 건물을 나란히 걷고 있다.","두 남자가 건물 앞에서 서류를 나눠 갖고 있다.","두 남자가 건물을 청소하고 있다."],
+ tip:"shake hands = 악수하다. walk side by side(나란히 걷다)와 소리로 헷갈리게 만드는 함정!"},
+{p:2,say:"Where did you put the revised contract?",a:0,
+ opts:["I left it on your desk.","Yes, I'd love to.","It was last Tuesday."],
+ tip:"의문사 Where = 장소. (A) 책상에 두었다 → 장소 답. (B) 부탁에 대한 승낙, (C) When에 대한 답이라 어긋나요."},
+{p:2,say:"When does the workshop start?",a:1,
+ opts:["In the conference room.","It begins at nine.","Yes, it does."],
+ tip:"When = 시간. (B) 9시에 시작 → 시간 답. (A)는 Where, (C)는 Yes/No로 받는 함정이에요."},
+{p:2,say:"Who is in charge of the shipment?",a:0,
+ opts:["Ms. Choi is.","By truck.","It's already done."],
+ tip:"Who = 사람. (A) 최 씨가 담당 → 사람 답. (B)는 How(어떻게), (C)는 완료 여부라 맞지 않아요."},
+{p:2,say:"Why was the meeting canceled?",a:2,
+ opts:["Yes, I canceled it.","At three o'clock.","Because the director is out of town."],
+ tip:"Why = 이유. (C) 부장님이 출장 중이라서 → 이유. Why에는 Because로 시작하는 답이 옵니다."},
+{p:2,say:"How do you get to the airport?",a:0,
+ opts:["You can take the express bus.","About 40 minutes.","Last week."],
+ tip:"How = 방법. (A) 급행버스를 타면 된다 → 방법. (B)는 How long(얼마나 걸리나), (C)는 When!"},
+{p:2,say:"Could you send me the file by noon?",a:0,
+ opts:["Sure, I'll do it right away.","No, I haven't seen him.","It's on the second floor."],
+ tip:"부탁(Could you~)에는 승낙·거절로 답해요. (A) 바로 보내겠다 → 정답. (B)(C)는 사람·장소 답이라 엉뚱!"},
+{p:2,say:"Would you like tea or coffee?",a:2,
+ opts:["Yes, please.","No, thank you for asking.","Neither, thanks. I'm fine."],
+ tip:"선택의문문(A or B)에는 Yes/No로 답하지 않아요. (C) 둘 다 괜찮다 → 선택에 대한 답!"},
+{p:2,say:"You've finished the report, haven't you?",a:1,
+ opts:["At the copy center.","Not yet. I need one more day.","Thanks, you too."],
+ tip:"부가의문문도 Yes/No 계열. (B) 아직, 하루 더 필요 → 정답. (A) 장소, (C) 인사말은 함정이에요."},
+{p:2,say:"Isn't the store open until nine?",a:0,
+ opts:["Actually, it closes at eight.","Yes, it's a new store.","I bought it yesterday."],
+ tip:"부정의문문엔 사실을 바로잡는 우회 답이 자주 와요. (A) 아니, 8시에 닫아 → 정답!"},
+{p:2,say:"How long does the flight take?",a:1,
+ opts:["Twice a week.","About two hours.","From Gate 12."],
+ tip:"How long = 걸리는 시간. (B) 두 시간 정도 → 정답. (A)는 How often, (C)는 Where(출발 위치)!"},
+{p:2,say:"What time should we arrive?",a:2,
+ opts:["At the box office.","Yes, we should.","Thirty minutes before the show."],
+ tip:"What time = 시각. (C) 공연 30분 전 → 정답. (A)는 장소, (B)는 should를 그대로 받은 함정."},
+{p:2,say:"Do you know if Mr. Lee is available?",a:0,
+ opts:["He's in a meeting right now.","Yes, I met him yesterday.","No, it's not available."],
+ tip:"'아무개가 시간 되나요?'의 답은 그의 상황. (A) 지금 회의 중 → 정답이에요."},
+{p:2,say:"Which floor is the HR department on?",a:0,
+ opts:["It's on the fifth floor.","Around 20 people.","For three years."],
+ tip:"Which floor = 몇 층. (A) 5층 → 정답. (B)는 How many people, (C)는 How long!"},
+{p:2,say:"Why don't we take a taxi?",a:1,
+ opts:["Because it's raining.","Good idea. It's faster.","No, I didn't take it."],
+ tip:"Why don't we~ = 제안('~하는 게 어때?'). (B) 좋아, 더 빠르잖아 → 정답. (A)는 Why의 이유 답처럼 보이는 함정!"},
+{p:2,say:"Has the package been delivered?",a:0,
+ opts:["Not yet. It's still in transit.","Yes, I'll deliver it.","To the main office."],
+ tip:"완료를 묻는 Have/Has 질문엔 완료 여부로 답해요. (A) 아직, 배송 중 → 정답. (B)는 미래 의지라 어긋나요."},
+{p:2,say:"Who should I contact about the invoice?",a:0,
+ opts:["Try the accounting department.","It's due next week.","Yes, please contact me."],
+ tip:"Who should I contact = 누구에게 연락? → (A) 회계부에 해 보세요. (B)는 When, (C)는 Yes/No 함정!"},
+{p:2,say:"When will the new employees start?",a:0,
+ opts:["Next Monday.","In the training room.","About ten of them."],
+ tip:"When = 시점. (A) 다음 월요일 → 정답. (C) About ten은 How many에 대한 답이라 사람 수 함정!"},
+{p:2,say:"Could you tell me where the nearest bank is?",a:1,
+ opts:["Yes, I can tell you.","There's one across the street.","I bank online."],
+ tip:"간접의문문(where~)은 장소 정보로 답해요. (B) 길 건너에 하나 있어요 → 정답. (A)는 알려 주겠다는 말만 반복한 함정!"},
+{p:2,say:"How often do you hold these meetings?",a:0,
+ opts:["Once a month.","For two hours.","In the main hall."],
+ tip:"How often = 빈도. (A) 한 달에 한 번 → 정답. (B) For two hours는 How long!"},
+{p:2,say:"Would it be possible to change my reservation?",a:2,
+ opts:["Yes, it's possible to park here.","No, I didn't reserve it.","Certainly. What date would you like?"],
+ tip:"정중한 요청 → (C) 물론입니다, 어떤 날짜로요? (A)는 possible만 받은 함정, (B)는 시제가 어긋나요."},
+{p:2,say:"The printer is out of toner again.",a:0,
+ opts:["I'll order some right away.","Yes, it's a new printer.","At the front desk."],
+ tip:"평서문 불평에는 해결책으로 답해요. (A) 바로 주문할게요 → 정답. Yes/No로 받으면 안 돼요."},
+{p:2,say:"Should we book the conference room for Friday?",a:2,
+ opts:["Yes, the room is large.","No, I didn't book it.","Friday's fully booked, I'm afraid."],
+ tip:"제안(Should we~)엔 대안·정정 답도 와요. (C) 금요일은 이미 다 찼어요 → 우회 거절. (A)는 형태만 맞춘 함정!"},
+{p:2,say:"Have you had a chance to look at the proposal?",a:0,
+ opts:["I'm still reviewing it.","Yes, I have a chance.","It's a good proposal."],
+ tip:"'검토할 기회 있었어요?'엔 진행 상황으로 답해요. (A) 아직 보고 있는 중 → 정답."},
+{p:2,say:"What did you think of the presentation?",a:0,
+ opts:["I thought it was very clear.","It starts at ten.","Yes, I presented it."],
+ tip:"의견을 묻는 What did you think → (A) 아주 명확했어요. (B)는 When, (C)는 Yes/No 함정!"},
+{p:3,lines:["M: I'm calling about the order I placed last week. It still hasn't arrived.","W: I'm sorry about that. Let me check the tracking number for you."],
+ lq:"남자는 왜 전화했나요?",a:0,
+ opts:["주문한 상품이 아직 도착하지 않아서","환불을 받으려고","새 제품을 주문하려고","배송지를 바꾸려고"],
+ tip:"'It still hasn't arrived'가 이유. calling about ~ = ~에 대해 전화하다. 환불(refund)은 아직 나오지 않았어요."},
+{p:3,lines:["W: The client wants to move Friday's meeting to Monday morning.","M: Monday doesn't work for me. Can we do Tuesday afternoon instead?"],
+ lq:"남자가 제안한 것은 무엇인가요?",a:2,
+ opts:["금요일 오전으로 회의를 옮기자","월요일 오후에 만나자","화요일 오후로 회의를 하자","회의를 취소하자"],
+ tip:"doesn't work for me = 내겐 안 된다. instead = 대신. 그래서 화요일 오후 제안!"},
+{p:3,lines:["M: Did you send the revised budget to the finance team?","W: Not yet. I'm waiting for the director's approval."],
+ lq:"여자는 왜 아직 예산서를 보내지 않았나요?",a:1,
+ opts:["이메일 주소를 몰라서","부장님의 승인을 기다리고 있어서","예산서를 잃어버려서","재무팀이 요청하지 않아서"],
+ tip:"Not yet + I'm waiting for the director's approval. '아직'의 이유를 바로 뒤에서 말해 줘요."},
+{p:3,lines:["W: Our flight is delayed by two hours.","M: Then let's grab something to eat before boarding."],
+ lq:"두 사람은 다음에 무엇을 할 것인가요?",a:2,
+ opts:["탑승구를 바꾸러 갈 것이다","항공사에 항의할 것이다","탑승 전에 식사를 할 것이다","호텔로 돌아갈 것이다"],
+ tip:"grab something to eat = 뭐 좀 먹다. before boarding = 탑승 전에."},
+{p:3,lines:["M: This laptop keeps shutting down by itself.","W: It might be overheating. Bring it to the service center on the first floor."],
+ lq:"여자가 남자에게 하라고 한 일은 무엇인가요?",a:1,
+ opts:["노트북을 새로 사라고 했다","1층 서비스 센터로 가져가라고 했다","노트북을 끄고 기다리라고 했다","전원 케이블을 바꾸라고 했다"],
+ tip:"Bring it to ~ = ~로 가져가라. might be overheating = 과열된 것 같다."},
+{p:3,lines:["W: I heard the new branch opens next month.","M: Right, and they're looking for three sales assistants."],
+ lq:"두 사람은 무엇에 대해 이야기하고 있나요?",a:3,
+ opts:["지점 철수 계획","판매 실적 보고","직원 교육 일정","새 지점 개점과 채용"],
+ tip:"opens next month + looking for three sales assistants → 개점과 채용 이야기예요."},
+{p:3,lines:["M: Could you cover my shift this Saturday? My son has a soccer game.","W: Sure, if you take my Sunday shift."],
+ lq:"여자가 근무를 대신해 주는 조건은 무엇인가요?",a:2,
+ opts:["추가 수당을 받는 것","토요일에 쉬는 것","남자가 일요일 근무를 대신하는 것","다음 주에 휴가를 가는 것"],
+ tip:"if you take my Sunday shift = 네가 내 일요일 근무를 맡으면. 조건은 if 뒤에!"},
+{p:3,lines:["W: The catering company needs the final headcount by Thursday.","M: I'll email everyone today and confirm."],
+ lq:"남자가 오늘 할 일은 무엇인가요?",a:0,
+ opts:["전 직원에게 메일을 보내 인원을 확인한다","케이터링 업체를 예약한다","목요일 회의를 취소한다","식당을 직접 방문한다"],
+ tip:"I'll email everyone today and confirm. 오늘(today) 하는 일을 물었으니 메일 발송!"},
+{p:3,lines:["M: The printer on the third floor is broken again.","W: I'll call the repair service. Use the one on the second floor for now."],
+ lq:"여자가 남자에게 지금 하라고 한 일은 무엇인가요?",a:2,
+ opts:["3층 프린터를 직접 고치라고 했다","수리 기사를 기다리라고 했다","2층 프린터를 쓰라고 했다","프린터를 새로 주문하라고 했다"],
+ tip:"for now = 당장은. 수리 기사 전화는 여자가 하고, 남자는 2층 프린터를 쓰면 돼요."},
+{p:3,lines:["W: Did you see the notice about the parking garage?","M: No. What does it say?","W: It'll be closed all next week for repairs."],
+ lq:"주차장은 언제 문을 닫나요?",a:1,
+ opts:["이번 주말에","다음 주 내내","오늘 하루","다음 달부터"],
+ tip:"all next week = 다음 주 내내. for repairs = 수리 때문에."},
+{p:3,lines:["M: I'd like to return this jacket. The zipper is broken.","W: Do you have the receipt?"],
+ lq:"여자가 남자에게 요구하는 것은 무엇인가요?",a:2,
+ opts:["재킷을 다시 가져오라는 것","다른 색상으로 바꾸라는 것","영수증을 보여 달라는 것","수선비를 내라는 것"],
+ tip:"Do you have the receipt? = 영수증 있으세요? 반품 절차의 첫 확인이에요."},
+{p:3,lines:["W: The interview is scheduled for 2 p.m. in Room 5.","M: I'll let the candidate know and prepare the questions."],
+ lq:"남자가 할 일은 무엇인가요?",a:0,
+ opts:["지원자에게 알리고 질문을 준비한다","면접 시간을 바꾼다","5호실을 청소한다","지원자를 면접에서 탈락시킨다"],
+ tip:"let A know = A에게 알리다. prepare the questions = 질문을 준비하다. 두 가지가 남자의 일!"},
+{p:4,say:"Attention passengers. Flight 208 to Busan has been delayed due to heavy fog. Boarding will begin at 4:30 at Gate 12.",lq:"이 방송의 목적은 무엇인가요?",a:2,
+ opts:["탑승구를 폐쇄한다는 안내","항공편을 취소한다는 안내","항공편 지연과 탑승 시간을 알리는 안내","수하물을 찾아가라는 안내"],
+ tip:"has been delayed + Boarding will begin at 4:30 — 지연과 새 탑승 시간 안내. due to heavy fog = 짙은 안개 때문에."},
+{p:4,say:"Attention shoppers. The store will close in 15 minutes. Please bring your items to the checkout counter.",lq:"이 방송은 무엇을 요청하고 있나요?",a:1,
+ opts:["매장 오픈 시간을 기다려 달라","계산대에서 계산을 해 달라","직원을 불러 달라","주차장으로 가 달라"],
+ tip:"close in 15 minutes = 15분 뒤 문 닫음. bring items to the checkout counter = 계산대에 가져오세요."},
+{p:4,say:"Good morning, everyone. The elevator on the west side is out of service today. Please use the stairs or the east elevator.",lq:"무엇에 대해 안내하고 있나요?",a:3,
+ opts:["오늘 휴무하는 직원","동쪽 계단 공사 일정","주차장 이용 규칙","서쪽 엘리베이터 고장과 대체 이동 수단"],
+ tip:"out of service = 운행 중지. 대신 stairs or the east elevator를 쓰라고 안내해요."},
+{p:4,say:"The next train to Chuncheon will arrive on platform 3. Please stand behind the yellow line.",lq:"승객에게 무엇을 요청하고 있나요?",a:0,
+ opts:["노란 선 뒤로 물러서 달라","3번 승강장으로 가서 표를 사 달라","다른 열차를 기다려 달라","짐을 들고 내려 달라"],
+ tip:"stand behind the yellow line = 노란 선 뒤에 서 주세요. platform 3 = 3번 승강장."},
+{p:4,say:"Guests are invited to a welcome dinner at 7 p.m. in the garden restaurant. Please inform the front desk by 5 p.m.",lq:"손님들은 무엇을 해야 하나요?",a:2,
+ opts:["7시에 정원을 청소해야 한다","레스토랑에서 표를 사야 한다","5시까지 프런트에 참석 여부를 알려야 한다","저녁 식사를 직접 준비해야 한다"],
+ tip:"inform the front desk by 5 p.m. = 5시까지 프런트에 알리세요. by + 시각 = 그때까지."},
+{p:4,say:"Photography is not permitted in this exhibition hall. Please leave large bags at the entrance.",lq:"이 안내에서 금지된 것은 무엇인가요?",a:1,
+ opts:["큰 가방을 맡기는 것","전시관에서 사진을 찍는 것","입구에 들어가는 것","안내 책자를 가져가는 것"],
+ tip:"is not permitted = 허용되지 않는다 → 사진 촬영 금지. large bags는 입구에 두라고 해요."},
+{p:4,say:"The pool will be closed for cleaning from 9 to 11 a.m. tomorrow. We apologize for the inconvenience.",lq:"수영장은 언제 닫나요?",a:3,
+ opts:["오늘 오후 9시부터 11시까지","내일 하루 종일","이번 주말 내내","내일 오전 9시부터 11시까지"],
+ tip:"from 9 to 11 a.m. tomorrow = 내일 오전 9~11시. 오후(p.m.)로 바꾼 함정을 조심!"},
+{p:4,say:"The keynote speech will begin in ten minutes. Please take your seats and silence your phones.",lq:"참석자들은 무엇을 해야 하나요?",a:0,
+ opts:["자리에 앉고 휴대폰을 무음으로 해야 한다","연설을 취소해야 한다","질문을 준비해야 한다","밖으로 나가야 한다"],
+ tip:"take your seats = 자리에 앉다. silence your phones = 휴대폰을 무음으로."},
+{p:4,say:"All staff must wear safety helmets and goggles in this area. Visitors must be accompanied by an employee.",lq:"이 구역에서 방문객이 지켜야 할 것은 무엇인가요?",a:2,
+ opts:["안전모를 직접 사야 한다","혼자서 자유롭게 둘러봐도 된다","직원과 동행해야 한다","보안경을 벗어야 한다"],
+ tip:"be accompanied by = ~와 동행해야 한다. 방문객(Visitors) 규칙을 물었어요."},
+{p:4,say:"Books borrowed after October 1 must be returned by November 30 to avoid a late fee.",lq:"이용자는 무엇을 피해야 하나요?",a:1,
+ opts:["책을 빌리는 것","연체료를 내는 것","11월 30일에 책을 반납하는 것","10월 1일 이후에 책을 빌리는 것"],
+ tip:"to avoid a late fee = 연체료를 피하려면. by November 30 = 11월 30일까지."},
+{p:4,say:"Thank you for calling Bella's Kitchen. We're fully booked tonight, but we have tables available tomorrow at 7.",lq:"전화한 사람은 무엇을 알게 되나요?",a:2,
+ opts:["오늘 저녁 7시에 예약이 가능하다","식당이 오늘 문을 닫는다","오늘은 예약이 다 찼고 내일 7시는 가능하다","내일은 예약을 받지 않는다"],
+ tip:"fully booked = 예약이 꽉 참. but 뒤에 대안(내일 7시)이 나오는 구조를 잡으세요."},
+{p:4,say:"Due to the snow, the mountain road will be closed until tomorrow morning. Please use the coastal route.",lq:"운전자들은 어떤 길로 가야 하나요?",a:3,
+ opts:["산길로 계속 가야 한다","내일 아침까지 기다려야 한다","눈이 그친 뒤 산길로 가야 한다","해안 도로를 이용해야 한다"],
+ tip:"until tomorrow morning = 내일 아침까지. coastal route = 해안 도로. 대안을 알려 주는 방송!"}
 ];
 </script>
 <script>
@@ -1576,18 +2278,40 @@ var BTS_MEMBERS = [
 ];
 
 var CATS = [
- {id:"words",emoji:"📜",name:"도파민 단어",desc:"Day 1~9 · 74단어",c1:"#8b5cf6",c2:"#f472b6",showStages:true},
- {id:"grammar",emoji:"⚡",name:"3초 문법 퍼즐",desc:"빈칸 앞뒤만 보면 끝",c1:"#22d3ee",c2:"#6366f1"},
- {id:"reading",emoji:"📖",name:"한 줄 해석",desc:"토익 빈출 문장 16",c1:"#fbbf24",c2:"#f97316"},
- {id:"listening",emoji:"🎧",name:"듣기(발음)",desc:"듣고 고르기 16",c1:"#34d399",c2:"#10b981"},
+ {id:"words",emoji:"📜",name:"도파민 단어",desc:"Day 1~9 + A to Z 빈출 어휘",c1:"#8b5cf6",c2:"#f472b6",showStages:true},
+ {id:"grammar",emoji:"⚡",name:"3초 문법 퍼즐",desc:"실전 Part 5 · 3초 컷 공식",c1:"#22d3ee",c2:"#6366f1"},
+ {id:"reading",emoji:"📖",name:"한 줄 해석",desc:"실전 구문 읽고 뜻 고르기",c1:"#fbbf24",c2:"#f97316"},
+ {id:"listening",emoji:"🎧",name:"실전 LC 듣기",desc:"LC Part 1~4 실전형",c1:"#34d399",c2:"#10b981",showStages:true},
  {id:"sense",emoji:"🌍",name:"한국사·세계사·상식",desc:"한국사 12강 · 세계사 12강 연계 퀴즈",c1:"#fb7185",c2:"#f43f5e",showStages:true}
 ];
 
+/* A to Z 단어 묶음 이름 (Day 10~18) */
+var THEME_BY_DAY = {
+  10:"👥 인사·채용", 11:"💰 재무·회계", 12:"📑 계약·법무", 13:"📣 마케팅·영업",
+  14:"📦 물류·생산", 15:"💻 IT·기술", 16:"🗓️ 회의·일정", 17:"🏢 시설·안전", 18:"🗂️ 사무·일상"
+};
+
 var STAGE_DEFS = {
   words:[
-    {n:1,name:"Day 1~3",sub:"기초 빈출 단어 · 3초 문법 1~2호",days:[1,2,3]},
+    {n:1,name:"Day 1~3",sub:"기초 빈출 단어",days:[1,2,3]},
     {n:2,name:"Day 4~6",sub:"목적어·수동태 구간",days:[4,5,6]},
-    {n:3,name:"Day 7~9",sub:"계약·업무·보고 구간",days:[7,8,9]}
+    {n:3,name:"Day 7~9",sub:"계약·업무·보고 구간",days:[7,8,9]},
+    {n:4,name:"👥 인사·채용",sub:"A to Z · 채용·급여·평가",days:[10]},
+    {n:5,name:"💰 재무·회계",sub:"A to Z · 매출·자산·감사",days:[11]},
+    {n:6,name:"📑 계약·법무",sub:"A to Z · 조항·해지·분쟁",days:[12]},
+    {n:7,name:"📣 마케팅·영업",sub:"A to Z · 광고·판촉·영업",days:[13]},
+    {n:8,name:"📦 물류·생산",sub:"A to Z · 배송·재고·제조",days:[14]},
+    {n:9,name:"💻 IT·기술",sub:"A to Z · 시스템·네트워크",days:[15]},
+    {n:10,name:"🗓️ 회의·일정",sub:"A to Z · 안건·일정·조율",days:[16]},
+    {n:11,name:"🏢 시설·안전",sub:"A to Z · 보수·위험·대피",days:[17]},
+    {n:12,name:"🗂️ 사무·일상",sub:"A to Z · 문서·요약·절차",days:[18]}
+  ],
+  listening:[
+    {n:1,name:"Part 1 사진 묘사",sub:"문장 듣고 상황 고르기",p:1},
+    {n:2,name:"Part 2 질문-응답",sub:"질문 듣고 응답 고르기 (질문 숨김)",p:2},
+    {n:3,name:"Part 3 짧은 대화",sub:"대화 듣고 핵심 파악",p:3},
+    {n:4,name:"Part 4 안내 방송",sub:"방송 듣고 목적·내용 파악",p:4},
+    {n:5,name:"발음·철자 워밍업",sub:"단어 철자 · 문장 뜻",p:0}
   ],
   sense:[
     {n:1,name:"1단계 한국사",sub:"12강 · 1강 고조선 → 12강 현대사 순서",st:1},
@@ -1817,6 +2541,15 @@ var wrong = load(LS_WRONG,{}) || {};
 var soundOn = load(LS_SOUND,true)!==false;
 var deck = load(LS_DECK,{}) || {};
 var subjStats = load(LS_SUBJ,null);
+var LS_SEEN="tmq_seen_v1";
+var seenMap = load(LS_SEEN,{}) || {};
+var ROUND_SIZE = 10;                          /* 한 라운드 = 10문제 */
+function markSeen(key){
+  if(!key) return;
+  seenMap[key]=(seenMap[key]||0)+1;
+  save(LS_SEEN,seenMap);
+}
+function seenCount(key){ return seenMap[key]||0; }
 if(!subjStats || typeof subjStats!=="object") subjStats={day:"",today:{},all:{}};
 
 function catStat(id){
@@ -1899,16 +2632,45 @@ function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){}
 
 /* ---------------- 영어 음성 ---------------- */
 var speechOK = (typeof window!=="undefined") && ("speechSynthesis" in window) && ("SpeechSynthesisUtterance" in window);
-function speak(text){
-  if(!speechOK) return false;
+var speechRate = 1.0;
+var VOICES=[];
+function pickVoice(pitch){
+  var vs=VOICES.length?VOICES:[];
+  if(!vs.length){ try{ vs=window.speechSynthesis.getVoices()||[]; VOICES=vs; }catch(e){ vs=[]; } }
+  var en=[];
+  for(var i=0;i<vs.length;i++){ if(String(vs[i].lang||"").toLowerCase().indexOf("en")===0) en.push(vs[i]); }
+  if(!en.length) return null;
+  if(pitch && pitch<1){ for(var j=0;j<en.length;j++){ if(/male|david|mark|guy|daniel/i.test(en[j].name||"")) return en[j]; } }
+  if(pitch && pitch>1){ for(var k=0;k<en.length;k++){ if(/female|samantha|zira|karen|susan|google us english/i.test(en[k].name||"")) return en[k]; } }
+  return en[0];
+}
+function speak(text, pitch){
+  if(!speechOK || !text) return false;
   try{
     var u=new SpeechSynthesisUtterance(text);
-    u.lang="en-US"; u.rate=0.85; u.pitch=1; u.volume=1;
-    var vs=[];
-    try{ vs=window.speechSynthesis.getVoices()||[]; }catch(e){ vs=[]; }
-    for(var i=0;i<vs.length;i++){ if(String(vs[i].lang||"").toLowerCase().indexOf("en")===0){ u.voice=vs[i]; break; } }
+    u.lang="en-US"; u.rate=speechRate; u.pitch=(pitch||1); u.volume=1;
+    var v=pickVoice(pitch); if(v) u.voice=v;
     if(window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
+    return true;
+  }catch(e){ return false; }
+}
+/* Part 3 대화: M은 낮은 목소리, W는 높은 목소리로 이어 읽기 */
+function speakLines(lines){
+  if(!speechOK || !lines || !lines.length) return false;
+  try{
+    if(window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
+    for(var i=0;i<lines.length;i++){
+      var raw=String(lines[i]), who="", txt=raw;
+      var m=raw.match(/^\s*(M|W|Man|Woman)\s*:\s*/i);
+      if(m){ who=m[1].toUpperCase(); txt=raw.slice(m[0].length); }
+      else if(/^\s*M\s*-/.test(raw)){ who="M"; txt=raw.replace(/^\s*M\s*-\s*/,""); }
+      var u=new SpeechSynthesisUtterance(txt);
+      u.lang="en-US"; u.rate=speechRate; u.volume=1;
+      u.pitch=(who==="M"?0.82:(who==="W"?1.18:1));
+      var v=pickVoice(u.pitch); if(v) u.voice=v;
+      window.speechSynthesis.speak(u);
+    }
     return true;
   }catch(e){ return false; }
 }
@@ -2264,6 +3026,11 @@ function stagePool(catId, st){
     }
     return out;
   }
+  if(catId==="listening"){
+    var li=[];
+    for(var q=0;q<LISTEN.length;q++){ if((LISTEN[q].p||0)===st.p) li.push(q); }
+    return li;
+  }
   if(catId==="sense"){
     var s=[];
     for(var j=0;j<SENSE.length;j++){ if(SENSE[j].st===st.st) s.push(SENSE[j]); }
@@ -2273,28 +3040,66 @@ function stagePool(catId, st){
 }
 function poolCount(catId, st){ return stagePool(catId, st).length; }
 
+/* ---------- 10문제 라운드 : 아직 안 본 문제부터 ---------- */
+function poolAll(catId){
+  var out=[], i;
+  if(catId==="words"){ return WORDS.slice(); }
+  if(catId==="grammar"){ for(i=0;i<GRAMMAR.length;i++) out.push(i); return out; }
+  if(catId==="reading"){ for(i=0;i<READING.length;i++) out.push(i); return out; }
+  if(catId==="listening"){ for(i=0;i<LISTEN.length;i++) out.push(i); return out; }
+  return out;
+}
+function keyOfItem(catId, item){
+  if(catId==="words") return "w:"+item.w;
+  if(catId==="grammar") return "g:"+item;
+  if(catId==="reading") return "r:"+item;
+  if(catId==="listening") return "l:"+item;
+  return "";
+}
+function newCountOf(catId, pool){
+  var n=0;
+  for(var i=0;i<pool.length;i++){ if(!seenCount(keyOfItem(catId,pool[i]))) n++; }
+  return n;
+}
+/* 풀을 '안 본 문제 → 적게 본 문제' 순으로 정렬한 뒤 앞에서 10개 */
+function takeRound(catId, pool){
+  var arr=[];
+  for(var i=0;i<pool.length;i++){
+    var it=pool[i];
+    arr.push({it:it, k:keyOfItem(catId,it), c:seenCount(keyOfItem(catId,it)), r:Math.random()});
+  }
+  arr.sort(function(a,b){ if(a.c!==b.c) return a.c-b.c; return a.r-b.r; });
+  var picked=arr.slice(0, ROUND_SIZE);
+  return shuffle(picked.map(function(o){ return o.it; }));
+}
+
 function renderStages(){
   var c=state.cat, defs=STAGE_DEFS[state.catId]||[];
   $("stageTitle").textContent=c.emoji+" "+c.name;
-  $("stageSub").textContent = state.catId==="words" ? "먼저 훑어본 뒤 BTS를 잡으러!" : "1줄 설명으로 공부하고 바로 BTS 잡기!";
+  $("stageSub").textContent = state.catId==="words" ? "주제별 A to Z · 10문제씩 라운드로 계속"
+    : (state.catId==="listening" ? "Part별로 골라 듣고 풀기 · 10문제씩 라운드" : "1줄 설명으로 공부하고 바로 BTS 잡기!");
+  var canStudy = (state.catId==="words" || state.catId==="sense");
   var html="";
   for(var i=0;i<defs.length;i++){
-    var d=defs[i], n=poolCount(state.catId,d);
-    html+='<div class="stage" data-study="'+d.n+'">'
+    var d=defs[i], pool=stagePool(state.catId,d), n=pool.length, nn=newCountOf(state.catId,pool);
+    html+='<div class="stage"'+(canStudy?(' data-study="'+d.n+'"'):'')+'>'
       +'<div class="s-row">'
         +'<div class="s-num">'+d.n+'</div>'
-        +'<div class="s-t"><b>'+esc(d.name)+'</b><span>'+esc(d.sub)+' · '+n+'개</span></div>'
+        +'<div class="s-t"><b>'+esc(d.name)+'</b><span>'+esc(d.sub)+' · '+n+'개'
+          +(nn!==n ? (' · <i style="color:#fde68a;font-style:normal">새 '+nn+'</i>') : '')+'</span></div>'
         +'<div class="s-arrow">›</div>'
       +'</div>'
       +'<div class="s-btns">'
-        +'<button class="mini" type="button" data-study="'+d.n+'">📖 훑어보기</button>'
-        +'<button class="mini solid" type="button" data-quiz="'+d.n+'">💜 잡으러 가기</button>'
+        +(canStudy?('<button class="mini" type="button" data-study="'+d.n+'">📖 훑어보기</button>'):'')
+        +'<button class="mini solid" type="button" data-quiz="'+d.n+'">'+(state.catId==="listening"?'🎧 듣고 풀기':'💜 잡으러 가기')+'</button>'
       +'</div></div>';
   }
   $("stageList").innerHTML=html;
   $("stageNote").textContent = state.catId==="words"
-    ? "Day 1~9 실제 발송 단어 전량 · 복습 단어는 해당 회차에 포함"
-    : "한국사 "+senseCount(1)+"(12강) · 세계사 "+senseCount(2)+"(12강) · 시사상식 "+senseCount(3)+" · 경제 "+senseCount(4)+" — 1·2단계는 1강부터 12강 순서로 출제돼요";
+    ? "Day 1~9 실제 발송 단어 74 + A to Z 빈출 어휘 — 라운드마다 아직 안 본 단어를 먼저 내요"
+    : (state.catId==="listening"
+       ? "Part 2는 질문이 화면에 안 보여요 — 🔊 듣고 고른 뒤 스크립트로 확인! 총 "+LISTEN.length+"문제"
+       : "한국사 "+senseCount(1)+"(12강) · 세계사 "+senseCount(2)+"(12강) · 시사상식 "+senseCount(3)+" · 경제 "+senseCount(4)+" — 1·2단계는 1강부터 12강 순서로 출제돼요");
 }
 
 /* ---------------- 훑어보기 ---------------- */
@@ -2321,8 +3126,10 @@ function renderStudy(){
   var d=state.deck[state.deckIdx]; if(!d){ return; }
   var it=d.item, html="";
   if(d.catId==="words"){
-    html='<div class="badge-row"><span class="badge day">Day '+it.d+'</span>'
-      +(it.r?'<span class="badge gold">복습</span>':'<span class="badge">신규</span>')
+    var dayBadge = (it.d>=10 && THEME_BY_DAY[it.d]) ? ('<span class="badge day">'+esc(THEME_BY_DAY[it.d])+'</span>')
+      : ('<span class="badge day">Day '+it.d+'</span>');
+    html='<div class="badge-row">'+dayBadge
+      +(it.r?'<span class="badge gold">복습</span>':(it.d>=10?'<span class="badge gold">A to Z</span>':'<span class="badge">신규</span>'))
       +'<span class="badge">'+esc(it.pos)+'</span></div>'
       +'<div class="word">'+esc(it.w)+'</div>'
       +'<div class="pron">['+esc(it.p)+']</div>'
@@ -2385,20 +3192,56 @@ function qGrammar(i){
   for(var k=0;k<g.opts.length;k++) opts.push({t:g.opts[k], ok:(k===g.a)});
   var html='<div class="qen">'+esc(g.q).replace(/___/g,'<span class="qblank">＿＿＿</span>')+'</div>';
   return {key:"g:"+i, mode:"grammar", tag:"GRAMMAR · "+g.tag, label:"문법 · "+g.tag, kw:g.tag,
-    html:html, sub:"빈칸 앞뒤만 보세요. 3초!", opts:opts, tip:g.tip, speak:null, answerText:g.opts[g.a]};
+    html:html, sub:"빈칸 앞뒤만 보세요. 3초!", opts:shuffle(opts), tip:g.tip, speak:null, answerText:g.opts[g.a]};
 }
 function qReading(i){
   var r=READING[i], opts=[];
   for(var k=0;k<r.opts.length;k++) opts.push({t:r.opts[k], ok:(k===r.a)});
-  return {key:"r:"+i, mode:"reading", tag:"READING · 한 줄 해석", label:"해석 · "+r.en.slice(0,34)+"…", kw:r.en.split(/\s+/).slice(0,3).join(" ")+"…",
-    html:'<div class="qen">'+esc(r.en)+'</div>', sub:"가장 알맞은 해석은?", opts:opts, tip:r.tip, speak:null, answerText:r.opts[r.a]};
+  return {key:"r:"+i, mode:"reading", tag:"READING · 실전 구문", label:"해석 · "+r.en.slice(0,34)+"…", kw:r.en.split(/\s+/).slice(0,3).join(" ")+"…",
+    html:'<div class="qen">'+esc(r.en)+'</div>', sub:"가장 알맞은 해석은?", opts:shuffle(opts), tip:r.tip, speak:null, answerText:r.opts[r.a]};
 }
+/* ---------- 🎧 LC Part 1~4 + 발음 워밍업 ---------- */
 function qListen(i){
-  var l=LISTEN[i], opts=[];
-  for(var k=0;k<l.opts.length;k++) opts.push({t:l.opts[k], ok:(k===l.a)});
-  var sub = l.kind==="spell" ? "들은 단어의 철자를 고르세요." : "들은 문장의 뜻을 고르세요.";
-  return {key:"l:"+i, mode:"listening", tag:"LISTENING · "+(l.kind==="spell"?"철자":"문장 뜻"), label:"듣기 · "+l.say, kw:l.say,
-    html:'<div class="qmean">🔊 '+esc(sub)+'</div>', sub:"", opts:opts, tip:l.tip, speak:l.say, answerText:l.opts[l.a]};
+  var l=LISTEN[i], opts=[], k;
+  for(k=0;k<l.opts.length;k++) opts.push({t:l.opts[k], ok:(k===l.a)});
+  var part=l.p||0;
+
+  /* p:0 기존 발음·철자 워밍업 */
+  if(part===0){
+    var sub0 = l.kind==="spell" ? "들은 단어의 철자를 고르세요." : "들은 문장의 뜻을 고르세요.";
+    return {key:"l:"+i, mode:"listening", tag:"LISTENING · "+(l.kind==="spell"?"철자":"문장 뜻"), label:"듣기 · "+l.say, kw:l.say,
+      html:'<div class="qmean">🔊 '+esc(sub0)+'</div>', sub:"", opts:opts, tip:l.tip, speak:l.say, script:l.say, answerText:l.opts[l.a]};
+  }
+  /* p:2 질문-응답 — 질문 텍스트는 숨기고 음성으로만 */
+  if(part===2){
+    return {key:"l:"+i, mode:"listening", tag:"LISTENING · Part 2 질문-응답",
+      label:"LC P2 · "+l.say, kw:l.say,
+      html:'<div class="qmean">🔊 <span class="qpart">Part 2</span>질문을 듣고 알맞은 응답을 고르세요.</div>',
+      sub:'<span style="color:#fde68a">질문은 화면에 안 보여요</span> · 안 들리면 🔁 다시 듣기 · 필요하면 👀 스크립트',
+      opts:opts, tip:l.tip, speak:l.say, script:"Q: "+l.say, hideQ:true, answerText:l.opts[l.a]};
+  }
+  /* p:1 사진·상황 묘사 */
+  if(part===1){
+    return {key:"l:"+i, mode:"listening", tag:"LISTENING · Part 1 상황 묘사",
+      label:"LC P1 · "+l.say.slice(0,28)+"…", kw:l.say.slice(0,26),
+      html:'<div class="qmean">🔊 <span class="qpart">Part 1</span>문장을 듣고 알맞은 상황을 고르세요.</div>',
+      sub:"",
+      opts:opts, tip:l.tip, speak:l.say, script:l.say, answerText:l.opts[l.a]};
+  }
+  /* p:3 대화 */
+  if(part===3){
+    return {key:"l:"+i, mode:"listening", tag:"LISTENING · Part 3 짧은 대화",
+      label:"LC P3 · "+l.lq, kw:(l.lines?l.lines[0].slice(4,26):l.lq),
+      html:'<div class="qmean">🔊 <span class="qpart">Part 3</span>대화를 듣고 물음에 답하세요.</div>',
+      sub:'<b style="color:#fde68a">'+esc(l.lq)+'</b>',
+      opts:opts, tip:l.tip, speak:null, lines:l.lines, script:(l.lines||[]).join("\n"), answerText:l.opts[l.a]};
+  }
+  /* p:4 안내 방송 */
+  return {key:"l:"+i, mode:"listening", tag:"LISTENING · Part 4 안내 방송",
+    label:"LC P4 · "+l.lq, kw:l.lq,
+    html:'<div class="qmean">🔊 <span class="qpart">Part 4</span>안내 방송을 듣고 물음에 답하세요.</div>',
+    sub:'<b style="color:#fde68a">'+esc(l.lq)+'</b>',
+    opts:opts, tip:l.tip, speak:l.say, script:l.say, answerText:l.opts[l.a]};
 }
 function qSense(i){
   var s=SENSE[i], opts=[];
@@ -2474,37 +3317,47 @@ function startBattleForPool(mode, catId, cat, items, label, target, ordered){
   askNext();
 }
 function startBattleForCat(catId){
-  var cat=byId(CATS,catId);
-  if(catId==="words"){
-    var all=[]; for(var i=0;i<WORDS.length;i++) all.push(WORDS[i]);
-    startBattleForPool("words",catId,cat,all,cat.emoji+" 도파민 단어 · 전체",3);
-  } else if(catId==="grammar"){
-    var gi=[]; for(var j=0;j<GRAMMAR.length;j++) gi.push(j);
-    startBattleForPool("grammar",catId,cat,gi,cat.emoji+" 3초 문법 퍼즐",3);
-  } else if(catId==="reading"){
-    var ri=[]; for(var k=0;k<READING.length;k++) ri.push(k);
-    startBattleForPool("reading",catId,cat,ri,cat.emoji+" 한 줄 해석",3);
-  } else if(catId==="listening"){
-    var li=[]; for(var m=0;m<LISTEN.length;m++) li.push(m);
-    startBattleForPool("listening",catId,cat,li,cat.emoji+" 듣기(발음)",3);
+  var cat=byId(CATS,catId); if(!cat) return;
+  if(catId==="sense"){ return; }
+  startRoundBattle(catId, null);
+}
+
+/* ---------- 10문제 라운드로 계속 이어지기 ---------- */
+function startRoundBattle(catId, stageN){
+  var cat=byId(CATS,catId); if(!cat) return;
+  var st=null, pool;
+  if(stageN){
+    var defs=STAGE_DEFS[catId]||[];
+    for(var i=0;i<defs.length;i++){ if(defs[i].n===stageN) st=defs[i]; }
+    if(!st) return;
+    pool = stagePool(catId, st);
+  } else {
+    pool = poolAll(catId);
   }
+  if(!pool.length){ toast("이 단계 문제는 준비 중이에요"); return; }
+  var full = st ? pool.length : pool.length;
+  var round = takeRound(catId, pool);
+  var label = st ? (cat.emoji+" "+st.name) : (cat.emoji+" "+cat.name+" · 전체");
+  startBattleForPool(catId, catId, cat, round, label, 3);
+  var b=state.battle; if(!b) return;
+  b.round = {catId:catId, stageN:(st?st.n:0), size:round.length, total:full, newLeft:newCountOf(catId, pool)};
+  $("battleMode").textContent = label + " · 라운드";
+  paintHp();
 }
 function startBattleForStage(catId, stageN){
-  var defs=STAGE_DEFS[catId], st=null;
-  for(var i=0;i<defs.length;i++){ if(defs[i].n===stageN) st=defs[i]; }
-  if(!st) return;
-  var pool=stagePool(catId,st), cat=byId(CATS,catId);
-  var label=cat.emoji+" "+st.name;
-  if(catId==="words"){
-    startBattleForPool("words",catId,cat,pool,label,3);
-  } else {
-    /* sense: 인덱스 배열로 변환 — 1·2단계는 1강부터 강의 순서 그대로 출제 */
+  if(catId==="sense"){
+    var defs=STAGE_DEFS[catId], st=null;
+    for(var i=0;i<defs.length;i++){ if(defs[i].n===stageN) st=defs[i]; }
+    if(!st) return;
+    var cat=byId(CATS,catId), label=cat.emoji+" "+st.name;
     var idxs=[];
     for(var j=0;j<SENSE.length;j++){ if(SENSE[j].st===st.st) idxs.push(j); }
     var ord=(st.n===1 || st.n===2);
     startBattleForPool("sense",catId,cat,idxs,label,3,ord);
     if(state.battle) state.battle.stageQuiz={catId:catId, stageN:st.n};
+    return;
   }
+  startRoundBattle(catId, stageN);
 }
 function startReview(){
   var keys=[]; for(var k in wrong){ if(wrong[k]) keys.push(k); }
@@ -2572,7 +3425,8 @@ function paintHp(){
     }
   }
   $("monsterHpTxt").textContent="💜 "+b.heart+" / "+b.heartMax;
-  $("monsterQn").textContent = b.lecQuiz ? ("문제 "+(b.qn||1)+" / "+b.lecQuiz.total) : ((b.qn||1)+"번째 문제");
+  $("monsterQn").textContent = b.lecQuiz ? ("문제 "+(b.qn||1)+" / "+b.lecQuiz.total)
+    : (b.round ? ("이번 라운드 "+(b.qn||1)+" / "+b.round.size) : ((b.qn||1)+"번째 문제"));
   $("battleCaught").textContent = b.lecQuiz ? ("📝 "+b.asked+"/"+b.lecQuiz.total) : ("💜 "+b.caught+"/"+b.target);
   var cb=$("battleCombo");
   if(b.combo>1){ cb.classList.remove("hidden"); cb.textContent="🔥 x"+b.combo; }
@@ -2611,6 +3465,7 @@ function nextQuestionObj(){
 function askNext(){
   var b=state.battle;
   if(b.caught>=b.target){ return finishBattle(false); }
+  if(b.round && b.asked>=b.round.size){ return finishBattle(false); }
   if(b.asked>=40){ return finishBattle(true); }
   var q=nextQuestionObj();
   if(!q){ return finishBattle(true); }
@@ -2623,8 +3478,10 @@ function renderQuestion(q){
   $("qTag").textContent=q.tag;
   $("qText").innerHTML=q.html;
   $("qSub").innerHTML=q.sub||"";
-  var sr=$("speakRow");
-  if(q.speak){ sr.classList.remove("hidden"); } else { sr.classList.add("hidden"); }
+  var sr=$("speakRow"), sp=$("spdRow");
+  var audio = !!(q.speak || (q.lines && q.lines.length));
+  if(audio){ sr.classList.remove("hidden"); } else { sr.classList.add("hidden"); }
+  if(sp){ if(audio) sp.classList.remove("hidden"); else sp.classList.add("hidden"); }
   $("fbSlot").innerHTML="";
   $("btnContinue").classList.add("hidden");
   var list=$("optList"), html="";
@@ -2633,18 +3490,24 @@ function renderQuestion(q){
       +'<span class="key">'+LETTERS[i]+'</span><span class="otxt">'+esc(q.opts[i].t)+'</span></button>';
   }
   list.innerHTML=html;
-  if(q.speak){
-    var ok=speak(q.speak);
+  if(audio){
+    var ok;
+    if(q.lines && q.lines.length) ok=speakLines(q.lines);
+    else ok=speak(q.speak);
     if(!ok) revealText(true);
   }
   try{ list.scrollIntoView({block:"nearest"}); }catch(e){}
 }
 function revealText(auto){
   var b=state.battle;
-  if(!b||!b.current||!b.current.speak) return;
+  if(!b||!b.current) return;
+  var q=b.current;
+  var body = q.script || q.speak || "";
+  if(!body) return;
   b.textShown=true;
-  var note = auto ? "이 기기에서는 영어 음성이 안 나와요. 글자로 풀어 보세요 👇" : "글자 모드";
-  $("qSub").innerHTML='<span style="color:#fde68a">'+esc(b.current.speak)+'</span><br><span style="font-size:11px;color:#a89ddb">'+esc(note)+'</span>';
+  var note = auto ? "이 기기에서는 영어 음성이 안 나와요. 스크립트로 풀어 보세요 👇" : "스크립트";
+  var extra = q.sub ? ('<div style="margin-top:6px;font-size:11.5px;color:#b7a9e8">'+q.sub+'</div>') : "";
+  $("qSub").innerHTML='<div class="qscript"><b>'+esc(note)+'</b><br>'+esc(body).replace(/\n/g,"<br>")+'</div>'+extra;
 }
 
 function chooseAnswer(idx){
@@ -2654,6 +3517,7 @@ function chooseAnswer(idx){
   var q=b.current, picked=q.opts[idx];
   if(!picked) return;
   b.asked++;
+  markSeen(q.key);
   var btns=$("optList").children;
   for(var i=0;i<btns.length;i++){
     var btn=btns[i];
@@ -2825,17 +3689,33 @@ function finishBattle(ranOut){
   var perfect = (b.caught>=b.target && b.correct===b.asked);
   var wrongLeft=0; for(var wk in wrong){ if(wrong[wk]) wrongLeft++; }
   var reviewClear = (b.mode==="review" && wrongLeft===0);
-  $("resEmoji").textContent = b.caught>=b.target ? (perfect?"🏆":"💜") : (reviewClear?"💜":(ranOut?"🥺":"💪"));
+  $("resEmoji").textContent = b.caught>=b.target ? (perfect?"🏆":"💜") : (reviewClear?"💜":(b.round?"🔁":(ranOut?"🥺":"💪")));
   $("resTitle").textContent = b.caught>=b.target
     ? "BTS "+b.caught+"명 포획 성공! 💜"
-    : (reviewClear ? "오답 청산 완료! 💜" : (ranOut?"오늘은 여기까지":"조금만 더!"));
+    : (reviewClear ? "오답 청산 완료! 💜" : (b.round ? (total+"문제 라운드 완료!") : (ranOut?"오늘은 여기까지":"조금만 더!")));
   var note="";
   if(perfect) note="완벽해요. 이 정도면 초희 토익 800 보인다!";
+  else if(b.round) note="이번 라운드 정답률 "+acc+"%. 다음 10문제로 이어서 가면 아직 안 본 문제부터 나와요.";
   else if(b.caught>=b.target) note="BTS "+b.caught+"명이 내 편이 됐어요. 도감도 확인해 봐 💜";
   else if(reviewClear) note="틀린 문제를 다 지웠어요. 오답 노트가 비었어요!";
   else if(b.asked>=40) note="오늘은 여기까지. 조금씩 쌓이면 돼요.";
   else note="틀린 건 오답 노트에 자동 저장됐어요. 홈에서 다시 잡으러 갈 수 있어요.";
   $("resFoot").textContent=note;
+
+  /* 🔁 10문제 라운드 → 다음 라운드로 계속 */
+  if(b.round){
+    var rr=b.round, rnb="";
+    var key=rr.catId+":"+rr.stageN;
+    rnb+='<button class="cta next" type="button" data-roundnext="'+key+'">➡️ 다음 10문제 이어서</button>';
+    if(rr.stageN && (rr.catId==="words" || rr.catId==="listening")){
+      var nds=STAGE_DEFS[rr.catId]||[], nxt=null;
+      for(var di=0;di<nds.length;di++){ if(nds[di].n===rr.stageN+1) nxt=nds[di]; }
+      if(nxt) rnb+='<button class="cta ghost mini2" type="button" data-qzstagecat="'+rr.catId+':'+nxt.n+'">다음 단계 · '+esc(nxt.name)+'</button>';
+      rnb+='<button class="cta ghost mini2" type="button" data-go="stages">📚 단계 목록으로</button>';
+    }
+    $("resNextBox").innerHTML='<div class="res-next">'+rnb+'</div>';
+    $("resAgain").textContent="🔁 다음 10문제";
+  }
 
   /* 📝 강의별 퀴즈 · 단계 완주 → '다음 강/다음 단계로 넘어가기' */
   if(b.lecQuiz){
@@ -2877,6 +3757,7 @@ function restartBattle(){
   var b=state.battle; if(!b) return;
   var mode=b.mode, defs, i;
   if(b.lecQuiz){ startLectureQuiz(b.lecQuiz.track, b.lecQuiz.n); return; }
+  if(b.round){ startRoundBattle(b.round.catId, b.round.stageN||null); return; }
   if(mode==="review"){ startReview(); return; }
   if(mode==="words"){
     defs=STAGE_DEFS.words;
@@ -3086,10 +3967,33 @@ function toggleRoomDone(id){
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-qzstagecat")||t.getAttribute("data-roundnext")||t.getAttribute("data-spd")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
+
+  if(t.hasAttribute && t.hasAttribute("data-spd")){
+    speechRate=parseFloat(t.getAttribute("data-spd"))||1;
+    var spb=document.querySelectorAll("#spdRow .spd");
+    for(var si=0;si<spb.length;si++){ if(spb[si]===t) spb[si].classList.add("on"); else spb[si].classList.remove("on"); }
+    var bb=state.battle;
+    if(bb&&bb.current){
+      if(bb.current.lines&&bb.current.lines.length) speakLines(bb.current.lines);
+      else if(bb.current.speak) speak(bb.current.speak);
+    }
+    toast("속도 "+speechRate+"x");
+    return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-roundnext")){
+    var rk=String(t.getAttribute("data-roundnext")).split(":");
+    startRoundBattle(rk[0], parseInt(rk[1],10)||null);
+    return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-qzstagecat")){
+    var ck=String(t.getAttribute("data-qzstagecat")).split(":");
+    startBattleForStage(ck[0], parseInt(ck[1],10));
+    return;
+  }
 
   if(t.hasAttribute && t.hasAttribute("data-room")){ openRoom(); return; }
   if(t.hasAttribute && t.hasAttribute("data-rseg")){
@@ -3152,7 +4056,12 @@ $("studyFight").addEventListener("click", function(){ startBattleForStage(state.
 $("btnContinue").addEventListener("click", function(){ nextStep(); });
 $("btnReplay").addEventListener("click", function(){
   var b=state.battle;
-  if(b&&b.current&&b.current.speak){ var ok=speak(b.current.speak); if(!ok) revealText(true); else toast("다시 들려줄게요 🔊"); }
+  if(b&&b.current){
+    var ok;
+    if(b.current.lines&&b.current.lines.length) ok=speakLines(b.current.lines);
+    else ok=speak(b.current.speak);
+    if(!ok) revealText(true); else toast("다시 들려줄게요 🔊");
+  }
 });
 $("btnShowText").addEventListener("click", function(){ revealText(false); });
 $("battleQuit").addEventListener("click", function(){
@@ -3187,6 +4096,17 @@ document.addEventListener("visibilitychange", function(){
   var home=$("screen-home");
   if(home && home.classList.contains("on")) renderSubjReport();
 });
+
+/* 홈 카드 설명은 실제 문제 수에서 자동 계산 (숫자 어긋남 방지) */
+(function refreshCatDesc(){
+  var uniq={}, wn=0, i;
+  for(i=0;i<WORDS.length;i++){ if(!uniq[WORDS[i].w]){ uniq[WORDS[i].w]=1; wn++; } }
+  var cw=byId(CATS,"words"), cg=byId(CATS,"grammar"), cr=byId(CATS,"reading"), cl=byId(CATS,"listening");
+  if(cw) cw.desc = "Day 1~9 + A to Z · "+wn+"단어 · 10문제 라운드";
+  if(cg) cg.desc = "실전 Part 5 · "+GRAMMAR.length+"공식 · 3초 컷";
+  if(cr) cr.desc = "실전 구문 · "+READING.length+"문장";
+  if(cl) cl.desc = "Part 1~4 실전 · "+LISTEN.length+"문제";
+})();
 
 /* 시작 */
 renderHome();
