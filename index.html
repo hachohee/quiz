@@ -572,6 +572,106 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
   .result h2{background:linear-gradient(92deg,#fde68a,#f9a8d4);
     -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 }
+/* ---------- 📻 매일 라디오 ---------- */
+.radio-entry{display:flex;align-items:center;gap:11px;width:100%;text-align:left;cursor:pointer;
+  border:1px solid rgba(34,211,238,.40);border-radius:16px;padding:12px 14px;margin:0 0 12px;
+  background:linear-gradient(150deg,rgba(34,211,238,.16),rgba(139,92,246,.22) 72%);
+  color:var(--ink);font-family:inherit}
+.radio-entry:active{transform:scale(.985)}
+.radio-entry .re-emoji{font-size:23px;line-height:1}
+.radio-entry .re-t{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.radio-entry .re-t b{font-size:12.5px;font-weight:800;color:#a5f3fc;letter-spacing:.01em;line-height:1.35}
+.radio-entry .re-t span{font-size:10.5px;color:var(--muted);line-height:1.4}
+.radio-entry .re-go{font-size:20px;color:#67e8f9;font-weight:900;line-height:1}
+.rbar{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted2);margin:0 0 11px;line-height:1.4}
+.rbar span{flex:1 1 auto;min-width:0}
+.rbar-re{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#c4b5fd;
+  border-radius:999px;padding:5px 11px;font-family:inherit;font-size:10.5px;font-weight:800;cursor:pointer}
+.rbar-re:active{transform:scale(.96)}
+.rgrp{margin:0 0 10px}
+.rgrp-h{font-size:9.5px;font-weight:900;letter-spacing:.05em;color:#8b80bd;margin:0 0 6px 2px}
+.rgrp-b{display:flex;flex-wrap:wrap;gap:6px}
+.rpill{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:rgba(255,255,255,.045);
+  color:#cdc3f5;border-radius:999px;padding:7px 11px;font-family:inherit;font-size:11.5px;font-weight:800;
+  cursor:pointer;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rpill .rflag{font-size:12px;line-height:1}
+.rpill:active{transform:scale(.97)}
+.rpill.on{border-color:rgba(34,211,238,.62);
+  background:linear-gradient(120deg,rgba(34,211,238,.32),rgba(139,92,246,.60));
+  color:#fff;box-shadow:0 6px 16px -10px #000}
+.rhead{border:1px solid var(--line);border-radius:16px;padding:11px 13px;margin:0 0 10px;
+  background:linear-gradient(150deg,rgba(139,92,246,.18),rgba(255,255,255,.03))}
+.rhead-t{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.rhead-t b{font-size:13.5px;font-weight:900;color:#f5e8ff;line-height:1.35}
+.rhead-st{font-size:9.5px;font-weight:800;color:#8b80bd}
+.rhead-tag{font-size:9px;font-weight:900;color:#0a1526;background:linear-gradient(92deg,#67e8f9,#a78bfa);
+  border-radius:999px;padding:2px 7px;white-space:nowrap}
+.rhead-d{margin:5px 0 0;font-size:10.5px;color:var(--muted);line-height:1.5}
+.rhead-m{display:flex;flex-wrap:wrap;gap:8px;font-size:10px;font-weight:800;color:var(--muted2);margin-top:6px}
+.rhead-m b{color:#a5f3fc;font-variant-numeric:tabular-nums}
+.rep{display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;background:rgba(0,0,0,.2);margin-bottom:6px;cursor:pointer}
+.rep:active{transform:scale(.995)}
+.rep.on{border-color:rgba(34,211,238,.55);background:linear-gradient(120deg,rgba(34,211,238,.14),rgba(139,92,246,.20))}
+.rep-ico{flex:0 0 26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:10.5px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#a5f3fc}
+.rep.on .rep-ico{background:linear-gradient(140deg,#22d3ee,#8b5cf6);color:#0a1526;border-color:transparent}
+.rep-m{flex:1 1 auto;min-width:0}
+.rep-t{font-size:11.5px;font-weight:800;color:#eee9ff;line-height:1.42;display:-webkit-box;
+  -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rep-d{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:9.5px;color:var(--muted2);margin-top:3px;font-weight:700}
+.rep-d i{font-style:normal;opacity:.5}
+.rep-heard{font-style:normal;color:#34d399;font-weight:900}
+.rep-chk{flex:0 0 30px;height:30px;border-radius:10px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);color:#4b4470;font-size:13px;font-family:inherit;line-height:1;cursor:pointer;padding:0}
+.rep-chk.on{color:#08170f;background:linear-gradient(140deg,#34d399,#a7f3d0);border-color:transparent}
+.rmsg{border:1px dashed rgba(255,255,255,.18);border-radius:14px;padding:15px 13px;text-align:center;
+  font-size:11.5px;color:var(--muted);line-height:1.7}
+.rmsg b{color:#a5f3fc}
+.rmsg button{margin-top:9px;border:1px solid rgba(34,211,238,.45);background:rgba(34,211,238,.14);color:#a5f3fc;
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer}
+.rplayer{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;
+  padding:8px 12px calc(9px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(21,13,46,.97),rgba(11,7,24,.995));
+  border-top:1px solid rgba(139,92,246,.36);box-shadow:0 -14px 34px -18px #000}
+body.radio-on.radio-open .rplayer{display:block}
+body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bottom))}
+.rplayer-in{max-width:520px;margin:0 auto}
+.rp-top{display:flex;align-items:center;gap:8px}
+.rp-badge{flex:0 0 auto;font-size:15px;line-height:1}
+.rp-tt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.rp-tt b{font-size:9.5px;font-weight:900;color:#67e8f9;line-height:1.3}
+.rp-tt span{font-size:11.5px;font-weight:800;color:#f2ecff;line-height:1.35;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-x{flex:0 0 auto;width:28px;height:28px;border-radius:9px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:var(--muted);font-size:12px;cursor:pointer;padding:0;line-height:1}
+.rp-seek{width:100%;margin:6px 0 0;height:22px;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;display:block}
+.rp-seek::-webkit-slider-runnable-track{height:6px;border-radius:99px;
+  background:linear-gradient(90deg,#22d3ee var(--p,0%),rgba(255,255,255,.16) var(--p,0%))}
+.rp-seek::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;
+  margin-top:-4.5px;box-shadow:0 0 0 3px rgba(34,211,238,.28)}
+.rp-seek::-moz-range-track{height:6px;border-radius:99px;background:rgba(255,255,255,.16)}
+.rp-seek::-moz-range-progress{height:6px;border-radius:99px;background:#22d3ee}
+.rp-seek::-moz-range-thumb{width:15px;height:15px;border:0;border-radius:50%;background:#fff}
+.rp-tm{display:flex;justify-content:space-between;font-size:9.5px;font-weight:800;color:var(--muted2);
+  font-variant-numeric:tabular-nums;margin-top:-1px}
+.rp-ctl{display:flex;align-items:center;gap:6px;margin-top:5px}
+.rp-b{flex:0 0 auto;height:38px;padding:0 11px;border-radius:11px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:#dcd3ff;font-family:inherit;font-size:11px;font-weight:900;cursor:pointer}
+.rp-b:active{transform:scale(.96)}
+.rp-play{flex:0 0 54px;height:42px;border-radius:14px;border:0;font-size:16px;padding:0;
+  background:linear-gradient(140deg,#22d3ee,#8b5cf6);color:#07101d;cursor:pointer;font-weight:900}
+.rp-play:active{transform:scale(.96)}
+.rp-heard{flex:1 1 auto;min-width:0;height:38px;border-radius:11px;border:1px solid rgba(52,211,153,.35);
+  background:rgba(52,211,153,.12);color:#a7f3d0;font-family:inherit;font-size:10.5px;font-weight:900;
+  cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px}
+.rp-heard.on{background:linear-gradient(140deg,#34d399,#a7f3d0);color:#08170f;border-color:transparent}
+.rp-spd{display:flex;gap:5px;margin-top:6px}
+.rp-spd button{flex:1 1 0;min-width:0;height:30px;border-radius:9px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--muted);font-family:inherit;font-size:10.5px;font-weight:900;
+  cursor:pointer;padding:0}
+.rp-spd button.on{background:linear-gradient(140deg,rgba(34,211,238,.9),rgba(139,92,246,.9));
+  color:#fff;border-color:transparent}
 @media(min-width:640px){
   .app{max-width:600px;padding:22px 20px 40px}
   .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -612,6 +712,12 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
     <button id="btnRoom" class="room-entry" type="button" data-room="open">
       <span class="re-emoji">📺</span>
       <span class="re-t"><b>2개월 공부방 (영어 · 역사 · 경제 · 시사 · 재테크)</b><span>토익·역사·경제·시사·재테크 12강씩 · 유튜브 84강 바로 보기</span></span>
+      <span class="re-go">›</span>
+    </button>
+
+    <button id="btnRadio" class="radio-entry" type="button" data-radio="open">
+      <span class="re-emoji">📻</span>
+      <span class="re-t"><b>📻 매일 라디오 다시듣기 (CNN · BBC · 굿모닝팝스 · 시사)</b><span>8개 프로그램 최신 회차 · 앱에서 바로 재생 · 0.8~1.5배속 · 15초 넘기기</span></span>
       <span class="re-go">›</span>
     </button>
 
@@ -747,8 +853,58 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
     <p class="foot" id="resFoot"></p>
   </section>
 
+  <!-- ================= 📻 매일 라디오 ================= -->
+  <section id="screen-radio" class="screen">
+    <div class="subhead">
+      <button class="back" type="button" data-go="home" aria-label="뒤로">←</button>
+      <div class="t">
+        <h2>📻 매일 라디오</h2>
+        <p>CNN · BBC · 굿모닝팝스 · 시사 다시듣기</p>
+      </div>
+    </div>
+
+    <div class="rbar">
+      <span id="radioUpdated">최신 회차를 불러오는 중…</span>
+      <button class="rbar-re" id="radioReload" type="button">↻ 새로고침</button>
+    </div>
+
+    <div id="radioProgs"></div>
+    <div id="radioHead"></div>
+    <div id="radioList"></div>
+
+    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요</p>
+  </section>
+
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- 📻 매일 라디오 전용 플레이어 (화면 아래 고정) -->
+<div class="rplayer" id="radioPlayer" aria-label="라디오 플레이어">
+  <div class="rplayer-in">
+    <div class="rp-top">
+      <span class="rp-badge" id="rpBadge">📻</span>
+      <div class="rp-tt">
+        <b id="rpProg">—</b>
+        <span id="rpTitle">—</span>
+      </div>
+      <button class="rp-x" type="button" data-rp="close" aria-label="플레이어 닫기">✕</button>
+    </div>
+    <input class="rp-seek" id="rpSeek" type="range" min="0" max="100" value="0" step="1" aria-label="재생 위치">
+    <div class="rp-tm"><span id="rpCur">0:00</span><span id="rpDur">0:00</span></div>
+    <div class="rp-ctl">
+      <button class="rp-b" type="button" data-rp="back" aria-label="15초 뒤로">↺15</button>
+      <button class="rp-play" type="button" id="rpPlay" data-rp="play" aria-label="재생 또는 일시정지">▶</button>
+      <button class="rp-b" type="button" data-rp="fwd" aria-label="15초 앞으로">15↻</button>
+      <button class="rp-heard" type="button" id="rpHeard" data-rp="heard">✓ 들었어요</button>
+    </div>
+    <div class="rp-spd" id="rpSpd">
+      <button type="button" data-rspd="0.8">0.8x</button>
+      <button type="button" data-rspd="1">1.0x</button>
+      <button type="button" data-rspd="1.25">1.25x</button>
+      <button type="button" data-rspd="1.5">1.5x</button>
+    </div>
+  </div>
+</div>
 <script>
 /* ============================================================
    똑똑핫초 — 데이터
@@ -2677,7 +2833,7 @@ function speakLines(lines){
 try{ if(speechOK){ window.speechSynthesis.getVoices(); if(window.speechSynthesis.onvoiceschanged!==undefined){ window.speechSynthesis.onvoiceschanged=function(){ try{window.speechSynthesis.getVoices();}catch(e){} }; } } }catch(e){}
 
 /* ---------------- 화면 ---------------- */
-var SCREENS=["home","stages","study","battle","result","studyroom"];
+var SCREENS=["home","stages","study","battle","result","studyroom","radio"];
 function show(name){
   for(var i=0;i<SCREENS.length;i++){
     var el=$("screen-"+SCREENS[i]);
@@ -2685,6 +2841,7 @@ function show(name){
     if(SCREENS[i]===name) el.classList.add("on"); else el.classList.remove("on");
   }
   try{ window.scrollTo(0,0); }catch(e){}
+  if(typeof radioScreenHook==="function") radioScreenHook(name);
 }
 
 var state = { catId:null, cat:null, stage:null, deck:[], deckIdx:0, battle:null };
@@ -4115,6 +4272,363 @@ document.addEventListener("visibilitychange", function(){
   if(cr) cr.desc = "실전 구문 · "+READING.length+"문장";
   if(cl) cl.desc = "Part 1~4 실전 · "+LISTEN.length+"문제";
 })();
+
+/* ============================================================
+   📻 매일 라디오 (CNN · BBC · 굿모닝팝스 · 시사) 다시듣기
+   - radio_episodes.json(하루 4번 자동 갱신)을 읽어 최신 8회차씩 보여 줌
+   - 앱 안에서 바로 재생: 배속 · 15초 이동 · 진행바 · 들은 회차 체크
+   ============================================================ */
+var LS_RADIO_HEARD="tmq_radio_heard_v1", LS_RADIO_POS="tmq_radio_pos_v1";
+var LS_RADIO_SPD="tmq_radio_spd_v1", LS_RADIO_LAST="tmq_radio_last_v1";
+var radioHeard=load(LS_RADIO_HEARD,{})||{};
+var radioPos=load(LS_RADIO_POS,{})||{};
+var radioSpeed=(function(){ var v=parseFloat(load(LS_RADIO_SPD,1)); return (v===0.8||v===1||v===1.25||v===1.5)?v:1; })();
+var radioData=null, radioLoading=false, radioErr="", radioPi=0, radioCur=null, radioAudio=null;
+var radioSeeking=false, radioPending=0, radioSavedAt=0, radioScreenHook=null;
+
+function pad2(n){ return (n<10?"0":"")+n; }
+function fmtClock(s){
+  s=Math.max(0,Math.floor(Number(s)||0));
+  var h=Math.floor(s/3600), m=Math.floor((s%3600)/60), x=s%60;
+  return h ? (h+":"+pad2(m)+":"+pad2(x)) : (m+":"+pad2(x));
+}
+function radioProg(i){ return (radioData && radioData.programs) ? radioData.programs[i] : null; }
+function radioEp(i,j){ var p=radioProg(i); return (p && p.episodes) ? p.episodes[j] : null; }
+function radioEpKey(p,e){ return p.id+"::"+((e&&(e.guid||e.mp3))||""); }
+function radioCountHeard(p){
+  var n=0, eps=p.episodes||[];
+  for(var i=0;i<eps.length;i++){ if(radioHeard[radioEpKey(p,eps[i])]) n++; }
+  return n;
+}
+
+function renderRadioTabs(){
+  var box=$("radioProgs"); if(!box) return;
+  if(!radioData){ box.innerHTML=""; return; }
+  var groups=[{k:"en",t:"🌍 영어 뉴스 · 영어 공부 (CNN · BBC)"},{k:"kr",t:"🇰🇷 한국 라디오 (팝스 · 시사 · 경제 · 국제)"}];
+  var html="";
+  for(var g=0;g<groups.length;g++){
+    var list=[], i;
+    for(i=0;i<radioData.programs.length;i++){
+      if((radioData.programs[i].group||"kr")===groups[g].k) list.push(i);
+    }
+    if(!list.length) continue;
+    html+='<div class="rgrp"><div class="rgrp-h">'+groups[g].t+'</div><div class="rgrp-b">';
+    for(var k=0;k<list.length;k++){
+      var pi=list[k], p=radioData.programs[pi];
+      html+='<button type="button" class="rpill'+(pi===radioPi?" on":"")+'" data-rprog="'+pi+'">'
+        +'<span class="rflag">'+esc(p.flag||"📻")+'</span>'+esc(p.short||p.name)+'</button>';
+    }
+    html+='</div></div>';
+  }
+  box.innerHTML=html;
+}
+
+function renderRadioHead(){
+  var box=$("radioHead"); if(!box) return;
+  var p=radioProg(radioPi);
+  if(!p || !p.episodes || !p.episodes.length){ box.innerHTML=""; return; }
+  var hc=radioCountHeard(p), nb=p.episodes.length-hc;
+  box.innerHTML='<div class="rhead">'
+    +'<div class="rhead-t"><b>'+esc(p.flag||"")+' '+esc(p.name)+'</b>'
+    +(p.tag?'<span class="rhead-tag">'+esc(p.tag)+'</span>':'')
+    +(p.station?'<span class="rhead-st">'+esc(p.station)+'</span>':'')+'</div>'
+    +(p.desc?'<p class="rhead-d">'+esc(p.desc)+'</p>':'')+
+    '<div class="rhead-m"><span>최신 <b>'+p.episodes.length+'</b>회차</span>'
+    +'<span>들은 <b>'+hc+'</b></span><span>안 들은 <b>'+nb+'</b></span>'
+    +(p.stale?'<span style="color:#fbbf24">⚠ 오늘 갱신 실패 · 이전 회차</span>':'')+'</div>'
+    +'</div>';
+}
+
+function renderRadioList(){
+  var box=$("radioList"); if(!box) return;
+  if(!radioData){
+    if(radioLoading){ box.innerHTML='<div class="rmsg">📡 최신 회차를 받아오는 중…</div>'; return; }
+    box.innerHTML='<div class="rmsg"><b>최신 회차를 못 받아왔어요</b><br>'+esc(radioErr||"인터넷 연결을 확인해 주세요")
+      +'<br><button type="button" id="radioRetry">↻ 다시 시도</button></div>';
+    return;
+  }
+  var p=radioProg(radioPi);
+  if(!p || !p.episodes || !p.episodes.length){ box.innerHTML='<div class="rmsg">회차 정보가 아직 없어요</div>'; return; }
+  var playing=!!(radioAudio && !radioAudio.paused);
+  var html="";
+  for(var j=0;j<p.episodes.length;j++){
+    var e=p.episodes[j], key=radioEpKey(p,e);
+    var on=!!(radioCur && radioCur.key===key);
+    var heard=!!radioHeard[key];
+    html+='<div class="rep'+(on?" on":"")+'" data-rep="'+radioPi+':'+j+'" role="button" tabindex="0">'
+      +'<span class="rep-ico">'+((on&&playing)?"❚❚":"▶")+'</span>'
+      +'<div class="rep-m"><div class="rep-t">'+esc(e.title)+'</div>'
+      +'<div class="rep-d"><span>'+esc(e.dateLabel||"")+'</span>'
+      +(e.durationLabel?'<i>·</i><span>'+esc(e.durationLabel)+'</span>':'')+'</div></div>'
+      +'<button type="button" class="rep-chk'+(heard?" on":"")+'" data-rheard="'+esc(key)+'" aria-label="들은 회차로 표시">✓</button>'
+      +'</div>';
+  }
+  box.innerHTML=html;
+}
+
+function ensureRadioAudio(){
+  if(radioAudio) return radioAudio;
+  var a=new Audio();
+  a.preload="metadata";
+  a.setAttribute("playsinline","");
+  a.addEventListener("loadedmetadata", function(){
+    if(radioPending>3 && isFinite(a.duration) && radioPending < a.duration-10){
+      try{ a.currentTime=radioPending; toast("이어서 재생 · "+fmtClock(radioPending)+"부터"); }catch(e){}
+    }
+    radioPending=0;
+    updateRadioSeek();
+  });
+  a.addEventListener("durationchange", updateRadioSeek);
+  a.addEventListener("timeupdate", function(){
+    if(radioSeeking) return;
+    updateRadioSeek();
+    var now=Date.now();
+    if(radioCur && now-radioSavedAt>5000){
+      radioSavedAt=now;
+      radioPos[radioCur.key]=Math.floor(a.currentTime||0);
+      save(LS_RADIO_POS,radioPos);
+    }
+  });
+  a.addEventListener("play", radioBtnState);
+  a.addEventListener("pause", radioBtnState);
+  a.addEventListener("ended", function(){
+    if(radioCur){
+      if(!radioHeard[radioCur.key]){
+        radioHeard[radioCur.key]=Date.now(); save(LS_RADIO_HEARD,radioHeard);
+        toast("✅ 끝까지 들었어요 · 들은 회차로 기록");
+      }
+      radioPos[radioCur.key]=0; save(LS_RADIO_POS,radioPos);
+      renderRadioHead(); renderRadioList();
+    }
+    radioBtnState();
+  });
+  a.addEventListener("error", function(){
+    if(a.error && radioCur) toast("이 회차 음원을 못 불러왔어요 · 잠시 뒤 다시 눌러 주세요");
+    radioBtnState();
+  });
+  try{ document.body.appendChild(a); }catch(e){}
+  radioAudio=a;
+  return a;
+}
+
+function updateRadioSeek(){
+  var a=radioAudio, seek=$("rpSeek"), cur=$("rpCur"), durEl=$("rpDur");
+  if(!seek) return;
+  var ep=radioCur?radioEp(radioCur.pi,radioCur.ei):null;
+  var d=(a && isFinite(a.duration) && a.duration>0) ? a.duration : (ep?(ep.durationSec||0):0);
+  var t=(a?a.currentTime:0)||0;
+  seek.max = d>0 ? Math.round(d) : Math.round(t)+60;
+  if(!radioSeeking) seek.value=Math.round(t);
+  var pct = d>0 ? Math.min(100, t/d*100) : 0;
+  seek.style.setProperty("--p", pct.toFixed(2)+"%");
+  if(cur) cur.textContent=fmtClock(t);
+  if(durEl) durEl.textContent=fmtClock(d);
+}
+function radioSpdState(){
+  var bs=document.querySelectorAll("#rpSpd button");
+  for(var i=0;i<bs.length;i++){
+    var v=parseFloat(bs[i].getAttribute("data-rspd"));
+    if(v===radioSpeed) bs[i].classList.add("on"); else bs[i].classList.remove("on");
+  }
+}
+function radioBtnState(){
+  var playing=!!(radioAudio && !radioAudio.paused);
+  var b=$("rpPlay"); if(b) b.textContent=playing?"❚❚":"▶";
+  var h=$("rpHeard");
+  if(h){
+    var on=!!(radioCur && radioHeard[radioCur.key]);
+    h.className="rp-heard"+(on?" on":"");
+    h.textContent=on?"✓ 들었어요":"✓ 들었어요";
+    h.setAttribute("aria-label", on?"들은 회차 표시 빼기":"들은 회차로 표시");
+  }
+  var ic=document.querySelector(".rep.on .rep-ico");
+  if(ic) ic.textContent=playing?"❚❚":"▶";
+}
+function syncRadioPlayer(){
+  var open=!!radioCur;
+  document.body.classList.toggle("radio-open", open);
+  if(!open) return;
+  var p=radioProg(radioCur.pi), e=radioEp(radioCur.pi,radioCur.ei);
+  var badge=$("rpBadge"), prog=$("rpProg"), title=$("rpTitle");
+  if(badge) badge.textContent=p?(p.flag||"📻"):"📻";
+  if(prog) prog.textContent=p?((p.short||p.name)+(p.station?" · "+p.station:"")):"";
+  if(title) title.textContent=e?e.title:"";
+  updateRadioSeek(); radioBtnState(); radioSpdState();
+}
+
+function toggleRadioHeard(key){
+  if(!key) return;
+  if(radioHeard[key]){ delete radioHeard[key]; toast("들은 회차 표시를 뺐어요"); }
+  else { radioHeard[key]=Date.now(); toast("✓ 들은 회차로 저장했어요"); }
+  save(LS_RADIO_HEARD,radioHeard);
+  renderRadioHead(); renderRadioList(); radioBtnState();
+}
+
+function skipRadio(d){
+  var a=radioAudio; if(!a) return;
+  var dur=isFinite(a.duration)&&a.duration>0?a.duration:0;
+  var t=(a.currentTime||0)+d;
+  if(t<0) t=0;
+  if(dur && t>dur-1) t=Math.max(0,dur-1.2);
+  try{ a.currentTime=t; }catch(e){}
+  updateRadioSeek();
+  toast((d>0?"+":"")+d+"초");
+}
+
+function setRadioSession(p,e){
+  try{
+    if(!("mediaSession" in navigator) || !window.MediaMetadata) return;
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title:e.title, artist:p.name, album:"똑똑핫초 · 매일 라디오"
+    });
+    navigator.mediaSession.setActionHandler("seekbackward", function(){ skipRadio(-15); });
+    navigator.mediaSession.setActionHandler("seekforward", function(){ skipRadio(15); });
+    navigator.mediaSession.setActionHandler("play", function(){ if(radioAudio) radioAudio.play(); });
+    navigator.mediaSession.setActionHandler("pause", function(){ if(radioAudio) radioAudio.pause(); });
+  }catch(err){}
+}
+
+function playRadio(pi,ei){
+  var p=radioProg(pi), e=radioEp(pi,ei);
+  if(!p || !e) return;
+  var key=radioEpKey(p,e);
+  var a=ensureRadioAudio();
+  var changed=(a.getAttribute("data-key")!==key);
+  radioCur={ pi:pi, ei:ei, key:key };
+  save(LS_RADIO_LAST,p.id);
+  if(changed){
+    var pos=parseFloat(radioPos[key]||0)||0;
+    radioPending = pos>3 ? pos : 0;
+    try{ a.pause(); }catch(err){}
+    a.setAttribute("data-key",key);
+    a.src=e.mp3;
+    a.load();
+  }
+  try{ a.playbackRate=radioSpeed; }catch(err){}
+  syncRadioPlayer(); renderRadioList(); renderRadioHead(); setRadioSession(p,e);
+  var pr=null;
+  try{ pr=a.play(); }catch(err){ pr=null; }
+  if(pr && pr.catch){ pr.catch(function(){ toast("▶ 를 한 번 더 눌러 주세요"); radioBtnState(); }); }
+}
+
+function renderRadio(){
+  var up=$("radioUpdated");
+  if(up){
+    if(radioData) up.textContent="최신 회차 "+(radioData.updatedLabel||"")+" 기준 · 하루 4번(08·10·13·19시) 자동 갱신";
+    else if(radioLoading) up.textContent="최신 회차를 불러오는 중…";
+    else up.textContent="최신 회차를 못 받아왔어요 · ↻ 로 다시 시도";
+  }
+  renderRadioTabs(); renderRadioHead(); renderRadioList(); syncRadioPlayer();
+}
+
+function radioLoad(){
+  if(radioLoading) return;
+  radioLoading=true; radioErr="";
+  renderRadio();
+  fetch("radio_episodes.json", { cache:"no-store" })
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(d){
+      if(!d || !d.programs || !d.programs.length) throw new Error("비어 있는 목록");
+      radioData=d; radioLoading=false;
+      var last=load(LS_RADIO_LAST,""), ix=0;
+      for(var i=0;i<d.programs.length;i++){ if(d.programs[i].id===last) ix=i; }
+      radioPi=ix;
+      renderRadio();
+    })
+    .catch(function(e){
+      radioLoading=false;
+      if(!radioData) radioErr=String((e&&e.message)||e);
+      renderRadio();
+      if(radioData) toast("최신 회차 갱신 실패 · 이전 목록을 보여줘요");
+    });
+}
+
+function openRadio(){
+  show("radio");
+  if(!radioData && !radioLoading) radioLoad();
+  else renderRadio();
+}
+
+/* 진행바(seek) — 손으로 끌어도 timeupdate가 덮어쓰지 않게 */
+(function wireRadioSeek(){
+  var seek=$("rpSeek"); if(!seek) return;
+  seek.addEventListener("input", function(){
+    radioSeeking=true;
+    var a=radioAudio, v=parseFloat(seek.value)||0;
+    if(a){ try{ a.currentTime=v; }catch(e){} }
+    var c=$("rpCur"); if(c) c.textContent=fmtClock(v);
+    var d=parseFloat(seek.max)||0;
+    seek.style.setProperty("--p", (d>0?(Math.min(100,v/d*100)):0).toFixed(2)+"%");
+  });
+  var done=function(){ radioSeeking=false; updateRadioSeek(); };
+  seek.addEventListener("change", done);
+  seek.addEventListener("pointerup", done);
+  seek.addEventListener("touchend", done);
+})();
+
+/* 라디오 전용 클릭 위임 */
+document.addEventListener("click", function(ev){
+  var t=ev.target;
+  while(t && t!==document){
+    if(t.getAttribute && (t.hasAttribute("data-radio")||t.hasAttribute("data-rprog")||t.hasAttribute("data-rep")
+      ||t.hasAttribute("data-rp")||t.hasAttribute("data-rspd")||t.hasAttribute("data-rheard")
+      ||t.id==="radioReload"||t.id==="radioRetry")) break;
+    t=t.parentNode;
+  }
+  if(!t || t===document) return;
+
+  if(t.id==="radioRetry"){ radioData=null; radioErr=""; radioLoad(); return; }
+  if(t.id==="radioReload"){ radioLoad(); toast("최신 회차를 다시 확인해요"); return; }
+  if(t.hasAttribute("data-radio")){ openRadio(); return; }
+  if(t.hasAttribute("data-rprog")){
+    radioPi=parseInt(t.getAttribute("data-rprog"),10)||0;
+    save(LS_RADIO_LAST, radioProg(radioPi)?radioProg(radioPi).id:"");
+    renderRadio();
+    try{ window.scrollTo(0,0); }catch(e){}
+    return;
+  }
+  if(t.hasAttribute("data-rep")){
+    var pk=String(t.getAttribute("data-rep")).split(":");
+    playRadio(parseInt(pk[0],10)||0, parseInt(pk[1],10)||0);
+    return;
+  }
+  if(t.hasAttribute("data-rheard")){ toggleRadioHeard(t.getAttribute("data-rheard")); return; }
+  if(t.hasAttribute("data-rspd")){
+    radioSpeed=parseFloat(t.getAttribute("data-rspd"))||1;
+    save(LS_RADIO_SPD,radioSpeed);
+    if(radioAudio){ try{ radioAudio.playbackRate=radioSpeed; }catch(e){} }
+    radioSpdState(); toast("속도 "+radioSpeed+"x");
+    return;
+  }
+  if(t.hasAttribute("data-rp")){
+    var act=t.getAttribute("data-rp");
+    if(act==="close"){
+      try{ if(radioAudio) radioAudio.pause(); }catch(e){}
+      radioCur=null; document.body.classList.remove("radio-open"); renderRadioList();
+      return;
+    }
+    if(act==="play"){
+      if(!radioAudio) return;
+      if(radioAudio.paused){
+        var pr=radioAudio.play();
+        if(pr && pr.catch) pr.catch(function(){ toast("재생을 못 시작했어요"); });
+      } else { radioAudio.pause(); }
+      return;
+    }
+    if(act==="back"){ skipRadio(-15); return; }
+    if(act==="fwd"){ skipRadio(15); return; }
+    if(act==="heard"){ if(radioCur) toggleRadioHeard(radioCur.key); return; }
+  }
+});
+
+/* 화면 전환 훅 — 라디오 화면에서만 하단 플레이어를 보여 줌 (소리는 계속 재생) */
+radioScreenHook=function(name){
+  var on=(name==="radio");
+  document.body.classList.toggle("radio-on", on);
+  if(on) syncRadioPlayer();
+  else document.body.classList.remove("radio-open");
+};
+radioSpdState();
 
 /* 시작 */
 renderHome();

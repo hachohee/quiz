@@ -1,0 +1,767 @@
+{
+ "updated": "2026-11-21T11:33:03+09:00",
+ "updatedLabel": "11/21 11:33",
+ "perProgram": 8,
+ "programs": [
+  {
+   "id": "cnn5things",
+   "group": "en",
+   "flag": "🇺🇸",
+   "name": "CNN 5 Things",
+   "short": "CNN 5 Things",
+   "station": "CNN Audio",
+   "tag": "미국·세계 뉴스 5분",
+   "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
+   "rss": "https://feeds.megaphone.fm/WMHY2007701094",
+   "episodes": [
+    {
+     "title": "Wall Street’s AI Wipeout",
+     "guid": "5b25b624-b04d-11f0-a7a7-4f1ddb478f16",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY3912534144.mp3",
+     "dateISO": "2026-11-21T07:11:00+09:00",
+     "dateLabel": "11/21(토) 07:11",
+     "dateShort": "11/21(토)",
+     "durationSec": 420,
+     "durationLabel": "7분 00초"
+    },
+    {
+     "title": "NSA Resolves Major Network Outage",
+     "guid": "a59a58fe-b04d-11f0-b754-e78943e6918c",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY4295829082.mp3",
+     "dateISO": "2026-11-21T03:47:00+09:00",
+     "dateLabel": "11/21(토) 03:47",
+     "dateShort": "11/21(토)",
+     "durationSec": 431,
+     "durationLabel": "7분 11초"
+    },
+    {
+     "title": "Tributes Pour In for Fiona the Hippo",
+     "guid": "00b85038-b04e-11f0-adaa-8b18bbb45303",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY7754296874.mp3",
+     "dateISO": "2026-11-20T21:05:00+09:00",
+     "dateLabel": "11/20(금) 21:05",
+     "dateShort": "11/20(금)",
+     "durationSec": 574,
+     "durationLabel": "9분 34초"
+    },
+    {
+     "title": "Trump Wraps Up Trilateral Summit with Xi and Putin",
+     "guid": "5ae02a28-b04d-11f0-a7a7-f7f234c57396",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY7530876046.mp3",
+     "dateISO": "2026-11-20T06:57:00+09:00",
+     "dateLabel": "11/20(금) 06:57",
+     "dateShort": "11/20(금)",
+     "durationSec": 444,
+     "durationLabel": "7분 24초"
+    },
+    {
+     "title": "Wall Street Welcomes Anthropic",
+     "guid": "a5e4b1ec-b04d-11f0-b754-dba19bfa2eaf",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY5532437273.mp3",
+     "dateISO": "2026-11-20T02:09:00+09:00",
+     "dateLabel": "11/20(금) 02:09",
+     "dateShort": "11/20(금)",
+     "durationSec": 496,
+     "durationLabel": "8분 16초"
+    },
+    {
+     "title": "Trump's Historic Talks with Putin, Xi",
+     "guid": "0076221c-b04e-11f0-adaa-7ff0f39fa941",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY9834104166.mp3",
+     "dateISO": "2026-11-19T21:04:00+09:00",
+     "dateLabel": "11/19(목) 21:04",
+     "dateShort": "11/19(목)",
+     "durationSec": 572,
+     "durationLabel": "9분 32초"
+    },
+    {
+     "title": "Officials Face Questions on Global Threats",
+     "guid": "2a6f6466-af7c-11f0-9be7-132a0c13da4d",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1631742496.mp3",
+     "dateISO": "2026-11-19T06:53:00+09:00",
+     "dateLabel": "11/19(목) 06:53",
+     "dateShort": "11/19(목)",
+     "durationSec": 482,
+     "durationLabel": "8분 02초"
+    },
+    {
+     "title": "Trump Returns to China",
+     "guid": "a55876e6-b04d-11f0-b754-b32ea2593db8",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1107949972.mp3",
+     "dateISO": "2026-11-19T02:02:00+09:00",
+     "dateLabel": "11/19(목) 02:02",
+     "dateShort": "11/19(목)",
+     "durationSec": 485,
+     "durationLabel": "8분 05초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "bbcnews",
+   "group": "en",
+   "flag": "🇬🇧",
+   "name": "BBC Global News Podcast",
+   "short": "BBC News",
+   "station": "BBC World Service",
+   "tag": "글로벌 심층 뉴스",
+   "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
+   "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
+   "episodes": [
+    {
+     "title": "UK agrees deal on closer cooperation with EU",
+     "guid": "urn:bbc:podcast:p0pp3pln",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pp3ndk.mp3",
+     "dateISO": "2026-11-21T00:29:00+09:00",
+     "dateLabel": "11/21(토) 00:29",
+     "dateShort": "11/21(토)",
+     "durationSec": 1763,
+     "durationLabel": "29분 23초"
+    },
+    {
+     "title": "Abusers convicted in Joanne Young case echoing Pelicot",
+     "guid": "urn:bbc:podcast:p0pnyk0h",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnyjht.mp3",
+     "dateISO": "2026-11-20T14:33:00+09:00",
+     "dateLabel": "11/20(금) 14:33",
+     "dateShort": "11/20(금)",
+     "durationSec": 1826,
+     "durationLabel": "30분 26초"
+    },
+    {
+     "title": "UN court says Myanmar committed genocide against Rohingyas",
+     "guid": "urn:bbc:podcast:p0pnw5rb",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnw2mf.mp3",
+     "dateISO": "2026-11-20T01:03:00+09:00",
+     "dateLabel": "11/20(금) 01:03",
+     "dateShort": "11/20(금)",
+     "durationSec": 1834,
+     "durationLabel": "30분 34초"
+    },
+    {
+     "title": "BBC reports from Ukraine's undergound frontier",
+     "guid": "urn:bbc:podcast:p0pnrndj",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnrnb6.mp3",
+     "dateISO": "2026-11-19T14:19:00+09:00",
+     "dateLabel": "11/19(목) 14:19",
+     "dateShort": "11/19(목)",
+     "durationSec": 1642,
+     "durationLabel": "27분 22초"
+    },
+    {
+     "title": "Trump, Xi and Putin meet in China",
+     "guid": "urn:bbc:podcast:p0pnndk4",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnncvn.mp3",
+     "dateISO": "2026-11-19T00:43:00+09:00",
+     "dateLabel": "11/19(목) 00:43",
+     "dateShort": "11/19(목)",
+     "durationSec": 1606,
+     "durationLabel": "26분 46초"
+    },
+    {
+     "title": "Nvidia rules out return for disgraced boss",
+     "guid": "urn:bbc:podcast:p0pnjy0q",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnjxxc.mp3",
+     "dateISO": "2026-11-18T14:26:00+09:00",
+     "dateLabel": "11/18(수) 14:26",
+     "dateShort": "11/18(수)",
+     "durationSec": 1737,
+     "durationLabel": "28분 57초"
+    },
+    {
+     "title": "Special episode: Trump, Putin and Xi meeting",
+     "guid": "urn:bbc:podcast:p0pnhq1p",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnhmvc.mp3",
+     "dateISO": "2026-11-18T05:00:00+09:00",
+     "dateLabel": "11/18(수) 05:00",
+     "dateShort": "11/18(수)",
+     "durationSec": 2136,
+     "durationLabel": "35분 36초"
+    },
+    {
+     "title": "Red carpet for Trump in Asia",
+     "guid": "urn:bbc:podcast:p0pngj3s",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pngg1l.mp3",
+     "dateISO": "2026-11-18T01:10:00+09:00",
+     "dateLabel": "11/18(수) 01:10",
+     "dateShort": "11/18(수)",
+     "durationSec": 1846,
+     "durationLabel": "30분 46초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "bbc6min",
+   "group": "en",
+   "flag": "🇬🇧",
+   "name": "BBC 6 Minute English",
+   "short": "6 Minute",
+   "station": "BBC Learning English",
+   "tag": "6분 영어 학습",
+   "desc": "6분 안에 영단어·표현 하나 — 출퇴근·설거지용",
+   "rss": "https://podcasts.files.bbci.co.uk/p02pc9tn.rss",
+   "episodes": [
+    {
+     "title": "Are microplastics harming us?",
+     "guid": "urn:bbc:podcast:p0pnt62q",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnsz8p.mp3",
+     "dateISO": "2026-11-19T19:07:00+09:00",
+     "dateLabel": "11/19(목) 19:07",
+     "dateShort": "11/19(목)",
+     "durationSec": 403,
+     "durationLabel": "6분 43초"
+    },
+    {
+     "title": "Learning from different generations",
+     "guid": "urn:bbc:podcast:p0pmkr5c",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pmkqml.mp3",
+     "dateISO": "2026-11-12T18:59:00+09:00",
+     "dateLabel": "11/12(목) 18:59",
+     "dateShort": "11/12(목)",
+     "durationSec": 411,
+     "durationLabel": "6분 51초"
+    },
+    {
+     "title": "Could vaccines cure cancer?",
+     "guid": "urn:bbc:podcast:p0pldm3h",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pldlfg.mp3",
+     "dateISO": "2026-11-05T18:36:00+09:00",
+     "dateLabel": "11/5(목) 18:36",
+     "dateShort": "11/5(목)",
+     "durationSec": 399,
+     "durationLabel": "6분 39초"
+    },
+    {
+     "title": "Is aircon the answer to a heating world?",
+     "guid": "urn:bbc:podcast:p0pk7d0p",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pk7c8b.mp3",
+     "dateISO": "2026-10-29T18:09:00+09:00",
+     "dateLabel": "10/29(목) 18:09",
+     "dateShort": "10/29(목)",
+     "durationSec": 379,
+     "durationLabel": "6분 19초"
+    },
+    {
+     "title": "What should you eat for a better night’s sleep?",
+     "guid": "urn:bbc:podcast:p0phz9z7",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0phyzz9.mp3",
+     "dateISO": "2026-10-22T18:56:00+09:00",
+     "dateLabel": "10/22(목) 18:56",
+     "dateShort": "10/22(목)",
+     "durationSec": 423,
+     "durationLabel": "7분 03초"
+    },
+    {
+     "title": "Why has gold got so expensive?",
+     "guid": "urn:bbc:podcast:p0pgs2w6",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pgs15w.mp3",
+     "dateISO": "2026-10-15T18:24:00+09:00",
+     "dateLabel": "10/15(목) 18:24",
+     "dateShort": "10/15(목)",
+     "durationSec": 419,
+     "durationLabel": "6분 59초"
+    },
+    {
+     "title": "Are people drinking less alcohol?",
+     "guid": "urn:bbc:podcast:p0pflmn5",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pfllv6.mp3",
+     "dateISO": "2026-10-08T17:28:00+09:00",
+     "dateLabel": "10/8(목) 17:28",
+     "dateShort": "10/8(목)",
+     "durationSec": 409,
+     "durationLabel": "6분 49초"
+    },
+    {
+     "title": "Why does heartbreak hurt so much?",
+     "guid": "urn:bbc:podcast:p0pdc9cq",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pdc7mz.mp3",
+     "dateISO": "2026-10-01T18:47:00+09:00",
+     "dateLabel": "10/1(목) 18:47",
+     "dateShort": "10/1(목)",
+     "durationSec": 393,
+     "durationLabel": "6분 33초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "goodmorningpops",
+   "group": "kr",
+   "flag": "🎵",
+   "name": "조정현의 굿모닝 팝스",
+   "short": "굿모닝팝스",
+   "station": "KBS 2FM",
+   "tag": "영어·팝",
+   "desc": "팝송 한 곡으로 영어 표현 익히기 (매일 10분)",
+   "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/I0000-2014-goodmorningpops",
+   "episodes": [
+    {
+     "title": "11/20(금) Million - Allen Stone",
+     "guid": "gid://kbs-podcast/6aff747cc29f64c502ea8463",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6aff747cc29f64c502ea8463.mp3",
+     "dateISO": "2026-11-20T07:13:30+09:00",
+     "dateLabel": "11/20(금) 07:13",
+     "dateShort": "11/20(금)",
+     "durationSec": 558,
+     "durationLabel": "9분 18초"
+    },
+    {
+     "title": "11/19(목) Wish You The Best - Lewis Capaldi",
+     "guid": "gid://kbs-podcast/6afe22b2990ef67d4af0ebd4",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe22b2990ef67d4af0ebd4.mp3",
+     "dateISO": "2026-11-19T07:12:30+09:00",
+     "dateLabel": "11/19(목) 07:12",
+     "dateShort": "11/19(목)",
+     "durationSec": 591,
+     "durationLabel": "9분 51초"
+    },
+    {
+     "title": "11/18(수) Maybe One Day - Mina Okabe",
+     "guid": "gid://kbs-podcast/6afcd084c5da797751b1dc2e",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afcd084c5da797751b1dc2e.mp3",
+     "dateISO": "2026-11-18T07:09:30+09:00",
+     "dateLabel": "11/18(수) 07:09",
+     "dateShort": "11/18(수)",
+     "durationSec": 679,
+     "durationLabel": "11분 19초"
+    },
+    {
+     "title": "11/17(화) Morning Coffee - Chevy and Nalba",
+     "guid": "gid://kbs-podcast/6afb7eaac5da797751b1c50c",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afb7eaac5da797751b1c50c.mp3",
+     "dateISO": "2026-11-17T07:07:30+09:00",
+     "dateLabel": "11/17(화) 07:07",
+     "dateShort": "11/17(화)",
+     "durationSec": 642,
+     "durationLabel": "10분 42초"
+    },
+    {
+     "title": "11/16(월) Gabriela - KATSEYE",
+     "guid": "gid://kbs-podcast/6afa2aa6990ef67d4af0a5cd",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afa2aa6990ef67d4af0a5cd.mp3",
+     "dateISO": "2026-11-16T06:56:30+09:00",
+     "dateLabel": "11/16(월) 06:56",
+     "dateShort": "11/16(월)",
+     "durationSec": 656,
+     "durationLabel": "10분 56초"
+    },
+    {
+     "title": "11/13(금) For Us - DAUL (feat. THAMA)",
+     "guid": "gid://kbs-podcast/6af63873990ef67d4af07388",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af63873990ef67d4af07388.mp3",
+     "dateISO": "2026-11-13T07:06:30+09:00",
+     "dateLabel": "11/13(금) 07:06",
+     "dateShort": "11/13(금)",
+     "durationSec": 594,
+     "durationLabel": "9분 54초"
+    },
+    {
+     "title": "11/12(목) Move Your Body - Sia",
+     "guid": "gid://kbs-podcast/6af4e536290654b506642e41",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af4e536290654b506642e41.mp3",
+     "dateISO": "2026-11-12T06:59:30+09:00",
+     "dateLabel": "11/12(목) 06:59",
+     "dateShort": "11/12(목)",
+     "durationSec": 599,
+     "durationLabel": "9분 59초"
+    },
+    {
+     "title": "11/11(수) Now I'm The Fool - Angelina Jordan",
+     "guid": "gid://kbs-podcast/6af39533c5da797751b1470a",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af39533c5da797751b1470a.mp3",
+     "dateISO": "2026-11-11T07:05:30+09:00",
+     "dateLabel": "11/11(수) 07:05",
+     "dateShort": "11/11(수)",
+     "durationSec": 584,
+     "durationLabel": "9분 44초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "siseon",
+   "group": "kr",
+   "flag": "🗞️",
+   "name": "김종배의 시선집중",
+   "short": "시선집중",
+   "station": "MBC 표준FM",
+   "tag": "시사 인터뷰",
+   "desc": "평일 아침 7시 5분, 그날의 쟁점 인터뷰",
+   "rss": "https://minicast.imbc.com/PodCast/pod.aspx?code=1000674100000100000",
+   "episodes": [
+    {
+     "title": "11/20(금) [언론어때] 정부 AI커닝 대책 SNS에서 아이디어를? (구교형 경향신문 기자, 노지민 미디어오늘 기자)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_11.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_11.mp3",
+     "dateISO": "2026-11-20T08:30:00+09:00",
+     "dateLabel": "11/20(금) 08:30",
+     "dateShort": "11/20(금)",
+     "durationSec": 1867,
+     "durationLabel": "31분 07초"
+    },
+    {
+     "title": "11/20(금) 3부 대법, 한덕수 일부 무죄 취지로 파기 환송 (이춘재 한겨레 논설위원, 임재성 변호사)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261120_3.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261120_3.mp3",
+     "dateISO": "2026-11-20T08:00:00+09:00",
+     "dateLabel": "11/20(금) 08:00",
+     "dateShort": "11/20(금)",
+     "durationSec": 1476,
+     "durationLabel": "24분 36초"
+    },
+    {
+     "title": "11/20(금) 2부 AI부정, 사후약방문이라도 어떻게? (고민정 더불어민주당 의원) | [6분집중] 지하철에 퍼지는 감동의 멘트 (유승민 작가)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261120_2.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261120_2.mp3",
+     "dateISO": "2026-11-20T07:30:00+09:00",
+     "dateLabel": "11/20(금) 07:30",
+     "dateShort": "11/20(금)",
+     "durationSec": 1296,
+     "durationLabel": "21분 36초"
+    },
+    {
+     "title": "11/20(금) 1부 [JB TIMES] 대법, 한덕수 파기환송…민주당 “조희대 탄핵할 것” | 미중러 첫 정상회담 “핵확산 방지” | 수능 부정행위 98명 적발…스마트기기 활용 5건 | “아파트 이미지 고급화해야 집값 올라” (더 막내작가)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_1.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_1.mp3",
+     "dateISO": "2026-11-20T07:05:00+09:00",
+     "dateLabel": "11/20(금) 07:05",
+     "dateShort": "11/20(금)",
+     "durationSec": 1243,
+     "durationLabel": "20분 43초"
+    },
+    {
+     "title": "11/19(목) [경제어때] 위기의 AI 생태계 앤트로픽이 구원자? (김원장 경제학전 대표, 이용우 서울대 경영대 객원교수)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_11.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_11.mp3",
+     "dateISO": "2026-11-19T08:30:00+09:00",
+     "dateLabel": "11/19(목) 08:30",
+     "dateShort": "11/19(목)",
+     "durationSec": 1668,
+     "durationLabel": "27분 48초"
+    },
+    {
+     "title": "11/19(목) 3부 조국 입국 거부, 일본의 진짜 속내는? (양기호 성공회대 명예교수) | 혼란스러운 고사장, 그래도 모두 최선을 다하길 (장익섭 인천 동산고 교사)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261119_3.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261119_3.mp3",
+     "dateISO": "2026-11-19T08:00:00+09:00",
+     "dateLabel": "11/19(목) 08:00",
+     "dateShort": "11/19(목)",
+     "durationSec": 1455,
+     "durationLabel": "24분 15초"
+    },
+    {
+     "title": "11/19(목) 2부 [블루캠프] AI부정 대책, 충분한가? 정부에 리스크 될 수도? (김영진 더불어민주당 의원) } [6분집중] 초소형카메라 규제? 법이 없어요! (유승민 작가)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261119_2.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261119_2.mp3",
+     "dateISO": "2026-11-19T07:30:00+09:00",
+     "dateLabel": "11/19(목) 07:30",
+     "dateShort": "11/19(목)",
+     "durationSec": 1343,
+     "durationLabel": "22분 23초"
+    },
+    {
+     "title": "11/19(목) 1부 [JB TIMES] '계엄 해제 표결 방해' 추경호 시장 1심 '무죄' | 정청래 \"최민희 징계, 강력 반대\"…\"신천지 문제가 더 큰 해당행위” | 조국 日 입국 불허… “독도 다시 찾을 것” | 한·중 정상 FTA 서비스·투자 타결, '한한령' 해제 기대감 커져 | 820조 예산안 심사에 '쪽지' 대거…상임위 증액만 28조5000억 | 장기요양등급 포기 5년새 1만5000명 (더 막내작가)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_1.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_1.mp3",
+     "dateISO": "2026-11-19T07:05:00+09:00",
+     "dateLabel": "11/19(목) 07:05",
+     "dateShort": "11/19(목)",
+     "durationSec": 1238,
+     "durationLabel": "20분 38초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "newsshow",
+   "group": "kr",
+   "flag": "📻",
+   "name": "박성태의 뉴스쇼",
+   "short": "뉴스쇼",
+   "station": "CBS 표준FM",
+   "tag": "시사",
+   "desc": "아침 7시 30분, 뉴스 뒤 이야기",
+   "rss": "https://www.omnycontent.com/d/playlist/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/b28168e2-c100-4ce4-92b3-af56000e0f7a/podcast.rss",
+   "episodes": [
+    {
+     "title": "[2026/11/19] [댓꿀쇼] \"나보고 정청래 좀 막아달래\" 김종인이 회고한 황당사건! | 김종인 전 비대위원장",
+     "guid": "275751c6-057a-42de-9ae3-b5070024c91e",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/275751c6-057a-42de-9ae3-b5070024c91e/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T13:25:15+09:00",
+     "dateLabel": "11/20(금) 13:25",
+     "dateShort": "11/20(금)",
+     "durationSec": 839,
+     "durationLabel": "13분 59초"
+    },
+    {
+     "title": "[2026/11/20 [뉴스쇼 방송 전체듣기]",
+     "guid": "86a047a1-d4cd-45c3-8c6f-b5080025d41b",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/86a047a1-d4cd-45c3-8c6f-b5080025d41b/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T11:24:28+09:00",
+     "dateLabel": "11/20(금) 11:24",
+     "dateShort": "11/20(금)",
+     "durationSec": 6930,
+     "durationLabel": "1시간 55분"
+    },
+    {
+     "title": "[2026/11/20] [뉴스락 2부] \"조희대 탄핵? 의원직 거세요\" 제명 각오한 하헌기 해당행위(?) | 노영희 김종혁 하헌기 서정욱",
+     "guid": "d592c7de-8314-4970-b3ba-b508000ab270",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/d592c7de-8314-4970-b3ba-b508000ab270/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T11:17:59+09:00",
+     "dateLabel": "11/20(금) 11:17",
+     "dateShort": "11/20(금)",
+     "durationSec": 1669,
+     "durationLabel": "27분 49초"
+    },
+    {
+     "title": "[2026/11/20] “대통령의 진심을 왜 모를까?” 李 SNS 분석한 탁현민! | 탁현민 국립목포대 특임교수",
+     "guid": "e0060bf1-cf7e-46f7-a64a-b5080014058e",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/e0060bf1-cf7e-46f7-a64a-b5080014058e/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T10:19:36+09:00",
+     "dateLabel": "11/20(금) 10:19",
+     "dateShort": "11/20(금)",
+     "durationSec": 2072,
+     "durationLabel": "34분 32초"
+    },
+    {
+     "title": "[2026/11/20] [뉴스락 1부] “계엄 전후로 죄를 쪼개?” 서정욱도 비판한 한덕수 무죄 | 노영희 김종혁 하헌기 서정욱",
+     "guid": "e8bd90eb-b982-4150-bd80-b507018a7471",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/e8bd90eb-b982-4150-bd80-b507018a7471/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T10:10:14+09:00",
+     "dateLabel": "11/20(금) 10:10",
+     "dateShort": "11/20(금)",
+     "durationSec": 1333,
+     "durationLabel": "22분 13초"
+    },
+    {
+     "title": "[2026/11/20] [뉴스 연구소] 김민석이 조희대 탄핵 꺼낸 진짜 이유! 민주당 찐반응 취재한 박순봉 | 김준일 평론가, 박순봉 경향신문 기자",
+     "guid": "188f1315-933b-4704-bafa-b507018a7470",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/188f1315-933b-4704-bafa-b507018a7470/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-20T09:41:34+09:00",
+     "dateLabel": "11/20(금) 09:41",
+     "dateShort": "11/20(금)",
+     "durationSec": 1754,
+     "durationLabel": "29분 14초"
+    },
+    {
+     "title": "[2026/11/19] [뉴스쇼 방송 전체듣기]",
+     "guid": "11b3bfcc-d498-496a-9972-b50700221882",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/11b3bfcc-d498-496a-9972-b50700221882/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-19T11:16:00+09:00",
+     "dateLabel": "11/19(목) 11:16",
+     "dateShort": "11/19(목)",
+     "durationSec": 6026,
+     "durationLabel": "1시간 40분"
+    },
+    {
+     "title": "[2026/11/19] [여의도 사자후 1부] \"나라면 윤석열 무릎 꿇렸다!\" 한덕수 유죄 확신한 김근식! | 김용남 김근식 박성민 김성열",
+     "guid": "e739557c-01c5-437a-8bc0-b50601816e7d",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/e739557c-01c5-437a-8bc0-b50601816e7d/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-19T10:26:06+09:00",
+     "dateLabel": "11/19(목) 10:26",
+     "dateShort": "11/19(목)",
+     "durationSec": 1309,
+     "durationLabel": "21분 49초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "mightysuccess",
+   "group": "kr",
+   "flag": "💡",
+   "name": "성공예감 이대호입니다",
+   "short": "성공예감",
+   "station": "KBS 1라디오",
+   "tag": "경제·재테크",
+   "desc": "돈·일·창업 이야기를 사례로 (보통 30~40분)",
+   "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
+   "episodes": [
+    {
+     "title": "원탁의 기자들 - 한중, 한중러 정상회담... APEC이 남긴 것",
+     "guid": "gid://kbs-podcast/6affd07a66294fb97158661a",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affd07a66294fb97158661a.mp3",
+     "dateISO": "2026-11-20T13:45:30+09:00",
+     "dateLabel": "11/20(금) 13:45",
+     "dateShort": "11/20(금)",
+     "durationSec": 2266,
+     "durationLabel": "37분 46초"
+    },
+    {
+     "title": "11/20(금) - [뿌리 깊은 제조업] ‘비만치료제' 속에 숨은 과학과 기술",
+     "guid": "gid://kbs-podcast/6affcf68c29f64c502ea8978",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affcf68c29f64c502ea8978.mp3",
+     "dateISO": "2026-11-20T13:41:30+09:00",
+     "dateLabel": "11/20(금) 13:41",
+     "dateShort": "11/20(금)",
+     "durationSec": 5975,
+     "durationLabel": "1시간 39분"
+    },
+    {
+     "title": "오늘의 경제 뉴스 - 수능일 주식시장 1시간 늦게 개장… 코스피 5천 회복",
+     "guid": "gid://kbs-podcast/6afe93fbaa2542d293205815",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe93fbaa2542d293205815.mp3",
+     "dateISO": "2026-11-19T15:15:30+09:00",
+     "dateLabel": "11/19(목) 15:15",
+     "dateShort": "11/19(목)",
+     "durationSec": 1066,
+     "durationLabel": "17분 46초"
+    },
+    {
+     "title": "11/19(목) - [투자의 민족] ‘조선시대도 커닝이 있었다' 시대를 넘는 부정행위 이야기",
+     "guid": "gid://kbs-podcast/6afe9363aa2542d293205803",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe9363aa2542d293205803.mp3",
+     "dateISO": "2026-11-19T15:12:30+09:00",
+     "dateLabel": "11/19(목) 15:12",
+     "dateShort": "11/19(목)",
+     "durationSec": 5981,
+     "durationLabel": "1시간 39분"
+    },
+    {
+     "title": "오늘의 경제 뉴스 - 미국 주요 경제 지표와 엔비디아 3분기 실적",
+     "guid": "gid://kbs-podcast/6afd2951990ef67d4af0da76",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afd2951990ef67d4af0da76.mp3",
+     "dateISO": "2026-11-18T13:28:30+09:00",
+     "dateLabel": "11/18(수) 13:28",
+     "dateShort": "11/18(수)",
+     "durationSec": 1210,
+     "durationLabel": "20분 10초"
+    },
+    {
+     "title": "11/18(수) - [미래생활사전] 젠슨 황의 성공과 몰락",
+     "guid": "gid://kbs-podcast/6afd2947e61ae23f027afede",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afd2947e61ae23f027afede.mp3",
+     "dateISO": "2026-11-18T13:27:30+09:00",
+     "dateLabel": "11/18(수) 13:27",
+     "dateShort": "11/18(수)",
+     "durationSec": 5985,
+     "durationLabel": "1시간 39분"
+    },
+    {
+     "title": "원탁의 기자들K - AI에 뚫린 부정행위... 이틀 뒤 수능 어쩌나?",
+     "guid": "gid://kbs-podcast/6afbd76ee61ae23f027ae643",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd76ee61ae23f027ae643.mp3",
+     "dateISO": "2026-11-17T13:26:30+09:00",
+     "dateLabel": "11/17(화) 13:26",
+     "dateShort": "11/17(화)",
+     "durationSec": 2062,
+     "durationLabel": "34분 22초"
+    },
+    {
+     "title": "11/17(화) - [심층 인터뷰] AI 시대, 교육의 현실과 미래",
+     "guid": "gid://kbs-podcast/6afbd767290654b506649786",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd767290654b506649786.mp3",
+     "dateISO": "2026-11-17T13:26:29+09:00",
+     "dateLabel": "11/17(화) 13:26",
+     "dateShort": "11/17(화)",
+     "durationSec": 5965,
+     "durationLabel": "1시간 39분"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  },
+  {
+   "id": "todayworld",
+   "group": "kr",
+   "flag": "🌏",
+   "name": "KBS 1라디오 오늘 세계는",
+   "short": "오늘세계",
+   "station": "KBS 1라디오",
+   "tag": "국제",
+   "desc": "국제 정세를 기자들이 풀어 주는 45분",
+   "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
+   "episodes": [
+    {
+     "title": "11/20(금) - [수상한 GPS] 푸틴이 꺼낸 '새 얄타' 청구서, 우크라이나 넘어 유럽 질서 재편까지 노린다",
+     "guid": "gid://kbs-podcast/6affc811c29f64c502ea8915",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affc811c29f64c502ea8915.mp3",
+     "dateISO": "2026-11-20T13:09:30+09:00",
+     "dateLabel": "11/20(금) 13:09",
+     "dateShort": "11/20(금)",
+     "durationSec": 2846,
+     "durationLabel": "47분 26초"
+    },
+    {
+     "title": "11/19(목) - [글로벌 경제] 인플레이션 2차 파도 남았다. 연준 ‘금리 인상' 시계 빨라지나?",
+     "guid": "gid://kbs-podcast/6afe7789d0caccfeb83599a7",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe7789d0caccfeb83599a7.mp3",
+     "dateISO": "2026-11-19T13:14:30+09:00",
+     "dateLabel": "11/19(목) 13:14",
+     "dateShort": "11/19(목)",
+     "durationSec": 2879,
+     "durationLabel": "47분 59초"
+    },
+    {
+     "title": "11/18(수) - [글로벌 이슈 - 에너지] 내년엔 원유 남아돈다! 호르무즈는 아직 막혀 있는데 왜?",
+     "guid": "gid://kbs-podcast/6afd27ac990ef67d4af0da34",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afd27ac990ef67d4af0da34.mp3",
+     "dateISO": "2026-11-18T13:21:30+09:00",
+     "dateLabel": "11/18(수) 13:21",
+     "dateShort": "11/18(수)",
+     "durationSec": 2758,
+     "durationLabel": "45분 58초"
+    },
+    {
+     "title": "11/17(화) - [글로벌 이슈] 젠슨 황 다음 타겟은 러트닉? 젠슨 황 퇴진, 대중 강경파의 승리?",
+     "guid": "gid://kbs-podcast/6afbd415e61ae23f027ae600",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd415e61ae23f027ae600.mp3",
+     "dateISO": "2026-11-17T13:12:30+09:00",
+     "dateLabel": "11/17(화) 13:12",
+     "dateShort": "11/17(화)",
+     "durationSec": 2776,
+     "durationLabel": "46분 16초"
+    },
+    {
+     "title": "11/16(월) - [글로벌 이슈] 사상 첫 미·중·러 정상회담… 핵 군축·이란 전쟁 해법 찾을 수 있을까",
+     "guid": "gid://kbs-podcast/6afa8130e61ae23f027ad035",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afa8130e61ae23f027ad035.mp3",
+     "dateISO": "2026-11-16T13:06:30+09:00",
+     "dateLabel": "11/16(월) 13:06",
+     "dateShort": "11/16(월)",
+     "durationSec": 2851,
+     "durationLabel": "47분 31초"
+    },
+    {
+     "title": "11/13(금) - [수상한 GPS] 젠슨 황 결국 사임, ‘테크 히어로'의 몰락… ‘젠슨 황 스캔들' 트럼프와 백악관도 흔든다.",
+     "guid": "gid://kbs-podcast/6af6903e290654b506644ba2",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af6903e290654b506644ba2.mp3",
+     "dateISO": "2026-11-13T13:21:30+09:00",
+     "dateLabel": "11/13(금) 13:21",
+     "dateShort": "11/13(금)",
+     "durationSec": 2814,
+     "durationLabel": "46분 54초"
+    },
+    {
+     "title": "11/12(목) - [글로벌 경제] 중국 AI, 미국 따라잡을 기회? 데이터센터 규제에 젠슨황 ‘스파이 논란'까지…",
+     "guid": "gid://kbs-podcast/6af53d52c5da797751b16730",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af53d52c5da797751b16730.mp3",
+     "dateISO": "2026-11-12T13:15:30+09:00",
+     "dateLabel": "11/12(목) 13:15",
+     "dateShort": "11/12(목)",
+     "durationSec": 2887,
+     "durationLabel": "48분 07초"
+    },
+    {
+     "title": "11/11(수) - [글로벌 이슈] 美 중간선거 표심 가른 데이터센터 논란, '중단되는 것 아니다. 관건은 \"어떻게 지을 것인가?\"'",
+     "guid": "gid://kbs-podcast/6af3ead6290654b506641baf",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af3ead6290654b506641baf.mp3",
+     "dateISO": "2026-11-11T13:11:30+09:00",
+     "dateLabel": "11/11(수) 13:11",
+     "dateShort": "11/11(수)",
+     "durationSec": 2847,
+     "durationLabel": "47분 27초"
+    }
+   ],
+   "ok": true,
+   "stale": false
+  }
+ ]
+}

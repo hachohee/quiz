@@ -8,6 +8,32 @@
 - 구조: `index.html` (앱 전체), `members/` (BTS 7인 대표 사진), `manifest.webmanifest`, `sw.js`, 아이콘
 - 원본: `work/toeic_monster_quiz.html` (이 저장소의 `index.html`과 동일하게 유지)
 
+## 📻 매일 라디오 다시듣기 (CNN · BBC · 굿모닝팝스 · 시사) — 2026-11-21 추가
+
+홈의 **📻 매일 라디오** 카드에서 8개 공식 팟캐스트의 최신 8회차를 앱 안에서 바로 듣습니다.
+
+| 그룹 | 프로그램 | 방송사 |
+|---|---|---|
+| 🇬🇧🌍 | CNN 5 Things | CNN Audio |
+| | BBC Global News Podcast | BBC World Service |
+| | BBC 6 Minute English | BBC Learning English |
+| 🇰🇷 | 조정현의 굿모닝 팝스 | KBS 2FM |
+| | 김종배의 시선집중 | MBC 표준FM |
+| | 박성태의 뉴스쇼 | CBS 표준FM |
+| | 성공예감 이대호입니다 | KBS 1라디오 |
+| | 오늘 세계는 | KBS 1라디오 |
+
+- **최신 회차 수집**: `scripts/fetch_radio.py`(표준 라이브러리만 사용)가 각 RSS에서 최신 8개를 뽑아
+  `radio_episodes.json`을 만듭니다. 하루 4번(한국시간 08·10·13·19시) `.github/workflows/update-radio.yml`이
+  자동 실행해 바뀐 게 있으면 커밋합니다(`workflow_dispatch`로 수동 실행도 가능).
+- **앱 내장 플레이어**: 화면 아래 고정 플레이어에서 재생/일시정지, **15초 앞·뒤**, **진행바(seek)**,
+  **배속 0.8x / 1.0x / 1.25x / 1.5x**. 30~47분짜리 시사 프로그램을 듣다가 나갔다 와도 이어서 재생됩니다.
+- **들은 회차 체크**: 각 회차의 `✓` 또는 플레이어의 `✓ 들었어요` → `tmq_radio_heard_v1`. 끝까지 들으면 자동 체크.
+  재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
+- **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
+  Mixed Content로 재생이 막히지 않게 했습니다.
+- **서비스 워커**: `toeic-bts-v14` · `radio_episodes.json`은 Network-First(온라인이면 항상 새 JSON, 오프라인일 때만 캐시).
+
 ## 🔥 토익 A to Z & 실전 LC 대폭 확충 (2026-11-21)
 
 토익 파트를 **800점 실전형 A to Z**로 넓혔습니다. 기존 Day 1~9 · 3초 공식 · 상식 문제는

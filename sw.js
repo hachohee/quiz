@@ -1,5 +1,6 @@
 /* 똑똑핫초 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용) */
-const CACHE = 'toeic-bts-v13';
+const CACHE = 'toeic-bts-v14';
+const RADIO_JSON = './radio_episodes.json';
 const SHELL = [
   './',
   './index.html',
@@ -30,21 +31,48 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+function networkFirst(req) {
+  return fetch(req)
+    .then((res) => {
+      if (res && res.ok) {
+        const copy = res.clone();
+        caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
+      }
+      return res;
+    })
+    .catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')));
+}
+
+/* 📻 라디오 회차 목록: 온라인이면 항상 새 JSON, 오프라인일 때만 캐시.
+   캐시도 없으면 index.html 대신 빈 JSON을 돌려줘 앱이 '불러오기 실패'로 처리하게 함 */
+function networkFirstRadio(req) {
+  return fetch(req)
+    .then((res) => {
+      if (res && res.ok) {
+        const copy = res.clone();
+        caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
+      }
+      return res;
+    })
+    .catch(() =>
+      caches.match(req).then(
+        (hit) =>
+          hit ||
+          new Response('{"programs":[]}', {
+            status: 503,
+            headers: { 'Content-Type': 'application/json; charset=utf-8' }
+          })
+      )
+    );
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
 
-  event.respondWith(
-    fetch(req)
-      .then((res) => {
-        if (res && res.ok) {
-          const copy = res.clone();
-          caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
-        }
-        return res;
-      })
-      .catch(() =>
-        caches.match(req).then((hit) => hit || caches.match('./index.html'))
-      )
-  );
+  if (new URL(req.url).pathname.endsWith('/radio_episodes.json')) {
+    event.respondWith(networkFirstRadio(req));
+    return;
+  }
+  event.respondWith(networkFirst(req));
 });
