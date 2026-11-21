@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>모바일 미리보기 · 똑똑핫초</title>
+<style>
+  html,body{margin:0;background:#05030c;display:flex;justify-content:center;align-items:flex-start}
+  #phone{width:390px;height:844px;border:0;background:#0c0819;display:block}
+</style>
+</head>
+<body>
+<iframe id="phone" src="./index.html?v=radio1" title="똑똑핫초 모바일 미리보기"></iframe>
+<script>
+  var h = parseInt((location.search.match(/[?&]h=(\d+)/)||[])[1] || "844", 10);
+  document.getElementById("phone").style.height = h + "px";
+</script>
+</body>
+</html>
