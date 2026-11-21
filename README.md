@@ -24,8 +24,10 @@
 | | 오늘 세계는 | KBS 1라디오 |
 
 - **최신 회차 수집**: `scripts/fetch_radio.py`(표준 라이브러리만 사용)가 각 RSS에서 최신 8개를 뽑아
-  `radio_episodes.json`을 만듭니다. 하루 4번(한국시간 08·10·13·19시) `.github/workflows/update-radio.yml`이
-  자동 실행해 바뀐 게 있으면 커밋합니다(`workflow_dispatch`로 수동 실행도 가능).
+  `radio_episodes.json`을 만듭니다. 회차 내용이 그대로면 갱신 시각도 그대로 두어 쓸데없는 커밋이 생기지 않습니다.
+- **자동 갱신**: `.github/workflows/update-radio.yml`(한국시간 08·10·13·19시 + `workflow_dispatch`).
+  GitHub App 토큰에 `workflows` 권한이 없어 아직 저장소에 못 올렸고, 그 전에는
+  `sh scripts/update_radio_live.sh`를 아침·저녁 스케줄에서 돌리면 됩니다(바뀐 게 있을 때만 커밋·푸시).
 - **앱 내장 플레이어**: 화면 아래 고정 플레이어에서 재생/일시정지, **15초 앞·뒤**, **진행바(seek)**,
   **배속 0.8x / 1.0x / 1.25x / 1.5x**. 30~47분짜리 시사 프로그램을 듣다가 나갔다 와도 이어서 재생됩니다.
 - **들은 회차 체크**: 각 회차의 `✓` 또는 플레이어의 `✓ 들었어요` → `tmq_radio_heard_v1`. 끝까지 들으면 자동 체크.

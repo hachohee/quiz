@@ -338,9 +338,23 @@ def main():
         programs.append(entry)
 
     now = datetime.now(KST)
+    label = "%d/%d %02d:%02d" % (now.month, now.day, now.hour, now.minute)
+
+    # 회차 내용이 그대로면 '갱신 시각'도 그대로 두어, 바뀐 게 없을 때 커밋이 생기지 않게 함
+    def content(progs):
+        return json.dumps(progs, ensure_ascii=False, sort_keys=True)
+
+    if content(programs) == content(previous.get("programs") or []):
+        now_iso = previous.get("updated") or now.isoformat(timespec="seconds")
+        label = previous.get("updatedLabel") or label
+        unchanged = True
+    else:
+        now_iso = now.isoformat(timespec="seconds")
+        unchanged = False
+
     doc = {
-        "updated": now.isoformat(timespec="seconds"),
-        "updatedLabel": "%d/%d %02d:%02d" % (now.month, now.day, now.hour, now.minute),
+        "updated": now_iso,
+        "updatedLabel": label,
         "perProgram": PER_PROGRAM,
         "programs": programs,
     }
@@ -352,8 +366,9 @@ def main():
     os.replace(tmp, out_path)
 
     total = sum(len(p["episodes"]) for p in programs)
-    print("→ %s (방송 %d개 · 회차 %d개 · 실패 %d개)"
-          % (out_path, len(programs), total, len(problems)))
+    print("→ %s (방송 %d개 · 회차 %d개 · 실패 %d개)%s"
+          % (out_path, len(programs), total, len(problems),
+             " — 내용 변화 없음" if unchanged else " — 갱신됨"))
     return 0 if len(problems) < len(programs) else 1
 
 
