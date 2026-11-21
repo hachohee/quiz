@@ -632,8 +632,8 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
   border-radius:10px;padding:7px 13px;font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer}
 .rplayer{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;
   padding:8px 12px calc(9px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,rgba(21,13,46,.97),rgba(11,7,24,.995));
-  border-top:1px solid rgba(139,92,246,.36);box-shadow:0 -14px 34px -18px #000}
+  background:linear-gradient(180deg,#1b1238,#0c0718);
+  border-top:1px solid rgba(139,92,246,.42);box-shadow:0 -14px 34px -18px #000}
 body.radio-on.radio-open .rplayer{display:block}
 body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bottom))}
 .rplayer-in{max-width:520px;margin:0 auto}
@@ -4355,7 +4355,7 @@ function renderRadioList(){
     var e=p.episodes[j], key=radioEpKey(p,e);
     var on=!!(radioCur && radioCur.key===key);
     var heard=!!radioHeard[key];
-    html+='<div class="rep'+(on?" on":"")+'" data-rep="'+radioPi+':'+j+'" role="button" tabindex="0">'
+    html+='<div class="rep'+(on?" on":"")+'" data-rep="'+radioPi+':'+j+'">'
       +'<span class="rep-ico">'+((on&&playing)?"❚❚":"▶")+'</span>'
       +'<div class="rep-m"><div class="rep-t">'+esc(e.title)+'</div>'
       +'<div class="rep-d"><span>'+esc(e.dateLabel||"")+'</span>'
@@ -4514,7 +4514,7 @@ function playRadio(pi,ei){
 function renderRadio(){
   var up=$("radioUpdated");
   if(up){
-    if(radioData) up.textContent="최신 회차 "+(radioData.updatedLabel||"")+" 기준 · 하루 4번(08·10·13·19시) 자동 갱신";
+    if(radioData) up.textContent="최신 회차 "+(radioData.updatedLabel||"")+" · 하루 4번 자동 갱신";
     else if(radioLoading) up.textContent="최신 회차를 불러오는 중…";
     else up.textContent="최신 회차를 못 받아왔어요 · ↻ 로 다시 시도";
   }
