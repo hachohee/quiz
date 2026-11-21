@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-21T11:33:03+09:00",
- "updatedLabel": "11/21 11:33",
+ "updated": "2026-11-22T06:00:53+09:00",
+ "updatedLabel": "11/22 06:00",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,16 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "She Clocked in as a Nurse and Clocked Out With a Newborn",
+     "guid": "08492ca0-af72-11f0-8a77-c744b16f6e7b",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY4478676606.mp3",
+     "dateISO": "2026-11-21T18:30:00+09:00",
+     "dateLabel": "11/21(토) 18:30",
+     "dateShort": "11/21(토)",
+     "durationSec": 1055,
+     "durationLabel": "17분 35초"
+    },
     {
      "title": "Wall Street’s AI Wipeout",
      "guid": "5b25b624-b04d-11f0-a7a7-4f1ddb478f16",
@@ -83,16 +93,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 482,
      "durationLabel": "8분 02초"
-    },
-    {
-     "title": "Trump Returns to China",
-     "guid": "a55876e6-b04d-11f0-b754-b32ea2593db8",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1107949972.mp3",
-     "dateISO": "2026-11-19T02:02:00+09:00",
-     "dateLabel": "11/19(목) 02:02",
-     "dateShort": "11/19(목)",
-     "durationSec": 485,
-     "durationLabel": "8분 05초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "The Happy Pod: The 'amazing’ device that controls Tourette's",
+     "guid": "urn:bbc:podcast:p0pp4d5y",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pp4c96.mp3",
+     "dateISO": "2026-11-21T21:00:00+09:00",
+     "dateLabel": "11/21(토) 21:00",
+     "dateShort": "11/21(토)",
+     "durationSec": 1589,
+     "durationLabel": "26분 29초"
+    },
+    {
+     "title": "Man found guilty of starting deadly LA wildfire",
+     "guid": "urn:bbc:podcast:p0pp66wy",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pp66mc.mp3",
+     "dateISO": "2026-11-21T14:00:00+09:00",
+     "dateLabel": "11/21(토) 14:00",
+     "dateShort": "11/21(토)",
+     "durationSec": 1469,
+     "durationLabel": "24분 29초"
+    },
     {
      "title": "UK agrees deal on closer cooperation with EU",
      "guid": "urn:bbc:podcast:p0pp3pln",
@@ -168,26 +188,6 @@
      "dateShort": "11/18(수)",
      "durationSec": 1737,
      "durationLabel": "28분 57초"
-    },
-    {
-     "title": "Special episode: Trump, Putin and Xi meeting",
-     "guid": "urn:bbc:podcast:p0pnhq1p",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pnhmvc.mp3",
-     "dateISO": "2026-11-18T05:00:00+09:00",
-     "dateLabel": "11/18(수) 05:00",
-     "dateShort": "11/18(수)",
-     "durationSec": 2136,
-     "durationLabel": "35분 36초"
-    },
-    {
-     "title": "Red carpet for Trump in Asia",
-     "guid": "urn:bbc:podcast:p0pngj3s",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-rss-low/proto/https/vpid/p0pngg1l.mp3",
-     "dateISO": "2026-11-18T01:10:00+09:00",
-     "dateLabel": "11/18(수) 01:10",
-     "dateShort": "11/18(수)",
-     "durationSec": 1846,
-     "durationLabel": "30분 46초"
     }
    ],
    "ok": true,
@@ -395,6 +395,16 @@
    "rss": "https://minicast.imbc.com/PodCast/pod.aspx?code=1000674100000100000",
    "episodes": [
     {
+     "title": "11/21(토) 김종배의 시선집중",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261121.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261121.mp3",
+     "dateISO": "2026-11-21T07:05:00+09:00",
+     "dateLabel": "11/21(토) 07:05",
+     "dateShort": "11/21(토)",
+     "durationSec": 2576,
+     "durationLabel": "42분 56초"
+    },
+    {
      "title": "11/20(금) [언론어때] 정부 AI커닝 대책 SNS에서 아이디어를? (구교형 경향신문 기자, 노지민 미디어오늘 기자)",
      "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_11.mp3",
      "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261120_11.mp3",
@@ -463,16 +473,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 1343,
      "durationLabel": "22분 23초"
-    },
-    {
-     "title": "11/19(목) 1부 [JB TIMES] '계엄 해제 표결 방해' 추경호 시장 1심 '무죄' | 정청래 \"최민희 징계, 강력 반대\"…\"신천지 문제가 더 큰 해당행위” | 조국 日 입국 불허… “독도 다시 찾을 것” | 한·중 정상 FTA 서비스·투자 타결, '한한령' 해제 기대감 커져 | 820조 예산안 심사에 '쪽지' 대거…상임위 증액만 28조5000억 | 장기요양등급 포기 5년새 1만5000명 (더 막내작가)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_1.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261119_1.mp3",
-     "dateISO": "2026-11-19T07:05:00+09:00",
-     "dateLabel": "11/19(목) 07:05",
-     "dateShort": "11/19(목)",
-     "durationSec": 1238,
-     "durationLabel": "20분 38초"
     }
    ],
    "ok": true,
