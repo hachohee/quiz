@@ -34,7 +34,19 @@
   재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
 - **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
   Mixed Content로 재생이 막히지 않게 했습니다.
-- **서비스 워커**: `toeic-bts-v14` · `radio_episodes.json`은 Network-First(온라인이면 항상 새 JSON, 오프라인일 때만 캐시).
+- **서비스 워커**: `toeic-bts-v15` · `radio_episodes.json`은 Network-First(온라인이면 항상 새 JSON, 오프라인일 때만 캐시).
+
+## 📚 매일 18:00 자동 반영 — Day 10 (2026-11-21)
+
+18:00 '저녁 토익 10분' 회차에서 낸 내용을 앱 데이터에 그대로 넣었습니다.
+
+- **📜 도파민 단어 → Day 10(👥 인사·채용)**: 오늘 새 단어 8개 중 이미 있던 3개(promotion·salary·colleague)는 그대로 두고,
+  **supervisor · certificate · policy · conference · efficiently** 5개를 이어 붙였습니다(Day 10 = 45단어).
+- **⚡ 3초 문법**: Day 8~10 사흘째 같은 공식 **`a / the + [ ] + 명사`** 문제 1개 추가 (73개).
+  "The supervisor shared a ___ policy with the team." → a와 policy 사이는 꾸며 주는 말 자리, 정답 clear.
+- **🌍 상식**: '🧠 오늘의 상식 한 조각'으로 낸 **매몰비용(Sunk Cost)** 을 4단계 경제에 문항으로 추가 (107개).
+- 현재 규모: 단어 **380**(397항목) · 문법 **73** · 해석 47 · LC 76 · 상식 **107**
+
 
 ## 🔥 토익 A to Z & 실전 LC 대폭 확충 (2026-11-21)
 

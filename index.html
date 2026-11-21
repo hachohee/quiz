@@ -1059,6 +1059,11 @@ var WORDS = [
 {d:10,w:"trainee",p:"트레이니",pos:"명사",m:"연수생, 수습 직원",s:"트레인(train·훈련) 받는 사람, '연수생'.",c:"a new trainee (신입 연수생)"},
 {d:10,w:"aptitude",p:"앱티튜드",pos:"명사",m:"적성",s:"앱(app)을 튜닝하듯 딱 맞는 재능, '적성'.",c:"an aptitude test (적성 검사)"},
 {d:10,w:"headhunt",p:"헤드헌트",pos:"동사",m:"스카우트하다",s:"머리(head)를 사냥(hunt)해 데려오는 '스카우트'.",c:"headhunt a specialist (전문가를 스카우트하다)"},
+{d:10,w:"supervisor",p:"수퍼바이저",pos:"명사",m:"상사, 감독관",s:"위에서(super) 매의 눈으로 보는(visor) 사람 = 우리 팀 '상사'!",c:"immediate supervisor (직속 상사)"},
+{d:10,w:"certificate",p:"서티피킷",pos:"명사",m:"증명서, 자격증",s:"서티(확실히) 피킷(피켓처럼 딱 내보이는 종이) = '자격증·증명서'!",c:"birth certificate (출생증명서)"},
+{d:10,w:"policy",p:"폴리시",pos:"명사",m:"정책, 규정",s:"폴리스(경찰)가 지키는 나라·회사의 약속 = '정책·규정'!",c:"company policy (회사 규정)"},
+{d:10,w:"conference",p:"컨퍼런스",pos:"명사",m:"회의, 학회",s:"컵(con) 들고 모여서(fer) 이야기 나누는 큰 '회의'!",c:"conference room (회의실)"},
+{d:10,w:"efficiently",p:"이피션틀리",pos:"부사",m:"효율적으로",s:"생선(fish) 한 마리로 뚝딱(-ly) 해치우는 모습 = '효율적으로'!",c:"work efficiently (효율적으로 일하다)"},
 {d:11,w:"accounting",p:"어카운팅",pos:"명사",m:"회계",s:"어카운트(계좌)에 팅(툭) 찍어 정리하는 '회계'.",c:"the accounting department (회계부)"},
 {d:11,w:"revenue",p:"레버뉴",pos:"명사",m:"매출, 수익",s:"레버(지렛대)로 뉴(새) 돈을 들어올리는 '매출'.",c:"annual revenue (연간 매출)"},
 {d:11,w:"profit",p:"프라핏",pos:"명사",m:"이익, 수익",s:"프로(전문가)도 핏(fit) 맞게 남기는 '이익'.",c:"net profit (순이익)"},
@@ -1495,7 +1500,9 @@ var GRAMMAR = [
 {tag:"be binding on = 구속력",q:"The terms of the agreement are ___ to both parties.",opts:["bind","binding","bound","binder"],a:1,
  tip:"be동사 뒤 보어 자리 → <b>binding</b>(구속력 있는). be binding on/upon = …을 구속하다."},
 {tag:"twice those of (복수 대명사)",q:"Our profits this year are twice ___ of last year.",opts:["that","those","this","them"],a:1,
- tip:"앞의 profits(복수)를 대신 받는 <b>those</b>. 단수 명사를 받을 땐 that!"}
+ tip:"앞의 profits(복수)를 대신 받는 <b>those</b>. 단수 명사를 받을 땐 that!"},
+{tag:"a / the + [ ] + 명사",q:"The supervisor shared a ___ policy with the team.",opts:["clear","clearly","clarity","clarify"],a:0,
+ tip:"a 다음, policy(명사) 앞 = 꾸며 주는 말 자리! -ly는 부사, -ity는 명사, -ify는 동사. 정답은 <b>clear</b>!"}
 ];
 
 /* ============================================================
@@ -2312,6 +2319,9 @@ var SENSE = [
 {st:4,term:"기회비용",k:"d2t",line:"하나를 선택하면서 포기한 다른 선택의 가치.",
  q:"하나를 선택할 때 포기한 다른 선택의 가치를 무엇이라 할까요?",opts:["기회비용","매몰비용","이자비용","한계비용"],a:0,
  tip:"영화를 고르면 포기한 건 독서 시간. 그게 기회비용! (11/19 상식 한 조각 그 개념)"},
+{st:4,term:"매몰비용",k:"d2t",line:"이미 써버려 돌려받을 수 없는 비용. 앞으로의 결정에서는 잊어야 한다.",
+ q:"이미 써버려 돌려받을 수 없어 앞으로의 결정에서 빼야 하는 비용은?",opts:["매몰비용","기회비용","한계비용","이자비용"],a:0,
+ tip:"재미없는 영화도 '표값 아까워서' 끝까지 보는 순간이 매몰비용에 끌려가는 것! (11/21 상식 한 조각 그 개념)"},
 {st:4,term:"금리",k:"d2t",line:"돈을 빌리거나 맡길 때 붙는 이자의 비율. 중앙은행의 기준금리가 출발점.",
  q:"돈을 빌릴 때 붙는 이자의 비율은?",opts:["금리","환율","물가","배당"],a:0,
  tip:"금리 오르면 대출 이자도 오른다. 기사에서 '기준금리 동결' 자주 나와요."},
