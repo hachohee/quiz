@@ -4657,6 +4657,10 @@ function rsKeyNow(){
 function rsSegsFor(key){
   if(!radioTr || !key) return null;
   var v=radioTr[key];
+  if(!v){                       /* 키 표기가 달라도 찾아지게: prog::guid / prog:guid / guid */
+    var g=key.indexOf("::")>=0 ? key.slice(key.indexOf("::")+2) : key;
+    v=radioTr[key.replace("::",":")] || radioTr[g];
+  }
   return (v && v.length && typeof v[0]==="object") ? v : null;
 }
 function rsLoad(){

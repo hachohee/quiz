@@ -46,7 +46,7 @@
 - **보기 모드**: `영+한 같이` / `영어만` / `숨기기`(이 폰에 `tmq_radio_script_mode_v1`로 저장).
 - **문장 탭**: 문장을 누르면 그 `start` 초로 점프해 바로 재생 — 받아쓰기·복습용.
 - **대본 없는 회차**(한국 라디오·지난 회차)는 오디오만 나오고 `이 회차는 아직 대본이 준비되지 않았어요` 한 줄만 표시됩니다.
-- **데이터**: `radio_transcripts.json` — 키 `{program_id}:{guid}`, 값 `[{start,end,en,ko}, ...]`.
+- **데이터**: `radio_transcripts.json` — 키 `{program_id}::{guid}`, 값 `[{start,end,en,ko}, ...]`.
   광고·프로모션 구간은 대본에서 빼고, 그 구간에는 하이라이트가 비어 있습니다.
 - **만드는 법**: `scripts/transcribe_radio.py`(faster-whisper, CPU int8)로 세그먼트를 뽑고
   `scripts/build_radio_transcripts.py --prog … --asr … --ko … --key …`로 문장 병합 + 해석을 붙여 JSON에 넣습니다.

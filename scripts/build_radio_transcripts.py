@@ -15,7 +15,7 @@
 }
 
     python3 scripts/build_radio_transcripts.py --prog cnn5things --asr raw.json \
-        --ko ko_cnn5things.json --key "cnn5things:<guid>" --title "..." --date "11/21(토)"
+        --ko ko_cnn5things.json --key "cnn5things::<guid>" --title "..." --date "11/21(토)"
 """
 import argparse
 import json
@@ -84,7 +84,7 @@ def main():
     ap.add_argument("--prog", required=True)
     ap.add_argument("--asr", required=True, help="세그먼트 JSON(또는 이미 병합된 문장 JSON)")
     ap.add_argument("--ko", required=True, help="해석 파일(skip/fix/ko)")
-    ap.add_argument("--key", required=True, help="에피소드 키 (예: cnn5things:<guid>)")
+    ap.add_argument("--key", required=True, help="에피소드 키 (예: cnn5things::<guid> — 앱의 radioEpKey 와 같은 prog::guid 형식)")
     ap.add_argument("--title", default="")
     ap.add_argument("--date", default="")
     ap.add_argument("--out", default=OUT)
