@@ -1,5 +1,5 @@
 /* 똑똑핫초 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용) */
-const CACHE = 'toeic-bts-v16';
+const CACHE = 'toeic-bts-v17';
 const RADIO_JSON = './radio_episodes.json';
 const SHELL = [
   './',

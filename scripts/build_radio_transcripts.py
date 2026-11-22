@@ -9,13 +9,20 @@
 
 해석 파일 형식(에피소드 1개분):
 {
+  "summary": "제목 아래에 보여 줄 주제·흐름 요약(한국어 2~3줄)",
   "skip": [0, 1, 2],                  # 광고·프로모션 등 대본에서 뺄 문장 번호
   "fix":  {"14": "고친 영어 문장"},    # ASR 오류·광고 꼬리 정리
   "ko":   {"14": "한국어 해석", ...}   # 남긴 모든 문장에 하나씩
 }
 
+`summary`는 `--summary "..."`로 넘겨도 됩니다(둘 다 있으면 `--summary`가 이김).
+요약은 회차 실제 내용만 2~3줄로, 줄바꿈은 `\n`으로 넣습니다. 앱은
+`radio_transcripts.json`의 `_meta[key].summary`를 읽어 플레이어 제목 아래와
+대본 시트 상단에 표시합니다.
+
     python3 scripts/build_radio_transcripts.py --prog cnn5things --asr raw.json \
-        --ko ko_cnn5things.json --key "cnn5things::<guid>" --title "..." --date "11/21(토)"
+        --ko ko_cnn5things.json --key "cnn5things::<guid>" --title "..." --date "11/21(토)" \
+        --summary "한 줄 요약"
 """
 import argparse
 import json
@@ -87,6 +94,7 @@ def main():
     ap.add_argument("--key", required=True, help="에피소드 키 (예: cnn5things::<guid> — 앱의 radioEpKey 와 같은 prog::guid 형식)")
     ap.add_argument("--title", default="")
     ap.add_argument("--date", default="")
+    ap.add_argument("--summary", default="", help="제목 아래 표시할 주제·흐름 요약(한국어 2~3줄, 줄바꿈은 \\n)")
     ap.add_argument("--out", default=OUT)
     a = ap.parse_args()
 
@@ -95,6 +103,8 @@ def main():
         rows = rows.get("segments") or []
     sents = merge_sentences(rows) if rows and "end" in rows[0] else rows
     spec = json.load(open(a.ko, encoding="utf-8"))
+    raw_summary = (a.summary or spec.get("summary") or "").replace("\\n", "\n")
+    summary = "\n".join(" ".join(line.split()) for line in raw_summary.split("\n") if line.strip()).strip()
     skip = set(int(x) for x in spec.get("skip", []))
     fix = {int(k): v for k, v in (spec.get("fix") or {}).items()}
     ko = {int(k): v for k, v in (spec.get("ko") or {}).items()}
@@ -118,12 +128,17 @@ def main():
             doc = json.load(open(a.out, encoding="utf-8"))
         except Exception:                                  # noqa: BLE001
             doc = {}
+    if not summary:
+        print("!! 요약(summary)이 비었습니다 — 플레이어 제목 아래 '주제와 흐름'이 안 보입니다")
+        print("   → --summary \"...\" 또는 해석 파일의 \"summary\" 키로 2~3줄 요약을 넣어 주세요")
+
     doc[a.key] = segs
     meta = doc.setdefault("_meta", {})
     meta[a.key] = {
         "program": a.prog,
         "title": a.title,
         "date": a.date,
+        "summary": summary,
         "segments": len(segs),
         "built": datetime.now(KST).isoformat(timespec="seconds"),
     }
@@ -132,8 +147,8 @@ def main():
         json.dump(doc, f, ensure_ascii=False, separators=(",", ":"))
         f.write("\n")
     os.replace(tmp, a.out)
-    print("✅ %s · %d문장 → %s (%.1f KB)" % (a.key, len(segs), a.out,
-                                            os.path.getsize(a.out) / 1024.0))
+    print("✅ %s · %d문장 · 요약 %d자 → %s (%.1f KB)" % (a.key, len(segs), len(summary), a.out,
+                                                   os.path.getsize(a.out) / 1024.0))
     return 0
 
 
