@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-23T06:00:31+09:00",
- "updatedLabel": "11/23 06:00",
+ "updated": "2026-11-23T07:30:50+09:00",
+ "updatedLabel": "11/23 07:30",
  "perProgram": 8,
  "programs": [
   {
@@ -300,6 +300,16 @@
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/I0000-2014-goodmorningpops",
    "episodes": [
     {
+     "title": "11/23(월) Lost - Alicee",
+     "guid": "gid://kbs-podcast/6b0367202f000c94d4f7c6f7",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0367202f000c94d4f7c6f7.mp3",
+     "dateISO": "2026-11-23T07:05:30+09:00",
+     "dateLabel": "11/23(월) 07:05",
+     "dateShort": "11/23(월)",
+     "durationSec": 673,
+     "durationLabel": "11분 13초"
+    },
+    {
      "title": "11/20(금) Million - Allen Stone",
      "guid": "gid://kbs-podcast/6aff747cc29f64c502ea8463",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6aff747cc29f64c502ea8463.mp3",
@@ -368,16 +378,6 @@
      "dateShort": "11/12(목)",
      "durationSec": 599,
      "durationLabel": "9분 59초"
-    },
-    {
-     "title": "11/11(수) Now I'm The Fool - Angelina Jordan",
-     "guid": "gid://kbs-podcast/6af39533c5da797751b1470a",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af39533c5da797751b1470a.mp3",
-     "dateISO": "2026-11-11T07:05:30+09:00",
-     "dateLabel": "11/11(수) 07:05",
-     "dateShort": "11/11(수)",
-     "durationSec": 584,
-     "durationLabel": "9분 44초"
     }
    ],
    "ok": true,
