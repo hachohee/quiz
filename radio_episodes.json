@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-22T06:00:53+09:00",
- "updatedLabel": "11/22 06:00",
+ "updated": "2026-11-23T06:00:31+09:00",
+ "updatedLabel": "11/23 06:00",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,16 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "Revisiting: “This Lost a Lot of People”: RFK Jr.’s Broken Pesticide Promise",
+     "guid": "295f41cc-af7c-11f0-9be7-1ff499c2e503",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY2873037639.mp3",
+     "dateISO": "2026-11-22T18:30:00+09:00",
+     "dateLabel": "11/22(일) 18:30",
+     "dateShort": "11/22(일)",
+     "durationSec": 1125,
+     "durationLabel": "18분 45초"
+    },
     {
      "title": "She Clocked in as a Nurse and Clocked Out With a Newborn",
      "guid": "08492ca0-af72-11f0-8a77-c744b16f6e7b",
@@ -83,16 +93,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 572,
      "durationLabel": "9분 32초"
-    },
-    {
-     "title": "Officials Face Questions on Global Threats",
-     "guid": "2a6f6466-af7c-11f0-9be7-132a0c13da4d",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY1631742496.mp3",
-     "dateISO": "2026-11-19T06:53:00+09:00",
-     "dateLabel": "11/19(목) 06:53",
-     "dateShort": "11/19(목)",
-     "durationSec": 482,
-     "durationLabel": "8분 02초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "The Global Story: AI can imitate a human. But can it think like one?",
+     "guid": "urn:bbc:podcast:p0pp0406",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp03f4.mp3",
+     "dateISO": "2026-11-23T05:00:00+09:00",
+     "dateLabel": "11/23(월) 05:00",
+     "dateShort": "11/23(월)",
+     "durationSec": 1720,
+     "durationLabel": "28분 40초"
+    },
+    {
+     "title": "Deadlock at UN climate summit in Turkey",
+     "guid": "urn:bbc:podcast:p0pp9hxv",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp9hr7.mp3",
+     "dateISO": "2026-11-22T13:48:00+09:00",
+     "dateLabel": "11/22(일) 13:48",
+     "dateShort": "11/22(일)",
+     "durationSec": 1658,
+     "durationLabel": "27분 38초"
+    },
     {
      "title": "The Happy Pod: The 'amazing’ device that controls Tourette's",
      "guid": "urn:bbc:podcast:p0pp4d5y",
@@ -168,26 +188,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 1642,
      "durationLabel": "27분 22초"
-    },
-    {
-     "title": "Trump, Xi and Putin meet in China",
-     "guid": "urn:bbc:podcast:p0pnndk4",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pnncvn.mp3",
-     "dateISO": "2026-11-19T00:43:00+09:00",
-     "dateLabel": "11/19(목) 00:43",
-     "dateShort": "11/19(목)",
-     "durationSec": 1606,
-     "durationLabel": "26분 46초"
-    },
-    {
-     "title": "Nvidia rules out return for disgraced boss",
-     "guid": "urn:bbc:podcast:p0pnjy0q",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pnjxxc.mp3",
-     "dateISO": "2026-11-18T14:26:00+09:00",
-     "dateLabel": "11/18(수) 14:26",
-     "dateShort": "11/18(수)",
-     "durationSec": 1737,
-     "durationLabel": "28분 57초"
     }
    ],
    "ok": true,
@@ -395,6 +395,16 @@
    "rss": "https://minicast.imbc.com/PodCast/pod.aspx?code=1000674100000100000",
    "episodes": [
     {
+     "title": "11/22(일) 김종배의 시선집중",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261122.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261122.mp3",
+     "dateISO": "2026-11-22T07:05:00+09:00",
+     "dateLabel": "11/22(일) 07:05",
+     "dateShort": "11/22(일)",
+     "durationSec": 2575,
+     "durationLabel": "42분 55초"
+    },
+    {
      "title": "11/21(토) 김종배의 시선집중",
      "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261121.mp3",
      "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261121.mp3",
@@ -463,16 +473,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 1455,
      "durationLabel": "24분 15초"
-    },
-    {
-     "title": "11/19(목) 2부 [블루캠프] AI부정 대책, 충분한가? 정부에 리스크 될 수도? (김영진 더불어민주당 의원) } [6분집중] 초소형카메라 규제? 법이 없어요! (유승민 작가)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261119_2.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261119_2.mp3",
-     "dateISO": "2026-11-19T07:30:00+09:00",
-     "dateLabel": "11/19(목) 07:30",
-     "dateShort": "11/19(목)",
-     "durationSec": 1343,
-     "durationLabel": "22분 23초"
     }
    ],
    "ok": true,
