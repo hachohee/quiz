@@ -4850,6 +4850,7 @@ function rsGapPaint(show){
 function rsJumpGap(){
   if(!(rsGapTo>=0)) return;
   var a=ensureRadioAudio();
+  var label=fmtClock(rsGapTo);
   var to=Math.max(0, rsGapTo - (rsOffset||0));
   try{ a.currentTime=to; }catch(e){}
   rsFollow=true; rsScrollStop(); rsHintState();
@@ -4857,7 +4858,7 @@ function rsJumpGap(){
   updateRadioSeek();
   rsTick(to, true);
   rsRafStart(); rsTimerStart();
-  toast("⏩ 본편 "+fmtClock(rsGapTo)+"부터");
+  toast("⏩ 본편 "+label+"부터");
 }
 /* 절전·백그라운드에서 rAF 가 멈춰도 250ms 마다 한 번은 현재 문장을 확인 */
 function rsTimerStart(){
