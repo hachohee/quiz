@@ -149,6 +149,17 @@ if os.path.exists(tr_path):
             if s.get("start", 0) < prev_end - 0.05:
                 errors.append(f"라디오 '{k}'[{i}]: 시간 역순(start {s['start']} < 직전 end {prev_end})")
             prev_end = s.get("end", prev_end)
+        # 광고가 섞여 들어오면(DAI) 대본 시각이 오디오와 어긋남 → 마지막 문장이 오디오보다 뒤면 오류
+        ad = m.get("audioDur")
+        if ad and segs:
+            if segs[-1].get("end", 0) > ad + 1.0:
+                errors.append(f"라디오 '{k}' ({title}): 마지막 문장 end {segs[-1]['end']} > 오디오 길이 {ad}")
+            if segs[0].get("start", 0) > ad:
+                errors.append(f"라디오 '{k}' ({title}): 첫 문장 start {segs[0]['start']} > 오디오 길이 {ad}")
+            print(f"  · {title}: 문장 {len(segs)}개 · 첫 {segs[0]['start']}초 · 마지막 {segs[-1]['end']}초 / 오디오 {ad}초"
+                  + (" · 정합 " + (m.get("aligned") or "-")))
+        else:
+            print(f"  · {title}: 문장 {len(segs)}개 · audioDur 미기록(align_transcripts.py 로 점검 권장)")
 
 if errors:
     print("\n❌ 문제 발견")

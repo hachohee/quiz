@@ -702,6 +702,8 @@ body.radio-on.script-on .rscript{display:flex}
   width:100%;max-width:600px;margin:0 auto}
 .rs-h-t{display:flex;align-items:center;gap:6px}
 .rs-h-t b{font-size:11.5px;font-weight:900;color:#c7f9ff;letter-spacing:.01em}
+.rs-ver,.app-ver{font-style:normal;font-size:8.5px;font-weight:900;letter-spacing:.02em;
+  color:#6f679a;background:rgba(255,255,255,.05);border-radius:6px;padding:1px 4px;white-space:nowrap}
 .rs-h-t span{flex:1 1 auto;min-width:0;font-size:9.5px;font-weight:800;color:var(--muted2);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
 .rs-h-t button{flex:0 1 auto;min-width:0;border:0;background:transparent;font-family:inherit;
@@ -935,7 +937,7 @@ body.radio-on.script-on .rscript{display:flex}
     <div id="radioHead"></div>
     <div id="radioList"></div>
 
-    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요</p>
+    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요 <span class="app-ver" id="appVer">v18</span></p>
   </section>
 
 </div>
@@ -977,7 +979,7 @@ body.radio-on.script-on .rscript{display:flex}
 <div class="rscript" id="rScript" aria-label="라디오 대본과 해석">
   <div class="rs-head">
     <div class="rs-h-t">
-      <b>📝 대본 &amp; 해석</b>
+      <b>📝 대본 &amp; 해석</b><i class="rs-ver" id="rsVer">v18</i>
       <button type="button" id="rsHint" data-rsfollow="1">문장을 누르면 그 지점부터 재생해요</button>
     </div>
     <div class="rs-modes">
@@ -4484,11 +4486,13 @@ function ensureRadioAudio(){
     }
     radioPending=0;
     updateRadioSeek();
+    if(!a.paused) rsRafStart();
   });
   a.addEventListener("durationchange", updateRadioSeek);
   a.addEventListener("timeupdate", function(){
     if(radioSeeking) return;
     updateRadioSeek();
+    if(!a.paused) rsRafStart();            /* 프레임 추적이 끊겼어도 여기서 되살림 */
     var now=Date.now();
     if(radioCur && now-radioSavedAt>5000){
       radioSavedAt=now;
@@ -4500,7 +4504,8 @@ function ensureRadioAudio(){
   a.addEventListener("playing", function(){ rsRafStart(); });
   a.addEventListener("pause", function(){ radioBtnState(); rsRafStop(); });
   a.addEventListener("seeked", function(){ rsTick(a.currentTime||0, true); if(!a.paused) rsRafStart(); });
-  a.addEventListener("ratechange", function(){ rsTick(a.currentTime||0, true); });
+  a.addEventListener("ratechange", function(){ rsTick(a.currentTime||0, true); if(!a.paused) rsRafStart(); });
+  a.addEventListener("waiting", function(){ if(!a.paused) rsRafStart(); });
   a.addEventListener("ended", function(){
     if(radioCur){
       if(!radioHeard[radioCur.key]){
@@ -4674,10 +4679,15 @@ function openRadio(){
 var LS_RS_MODE="tmq_radio_script_mode_v1";
 var radioScriptMode=(function(){ var v=load(LS_RS_MODE,"both"); return (v==="both"||v==="en"||v==="off")?v:"both"; })();
 var radioTr=null, radioTrLoading=false, radioTrErr="";
-var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="", rsProgScroll=false;
-var rsRafId=0, rsLineEls=[], rsBarIdx=-2, rsScrollAt=0, rsScrollGuard=0;
-/* 부드러운 스크롤 지원 여부(아이폰 구형 사파리는 안 되면 바로 점프) */
-var rsSmoothOK=(function(){ try{ return "scrollBehavior" in document.documentElement.style; }catch(e){ return false; } })();
+var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="";
+var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
+/* 따라가기 스크롤은 브라우저의 smooth scroll 에 맡기지 않고 직접 조금씩 움직입니다.
+   (smooth scroll 은 거리에 따라 400~900ms 걸려서, 그 사이 마지막 scroll 이벤트가
+    '사용자가 직접 끈 스크롤'로 오판돼 자동 따라가기가 꺼지는 일이 있었어요.
+    직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
+var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
+var rsTouchY=0, rsTouchTop=0;
+var APP_VER="v18";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -4744,36 +4754,62 @@ function rsPlayerOffset(){
    - 광고·음악처럼 긴 공백에서만 하이라이트를 비움 */
 function rsIndexAt(t){
   var segs=rsSegs; if(!segs || !segs.length) return -1;
+  var LEAD=0.22;                      /* 0.22초 먼저 띄워 '자막이 늦다'는 느낌을 없앰 */
   var lo=0, hi=segs.length-1, ans=-1;
   while(lo<=hi){
     var mid=(lo+hi)>>1;
-    if(segs[mid].start <= t+0.15){ ans=mid; lo=mid+1; } else { hi=mid-1; }
+    if(segs[mid].start <= t+LEAD){ ans=mid; lo=mid+1; } else { hi=mid-1; }
   }
   if(ans<0) return (segs[0].start - t <= 0.8) ? 0 : -1;
   var s=segs[ans], nx=segs[ans+1];
   if(t > s.end){
-    if(nx && nx.start - t <= 0.4) return ans+1;
+    if(nx && nx.start - t <= 0.45) return ans+1;
     if(t - s.end <= 1.6) return ans;
     return -1;
   }
   return ans;
 }
-/* 대본 시트 안에서 지금 문장이 편한 위치(위 30%)에 오도록 부드럽게 스크롤 */
+/* 대본 시트 안에서 지금 문장이 편한 위치(위 32%)에 오도록 직접 애니메이션 */
+function rsScrollStop(){
+  if(rsScrollRAF){ cancelAnimationFrame(rsScrollRAF); rsScrollRAF=0; }
+  rsScrollTo=-1;
+}
 function rsScrollToLine(body, el, force){
   if(!body || !el) return;
   var br=body.getBoundingClientRect(), r=el.getBoundingClientRect();
-  if(!force && r.top >= br.top+8 && r.bottom <= br.top + br.height*0.78) return;
+  if(!force && r.top >= br.top+8 && r.bottom <= br.top + br.height*0.72) return;
   var cur=body.scrollTop||0;
-  var target=Math.round((r.top-br.top)+cur - br.height*0.30);
+  var target=Math.round((r.top-br.top)+cur - br.height*0.32);
   var max=Math.max(0, (body.scrollHeight||0)-(body.clientHeight||0));
   if(target<0) target=0;
   if(target>max) target=max;
+  if(Math.abs(target-cur) < 2) return;
+  var dist=Math.abs(target-cur);
+  rsScrollFrom=cur; rsScrollTo=target; rsScrollT0=performance.now();
+  rsScrollDur = force ? 150 : (dist>700 ? 260 : dist>240 ? 200 : 140);
+  if(!rsScrollRAF) rsScrollRAF=requestAnimationFrame(rsScrollStep);
+}
+function rsScrollStep(){
+  rsScrollRAF=0;
+  var body=rsBodyEl(); if(!body){ rsScrollTo=-1; return; }
+  var t=(performance.now()-rsScrollT0)/(rsScrollDur||160);
+  if(t>1) t=1;
+  var e=1-Math.pow(1-t,3);
+  body.scrollTop = rsScrollFrom + (rsScrollTo-rsScrollFrom)*e;
+  if(t<1) rsScrollRAF=requestAnimationFrame(rsScrollStep);
+  else { rsScrollTo=-1; rsScrollFrom=body.scrollTop||0; }
+}
+/* 문장이 바뀌지 않았어도, 화면 밖으로 밀려났으면 다시 끌어옵니다(0.24초에 한 번만 확인) */
+function rsKeepInView(body){
+  if(!rsFollow || rsActive<0 || rsScrollTo>=0) return;
   var now=performance.now();
-  if(!force && now < rsScrollGuard) return;      /* 직전 스크롤이 끝나기 전 중복 호출 방지 */
-  if(Math.abs(target-cur) < 3) return;
-  rsScrollAt=now; rsScrollGuard=now+560;
-  if(rsSmoothOK && body.scrollTo) body.scrollTo({top:target, behavior:"smooth"});
-  else body.scrollTop=target;
+  if(now < rsScrollCheck) return;
+  rsScrollCheck=now+240;
+  var el=rsLineEls[rsActive] || body.querySelector(".rs-line.on");
+  if(!el) return;
+  var br=body.getBoundingClientRect(), r=el.getBoundingClientRect();
+  if(r.top >= br.top+2 && r.bottom <= br.top + br.height*0.80) return;
+  rsScrollToLine(body, el, true);
 }
 function rsTick(t, force){
   t = (typeof t==="number" && isFinite(t)) ? t : (radioAudio?radioAudio.currentTime:0);
@@ -4794,7 +4830,7 @@ function rsTick(t, force){
   }
   if(!rsOpenState()){ rsActive=idx; return; }
   var body=rsBodyEl(); if(!body) return;
-  if(idx===rsActive && !force) return;
+  if(idx===rsActive && !force){ rsKeepInView(body); return; }
   var old=rsLineEls[rsActive] || body.querySelector(".rs-line.on");
   if(old) old.classList.remove("on");
   if(idx>=0){
@@ -4821,8 +4857,7 @@ function rsHintState(){
   var h=$("rsHint"); if(!h) return;
   h.textContent = rsFollow ? "문장을 누르면 그 지점부터 재생해요" : "⤓ 지금 문장으로 따라가기";
   h.classList.toggle("follow-off", !rsFollow);
-}
-function rsSync(force){
+}function rsSync(force){
   var body=rsBodyEl(), panel=$("rScript");
   if(!body || !panel) return;
   var btns=panel.querySelectorAll("[data-rsmode]");
@@ -4857,8 +4892,8 @@ function rsSync(force){
           + '<span class="ko">'+esc(segs[k].ko)+'</span></button>';
     }
     body.innerHTML=html;
-    rsScrollGuard=performance.now()+300;   /* scrollTop=0 은 우리가 옮긴 것 — 따라가기 해제로 오판하지 않게 */
     body.scrollTop=0;
+    rsScrollStop();
     rsLineEls=[]; rsBarIdx=-2;
     rsBuiltKey=key; rsActive=-1; rsFollow=true;
     renderRpSum();
@@ -4881,7 +4916,9 @@ function rsOpen(on){
   if(on){
     if(radioScriptMode==="off"){ radioScriptMode="both"; save(LS_RS_MODE,radioScriptMode); }
     rsFollow=true;
+    rsScrollStop();
     rsSync(true);
+    if(radioAudio && !radioAudio.paused) rsRafStart();
   } else {
     rsTick(radioAudio?radioAudio.currentTime:0, false);
   }
@@ -4906,23 +4943,37 @@ function rsJump(i){
   rsRafStart();
   rsTick(rsSegs[i].start, true);
 }
-function rsFollowNow(){ rsFollow=true; rsTick(radioAudio?radioAudio.currentTime:0, true); }
+function rsFollowNow(){ rsFollow=true; rsScrollStop(); rsTick(radioAudio?radioAudio.currentTime:0, true); rsKeepInView(rsBodyEl()); }
 
-/* 대본 패널: 손으로 끌어 올린 것은 스크롤 위치 변화로만 판단
-   (탭할 때 손가락이 살짝 움직인 것 때문에 따라가기가 꺼지지 않게) */
+/* 대본 패널 스크롤: '손으로 미는 동작'에서만 따라가기를 끕니다.
+   scroll 이벤트 거리로 판단하면 우리가 옮긴 스크롤·화면 높이 변경까지
+   사용자 스크롤로 오판해 자동 따라가기가 꺼지므로, 동작 자체를 봐요. */
 (function wireRsScroll(){
   var body=rsBodyEl(); if(!body) return;
-  var last=body.scrollTop||0;
-  body.addEventListener("scroll", function(){
-    var top=body.scrollTop||0, now=performance.now();
-    if(now < rsScrollGuard+80){ last=top; return; }   /* 우리가 움직인 것 */
-    if(Math.abs(top-last)>14 && rsFollow){ rsFollow=false; rsHintState(); }
-    last=top;
+  function off(){ if(!rsFollow) return; rsFollow=false; rsScrollStop(); rsHintState(); }
+  body.addEventListener("touchstart", function(ev){
+    var t=ev.touches&&ev.touches[0]; if(!t) return;
+    rsTouchY=t.clientY; rsTouchTop=body.scrollTop||0;
+  }, {passive:true});
+  body.addEventListener("touchmove", function(ev){
+    var t=ev.touches&&ev.touches[0]; if(!t) return;
+    if(Math.abs(t.clientY-rsTouchY)>10 || Math.abs((body.scrollTop||0)-rsTouchTop)>6){
+      rsTouchY=t.clientY; rsTouchTop=body.scrollTop||0;   /* 끈 뒤에는 기준만 갱신 */
+      off();
+    }
   }, {passive:true});
   body.addEventListener("wheel", function(ev){
-    if((ev.deltaY||0)!==0 && rsFollow){ rsFollow=false; rsHintState(); }
-    last=body.scrollTop||0;
+    if((ev.deltaY||0)!==0) off();
   }, {passive:true});
+  body.addEventListener("pointerdown", function(ev){
+    if(ev.pointerType==="touch") return;
+    var t=ev.target;
+    if(t && t.closest && t.closest(".rs-line")) return;  /* 문장 탭은 점프이므로 유지 */
+    off();
+  }, {passive:true});
+  body.addEventListener("keydown", function(ev){
+    if(/^(Arrow|Page|Home|End| )/.test(ev.key||"")) off();
+  });
 })();
 
 /* 진행바(seek) — 손으로 끌어도 timeupdate가 덮어쓰지 않게 */
@@ -5011,6 +5062,17 @@ radioScreenHook=function(name){
   else { document.body.classList.remove("radio-open"); rsOpen(false); }
 };
 radioSpdState();
+
+/* 앱 버전 표기 — 폰에 새 코드가 내려왔는지 한눈에 확인용 */
+(function showVer(){
+  var a=$("appVer"), b=$("rsVer");
+  if(a) a.textContent=APP_VER;
+  if(b) b.textContent=APP_VER;
+})();
+/* 화면을 다시 열었을 때도 자막 추적을 놓치지 않게 */
+document.addEventListener("visibilitychange", function(){
+  if(document.visibilityState==="visible" && radioAudio && !radioAudio.paused) rsRafStart();
+});
 
 /* 시작 */
 renderHome();
