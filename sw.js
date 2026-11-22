@@ -1,7 +1,8 @@
 /* 똑똑핫초 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용)
+   v19: 대본 시트에 싱크 조절 바(-10/-1/0/+1/+10초) 추가.
    v18: index.html·라디오 JSON 은 HTTP 캐시(GitHub Pages 10분)까지 건너뛰고
         항상 새 파일을 받아 옵니다. 고친 코드가 폰에 바로 내려오게. */
-const CACHE = 'toeic-bts-v18';
+const CACHE = 'toeic-bts-v19';
 const SHELL = [
   './',
   './index.html',

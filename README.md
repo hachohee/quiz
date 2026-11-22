@@ -34,9 +34,9 @@
   재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
 - **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
   Mixed Content로 재생이 막히지 않게 했습니다.
-- **서비스 워커**: `toeic-bts-v18` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
+- **서비스 워커**: `toeic-bts-v19` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
   `cache: no-store` 까지 써서, 고친 코드·데이터가 GitHub Pages 의 10분 HTTP 캐시에 가로막히지 않고 바로 내려옵니다.
-  앱 화면(라디오 하단 문구·대본 시트 헤더)에 `v18` 처럼 버전이 찍혀서 폰이 새 코드를 받았는지 눈으로 확인할 수 있습니다.
+  앱 화면(라디오 하단 문구·대본 시트 헤더)에 `v19` 처럼 버전이 찍혀서 폰이 새 코드를 받았는지 눈으로 확인할 수 있습니다.
 
 ## 📝 라디오 대본 · 한국어 해석 (2026-11-22 추가)
 
@@ -77,6 +77,12 @@
   `_meta[key].audioDur`(실제 오디오 길이)·`aligned`(정합 시각)를 기록합니다. 문장끼리 겹치지 않게 끝도 다듬습니다.
 - **검사**: `python3 scripts/check_data.py`가 회차별 `summary` 존재 여부, `start`/`end` 시간 순서,
   마지막 문장이 오디오 길이(`audioDur`)를 넘지 않는지까지 함께 확인합니다.
+- **🎚 싱크 조절 바**(2026-11-23 v19): 대본 시트 맨 위에 `-10초 · -1초 · 0초 · +1초 · +10초` 버튼과 지금 보정값(`+15초`/`-30초`)을 뒀습니다.
+  같은 회차라도 폰·지역에 따라 광고(DAI) 길이가 달라 수 초~수십 초 밀리는데, 서버 정합(`align_transcripts.py`)으로도 다 못 맞추는
+  나머지를 **듣는 자리에서 바로** 맞추는 용도입니다. 값이 `+`면 자막을 그만큼 늦게(`t + offset`), `-`면 그만큼 앞서 따라갑니다.
+  누르는 즉시 재계산해 하이라이트·스크롤이 그 위치로 점프하고, 버튼 탭은 따라가기가 꺼져 있어도 다시 켭니다.
+  보정값은 **회차별**(`{program_id}::{guid}`)로 `tmq_radio_offsets_v1`에 이 폰에만 저장돼 다음 재생에도 유지됩니다(±300초 한도).
+  문장을 탭해 점프할 때도 보정값을 되돌려(`start - offset`) 그 문장이 실제로 나오는 지점부터 재생합니다.
 
 ## 📚 매일 18:00 자동 반영 — Day 10 (2026-11-21)
 
