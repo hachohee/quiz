@@ -672,6 +672,51 @@ body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bo
   cursor:pointer;padding:0}
 .rp-spd button.on{background:linear-gradient(140deg,rgba(34,211,238,.9),rgba(139,92,246,.9));
   color:#fff;border-color:transparent}
+/* 📝 대본·해석 */
+.rp-script{flex:0 0 auto;height:38px;padding:0 9px;border-radius:11px;border:1px solid rgba(167,139,250,.45);
+  background:rgba(139,92,246,.2);color:#ddd0ff;font-family:inherit;font-size:10.5px;font-weight:900;cursor:pointer;white-space:nowrap}
+.rp-script.on{background:linear-gradient(140deg,#22d3ee,#8b5cf6);color:#0a1526;border-color:transparent}
+.rp-now{display:none;width:100%;margin-top:5px;padding:5px 8px;border-radius:9px;text-align:left;cursor:pointer;
+  border:1px solid rgba(103,232,249,.22);background:rgba(34,211,238,.07);font-family:inherit}
+.rp-now.on{display:block}
+.rp-now b{display:block;font-size:10.5px;font-weight:800;color:#ece6ff;line-height:1.35;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-now span{display:block;font-size:9.5px;font-weight:700;color:#a79ed0;line-height:1.35;margin-top:1px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-now.en-only span{display:none}
+.rscript{position:fixed;left:0;right:0;bottom:var(--rph,206px);z-index:79;display:none;
+  flex-direction:column;height:min(58vh,500px);
+  background:linear-gradient(180deg,#150f2c,#0b0716);border-top:1px solid rgba(139,92,246,.38);
+  box-shadow:0 -16px 38px -20px #000}
+body.radio-on.script-on .rscript{display:flex}
+.rs-head{flex:0 0 auto;padding:8px 12px 7px;border-bottom:1px solid rgba(255,255,255,.07)}
+.rs-h-t{display:flex;align-items:center;gap:6px}
+.rs-h-t b{font-size:11.5px;font-weight:900;color:#c7f9ff;letter-spacing:.01em}
+.rs-h-t span{flex:1 1 auto;min-width:0;font-size:9.5px;font-weight:800;color:var(--muted2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.rs-h-t button{flex:0 1 auto;min-width:0;border:0;background:transparent;font-family:inherit;
+  font-size:9.5px;font-weight:800;color:var(--muted2);text-align:right;cursor:pointer;padding:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rs-h-t button.follow-off{color:#67e8f9}
+.rs-modes{display:flex;gap:5px;margin-top:6px}
+.rs-modes button{flex:1 1 0;min-width:0;height:30px;border-radius:9px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--muted);font-family:inherit;font-size:10.5px;font-weight:900;
+  cursor:pointer;padding:0;white-space:nowrap}
+.rs-modes button.on{background:linear-gradient(140deg,rgba(34,211,238,.92),rgba(139,92,246,.92));
+  color:#fff;border-color:transparent}
+.rs-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:8px 10px calc(14px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+.rs-line{display:block;width:100%;text-align:left;font-family:inherit;border:0;background:transparent;cursor:pointer;
+  padding:7px 9px;border-radius:10px;border-left:3px solid transparent;color:inherit}
+.rs-line+.rs-line{margin-top:2px}
+.rs-line .en{display:block;font-size:12px;font-weight:700;color:#d3ccf2;line-height:1.5;word-break:break-word}
+.rs-line .ko{display:block;font-size:11px;font-weight:600;color:#8d84b5;line-height:1.5;margin-top:2px;word-break:keep-all}
+.rs-line.on{background:rgba(34,211,238,.13);border-left-color:#22d3ee}
+.rs-line.on .en{color:#fff;font-weight:800}
+.rs-line.on .ko{color:#a5f3fc}
+.rscript.en-only .ko{display:none}
+.rs-empty{padding:20px 14px;text-align:center;font-size:11.5px;line-height:1.8;color:var(--muted)}
+.rs-empty b{color:#a5f3fc}
 @media(min-width:640px){
   .app{max-width:600px;padding:22px 20px 40px}
   .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -891,11 +936,15 @@ body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bo
     </div>
     <input class="rp-seek" id="rpSeek" type="range" min="0" max="100" value="0" step="1" aria-label="재생 위치">
     <div class="rp-tm"><span id="rpCur">0:00</span><span id="rpDur">0:00</span></div>
+    <button class="rp-now" type="button" id="rpNow" data-rp="script" aria-label="지금 문장 대본 열기">
+      <b id="rpNowEn">—</b><span id="rpNowKo">—</span>
+    </button>
     <div class="rp-ctl">
       <button class="rp-b" type="button" data-rp="back" aria-label="15초 뒤로">↺15</button>
       <button class="rp-play" type="button" id="rpPlay" data-rp="play" aria-label="재생 또는 일시정지">▶</button>
       <button class="rp-b" type="button" data-rp="fwd" aria-label="15초 앞으로">15↻</button>
       <button class="rp-heard" type="button" id="rpHeard" data-rp="heard">✓ 들었어요</button>
+      <button class="rp-script" type="button" id="rpScript" data-rp="script" aria-label="대본과 해석 열기">📝 대본</button>
     </div>
     <div class="rp-spd" id="rpSpd">
       <button type="button" data-rspd="0.8">0.8x</button>
@@ -904,6 +953,21 @@ body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bo
       <button type="button" data-rspd="1.5">1.5x</button>
     </div>
   </div>
+</div>
+<!-- 📝 라디오 대본·해석 시트 (플레이어 바로 위에 붙어 열림) -->
+<div class="rscript" id="rScript" aria-label="라디오 대본과 해석">
+  <div class="rs-head">
+    <div class="rs-h-t">
+      <b>📝 대본 &amp; 해석</b>
+      <button type="button" id="rsHint" data-rsfollow="1">문장을 누르면 그 지점부터 재생해요</button>
+    </div>
+    <div class="rs-modes">
+      <button type="button" data-rsmode="both">영+한 같이</button>
+      <button type="button" data-rsmode="en">영어만</button>
+      <button type="button" data-rsmode="off">숨기기</button>
+    </div>
+  </div>
+  <div class="rs-body" id="rsBody"></div>
 </div>
 <script>
 /* ============================================================
@@ -4444,6 +4508,7 @@ function updateRadioSeek(){
   seek.style.setProperty("--p", pct.toFixed(2)+"%");
   if(cur) cur.textContent=fmtClock(t);
   if(durEl) durEl.textContent=fmtClock(d);
+  rsTick(t, false);
 }
 function radioSpdState(){
   var bs=document.querySelectorAll("#rpSpd button");
@@ -4475,6 +4540,7 @@ function syncRadioPlayer(){
   if(prog) prog.textContent=p?((p.short||p.name)+(p.station?" · "+p.station:"")):"";
   if(title) title.textContent=e?e.title:"";
   updateRadioSeek(); radioBtnState(); radioSpdState();
+  rsPlayerOffset();
 }
 
 function toggleRadioHeard(key){
@@ -4527,6 +4593,7 @@ function playRadio(pi,ei){
   }
   try{ a.playbackRate=radioSpeed; }catch(err){}
   syncRadioPlayer(); renderRadioList(); renderRadioHead(); setRadioSession(p,e);
+  rsEpisodeRefresh();
   var pr=null;
   try{ pr=a.play(); }catch(err){ pr=null; }
   if(pr && pr.catch){ pr.catch(function(){ toast("▶ 를 한 번 더 눌러 주세요"); radioBtnState(); }); }
@@ -4570,6 +4637,180 @@ function openRadio(){
   else renderRadio();
 }
 
+/* ============================================================
+   📝 라디오 대본·해석 (radio_transcripts.json)
+   - 재생 위치에 맞춰 지금 문장을 실시간 하이라이트
+   - 문장을 누르면 그 지점으로 점프해서 재생
+   - 보기 모드: 영+한 같이 / 영어만 / 숨기기 (이 폰에만 저장)
+   ============================================================ */
+var LS_RS_MODE="tmq_radio_script_mode_v1";
+var radioScriptMode=(function(){ var v=load(LS_RS_MODE,"both"); return (v==="both"||v==="en"||v==="off")?v:"both"; })();
+var radioTr=null, radioTrLoading=false, radioTrErr="";
+var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="", rsProgScroll=false;
+
+function rsBodyEl(){ return $("rsBody"); }
+function rsOpenState(){ return document.body.classList.contains("script-on"); }
+function rsKeyNow(){
+  var p=radioCur?radioProg(radioCur.pi):null, e=radioCur?radioEp(radioCur.pi,radioCur.ei):null;
+  return (p&&e)?radioEpKey(p,e):"";
+}
+function rsSegsFor(key){
+  if(!radioTr || !key) return null;
+  var v=radioTr[key];
+  return (v && v.length && typeof v[0]==="object") ? v : null;
+}
+function rsLoad(){
+  if(radioTr || radioTrLoading) return;
+  radioTrLoading=true; radioTrErr="";
+  fetch("radio_transcripts.json", { cache:"no-store" })
+    .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+    .then(function(d){ radioTr=d||{}; radioTrLoading=false; rsSync(true); })
+    .catch(function(e){ radioTrLoading=false; radioTrErr=String((e&&e.message)||e); rsSync(true); });
+}
+function rsPlayerOffset(){
+  var pl=$("radioPlayer"); if(!pl) return;
+  var h=pl.getBoundingClientRect().height || 206;
+  document.documentElement.style.setProperty("--rph", Math.round(h)+"px");
+}
+function rsIndexAt(t){
+  var segs=rsSegs; if(!segs || !segs.length) return -1;
+  var lo=0, hi=segs.length-1, ans=-1;
+  while(lo<=hi){
+    var mid=(lo+hi)>>1;
+    if(segs[mid].start <= t+0.25){ ans=mid; lo=mid+1; } else { hi=mid-1; }
+  }
+  if(ans<0) return -1;
+  if(t > segs[ans].end + 2.0) return -1;     /* 광고·간주 구간은 비워 둔다 */
+  return ans;
+}
+function rsTick(t, force){
+  t = (typeof t==="number" && isFinite(t)) ? t : (radioAudio?radioAudio.currentTime:0);
+  var idx=rsIndexAt(t), segs=rsSegs;
+  var box=$("rpNow");
+  if(box){
+    var show=!!(segs && idx>=0 && radioScriptMode!=="off");
+    var was=box.classList.contains("on");
+    box.classList.toggle("on", show);
+    box.classList.toggle("en-only", radioScriptMode==="en");
+    if(show){
+      var en=$("rpNowEn"), ko=$("rpNowKo");
+      if(en) en.textContent=segs[idx].en;
+      if(ko) ko.textContent=segs[idx].ko;
+    }
+    if(was!==show) rsPlayerOffset();
+  }
+  if(!rsOpenState()){ rsActive=idx; return; }
+  var body=rsBodyEl(); if(!body) return;
+  if(idx===rsActive && !force) return;
+  var old=body.querySelector(".rs-line.on"); if(old) old.classList.remove("on");
+  if(idx>=0){
+    var el=body.querySelector('.rs-line[data-rline="'+idx+'"]');
+    if(el){
+      el.classList.add("on");
+      if(rsFollow){
+        var r=el.getBoundingClientRect(), br=body.getBoundingClientRect();
+        if(r.top < br.top+6 || r.bottom > br.bottom-6){
+          rsProgScroll=true;
+          body.scrollTop += (r.top-br.top) - (br.height/2) + (r.height/2);
+          setTimeout(function(){ rsProgScroll=false; }, 700);
+        }
+      }
+    }
+  }
+  rsActive=idx;
+  rsHintState();
+}
+function rsHintState(){
+  var h=$("rsHint"); if(!h) return;
+  h.textContent = rsFollow ? "문장을 누르면 그 지점부터 재생해요" : "⤓ 지금 문장으로 따라가기";
+  h.classList.toggle("follow-off", !rsFollow);
+}
+function rsSync(force){
+  var body=rsBodyEl(), panel=$("rScript");
+  if(!body || !panel) return;
+  var btns=panel.querySelectorAll("[data-rsmode]");
+  for(var i=0;i<btns.length;i++){
+    if(btns[i].getAttribute("data-rsmode")===radioScriptMode) btns[i].classList.add("on");
+    else btns[i].classList.remove("on");
+  }
+  panel.classList.toggle("en-only", radioScriptMode==="en");
+  var sb=$("rpScript"); if(sb) sb.classList.toggle("on", rsOpenState());
+  if(!rsOpenState()) return;
+  var key=rsKeyNow();
+  if(key!==rsKey){ rsKey=key; rsActive=-1; rsBuiltKey=""; }
+  if(radioScriptMode==="off"){ /* 숨김 상태에서도 열리면 같이 보기로 */ }
+  if(!radioTr && !radioTrLoading) rsLoad();
+  if(!key){ body.innerHTML='<div class="rs-empty">먼저 들을 회차를 골라 주세요</div>'; rsBuiltKey=""; rsSegs=null; return; }
+  var segs=rsSegsFor(key);
+  if(!segs && !radioTr && !radioTrLoading){
+    body.innerHTML='<div class="rs-empty">📝 대본을 불러오는 중…</div>'; rsBuiltKey=""; rsSegs=null; return;
+  }
+  if(!segs){
+    body.innerHTML='<div class="rs-empty">🎧 <b>이 회차는 아직 대본이 준비되지 않았어요</b><br>최신 회차부터 영어 대본과 한국어 해석을 볼 수 있어요</div>';
+    rsSegs=null; rsBuiltKey=""; rsHintState();
+    var nb=$("rpNow"); if(nb) nb.classList.remove("on");
+    return;
+  }
+  rsSegs=segs;
+  if(rsBuiltKey!==key || !body.querySelector(".rs-line")){
+    var html="";
+    for(var k=0;k<segs.length;k++){
+      html+='<button type="button" class="rs-line" data-rline="'+k+'"><span class="en">'+esc(segs[k].en)+'</span>'
+          + '<span class="ko">'+esc(segs[k].ko)+'</span></button>';
+    }
+    body.innerHTML=html;
+    body.scrollTop=0;
+    rsBuiltKey=key; rsActive=-1; rsFollow=true;
+  }
+  rsHintState();
+  rsTick(radioAudio?radioAudio.currentTime:0, true);
+}
+function rsEpisodeRefresh(){
+  var key=rsKeyNow();
+  rsKey=key; rsBuiltKey=""; rsActive=-1; rsFollow=true;
+  rsSegs=rsSegsFor(key);
+  if(key && !radioTr && !radioTrLoading) rsLoad();
+  if(rsOpenState()) rsSync(true);
+  rsTick(radioAudio?radioAudio.currentTime:0, true);
+}
+function rsOpen(on){
+  document.body.classList.toggle("script-on", !!on);
+  var sb=$("rpScript"); if(sb) sb.classList.toggle("on", !!on);
+  if(on){
+    if(radioScriptMode==="off"){ radioScriptMode="both"; save(LS_RS_MODE,radioScriptMode); }
+    rsFollow=true;
+    rsSync(true);
+  } else {
+    rsTick(radioAudio?radioAudio.currentTime:0, false);
+  }
+  rsPlayerOffset();
+}
+function rsToggle(){ rsOpen(!rsOpenState()); }
+function rsMode(m){
+  radioScriptMode = (m==="en"||m==="off") ? m : "both";
+  save(LS_RS_MODE, radioScriptMode);
+  if(radioScriptMode==="off"){ rsOpen(false); }
+  else if(!rsOpenState()){ rsOpen(true); }
+  else { rsSync(false); }
+  rsTick(radioAudio?radioAudio.currentTime:0, true);
+}
+function rsJump(i){
+  if(!rsSegs || !rsSegs[i]) return;
+  var a=ensureRadioAudio();
+  try{ a.currentTime=Math.max(0, rsSegs[i].start); }catch(e){}
+  rsFollow=true; rsHintState();
+  if(a.paused){ var pr=a.play(); if(pr&&pr.catch) pr.catch(function(){}); }
+  updateRadioSeek();
+  rsTick(rsSegs[i].start, true);
+}
+function rsFollowNow(){ rsFollow=true; rsTick(radioAudio?radioAudio.currentTime:0, true); }
+
+/* 대본 패널: 손으로 스크롤하면 따라가기를 잠시 멈춤 */
+(function wireRsScroll(){
+  var body=rsBodyEl(); if(!body) return;
+  body.addEventListener("scroll", function(){ if(!rsProgScroll) rsFollow=false; rsHintState(); }, {passive:true});
+})();
+
 /* 진행바(seek) — 손으로 끌어도 timeupdate가 덮어쓰지 않게 */
 (function wireRadioSeek(){
   var seek=$("rpSeek"); if(!seek) return;
@@ -4593,6 +4834,7 @@ document.addEventListener("click", function(ev){
   while(t && t!==document){
     if(t.getAttribute && (t.hasAttribute("data-radio")||t.hasAttribute("data-rprog")||t.hasAttribute("data-rep")
       ||t.hasAttribute("data-rp")||t.hasAttribute("data-rspd")||t.hasAttribute("data-rheard")
+      ||t.hasAttribute("data-rsmode")||t.hasAttribute("data-rline")||t.hasAttribute("data-rsfollow")
       ||t.id==="radioReload"||t.id==="radioRetry")) break;
     t=t.parentNode;
   }
@@ -4614,6 +4856,9 @@ document.addEventListener("click", function(ev){
     return;
   }
   if(t.hasAttribute("data-rheard")){ toggleRadioHeard(t.getAttribute("data-rheard")); return; }
+  if(t.hasAttribute("data-rsmode")){ rsMode(t.getAttribute("data-rsmode")); return; }
+  if(t.hasAttribute("data-rsfollow")){ rsFollowNow(); return; }
+  if(t.hasAttribute("data-rline")){ rsJump(parseInt(t.getAttribute("data-rline"),10)||0); return; }
   if(t.hasAttribute("data-rspd")){
     radioSpeed=parseFloat(t.getAttribute("data-rspd"))||1;
     save(LS_RADIO_SPD,radioSpeed);
@@ -4625,6 +4870,7 @@ document.addEventListener("click", function(ev){
     var act=t.getAttribute("data-rp");
     if(act==="close"){
       try{ if(radioAudio) radioAudio.pause(); }catch(e){}
+      rsOpen(false);
       radioCur=null; document.body.classList.remove("radio-open"); renderRadioList();
       return;
     }
@@ -4639,6 +4885,7 @@ document.addEventListener("click", function(ev){
     if(act==="back"){ skipRadio(-15); return; }
     if(act==="fwd"){ skipRadio(15); return; }
     if(act==="heard"){ if(radioCur) toggleRadioHeard(radioCur.key); return; }
+    if(act==="script"){ rsToggle(); return; }
   }
 });
 
@@ -4647,7 +4894,7 @@ radioScreenHook=function(name){
   var on=(name==="radio");
   document.body.classList.toggle("radio-on", on);
   if(on) syncRadioPlayer();
-  else document.body.classList.remove("radio-open");
+  else { document.body.classList.remove("radio-open"); rsOpen(false); }
 };
 radioSpdState();
 

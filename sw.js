@@ -1,5 +1,5 @@
 /* 똑똑핫초 — 네트워크 우선 서비스 워커 (오프라인일 때만 캐시 사용) */
-const CACHE = 'toeic-bts-v15';
+const CACHE = 'toeic-bts-v16';
 const RADIO_JSON = './radio_episodes.json';
 const SHELL = [
   './',
@@ -72,6 +72,15 @@ self.addEventListener('fetch', (event) => {
 
   if (new URL(req.url).pathname.endsWith('/radio_episodes.json')) {
     event.respondWith(networkFirstRadio(req));
+    return;
+  }
+  /* 📝 라디오 대본·해석: 같은 방식(온라인이면 새 파일, 오프라인이면 캐시) */
+  if (new URL(req.url).pathname.endsWith('/radio_transcripts.json')) {
+    event.respondWith(
+      networkFirstRadio(req).catch(
+        () => new Response('{}', { status: 503, headers: { 'Content-Type': 'application/json; charset=utf-8' } })
+      )
+    );
     return;
   }
   event.respondWith(networkFirst(req));

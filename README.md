@@ -34,7 +34,23 @@
   재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
 - **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
   Mixed Content로 재생이 막히지 않게 했습니다.
-- **서비스 워커**: `toeic-bts-v15` · `radio_episodes.json`은 Network-First(온라인이면 항상 새 JSON, 오프라인일 때만 캐시).
+- **서비스 워커**: `toeic-bts-v16` · `radio_episodes.json`은 Network-First(온라인이면 항상 새 JSON, 오프라인일 때만 캐시).
+
+## 📝 라디오 대본 · 한국어 해석 (2026-11-22 추가)
+
+영어 3개 채널(**CNN 5 Things**, **BBC Global News Podcast**, **BBC 6 Minute English**)의 최신 회차에
+**재생 위치와 실시간으로 맞춰지는 영어 대본 + 한국어 해석**을 붙였습니다.
+
+- **쓰는 법**: 영어 회차를 재생하면 플레이어에 `📝 대본` 버튼과 지금 문장 한 줄이 뜹니다.
+  버튼을 누르면 플레이어 바로 위에 대본 시트가 열리고, 재생되는 문장이 자동으로 하이라이트·스크롤됩니다.
+- **보기 모드**: `영+한 같이` / `영어만` / `숨기기`(이 폰에 `tmq_radio_script_mode_v1`로 저장).
+- **문장 탭**: 문장을 누르면 그 `start` 초로 점프해 바로 재생 — 받아쓰기·복습용.
+- **대본 없는 회차**(한국 라디오·지난 회차)는 오디오만 나오고 `이 회차는 아직 대본이 준비되지 않았어요` 한 줄만 표시됩니다.
+- **데이터**: `radio_transcripts.json` — 키 `{program_id}:{guid}`, 값 `[{start,end,en,ko}, ...]`.
+  광고·프로모션 구간은 대본에서 빼고, 그 구간에는 하이라이트가 비어 있습니다.
+- **만드는 법**: `scripts/transcribe_radio.py`(faster-whisper, CPU int8)로 세그먼트를 뽑고
+  `scripts/build_radio_transcripts.py --prog … --asr … --ko … --key …`로 문장 병합 + 해석을 붙여 JSON에 넣습니다.
+  해석 파일 형식은 `{"skip":[…], "fix":{…}, "ko":{…}}` (스크립트 상단 설명 참고).
 
 ## 📚 매일 18:00 자동 반영 — Day 10 (2026-11-21)
 
