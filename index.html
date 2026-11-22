@@ -693,6 +693,16 @@ body.script-on .rp-sum.on{display:none}
 .rp-now span{display:block;font-size:9.5px;font-weight:700;color:#a79ed0;line-height:1.35;margin-top:1px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rp-now.en-only span{display:none}
+/* 📢 광고·인트로/공백 구간 안내 + ⏩ 본편 바로 듣기 (자막이 멈춘 걸로 오해하지 않게) */
+.rp-gap{display:none;width:100%;margin-top:5px;padding:5px 8px;border-radius:9px;
+  border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.08);align-items:center;gap:6px}
+.rp-gap.on{display:flex}
+.rp-gap-t{flex:1 1 auto;min-width:0;font-size:9.5px;font-weight:800;color:#fcd34d;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-gap-b{flex:0 0 auto;height:24px;padding:0 8px;border-radius:7px;border:1px solid rgba(251,191,36,.42);
+  background:rgba(251,191,36,.16);color:#fde68a;font-family:inherit;font-size:9.5px;font-weight:900;
+  cursor:pointer;white-space:nowrap}
+.rp-gap-b:active{background:rgba(251,191,36,.32);color:#fff}
 .rscript{position:fixed;left:0;right:0;bottom:var(--rph,206px);z-index:79;display:none;
   flex-direction:column;height:min(58vh,500px);
   background:linear-gradient(180deg,#150f2c,#0b0716);border-top:1px solid rgba(139,92,246,.38);
@@ -736,6 +746,17 @@ body.radio-on.script-on .rscript{display:flex}
   padding:7px 10px 8px;font-size:11px;line-height:1.5;font-weight:700;color:#d2c9f2;
   white-space:pre-line;word-break:keep-all;max-height:8.6em;overflow-y:auto;overscroll-behavior:contain}
 .rs-sum-in b{display:block;font-size:9px;font-weight:900;letter-spacing:.06em;color:#67e8f9;margin:0 0 3px}
+/* 📢 대본 시트 안 광고·인트로/공백 안내 */
+.rs-gap{display:none;width:100%;max-width:600px;margin:0 auto;padding:8px 12px 0}
+.rs-gap.on{display:block}
+.rs-gap-in{display:flex;align-items:center;gap:6px;border:1px solid rgba(251,191,36,.26);
+  border-radius:11px;background:rgba(251,191,36,.09);padding:7px 9px}
+.rs-gap-t{flex:1 1 auto;min-width:0;font-size:10.5px;font-weight:800;color:#fcd34d;line-height:1.35;
+  word-break:keep-all}
+.rs-gap-b{flex:0 0 auto;height:28px;padding:0 9px;border-radius:8px;border:1px solid rgba(251,191,36,.42);
+  background:rgba(251,191,36,.16);color:#fde68a;font-family:inherit;font-size:10px;font-weight:900;
+  cursor:pointer;white-space:nowrap}
+.rs-gap-b:active{background:rgba(251,191,36,.32);color:#fff}
 .rs-body{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
   padding:8px 10px calc(14px + env(safe-area-inset-bottom));overscroll-behavior:contain;
   width:100%;max-width:600px;margin:0 auto}
@@ -973,6 +994,10 @@ body.radio-on.script-on .rscript{display:flex}
     <button class="rp-now" type="button" id="rpNow" data-rp="script" aria-label="지금 문장 대본 열기">
       <b id="rpNowEn">—</b><span id="rpNowKo">—</span>
     </button>
+    <div class="rp-gap" id="rpGap">
+      <span class="rp-gap-t" id="rpGapTxt">📢 광고·인트로 구간</span>
+      <button class="rp-gap-b" type="button" data-rpjump="1">⏩ 본편 바로 듣기</button>
+    </div>
     <div class="rp-ctl">
       <button class="rp-b" type="button" data-rp="back" aria-label="15초 뒤로">↺15</button>
       <button class="rp-play" type="button" id="rpPlay" data-rp="play" aria-label="재생 또는 일시정지">▶</button>
@@ -1013,6 +1038,12 @@ body.radio-on.script-on .rscript{display:flex}
     </div>
   </div>
   <div class="rs-sum" id="rsSum" hidden><div class="rs-sum-in" id="rsSumIn"></div></div>
+  <div class="rs-gap" id="rsGap">
+    <div class="rs-gap-in">
+      <span class="rs-gap-t" id="rsGapTxt">📢 광고·인트로 구간</span>
+      <button class="rs-gap-b" type="button" data-rpjump="1">⏩ 본편 바로 듣기</button>
+    </div>
+  </div>
   <div class="rs-body" id="rsBody"></div>
 </div>
 <script>
@@ -4524,10 +4555,10 @@ function ensureRadioAudio(){
       save(LS_RADIO_POS,radioPos);
     }
   });
-  a.addEventListener("play", function(){ radioBtnState(); rsRafStart(); });
-  a.addEventListener("playing", function(){ rsRafStart(); });
-  a.addEventListener("pause", function(){ radioBtnState(); rsRafStop(); });
-  a.addEventListener("seeked", function(){ rsTick(a.currentTime||0, true); if(!a.paused) rsRafStart(); });
+  a.addEventListener("play", function(){ radioBtnState(); rsRafStart(); rsTimerStart(); });
+  a.addEventListener("playing", function(){ rsRafStart(); rsTimerStart(); rsResume(false); });
+  a.addEventListener("pause", function(){ radioBtnState(); rsRafStop(); rsTimerStop(); });
+  a.addEventListener("seeked", function(){ rsTick(a.currentTime||0, true); if(!a.paused){ rsRafStart(); rsTimerStart(); } });
   a.addEventListener("ratechange", function(){ rsTick(a.currentTime||0, true); if(!a.paused) rsRafStart(); });
   a.addEventListener("waiting", function(){ if(!a.paused) rsRafStart(); });
   a.addEventListener("ended", function(){
@@ -4539,7 +4570,7 @@ function ensureRadioAudio(){
       radioPos[radioCur.key]=0; save(LS_RADIO_POS,radioPos);
       renderRadioHead(); renderRadioList();
     }
-    rsRafStop();
+    rsRafStop(); rsTimerStop();
     radioBtnState();
   });
   a.addEventListener("error", function(){
@@ -4705,6 +4736,8 @@ var LS_RS_OFF="tmq_radio_offsets_v1";
 var rsOffsets=load(LS_RS_OFF,{})||{};
 var rsOffset=0;                 /* 회차별 자막 싱크 보정값(초). +면 자막이 그만큼 늦게, -면 그만큼 앞서 따라갑니다. */
 var RS_OFF_MAX=300;
+var rsGapTo=-1, rsGapShown=false;   /* 광고·인트로/공백일 때 건너뛸 지점(초) */
+var rsTimerId=0;                    /* rAF 가 절전·백그라운드로 멈출 때를 대비한 250ms 백업 추적 */
 var radioScriptMode=(function(){ var v=load(LS_RS_MODE,"both"); return (v==="both"||v==="en"||v==="off")?v:"both"; })();
 var radioTr=null, radioTrLoading=false, radioTrErr="";
 var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="";
@@ -4791,6 +4824,60 @@ function rsOffsetSet(v){
   rsTick(radioAudio?radioAudio.currentTime:0, true);
   if(radioAudio && !radioAudio.paused) rsRafStart();
 }
+function rsNextStart(at){
+  var segs=rsSegs; if(!segs || !segs.length) return -1;
+  var lo=0, hi=segs.length-1, ans=-1;
+  while(lo<=hi){
+    var mid=(lo+hi)>>1;
+    if(segs[mid].start > at){ ans=mid; hi=mid-1; } else { lo=mid+1; }
+  }
+  return ans>=0 ? segs[ans].start : -1;
+}
+/* 플레이어 한 줄 + 대본 시트에 "지금은 광고/인트로" 를 알리고 ⏩ 버튼을 보임 */
+function rsGapPaint(show){
+  var segs=rsSegs, to=rsGapTo, txt="";
+  if(show){
+    var intro=!!(segs && segs.length && Math.abs(to-segs[0].start)<0.05);
+    txt=(intro?"📢 광고·인트로 구간":"📢 광고·음악 구간")+" · 대본 "+fmtClock(to)+"부터";
+  }
+  var g=$("rpGap"); if(g) g.classList.toggle("on", !!show && radioScriptMode!=="off");
+  var gt=$("rpGapTxt"); if(gt) gt.textContent=txt;
+  var s=$("rsGap"); if(s) s.classList.toggle("on", !!show && radioScriptMode!=="off");
+  var st=$("rsGapTxt"); if(st) st.textContent=txt;
+  rsPlayerOffset();
+}
+/* ⏩ 본편 바로 듣기 — 첫 문장(또는 광고 뒤 다음 문장)으로 건너뜀 */
+function rsJumpGap(){
+  if(!(rsGapTo>=0)) return;
+  var a=ensureRadioAudio();
+  var to=Math.max(0, rsGapTo - (rsOffset||0));
+  try{ a.currentTime=to; }catch(e){}
+  rsFollow=true; rsScrollStop(); rsHintState();
+  if(a.paused){ var pr=a.play(); if(pr&&pr.catch) pr.catch(function(){}); }
+  updateRadioSeek();
+  rsTick(to, true);
+  rsRafStart(); rsTimerStart();
+  toast("⏩ 본편 "+fmtClock(rsGapTo)+"부터");
+}
+/* 절전·백그라운드에서 rAF 가 멈춰도 250ms 마다 한 번은 현재 문장을 확인 */
+function rsTimerStart(){
+  if(rsTimerId) return;
+  rsTimerId=setInterval(function(){
+    var a=radioAudio;
+    if(!a || a.paused || a.ended){ rsTimerStop(); return; }
+    rsTick(a.currentTime||0, false);
+    if(!rsRafId) rsRafStart();          /* rAF 가 끊겼으면 되살림 */
+  }, 250);
+}
+function rsTimerStop(){ if(rsTimerId){ clearInterval(rsTimerId); rsTimerId=0; } }
+/* 화면 복귀·포커스 복귀 순간 바로 현재 문장으로 (느리게 따라오는 체감 제거) */
+function rsResume(forceScroll){
+  var a=radioAudio;
+  if(!a || a.paused || a.ended) return;
+  rsRafStart(); rsTimerStart();
+  if(forceScroll){ rsFollow=true; rsScrollStop(); rsHintState(); }
+  rsTick(a.currentTime||0, !!forceScroll);
+}
 function rsLoad(){
   if(radioTr || radioTrLoading) return;
   radioTrLoading=true; radioTrErr="";
@@ -4871,7 +4958,15 @@ function rsKeepInView(body){
 function rsTick(t, force){
   t = (typeof t==="number" && isFinite(t)) ? t : (radioAudio?radioAudio.currentTime:0);
   /* 🎚 손으로 맞춘 싱크 보정 + 시작 0.22초 앞당김(rsIndexAt 안) — 광고(DAI)로 밀린 만큼을 여기서 흡수 */
-  var idx=rsIndexAt(t + (rsOffset||0)), segs=rsSegs;
+  var at=t + (rsOffset||0);
+  var idx=rsIndexAt(at), segs=rsSegs;
+  /* 📢 광고·인트로(프리롤)·문장 사이 긴 공백: 자막이 멈춘 것처럼 보이므로 다음 대본 시작을 알려 주고 건너뛰기 버튼을 띄움 */
+  var gapTo=(segs && segs.length && idx<0) ? rsNextStart(at) : -1;
+  var gapShow=!!(gapTo>=0 && radioScriptMode!=="off");
+  if(gapShow!==rsGapShown || gapTo!==rsGapTo){
+    rsGapShown=gapShow; rsGapTo=gapTo;
+    rsGapPaint(gapShow);
+  }
   var box=$("rpNow");
   if(box){
     var show=!!(segs && idx>=0 && radioScriptMode!=="off");
@@ -4896,7 +4991,8 @@ function rsTick(t, force){
     if(!el){ el=body.querySelector('.rs-line[data-rline="'+idx+'"]'); rsLineEls[idx]=el; }
     if(el){
       el.classList.add("on");
-      if(rsFollow) rsScrollToLine(body, el, !!force);
+      /* 문장이 바뀌면 진행 중이던 tween 은 버리고 새 문장으로 바로 (느린 따라가기·뒤처짐 방지) */
+      if(rsFollow){ if(rsScrollTo>=0) rsScrollStop(); rsScrollToLine(body, el, !!force); }
     }
   }
   rsActive=idx;
@@ -4977,7 +5073,8 @@ function rsOpen(on){
     rsFollow=true;
     rsScrollStop();
     rsSync(true);
-    if(radioAudio && !radioAudio.paused) rsRafStart();
+    rsOffsetShow();
+    if(radioAudio && !radioAudio.paused){ rsRafStart(); rsTimerStart(); rsResume(false); }
   } else {
     rsTick(radioAudio?radioAudio.currentTime:0, false);
   }
@@ -4987,6 +5084,7 @@ function rsToggle(){ rsOpen(!rsOpenState()); }
 function rsMode(m){
   radioScriptMode = (m==="en"||m==="off") ? m : "both";
   save(LS_RS_MODE, radioScriptMode);
+  rsGapPaint(rsGapTo>=0);
   if(radioScriptMode==="off"){ rsOpen(false); }
   else if(!rsOpenState()){ rsOpen(true); }
   else { rsSync(false); }
@@ -5060,7 +5158,7 @@ document.addEventListener("click", function(ev){
     if(t.getAttribute && (t.hasAttribute("data-radio")||t.hasAttribute("data-rprog")||t.hasAttribute("data-rep")
       ||t.hasAttribute("data-rp")||t.hasAttribute("data-rspd")||t.hasAttribute("data-rheard")
       ||t.hasAttribute("data-rsmode")||t.hasAttribute("data-rline")||t.hasAttribute("data-rsfollow")
-      ||t.hasAttribute("data-rsoff")
+      ||t.hasAttribute("data-rsoff")||t.hasAttribute("data-rpjump")
       ||t.id==="radioReload"||t.id==="radioRetry")) break;
     t=t.parentNode;
   }
@@ -5084,6 +5182,7 @@ document.addEventListener("click", function(ev){
   if(t.hasAttribute("data-rheard")){ toggleRadioHeard(t.getAttribute("data-rheard")); return; }
   if(t.hasAttribute("data-rsmode")){ rsMode(t.getAttribute("data-rsmode")); return; }
   if(t.hasAttribute("data-rsfollow")){ rsFollowNow(); return; }
+  if(t.hasAttribute("data-rpjump")){ rsJumpGap(); return; }
   if(t.hasAttribute("data-rsoff")){
     var d=parseFloat(t.getAttribute("data-rsoff"))||0;
     rsOffsetSet(d===0 ? 0 : (rsOffset||0)+d);
@@ -5136,10 +5235,12 @@ radioSpdState();
   if(b) b.textContent=APP_VER;
   rsOffsetShow();
 })();
-/* 화면을 다시 열었을 때도 자막 추적을 놓치지 않게 */
+/* 화면을 다시 열었을 때도 자막 추적을 놓치지 않게 (안드로이드 절전 후 복귀 포함) */
 document.addEventListener("visibilitychange", function(){
-  if(document.visibilityState==="visible" && radioAudio && !radioAudio.paused) rsRafStart();
+  if(document.visibilityState==="visible") rsResume(true);
 });
+window.addEventListener("focus", function(){ rsResume(true); });
+window.addEventListener("pageshow", function(){ rsResume(true); });
 
 /* 시작 */
 renderHome();
