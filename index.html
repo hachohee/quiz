@@ -4763,9 +4763,9 @@ function rsIndexAt(t){
   if(ans<0) return (segs[0].start - t <= 0.8) ? 0 : -1;
   var s=segs[ans], nx=segs[ans+1];
   if(t > s.end){
-    if(nx && nx.start - t <= 0.45) return ans+1;
-    if(t - s.end <= 1.6) return ans;
-    return -1;
+    if(nx && nx.start - t <= 0.45) return ans+1;      /* 다음 문장이 곷 눈앞 */
+    if(!nx || (t - s.end <= 2.5 && nx.start - t <= 3.0)) return ans;   /* 짧은 틈은 직전 문장 유지(깜박임 방지) */
+    return -1;                                        /* 광고·음악 같은 긴 공백 */
   }
   return ans;
 }
