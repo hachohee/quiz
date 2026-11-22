@@ -1064,6 +1064,11 @@ var WORDS = [
 {d:10,w:"policy",p:"폴리시",pos:"명사",m:"정책, 규정",s:"폴리스(경찰)가 지키는 나라·회사의 약속 = '정책·규정'!",c:"company policy (회사 규정)"},
 {d:10,w:"conference",p:"컨퍼런스",pos:"명사",m:"회의, 학회",s:"컵(con) 들고 모여서(fer) 이야기 나누는 큰 '회의'!",c:"conference room (회의실)"},
 {d:10,w:"efficiently",p:"이피션틀리",pos:"부사",m:"효율적으로",s:"생선(fish) 한 마리로 뚝딱(-ly) 해치우는 모습 = '효율적으로'!",c:"work efficiently (효율적으로 일하다)"},
+{d:11,w:"apply",p:"어플라이",pos:"동사",m:"지원하다, 신청하다, 적용하다",s:"어플(앱) 켜서 버튼 딱 누르면 바로 '지원하다'!",c:"apply for a job (일자리에 지원하다)"},
+{d:11,w:"experience",p:"익스피리언스",pos:"명사",m:"경험, 경력",s:"이(ex) 스피릿(spirit)으로 직접 부딪혀 쌓은 '경험'!",c:"work experience (직무 경력)"},
+{d:11,w:"qualify",p:"퀄러파이",pos:"동사",m:"자격을 얻다, 적격이다",s:"퀄리티(quality)를 통과해서 드디어 '자격을 얻다'!",c:"qualify for the position (그 직책에 자격이 되다)"},
+{d:11,w:"successful",p:"석세스풀",pos:"형용사",m:"성공적인",s:"성공(success)이 상자에 가득(full) 차서 '성공적인'!",c:"a successful interview (성공적인 면접)"},
+{d:11,w:"carefully",p:"케어풀리",pos:"부사",m:"신중하게, 주의 깊게",s:"케어(care)를 가득(full) 담아서 꼼꼼하게(-ly) '신중하게'!",c:"review carefully (신중하게 검토하다)"},
 {d:11,w:"accounting",p:"어카운팅",pos:"명사",m:"회계",s:"어카운트(계좌)에 팅(툭) 찍어 정리하는 '회계'.",c:"the accounting department (회계부)"},
 {d:11,w:"revenue",p:"레버뉴",pos:"명사",m:"매출, 수익",s:"레버(지렛대)로 뉴(새) 돈을 들어올리는 '매출'.",c:"annual revenue (연간 매출)"},
 {d:11,w:"profit",p:"프라핏",pos:"명사",m:"이익, 수익",s:"프로(전문가)도 핏(fit) 맞게 남기는 '이익'.",c:"net profit (순이익)"},
@@ -1502,7 +1507,9 @@ var GRAMMAR = [
 {tag:"twice those of (복수 대명사)",q:"Our profits this year are twice ___ of last year.",opts:["that","those","this","them"],a:1,
  tip:"앞의 profits(복수)를 대신 받는 <b>those</b>. 단수 명사를 받을 땐 that!"},
 {tag:"a / the + [ ] + 명사",q:"The supervisor shared a ___ policy with the team.",opts:["clear","clearly","clarity","clarify"],a:0,
- tip:"a 다음, policy(명사) 앞 = 꾸며 주는 말 자리! -ly는 부사, -ity는 명사, -ify는 동사. 정답은 <b>clear</b>!"}
+ tip:"a 다음, policy(명사) 앞 = 꾸며 주는 말 자리! -ly는 부사, -ity는 명사, -ify는 동사. 정답은 <b>clear</b>!"},
+{tag:"will + [ ] + 동사원형 = -ly",q:"The team will ___ review every resume before Friday.",opts:["careful","carefully","care","carefulness"],a:1,
+ tip:"will(조동사)이랑 review(동사) 사이에 쏙! 동사를 꾸며 주는 자리는 거의 <b>-ly</b> 부사(carefully)예요!"}
 ];
 
 /* ============================================================
@@ -2314,6 +2321,10 @@ var SENSE = [
 {st:3,term:"재보궐선거",k:"d2t",line:"당선자가 사퇴·사망 등으로 빈자리가 생길 때 다시 치르는 선거.",
  q:"당선자가 사퇴·사망 등으로 빈자리가 생길 때 치르는 선거는?",opts:["재보궐선거","국민투표","비례대표 선거","총선거"],a:0,
  tip:"'다시' + '빈자리' = 재·보궐. 뉴스에서 '재보선'으로 줄여 써요."},
+
+{st:2,term:"판도라의 상자",k:"d2t",line:"온갖 재앙이 튀어나왔지만 맨 마지막에 '희망'만 남았다는 그리스 신화 속 상자. 건드리면 안 될 문제를 뜻하기도 한다.",
+ q:"그리스 신화에서 모든 재앙이 빠져나간 뒤 상자 맨 밑바닥에 마지막으로 남은 것은?",opts:["희망","지혜","용기","사랑"],a:0,
+ tip:"기사에서 '판도라의 상자를 열었다'고 하면 큰 파장이 시작됐다는 뜻! 그래도 끝엔 희망이 남아 있답니다. (11/22 상식 한 조각)"},
 
 /* ---------- 4단계 경제 ---------- */
 {st:4,term:"기회비용",k:"d2t",line:"하나를 선택하면서 포기한 다른 선택의 가치.",
