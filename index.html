@@ -622,6 +622,8 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
 .rep-d{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:9.5px;color:var(--muted2);margin-top:3px;font-weight:700}
 .rep-d i{font-style:normal;opacity:.5}
 .rep-heard{font-style:normal;color:#34d399;font-weight:900}
+.rep-tr{flex:0 0 auto;font-size:9.5px;font-weight:900;color:#a5f3fc;background:rgba(34,211,238,.12);
+  border:1px solid rgba(34,211,238,.3);border-radius:8px;padding:2px 5px;line-height:1.2}
 .rep-chk{flex:0 0 30px;height:30px;border-radius:10px;border:1px solid rgba(255,255,255,.1);
   background:rgba(255,255,255,.04);color:#4b4470;font-size:13px;font-family:inherit;line-height:1;cursor:pointer;padding:0}
 .rep-chk.on{color:#08170f;background:linear-gradient(140deg,#34d399,#a7f3d0);border-color:transparent}
@@ -673,8 +675,9 @@ body.radio-on.radio-open .app{padding-bottom:calc(206px + env(safe-area-inset-bo
 .rp-spd button.on{background:linear-gradient(140deg,rgba(34,211,238,.9),rgba(139,92,246,.9));
   color:#fff;border-color:transparent}
 /* 📝 대본·해석 */
-.rp-script{flex:0 0 auto;height:38px;padding:0 9px;border-radius:11px;border:1px solid rgba(167,139,250,.45);
-  background:rgba(139,92,246,.2);color:#ddd0ff;font-family:inherit;font-size:10.5px;font-weight:900;cursor:pointer;white-space:nowrap}
+.rp-script{flex:0 0 auto;height:38px;padding:0 8px;border-radius:11px;border:1px solid rgba(167,139,250,.45);
+  background:rgba(139,92,246,.2);color:#ddd0ff;font-family:inherit;font-size:10px;font-weight:900;cursor:pointer;
+  white-space:nowrap;display:flex;align-items:center;gap:2px}
 .rp-script.on{background:linear-gradient(140deg,#22d3ee,#8b5cf6);color:#0a1526;border-color:transparent}
 .rp-now{display:none;width:100%;margin-top:5px;padding:5px 8px;border-radius:9px;text-align:left;cursor:pointer;
   border:1px solid rgba(103,232,249,.22);background:rgba(34,211,238,.07);font-family:inherit}
@@ -4442,11 +4445,13 @@ function renderRadioList(){
     var e=p.episodes[j], key=radioEpKey(p,e);
     var on=!!(radioCur && radioCur.key===key);
     var heard=!!radioHeard[key];
+    var hasTr=!!rsSegsFor(key);
     html+='<div class="rep'+(on?" on":"")+'" data-rep="'+radioPi+':'+j+'">'
       +'<span class="rep-ico">'+((on&&playing)?"❚❚":"▶")+'</span>'
       +'<div class="rep-m"><div class="rep-t">'+esc(e.title)+'</div>'
       +'<div class="rep-d"><span>'+esc(e.dateLabel||"")+'</span>'
       +(e.durationLabel?'<i>·</i><span>'+esc(e.durationLabel)+'</span>':'')+'</div></div>'
+      +(hasTr?'<span class="rep-tr" aria-label="대본·해석 있음">📝</span>':'')
       +'<button type="button" class="rep-chk'+(heard?" on":"")+'" data-rheard="'+esc(key)+'" aria-label="들은 회차로 표시">✓</button>'
       +'</div>';
   }
@@ -4637,6 +4642,7 @@ function openRadio(){
   show("radio");
   if(!radioData && !radioLoading) radioLoad();
   else renderRadio();
+  if(!radioTr && !radioTrLoading) rsLoad();     /* 어떤 회차에 대본이 있는지 표시하려고 미리 받아 둠 */
 }
 
 /* ============================================================
@@ -4670,7 +4676,8 @@ function rsLoad(){
   radioTrLoading=true; radioTrErr="";
   fetch("radio_transcripts.json", { cache:"no-store" })
     .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
-    .then(function(d){ radioTr=d||{}; radioTrLoading=false; rsSync(true); })
+    .then(function(d){ radioTr=d||{}; radioTrLoading=false; rsSync(true);
+      try{ renderRadioList(); }catch(e){} })
     .catch(function(e){ radioTrLoading=false; radioTrErr=String((e&&e.message)||e); rsSync(true); });
 }
 function rsPlayerOffset(){
