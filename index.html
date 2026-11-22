@@ -4857,6 +4857,7 @@ function rsSync(force){
           + '<span class="ko">'+esc(segs[k].ko)+'</span></button>';
     }
     body.innerHTML=html;
+    rsScrollGuard=performance.now()+300;   /* scrollTop=0 은 우리가 옮긴 것 — 따라가기 해제로 오판하지 않게 */
     body.scrollTop=0;
     rsLineEls=[]; rsBarIdx=-2;
     rsBuiltKey=key; rsActive=-1; rsFollow=true;
