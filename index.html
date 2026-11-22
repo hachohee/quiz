@@ -4714,9 +4714,7 @@ function rsTick(t, force){
       if(rsFollow){
         var r=el.getBoundingClientRect(), br=body.getBoundingClientRect();
         if(r.top < br.top+6 || r.bottom > br.bottom-6){
-          rsProgScroll=true;
           body.scrollTop += (r.top-br.top) - (br.height/2) + (r.height/2);
-          setTimeout(function(){ rsProgScroll=false; }, 700);
         }
       }
     }
@@ -4809,10 +4807,12 @@ function rsJump(i){
 }
 function rsFollowNow(){ rsFollow=true; rsTick(radioAudio?radioAudio.currentTime:0, true); }
 
-/* 대본 패널: 손으로 스크롤하면 따라가기를 잠시 멈춤 */
+/* 대본 패널: 손으로 스크롤(휠·드래그)하면 자동 따라가기를 잠시 멈춤 */
 (function wireRsScroll(){
   var body=rsBodyEl(); if(!body) return;
-  body.addEventListener("scroll", function(){ if(!rsProgScroll) rsFollow=false; rsHintState(); }, {passive:true});
+  var off=function(){ if(rsFollow){ rsFollow=false; rsHintState(); } };
+  body.addEventListener("wheel", off, {passive:true});
+  body.addEventListener("touchmove", off, {passive:true});
 })();
 
 /* 진행바(seek) — 손으로 끌어도 timeupdate가 덮어쓰지 않게 */
