@@ -58,6 +58,7 @@
 - **만드는 법**: `scripts/transcribe_radio.py`(faster-whisper, CPU int8)로 세그먼트를 뽑고
   `scripts/build_radio_transcripts.py --prog … --asr … --ko … --key … --summary "…"`로 문장 병합 + 해석 + 요약을 붙여 JSON에 넣습니다.
   해석 파일 형식은 `{"summary":"…", "skip":[…], "fix":{…}, "ko":{…}}` (스크립트 상단 설명 참고).
+- **검사**: `python3 scripts/check_data.py`가 회차별 `summary` 존재 여부와 `start`/`end` 시간 순서까지 함께 확인합니다.
 
 ## 📚 매일 18:00 자동 반영 — Day 10 (2026-11-21)
 

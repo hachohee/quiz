@@ -121,6 +121,35 @@ for (st, term), n in sense_terms.items():
 sunk = [s for s in sense if "매몰" in (s.get("term") or "")]
 print("매몰비용 문항:", len(sunk), "개")
 
+# --- 라디오 대본·요약 무결성 (radio_transcripts.json) ---
+import os
+
+tr_path = os.path.join(os.path.dirname(os.path.abspath(HTML)), "radio_transcripts.json")
+if os.path.exists(tr_path):
+    tr = json.load(open(tr_path, encoding="utf-8"))
+    meta = tr.get("_meta") or {}
+    keys = [k for k in tr if k != "_meta"]
+    print("라디오 대본:", len(keys), "회차")
+    for k in keys:
+        segs = tr[k]
+        m = meta.get(k) or {}
+        title = (m.get("title") or "?")[:40]
+        if not segs:
+            errors.append(f"라디오 '{k}': 문장 0개")
+        if not (m.get("summary") or "").strip():
+            errors.append(f"라디오 '{k}' ({title}): summary(주제·흐름 요약) 없음")
+        prev_end = -1.0
+        for i, s in enumerate(segs):
+            for key in ("start", "end", "en", "ko"):
+                if key not in s or s[key] in (None, ""):
+                    errors.append(f"라디오 '{k}'[{i}]: '{key}' 누락")
+                    break
+            if s.get("start", 0) > s.get("end", 0) + 0.01:
+                errors.append(f"라디오 '{k}'[{i}]: start>end ({s['start']}>{s['end']})")
+            if s.get("start", 0) < prev_end - 0.05:
+                errors.append(f"라디오 '{k}'[{i}]: 시간 역순(start {s['start']} < 직전 end {prev_end})")
+            prev_end = s.get("end", prev_end)
+
 if errors:
     print("\n❌ 문제 발견")
     for e in errors:
