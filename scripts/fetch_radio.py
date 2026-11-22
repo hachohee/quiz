@@ -8,6 +8,9 @@
 
     python3 scripts/fetch_radio.py [출력경로]
 
+- **광고 없는 고정 음원(2026-11-23 v20 보완)**: BBC mediaselector 의 `-rss-low` 는 요청하는 폰/브라우저마다
+  광고(DAI)가 다르게 끼어 같은 회차가 1807·1845·1872·1882초로 달라집니다. 그래서 BBC 회차는
+  `audio-nondrm-download-low`(광고 없는 방송 원본, RSS 표기 길이와 일치)로 받도록 바꿔, 대본 초가 모든 폰에서 같게 맞습니다.
 - 한 방송이 일시적으로 실패해도 기존 JSON의 그 방송 회차를 그대로 살려 둡니다(stale 표시).
 - BBC RSS의 enclosure는 http:// 라서 https:// 로 바꿔 저장합니다(HTTPS 페이지 Mixed Content 방지).
   ppg:enclosureSecure 가 있으면 그것을 우선 씁니다.
@@ -224,6 +227,20 @@ def https_url(u):
     u = (u or "").strip()
     if u.startswith("http://"):
         u = "https://" + u[len("http://"):]
+    return ad_free(u)
+
+
+def ad_free(u):
+    """BBC mediaselector 의 `-rss-low` 는 받는 사람마다 광고(DAI)가 달리 끼어
+    길이가 1807~1882초로 들쭉날쭉합니다(같은 회차인데도). 그러면 대본 초가
+    폰에서 어긋나 자막이 못 따라갑니다.
+
+    `audio-nondrm-download-rss-low` → `audio-nondrm-download-low` 로 바꾸면
+    광고가 끼지 않은 **방송 원본 그대로**(RSS 표기 길이와 일치, UA와 무관하게
+    바이트까지 동일)가 내려와서, 대본 타임스탬프가 모든 폰에서 똑같이 맞습니다.
+    """
+    if "open.live.bbc.co.uk/mediaselector" in u and "/audio-nondrm-download-rss-low/" in u:
+        return u.replace("/audio-nondrm-download-rss-low/", "/audio-nondrm-download-low/")
     return u
 
 
