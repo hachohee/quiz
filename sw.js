@@ -2,9 +2,10 @@
    v20: 영어 3채널(CNN·BBC News·6 Minute) 대본 타임스탬프를 지금 내려오는 음원 기준으로
         다시 정합(기본 0초 오프셋에서 초·중·후반 모두 0.5초 안쪽).
    v19: 대본 시트에 싱크 조절 바(-10/-1/0/+1/+10초) 추가.
+   v21: 라디오 대본 각 문장 아래에 핵심 단어·숙어·표현 칩 + '💡 표현' 보기/숨기기 토글.
    v18: index.html·라디오 JSON 은 HTTP 캐시(GitHub Pages 10분)까지 건너뛰고
         항상 새 파일을 받아 옵니다. 고친 코드가 폰에 바로 내려오게. */
-const CACHE = 'toeic-bts-v20';
+const CACHE = 'toeic-bts-v21';
 const SHELL = [
   './',
   './index.html',

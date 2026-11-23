@@ -768,7 +768,21 @@ body.radio-on.script-on .rscript{display:flex}
 .rs-line.on{background:rgba(34,211,238,.13);border-left-color:#22d3ee}
 .rs-line.on .en{color:#fff;font-weight:800}
 .rs-line.on .ko{color:#a5f3fc}
+/* 💡 문장별 핵심 단어·숙어·표현 (v21) */
+.rs-line .vocab{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.rs-line .vc{display:inline-flex;align-items:baseline;gap:4px;max-width:100%;
+  padding:2px 7px 2px 8px;border-radius:8px;border:1px solid rgba(167,139,250,.26);
+  background:rgba(139,92,246,.10);font-size:10px;line-height:1.4;word-break:keep-all}
+.rs-line .vc b{font-weight:900;color:#ddd6fe;word-break:break-word}
+.rs-line .vc i{font-style:normal;font-weight:700;color:#a79ed0;word-break:keep-all}
+.rs-line.on .vc{border-color:rgba(34,211,238,.34);background:rgba(34,211,238,.11)}
+.rs-line.on .vc b{color:#e0f2fe}
+.rs-line.on .vc i{color:#a5f3fc}
+.rscript.vocab-off .rs-line .vocab{display:none}
+.rs-modes button.rs-vc.on{background:linear-gradient(140deg,rgba(251,191,36,.95),rgba(167,139,250,.95));
+  color:#241800;border-color:transparent}
 .rscript.en-only .ko{display:none}
+.rscript.en-only .rs-line .vocab{display:none}
 .rs-empty{padding:20px 14px;text-align:center;font-size:11.5px;line-height:1.8;color:var(--muted)}
 .rs-empty b{color:#a5f3fc}
 @media(min-width:640px){
@@ -971,7 +985,7 @@ body.radio-on.script-on .rscript{display:flex}
     <div id="radioHead"></div>
     <div id="radioList"></div>
 
-    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요 <span class="app-ver" id="appVer">v20</span></p>
+    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요 <span class="app-ver" id="appVer">v21</span></p>
   </section>
 
 </div>
@@ -1017,13 +1031,14 @@ body.radio-on.script-on .rscript{display:flex}
 <div class="rscript" id="rScript" aria-label="라디오 대본과 해석">
   <div class="rs-head">
     <div class="rs-h-t">
-      <b>📝 대본 &amp; 해석</b><i class="rs-ver" id="rsVer">v20</i>
+      <b>📝 대본 &amp; 해석</b><i class="rs-ver" id="rsVer">v21</i>
       <button type="button" id="rsHint" data-rsfollow="1">문장을 누르면 그 지점부터 재생해요</button>
     </div>
     <div class="rs-modes">
       <button type="button" data-rsmode="both">영+한 같이</button>
       <button type="button" data-rsmode="en">영어만</button>
       <button type="button" data-rsmode="off">숨기기</button>
+      <button type="button" class="rs-vc" data-rsvocab="1" aria-pressed="true" aria-label="문장별 단어·표현 보기 켜기/끄기">💡 표현</button>
     </div>
     <div class="rs-sync" id="rsSync" aria-label="자막 싱크 조절">
       <span class="rs-sync-l">싱크</span>
@@ -4732,6 +4747,7 @@ function openRadio(){
    - 보기 모드: 영+한 같이 / 영어만 / 숨기기 (이 폰에만 저장)
    ============================================================ */
 var LS_RS_MODE="tmq_radio_script_mode_v1";
+var LS_RS_VOCAB="tmq_radio_vocab_v1";   /* 💡 문장별 단어·표현 보기 (기본 켜짐) */
 var LS_RS_OFF="tmq_radio_offsets_v1";
 var rsOffsets=load(LS_RS_OFF,{})||{};
 var rsOffset=0;                 /* 회차별 자막 싱크 보정값(초). +면 자막이 그만큼 늦게, -면 그만큼 앞서 따라갑니다. */
@@ -4739,6 +4755,7 @@ var RS_OFF_MAX=300;
 var rsGapTo=-1, rsGapShown=false;   /* 광고·인트로/공백일 때 건너뛸 지점(초) */
 var rsTimerId=0;                    /* rAF 가 절전·백그라운드로 멈출 때를 대비한 250ms 백업 추적 */
 var radioScriptMode=(function(){ var v=load(LS_RS_MODE,"both"); return (v==="both"||v==="en"||v==="off")?v:"both"; })();
+var radioVocab=(function(){ var v=load(LS_RS_VOCAB,"1"); return !(v==="0"||v===0||v===false); })();
 var radioTr=null, radioTrLoading=false, radioTrErr="";
 var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="";
 var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
@@ -4748,7 +4765,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v20";
+var APP_VER="v21";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5021,6 +5038,12 @@ function rsHintState(){
     else btns[i].classList.remove("on");
   }
   panel.classList.toggle("en-only", radioScriptMode==="en");
+  panel.classList.toggle("vocab-off", !radioVocab);
+  var vb=panel.querySelectorAll("[data-rsvocab]");
+  for(var j=0;j<vb.length;j++){
+    vb[j].classList.toggle("on", radioVocab);
+    vb[j].setAttribute("aria-pressed", radioVocab?"true":"false");
+  }
   var sb=$("rpScript"); if(sb) sb.classList.toggle("on", rsOpenState());
   if(!rsOpenState()) return;
   renderRsSum();
@@ -5044,7 +5067,7 @@ function rsHintState(){
     var html="";
     for(var k=0;k<segs.length;k++){
       html+='<button type="button" class="rs-line" data-rline="'+k+'"><span class="en">'+esc(segs[k].en)+'</span>'
-          + '<span class="ko">'+esc(segs[k].ko)+'</span></button>';
+          + '<span class="ko">'+esc(segs[k].ko)+'</span>'+rsVocabHtml(segs[k])+'</button>';
     }
     body.innerHTML=html;
     body.scrollTop=0;
@@ -5055,6 +5078,24 @@ function rsHintState(){
   }
   rsHintState();
   rsTick(radioAudio?radioAudio.currentTime:0, true);
+}
+/* 💡 한 문장의 핵심 단어·숙어·표현 칩 — seg.v = [{e:"clock in", m:"출근 기록을 하다"}, ...] */
+function rsVocabHtml(seg){
+  var v=seg && seg.v;
+  if(!v || !v.length) return "";
+  var h='<span class="vocab">';
+  for(var i=0;i<v.length;i++){
+    if(!v[i] || !v[i].e) continue;
+    h+='<span class="vc"><b>'+esc(v[i].e)+'</b><i>'+esc(v[i].m||"")+'</i></span>';
+  }
+  return h+'</span>';
+}
+function rsVocabToggle(){
+  radioVocab=!radioVocab;
+  save(LS_RS_VOCAB, radioVocab?"1":"0");
+  rsSync(false);
+  if(rsOpenState()) rsKeepInView(rsBodyEl());
+  toast(radioVocab?"💡 문장별 단어·표현을 보여요":"💡 단어·표현을 숨겼어요 (대본만)");
 }
 function rsEpisodeRefresh(){
   var key=rsKeyNow();
@@ -5182,6 +5223,7 @@ document.addEventListener("click", function(ev){
   }
   if(t.hasAttribute("data-rheard")){ toggleRadioHeard(t.getAttribute("data-rheard")); return; }
   if(t.hasAttribute("data-rsmode")){ rsMode(t.getAttribute("data-rsmode")); return; }
+  if(t.hasAttribute("data-rsvocab")){ rsVocabToggle(); return; }
   if(t.hasAttribute("data-rsfollow")){ rsFollowNow(); return; }
   if(t.hasAttribute("data-rpjump")){ rsJumpGap(); return; }
   if(t.hasAttribute("data-rsoff")){
