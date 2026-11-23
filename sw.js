@@ -6,8 +6,9 @@
    v22: CNN(DAI) 음원의 '광고 길이 차이' 자동 보정 — 폰이 받은 오디오 길이와 대본 기준
         길이(audioDur)의 차이를 대본에 기록된 광고 지점(adBreaks)에 얹어 자막 시각을 맞춤.
    v18: index.html·라디오 JSON 은 HTTP 캐시(GitHub Pages 10분)까지 건너뛰고
-        항상 새 파일을 받아 옵니다. 고친 코드가 폰에 바로 내려오게. */
-const CACHE = 'toeic-bts-v22';
+        항상 새 파일을 받아 옵니다. 고친 코드가 폰에 바로 내려오게.
+   v23: Day 12(2026-11-23) 토익 단어 7개·3초 문법 2문제·상식 '그린워싱' 반영. */
+const CACHE = 'toeic-bts-v23';
 const SHELL = [
   './',
   './index.html',

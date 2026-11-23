@@ -92,6 +92,13 @@ for target in ["promotion", "salary", "supervisor", "colleague",
         errors.append(f"Day 10에 '{target}' 없음")
 print("Day 10:", len(d10), "개")
 
+d12 = [w["w"] for w in words if w.get("d") == 12]
+for target in ["compensate", "guarantee", "estimate", "alternative",
+               "flexible", "properly", "regulation", "distribute"]:
+    if target not in d12:
+        errors.append(f"Day 12에 '{target}' 없음")
+print("Day 12:", len(d12), "개")
+
 # --- GRAMMAR 무결성 ---
 for i, g in enumerate(grammar):
     opts = list(g["opts"])

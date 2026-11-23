@@ -1313,6 +1313,13 @@ var WORDS = [
 {d:12,w:"nullify",p:"널리파이",pos:"동사",m:"무효화하다",s:"널(null·없음)로 만드는 '무효화'.",c:"nullify the agreement (합의를 무효화하다)"},
 {d:12,w:"jurisdiction",p:"주리스딕션",pos:"명사",m:"관할권",s:"주리(법) 딕션(말)이 통하는 범위, '관할권'.",c:"within our jurisdiction (우리 관할 안에서)"},
 {d:12,w:"dispute",p:"디스퓻",pos:"명사",m:"분쟁",s:"디스(서로) 퓻(부딪힘) — 다투는 '분쟁'.",c:"resolve a dispute (분쟁을 해결하다)"},
+{d:12,w:"compensate",p:"컴펜세이트",pos:"동사",m:"보상하다",s:"컴(덮고) 펜(pay)으로 세 배 채워 만족(세이트)시키는 '보상'.",c:"compensate for the damage (손해를 보상하다)"},
+{d:12,w:"guarantee",p:"개런티",pos:"동사",m:"보장하다, 보증하다",s:"가(ga) 안티(anti) 없이 '이건 확실해' 도장 찍는 '보증'.",c:"guarantee a refund (환불을 보장하다)"},
+{d:12,w:"estimate",p:"에스터메이트",pos:"동사",m:"추정하다, 견적을 내다",s:"에스(에스케이) 티메이트(시간 친구)와 대충 시간을 '추정'하며 견적.",c:"estimate the cost (비용을 추정하다)"},
+{d:12,w:"alternative",p:"얼터너티브",pos:"명사",m:"대안, 대안의",s:"얼터(alter·다른) 너티브 — 다른 길 하나 더 내놓는 '대안'.",c:"an alternative plan (대안 계획)"},
+{d:12,w:"flexible",p:"플렉서블",pos:"형용사",m:"유연한, 융통성 있는",s:"플렉스(flex·구부리기)가 되는 몸처럼 '유연한'.",c:"a flexible schedule (유연한 일정)"},
+{d:12,w:"properly",p:"프라퍼리",pos:"부사",m:"제대로, 적절하게",s:"프라퍼(proper·제대로)하게 리(-ly) 마무리 = '제대로'.",c:"properly installed (제대로 설치된)"},
+{d:12,w:"distribute",p:"디스트리뷰트",pos:"동사",m:"배포하다, 나누어 주다",s:"디스(곳곳에) 트리뷰트(나눠 주기) = '배포'. (Day 14 distribution의 동사형!)",c:"distribute the materials (자료를 배포하다)"},
 {d:13,w:"advertise",p:"애드버타이즈",pos:"동사",m:"광고하다",s:"애드(광고) 버타이즈(번쩍번쩍) — 눈에 띄게 '광고'.",c:"advertise a product (제품을 광고하다)"},
 {d:13,w:"advertisement",p:"애드버타이즈먼트",pos:"명사",m:"광고 (물)",s:"advertise + ment = 광고 그 자체, '광고물'.",c:"a full-page advertisement (전면 광고)"},
 {d:13,w:"brand",p:"브랜드",pos:"명사",m:"브랜드, 상표",s:"가슴에 새기는(brand) 이름, '브랜드'.",c:"a brand image (브랜드 이미지)"},
@@ -1681,7 +1688,11 @@ var GRAMMAR = [
 {tag:"a / the + [ ] + 명사",q:"The supervisor shared a ___ policy with the team.",opts:["clear","clearly","clarity","clarify"],a:0,
  tip:"a 다음, policy(명사) 앞 = 꾸며 주는 말 자리! -ly는 부사, -ity는 명사, -ify는 동사. 정답은 <b>clear</b>!"},
 {tag:"will + [ ] + 동사원형 = -ly",q:"The team will ___ review every resume before Friday.",opts:["careful","carefully","care","carefulness"],a:1,
- tip:"will(조동사)이랑 review(동사) 사이에 쏙! 동사를 꾸며 주는 자리는 거의 <b>-ly</b> 부사(carefully)예요!"}
+ tip:"will(조동사)이랑 review(동사) 사이에 쏙! 동사를 꾸며 주는 자리는 거의 <b>-ly</b> 부사(carefully)예요!"},
+{tag:"a / the + [ ] + 명사",q:"Our company offers a ___ schedule for working parents.",opts:["flexible","flexibly","flexibility","flex"],a:0,
+ tip:"a 다음, schedule(명사) 앞 = 명사를 꾸며 주는 자리! -ly는 부사, -ity는 명사, flex는 동사라 안 돼요. 정답은 <b>flexible</b>!"},
+{tag:"be + [ ] + p.p. = -ly 부사",q:"Please make sure the equipment is ___ installed before tomorrow.",opts:["proper","properly","property","appropriateness"],a:1,
+ tip:"is와 installed(과거분사) 사이 = 동사를 꾸며 주는 자리! 형용사 proper·명사 property·명사 appropriateness는 자리가 안 맞아요. 정답은 <b>properly</b>!"}
 ];
 
 /* ============================================================
@@ -2581,7 +2592,12 @@ var SENSE = [
  tip:"해외상장은 양도소득세, 손익통산되고 금융소득종합과세엔 안 들어가요. 대신 다음 해 5월에 직접 신고해야 해요."},
 {st:4,cat:"재테크",term:"금융투자소득세 폐지",k:"d2t",line:"금투세는 2024년 12월 국회에서 폐지돼 2025년 1월 1일부터 시행되지 않는다. 국내 상장주식은 소액주주 장내 매도라면 양도차익 과세가 없다.",
  q:"2025년 1월 1일부터 금융투자소득세(금투세)는 어떻게 됐나요?",opts:["폐지돼 시행되지 않는다","시행 중이다","2년 유예돼 2027년 시행된다","세율이 10%로 낮아졌다"],a:0,
- tip:"폐지된 건 금투세, 2027년으로 미뤄진 건 가상자산 과세. 2026년 11월 현재 재도입 논의는 있지만 법은 그대로예요."}
+ tip:"폐지된 건 금투세, 2027년으로 미뤄진 건 가상자산 과세. 2026년 11월 현재 재도입 논의는 있지만 법은 그대로예요."},
+
+/* ---------- 추가: '🧠 오늘의 상식 한 조각' (매일 1개씩, 문제 배열 뒤에 덧붙임 — 기존 문제 번호 유지) ---------- */
+{st:3,term:"그린워싱",k:"d2t",line:"실제로는 친환경이 아니면서 겉만 초록색으로 꾸며 친환경인 척 홍보하는 눈속임.",
+ q:"실제로는 친환경이 아니면서 친환경인 척 포장해 홍보하는 눈속임을 무엇이라 할까요?",opts:["그린워싱(Greenwashing)","그린뉴딜","탄소중립","업사이클링"],a:0,
+ tip:"green(초록) + whitewashing(겉만 칠하기) = '그린워싱'. 기사에 '친환경 마케팅'이 나오면 이 눈속임부터 의심! (11/23 상식 한 조각)"}
 ];
 
 /* ============================================================
@@ -4792,7 +4808,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v22";
+var APP_VER="v23";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
