@@ -770,11 +770,11 @@ body.radio-on.script-on .rscript{display:flex}
 .rs-line.on .ko{color:#a5f3fc}
 /* 💡 문장별 핵심 단어·숙어·표현 (v21) */
 .rs-line .vocab{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.rs-line .vc{display:inline-flex;align-items:baseline;gap:4px;max-width:100%;
+.rs-line .vc{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:0 4px;max-width:100%;
   padding:2px 7px 2px 8px;border-radius:8px;border:1px solid rgba(167,139,250,.26);
   background:rgba(139,92,246,.10);font-size:10px;line-height:1.4;word-break:keep-all}
-.rs-line .vc b{font-weight:900;color:#ddd6fe;word-break:break-word}
-.rs-line .vc i{font-style:normal;font-weight:700;color:#a79ed0;word-break:keep-all}
+.rs-line .vc b{font-weight:900;color:#ddd6fe;word-break:break-word;overflow-wrap:anywhere}
+.rs-line .vc i{font-style:normal;font-weight:700;color:#a79ed0;word-break:keep-all;overflow-wrap:anywhere}
 .rs-line.on .vc{border-color:rgba(34,211,238,.34);background:rgba(34,211,238,.11)}
 .rs-line.on .vc b{color:#e0f2fe}
 .rs-line.on .vc i{color:#a5f3fc}
@@ -5200,6 +5200,7 @@ document.addEventListener("click", function(ev){
     if(t.getAttribute && (t.hasAttribute("data-radio")||t.hasAttribute("data-rprog")||t.hasAttribute("data-rep")
       ||t.hasAttribute("data-rp")||t.hasAttribute("data-rspd")||t.hasAttribute("data-rheard")
       ||t.hasAttribute("data-rsmode")||t.hasAttribute("data-rline")||t.hasAttribute("data-rsfollow")
+      ||t.hasAttribute("data-rsvocab")
       ||t.hasAttribute("data-rsoff")||t.hasAttribute("data-rpjump")
       ||t.id==="radioReload"||t.id==="radioRetry")) break;
     t=t.parentNode;
