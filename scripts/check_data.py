@@ -139,6 +139,8 @@ if os.path.exists(tr_path):
         if not (m.get("summary") or "").strip():
             errors.append(f"라디오 '{k}' ({title}): summary(주제·흐름 요약) 없음")
         prev_end = -1.0
+        v_covered = 0
+        v_total = 0
         for i, s in enumerate(segs):
             for key in ("start", "end", "en", "ko"):
                 if key not in s or s[key] in (None, ""):
@@ -149,6 +151,24 @@ if os.path.exists(tr_path):
             if s.get("start", 0) < prev_end - 0.05:
                 errors.append(f"라디오 '{k}'[{i}]: 시간 역순(start {s['start']} < 직전 end {prev_end})")
             prev_end = s.get("end", prev_end)
+            # 💡 문장별 핵심 단어·숙어·표현 (v21) — 있으면 형식·표현 존재 확인
+            v = s.get("v")
+            if v:
+                if not isinstance(v, list):
+                    errors.append(f"라디오 '{k}'[{i}]: v 가 배열이 아님")
+                    continue
+                if len(v) > 4:
+                    print(f"  ! 라디오 '{k}'[{i}]: 표현 {len(v)}개(권장 4개 이하)")
+                v_covered += 1
+                for it in v:
+                    if not isinstance(it, dict) or not str(it.get("e") or "").strip() or not str(it.get("m") or "").strip():
+                        errors.append(f"라디오 '{k}'[{i}]: 표현 항목에 e/m 누락 {it!r}")
+                        continue
+                    v_total += 1
+                    if str(it["e"]).lower() not in (s.get("en") or "").lower():
+                        print(f"  ! 라디오 '{k}'[{i}]: 문장에 없는 표현 '{it['e']}'")
+        if segs:
+            print(f"    · 문장별 표현: {v_covered}/{len(segs)}문장 · {v_total}개")
         # 광고가 섞여 들어오면(DAI) 대본 시각이 오디오와 어긋남 → 마지막 문장이 오디오보다 뒤면 오류
         ad = m.get("audioDur")
         if ad and segs:

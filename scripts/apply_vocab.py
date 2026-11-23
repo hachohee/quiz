@@ -11,9 +11,11 @@ TSV 형식 (한 줄에 표현 하나, 같은 번호를 여러 줄 써도 됨):
     14<TAB>clock out<TAB>퇴근 기록을 하다
     # 주석 줄은 무시
 
-    python3 scripts/apply_vocab.py <episode-key> <vocab.tsv> [--check-only]
+    python3 scripts/apply_vocab.py <episode-key> <vocab.tsv> [--check-only] [--append]
 
-구분자는 탭 또는 ' | ' 둘 다 됩니다(한 파일 안에서 섞어도 됨).
+구분자는 탭 또는 ' | ' 둘 다 됩니다(한 파일 안에서 섞여도 됨).
+기본은 그 회차의 표현을 TSV 내용으로 **통째로 교체**합니다(TSV가 그 회차의 정답).
+--append 를 주면 TSV에 없는 문장의 기존 표현은 그대로 둡니다.
 
 표현은 그 문장 안에 실제로 나오는 표기 그대로 적어야 합니다(검사에서 확인).
 """
@@ -59,6 +61,7 @@ def main():
         raise SystemExit(__doc__)
     key, tsv = sys.argv[1], sys.argv[2]
     check_only = "--check-only" in sys.argv[3:]
+    append = "--append" in sys.argv[3:]
 
     doc = json.load(open(TR, encoding="utf-8"))
     segs = doc.get(key)
@@ -69,6 +72,10 @@ def main():
     bad_idx = [i for i in vocab if not (0 <= i < len(segs))]
     if bad_idx:
         raise SystemExit("문장 번호 범위 밖: %s (문장 %d개)" % (bad_idx, len(segs)))
+
+    if not append:
+        for s in segs:
+            s.pop("v", None)
 
     warnings = []
     total = 0
