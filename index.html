@@ -5019,9 +5019,25 @@ function rsLoad(){
   radioTrLoading=true; radioTrErr="";
   fetch("radio_transcripts.json", { cache:"no-store" })
     .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
-    .then(function(d){ radioTr=d||{}; radioTrLoading=false; renderRpSum(); rsSync(true);
+    .then(function(d){ radioTr=d||{}; radioTrLoading=false; rsOffsetsMigrate(); renderRpSum(); rsSync(true);
       try{ renderRadioList(); }catch(e){} })
     .catch(function(e){ radioTrLoading=false; radioTrErr=String((e&&e.message)||e); rsSync(true); });
+}
+/* v22 한 번만: 예전에 손으로 맞춰 둔 싱크 값(±)이 광고 자동 보정과 겹쳐 두 번 밀리는 일을 막기 위해,
+   광고 지도(adBreaks)가 있는 CNN 회차의 저장된 손보정 값만 지웁니다(BBC 등은 그대로). */
+var rsOffMigrated=0;
+function rsOffsetsMigrate(){
+  if(rsOffMigrated) return;
+  rsOffMigrated=1;
+  var changed=false, k, m;
+  for(k in rsOffsets){
+    m=rsMetaFor(k);
+    if(m && m.adBreaks && m.adBreaks.length){ delete rsOffsets[k]; changed=true; }
+  }
+  if(!changed) return;
+  save(LS_RS_OFF, rsOffsets);
+  var key=rsKeyNow();
+  if(key){ rsOffset=rsOffsetSaved(key); rsOffsetShow(); }
 }
 function rsPlayerOffset(){
   var pl=$("radioPlayer"); if(!pl) return;
