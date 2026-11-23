@@ -739,6 +739,18 @@ body.radio-on.script-on .rscript{display:flex}
   cursor:pointer;padding:0;white-space:nowrap}
 .rs-sync-b button:active{background:rgba(34,211,238,.22);color:#fff}
 .rs-sync-b button[data-rsoff="0"]{color:#a5f3fc;border-color:rgba(34,211,238,.28)}
+/* ⚡ 광고 길이 차이 자동 보정 배지 (v22) */
+.rs-ad{display:flex;align-items:center;gap:6px;width:100%;max-width:600px;margin:0 auto;padding:8px 12px 0}
+.rs-ad[hidden]{display:none}
+.rs-ad > .rs-ad-t{flex:1 1 auto;min-width:0;border:1px solid rgba(34,211,238,.26);border-radius:11px;
+  background:linear-gradient(140deg,rgba(34,211,238,.13),rgba(139,92,246,.14));
+  padding:7px 9px;font-size:10.5px;font-weight:800;color:#c7f9ff;line-height:1.35;word-break:keep-all}
+.rs-ad > .rs-ad-t b{font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+.rs-ad.off > .rs-ad-t{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:var(--muted2)}
+.rs-ad > .rs-ad-b{flex:0 0 auto;height:28px;padding:0 9px;border-radius:8px;border:1px solid rgba(34,211,238,.34);
+  background:rgba(34,211,238,.12);color:#a5f3fc;font-family:inherit;font-size:10px;font-weight:900;
+  cursor:pointer;white-space:nowrap}
+.rs-ad > .rs-ad-b:active{background:rgba(34,211,238,.3);color:#fff}
 /* 📌 대본 시트 상단 주제·흐름 요약 */
 .rs-sum{flex:0 0 auto;width:100%;max-width:600px;margin:0 auto;padding:8px 12px 0}
 .rs-sum-in{border:1px solid rgba(34,211,238,.24);border-radius:11px;
@@ -985,7 +997,7 @@ body.radio-on.script-on .rscript{display:flex}
     <div id="radioHead"></div>
     <div id="radioList"></div>
 
-    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요 <span class="app-ver" id="appVer">v21</span></p>
+    <p class="foot">음원은 각 방송사 공식 팟캐스트에서 바로 받아 와요 (앱에 저장하지 않아 데이터 요금이 나요)<br>들은 회차 ✓ 와 재생 위치·속도는 이 폰에만 저장돼요 <span class="app-ver" id="appVer">v22</span></p>
   </section>
 
 </div>
@@ -1031,7 +1043,7 @@ body.radio-on.script-on .rscript{display:flex}
 <div class="rscript" id="rScript" aria-label="라디오 대본과 해석">
   <div class="rs-head">
     <div class="rs-h-t">
-      <b>📝 대본 &amp; 해석</b><i class="rs-ver" id="rsVer">v21</i>
+      <b>📝 대본 &amp; 해석</b><i class="rs-ver" id="rsVer">v22</i>
       <button type="button" id="rsHint" data-rsfollow="1">문장을 누르면 그 지점부터 재생해요</button>
     </div>
     <div class="rs-modes">
@@ -1051,6 +1063,10 @@ body.radio-on.script-on .rscript{display:flex}
         <button type="button" data-rsoff="10" aria-label="자막 10초 늦춤">+10초</button>
       </div>
     </div>
+  </div>
+  <div class="rs-ad" id="rsAd" hidden>
+    <span class="rs-ad-t">⚡ 광고 길이 차이 자동 보정 <b id="rsAdVal">+0초</b></span>
+    <button type="button" class="rs-ad-b" id="rsAdBtn" data-rsadoff="1" aria-label="광고 자동 보정 켜기/끄기">끄기</button>
   </div>
   <div class="rs-sum" id="rsSum" hidden><div class="rs-sum-in" id="rsSumIn"></div></div>
   <div class="rs-gap" id="rsGap">
@@ -4556,9 +4572,10 @@ function ensureRadioAudio(){
     }
     radioPending=0;
     updateRadioSeek();
+    rsAdRefresh();                         /* ⚡ 오디오 길이가 확인되면 광고 차이 보정 재계산 */
     if(!a.paused) rsRafStart();
   });
-  a.addEventListener("durationchange", updateRadioSeek);
+  a.addEventListener("durationchange", function(){ updateRadioSeek(); rsAdRefresh(); });
   a.addEventListener("timeupdate", function(){
     if(radioSeeking) return;
     updateRadioSeek();
@@ -4758,6 +4775,16 @@ var radioScriptMode=(function(){ var v=load(LS_RS_MODE,"both"); return (v==="bot
 var radioVocab=(function(){ var v=load(LS_RS_VOCAB,"1"); return !(v==="0"||v===0||v===false); })();
 var radioTr=null, radioTrLoading=false, radioTrErr="";
 var rsKey="", rsSegs=null, rsActive=-1, rsFollow=true, rsBuiltKey="";
+/* ⚡ 광고 길이 차이 자동 보정 (v22)
+   CNN(5 Things·One Thing)은 megaphone DAI 음원이라 회차 중간에 광고가
+   *세션마다 다른 길이로* 끼어듭니다. 그래서 폰이 받은 파일 길이(audio.duration)와
+   대본 기준 길이(_meta[key].audioDur)가 달라 자막이 통째로 밀립니다.
+   대본에 기록해 둔 광고 지점(_meta[key].adBreaks=[{at,add}])에 그 차이를 얹어 맞춥니다.
+   · 기준 길이(add)보다 차이가 작으면(광고가 짧게 끼거나 안 끼면) 그만큼만 얹음
+   · 회차별로 '끄기'를 누르면 그 폰에서는 자동 보정을 안 씀(아래 싱크 바로 직접 조절) */
+var LS_RS_ADOFF="tmq_radio_ad_auto_off_v1";
+var rsAdAutoOff=load(LS_RS_ADOFF,{})||{};
+var rsAdPlan={ total:0, steps:[], diff:0, key:"" }, rsSegsRaw=null, rsAdTold={};
 var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
 /* 따라가기 스크롤은 브라우저의 smooth scroll 에 맡기지 않고 직접 조금씩 움직입니다.
    (smooth scroll 은 거리에 따라 400~900ms 걸려서, 그 사이 마지막 scroll 이벤트가
@@ -4765,7 +4792,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v21";
+var APP_VER="v22";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -4811,6 +4838,95 @@ function renderRsSum(){
     inner.textContent="";
     box.hidden=true;
   }
+}
+/* ⚡ 광고 보정 계산·적용 ------------------------------------------------ */
+function rsAudioDurNow(){
+  var a=radioAudio;
+  return (a && isFinite(a.duration) && a.duration>0) ? a.duration : 0;
+}
+/* 이 회차·이 오디오 길이에 적용할 보정 계단. 보정할 게 없으면 null */
+function rsAdPlanFor(key, dur){
+  if(!key || !dur) return null;
+  var m=rsMetaFor(key); if(!m) return null;
+  var base=Number(m.audioDur)||0;
+  var brk=(m.adBreaks && m.adBreaks.length) ? m.adBreaks : null;
+  if(!base || !brk || rsAdAutoOff[key]) return null;
+  var diff=Math.round((dur-base)*10)/10;        /* 폰이 받은 파일이 대본 기준보다 긴 초 */
+  if(diff<2) return null;                       /* 차이가 없거나 오히려 짧으면 손대지 않음 */
+  var used=0, steps=[], i, b, want, at, left, take;
+  for(i=0;i<brk.length;i++){
+    b=brk[i]||{}; want=Number(b.add)||0; at=Number(b.at);
+    if(!isFinite(at) || want<=0) continue;
+    left=diff-used;
+    if(left<2) break;
+    take=Math.min(want, left);                  /* 기준보다 짧게 끼었으면 짧은 쪽 */
+    if(take>=2){ steps.push({at:at, add:Math.round(take*10)/10}); used+=take; }
+  }
+  if(!steps.length) return null;
+  return { key:key, diff:diff, total:Math.round(used*10)/10, steps:steps, dur:dur };
+}
+/* 원본 문장 배열 + 계단 → 화면·판정에 쓰는 시각 배열(원본은 그대로 둠) */
+function rsSegsView(raw, plan){
+  if(!raw || !plan || !plan.steps.length) return raw;
+  var out=[], i, j, s, add;
+  for(i=0;i<raw.length;i++){
+    s=raw[i]; add=0;
+    for(j=0;j<plan.steps.length;j++){ if(s.start >= plan.steps[j].at - 0.01) add+=plan.steps[j].add; }
+    if(!add){ out.push(s); continue; }
+    out.push({ start:Math.round((s.start+add)*100)/100, end:Math.round((s.end+add)*100)/100,
+               en:s.en, ko:s.ko, v:s.v });
+  }
+  return out;
+}
+function rsAdBadge(){
+  var box=$("rsAd"), val=$("rsAdVal"), btn=$("rsAdBtn");
+  if(!box) return;
+  var key=rsKeyNow(), m=rsMetaFor(key);
+  var hasMap=!!(m && m.adBreaks && m.adBreaks.length && Number(m.audioDur)>0);
+  if(!hasMap){ box.hidden=true; return; }
+  if(rsAdAutoOff[key]){
+    var d0=Math.round((rsAudioDurNow()-(Number(m.audioDur)||0))*10)/10;
+    if(!(d0>=2)){ box.hidden=true; return; }
+    box.hidden=false; box.className="rs-ad off";
+    if(val) val.textContent="+"+d0+"초 차이";
+    if(btn) btn.textContent="켜기";
+    return;
+  }
+  if(!rsAdPlan.total){ box.hidden=true; return; }
+  box.hidden=false; box.className="rs-ad";
+  if(val) val.textContent="+"+rsAdPlan.total+"초";
+  if(btn) btn.textContent="끄기";
+}
+/* 계단 계산 → 보기 배열 → 배지. notify 면 처음 적용될 때 토스트로 알림 */
+function rsAdSync(notify){
+  var key=rsKeyNow();
+  rsAdPlan=rsAdPlanFor(key, rsAudioDurNow()) || { total:0, steps:[], diff:0, key:key };
+  rsSegs=rsSegsView(rsSegsRaw, rsAdPlan.total?rsAdPlan:null);
+  rsAdBadge();
+  if(notify && rsAdPlan.total>=2 && key && !rsAdTold[key]){
+    rsAdTold[key]=1;
+    toast("⚡ 광고 "+Math.round(rsAdPlan.total)+"초 차이를 자동 보정했어요");
+  }
+  return rsAdPlan;
+}
+/* 오디오 길이가 (다시) 확인될 때 — loadedmetadata·durationchange */
+function rsAdRefresh(){
+  var key=rsKeyNow(); if(!key || !rsSegsRaw) return;
+  var plan=rsAdPlanFor(key, rsAudioDurNow()), total=plan?plan.total:0;
+  if(rsAdPlan.key===key && Math.abs(total-(rsAdPlan.total||0))<0.35){ rsAdBadge(); return; }
+  rsAdSync(true);
+  rsActive=-1; rsBarIdx=-2;
+  rsTick(radioAudio?radioAudio.currentTime:0, true);
+}
+/* 배지의 끄기/켜기 — 이 회차만, 이 폰에서만 */
+function rsAdToggle(){
+  var key=rsKeyNow(); if(!key) return;
+  if(rsAdAutoOff[key]){ delete rsAdAutoOff[key]; toast("⚡ 광고 자동 보정을 다시 켰어요"); }
+  else { rsAdAutoOff[key]=1; toast("⚡ 자동 보정을 껐어요 · 아래 싱크 바로 직접 맞출 수 있어요"); }
+  save(LS_RS_ADOFF, rsAdAutoOff);
+  rsAdSync(false);
+  rsActive=-1; rsBarIdx=-2;
+  rsTick(radioAudio?radioAudio.currentTime:0, true);
 }
 /* 🎚 싱크 조절 (v19) — CNN·BBC 는 받을 때마다 광고(DAI)가 달리 끼어들어
    서버에서 맞춰 둔 타임스탬프가 폰 오디오와 수 초~수십 초 어긋납니다.
@@ -5051,18 +5167,20 @@ function rsHintState(){
   if(key!==rsKey){ rsKey=key; rsActive=-1; rsBuiltKey=""; rsOffset=rsOffsetSaved(key); rsOffsetShow(); }
   if(radioScriptMode==="off"){ /* 숨김 상태에서도 열리면 같이 보기로 */ }
   if(!radioTr && !radioTrLoading) rsLoad();
-  if(!key){ body.innerHTML='<div class="rs-empty">먼저 들을 회차를 골라 주세요</div>'; rsBuiltKey=""; rsSegs=null; return; }
+  if(!key){ body.innerHTML='<div class="rs-empty">먼저 들을 회차를 골라 주세요</div>'; rsBuiltKey=""; rsSegs=null; rsSegsRaw=null; return; }
   var segs=rsSegsFor(key);
   if(!segs && !radioTr && !radioTrLoading){
-    body.innerHTML='<div class="rs-empty">📝 대본을 불러오는 중…</div>'; rsBuiltKey=""; rsSegs=null; return;
+    body.innerHTML='<div class="rs-empty">📝 대본을 불러오는 중…</div>'; rsBuiltKey=""; rsSegs=null; rsSegsRaw=null; return;
   }
   if(!segs){
     body.innerHTML='<div class="rs-empty">🎧 <b>이 회차는 아직 대본이 준비되지 않았어요</b><br>최신 회차부터 영어 대본과 한국어 해석을 볼 수 있어요</div>';
-    rsSegs=null; rsBuiltKey=""; rsHintState();
+    rsSegs=null; rsSegsRaw=null; rsBuiltKey=""; rsHintState();
     var nb=$("rpNow"); if(nb) nb.classList.remove("on");
     return;
   }
-  rsSegs=segs;
+  rsSegsRaw=segs;
+  rsAdSync(false);                         /* ⚡ 광고 길이 차이 → 문장 시각 자동 보정 */
+  segs=rsSegs||segs;
   if(rsBuiltKey!==key || !body.querySelector(".rs-line")){
     var html="";
     for(var k=0;k<segs.length;k++){
@@ -5101,7 +5219,8 @@ function rsEpisodeRefresh(){
   var key=rsKeyNow();
   rsKey=key; rsBuiltKey=""; rsActive=-1; rsFollow=true; rsLineEls=[]; rsBarIdx=-2;
   rsOffset=rsOffsetSaved(key); rsOffsetShow();
-  rsSegs=rsSegsFor(key);
+  rsSegsRaw=rsSegsFor(key);
+  rsAdSync(false);                         /* ⚡ 새 회차의 광고 보정 계산(오디오 길이는 metadata 뒤 한 번 더) */
   if(key && !radioTr && !radioTrLoading) rsLoad();
   renderRpSum();
   if(rsOpenState()) rsSync(true);
@@ -5200,7 +5319,7 @@ document.addEventListener("click", function(ev){
     if(t.getAttribute && (t.hasAttribute("data-radio")||t.hasAttribute("data-rprog")||t.hasAttribute("data-rep")
       ||t.hasAttribute("data-rp")||t.hasAttribute("data-rspd")||t.hasAttribute("data-rheard")
       ||t.hasAttribute("data-rsmode")||t.hasAttribute("data-rline")||t.hasAttribute("data-rsfollow")
-      ||t.hasAttribute("data-rsvocab")
+      ||t.hasAttribute("data-rsvocab")||t.hasAttribute("data-rsadoff")
       ||t.hasAttribute("data-rsoff")||t.hasAttribute("data-rpjump")
       ||t.id==="radioReload"||t.id==="radioRetry")) break;
     t=t.parentNode;
@@ -5225,6 +5344,7 @@ document.addEventListener("click", function(ev){
   if(t.hasAttribute("data-rheard")){ toggleRadioHeard(t.getAttribute("data-rheard")); return; }
   if(t.hasAttribute("data-rsmode")){ rsMode(t.getAttribute("data-rsmode")); return; }
   if(t.hasAttribute("data-rsvocab")){ rsVocabToggle(); return; }
+  if(t.hasAttribute("data-rsadoff")){ rsAdToggle(); return; }
   if(t.hasAttribute("data-rsfollow")){ rsFollowNow(); return; }
   if(t.hasAttribute("data-rpjump")){ rsJumpGap(); return; }
   if(t.hasAttribute("data-rsoff")){

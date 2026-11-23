@@ -179,14 +179,17 @@ def main():
 
     doc[a.key] = segs
     meta = doc.setdefault("_meta", {})
-    meta[a.key] = {
+    prev = meta.get(a.key) or {}
+    entry = dict(prev)                     # audioDur·aligned·adBreaks·adRef 등은 그대로 살림
+    entry.update({
         "program": a.prog,
         "title": a.title,
         "date": a.date,
         "summary": summary,
         "segments": len(segs),
         "built": datetime.now(KST).isoformat(timespec="seconds"),
-    }
+    })
+    meta[a.key] = entry
     tmp = a.out + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, separators=(",", ":"))

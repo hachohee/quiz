@@ -169,8 +169,39 @@ if os.path.exists(tr_path):
                         print(f"  ! 라디오 '{k}'[{i}]: 문장에 없는 표현 '{it['e']}'")
         if segs:
             print(f"    · 문장별 표현: {v_covered}/{len(segs)}문장 · {v_total}개")
-        # 광고가 섞여 들어오면(DAI) 대본 시각이 오디오와 어긋남 → 마지막 문장이 오디오보다 뒤면 오류
         ad = m.get("audioDur")
+        # ⚡ 광고 삽입 지도(adBreaks) — CNN DAI 음원의 '광고 길이 차이' 자동 보정용
+        brk = m.get("adBreaks")
+        if brk is not None:
+            if not isinstance(brk, list):
+                errors.append(f"라디오 '{k}' ({title}): adBreaks 가 배열이 아님")
+                brk = None
+            elif brk:
+                if not ad:
+                    errors.append(f"라디오 '{k}' ({title}): adBreaks 가 있는데 audioDur 가 없음")
+                prev_at = -1.0
+                for j, b in enumerate(brk):
+                    if not isinstance(b, dict) or "at" not in b or "add" not in b:
+                        errors.append(f"라디오 '{k}' adBreaks[{j}]: at/add 누락 {b!r}")
+                        continue
+                    try:
+                        at, add = float(b["at"]), float(b["add"])
+                    except (TypeError, ValueError):
+                        errors.append(f"라디오 '{k}' adBreaks[{j}]: 숫자가 아님 {b!r}")
+                        continue
+                    if not (-2.0 <= add <= 180.0):
+                        errors.append(f"라디오 '{k}' adBreaks[{j}]: add {add}초 범위 밖")
+                    if at < prev_at - 0.01:
+                        errors.append(f"라디오 '{k}' adBreaks[{j}]: at 이 앞 지점보다 이른 역순")
+                    if ad and at > ad + 1.0:
+                        errors.append(f"라디오 '{k}' adBreaks[{j}]: at {at} > 오디오 길이 {ad}")
+                    prev_at = at
+                ref = m.get("adRef") or {}
+                if brk and not ref.get("dur"):
+                    print(f"  ! 라디오 '{k}' ({title}): adBreaks 는 있는데 adRef(측정 파일 길이)가 없음")
+                print("    · 광고 지점 " + " · ".join("%.1f초 %+.1f초" % (float(b["at"]), float(b["add"]))
+                                                for b in brk if isinstance(b, dict) and "at" in b and "add" in b))
+        # 광고가 섞여 들어오면(DAI) 대본 시각이 오디오와 어긋남 → 마지막 문장이 오디오보다 뒤면 오류
         if ad and segs:
             if segs[-1].get("end", 0) > ad + 1.0:
                 errors.append(f"라디오 '{k}' ({title}): 마지막 문장 end {segs[-1]['end']} > 오디오 길이 {ad}")

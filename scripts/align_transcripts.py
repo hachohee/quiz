@@ -298,6 +298,7 @@ def main():
         print("\n(미리보기) --write 를 붙이면 radio_transcripts.json 을 갱신합니다.")
         return 0
 
+    old_starts = [s["start"] for s in segs]
     for f in fixed:
         s = segs[f["i"]]
         s["start"] = round(f["start"], 2)
@@ -310,6 +311,26 @@ def main():
     meta = doc.setdefault("_meta", {}).setdefault(a.key, {})
     meta["audioDur"] = round(dur, 2)
     meta["aligned"] = datetime.now(KST).isoformat(timespec="seconds")
+    # ⚡ 광고 삽입 지도(adBreaks) — 문장별 이동폭에서 '계단'을 찾아 그대로 기록.
+    #    CNN(DAI) 음원은 이 계단이 세션마다 달라져서, 앱이 폰 오디오 길이 차이와
+    #    맞춰 자막 시각을 자동 보정하는 데 이 값을 씁니다(scan_ads.py 참고).
+    try:
+        sys.path.insert(0, HERE)
+        from scan_ads import detect_from
+        pairs = [(f["i"], round(old_starts[f["i"]], 2),
+                  round(segs[f["i"]]["start"] - old_starts[f["i"]], 2))
+                 for f in fixed if not f.get("interp")]
+        breaks, _levels = detect_from(pairs, segs)
+        meta["adBreaks"] = breaks
+        meta["adRef"] = {"dur": round(dur, 2), "sum": round(sum(b["add"] for b in breaks), 2),
+                         "scanned": meta["aligned"]}
+        if breaks:
+            print("⚡ 광고 지도: " + " · ".join("대본 %.1f초 이후 %+.1f초" % (b["at"], b["add"])
+                                            for b in breaks))
+        else:
+            print("⚡ 광고 지도: 계단 없음(이 음원이 대본과 같은 광고 구성)")
+    except Exception as exc:                     # noqa: BLE001
+        print("!! 광고 지도 계산 실패:", exc)
     tmp = a.out + ".tmp"
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, ensure_ascii=False, separators=(",", ":"))
