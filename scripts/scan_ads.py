@@ -39,6 +39,7 @@ KST = timezone(timedelta(hours=9))
 SR = 16000
 STEP_MIN = 5.0      # 이만큼(초) 이상 오차가 계단처럼 바뀌면 광고 삽입 지점으로 봄
 NOISE = 3.0         # 계단 판정 전에 문장별 오차에서 걷어낼 잡음 폭
+GAP_MIN = 8.0       # 대본 자체에 이만큼 빈 틈이 있으면 '광고가 빠질 수 있는 자리'로도 기록
 
 
 def norm(w):
@@ -156,6 +157,33 @@ def detect_from(pairs, segs):
     return breaks, merged
 
 
+def merge_maps(measured, segs, gap_min=GAP_MIN):
+    """측정한 계단 + 대본 자체의 긴 틈(광고가 빠질 수 있는 자리) → 하나의 지도.
+
+    · add  : 이 자리에 지금 파일이 끼운 광고 길이(측정값). 앱은 실제 차이와 이 값 중 작은 쪽을 얹음
+    · gap  : 대본 시각 자체에 비어 있는 틈(그 음원에 광고가 들어 있던 자리)
+             → 폰이 받은 파일에 그 광고가 없으면 -gap 까지 당겨서 맞춤
+    """
+    gaps = []
+    for i in range(len(segs) - 1):
+        g = segs[i + 1]["start"] - segs[i]["end"]
+        if g >= gap_min:
+            gaps.append({"at": round(segs[i]["end"], 2), "add": 0.0, "gap": round(g, 2), "kind": "gap"})
+    out = []
+    for b in measured:
+        b = {"at": round(float(b["at"]), 2), "add": round(float(b["add"]), 2), "kind": "measured"}
+        for g in gaps:
+            if abs(g["at"] - b["at"]) <= 0.6:
+                b["gap"] = g["gap"]
+                g["_used"] = True
+        out.append(b)
+    for g in gaps:
+        if not g.pop("_used", False):
+            out.append(g)
+    out.sort(key=lambda x: x["at"])
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--audio", required=True)
@@ -191,17 +219,19 @@ def main():
     for lv in levels:
         print("  오차 %+7.2f초 · 문장 %d~%d (%d문장)" % (lv["off"], lv["i0"], lv["i1"], lv["n"]))
     print("\n광고 삽입 지점(adBreaks):")
-    if not breaks:
+    if not merge_maps(breaks, segs):
         print("  없음 — 대본 시각이 이 파일과 같습니다")
-    for b in breaks:
-        print("  대본 %7.2f초 이후 문장 +%.2f초" % (b["at"], b["add"]))
+    for b in merge_maps(breaks, segs):
+        extra = (" · 대본 틈 %.2f초" % b["gap"]) if b.get("gap") else ""
+        print("  대본 %7.2f초 이후 문장 %+.2f초%s" % (b["at"], b.get("add", 0.0), extra))
 
     if not a.write:
         print("\n(미리보기) --write 를 붙이면 radio_transcripts.json 의 _meta 에 기록합니다.")
         return 0
     meta = doc.setdefault("_meta", {}).setdefault(a.key, {})
-    meta["adBreaks"] = breaks
-    meta["adRef"] = {"dur": round(dur, 2), "sum": round(sum(b["add"] for b in breaks), 2),
+    brk = merge_maps(breaks, segs)
+    meta["adBreaks"] = brk
+    meta["adRef"] = {"dur": round(dur, 2), "sum": round(sum(b["add"] for b in brk), 2),
                      "scanned": datetime.now(KST).isoformat(timespec="seconds")}
     tmp = a.out + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:

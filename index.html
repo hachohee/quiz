@@ -4851,16 +4851,17 @@ function rsAdPlanFor(key, dur){
   var base=Number(m.audioDur)||0;
   var brk=(m.adBreaks && m.adBreaks.length) ? m.adBreaks : null;
   if(!base || !brk || rsAdAutoOff[key]) return null;
-  var diff=Math.round((dur-base)*10)/10;        /* 폰이 받은 파일이 대본 기준보다 긴 초 */
-  if(diff<2) return null;                       /* 차이가 없거나 오히려 짧으면 손대지 않음 */
-  var used=0, steps=[], i, b, want, at, left, take;
+  var diff=Math.round((dur-base)*10)/10;        /* 폰이 받은 파일이 대본 기준보다 긴 초(모자라면 음수) */
+  if(Math.abs(diff)<2) return null;             /* 차이가 거의 없으면 손대지 않음 */
+  var used=0, steps=[], i, b, want, gapNeg, at, left, take;
   for(i=0;i<brk.length;i++){
     b=brk[i]||{}; want=Number(b.add)||0; at=Number(b.at);
-    if(!isFinite(at) || want<=0) continue;
+    if(!isFinite(at)) continue;
+    gapNeg=Math.max(want, Number(b.gap)||0);    /* 대본 자체에 광고 틈이 있던 자리는 그만큼 줄 수도 있음 */
     left=diff-used;
-    if(left<2) break;
-    take=Math.min(want, left);                  /* 기준보다 짧게 끼었으면 짧은 쪽 */
-    if(take>=2){ steps.push({at:at, add:Math.round(take*10)/10}); used+=take; }
+    if(Math.abs(left)<2) break;
+    take = left>0 ? Math.min(want, left) : Math.min(0, Math.max(-gapNeg, left));
+    if(Math.abs(take)>=2){ steps.push({at:at, add:Math.round(take*10)/10}); used+=take; }
   }
   if(!steps.length) return null;
   return { key:key, diff:diff, total:Math.round(used*10)/10, steps:steps, dur:dur };
@@ -4878,6 +4879,7 @@ function rsSegsView(raw, plan){
   }
   return out;
 }
+function rsAdSign(v){ var n=Math.round(Math.abs(Number(v)||0)); return (Number(v)>0?"+":Number(v)<0?"-":"")+n; }
 function rsAdBadge(){
   var box=$("rsAd"), val=$("rsAdVal"), btn=$("rsAdBtn");
   if(!box) return;
@@ -4886,15 +4888,15 @@ function rsAdBadge(){
   if(!hasMap){ box.hidden=true; return; }
   if(rsAdAutoOff[key]){
     var d0=Math.round((rsAudioDurNow()-(Number(m.audioDur)||0))*10)/10;
-    if(!(d0>=2)){ box.hidden=true; return; }
+    if(!(Math.abs(d0)>=2)){ box.hidden=true; return; }
     box.hidden=false; box.className="rs-ad off";
-    if(val) val.textContent="+"+d0+"초 차이";
+    if(val) val.textContent=rsAdSign(d0)+"초 차이";
     if(btn) btn.textContent="켜기";
     return;
   }
   if(!rsAdPlan.total){ box.hidden=true; return; }
   box.hidden=false; box.className="rs-ad";
-  if(val) val.textContent="+"+rsAdPlan.total+"초";
+  if(val) val.textContent=rsAdSign(rsAdPlan.total)+"초";
   if(btn) btn.textContent="끄기";
 }
 /* 계단 계산 → 보기 배열 → 배지. notify 면 처음 적용될 때 토스트로 알림 */
@@ -4903,9 +4905,9 @@ function rsAdSync(notify){
   rsAdPlan=rsAdPlanFor(key, rsAudioDurNow()) || { total:0, steps:[], diff:0, key:key };
   rsSegs=rsSegsView(rsSegsRaw, rsAdPlan.total?rsAdPlan:null);
   rsAdBadge();
-  if(notify && rsAdPlan.total>=2 && key && !rsAdTold[key]){
+  if(notify && Math.abs(rsAdPlan.total)>=2 && key && !rsAdTold[key]){
     rsAdTold[key]=1;
-    toast("⚡ 광고 "+Math.round(rsAdPlan.total)+"초 차이를 자동 보정했어요");
+    toast("⚡ 광고 "+Math.abs(Math.round(rsAdPlan.total))+"초 차이를 자동 보정했어요");
   }
   return rsAdPlan;
 }

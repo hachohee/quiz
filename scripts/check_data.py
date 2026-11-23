@@ -199,8 +199,10 @@ if os.path.exists(tr_path):
                 ref = m.get("adRef") or {}
                 if brk and not ref.get("dur"):
                     print(f"  ! 라디오 '{k}' ({title}): adBreaks 는 있는데 adRef(측정 파일 길이)가 없음")
-                print("    · 광고 지점 " + " · ".join("%.1f초 %+.1f초" % (float(b["at"]), float(b["add"]))
-                                                for b in brk if isinstance(b, dict) and "at" in b and "add" in b))
+                print("    · 광고 지점 " + " · ".join(
+                    "%.1f초 %+.1f초%s" % (float(b["at"]), float(b["add"]),
+                                         ("( 대본 틈 %.1f초)" % float(b["gap"])) if b.get("gap") else "")
+                    for b in brk if isinstance(b, dict) and "at" in b and "add" in b))
         # 광고가 섞여 들어오면(DAI) 대본 시각이 오디오와 어긋남 → 마지막 문장이 오디오보다 뒤면 오류
         if ad and segs:
             if segs[-1].get("end", 0) > ad + 1.0:

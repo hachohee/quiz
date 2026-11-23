@@ -316,17 +316,19 @@ def main():
     #    맞춰 자막 시각을 자동 보정하는 데 이 값을 씁니다(scan_ads.py 참고).
     try:
         sys.path.insert(0, HERE)
-        from scan_ads import detect_from
+        from scan_ads import detect_from, merge_maps
         pairs = [(f["i"], round(old_starts[f["i"]], 2),
                   round(segs[f["i"]]["start"] - old_starts[f["i"]], 2))
                  for f in fixed if not f.get("interp")]
         breaks, _levels = detect_from(pairs, segs)
-        meta["adBreaks"] = breaks
-        meta["adRef"] = {"dur": round(dur, 2), "sum": round(sum(b["add"] for b in breaks), 2),
+        brk = merge_maps(breaks, segs)          # + 대본 자체의 긴 틈(광고가 빠질 수 있는 자리)
+        meta["adBreaks"] = brk
+        meta["adRef"] = {"dur": round(dur, 2), "sum": round(sum(b["add"] for b in brk), 2),
                          "scanned": meta["aligned"]}
-        if breaks:
-            print("⚡ 광고 지도: " + " · ".join("대본 %.1f초 이후 %+.1f초" % (b["at"], b["add"])
-                                            for b in breaks))
+        if brk:
+            print("⚡ 광고 지도: " + " · ".join("대본 %.1f초 이후 %+.1f초%s" % (b["at"], b["add"],
+                                            ("(틈 %.1f초)" % b["gap"]) if b.get("gap") else "")
+                                            for b in brk))
         else:
             print("⚡ 광고 지도: 계단 없음(이 음원이 대본과 같은 광고 구성)")
     except Exception as exc:                     # noqa: BLE001
