@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-24T06:00:55+09:00",
- "updatedLabel": "11/24 06:00",
+ "updated": "2026-11-24T07:31:18+09:00",
+ "updatedLabel": "11/24 07:31",
  "perProgram": 8,
  "programs": [
   {
@@ -300,6 +300,16 @@
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/I0000-2014-goodmorningpops",
    "episodes": [
     {
+     "title": "11/24(화) Good to Go - Daphne Willis and LÒNIS",
+     "guid": "gid://kbs-podcast/6b04b91f08062234165a81ab",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b04b91f08062234165a81ab.mp3",
+     "dateISO": "2026-11-24T07:07:30+09:00",
+     "dateLabel": "11/24(화) 07:07",
+     "dateShort": "11/24(화)",
+     "durationSec": 659,
+     "durationLabel": "10분 59초"
+    },
+    {
      "title": "11/23(월) Lost - Alicee",
      "guid": "gid://kbs-podcast/6b0367202f000c94d4f7c6f7",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0367202f000c94d4f7c6f7.mp3",
@@ -368,16 +378,6 @@
      "dateShort": "11/13(금)",
      "durationSec": 594,
      "durationLabel": "9분 54초"
-    },
-    {
-     "title": "11/12(목) Move Your Body - Sia",
-     "guid": "gid://kbs-podcast/6af4e536290654b506642e41",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af4e536290654b506642e41.mp3",
-     "dateISO": "2026-11-12T06:59:30+09:00",
-     "dateLabel": "11/12(목) 06:59",
-     "dateShort": "11/12(목)",
-     "durationSec": 599,
-     "durationLabel": "9분 59초"
     }
    ],
    "ok": true,
