@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-23T13:00:42+09:00",
- "updatedLabel": "11/23 13:00",
+ "updated": "2026-11-24T06:00:55+09:00",
+ "updatedLabel": "11/24 06:00",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,26 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "Nvidia Reinstates Jensen Huang",
+     "guid": "a7382434-b04d-11f0-b754-63a094d5b636",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY6211546052.mp3",
+     "dateISO": "2026-11-24T01:56:00+09:00",
+     "dateLabel": "11/24(화) 01:56",
+     "dateShort": "11/24(화)",
+     "durationSec": 476,
+     "durationLabel": "7분 56초"
+    },
+    {
+     "title": "Delta Fixes Glitch That Caused Massive Delays",
+     "guid": "01ca75aa-b04e-11f0-adaa-e757fda56659",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY2311599617.mp3",
+     "dateISO": "2026-11-23T20:54:00+09:00",
+     "dateLabel": "11/23(월) 20:54",
+     "dateShort": "11/23(월)",
+     "durationSec": 531,
+     "durationLabel": "8분 51초"
+    },
     {
      "title": "Revisiting: “This Lost a Lot of People”: RFK Jr.’s Broken Pesticide Promise",
      "guid": "295f41cc-af7c-11f0-9be7-1ff499c2e503",
@@ -31,8 +51,8 @@
      "dateISO": "2026-11-21T18:30:00+09:00",
      "dateLabel": "11/21(토) 18:30",
      "dateShort": "11/21(토)",
-     "durationSec": 1055,
-     "durationLabel": "17분 35초"
+     "durationSec": 1054,
+     "durationLabel": "17분 34초"
     },
     {
      "title": "Wall Street’s AI Wipeout",
@@ -73,26 +93,6 @@
      "dateShort": "11/20(금)",
      "durationSec": 444,
      "durationLabel": "7분 24초"
-    },
-    {
-     "title": "Wall Street Welcomes Anthropic",
-     "guid": "a5e4b1ec-b04d-11f0-b754-dba19bfa2eaf",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY5532437273.mp3",
-     "dateISO": "2026-11-20T02:09:00+09:00",
-     "dateLabel": "11/20(금) 02:09",
-     "dateShort": "11/20(금)",
-     "durationSec": 496,
-     "durationLabel": "8분 16초"
-    },
-    {
-     "title": "Trump's Historic Talks with Putin, Xi",
-     "guid": "0076221c-b04e-11f0-adaa-7ff0f39fa941",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY9834104166.mp3",
-     "dateISO": "2026-11-19T21:04:00+09:00",
-     "dateLabel": "11/19(목) 21:04",
-     "dateShort": "11/19(목)",
-     "durationSec": 572,
-     "durationLabel": "9분 32초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "Jensen Huang reinstated as Nvidia CEO",
+     "guid": "urn:bbc:podcast:p0pphgd5",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pphdx7.mp3",
+     "dateISO": "2026-11-24T01:08:00+09:00",
+     "dateLabel": "11/24(화) 01:08",
+     "dateShort": "11/24(화)",
+     "durationSec": 1896,
+     "durationLabel": "31분 36초"
+    },
+    {
+     "title": "COP31 in Turkey ends without a deal",
+     "guid": "urn:bbc:podcast:p0ppdfkn",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppdf4f.mp3",
+     "dateISO": "2026-11-23T14:48:00+09:00",
+     "dateLabel": "11/23(월) 14:48",
+     "dateShort": "11/23(월)",
+     "durationSec": 1654,
+     "durationLabel": "27분 34초"
+    },
     {
      "title": "The Global Story: AI can imitate a human. But can it think like one?",
      "guid": "urn:bbc:podcast:p0pp0406",
@@ -168,26 +188,6 @@
      "dateShort": "11/20(금)",
      "durationSec": 1826,
      "durationLabel": "30분 26초"
-    },
-    {
-     "title": "UN court says Myanmar committed genocide against Rohingyas",
-     "guid": "urn:bbc:podcast:p0pnw5rb",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pnw2mf.mp3",
-     "dateISO": "2026-11-20T01:03:00+09:00",
-     "dateLabel": "11/20(금) 01:03",
-     "dateShort": "11/20(금)",
-     "durationSec": 1834,
-     "durationLabel": "30분 34초"
-    },
-    {
-     "title": "BBC reports from Ukraine's undergound frontier",
-     "guid": "urn:bbc:podcast:p0pnrndj",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pnrnb6.mp3",
-     "dateISO": "2026-11-19T14:19:00+09:00",
-     "dateLabel": "11/19(목) 14:19",
-     "dateShort": "11/19(목)",
-     "durationSec": 1642,
-     "durationLabel": "27분 22초"
     }
    ],
    "ok": true,
@@ -585,6 +585,36 @@
    "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
    "episodes": [
     {
+     "title": "개미스쿨 - 코스피, 더 떨어질까? 급락장에서 지켜야 할 투자 원칙",
+     "guid": "gid://kbs-podcast/6b03c4f813134bfa93ad120e",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4f813134bfa93ad120e.mp3",
+     "dateISO": "2026-11-23T13:45:30+09:00",
+     "dateLabel": "11/23(월) 13:45",
+     "dateShort": "11/23(월)",
+     "durationSec": 2742,
+     "durationLabel": "45분 42초"
+    },
+    {
+     "title": "오늘의 경제 뉴스 - 정부, 증시안정펀드 가동 준비 작업 착수",
+     "guid": "gid://kbs-podcast/6b03c4f2045adfc305c56f17",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4f2045adfc305c56f17.mp3",
+     "dateISO": "2026-11-23T13:45:29+09:00",
+     "dateLabel": "11/23(월) 13:45",
+     "dateShort": "11/23(월)",
+     "durationSec": 1110,
+     "durationLabel": "18분 30초"
+    },
+    {
+     "title": "11/23(월) - [개미스쿨] 코스피, 더 떨어질까? 급락장에서 지켜야 할 투자 원칙",
+     "guid": "gid://kbs-podcast/6b03c4bb13134bfa93ad11ee",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4bb13134bfa93ad11ee.mp3",
+     "dateISO": "2026-11-23T13:44:30+09:00",
+     "dateLabel": "11/23(월) 13:44",
+     "dateShort": "11/23(월)",
+     "durationSec": 5973,
+     "durationLabel": "1시간 39분"
+    },
+    {
      "title": "원탁의 기자들 - 한중, 한중러 정상회담... APEC이 남긴 것",
      "guid": "gid://kbs-podcast/6affd07a66294fb97158661a",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affd07a66294fb97158661a.mp3",
@@ -633,36 +663,6 @@
      "dateShort": "11/18(수)",
      "durationSec": 1210,
      "durationLabel": "20분 10초"
-    },
-    {
-     "title": "11/18(수) - [미래생활사전] 젠슨 황의 성공과 몰락",
-     "guid": "gid://kbs-podcast/6afd2947e61ae23f027afede",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afd2947e61ae23f027afede.mp3",
-     "dateISO": "2026-11-18T13:27:30+09:00",
-     "dateLabel": "11/18(수) 13:27",
-     "dateShort": "11/18(수)",
-     "durationSec": 5985,
-     "durationLabel": "1시간 39분"
-    },
-    {
-     "title": "원탁의 기자들K - AI에 뚫린 부정행위... 이틀 뒤 수능 어쩌나?",
-     "guid": "gid://kbs-podcast/6afbd76ee61ae23f027ae643",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd76ee61ae23f027ae643.mp3",
-     "dateISO": "2026-11-17T13:26:30+09:00",
-     "dateLabel": "11/17(화) 13:26",
-     "dateShort": "11/17(화)",
-     "durationSec": 2062,
-     "durationLabel": "34분 22초"
-    },
-    {
-     "title": "11/17(화) - [심층 인터뷰] AI 시대, 교육의 현실과 미래",
-     "guid": "gid://kbs-podcast/6afbd767290654b506649786",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd767290654b506649786.mp3",
-     "dateISO": "2026-11-17T13:26:29+09:00",
-     "dateLabel": "11/17(화) 13:26",
-     "dateShort": "11/17(화)",
-     "durationSec": 5965,
-     "durationLabel": "1시간 39분"
     }
    ],
    "ok": true,
@@ -679,6 +679,16 @@
    "desc": "국제 정세를 기자들이 풀어 주는 45분",
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
    "episodes": [
+    {
+     "title": "11/23(월) - [글로벌 이슈] ICJ, 미얀마 집단학살 판결… 이스라엘·미국이 긴장하는 이유는?",
+     "guid": "gid://kbs-podcast/6b03bcee25ebe7890699a3be",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03bcee25ebe7890699a3be.mp3",
+     "dateISO": "2026-11-23T13:11:30+09:00",
+     "dateLabel": "11/23(월) 13:11",
+     "dateShort": "11/23(월)",
+     "durationSec": 2828,
+     "durationLabel": "47분 08초"
+    },
     {
      "title": "11/20(금) - [수상한 GPS] 푸틴이 꺼낸 '새 얄타' 청구서, 우크라이나 넘어 유럽 질서 재편까지 노린다",
      "guid": "gid://kbs-podcast/6affc811c29f64c502ea8915",
@@ -748,16 +758,6 @@
      "dateShort": "11/12(목)",
      "durationSec": 2887,
      "durationLabel": "48분 07초"
-    },
-    {
-     "title": "11/11(수) - [글로벌 이슈] 美 중간선거 표심 가른 데이터센터 논란, '중단되는 것 아니다. 관건은 \"어떻게 지을 것인가?\"'",
-     "guid": "gid://kbs-podcast/6af3ead6290654b506641baf",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af3ead6290654b506641baf.mp3",
-     "dateISO": "2026-11-11T13:11:30+09:00",
-     "dateLabel": "11/11(수) 13:11",
-     "dateShort": "11/11(수)",
-     "durationSec": 2847,
-     "durationLabel": "47분 27초"
     }
    ],
    "ok": true,
