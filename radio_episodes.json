@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-24T13:00:48+09:00",
- "updatedLabel": "11/24 13:00",
+ "updated": "2026-11-25T06:01:18+09:00",
+ "updatedLabel": "11/25 06:01",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,26 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "Thanksgiving Sticker Shock",
+     "guid": "a6f3610a-b04d-11f0-b754-b779c90b8c34",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY8443885550.mp3",
+     "dateISO": "2026-11-25T01:51:00+09:00",
+     "dateLabel": "11/25(수) 01:51",
+     "dateShort": "11/25(수)",
+     "durationSec": 495,
+     "durationLabel": "8분 15초"
+    },
+    {
+     "title": "The Pope's Diaries Revealed",
+     "guid": "01876490-b04e-11f0-adaa-431e651f6559",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY5293483630.mp3",
+     "dateISO": "2026-11-24T20:47:00+09:00",
+     "dateLabel": "11/24(화) 20:47",
+     "dateShort": "11/24(화)",
+     "durationSec": 534,
+     "durationLabel": "8분 54초"
+    },
     {
      "title": "US Set to Host 2031 Women’s World Cup",
      "guid": "5c494eb2-b04d-11f0-a7a7-b7e2ce291092",
@@ -73,26 +93,6 @@
      "dateShort": "11/21(토)",
      "durationSec": 420,
      "durationLabel": "7분 00초"
-    },
-    {
-     "title": "NSA Resolves Major Network Outage",
-     "guid": "a59a58fe-b04d-11f0-b754-e78943e6918c",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY4295829082.mp3",
-     "dateISO": "2026-11-21T03:47:00+09:00",
-     "dateLabel": "11/21(토) 03:47",
-     "dateShort": "11/21(토)",
-     "durationSec": 431,
-     "durationLabel": "7분 11초"
-    },
-    {
-     "title": "Tributes Pour In for Fiona the Hippo",
-     "guid": "00b85038-b04e-11f0-adaa-8b18bbb45303",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY7754296874.mp3",
-     "dateISO": "2026-11-20T21:05:00+09:00",
-     "dateLabel": "11/20(금) 21:05",
-     "dateShort": "11/20(금)",
-     "durationSec": 574,
-     "durationLabel": "9분 34초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "Is Jensen Huang's reinstatement good news for China?",
+     "guid": "urn:bbc:podcast:p0ppp111",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppnzlx.mp3",
+     "dateISO": "2026-11-25T01:47:00+09:00",
+     "dateLabel": "11/25(수) 01:47",
+     "dateShort": "11/25(수)",
+     "durationSec": 1718,
+     "durationLabel": "28분 38초"
+    },
+    {
+     "title": "Stock markets jump after Nvidia boss reinstated",
+     "guid": "urn:bbc:podcast:p0ppkqn5",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppkq65.mp3",
+     "dateISO": "2026-11-24T14:48:00+09:00",
+     "dateLabel": "11/24(화) 14:48",
+     "dateShort": "11/24(화)",
+     "durationSec": 1721,
+     "durationLabel": "28분 41초"
+    },
     {
      "title": "Jensen Huang reinstated as Nvidia CEO",
      "guid": "urn:bbc:podcast:p0pphgd5",
@@ -168,26 +188,6 @@
      "dateShort": "11/21(토)",
      "durationSec": 1469,
      "durationLabel": "24분 29초"
-    },
-    {
-     "title": "UK agrees deal on closer cooperation with EU",
-     "guid": "urn:bbc:podcast:p0pp3pln",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp3ndk.mp3",
-     "dateISO": "2026-11-21T00:29:00+09:00",
-     "dateLabel": "11/21(토) 00:29",
-     "dateShort": "11/21(토)",
-     "durationSec": 1763,
-     "durationLabel": "29분 23초"
-    },
-    {
-     "title": "Abusers convicted in Joanne Young case echoing Pelicot",
-     "guid": "urn:bbc:podcast:p0pnyk0h",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pnyjht.mp3",
-     "dateISO": "2026-11-20T14:33:00+09:00",
-     "dateLabel": "11/20(금) 14:33",
-     "dateShort": "11/20(금)",
-     "durationSec": 1826,
-     "durationLabel": "30분 26초"
     }
    ],
    "ok": true,
@@ -585,6 +585,26 @@
    "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
    "episodes": [
     {
+     "title": "원탁의 기자들K - '젠슨 황 복귀' 주가 폭등... 코스피 다시 오르나",
+     "guid": "gid://kbs-podcast/6b0510eefaec22a01452c980",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0510eefaec22a01452c980.mp3",
+     "dateISO": "2026-11-24T13:22:30+09:00",
+     "dateLabel": "11/24(화) 13:22",
+     "dateShort": "11/24(화)",
+     "durationSec": 2101,
+     "durationLabel": "35분 01초"
+    },
+    {
+     "title": "11/24(화) - [창업 트렌드] 편의점 매출 증대, 실전 노하우",
+     "guid": "gid://kbs-podcast/6b0510d313134bfa93ad2854",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0510d313134bfa93ad2854.mp3",
+     "dateISO": "2026-11-24T13:21:30+09:00",
+     "dateLabel": "11/24(화) 13:21",
+     "dateShort": "11/24(화)",
+     "durationSec": 5982,
+     "durationLabel": "1시간 39분"
+    },
+    {
      "title": "개미스쿨 - 코스피, 더 떨어질까? 급락장에서 지켜야 할 투자 원칙",
      "guid": "gid://kbs-podcast/6b03c4f813134bfa93ad120e",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4f813134bfa93ad120e.mp3",
@@ -643,26 +663,6 @@
      "dateShort": "11/19(목)",
      "durationSec": 1066,
      "durationLabel": "17분 46초"
-    },
-    {
-     "title": "11/19(목) - [투자의 민족] ‘조선시대도 커닝이 있었다' 시대를 넘는 부정행위 이야기",
-     "guid": "gid://kbs-podcast/6afe9363aa2542d293205803",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe9363aa2542d293205803.mp3",
-     "dateISO": "2026-11-19T15:12:30+09:00",
-     "dateLabel": "11/19(목) 15:12",
-     "dateShort": "11/19(목)",
-     "durationSec": 5981,
-     "durationLabel": "1시간 39분"
-    },
-    {
-     "title": "오늘의 경제 뉴스 - 미국 주요 경제 지표와 엔비디아 3분기 실적",
-     "guid": "gid://kbs-podcast/6afd2951990ef67d4af0da76",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afd2951990ef67d4af0da76.mp3",
-     "dateISO": "2026-11-18T13:28:30+09:00",
-     "dateLabel": "11/18(수) 13:28",
-     "dateShort": "11/18(수)",
-     "durationSec": 1210,
-     "durationLabel": "20분 10초"
     }
    ],
    "ok": true,
@@ -679,6 +679,16 @@
    "desc": "국제 정세를 기자들이 풀어 주는 45분",
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
    "episodes": [
+    {
+     "title": "11/24(화) - [글로벌 이슈] 트럼프의 중·러 틈 벌리기… 미·중·러 정상회담은 '역키신저' 전략?",
+     "guid": "gid://kbs-podcast/6b050d6d13134bfa93ad280f",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b050d6d13134bfa93ad280f.mp3",
+     "dateISO": "2026-11-24T13:07:30+09:00",
+     "dateLabel": "11/24(화) 13:07",
+     "dateShort": "11/24(화)",
+     "durationSec": 2847,
+     "durationLabel": "47분 27초"
+    },
     {
      "title": "11/23(월) - [글로벌 이슈] ICJ, 미얀마 집단학살 판결… 이스라엘·미국이 긴장하는 이유는?",
      "guid": "gid://kbs-podcast/6b03bcee25ebe7890699a3be",
@@ -748,16 +758,6 @@
      "dateShort": "11/13(금)",
      "durationSec": 2814,
      "durationLabel": "46분 54초"
-    },
-    {
-     "title": "11/12(목) - [글로벌 경제] 중국 AI, 미국 따라잡을 기회? 데이터센터 규제에 젠슨황 ‘스파이 논란'까지…",
-     "guid": "gid://kbs-podcast/6af53d52c5da797751b16730",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af53d52c5da797751b16730.mp3",
-     "dateISO": "2026-11-12T13:15:30+09:00",
-     "dateLabel": "11/12(목) 13:15",
-     "dateShort": "11/12(목)",
-     "durationSec": 2887,
-     "durationLabel": "48분 07초"
     }
    ],
    "ok": true,
