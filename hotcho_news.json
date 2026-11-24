@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24 14:22",
+ "updated": "2026-11-24 14:27",
  "categories": {
   "world": {
    "label": "세계",
@@ -10,13 +10,6 @@
      "when": "11/24 13:48",
      "ts": "2026-11-24T13:48+09:00",
      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBfcVJSa1c2TklOS0hBanhKYXZVUVoyZFVoR1FQSkc2N1FPemk2clBVLXYzWUloWC14UGtQWXRCWEFfUFVTLUM2THFuOVBwTFVNcVh5eTdDQVE3QUNYMVhyb0dtdHRWeWU4QldMaUFCZFZMZXJ3?oc=5"
-    },
-    {
-     "title": "\"이란 즉각적 위협\" 놓고 네타냐후·아이젠코트 충돌…연정협상도 진통",
-     "source": "뉴스1",
-     "when": "11/24 11:43",
-     "ts": "2026-11-24T11:43+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBqZVZDcjc2Umh4R2J4d1lWUGZTd0N2a1lhZDJUalV5Wi1HZ0tVQXRpZGNkZ0hacTFmSUR0cWpfYnJIY20yUGo3ZnI1aXNWODh1SEZ1dll0RzZ2UFc2STliQWpB?oc=5"
     },
     {
      "title": "‘우주 핵전쟁’ 현실화하나… 獨 “러시아, 연내 核 인공위성 배치” [오늘의world+]",
@@ -31,6 +24,20 @@
      "when": "11/24 11:28",
      "ts": "2026-11-24T11:28+09:00",
      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBRMm1ZbHRfZVFtNW9lYk5pazVfNG1KN09JOG45TTA2NHJKb01oQ04ySzAxcnYzWTFVRXBOajBJV2hweDIyaUlkd1IwU0dwai0tczg3SjRQSUZWNDdlbEl3MjJERUVxVlE?oc=5"
+    },
+    {
+     "title": "\"日다카이치, 中의 APEC 홀대 계산했다…보수층 결집에 역이용\"",
+     "source": "뉴스1",
+     "when": "11/24 11:19",
+     "ts": "2026-11-24T11:19+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1ScUpLajY5ZFp5dHVtd1dOa3NJRmlQRHotcXBVQU9NZ3NDQUNPcXM0TFFzYUtCSXhwWll2SzdGdER3Nm9KejZxb0JjTnVwaURDVHQ2ZW5EaUU4MzVzaXc?oc=5"
+    },
+    {
+     "title": "加총리, 트럼프 풍자 코미디언 만찬 초청…\"美 불필요한 자극\" 논란",
+     "source": "뉴스1",
+     "when": "11/24 11:03",
+     "ts": "2026-11-24T11:03+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1GeUIxbGFGcWFLMUQ4LWxPa05MTnFTWWREbnhBWFJqcm1zbV91ei1nTGtVVnlUYjk4WXFWYmNwTnV3dHVnRXVSUjEwSFpuVUduV25ocjY2Q2g?oc=5"
     },
     {
      "title": "인도, 네팔 대홍수 복구에 2조원대 지원…中도 \"재건 적극 지원\"",
@@ -66,19 +73,19 @@
      "when": "11/24 05:32",
      "ts": "2026-11-24T05:32+09:00",
      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5YcUgxTEFJMFUxaXdkRWlKajM2UU9uN29xdm5MSkU5TEp3OFpKcDN6ZDRWRS04eDVXOWs0SDhRUzZYWG1yQUlua2c0WjFLcEgwR3NUWVEydlhlaDjSAWBBVV95cUxNUTVUZXhka2lkTWJ2RjdLWUxWd1FfRWd0UFAxUkcwRkg1eUdWQi1IZk5QN2lXVzhyaGwybXlNSEJlUFFVeVBBQVo2c25LbWxDaFI4eS0xdGU2NklZR0M2cF8?oc=5"
-    },
-    {
-     "title": "트럼프 인사-예산, 집권 공화당이 제동… “조기 레임덕 가능성도”",
-     "source": "동아일보",
-     "when": "11/24 04:30",
-     "ts": "2026-11-24T04:30+09:00",
-     "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9jZkZ6RHB6SmFzdHZDOEM1OGNBU0s3aHNZdlVJTG0xdmx4dTNrbXhfaXUxUlJHX3Y5a25janRtTmFnTW1TXzJ0ZnNTQTZROHVIY2tPRUtObENJTnBpbjdLVGNLYW5jOTRlWmQxaXpyNVhldk3SAWZBVV95cUxQRlItT2x5SWUwRmRpTjBkaTNKZU1hVVRsYXFwcU5hMVpKT1BPU3BqbHI3YVByaUFYeG5aOFl2NF8xTjNfWXdpQ0g2YmhHUmZ6cDRFRVRKQ0tEdXJXcjVUTG9pM2ZlVEE?oc=5"
     }
    ]
   },
   "nation": {
    "label": "전국",
    "items": [
+    {
+     "title": "‘중처법 위반 혐의’ 세아베스틸 전 대표 1심 집행유예",
+     "source": "KBS 뉴스",
+     "when": "11/24 13:57",
+     "ts": "2026-11-24T13:57+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE05aG1vcjFVLXczZDNVc0ZpdVVObzA2TVJ3TUdWTDNCLTdLM2VERFBfWUZra09PNUJ3bGVOendaQW04YWlOaDlEUGwtaGJQNUhLbXlyd0o3VW5IajA?oc=5"
+    },
     {
      "title": "'숙박업소로 초등학생 불러내 성범죄' 30대 강남 학원 원장 구속",
      "source": "MBC 뉴스",
@@ -94,11 +101,25 @@
      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE0wWDZZUWc4UXlfdmdleUp6eW1ScFd0clViSnJteXJyTVFhd2FhS2s5d2xVV3pMTUJCSDFnc3M1RXl2ZzFYR1dGbV9fam9UNXBrQUxIT0V2d1hEVGI3Z01ycmFQM1JpV3RuR0huSHV5RHgyaHVSNHY00gF3QVVfeXFMT0diTGZ5VndhenQ1Vnk3VUpKSTNaZzYwQjBLcFp6Q0xqTlVuUFlZa1JDY09KSFFFdDV0bUFFMnhTOE1kbk1Vd1dwRjktQWJvU2w0c3JkWHpNSzY2bnNsX0NyZEh6S3ZRMmk1VWd1OWszSUg5QWdSVVE?oc=5"
     },
     {
+     "title": "이용철 법무후보 \"李대통령과 오랜 친분 맞지만 측근 아냐\"",
+     "source": "연합뉴스",
+     "when": "11/24 12:28",
+     "ts": "2026-11-24T12:28+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pZndYRS04Nzc1STVwamRGYWxKQzBkdVFyaUN2TGJ2R0VvTGVqUEF1dU9WQkRWbnRsRGx2VGJKM0JKVHNOU3FFTXZTRWcyaXhNMFBnME1TOTFGMlXSAWBBVV95cUxNbVNzVHZPMXMwRks1b2ZNRGtuOEhyZnZhMk5tQ2hqcEZxUTc4Ry1zVkZVVUpyQ09GVlliVHFETWZTNllMTTlLYnVCLV9mRHFXRGt0NkVjeGF3OWo3NkFzeUQ?oc=5"
+    },
+    {
      "title": "﻿의정사태 여파, 상급종병 관상동맥 우회술 13%↓",
      "source": "데일리메디",
      "when": "11/24 12:21",
      "ts": "2026-11-24T12:21+09:00",
      "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE92aU1vN0ctRWM0eERUSlNKVzBpYnNJOEotMFdEdEs3SVBEUjJRMTRkQl9YRXJqajJ6c3QxZk1JUnh4VE05ZVRERXFiN0F0Ujc2MzdRV0NHY1h4NWhvWEdFR2xhWQ?oc=5"
+    },
+    {
+     "title": "이 대통령 “수능 부정행위 자수시 처벌 감경하되 제재…다른 시험 응시 막아야”",
+     "source": "KBS 뉴스",
+     "when": "11/24 12:14",
+     "ts": "2026-11-24T12:14+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFAtbGRnd00wMFBiNi1fTml2bzVuWWFYQkw1M1lkNWEzNTVuc3JwOTRDNkp4dS10TDYwMzhuLTBLbEZZd29lcE1UcUlUQzJPVjhTb0Rzd2Znd2RicVdmY1NienQzb3VuUQ?oc=5"
     },
     {
      "title": "홍준표 \"법 왜곡죄로 판사 고발 말이 되나‥계엄 사과부터\"",
@@ -108,20 +129,6 @@
      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1ScGNKczlsbG8xM2VNSWZlM2V0SF9wWHUwQUhWRkVCOEZjQXlkMDFYUkpCVFRTd1JMVXlMakFIVDl3VUtYYXUtVW9qcnRRdEhVempQTF9DN1dzekRDdW9vNlJfVjYtVFBLd053N3NvRW5Ma29ySFcybNIBeEFVX3lxTE5oQlFRbjlxQUkxQVVGVmhNcmpuRFNlNnZpejk0YmVZd1VmU2pRWmFJWUEzY091djVZRjhxaXpBdWJ5WG42Zmx3RnRTb0Nyd1lsLVg4eWhIR0lCOHJwQ1NBbWtXc3E0MTdYNXl4VHNvZ3FZM2RheVU0bA?oc=5"
     },
     {
-     "title": "친한계, ‘윤리위 징계’ 추가 의혹 제기에 “장동혁 물러나야”",
-     "source": "KBS 뉴스",
-     "when": "11/24 11:56",
-     "ts": "2026-11-24T11:56+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE15Z0VZaHQzUTBRTlNkbkV4bVhxYWdOTXhyVmhfVjVwVU5HZHVMem1MNTNVRU5VS3JfZ2ZqRDFVYjd2M1owb3lZUGhGMkg1N1hDWng3alphazM3bDA?oc=5"
-    },
-    {
-     "title": "'삼부는 골프 3부' 송호종 전 경호부장 징역형 집행유예",
-     "source": "MBC 뉴스",
-     "when": "11/24 11:45",
-     "ts": "2026-11-24T11:45+09:00",
-     "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBRM0RnYU1JODdYVHNWZ2FrSGFKVEZlQWZHTVdyMUVBQjkwX1dZcHNzZ20xbER3ZU1OaFl3NWpJbW1wNFdPc3I4TXltcnktSUtuRFJBM2hmcnE3NWd3cF9zM2lmSjh5WE03UG9sSkJXdHBxNzBMV0FJ0gF3QVVfeXFMTVBucFNUVU5LYUViRFVFM1pFMFloblp3emtOMWhpVW14RUhaWTBqdlozQXpWSVppU1pDQVpEVHMzTG5QVmxHYkZpYTlUaUxDbzJPUDl4VGJlNUtPa0dXTmVMVHVRWEt3TWcxcVh6b1JpX0FaTG5QQXc?oc=5"
-    },
-    {
      "title": "김천시, 납세자 권익증진 전국대회 ‘최우수상’ 수상",
      "source": "데일리대구경북뉴스",
      "when": "11/24 11:39",
@@ -129,25 +136,18 @@
      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE0xUWk2RGJkQzhYVmtzM0Z0TzNHYlN0WG4zQXRlb3hJOVVRajk5ZEszamk5eEpVU3B6d192SVBSN2tNV3UwYTVKbzBuaWIybWNwZUVHWVYxSlYxWGhhdWd3eERfbEVGUQ?oc=5"
     },
     {
+     "title": "출근길 영하권 추위…‘빙판길’ 조심",
+     "source": "한겨레",
+     "when": "11/24 11:05",
+     "ts": "2026-11-24T11:05+09:00",
+     "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5rWkhwc3dmWkExQUlSTzBvdmJ2WVMtX2JXS0hPRXN1a0g0ZVFIZHc4YXJ4S2VwZnUzTW96V3hOLUF2WE92MkJXUzFDQlVfSDBIM3dKR2hMS054SjVHQUFBU2M2c1FZd2Yzb2VNMA?oc=5"
+    },
+    {
      "title": "고령군의회, 제317회 제2차 정례회 돌입",
      "source": "데일리대구경북뉴스",
      "when": "11/24 11:04",
      "ts": "2026-11-24T11:04+09:00",
      "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE51OEpKdXZEa0ktVmc2WDRzRUxncEJjeFd2UlBPT0Zock56b2hhWmE0OWgzY0dTVTB1TTE4ZUxFOEZUbTFFWEZ2TURvWkVXbUxHVjRRUk9EODVoeVhxNExOTnlRcXdDdw?oc=5"
-    },
-    {
-     "title": "고양 교복 입찰 '짬짜미' 정황‥경기도교육청, 업체 6곳 수사 의뢰",
-     "source": "MBC 뉴스",
-     "when": "11/24 10:45",
-     "ts": "2026-11-24T10:45+09:00",
-     "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1EUWJLbzVDeDZEdjJxbTZCdHhlVTZwUy1TczNhZ2N6RTBsUjcxc1Zva3ZrWXZsSC11VjdzMlY2bEJ1Ym1SMWl2WXlPczZXX1NRam4xOVFCRkZsVGlENzI3LXZVZ0x4TGphWXphQjk1bm9JQUYzOThj0gF3QVVfeXFMT2NINjhpWkw4cjNIbXRxSktUWFdGOEVPUFc3MGo4cnkxcThDT0lCVnRtc1gxXzV6SUN3OHR4dlpKdEw3ZzlhQktYRjRjZU44UmtUaHFxbDVSYjBwYU5YNkxqTWpRaDI4bGJ4dmRrbjZ0R1E5ZlpyakE?oc=5"
-    },
-    {
-     "title": "정점식 “이용철은 ’대통령 탈옥 도우미’…공소 취소 포석“",
-     "source": "연합뉴스TV",
-     "when": "11/24 10:41",
-     "ts": "2026-11-24T10:41+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1ic0pPWW93d1cwcVJDUmp5ZUNyOG1KS2dKcDZRYnBVaTlMaXpoWEFDVDNwMmIzYzFELXpxNzZhYVNraDNXWkZjZ3Z1cW5kdXV0Sm14ellZRXFyNjlQdUFRS3dvbTZVZUk?oc=5"
     }
    ]
   },
@@ -170,10 +170,10 @@
     },
     {
      "title": "첨단기술·신품종 품은 강릉 딸기 조기 출하…농가 효자 기대",
-     "source": "연합뉴스",
+     "source": "매일경제 마켓",
      "when": "11/24 14:01",
      "ts": "2026-11-24T14:01+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE04eUpwbmlOVHg5cm9TQW0wMUttWVR6cWdQdlZEcVp1bUdTZFU1eUdFcXkwX05majF5X3U1RExHc3I3amFEVEtQUGt3ekVibExNSWFhVGVCS19GWknSAWBBVV95cUxNSmpNNFpmOHBTWjNrMkNhSC1YQkcxMy1PaFJWYWpPbnZrbERydFExNkt4QUtKUnowU3dxb3NKcnlTSEM3Uy1XU0pKTzYyT0dUb0ozMmRHLUQzbUhhd1V2bUc?oc=5"
+     "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBseEJhaEY1SWNFQjFERHlOeGpzNXVWclROUzNZZ3NmMXUzR3ZfX2IwLVZ5b0otN2xPLV9SOWNTWUdPM01hOW54QTdPdU9GSDlDVlE?oc=5"
     },
     {
      "title": "LED 다단재배로 수확 앞당긴 ‘강릉 겨울 명품딸기’ 본격 출하",

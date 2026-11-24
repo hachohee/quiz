@@ -79,7 +79,7 @@ def clean_text(text):
         out = re.sub(pat, rep, out)
     for pat, rep in TIDY:
         out = re.sub(pat, rep, out)
-    return out.strip(" ·-,()")
+    return out.strip(" ·-,")
 
 
 def is_blocked(text):
