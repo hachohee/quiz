@@ -8,6 +8,29 @@
 - 구조: `index.html` (앱 전체), `members/` (BTS 7인 대표 사진), `manifest.webmanifest`, `sw.js`, 아이콘
 - 원본: `work/toeic_monster_quiz.html` (이 저장소의 `index.html`과 동일하게 유지)
 
+## 📰 방송 4사 시사·다큐 최신 다시보기 — 2026-11-24 추가 (v25)
+
+홈의 **📰 방송 4사 시사·다큐 최신 다시보기** 카드에서 KBS · MBC · SBS · EBS **공식 유튜브 채널의 최신 업로드**를
+**최신순**으로 봅니다. 화면은 두 갈래로 나뉩니다.
+
+| 갈래 | 방송사 | 프로그램(공식 채널) |
+|---|---|---|
+| 📰 시사·보도 | KBS | KBS 시사(시사기획 창·사사건건·9층 시사국) · 추적 60분 |
+| | MBC | PD수첩 · 탐사기획 스트레이트 |
+| | SBS | 그것이 알고 싶다 |
+| 🎬 교양·다큐 | KBS | KBS 다큐(다큐멘터리 3일·다큐 인사이트·역사스페셜) |
+| | MBC | MBC PLAYGROUND(MBC 스페셜·다큐플렉스) |
+| | SBS | 달리 [SBS DALI](SBS 스페셜·꼬꼬무) |
+| | EBS | EBS 다큐(다큐프라임·한국기행·극한직업·건축탐구 집) · 지식채널e |
+
+- 필터: **갈래(시사/교양) × 방송사(전체/KBS/MBC/SBS/EBS)**, 날짜별 묶음 + 날짜 내림차순.
+- 데이터: `docs_episodes.json` — 앱은 이 파일만 읽습니다(HTML에 링크 하드코딩 없음). `radio_episodes.json`과 같은 방식.
+- 수집: `python3 scripts/update_docs.py` — 채널 RSS(`https://www.youtube.com/feeds/videos.xml?channel_id=...`)에서
+  프로그램별 최신 8편. **API 키 불필요**. 쇼츠·예고/티저는 걸러 내고, 한 채널이 실패하면 그 채널의 이전 회차를 유지합니다.
+- 자동 갱신: `.github/workflows/update-docs.yml`(매일 07:30 KST) 또는 `sh scripts/update_docs_live.sh`.
+- 공부방 84강 진도(`roomDoneN()`)와는 **별개**입니다 — 다큐를 봐도 강의 진도는 그대로입니다.
+
+
 ## 📻 매일 라디오 다시듣기 (CNN · BBC · 굿모닝팝스 · 시사) — 2026-11-21 추가
 
 홈의 **📻 매일 라디오** 카드에서 8개 공식 팟캐스트의 최신 8회차를 앱 안에서 바로 듣습니다.
