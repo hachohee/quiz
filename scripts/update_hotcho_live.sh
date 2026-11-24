@@ -13,6 +13,7 @@ cd "$(dirname "$0")/.."
 git -c rebase.autoStash=true pull --quiet --rebase origin main || true
 
 python3 scripts/update_hotcho_hub.py
+python3 scripts/update_hotcho_monitor.py || echo "언론·정책 모니터 갱신 실패 — 이전 목록을 그대로 둡니다."
 
 CAL_JSON="$(mktemp)"
 if gog --readonly calendar events primary --days 14 --all-pages --results-only \
@@ -31,12 +32,12 @@ else
 fi
 rm -f "$CAL_JSON"
 
-if git diff --quiet -- hotcho_news.json hotcho_hub.json hotcho_family.json; then
+if git diff --quiet -- hotcho_news.json hotcho_hub.json hotcho_family.json hotcho_monitor.json; then
   echo "변경 없음 — 올리지 않습니다."
   exit 0
 fi
 
-git add hotcho_news.json hotcho_hub.json hotcho_family.json
+git add hotcho_news.json hotcho_hub.json hotcho_family.json hotcho_monitor.json
 git -c user.name="똑똑핫초" -c user.email="hachohee@users.noreply.github.com" commit -q \
   -m "💼🏠 뿌듯·행복핫초 데이터 자동 갱신 ($(TZ=Asia/Seoul date +'%m/%d %H:%M') KST)"
 git push --quiet origin HEAD:main

@@ -20,8 +20,21 @@
     drafts: 'hotcho_drafts_v1',
     article: 'hotcho_article_v1',
     home: 'hotcho_home_v1',
-    mode: 'hotcho_mode_v1'
+    mode: 'hotcho_mode_v1',
+    mon: 'hotcho_mon_v1'
   };
+
+  /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
+  var MON_KINDS = {
+    press: { label: '정책·부처', emoji: '🏛' },
+    law: { label: '입법', emoji: '⚖️' },
+    assembly: { label: '국회', emoji: '🗳' },
+    mods: { label: '통계', emoji: '📊' },
+    local: { label: '지자체', emoji: '🏢' },
+    gangwon: { label: '강원언론', emoji: '🗞' },
+    nation: { label: '전국언론', emoji: '📰' }
+  };
+  var MON_ORDER = ['press', 'law', 'assembly', 'mods', 'local', 'gangwon', 'nation'];
 
   var CATS = ['강원', '전국', '탐사', '생활'];
   var STATUS = [
@@ -83,8 +96,25 @@
     editing: '',
     pickedNews: {},
     linkedItem: '',
-    linkedUrl: ''
+    linkedUrl: '',
+    /* 언론·정책 모니터 */
+    mon: null,
+    monTab: 'all',
+    monKw: '',
+    monOnly: false,
+    monMg: false,
+    monPicked: {},
+    monKwCustom: []
   };
+  /* 관심 키워드는 이 폰에만 저장(hotcho_ 로 시작 → 백업·기기 옮기기에도 함께 감) */
+  (function () {
+    var m = load(K.mon, null) || {};
+    S.monKwCustom = (m.kw || []).filter(function (x) { return typeof x === 'string' && x; });
+    S.monPicked = m.picked || {};
+    if (m.tab) S.monTab = m.tab;
+    if (m.kwSel) S.monKw = m.kwSel;
+    if (m.only) S.monOnly = true;
+  })();
   if (!S.article.brief) S.article.brief = {};
   if (!S.article.report) S.article.report = {};
   if (!S.home.memos) S.home.memos = [];
@@ -218,7 +248,7 @@
     document.body.classList.toggle('hc-mode-alt', mode !== 'study');
     if (remember !== false) { try { localStorage.setItem(K.mode, mode); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
-    if (mode === 'work') { renderNews(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); }
+    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); }
     if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); renderSyncSummary(); }
   }
 
@@ -288,6 +318,201 @@
     renderNews();
     renderItems();
     toast('아이템 구상에 담았어요 · 아래에서 다듬어 보세요');
+  }
+
+  /* ------------------------------------------------------------ 언론·정책 모니터 */
+  /* hotcho_monitor.json — 정부·국회·통계·언론의 공개 출처를 하루 몇 번 모아 둔 목록.
+     갈래(정책·부처 / 입법 / 국회 / 통계 / 지자체 / 강원언론 / 전국언론) × 관심 키워드로
+     걸러 보고, 마음에 드는 항목을 누르면 그대로 [💡 아이템으로 담기] → [✍️ 기사로 쓰기]로 이어집니다. */
+  var MON_LIMIT = 50;
+  var monView = [];
+
+  function monKinds() { return (S.mon && S.mon.kinds) || MON_KINDS; }
+
+  function monKeywords() {
+    var base = (S.mon && S.mon.keywords) || [];
+    var all = base.concat(S.monKwCustom), out = [], seen = {};
+    for (var i = 0; i < all.length; i++) {
+      var k = String(all[i] == null ? '' : all[i]).trim();
+      if (!k || seen[k]) continue;
+      seen[k] = 1; out.push(k);
+    }
+    return out;
+  }
+  function isMyKw(k) { return S.monKwCustom.indexOf(k) >= 0; }
+
+  /* 제목·요약·기관·분야에서 걸린 관심 키워드 */
+  function monMatch(it) {
+    var hay = [it.title, it.summary, it.org, it.field, it.source].join(' ');
+    var kws = monKeywords(), out = [];
+    for (var i = 0; i < kws.length; i++) if (hay.indexOf(kws[i]) >= 0) out.push(kws[i]);
+    return out;
+  }
+
+  function saveMon() {
+    save(K.mon, {
+      kw: S.monKwCustom,
+      picked: S.monPicked,
+      tab: S.monTab,
+      kwSel: S.monKw,
+      only: S.monOnly
+    });
+  }
+
+  function renderMonitor() {
+    var listEl = $('hcMonList');
+    if (!listEl) return;
+    var upd = $('hcMonUpd'), tabsEl = $('hcMonTabs'), kwEl = $('hcMonKw'), srcEl = $('hcMonSrc');
+    if (upd) upd.textContent = (S.mon && S.mon.updated) ? S.mon.updated + ' 수집' : '불러오는 중…';
+    var items = (S.mon && S.mon.items) || [];
+
+    /* ---- 갈래 탭 (전체 + 있는 갈래만) ---- */
+    if (tabsEl) {
+      var kinds = monKinds(), counts = {};
+      for (var i = 0; i < items.length; i++) counts[items[i].kind] = (counts[items[i].kind] || 0) + 1;
+      var th = '<button type="button" data-mon-tab="all" class="' + (S.monTab === 'all' ? 'on' : '') + '">전체<span class="n">' + items.length + '</span></button>';
+      var order = MON_ORDER.filter(function (k) { return counts[k]; });
+      for (var j = 0; j < order.length; j++) {
+        var kk = order[j], meta = kinds[kk] || { label: kk };
+        th += '<button type="button" data-mon-tab="' + kk + '" class="' + (S.monTab === kk ? 'on' : '') + '">' +
+          (meta.emoji ? meta.emoji + ' ' : '') + esc(meta.label) + '<span class="n">' + counts[kk] + '</span></button>';
+      }
+      tabsEl.innerHTML = th;
+    }
+
+    /* ---- 관심 키워드 줄 (지금 자료에 걸린 것 + 내가 더한 것만) ---- */
+    if (kwEl) {
+      var kws = monKeywords(), kwHits = {};
+      for (var a = 0; a < items.length; a++) {
+        if (S.monTab !== 'all' && items[a].kind !== S.monTab) continue;
+        var hh = monMatch(items[a]);
+        for (var b = 0; b < hh.length; b++) kwHits[hh[b]] = (kwHits[hh[b]] || 0) + 1;
+      }
+      var show = kws.filter(function (k) { return kwHits[k] || isMyKw(k) || S.monKw === k; });
+      show.sort(function (x, y) { return (kwHits[y] || 0) - (kwHits[x] || 0); });
+      var kh = '<button type="button" class="hc-kw' + (S.monOnly ? ' on' : '') + '" data-mon-only="1">🔎 키워드만</button>';
+      for (var q = 0; q < show.length; q++) {
+        var kw = show[q];
+        kh += '<button type="button" class="hc-kw' + (S.monKw === kw ? ' on' : '') + '" data-mon-kw="' + esc(kw) + '">' +
+          esc(kw) + (kwHits[kw] ? '<span class="n">' + kwHits[kw] + '</span>' : '') +
+          (isMyKw(kw) ? '<i data-mon-kwdel="' + esc(kw) + '" title="빼기">✕</i>' : '') + '</button>';
+      }
+      kh += '<button type="button" class="hc-kw add" data-mon-kwadd="1">＋ 내 키워드</button>';
+      kwEl.innerHTML = kh;
+    }
+
+    /* ---- 목록 ---- */
+    var view = [], only = S.monOnly || !!S.monKw;
+    for (var n = 0; n < items.length; n++) {
+      var it = items[n];
+      if (S.monTab !== 'all' && it.kind !== S.monTab) continue;
+      var hits = monMatch(it);
+      if (S.monKw && hits.indexOf(S.monKw) < 0) continue;
+      if (S.monOnly && !hits.length) continue;
+      view.push({ it: it, hits: hits });
+    }
+    monView = view;
+
+    if (!items.length) {
+      listEl.innerHTML = '<div class="hc-empty">모니터 자료를 불러오지 못했어요.<br>위의 <b>↻ 새로고침</b>을 눌러 보세요.</div>';
+    } else if (!view.length) {
+      listEl.innerHTML = '<div class="hc-empty">' + (only ? '이 갈래·키워드에 걸린 항목이 없어요.<br>키워드를 한 번 더 눌러 풀어 보세요.' : '이 갈래에 새 소식이 없어요.') + '</div>';
+    } else {
+      var html = '';
+      for (var v = 0; v < view.length && v < MON_LIMIT; v++) {
+        var row = view[v], x = row.it, meta2 = monKinds()[x.kind] || { label: x.kind, emoji: '•' };
+        var picked = !!S.monPicked[x.url];
+        var tags = '';
+        for (var t = 0; t < row.hits.length && t < 3; t++) tags += '<span class="hc-mon-tag">' + esc(row.hits[t]) + '</span>';
+        html += '<div class="hc-mon">' +
+          '<div class="hc-mon-top"><span class="hc-mon-kind k-' + esc(x.kind) + '">' + (meta2.emoji || '') + ' ' + esc(meta2.label) + '</span>' +
+          (x.org ? '<span class="hc-mon-org">' + esc(x.org) + '</span>' : '') +
+          '<span class="hc-mon-d">' + esc(monDay(x.date) + (x.time ? ' ' + x.time : '')) + '</span></div>' +
+          '<div class="hc-mon-t">' + esc(x.title) + '</div>' +
+          (x.summary ? '<div class="hc-mon-s">' + esc(x.summary) + '</div>' : '') +
+          ((tags || x.status) ? '<div class="hc-mon-tags">' + tags +
+            (x.status ? '<span class="hc-mon-due">' + esc(x.status) + '</span>' : '') + '</div>' : '') +
+          '<div class="hc-mon-act">' +
+          '<button type="button" class="hc-btn sm' + (picked ? ' picked' : '') + '" data-mon-add="' + v + '">' +
+            (picked ? '✓ 담았어요' : '💡 아이템으로 담기') + '</button>' +
+          '<a class="hc-btn sm ghost" href="' + esc(x.url) + '" target="_blank" rel="noopener">원문 ↗</a>' +
+          '</div></div>';
+      }
+      if (view.length > MON_LIMIT) html += '<p class="hc-note">' + num(view.length - MON_LIMIT) + '건 더 있어요 — 갈래나 키워드로 좁혀 보세요.</p>';
+      listEl.innerHTML = html;
+    }
+
+    /* ---- 출처·고지 ---- */
+    if (srcEl) {
+      var srcs = (S.mon && S.mon.sources) || [];
+      var okList = [], badList = [];
+      for (var s = 0; s < srcs.length; s++) (srcs[s].ok ? okList : badList).push(srcs[s].label);
+      var sh = '';
+      if (okList.length) sh += '출처: ' + esc(okList.join(' · '));
+      if (badList.length) sh += (sh ? '<br>' : '') + '이번에 못 받은 곳: ' + esc(badList.join(' · ')) + ' (이전 자료 유지)';
+      if (S.mon && S.mon.disclaimer) sh += (sh ? '<br>' : '') + esc(S.mon.disclaimer);
+      srcEl.innerHTML = sh;
+    }
+  }
+
+  /* 2026-11-24 → 11/24, 올해가 아니면 2026.11.24 */
+  function monDay(iso) {
+    var d = String(iso || '');
+    if (!d) return '';
+    var p = d.split('-');
+    if (p.length !== 3) return d;
+    var y = kstToday().slice(0, 4);
+    return (p[0] === y ? (+p[1]) + '/' + (+p[2]) : d);
+  }
+
+  function addMonitorItem(idx) {
+    var row = monView[idx];
+    if (!row) return;
+    var it = row.it;
+    for (var i = 0; i < S.items.length; i++) {
+      if (S.items[i].url && S.items[i].url === it.url) {
+        S.monPicked[it.url] = 1; saveMon(); renderMonitor();
+        toast('이미 아이템 구상에 담겨 있어요');
+        return;
+      }
+    }
+    var cat = (it.kind === 'gangwon' || it.kind === 'local') ? '강원' : '전국';
+    S.items.unshift({
+      id: uid(),
+      title: it.title,
+      cat: cat,
+      status: '아이디어',
+      facts: it.summary || '',
+      sources: [it.org, it.source].filter(Boolean).join(' · '),
+      url: it.url,
+      from: it.source + (it.date ? ' · ' + it.date : ''),
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    });
+    save(K.items, S.items);
+    S.monPicked[it.url] = 1;
+    saveMon();
+    renderMonitor();
+    renderItems();
+    toast('아이템 구상에 담았어요 · 아래에서 ✍️ 기사로 쓰기');
+  }
+
+  function addMonitorKeyword() {
+    var inp = window.prompt('감시할 키워드를 적어 주세요 (예: 교육청, 재개발, 채용비리)');
+    var k = String(inp == null ? '' : inp).trim();
+    if (!k) return;
+    if (monKeywords().indexOf(k) >= 0) { toast('이미 있는 키워드예요'); return; }
+    S.monKwCustom.push(k);
+    S.monKw = k; S.monOnly = false;
+    saveMon(); renderMonitor();
+    toast('“' + k + '” 키워드를 더했어요');
+  }
+
+  function removeMonitorKeyword(k) {
+    S.monKwCustom = S.monKwCustom.filter(function (x) { return x !== k; });
+    if (S.monKw === k) S.monKw = '';
+    saveMon(); renderMonitor();
+    toast('키워드를 뺐어요');
   }
 
   /* ------------------------------------------------------------ 카르텔워치 */
@@ -909,6 +1134,14 @@
       '<p class="hc-note">기사 제목을 누르면 원문이 열려요 · 💡를 누르면 아이템 구상에 그대로 담겨요</p>' +
       '</section>' +
 
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📡 언론·정책 모니터</h3><span class="hc-tiny" id="hcMonUpd">불러오는 중…</span></div>' +
+      '<div class="hc-seg wrap" id="hcMonTabs"></div>' +
+      '<div class="hc-mon-kws" id="hcMonKw"></div>' +
+      '<div class="hc-mon-list" id="hcMonList"></div>' +
+      '<p class="hc-note" id="hcMonSrc"></p>' +
+      '</section>' +
+
       '<section class="hc-card" id="hcCartelCard"></section>' +
 
       '<section class="hc-card">' +
@@ -1002,10 +1235,11 @@
     return Promise.all([
       fetchJSON('hotcho_news.json').then(function (d) { S.news = d; }, function () { return null; }),
       fetchJSON('hotcho_hub.json').then(function (d) { S.hub = d; }, function () { return null; }),
-      fetchJSON('hotcho_family.json').then(function (d) { S.family = d; }, function () { return null; })
+      fetchJSON('hotcho_family.json').then(function (d) { S.family = d; }, function () { return null; }),
+      fetchJSON('hotcho_monitor.json').then(function (d) { S.mon = d; }, function () { return null; })
     ]).then(function () {
         if (btn) btn.textContent = '↻ 새로고침';
-      renderNews(); renderCartel(); renderEvents(); renderKids();
+      renderNews(); renderMonitor(); renderCartel(); renderEvents(); renderKids();
       if (!silent) {
         var ok = S.news || S.family;
         toast(ok ? '최신으로 맞췄어요' : '데이터를 못 받았어요 — 잠시 뒤 다시');
@@ -1015,8 +1249,31 @@
 
   /* ------------------------------------------------------------ 이벤트 */
   function onWorkClick(e) {
-    var t = e.target.closest ? e.target.closest('[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-act]') : null;
+    var t = e.target.closest ? e.target.closest('[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-act]') : null;
     if (!t) return;
+
+    var monTab = t.getAttribute('data-mon-tab');
+    if (monTab) { S.monTab = monTab; saveMon(); renderMonitor(); return; }
+
+    var monAdd = t.getAttribute('data-mon-add');
+    if (monAdd != null) { addMonitorItem(+monAdd); return; }
+
+    var monKwDel = t.getAttribute('data-mon-kwdel');
+    if (monKwDel) { removeMonitorKeyword(monKwDel); return; }
+
+    var monKw = t.getAttribute('data-mon-kw');
+    if (monKw != null) {
+      S.monKw = (S.monKw === monKw) ? '' : monKw;
+      saveMon(); renderMonitor(); return;
+    }
+
+    if (t.getAttribute('data-mon-kwadd')) { addMonitorKeyword(); return; }
+
+    if (t.getAttribute('data-mon-only')) {
+      S.monOnly = !S.monOnly;
+      if (S.monOnly) S.monKw = '';
+      saveMon(); renderMonitor(); return;
+    }
 
     var newsTab = t.getAttribute('data-news-tab');
     if (newsTab) { S.newsTab = newsTab; renderNews(); return; }
@@ -1234,6 +1491,7 @@
     renderArticle();
     renderDrafts();
     renderItems();
+    renderMonitor();
     renderMemos();
     renderShop();
     renderSyncSummary();

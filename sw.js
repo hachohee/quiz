@@ -18,8 +18,10 @@
    v28: 앱 이름 '핫초하트' · v29: '핫초홧팅'.
    v30: 🔓 BTS 도감 '멤버 모두 열기' 버튼(잠긴 멤버만 열고 기존 기록은 보존).
         ⚙️ 내 기록 백업을 '기기 옮기기'로 확장 — tmq_*·hotcho_* 전체를 기록 코드(복사/붙여넣기)나
-        JSON 한 파일로 폰↔태블릿에 그대로 옮김. */
-const CACHE = 'toeic-bts-v30';
+        JSON 한 파일로 폰↔태블릿에 그대로 옮김.
+   v31: 📡 뿌듯핫초 '언론·정책 모니터' — 정책브리핑·국가데이터처·입법예고·춘천시 보도자료·강원/전국 언론을
+        한 목록으로(hotcho_monitor.json, 하루 몇 번 자동 갱신). 갈래 탭 + 관심 키워드 필터 + 아이템으로 담기. */
+const CACHE = 'toeic-bts-v31';
 const SHELL = [
   './',
   './index.html',
@@ -109,7 +111,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   /* 💼🏠 뿌듯·행복핫초 데이터: 온라인일 때 항상 새 JSON, 오프라인일 때만 캐시 */
-  if (path.endsWith('/hotcho_news.json') || path.endsWith('/hotcho_hub.json') || path.endsWith('/hotcho_family.json')) {
+  if (path.endsWith('/hotcho_news.json') || path.endsWith('/hotcho_hub.json') || path.endsWith('/hotcho_family.json')
+      || path.endsWith('/hotcho_monitor.json')) {
     event.respondWith(networkFirst(req, '{}'));
     return;
   }

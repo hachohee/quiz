@@ -42,6 +42,44 @@
 }
 .hc-seg button.on { background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff; box-shadow: 0 6px 16px rgba(139, 92, 246, .28); }
 .hc-seg button .n { opacity: .8; font-weight: 500; font-size: 11px; margin-left: 3px; }
+/* 갈래가 많을 때(언론·정책 모니터)는 두 줄로 흘려보냅니다 */
+.hc-seg.wrap { flex-wrap: wrap; }
+.hc-seg.wrap button { flex: 0 0 auto; padding: 7px 10px; font-size: 12px; }
+
+/* ---------- 언론·정책 모니터 ---------- */
+.hc-mon-kws { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
+.hc-kw {
+  position: relative; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05);
+  color: #c9c0ea; border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 11.5px;
+  font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.hc-kw.on { background: linear-gradient(135deg, rgba(139, 92, 246, .38), rgba(244, 114, 182, .34)); color: #fff; border-color: rgba(196, 181, 253, .55); }
+.hc-kw.add { border-style: dashed; color: var(--muted2, #7f74b3); }
+.hc-kw .n { opacity: .65; font-weight: 500; font-size: 10px; margin-left: 4px; }
+.hc-kw i { font-style: normal; margin-left: 5px; color: #fb7185; font-size: 10px; }
+
+.hc-mon-list { display: flex; flex-direction: column; }
+.hc-mon { padding: 10px 2px; border-top: 1px solid rgba(255, 255, 255, .07); }
+.hc-mon:first-child { border-top: 0; padding-top: 2px; }
+.hc-mon-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+.hc-mon-kind { font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; }
+.hc-mon-kind.k-press { background: rgba(96, 165, 250, .16); color: #93c5fd; }
+.hc-mon-kind.k-law { background: rgba(251, 191, 36, .16); color: #fbbf24; }
+.hc-mon-kind.k-assembly { background: rgba(167, 139, 250, .18); color: #c4b5fd; }
+.hc-mon-kind.k-mods { background: rgba(34, 211, 238, .14); color: #22d3ee; }
+.hc-mon-kind.k-local { background: rgba(52, 211, 153, .15); color: #34d399; }
+.hc-mon-kind.k-gangwon { background: rgba(244, 114, 182, .16); color: #f9a8d4; }
+.hc-mon-kind.k-nation { background: rgba(255, 255, 255, .08); color: #c9c0ea; }
+.hc-mon-org { font-size: 11px; color: var(--muted, #a89ddb); font-weight: 600; }
+.hc-mon-d { margin-left: auto; font-size: 10.5px; color: var(--muted2, #7f74b3); }
+.hc-mon-t { font-size: 13.4px; font-weight: 700; line-height: 1.4; letter-spacing: -.2px; }
+.hc-mon-s { font-size: 11.8px; color: var(--muted, #a89ddb); line-height: 1.45; margin-top: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hc-mon-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.hc-mon-tag { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(139, 92, 246, .18); color: #c4b5fd; font-weight: 600; }
+.hc-mon-due { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(251, 191, 36, .14); color: #fbbf24; font-weight: 600; }
+.hc-mon-act { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.hc-mon-act .hc-btn { text-decoration: none; display: inline-flex; align-items: center; }
 
 .hc-btn {
   border: 1px solid rgba(255, 255, 255, .14); background: rgba(255, 255, 255, .06);
