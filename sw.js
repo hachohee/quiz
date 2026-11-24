@@ -57,7 +57,7 @@
         (index.html ?v=42 · APP_VER v42 · hotcho_modes.js·css?v=42)
    v43: 📅 주간 스케줄의 '1강' 자리에 2개월 공부방 실제 강의 이름 — 시작일(11/25 수)부터 그 트랙의
         몇 번째 회차인지 세어 1~12강을 돌리고 12강 넘으면 '2회독 1강'. 강의 이름은 공부방 목록이 만든
-        ROOM_LEC 인덱스에서 그대로 가져옴(공부방을 고치면 스케줄도 같이 바뀜), 실제 영상 제목은 그 아래 한 줄.
+        ROOM 인덱스에서 그대로 가져옴(공부방을 고치면 스케줄도 같이 바뀜), 실제 영상 제목은 그 아래 한 줄.
         체크 저장 키(hotcho_study_schedule_v1)·접기 펼치기·주 이동은 v42 그대로.
         (index.html ?v=43 · APP_VER v43 · hotcho_modes.js·css?v=43) */
 const CACHE = 'toeic-bts-v43';

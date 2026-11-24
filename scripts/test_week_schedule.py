@@ -115,8 +115,7 @@ if len(sys.argv) > 1:
     ctx.eval("Date.now = function(){ return %d; };" % int(noon_kst.timestamp() * 1000))
     print("# 오늘 =", sys.argv[1])
 
-ctx.set("ROOM_LEC", ctx.eval("JSON.parse(%s)" % json.dumps(json.dumps(room_lec))))
-ctx.eval("window.ROOM_LEC = ROOM_LEC;")
+# 공부방 쪽 ROOM_LEC는 전역이 아니라서 노출되지 않음 — 스케줄 스크립트가 ROOM에서 직접 만드는 경로를 시험
 ctx.eval(script)
 
 # 4) 결과 확인

@@ -5824,7 +5824,8 @@ show("home");
    · 요일 트랙은 scheduled-actions/📚-낮-1시-2개월-공부방-추천-강의/action.md 와 같게 맞췄습니다.
    · v43(2026-11-24): '1강' 숫자만 있던 자리에 2개월 공부방(ROOM)의 실제 강의 이름을 그대로 표시.
      시작일(2026-11-25 수)부터 그 날이 그 트랙의 몇 번째 회차인지 세어 1~12강을 순서대로 돌리고,
-     12강을 넘으면 '2회독 1강'처럼 회독 수를 붙입니다. 강의 이름은 ROOM_LEC(공부방 목록이 만든 인덱스)에서
+     12강을 넘으면 '2회독 1강'처럼 회독 수를 붙입니다. 강의 이름은 공부방 목록(ROOM)에서
+     그대로 가져오므로 공부방 목록을 고치면 스케줄도 같이 바뀝니다. 강의 이름은 ROOM_LEC(공부방 목록이 만든 인덱스)에서
      그대로 가져오므로 공부방 목록을 고치면 스케줄도 같이 바뀝니다.
    · 날짜 계산은 폰 시간대와 상관없이 한국 시간(KST) 기준입니다. */
 (function () {
@@ -5872,12 +5873,34 @@ show("home");
   }
 
   /* ---- 공부방 실제 강의 가져오기 ----
-     ROOM_LEC는 공부방 목록 스크립트가 '트랙id-강번호'로 만들어 둔 인덱스.
-     (없으면 숫자만 표시 — 스케줄 자체는 항상 뜨게) */
-  function lecture(tid, n) {
-    var idx = window.ROOM_LEC;
-    return (idx && idx[tid + '-' + n]) || null;
-  }
+     공부방 목록은 위 스크립트의 ROOM(공개 전역)에서 '트랙id-강번호'로 인덱스를 만듭니다.
+     (공부방 쪽 ROOM_LEC가 전역으로 열려 있으면 그걸 먼저 쓰고, 없으면 ROOM에서 직접 —
+      어느 쪽이든 공부방 목록을 고치면 스케줄도 같이 바뀝니다. 둘 다 없으면 숫자만 표시) */
+  var LEC = (function () {
+    var idx = (window.ROOM_LEC && typeof window.ROOM_LEC === 'object') ? window.ROOM_LEC : null;
+    if (idx) { for (var k in idx) { if (idx.hasOwnProperty(k)) return idx; } }
+    idx = {};
+    var room = window.ROOM;
+    if (!room || !room.length) return idx;
+    for (var i = 0; i < room.length; i++) {
+      var g = room[i], tracks = g && g.tracks;
+      if (!tracks) continue;
+      for (var j = 0; j < tracks.length; j++) {
+        var tr = tracks[j], months = tr && tr.months;
+        if (!months) continue;
+        for (var m = 0; m < months.length; m++) {
+          var lec = months[m] && months[m].lec;
+          if (!lec) continue;
+          for (var c = 0; c < lec.length; c++) {
+            var L = lec[c];
+            if (L && L.n) idx[tr.id + '-' + L.n] = L;
+          }
+        }
+      }
+    }
+    return idx;
+  })();
+  function lecture(tid, n) { return LEC[tid + '-' + n] || null; }
   /* 그 날이 그 트랙의 몇 번째 회차인지 — 시작일부터 그 날까지 같은 트랙 요일을 센다 */
   function trackOcc(n, gid) {
     var c = 0;
