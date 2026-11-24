@@ -1,7 +1,7 @@
 {
-  "name": "똑똑핫초",
-  "short_name": "똑똑핫초",
-  "description": "똑똑핫초 — 토익 단어·문법을 BTS 몬스터 배틀로 잡는 10분 영어 훈련 + 2개월 공부방",
+  "name": "핫초하트",
+  "short_name": "핫초하트",
+  "description": "핫초하트 — 뿌듯핫초(일)·행복핫초(집)·똑똑핫초(공부) 올인원 앱",
   "lang": "ko",
   "dir": "ltr",
   "start_url": "./",
