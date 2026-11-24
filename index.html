@@ -145,6 +145,17 @@ body{
 .wk-tr .st{color:#67e8f9}
 .wk-it{font-size:11.5px;font-weight:700;color:#ece7ff;line-height:1.35;letter-spacing:-.01em}
 .wk-day.done .wk-it{color:#d1fae5}
+/* v43: '1강' 대신 실제 강의 이름 — 강의마다 이름(굵게) + 실제 영상 제목(작게 · 1줄 말줄임) */
+.wk-ls{display:flex;flex-direction:column;gap:1.5px;min-width:0;margin-top:1px}
+.wk-li{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:10.5px;font-weight:700;line-height:1.28;letter-spacing:-.02em;color:#ece7ff;overflow-wrap:anywhere}
+.wk-li b{font-weight:900;color:#c4b5fd}
+.wk-day.done .wk-li{color:#d1fae5}
+.wk-day.done .wk-li b{color:#6ee7b7}
+.wk-li.vt{font-size:9px;font-weight:600;color:#9d92c4;-webkit-line-clamp:1;line-height:1.25;padding-left:1px}
+.wk-day.done .wk-li.vt{color:#7fd0b6}
+.wk-li.ex{font-size:9.5px;font-weight:800;color:#a5f3fc;-webkit-line-clamp:1;margin-top:1px}
+.wk-li.off{font-size:10px;font-weight:700;color:var(--muted2)}
 .wk-ck{flex:0 0 auto;width:22px;height:22px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);
   background:rgba(255,255,255,.04);display:grid;place-items:center;font-size:13px;font-weight:900;
   line-height:1;color:transparent;transition:background .18s ease,border-color .18s ease,transform .18s ease}
@@ -949,7 +960,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=42">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=43">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -5166,7 +5177,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v42";
+var APP_VER="v43";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5804,13 +5815,17 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=42"></script>
+<script src="hotcho_modes.js?v=43"></script>
 <script>
 /* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
    초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."
    · 저장 키: hotcho_study_schedule_v1  →  { days:{"YYYY-MM-DD":1}, open:true }
      (hotcho_ 접두사라 ⚙️ 내 기록 백업·기기 옮기기(HOTCHO-SYNC-G1:)에 그대로 담깁니다)
    · 요일 트랙은 scheduled-actions/📚-낮-1시-2개월-공부방-추천-강의/action.md 와 같게 맞췄습니다.
+   · v43(2026-11-24): '1강' 숫자만 있던 자리에 2개월 공부방(ROOM)의 실제 강의 이름을 그대로 표시.
+     시작일(2026-11-25 수)부터 그 날이 그 트랙의 몇 번째 회차인지 세어 1~12강을 순서대로 돌리고,
+     12강을 넘으면 '2회독 1강'처럼 회독 수를 붙입니다. 강의 이름은 ROOM_LEC(공부방 목록이 만든 인덱스)에서
+     그대로 가져오므로 공부방 목록을 고치면 스케줄도 같이 바뀝니다.
    · 날짜 계산은 폰 시간대와 상관없이 한국 시간(KST) 기준입니다. */
 (function () {
   'use strict';
@@ -5819,15 +5834,17 @@ show("home");
   var START = '2026-11-25';        /* 공부 시작일 — 수요일 */
   var LAST_DAY = '2027-02-21';     /* 복직(2027-02-22) 전날까지는 넘겨 볼 수 있게 */
   var DOW = ['일', '월', '화', '수', '목', '금', '토'];
-  var PLAN = {
-    0: { track: '재테크·복습 데이', items: '💎 재테크 1~2강 · 오답 복습 · 🎧 토익 10분' },
-    1: { track: '역사 데이',       items: '📜 세계사·한국사 1강 · 🎧 토익 10분' },
-    2: { track: '경제 데이',       items: '💰 기초경제·최신트렌드 1강 · 🎧 토익 10분' },
-    3: { track: '시사·영어 데이',   items: '📰 시사상식·📘 영어 1강 · 🎧 토익 10분' },
-    4: { track: '역사 데이',       items: '📜 세계사·한국사 1강 · 🎧 토익 10분' },
-    5: { track: '경제 데이',       items: '💰 기초경제·최신트렌드 1강 · 🎧 토익 10분' },
-    6: { track: '시사·영어 데이',   items: '📰 시사상식·📘 영어 1강 · 🎧 토익 10분' }
+  var PER_TRACK = 12;              /* 트랙마다 12강 */
+  var SHOW_VT = true;              /* 강의 이름 아래에 실제 유튜브 영상 제목도 한 줄 (길면 말줄임) */
+
+  /* 요일별 트랙 — lec: [공부방 트랙 id, 표시 이름] */
+  var GROUPS = {
+    hist:  { track: '역사 데이',        lec: [['world', '🌏 세계사'], ['korea', '🇰🇷 한국사']], extra: '🎧 토익 10분' },
+    econ:  { track: '경제 데이',        lec: [['basic', '📗 기초경제'], ['trend', '📈 최신트렌드']], extra: '🎧 토익 10분' },
+    cur:   { track: '시사·영어 데이',    lec: [['now', '📰 시사상식'], ['toeic800', '📘 영어']], extra: '🎧 토익 10분' },
+    money: { track: '재테크·복습 데이',  lec: [['money', '💎 재테크']], extra: '📝 오답 복습 · 🎧 토익 10분' }
   };
+  var GROUP_OF_DOW = { 0: 'money', 1: 'hist', 2: 'econ', 3: 'cur', 4: 'hist', 5: 'econ', 6: 'cur' };
 
   /* ---- 날짜: '일 수'(UTC 자정 기준 날짜 번호)로 계산 ---- */
   function p2(n) { return (n < 10 ? '0' : '') + n; }
@@ -5847,6 +5864,26 @@ show("home");
   function mondayOf(n) { return n - ((dowOf(n) + 6) % 7); }   /* 그 주 월요일 */
   function md(n) { var d = new Date(n * 86400000); return (d.getUTCMonth() + 1) + '/' + d.getUTCDate(); }
   function mdw(n) { return md(n) + '(' + DOW[dowOf(n)] + ')'; }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c];
+    });
+  }
+
+  /* ---- 공부방 실제 강의 가져오기 ----
+     ROOM_LEC는 공부방 목록 스크립트가 '트랙id-강번호'로 만들어 둔 인덱스.
+     (없으면 숫자만 표시 — 스케줄 자체는 항상 뜨게) */
+  function lecture(tid, n) {
+    var idx = window.ROOM_LEC;
+    return (idx && idx[tid + '-' + n]) || null;
+  }
+  /* 그 날이 그 트랙의 몇 번째 회차인지 — 시작일부터 그 날까지 같은 트랙 요일을 센다 */
+  function trackOcc(n, gid) {
+    var c = 0;
+    for (var d = START_N; d <= n; d++) { if (GROUP_OF_DOW[dowOf(d)] === gid) c++; }
+    return c;
+  }
 
   /* ---- 저장 ---- */
   function loadState() {
@@ -5873,6 +5910,45 @@ show("home");
   if (week > LAST_WEEK) week = LAST_WEEK;
 
   var $ = function (id) { return document.getElementById(id); };
+
+  /* ---- 그 날의 공부 항목 (실제 강의 이름) ---- */
+  function planItems(n, gid) {
+    var g = GROUPS[gid];
+    if (!g) return '';
+    var occ = trackOcc(n, gid);
+    var round = Math.floor((occ - 1) / PER_TRACK) + 1;
+    var k = ((occ - 1) % PER_TRACK) + 1;
+    var no = (round > 1 ? round + '회독 ' : '') + k + '강';
+    var out = '';
+    for (var i = 0; i < g.lec.length; i++) {
+      var tid = g.lec[i][0], label = g.lec[i][1], L = lecture(tid, k);
+      var topic = (L && L.topic) ? L.topic : '';
+      out += '<span class="wk-li"><b>' + esc(label + ' ' + no) + '</b>' +
+        (topic ? ' · ' + esc(topic) : '') + '</span>';
+      if (SHOW_VT && L && L.title) {
+        out += '<span class="wk-li vt">' + esc(L.title) + (L.ch ? ' · ' + esc(L.ch) : '') + '</span>';
+      }
+    }
+    out += '<span class="wk-li ex">' + esc(g.extra) + '</span>';
+    return out;
+  }
+
+  /* 날짜 버튼을 길게 눌렀을 때/스크린리더에 읽힐 전체 문장 */
+  function planText(n, gid) {
+    var g = GROUPS[gid];
+    if (!g) return '';
+    var occ = trackOcc(n, gid);
+    var round = Math.floor((occ - 1) / PER_TRACK) + 1;
+    var k = ((occ - 1) % PER_TRACK) + 1;
+    var no = (round > 1 ? round + '회독 ' : '') + k + '강';
+    var parts = [g.track];
+    for (var i = 0; i < g.lec.length; i++) {
+      var L = lecture(g.lec[i][0], k);
+      parts.push(g.lec[i][1] + ' ' + no + (L && L.topic ? ' ' + L.topic : ''));
+    }
+    parts.push(g.extra);
+    return parts.join(' · ');
+  }
 
   /* ---- 그리기 ---- */
   function weekTag() {
@@ -5912,7 +5988,8 @@ show("home");
     /* 날짜별 칸 */
     for (var j = 0; j < 7; j++) {
       var d = week + j, iso = isoOf(d), dow = dowOf(d);
-      var plan = PLAN[dow] || { track: '', items: '' };
+      var gid = GROUP_OF_DOW[dow];
+      var plan = GROUPS[gid] || { track: '', extra: '' };
       var pre = (d < START_N) || (d > LAST_N);
       var isToday = (d === todayN);
       var on = !!st.days[iso];
@@ -5926,8 +6003,8 @@ show("home");
         (d === START_N && !isToday ? '<span class="st">시작</span> · ' : '') +
         plan.track + '</span>';
       var it = pre
-        ? '<span class="wk-it" style="color:var(--muted2)">' + mdw(START_N) + '부터 시작해요</span>'
-        : '<span class="wk-it">' + plan.items + '</span>';
+        ? '<span class="wk-ls"><span class="wk-li off">' + mdw(START_N) + '부터 시작해요</span></span>'
+        : '<span class="wk-ls">' + planItems(d, gid) + '</span>';
 
       var inner = '<span class="wk-dl"><b>' + DOW[dow] + '</b><small>' + md(d) + '</small></span>' +
         '<span class="wk-m">' + tr + it + '</span>' +
@@ -5935,7 +6012,7 @@ show("home");
 
       html += pre
         ? '<div class="' + cls + '">' + inner + '</div>'
-        : '<button type="button" class="' + cls + '" data-d="' + iso + '" aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + mdw(d) + ' ' + plan.track + ' 공부 완료">' + inner + '</button>';
+        : '<button type="button" class="' + cls + '" data-d="' + iso + '" aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + esc(mdw(d) + ' ' + planText(d, gid)) + ' 공부 완료">' + inner + '</button>';
     }
     daysEl.innerHTML = html;
   }
