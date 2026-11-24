@@ -21,7 +21,8 @@
     article: 'hotcho_article_v1',
     home: 'hotcho_home_v1',
     mode: 'hotcho_mode_v1',
-    mon: 'hotcho_mon_v1'
+    mon: 'hotcho_mon_v1',
+    ui: 'hotcho_ui_v1'
   };
 
   /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
@@ -104,8 +105,34 @@
     monOnly: false,
     monMg: false,
     monPicked: {},
-    monKwCustom: []
+    monKwCustom: [],
+    /* 메뉴 버튼 전환 상태 + 일일브리핑 */
+    brief: null,
+    workSec: 'news',
+    homeSec: 'events',
+    mgGroup: 'press',
+    mgSub: 'daily',
+    polTab: 'today',
+    briefDate: '',
+    calY: -1,
+    calM: -1,
+    trendKind: 'week',
+    accTopic: '',
+    accQ: ''
   };
+  /* 지난번에 보던 메뉴를 그대로 열어 준다 */
+  (function () {
+    var u = load(K.ui, null) || {};
+    ['workSec', 'homeSec', 'mgGroup', 'mgSub', 'polTab', 'trendKind'].forEach(function (k) {
+      if (typeof u[k] === 'string' && u[k]) S[k] = u[k];
+    });
+  })();
+  function saveUi() {
+    save(K.ui, {
+      workSec: S.workSec, homeSec: S.homeSec, mgGroup: S.mgGroup,
+      mgSub: S.mgSub, polTab: S.polTab, trendKind: S.trendKind
+    });
+  }
   /* 관심 키워드는 이 폰에만 저장(hotcho_ 로 시작 → 백업·기기 옮기기에도 함께 감) */
   (function () {
     var m = load(K.mon, null) || {};
@@ -248,7 +275,7 @@
     document.body.classList.toggle('hc-mode-alt', mode !== 'study');
     if (remember !== false) { try { localStorage.setItem(K.mode, mode); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
-    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); }
+    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); if (S.workSec === 'monitor') renderMg(); }
     if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); renderSyncSummary(); }
   }
 
@@ -465,6 +492,489 @@
     return (p[0] === y ? (+p[1]) + '/' + (+p[2]) : d);
   }
 
+  /* ============================================================ 메뉴 버튼 전환 */
+  var WORK_SECS = ['news', 'monitor', 'cartel', 'items', 'article'];
+  var HOME_SECS = ['events', 'kids', 'fridge', 'backup'];
+
+  function showWorkSec(sec) {
+    if (WORK_SECS.indexOf(sec) < 0) sec = 'news';
+    S.workSec = sec; saveUi();
+    var menu = $('hcWorkMenu');
+    if (menu) {
+      var bs = menu.querySelectorAll('[data-work-sec]');
+      for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-work-sec') === sec);
+    }
+    for (var j = 0; j < WORK_SECS.length; j++) {
+      var el = $('hcSec-' + WORK_SECS[j]);
+      if (el) el.hidden = (WORK_SECS[j] !== sec);
+    }
+    if (sec === 'news') renderNews();
+    if (sec === 'monitor') renderMg();
+    if (sec === 'cartel') renderCartel();
+    if (sec === 'items') renderItems();
+    if (sec === 'article') renderArticle();
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+
+  function showHomeSec(sec) {
+    if (HOME_SECS.indexOf(sec) < 0) sec = 'events';
+    S.homeSec = sec; saveUi();
+    var menu = $('hcHomeMenu');
+    if (menu) {
+      var bs = menu.querySelectorAll('[data-home-sec]');
+      for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-home-sec') === sec);
+    }
+    for (var j = 0; j < HOME_SECS.length; j++) {
+      var el = $('hcHSec-' + HOME_SECS[j]);
+      if (el) el.hidden = (HOME_SECS[j] !== sec);
+    }
+    if (sec === 'events') { renderEvents(); renderMemos(); }
+    if (sec === 'kids') renderKids();
+    if (sec === 'fridge') renderShop();
+    if (sec === 'backup') renderSyncSummary();
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+
+  /* ============================================================ 일일브리핑 데이터 */
+  function briefDays() { return (S.brief && S.brief.days) || []; }
+  function briefDay(date) {
+    var ds = briefDays();
+    for (var i = 0; i < ds.length; i++) if (ds[i].date === date) return ds[i];
+    return null;
+  }
+  function briefLatest() {
+    var ds = briefDays().slice().sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+    return ds.length ? ds[0].date : '';
+  }
+  function briefAllItems() {
+    var out = [], ds = briefDays();
+    for (var i = 0; i < ds.length; i++) {
+      var its = ds[i].items || [];
+      for (var j = 0; j < its.length; j++) out.push(its[j]);
+    }
+    return out;
+  }
+  function briefPolicy() { return (S.brief && S.brief.policy) || []; }
+  function dayAdd(iso, n) {
+    var p = String(iso).split('-');
+    var d = new Date(+p[0], (+p[1]) - 1, (+p[2]) + n);
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function isPicked(url) {
+    for (var i = 0; i < S.items.length; i++) if (S.items[i].url && S.items[i].url === url) return true;
+    return false;
+  }
+  function srcLink(url, label) {
+    if (!url) return '';
+    return '<a class="hc-src-link" href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(label) + ' ↗</a>';
+  }
+
+  /* ============================================================ 🛰 모니터 (1단) */
+  function renderMg() {
+    var tabs = $('hcMgTabs');
+    if (!tabs) return;
+    tabs.innerHTML =
+      '<button type="button" data-mg="press" class="' + (S.mgGroup === 'press' ? 'on' : '') + '">📰 언론 모니터</button>' +
+      '<button type="button" data-mg="policy" class="' + (S.mgGroup === 'policy' ? 'on' : '') + '">🏛 정책 모니터</button>';
+    var body = $('hcMgBody');
+    if (!body) return;
+    if (S.mgGroup === 'policy') {
+      body.innerHTML = '<div class="hc-seg wrap" id="hcPolTabs"></div><div id="hcPolBody"></div>';
+      renderPolTabs();
+      renderPolBody();
+      return;
+    }
+    body.innerHTML = '<div class="hc-seg wrap" id="hcMgSub"></div><div id="hcMgSubBody"></div>';
+    renderPressSub();
+  }
+
+  function renderPressSub() {
+    var tabs = $('hcMgSub');
+    if (!tabs) return;
+    tabs.innerHTML =
+      '<button type="button" data-mg-sub="daily" class="' + (S.mgSub === 'daily' ? 'on' : '') + '">📅 일일브리핑</button>' +
+      '<button type="button" data-mg-sub="acc" class="' + (S.mgSub === 'acc' ? 'on' : '') + '">🔁 뉴스데이터 누적/추가취재 제안</button>';
+    var body = $('hcMgSubBody');
+    if (!body) return;
+    body.innerHTML = (S.mgSub === 'acc') ? accHTML() : dailyHTML();
+    if (S.mgSub !== 'acc') renderDailyParts();
+  }
+
+  /* ---------- 📅 일일브리핑 ---------- */
+  function dailyHTML() {
+    var upd = (S.brief && S.brief.updated) ? esc(S.brief.updated) + ' 갱신' : '불러오는 중…';
+    var cat = (S.news && S.news.categories) ? S.news.categories[S.newsTab] : null;
+    var list = (cat && cat.items) || [];
+    var head = '<div class="hc-live-top">';
+    for (var i = 0; i < list.length && i < 3; i++) {
+      head += '<a class="hc-live-a" href="' + esc(list[i].link) + '" target="_blank" rel="noopener">' +
+        '<span class="src">' + esc(list[i].source) + '</span>' + esc(list[i].title) + '</a>';
+    }
+    if (!list.length) head += '<p class="hc-note">실시간 뉴스를 불러오지 못했어요. [↻ 새로고침]을 눌러 주세요.</p>';
+    head += '</div>';
+
+    return '' +
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📡 실시간 뉴스</h3><span class="hc-tiny" id="hcDailyUpd">' +
+      ((S.news && S.news.updated) ? esc(S.news.updated) + ' 기준' : '') + '</span></div>' +
+      head +
+      '<div class="hc-row" style="margin-top:8px">' +
+      '<button type="button" class="hc-btn sm" data-act="refresh">↻ 새로고침</button>' +
+      '<button type="button" class="hc-btn sm ghost" data-work-sec="news">📰 실시간 뉴스 전체</button></div>' +
+      '</section>' +
+
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📅 날짜별 브리핑</h3><span class="hc-tiny" id="hcCalUpd">' + upd + '</span></div>' +
+      '<div id="hcCal">' + calHTML() + '</div>' +
+      '</section>' +
+
+      '<section class="hc-card" id="hcDayCard">' + dayHTML() + '</section>' +
+
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📊 보도 흐름</h3><span class="hc-tiny" id="hcTrendUpd"></span></div>' +
+      '<div id="hcTrend">' + trendHTML() + '</div>' +
+      '</section>';
+  }
+
+  /* 일일브리핑 안쪽 조각만 다시 그린다(달력·날짜·보도흐름) */
+  function renderDailyParts() {
+    var cal = $('hcCal');
+    if (cal) cal.innerHTML = calHTML();
+    var dayCard = $('hcDayCard');
+    if (dayCard) dayCard.innerHTML = dayHTML();
+    var tr = $('hcTrend');
+    if (tr) tr.innerHTML = trendHTML();
+  }
+
+  var WEEK_NAME = ['일', '월', '화', '수', '목', '금', '토'];
+  function calHTML() {
+    var today = kstToday();
+    if (S.calY < 0 || S.calM < 0) {
+      var sel = S.briefDate || today;
+      var sp = sel.split('-');
+      S.calY = +sp[0]; S.calM = (+sp[1]) - 1;
+    }
+    var ds = briefDays(), has = {};
+    for (var i = 0; i < ds.length; i++) has[ds[i].date] = 1;
+    if (!S.briefDate) S.briefDate = has[today] ? today : briefLatest();
+
+    var first = new Date(S.calY, S.calM, 1);
+    var startW = first.getDay();
+    var lastDay = new Date(S.calY, S.calM + 1, 0).getDate();
+    var h = '<div class="hc-cal-head">' +
+      '<button type="button" data-cal-nav="-1" aria-label="이전 달">‹</button>' +
+      '<span>' + S.calY + '년 ' + (S.calM + 1) + '월</span>' +
+      '<button type="button" data-cal-nav="1" aria-label="다음 달">›</button></div>' +
+      '<div class="hc-cal">';
+    for (var w = 0; w < 7; w++) h += '<div class="w">' + WEEK_NAME[w] + '</div>';
+    for (var b = 0; b < startW; b++) h += '<div></div>';
+    for (var d = 1; d <= lastDay; d++) {
+      var iso = S.calY + '-' + pad(S.calM + 1) + '-' + pad(d);
+      var cls = 'hc-cal-d' + (iso === S.briefDate ? ' on' : '') + (iso === today ? ' today' : '') + (has[iso] ? ' has' : '');
+      h += '<button type="button" class="' + cls + '" data-cal-day="' + iso + '">' + d + '</button>';
+    }
+    h += '</div>';
+    h += '<p class="hc-note">점이 있는 날은 브리핑이 쌓인 날이에요 · 누르면 그날 브리핑으로 바뀝니다</p>';
+    return h;
+  }
+
+  /* 줄글을 빈 줄 기준 문단으로 나누고, 문단 주제와 같은 기사 링크를 그 문단 밑에 붙인다 */
+  function splitNarrative(day) {
+    var items = day.items || [], used = {};
+    var blocks = String(day.narrative || '').split(/\n{2,}/);
+    var out = blocks.map(function (block) {
+      var header = (block.split('\n')[0] || '').replace(/^[^\p{L}\p{N}]+/u, '').split('—')[0].trim();
+      var links = [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].url && items[i].topic === header) { links.push(items[i]); used[items[i].id] = 1; }
+      }
+      return { block: block, links: links };
+    });
+    var left = [];
+    for (var j = 0; j < items.length; j++) if (items[j].url && !used[items[j].id]) left.push(items[j]);
+    return { blocks: out, leftover: left };
+  }
+
+  function dayHTML() {
+    var date = S.briefDate || briefLatest();
+    var day = briefDay(date);
+    if (!day) {
+      return '<div class="hc-card-head"><h3>📄 ' + esc(date ? monDay(date) + ' 브리핑' : '브리핑') + '</h3></div>' +
+        '<div class="hc-empty">이 날짜에는 아직 브리핑이 없어요.<br>아침 자동 갱신이 돌면 여기에 쌓입니다.</div>';
+    }
+    var sp = splitNarrative(day), h = '';
+    h += '<div class="hc-card-head"><h3>📄 ' + esc(day.label || monDay(day.date)) + ' 브리핑</h3>' +
+      '<span class="hc-tiny">' + (day.items ? day.items.length + '건' : '') + '</span></div>';
+    if (day.generated) h += '<p class="hc-note" style="margin:0 2px 10px">' + esc(day.generated) + '</p>';
+    for (var i = 0; i < sp.blocks.length; i++) {
+      var blk = sp.blocks[i];
+      h += '<div class="hc-br-block"><p>' + esc(blk.block) + '</p>';
+      if (blk.links.length) {
+        h += '<ul class="hc-br-src">';
+        for (var k = 0; k < blk.links.length; k++) {
+          var it = blk.links[k];
+          h += '<li>' + srcLink(it.url, it.source + ' 원문 보기') + '</li>';
+        }
+        h += '</ul>';
+      }
+      h += '</div>';
+    }
+    if (sp.leftover.length) {
+      h += '<div class="hc-fold" style="border-top:1px solid rgba(255,255,255,.1)"><div class="hc-br-etc-h">기타 출처</div><ul class="hc-br-src">';
+      for (var m = 0; m < sp.leftover.length; m++) {
+        var lo = sp.leftover[m];
+        h += '<li>' + srcLink(lo.url, '[' + lo.topic + '] ' + lo.title + ' — ' + lo.source) + '</li>';
+      }
+      h += '</ul></div>';
+    }
+    if (S.brief && S.brief.note) h += '<p class="hc-note">' + esc(S.brief.note) + '</p>';
+    return h;
+  }
+
+  function trendCounts(kind) {
+    var span = (kind === 'month') ? 30 : 7;
+    var to = kstToday(), from = dayAdd(to, -(span - 1));
+    var counts = {}, total = 0, all = briefAllItems();
+    for (var i = 0; i < all.length; i++) {
+      var d = all[i].date;
+      if (!d || d < from || d > to) continue;
+      total++;
+      var t = all[i].topic || '기타';
+      counts[t] = (counts[t] || 0) + 1;
+    }
+    var ent = [];
+    for (var k in counts) ent.push([k, counts[k]]);
+    ent.sort(function (a, b) { return b[1] - a[1]; });
+    return { from: from, to: to, total: total, ent: ent };
+  }
+
+  function trendHTML() {
+    var t = trendCounts(S.trendKind || 'week');
+    var h = '<div class="hc-row" style="margin-bottom:10px">' +
+      '<button type="button" class="hc-btn sm' + (S.trendKind === 'week' ? ' primary' : ' ghost') + '" data-trend="week">주간</button>' +
+      '<button type="button" class="hc-btn sm' + (S.trendKind === 'month' ? ' primary' : ' ghost') + '" data-trend="month">월간</button>' +
+      '<span class="hc-tiny" style="margin-left:auto;align-self:center">' + monDay(t.from) + '~' + monDay(t.to) + ' · ' + num(t.total) + '건</span>' +
+      '</div>';
+    if (!t.total) {
+      return h + '<div class="hc-empty">이 기간에 쌓인 브리핑이 없어요.</div>';
+    }
+    var max = t.ent.length ? t.ent[0][1] : 1;
+    h += '<div class="hc-bars">';
+    for (var i = 0; i < t.ent.length; i++) {
+      var w = Math.round((t.ent[i][1] / max) * 100);
+      h += '<div class="hc-bar-row"><span class="lb">' + esc(t.ent[i][0]) + '</span>' +
+        '<span class="tr"><i style="width:' + Math.max(w, 6) + '%"></i></span>' +
+        '<span class="ct">' + t.ent[i][1] + '</span></div>';
+    }
+    h += '</div>';
+    var top2 = t.ent.slice(0, 2).map(function (e) { return "'" + e[0] + "'(" + e[1] + '건)'; }).join(', ');
+    h += '<p class="hc-note">' + (S.trendKind === 'month' ? '최근 30일' : '최근 7일') + ' 쌓인 브리핑 ' +
+      num(t.total) + '건 기준 · 가장 많이 다룬 주제는 ' + esc(top2) + '예요.</p>';
+    return h;
+  }
+
+  /* ---------- 🔁 뉴스데이터 누적 / 추가취재 제안 ---------- */
+  function accTopics() {
+    var all = briefAllItems(), cnt = {}, order = [];
+    for (var i = 0; i < all.length; i++) {
+      var ts = all[i].tags || [];
+      for (var j = 0; j < ts.length; j++) {
+        if (!cnt[ts[j]]) order.push(ts[j]);
+        cnt[ts[j]] = (cnt[ts[j]] || 0) + 1;
+      }
+    }
+    return { order: order, cnt: cnt };
+  }
+
+  function accHTML() {
+    var t = accTopics();
+    var all = briefAllItems();
+    var chips = '<button type="button" class="hc-kw' + (S.accTopic ? '' : ' on') + '" data-acc-topic="">전체<span class="n">' + all.length + '</span></button>';
+    for (var i = 0; i < t.order.length; i++) {
+      var k = t.order[i];
+      chips += '<button type="button" class="hc-kw' + (S.accTopic === k ? ' on' : '') + '" data-acc-topic="' + esc(k) + '">' +
+        esc(k) + '<span class="n">' + t.cnt[k] + '</span></button>';
+    }
+    return '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>🔁 뉴스데이터 누적</h3><span class="hc-tiny">' + all.length + '건</span></div>' +
+      '<p class="hc-note" style="margin:0 2px 8px">지금까지 쌓인 브리핑 항목을 주제·검색어로 모아 봅니다. 카드마다 추가 취재 제안이 붙어 있어요.</p>' +
+      '<div class="hc-mon-kws">' + chips + '</div>' +
+      '<div class="hc-add-row"><input class="hc-input" id="hcAccQ" value="' + esc(S.accQ) + '" placeholder="제목·요약·취재제안 검색">' +
+      '<button type="button" class="hc-btn primary" data-acc-search="1">검색</button></div>' +
+      '</section><div id="hcAccList">' + accListHTML() + '</div>';
+  }
+
+  function accListHTML() {
+    var q = String(S.accQ || '').trim();
+    var all = briefAllItems(), rows = [];
+    for (var i = 0; i < all.length; i++) {
+      var x = all[i];
+      if (S.accTopic && (x.tags || []).indexOf(S.accTopic) < 0) continue;
+      if (q) {
+        var hay = [x.title, x.summary, x.follow_up, x.topic, x.source].join(' ');
+        if (hay.indexOf(q) < 0) continue;
+      }
+      rows.push(x);
+    }
+    rows.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    if (!rows.length) return '<div class="hc-empty">조건에 맞는 항목이 없어요.<br>주제를 풀거나 검색어를 지워 보세요.</div>';
+    var h = '';
+    for (var j = 0; j < rows.length; j++) {
+      var it = rows[j];
+      var picked = isPicked(it.url);
+      h += '<div class="hc-acc">' +
+        '<div class="hc-acc-top"><span class="hc-mon-tag">' + esc(it.topic) + '</span>' +
+        '<span class="hc-acc-d">' + esc(monDay(it.date)) + ' · ' + esc(it.source) + '</span></div>' +
+        '<div class="hc-acc-t">' + esc(it.title) + '</div>' +
+        (it.summary ? '<div class="hc-acc-s"><b class="k">원문 사실</b>' + esc(it.summary) + '</div>' : '') +
+        (it.follow_up ? '<div class="hc-follow"><b>추가 취재 제안</b><p>' + esc(it.follow_up) + '</p></div>' : '') +
+        '<div class="hc-mon-act">' + srcLink(it.url, '원문 보기') +
+        '<button type="button" class="hc-btn sm' + (picked ? ' picked' : '') + '" data-brief-add="' + esc(it.id) + '">' +
+        (picked ? '✓ 담았어요' : '💡 아이템으로 담기') + '</button></div></div>';
+    }
+    return h;
+  }
+
+  /* ============================================================ 🏛 정책 모니터 (2단) */
+  var POL_TABS = [
+    { k: 'today', l: '오늘의 변화' },
+    { k: 'press', l: '정책브리핑' },
+    { k: 'assembly', l: '국회' },
+    { k: 'mods', l: '국가데이터처' },
+    { k: 'history', l: '정책 히스토리' },
+    { k: 'live', l: '실시간 소식' }
+  ];
+
+  function renderPolTabs() {
+    var el = $('hcPolTabs');
+    if (!el) return;
+    var h = '';
+    for (var i = 0; i < POL_TABS.length; i++) {
+      var t = POL_TABS[i];
+      h += '<button type="button" data-pol-tab="' + t.k + '" class="' + (S.polTab === t.k ? 'on' : '') + '">' + t.l + '</button>';
+    }
+    el.innerHTML = h;
+  }
+
+  function polCards(filter) {
+    var src = briefPolicy(), out = [], today = kstToday();
+    for (var i = 0; i < src.length; i++) {
+      var p = src[i];
+      if (filter === 'all') out.push(p);
+      else if (filter === 'today') { if (p.date === today) out.push(p); }
+      else if (p.tab === filter) out.push(p);
+    }
+    out.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
+    return out;
+  }
+
+  function polCardHTML(p) {
+    var picked = isPicked(p.url);
+    return '<div class="hc-pol">' +
+      '<div class="hc-pol-top">' +
+      '<span class="hc-src s-' + esc(p.tab) + '">' + esc(p.source) + '</span>' +
+      (p.field ? '<span class="hc-field-b">' + esc(p.field) + '</span>' : '') +
+      '<span class="hc-pol-org">' + esc(p.org || '') + '</span>' +
+      '<span class="hc-pol-d">' + esc(monDay(p.date)) + '</span></div>' +
+      '<div class="hc-pol-t">' + esc(p.title) + '</div>' +
+      (p.summary ? '<div class="hc-pol-blk"><b>[원문 사실]</b><p>' + esc(p.summary) + '</p></div>' : '') +
+      (p.analysis ? '<div class="hc-pol-blk cmp"><b>[전후 비교·장단점]</b><p>' + esc(p.analysis) + '</p></div>' : '') +
+      (p.reporting ? '<div class="hc-pol-blk rep"><b>[추가 취재 방향]</b><p>' + esc(p.reporting) + '</p></div>' : '') +
+      '<div class="hc-mon-act">' + srcLink(p.url, '원문 보기') +
+      '<button type="button" class="hc-btn sm' + (picked ? ' picked' : '') + '" data-pol-add="' + esc(p.id) + '">' +
+      (picked ? '✓ 담았어요' : '💡 아이템으로 담기') + '</button></div></div>';
+  }
+
+  function renderPolBody() {
+    var body = $('hcPolBody');
+    if (!body) return;
+    if (S.polTab === 'live') {
+      body.innerHTML = '<section class="hc-card">' +
+        '<div class="hc-card-head"><h3>📡 실시간 원문 소식</h3><span class="hc-tiny" id="hcMonUpd">불러오는 중…</span></div>' +
+        '<div class="hc-seg wrap" id="hcMonTabs"></div>' +
+        '<div class="hc-mon-kws" id="hcMonKw"></div>' +
+        '<div class="hc-mon-list" id="hcMonList"></div>' +
+        '<p class="hc-note" id="hcMonSrc"></p></section>';
+      renderMonitor();
+      return;
+    }
+    if (S.polTab === 'history') {
+      var all = polCards('all');
+      var h = '<section class="hc-card"><div class="hc-card-head"><h3>🗓 정책 히스토리</h3>' +
+        '<span class="hc-tiny">' + all.length + '건</span></div>';
+      for (var i = 0; i < all.length; i++) {
+        var p = all[i];
+        h += '<div class="hc-hist"><div class="hc-hist-d">' + esc(monDay(p.date)) + '</div>' +
+          '<div class="hc-hist-b"><span class="hc-src s-' + esc(p.tab) + '">' + esc(p.source) + '</span>' +
+          '<div class="hc-hist-t">' + esc(p.title) + '</div>' +
+          '<div class="hc-hist-m">' + esc(p.org || '') + (p.field ? ' · ' + esc(p.field) : '') + '</div>' +
+          srcLink(p.url, '원문 보기') + '</div></div>';
+      }
+      h += '</section>';
+      body.innerHTML = h;
+      return;
+    }
+    var list = polCards(S.polTab);
+    if (!list.length) {
+      body.innerHTML = '<div class="hc-empty">이 탭에 해당하는 정책 카드가 없어요.</div>';
+      return;
+    }
+    var out = '';
+    for (var j = 0; j < list.length; j++) out += polCardHTML(list[j]);
+    if (S.polTab === 'today') {
+      out = '<p class="hc-note" style="margin:0 2px 10px">' + esc(monDay(kstToday())) + ' 기준으로 새로 나온 정책·입법·통계·지자체 항목입니다. 카드마다 [원문 사실] · [전후 비교·장단점] · [추가 취재 방향]이 붙어 있어요.</p>' + out;
+    }
+    body.innerHTML = out;
+  }
+
+  /* ---------- 아이템으로 담기 (브리핑·정책) ---------- */
+  function addFromBrief(id) {
+    var all = briefAllItems();
+    for (var i = 0; i < all.length; i++) {
+      var x = all[i];
+      if (x.id !== id) continue;
+      if (isPicked(x.url)) { toast('이미 아이템 구상에 담겨 있어요'); return; }
+      var tags = x.tags || [];
+      S.items.unshift({
+        id: uid(), title: x.title,
+        cat: (tags.indexOf('강원') >= 0 || x.topic === '강원 종합' || x.topic === '지방자치') ? '강원' : '전국',
+        status: '아이디어', facts: x.summary || '', sources: x.follow_up || '',
+        url: x.url, from: x.source + ' · ' + x.date,
+        createdAt: Date.now(), updatedAt: Date.now()
+      });
+      save(K.items, S.items);
+      renderItems(); renderMgBodyIfNeeded();
+      toast('아이템 구상에 담았어요 · ✍️ 기사로 쓰기로 이어져요');
+      return;
+    }
+  }
+
+  function addFromPolicy(id) {
+    var src = briefPolicy();
+    for (var i = 0; i < src.length; i++) {
+      var p = src[i];
+      if (p.id !== id) continue;
+      if (isPicked(p.url)) { toast('이미 아이템 구상에 담겨 있어요'); return; }
+      S.items.unshift({
+        id: uid(), title: p.title,
+        cat: (p.tab === 'today' && (p.org || '').indexOf('춘천') >= 0) ? '강원' : '전국',
+        status: '아이디어', facts: p.summary || '',
+        sources: [p.reporting || '', p.org || ''].filter(Boolean).join(' · '),
+        url: p.url, from: p.source + ' · ' + p.date,
+        createdAt: Date.now(), updatedAt: Date.now()
+      });
+      save(K.items, S.items);
+      renderItems(); renderMgBodyIfNeeded();
+      toast('아이템 구상에 담았어요 · ✍️ 기사로 쓰기로 이어져요');
+      return;
+    }
+  }
+
+  function renderMgBodyIfNeeded() {
+    if (S.workSec !== 'monitor') return;
+    if (S.mgGroup === 'policy') renderPolBody(); else renderPressSub();
+  }
+
   function addMonitorItem(idx) {
     var row = monView[idx];
     if (!row) return;
@@ -662,6 +1172,7 @@
     S.linkedItem = it.title;
     S.artTab = 'brief';
     renderArticle();
+    showWorkSec('article');
     var card = $('hcArticleCard');
     if (card && card.scrollIntoView) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     toast('소재를 기사작성으로 옮겼어요');
@@ -1122,28 +1633,44 @@
   }
 
   /* ------------------------------------------------------------ 뼈대 그리기 */
+  /* 상단 서브메뉴는 '버튼'으로만 두고, 고른 메뉴 한 칸만 화면에 남긴다.
+     (길게 나열하면 폰에서 스크롤 지옥이 된다 — 초희 요청) */
+  function menuBtn(group, key, emoji, label) {
+    var on = (group === 'work' ? S.workSec : S.homeSec) === key;
+    return '<button type="button" class="' + (on ? 'on' : '') + '" data-' + group + '-sec="' + key + '">' +
+      '<span class="e">' + emoji + '</span>' + esc(label) + '</button>';
+  }
+
   function workHTML() {
     return '' +
       '<div class="hc-head"><div><h2>💼 뿌듯핫초</h2><p class="hc-sub">취재기자 업무 허브 · 일</p></div>' +
       '<button type="button" class="hc-refresh" data-act="refresh">↻ 새로고침</button></div>' +
 
+      '<nav class="hc-menu" id="hcWorkMenu" aria-label="뿌듯핫초 메뉴">' +
+      menuBtn('work', 'news', '📰', '실시간 뉴스') +
+      menuBtn('work', 'monitor', '🛰', '언론·정책 모니터') +
+      menuBtn('work', 'cartel', '🕵️', '카르텔워치') +
+      menuBtn('work', 'items', '🧩', '아이템 구상') +
+      menuBtn('work', 'article', '✍️', '기사작성') +
+      '</nav>' +
+
+      '<div class="hc-sec" id="hcSec-news">' +
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📰 실시간 주요뉴스</h3><span class="hc-tiny" id="hcNewsUpd">불러오는 중…</span></div>' +
       '<div class="hc-seg" id="hcNewsTabs"></div>' +
       '<div class="hc-news-list" id="hcNewsList"></div>' +
       '<p class="hc-note">기사 제목을 누르면 원문이 열려요 · 💡를 누르면 아이템 구상에 그대로 담겨요</p>' +
-      '</section>' +
+      '</section></div>' +
 
-      '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>📡 언론·정책 모니터</h3><span class="hc-tiny" id="hcMonUpd">불러오는 중…</span></div>' +
-      '<div class="hc-seg wrap" id="hcMonTabs"></div>' +
-      '<div class="hc-mon-kws" id="hcMonKw"></div>' +
-      '<div class="hc-mon-list" id="hcMonList"></div>' +
-      '<p class="hc-note" id="hcMonSrc"></p>' +
-      '</section>' +
+      '<div class="hc-sec" id="hcSec-monitor" hidden>' +
+      '<div class="hc-seg" id="hcMgTabs"></div>' +
+      '<div id="hcMgBody"></div>' +
+      '</div>' +
 
-      '<section class="hc-card" id="hcCartelCard"></section>' +
+      '<div class="hc-sec" id="hcSec-cartel" hidden>' +
+      '<section class="hc-card" id="hcCartelCard"></section></div>' +
 
+      '<div class="hc-sec" id="hcSec-items" hidden>' +
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>🧩 아이템 구상</h3><span class="hc-tiny" id="hcItemCnt"></span></div>' +
       '<div class="hc-field"><label>소재(제목)</label><input class="hc-input" id="hcItemTitle" placeholder="예: ○○군, 수의계약 3건으로 쪼개 발주"></div>' +
@@ -1156,8 +1683,9 @@
       '<div class="hc-row"><button type="button" class="hc-btn primary" data-act="item-add" id="hcItemAddBtn">＋ 소재 추가</button>' +
       '<button type="button" class="hc-btn ghost" data-act="item-cancel" id="hcItemCancelBtn" hidden>취소</button></div>' +
       '<div id="hcItemList" style="margin-top:12px"></div>' +
-      '</section>' +
+      '</section></div>' +
 
+      '<div class="hc-sec" id="hcSec-article" hidden>' +
       '<section class="hc-card" id="hcArticleCard">' +
       '<div class="hc-card-head"><h3>✍️ 기사작성</h3><span class="hc-tiny" id="hcArtLink"></span></div>' +
       '<div class="hc-seg" id="hcArtTabs"></div>' +
@@ -1169,7 +1697,7 @@
       '<button type="button" class="hc-btn ghost" data-act="art-clear">비우기</button></div>' +
       '<details class="hc-fold"><summary>💾 저장한 초안 (<span id="hcDraftCnt">0</span>)</summary><div id="hcDraftList"></div></details>' +
       '<p class="hc-note">초안은 이 폰에만 저장돼요 · 리포트는 1분에 ' + READ_CHARS_PER_MIN + '자 기준으로 방송 길이를 계산해요</p>' +
-      '</section>';
+      '</section></div>';
   }
 
   function homeHTML() {
@@ -1177,30 +1705,39 @@
       '<div class="hc-head"><div><h2>🏠 행복핫초</h2><p class="hc-sub">우리 집 허브 · 집</p></div>' +
       '<button type="button" class="hc-refresh" data-act="refresh">↻ 새로고침</button></div>' +
 
+      '<nav class="hc-menu home" id="hcHomeMenu" aria-label="행복핫초 메뉴">' +
+      menuBtn('home', 'events', '📅', '가족일정') +
+      menuBtn('home', 'kids', '🎒', '찬우학업') +
+      menuBtn('home', 'fridge', '🍳', '냉파') +
+      menuBtn('home', 'backup', '⚙️', '백업/이동') +
+      '</nav>' +
+
+      '<div class="hc-sec" id="hcHSec-events">' +
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📅 가족일정 (앞으로 2주)</h3><span class="hc-tiny" id="hcEvUpd"></span></div>' +
       '<div id="hcEvList"></div>' +
       '<p class="hc-note" id="hcEvNote"></p>' +
       '</section>' +
-
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📝 빠른 집안 메모</h3><span class="hc-tiny" id="hcMemoCnt"></span></div>' +
       '<div id="hcMemoList"></div>' +
       '<div class="hc-add-row"><input class="hc-input" id="hcMemoInput" placeholder="예: 세탁기 필터 청소">' +
       '<button type="button" class="hc-btn primary" data-act="memo-add">추가</button></div>' +
-      '</section>' +
+      '</section></div>' +
 
+      '<div class="hc-sec" id="hcHSec-kids" hidden>' +
       '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>📚 찬우학업</h3><span class="hc-tiny" id="hcKidsDay"></span></div>' +
+      '<div class="hc-card-head"><h3>🎒 찬우학업</h3><span class="hc-tiny" id="hcKidsDay"></span></div>' +
       '<a class="hc-open" href="' + STUDY_APP + '" target="_blank" rel="noopener">' +
       '<span class="e">🎒</span><span class="b"><b>찬우친구들 공부방 열기</b><span>오늘 분량 · 읽기 글 · 퀴즈 · 도장판</span></span><span class="go">›</span></a>' +
       '<div id="hcKidsTopics"></div>' +
       '<div style="margin-top:10px" id="hcKidsChecks"></div>' +
       '<p class="hc-note">체크는 오늘 날짜로만 남고, 날이 바뀌면 새로 시작해요</p>' +
-      '</section>' +
+      '</section></div>' +
 
+      '<div class="hc-sec" id="hcHSec-fridge" hidden>' +
       '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>🧊 냉파 · 미션! 건강 냉파</h3><span class="hc-tiny">냉장고 정리</span></div>' +
+      '<div class="hc-card-head"><h3>🍳 냉파 · 미션! 건강 냉파</h3><span class="hc-tiny">냉장고 정리</span></div>' +
       '<a class="hc-open" href="' + FRIDGE_APP + '" target="_blank" rel="noopener">' +
       '<span class="e">🧊</span><span class="b"><b>냉파 앱 열기</b><span>재료 넣으면 만들 수 있는 반찬을 알려 줘요</span></span><span class="go">›</span></a>' +
       '<div class="hc-field"><label>냉장고 메모</label><textarea class="hc-ta" id="hcFridgeMemo" rows="3" placeholder="먼저 먹어야 할 것, 남은 재료…"></textarea></div>' +
@@ -1209,11 +1746,12 @@
       '<div class="hc-add-row"><input class="hc-input" id="hcShopInput" placeholder="예: 두부 1모">' +
       '<button type="button" class="hc-btn primary" data-act="shop-add">추가</button></div>' +
       '<button type="button" class="hc-btn ghost sm" data-act="shop-clear" style="margin-top:8px">산 것 지우기</button>' +
-      '</section>' +
+      '</section></div>' +
 
+      '<div class="hc-sec" id="hcHSec-backup" hidden>' +
       '<section class="hc-card">' +
-      '<details class="hc-fold" style="border:0;margin:0;padding:0"><summary>⚙️ 내 기록 백업 · 기기 옮기기 (전체)</summary>' +
-      '<p class="hc-note" id="hcSyncSummary" style="margin:8px 2px 10px"></p>' +
+      '<div class="hc-card-head"><h3>⚙️ 내 기록 백업 · 기기 옮기기</h3><span class="hc-tiny">전체</span></div>' +
+      '<p class="hc-note" id="hcSyncSummary" style="margin:0 2px 10px"></p>' +
       '<div class="hc-row"><button type="button" class="hc-btn primary" data-act="code-copy">📋 기록 코드 복사</button>' +
       '<button type="button" class="hc-btn" data-act="code-open">📥 기록 코드 붙여넣기</button></div>' +
       '<div id="hcSyncBox" hidden style="margin-top:10px">' +
@@ -1226,7 +1764,7 @@
       '<button type="button" class="hc-btn" data-act="import">⬆️ 파일에서 불러오기</button>' +
       '<input type="file" id="hcImportFile" accept="application/json,.json" hidden></div>' +
       '<p class="hc-note">BTS 도감·공부방 진도·오답노트·아이템·초안·메모까지 한 번에 옮겨요. 보던 모드·소리 설정은 이 기기 것을 그대로 둡니다.</p>' +
-      '</details></section>';
+      '</section></div>';
   }
 
   /* ------------------------------------------------------------ 새로고침 */
@@ -1236,10 +1774,12 @@
       fetchJSON('hotcho_news.json').then(function (d) { S.news = d; }, function () { return null; }),
       fetchJSON('hotcho_hub.json').then(function (d) { S.hub = d; }, function () { return null; }),
       fetchJSON('hotcho_family.json').then(function (d) { S.family = d; }, function () { return null; }),
-      fetchJSON('hotcho_monitor.json').then(function (d) { S.mon = d; }, function () { return null; })
+      fetchJSON('hotcho_monitor.json').then(function (d) { S.mon = d; }, function () { return null; }),
+      fetchJSON('hotcho_briefings.json').then(function (d) { S.brief = d; }, function () { return null; })
     ]).then(function () {
         if (btn) btn.textContent = '↻ 새로고침';
       renderNews(); renderMonitor(); renderCartel(); renderEvents(); renderKids();
+      if (S.workSec === 'monitor') renderMg();
       if (!silent) {
         var ok = S.news || S.family;
         toast(ok ? '최신으로 맞췄어요' : '데이터를 못 받았어요 — 잠시 뒤 다시');
@@ -1249,8 +1789,68 @@
 
   /* ------------------------------------------------------------ 이벤트 */
   function onWorkClick(e) {
-    var t = e.target.closest ? e.target.closest('[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-act]') : null;
+    var t = e.target.closest ? e.target.closest('[data-work-sec],[data-mg],[data-mg-sub],[data-pol-tab],[data-cal-nav],[data-cal-day],[data-trend],[data-acc-topic],[data-acc-search],[data-brief-add],[data-pol-add],[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-act]') : null;
     if (!t) return;
+
+    /* --- 메뉴 버튼 전환 --- */
+    var wsec = t.getAttribute('data-work-sec');
+    if (wsec) { showWorkSec(wsec); return; }
+
+    var mg = t.getAttribute('data-mg');
+    if (mg) { S.mgGroup = mg; saveUi(); renderMg(); return; }
+
+    var mgs = t.getAttribute('data-mg-sub');
+    if (mgs) { S.mgSub = mgs; saveUi(); renderPressSub(); return; }
+
+    var polt = t.getAttribute('data-pol-tab');
+    if (polt) { S.polTab = polt; saveUi(); renderPolTabs(); renderPolBody(); return; }
+
+    var caln = t.getAttribute('data-cal-nav');
+    if (caln) {
+      var m = S.calM + (+caln), y = S.calY;
+      if (m < 0) { m = 11; y -= 1; }
+      if (m > 11) { m = 0; y += 1; }
+      S.calM = m; S.calY = y;
+      var calEl = $('hcCal');
+      if (calEl) calEl.innerHTML = calHTML();
+      return;
+    }
+
+    var cald = t.getAttribute('data-cal-day');
+    if (cald) {
+      S.briefDate = cald;
+      var sp = cald.split('-');
+      S.calY = +sp[0]; S.calM = (+sp[1]) - 1;
+      renderDailyParts();
+      return;
+    }
+
+    var trd = t.getAttribute('data-trend');
+    if (trd) { S.trendKind = trd; saveUi(); var trEl = $('hcTrend'); if (trEl) trEl.innerHTML = trendHTML(); return; }
+
+    var acct = t.getAttribute('data-acc-topic');
+    if (acct !== null) {
+      S.accTopic = acct;
+      var box = $('hcMgSubBody');
+      if (box) {
+        box.innerHTML = accHTML();
+      }
+      return;
+    }
+
+    if (t.getAttribute('data-acc-search')) {
+      var qi = $('hcAccQ');
+      if (qi) S.accQ = qi.value || '';
+      var le = $('hcAccList');
+      if (le) le.innerHTML = accListHTML();
+      return;
+    }
+
+    var ba = t.getAttribute('data-brief-add');
+    if (ba) { addFromBrief(ba); return; }
+
+    var pa = t.getAttribute('data-pol-add');
+    if (pa) { addFromPolicy(pa); return; }
 
     var monTab = t.getAttribute('data-mon-tab');
     if (monTab) { S.monTab = monTab; saveMon(); renderMonitor(); return; }
@@ -1354,6 +1954,15 @@
 
   function onWorkInput(e) {
     var t = e.target;
+    if (t.id === 'hcAccQ') {
+      S.accQ = t.value || '';
+      clearTimeout(onWorkInput._q);
+      onWorkInput._q = setTimeout(function () {
+        var le = $('hcAccList');
+        if (le) le.innerHTML = accListHTML();
+      }, 220);
+      return;
+    }
     var artKey = t.getAttribute && t.getAttribute('data-art');
     if (artKey) {
       if (!S.article[S.artTab]) S.article[S.artTab] = {};
@@ -1367,6 +1976,8 @@
   }
 
   function onHomeClick(e) {
+    var hs = e.target.closest ? e.target.closest('[data-home-sec]') : null;
+    if (hs) { showHomeSec(hs.getAttribute('data-home-sec')); return; }
     var t = e.target.closest ? e.target.closest('[data-act],[data-memo-del],[data-shop-del]') : null;
     if (t) {
       var act = t.getAttribute('data-act');
@@ -1457,6 +2068,12 @@
     if (id === 'hcMemoInput') { e.preventDefault(); addMemo(); }
     if (id === 'hcShopInput') { e.preventDefault(); addShop(); }
     if (id === 'hcItemTitle') { e.preventDefault(); submitItem(); }
+    if (id === 'hcAccQ') {
+      e.preventDefault();
+      S.accQ = e.target.value || '';
+      var le = $('hcAccList');
+      if (le) le.innerHTML = accListHTML();
+    }
   }
 
   /* ------------------------------------------------------------ 시작 */
@@ -1495,6 +2112,8 @@
     renderMemos();
     renderShop();
     renderSyncSummary();
+    showWorkSec(S.workSec);
+    showHomeSec(S.homeSec);
 
     var mode = 'study';
     try {

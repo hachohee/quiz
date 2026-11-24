@@ -215,3 +215,133 @@
 .hc-fold { border-top: 1px solid rgba(255, 255, 255, .07); margin-top: 8px; padding-top: 10px; }
 .hc-fold summary { font-size: 12px; color: var(--muted, #a89ddb); cursor: pointer; font-weight: 600; }
 .hc-fold[open] summary { margin-bottom: 8px; }
+
+/* =====================================================================
+   v32 — 상단 메뉴 버튼화 + 일일브리핑·정책 심층 카드
+   ===================================================================== */
+
+/* ---------- 메뉴 버튼(한 번에 하나만 보임) ---------- */
+.hc-menu { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 13px; }
+.hc-menu button {
+  flex: 1 1 calc(33.333% - 6px); min-width: 0; display: flex; align-items: center; justify-content: center; gap: 4px;
+  border: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .05);
+  color: #bdb4e4; border-radius: 13px; padding: 9px 6px; font: inherit; font-size: 12px;
+  font-weight: 700; letter-spacing: -.2px; cursor: pointer; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; line-height: 1.2;
+}
+.hc-menu button .e { font-size: 13px; }
+.hc-menu button.on {
+  background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff;
+  border-color: transparent; box-shadow: 0 8px 20px rgba(139, 92, 246, .28);
+}
+.hc-menu button:active { transform: scale(.98); }
+.hc-menu.home button { flex: 1 1 calc(50% - 6px); font-size: 12.5px; padding: 10px 6px; }
+.hc-sec[hidden] { display: none !important; }
+
+/* ---------- 일일브리핑 상단 실시간 뉴스 ---------- */
+.hc-live-top { display: flex; flex-direction: column; gap: 6px; }
+.hc-live-a {
+  display: block; font-size: 12.6px; line-height: 1.45; color: #e8e2ff; text-decoration: none;
+  padding: 7px 9px; border-radius: 11px; background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .06);
+}
+.hc-live-a .src { display: inline-block; font-size: 10.5px; font-weight: 700; color: #c4b5fd; margin-right: 6px; }
+
+/* ---------- 달력 ---------- */
+.hc-cal-head { display: flex; align-items: center; justify-content: space-between; margin: 0 2px 6px; }
+.hc-cal-head span { font-size: 12.5px; font-weight: 700; }
+.hc-cal-head button {
+  border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05);
+  color: #cfc7ee; width: 28px; height: 28px; border-radius: 999px; font: inherit; font-size: 15px;
+  line-height: 1; cursor: pointer;
+}
+.hc-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.hc-cal .w { text-align: center; font-size: 10.5px; color: var(--muted2, #7f74b3); padding: 2px 0 4px; }
+.hc-cal-d {
+  position: relative; border: 0; background: transparent; color: #cfc7ee; font: inherit;
+  font-size: 12px; border-radius: 9px; padding: 7px 0 9px; cursor: pointer;
+}
+.hc-cal-d.today { box-shadow: inset 0 0 0 1px rgba(196, 181, 253, .55); }
+.hc-cal-d.on { background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff; font-weight: 800; }
+.hc-cal-d.has::after {
+  content: ''; position: absolute; left: 50%; bottom: 3px; width: 4px; height: 4px;
+  border-radius: 50%; background: #f0abfc; transform: translateX(-50%);
+}
+.hc-cal-d.on.has::after { background: #fff; }
+
+/* ---------- 브리핑 문단 + 원문 링크 ---------- */
+.hc-br-block { margin: 0 0 13px; }
+.hc-br-block > p { margin: 0; font-size: 12.8px; line-height: 1.62; white-space: pre-wrap; color: #eae4ff; }
+.hc-br-src { list-style: none; margin: 6px 0 0; padding: 0; }
+.hc-br-src li { margin: 3px 0; }
+.hc-src-link {
+  font-size: 11.5px; line-height: 1.4; color: #c4b5fd; text-decoration: none;
+  border-bottom: 1px dotted rgba(196, 181, 253, .55);
+}
+.hc-src-link:active { opacity: .7; }
+.hc-br-etc-h { font-size: 11.5px; font-weight: 700; color: var(--muted, #a89ddb); margin: 2px 0 6px; }
+
+/* ---------- 보도 흐름 막대 ---------- */
+.hc-bars { display: flex; flex-direction: column; gap: 7px; }
+.hc-bar-row { display: flex; align-items: center; gap: 7px; font-size: 11.5px; }
+.hc-bar-row .lb { flex: 0 0 76px; color: #b9b0dd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hc-bar-row .tr { flex: 1; height: 8px; border-radius: 999px; background: rgba(255, 255, 255, .07); overflow: hidden; }
+.hc-bar-row .tr i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #8b5cf6, #f472b6); }
+.hc-bar-row .ct { flex: 0 0 20px; text-align: right; color: var(--muted2, #7f74b3); }
+
+/* ---------- 뉴스데이터 누적 카드 ---------- */
+.hc-acc {
+  border: 1px solid rgba(255, 255, 255, .09); border-radius: 16px; padding: 12px;
+  margin: 0 0 10px; background: rgba(255, 255, 255, .03);
+}
+.hc-acc-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 5px; }
+.hc-acc-d { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-left: auto; }
+.hc-acc-t { font-size: 13.4px; font-weight: 700; line-height: 1.4; letter-spacing: -.2px; }
+.hc-acc-s { font-size: 11.8px; line-height: 1.5; color: #b9b0dd; margin-top: 6px; }
+.hc-acc-s .k { display: inline-block; font-size: 10.5px; color: #a89ddb; font-weight: 800; margin-right: 5px; }
+.hc-follow {
+  margin-top: 8px; border-left: 3px solid #fb923c; background: rgba(251, 146, 60, .12);
+  border-radius: 0 10px 10px 0; padding: 7px 9px;
+}
+.hc-follow b { display: block; font-size: 10.5px; font-weight: 800; color: #fdba74; letter-spacing: .2px; }
+.hc-follow p { margin: 3px 0 0; font-size: 11.8px; line-height: 1.5; color: #fdba74; }
+
+/* ---------- 정책 심층 카드 ---------- */
+.hc-pol {
+  border: 1px solid rgba(255, 255, 255, .09); border-radius: 16px; padding: 12px;
+  margin: 0 0 11px; background: rgba(255, 255, 255, .035);
+}
+.hc-pol-top { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-bottom: 6px; }
+.hc-src {
+  font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 999px;
+  background: rgba(96, 165, 250, .18); color: #93c5fd; letter-spacing: -.1px;
+}
+.hc-src.s-press { background: rgba(96, 165, 250, .18); color: #93c5fd; }
+.hc-src.s-mods { background: rgba(34, 211, 238, .16); color: #22d3ee; }
+.hc-src.s-assembly { background: rgba(167, 139, 250, .2); color: #c4b5fd; }
+.hc-src.s-today { background: rgba(244, 114, 182, .18); color: #f9a8d4; }
+.hc-field-b {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+  background: rgba(255, 255, 255, .08); color: #c9c0ea;
+}
+.hc-pol-org { font-size: 11px; font-weight: 700; color: var(--muted, #a89ddb); }
+.hc-pol-d { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-left: auto; }
+.hc-pol-t { font-size: 13.6px; font-weight: 700; line-height: 1.4; letter-spacing: -.25px; margin-bottom: 8px; }
+.hc-pol-blk { margin: 0 0 8px; }
+.hc-pol-blk > b { display: block; font-size: 10.5px; font-weight: 800; color: #a5b4fc; margin-bottom: 3px; }
+.hc-pol-blk > p { margin: 0; font-size: 11.9px; line-height: 1.55; color: #ddd7f5; white-space: pre-wrap; }
+.hc-pol-blk.cmp { background: rgba(139, 92, 246, .13); border-radius: 11px; padding: 8px 9px; }
+.hc-pol-blk.cmp > b { color: #c4b5fd; }
+.hc-pol-blk.rep > b { color: #fdba74; }
+.hc-pol-blk.rep > p { color: #f6d2ae; }
+.hc-pol .hc-mon-act { margin-top: 9px; }
+
+/* ---------- 정책 히스토리 ---------- */
+.hc-hist { display: flex; gap: 9px; padding: 9px 0; border-top: 1px solid rgba(255, 255, 255, .07); }
+.hc-hist:first-child { border-top: 0; }
+.hc-hist-d { flex: 0 0 40px; font-size: 11px; font-weight: 700; color: #c4b5fd; padding-top: 2px; }
+.hc-hist-b { flex: 1; min-width: 0; }
+.hc-hist-t { font-size: 12.6px; font-weight: 600; line-height: 1.4; margin: 3px 0; }
+.hc-hist-m { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-bottom: 3px; }
+.hc-hist-b .hc-src-link { font-size: 10.5px; }
+
