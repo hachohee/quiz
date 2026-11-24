@@ -98,6 +98,13 @@ body{
 .deck-t{display:flex;align-items:center;justify-content:space-between;gap:8px;
   font-size:11.5px;font-weight:800;color:#ddd6fe;margin-bottom:8px;letter-spacing:.01em}
 .deck-t b{color:#f9a8d4;font-size:12px;font-variant-numeric:tabular-nums}
+.deck-t-r{display:flex;align-items:center;gap:6px;min-width:0}
+.deck-all{font:inherit;font-size:10px;font-weight:800;letter-spacing:.01em;color:#fde68a;
+  border:1px solid rgba(251,191,36,.5);background:rgba(251,191,36,.12);border-radius:999px;
+  padding:3px 7px;line-height:1.2;cursor:pointer;white-space:nowrap;font-family:inherit}
+.deck-all:active{transform:scale(.96)}
+.deck-all.done{color:#a7f3d0;border-color:rgba(52,211,153,.42);background:rgba(52,211,153,.1);cursor:default}
+.deck-all.done:active{transform:none}
 .deck-row{display:flex;gap:5px}
 .deck-cell{flex:1 1 0;min-width:0;text-align:center;border-radius:11px;padding:6px 1px 5px;
   border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.22);
@@ -911,7 +918,8 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
     </div>
 
     <div class="deck">
-      <div class="deck-t"><span>💜 내가 잡은 BTS 도감</span><b id="deckCount">0 / 7</b></div>
+      <div class="deck-t"><span>💜 내가 잡은 BTS 도감</span>
+        <span class="deck-t-r"><b id="deckCount">0 / 7</b><button id="btnDeckAll" class="deck-all" type="button">🔓 멤버 모두 열기</button></span></div>
       <div class="deck-row" id="deckRow"></div>
     </div>
 
@@ -3057,6 +3065,27 @@ function renderDeck(){
   }
   row.innerHTML=html;
   var dc=$("deckCount"); if(dc) dc.textContent=deckCount()+" / "+BTS_MEMBERS.length;
+  var ba=$("btnDeckAll");
+  if(ba){
+    var full = deckCount()>=BTS_MEMBERS.length;
+    ba.classList.toggle("done", full);
+    ba.textContent = full ? "✓ "+BTS_MEMBERS.length+"명 모두 열림" : "🔓 멤버 모두 열기";
+    ba.disabled = full;
+  }
+}
+/* 도감 한 번에 열기 — 이미 잡은 멤버의 기록(잡은 날짜·통계·오답)은 건드리지 않고
+   잠겨 있는 멤버만 새로 담는다. */
+function unlockAllDeck(){
+  var added=0, now=Date.now();
+  for(var i=0;i<BTS_MEMBERS.length;i++){
+    var m=BTS_MEMBERS[i];
+    if(!m || !m.id || deck[m.id]) continue;
+    deck[m.id]=now; added++;
+  }
+  if(added) save(LS_DECK,deck);
+  renderDeck();
+  if(added){ sfx("win"); toast("🔓 BTS "+added+"명을 도감에 열었어요 ("+deckCount()+"/"+BTS_MEMBERS.length+")"); }
+  else toast("이미 "+BTS_MEMBERS.length+"명 모두 열려 있어요 ✓");
 }
 function markDeck(m){
   if(!m||deck[m.id]) return false;
@@ -4666,6 +4695,7 @@ $("btnSound").addEventListener("click", function(){
   toast(soundOn?"소리 켜짐":"소리 꺼짐");
   if(soundOn) sfx("ok");
 });
+var dba=$("btnDeckAll"); if(dba) dba.addEventListener("click", function(){ unlockAllDeck(); });
 $("btnWrong").addEventListener("click", function(){ startReview(); });
 $("studyPrev").addEventListener("click", function(){ if(state.deckIdx>0){ state.deckIdx--; renderStudy(); } });
 $("studyNext").addEventListener("click", function(){ if(state.deckIdx<state.deck.length-1){ state.deckIdx++; renderStudy(); } });
@@ -5051,7 +5081,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v29";
+var APP_VER="v30";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }

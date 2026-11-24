@@ -5,6 +5,8 @@
      이 파일은 자기 이름공간(hc*)만 씁니다. 저장 키도 hotcho_ 로 시작합니다.
    · 데이터: hotcho_news.json · hotcho_hub.json · hotcho_family.json (매일 갱신)
      + 이 폰의 localStorage(아이템·초안·메모·체크) + JSON 백업.
+   · ⚙️ 백업 · 기기 옮기기: tmq_*(똑똑핫초)·hotcho_* 기록을 코드 글자 한 줄로
+     복사·붙여넣기 해서 폰↔태블릿에 그대로 옮긴다.
    ===================================================================== */
 (function () {
   'use strict';
@@ -217,7 +219,7 @@
     if (remember !== false) { try { localStorage.setItem(K.mode, mode); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
     if (mode === 'work') { renderNews(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); }
-    if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); }
+    if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); renderSyncSummary(); }
   }
 
   /* ------------------------------------------------------------ 뉴스 */
@@ -632,16 +634,223 @@
     el.innerHTML = html;
   }
 
-  /* ------------------------------------------------------------ 백업 */
+  /* ------------------------------------------------------------ 백업 · 기기 옮기기 */
+  /* 똑똑핫초(tmq_*) + 뿌듯·행복핫초(hotcho_*) 기록을 한 번에 담는다.
+     기기마다 다른 '화면 취향'(보던 모드·소리)만 빼고 나머지는 전부 옮긴다. */
+  var SYNC_PREFIX = ['tmq_', 'hotcho_'];
+  var SYNC_LOCAL = ['hotcho_mode_v1', 'tmq_sound_v1'];   /* 이 기기에서만 쓰는 설정 */
+  var CODE_RAW = 'HOTCHO-SYNC-1:';    /* 압축 없이 */
+  var CODE_GZIP = 'HOTCHO-SYNC-G1:';  /* gzip 압축(있으면 이쪽) */
+
+  function syncableKey(k) {
+    if (!k || SYNC_LOCAL.indexOf(k) >= 0) return false;
+    for (var i = 0; i < SYNC_PREFIX.length; i++) if (k.indexOf(SYNC_PREFIX[i]) === 0) return true;
+    return false;
+  }
+  function collectStore() {
+    var out = {};
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!syncableKey(k)) continue;
+        var v = localStorage.getItem(k);
+        if (v == null) continue;
+        out[k] = v;
+      }
+    } catch (e) {}
+    return out;
+  }
+  function summarizeStore(store) {
+    function j(k, d) { try { var v = store[k]; return (v == null ? d : JSON.parse(v)) || d; } catch (e) { return d; } }
+    var deck = j('tmq_btsdeck_v1', {});
+    var wrong = j('tmq_wrong_v1', {});
+    var items = j('hotcho_items_v1', []);
+    var drafts = j('hotcho_drafts_v1', []);
+    var keys = 0, bytes = 0;
+    for (var k in store) {
+      if (!Object.prototype.hasOwnProperty.call(store, k)) continue;
+      keys++; bytes += String(store[k]).length + k.length;
+    }
+    return {
+      deck: (deck && typeof deck === 'object') ? Object.keys(deck).length : 0,
+      wrong: (wrong && typeof wrong === 'object') ? Object.keys(wrong).length : 0,
+      items: (items && items.length) || 0,
+      drafts: (drafts && drafts.length) || 0,
+      keys: keys,
+      kb: Math.max(1, Math.round(bytes / 1024))
+    };
+  }
+  function summaryText(st) {
+    return 'BTS ' + st.deck + '/7 · 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개 · 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)';
+  }
+
+  /* 코드 글자 ↔ 기록: base64(가능하면 gzip) */
+  function utf8ToB64(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+  function b64ToUtf8(b64) {
+    var bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+  function gzipB64(str) {
+    if (typeof CompressionStream === 'undefined' || typeof Response === 'undefined') {
+      return Promise.reject(new Error('no-compression'));
+    }
+    var stream = new Blob([new TextEncoder().encode(str)]).stream().pipeThrough(new CompressionStream('gzip'));
+    return new Response(stream).arrayBuffer().then(function (buf) {
+      var bytes = new Uint8Array(buf), bin = '';
+      for (var i = 0; i < bytes.length; i += 0x8000) {
+        bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+      }
+      return btoa(bin);
+    });
+  }
+  function gunzipB64(b64) {
+    if (typeof DecompressionStream === 'undefined') return Promise.reject(new Error('no-decompression'));
+    var bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    return new Response(stream).text();
+  }
+
+  function makeSyncCode() {
+    var json = JSON.stringify(collectStore());
+    return gzipB64(json).then(
+      function (b64) { return CODE_GZIP + b64; },
+      function () { return CODE_RAW + utf8ToB64(json); }
+    );
+  }
+  /* 붙여넣은 글자 → 기록 묶음. JSON 파일 내용을 그대로 붙여도 받아 준다. */
+  function readSyncCode(text) {
+    try { return readSyncCodeIn(text); }
+    catch (e) { return Promise.reject(e); }
+  }
+  function readSyncCodeIn(text) {
+    var raw = String(text == null ? '' : text).trim();
+    var t = raw.replace(/\s+/g, '');
+    if (!t) return Promise.reject(new Error('empty'));
+    if (t.indexOf(CODE_GZIP) === 0) {
+      return gunzipB64(t.slice(CODE_GZIP.length)).then(function (s) { return pickStore(JSON.parse(s)); });
+    }
+    if (t.indexOf(CODE_RAW) === 0) {
+      return Promise.resolve(pickStore(JSON.parse(b64ToUtf8(t.slice(CODE_RAW.length)))));
+    }
+    try { return Promise.resolve(pickStore(JSON.parse(raw))); }
+    catch (e) { return Promise.reject(new Error('format')); }
+  }
+  function pickStore(d) {
+    if (!d || typeof d !== 'object') throw new Error('format');
+    if (d.store && typeof d.store === 'object') return d.store;   /* 백업 파일(JSON) 통째로 */
+    var out = {}, n = 0;
+    for (var k in d) {
+      if (!Object.prototype.hasOwnProperty.call(d, k)) continue;
+      if (!syncableKey(k)) continue;
+      if (typeof d[k] !== 'string') continue;
+      out[k] = d[k]; n++;
+    }
+    if (!n) throw new Error('format');
+    return out;
+  }
+
+  function applyStore(store) {
+    var applied = 0, removed = 0, cur = [];
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (syncableKey(k)) cur.push(k);
+      }
+    } catch (e) {}
+    for (var c = 0; c < cur.length; c++) {
+      if (!Object.prototype.hasOwnProperty.call(store, cur[c])) {
+        try { localStorage.removeItem(cur[c]); removed++; } catch (e) {}
+      }
+    }
+    for (var key in store) {
+      if (!Object.prototype.hasOwnProperty.call(store, key)) continue;
+      if (!syncableKey(key)) continue;
+      try { localStorage.setItem(key, String(store[key])); applied++; } catch (e) {}
+    }
+    return { applied: applied, removed: removed };
+  }
+
+  /* 옮기기 전에 무엇이 바뀌는지 확인받고, 옮긴 뒤에는 화면을 새로 고쳐
+     도감·공부방 진도·오답노트·아이템·초안·메모를 한 번에 다시 읽게 한다. */
+  function confirmApplyStore(store, label) {
+    var st = summarizeStore(store);
+    if (!st.keys) { toast('옮길 기록이 없어요'); return false; }
+    var msg = '이 기기의 기록을 ' + label + ' 내용으로 바꿀까요?\n\n' +
+      '· BTS 도감 ' + st.deck + '/7\n' +
+      '· 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개\n' +
+      '· 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)\n\n' +
+      '이 기기에 지금 있는 기록은 지워져요.';
+    if (!window.confirm(msg)) return false;
+    var r = applyStore(store);
+    toast('기록 ' + r.applied + '개를 옮겼어요 · 화면을 새로 고칩니다');
+    setTimeout(function () { try { location.reload(); } catch (e) {} }, 1200);
+    return true;
+  }
+
+  function copySyncCode() {
+    toast('기록 코드 만드는 중…');
+    makeSyncCode().then(function (code) {
+      return copyText(code).then(function (ok) {
+        if (ok) {
+          toast('기록 코드를 복사했어요 (' + Math.max(1, Math.round(code.length / 1024)) + 'KB) — 카톡·메모로 보내세요');
+        } else {
+          openSyncBox(code);
+          toast('복사가 안 됐어요 — 아래 칸의 코드를 길게 눌러 복사해 주세요');
+        }
+      });
+    }, function () { toast('기록 코드를 만들지 못했어요 — 백업 파일을 써 주세요'); });
+  }
+  function openSyncBox(prefill) {
+    var box = $('hcSyncBox'); if (!box) return;
+    box.hidden = false;
+    var ta = $('hcSyncText');
+    if (ta) {
+      ta.value = prefill || '';
+      if (!prefill && navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(function (t) {
+          if (ta && !ta.value && t) ta.value = String(t).trim();
+        }, function () {});
+      }
+      try { ta.focus(); } catch (e) {}
+    }
+    var info = $('hcSyncInfo');
+    if (info && prefill) info.textContent = '위 코드를 전부 선택해 복사한 뒤, 옮길 기기에서 [📥 기록 코드 붙여넣기]에 넣어 주세요.';
+  }
+  function applySyncText() {
+    var ta = $('hcSyncText');
+    var text = ta ? ta.value : '';
+    if (!text || !text.trim()) { toast('기록 코드를 먼저 붙여넣어 주세요'); return; }
+    toast('코드 확인 중…');
+    readSyncCode(text).then(function (store) {
+      if (!store || !Object.keys(store).length) { toast('기록이 비어 있는 코드예요'); return; }
+      if (!confirmApplyStore(store, '붙여넣은 코드')) toast('그대로 두었어요');
+    }, function () {
+      toast('코드를 읽지 못했어요 — 처음부터 다시 복사해 주세요');
+    });
+  }
+  function renderSyncSummary() {
+    var el = $('hcSyncSummary'); if (!el) return;
+    el.textContent = '이 기기에 지금 있는 기록 — ' + summaryText(summarizeStore(collectStore()));
+  }
+
   function exportAll() {
     var data = {
       app: 'hotcho-hub',
-      version: 1,
+      version: 2,
       exportedAt: new Date().toISOString(),
       items: S.items,
       drafts: S.drafts,
       article: S.article,
-      home: S.home
+      home: S.home,
+      store: collectStore()
     };
     var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     var a = document.createElement('a');
@@ -650,7 +859,7 @@
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
-    toast('백업 파일을 내려받았어요');
+    toast('백업 파일을 내려받았어요 (전체 기록)');
   }
 
   function importAll(file) {
@@ -658,7 +867,12 @@
     reader.onload = function () {
       try {
         var d = JSON.parse(String(reader.result));
-        if (!d || (!d.items && !d.drafts && !d.home)) throw new Error('형식이 달라요');
+        if (!d || (!d.store && !d.items && !d.drafts && !d.home)) throw new Error('형식이 달라요');
+        /* 새 백업(v2): 전체 기록을 그대로 옮긴다 */
+        if (d.store && typeof d.store === 'object') {
+          confirmApplyStore(d.store, '백업 파일');
+          return;
+        }
         if (!window.confirm('지금 기록을 백업 파일 내용으로 바꿀까요?\n(아이템 ' + ((d.items || []).length) + '개 · 초안 ' + ((d.drafts || []).length) + '개)')) return;
         if (d.items) S.items = d.items;
         if (d.drafts) S.drafts = d.drafts;
@@ -670,7 +884,7 @@
           if (!S.home.checks) S.home.checks = {};
         }
         save(K.items, S.items); save(K.drafts, S.drafts); save(K.article, S.article); save(K.home, S.home);
-        renderItems(); renderDrafts(); renderArticle(); renderMemos(); renderKids(); renderShop();
+        renderItems(); renderDrafts(); renderArticle(); renderMemos(); renderKids(); renderShop(); renderSyncSummary();
         toast('불러왔어요');
       } catch (e) {
         toast('백업 파일을 읽지 못했어요');
@@ -762,11 +976,20 @@
       '</section>' +
 
       '<section class="hc-card">' +
-      '<details class="hc-fold" style="border:0;margin:0;padding:0"><summary>⚙️ 내 기록 백업 (JSON 내보내기 / 불러오기)</summary>' +
-      '<div class="hc-row" style="margin-top:10px"><button type="button" class="hc-btn" data-act="export">⬇️ 내보내기</button>' +
-      '<button type="button" class="hc-btn" data-act="import">⬆️ 불러오기</button>' +
+      '<details class="hc-fold" style="border:0;margin:0;padding:0"><summary>⚙️ 내 기록 백업 · 기기 옮기기 (전체)</summary>' +
+      '<p class="hc-note" id="hcSyncSummary" style="margin:8px 2px 10px"></p>' +
+      '<div class="hc-row"><button type="button" class="hc-btn primary" data-act="code-copy">📋 기록 코드 복사</button>' +
+      '<button type="button" class="hc-btn" data-act="code-open">📥 기록 코드 붙여넣기</button></div>' +
+      '<div id="hcSyncBox" hidden style="margin-top:10px">' +
+      '<textarea class="hc-ta" id="hcSyncText" rows="4" spellcheck="false" placeholder="폰에서 복사한 기록 코드를 여기에 붙여넣고 [✅ 이 기기에 적용]을 눌러 주세요"></textarea>' +
+      '<div class="hc-row" style="margin-top:8px"><button type="button" class="hc-btn primary" data-act="code-apply">✅ 이 기기에 적용</button>' +
+      '<button type="button" class="hc-btn ghost" data-act="code-close">닫기</button></div>' +
+      '<p class="hc-note" id="hcSyncInfo">폰에서 [📋 기록 코드 복사] → 카톡·메모로 태블릿에 보내기 → 태블릿에서 위 칸에 붙여넣고 [✅ 이 기기에 적용].</p>' +
+      '</div>' +
+      '<div class="hc-row" style="margin-top:10px"><button type="button" class="hc-btn" data-act="export">⬇️ 파일로 내보내기</button>' +
+      '<button type="button" class="hc-btn" data-act="import">⬆️ 파일에서 불러오기</button>' +
       '<input type="file" id="hcImportFile" accept="application/json,.json" hidden></div>' +
-      '<p class="hc-note">아이템·초안·메모·체크를 한 파일로 저장해 두고, 폰을 바꿀 때 되살려요</p>' +
+      '<p class="hc-note">BTS 도감·공부방 진도·오답노트·아이템·초안·메모까지 한 번에 옮겨요. 보던 모드·소리 설정은 이 기기 것을 그대로 둡니다.</p>' +
       '</details></section>';
   }
 
@@ -897,6 +1120,10 @@
       }
       if (act === 'export') { exportAll(); return; }
       if (act === 'import') { var f = $('hcImportFile'); if (f) f.click(); return; }
+      if (act === 'code-copy') { copySyncCode(); return; }
+      if (act === 'code-open') { openSyncBox(''); return; }
+      if (act === 'code-apply') { applySyncText(); return; }
+      if (act === 'code-close') { var bx = $('hcSyncBox'); if (bx) bx.hidden = true; return; }
       var md = t.getAttribute('data-memo-del');
       if (md) {
         S.home.memos = S.home.memos.filter(function (m) { return m.id !== md; });
@@ -1006,6 +1233,7 @@
     renderItems();
     renderMemos();
     renderShop();
+    renderSyncSummary();
 
     var mode = 'study';
     try {

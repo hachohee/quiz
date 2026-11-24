@@ -14,8 +14,12 @@
         재생목록에서 받고, KBS 시사 채널에선 [사사건건]을 빼고(9층 시사국·더 보다만), 다큐멘터리 3일을 따로 세움.
    v27: 💼뿌듯핫초(일) · 🏠행복핫초(집) · 📚똑똑핫초(공부) 3모드 통합 — 상단 전환 바 + hotcho_modes.js/.css
         + hotcho_news.json(세계·전국·강원 헤드라인) · hotcho_hub.json(카르텔워치) · hotcho_family.json(가족일정·찬우학업).
-        기존 똑똑핫초 화면·퀴즈·공부방·라디오·localStorage 키는 그대로. */
-const CACHE = 'toeic-bts-v29';
+        기존 똑똑핫초 화면·퀴즈·공부방·라디오·localStorage 키는 그대로.
+   v28: 앱 이름 '핫초하트' · v29: '핫초홧팅'.
+   v30: 🔓 BTS 도감 '멤버 모두 열기' 버튼(잠긴 멤버만 열고 기존 기록은 보존).
+        ⚙️ 내 기록 백업을 '기기 옮기기'로 확장 — tmq_*·hotcho_* 전체를 기록 코드(복사/붙여넣기)나
+        JSON 한 파일로 폰↔태블릿에 그대로 옮김. */
+const CACHE = 'toeic-bts-v30';
 const SHELL = [
   './',
   './index.html',
