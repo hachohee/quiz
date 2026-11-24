@@ -572,6 +572,48 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
   .result h2{background:linear-gradient(92deg,#fde68a,#f9a8d4);
     -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 }
+/* ---------- 🎬 방송 4사 다큐 다시보기 (KBS·MBC·SBS·EBS) ---------- */
+.docs-entry{display:flex;align-items:center;gap:11px;width:100%;text-align:left;cursor:pointer;
+  border:1px solid rgba(52,211,153,.38);border-radius:16px;padding:12px 14px;margin:0 0 12px;
+  background:linear-gradient(150deg,rgba(52,211,153,.15),rgba(139,92,246,.20) 72%);
+  color:var(--ink);font-family:inherit}
+.docs-entry:active{transform:scale(.985)}
+.docs-entry .re-emoji{font-size:23px;line-height:1}
+.docs-entry .re-t{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.docs-entry .re-t b{font-size:12.5px;font-weight:800;color:#a7f3d0;letter-spacing:.01em;line-height:1.35}
+.docs-entry .re-t span{font-size:10.5px;color:var(--muted);line-height:1.4}
+.docs-entry .re-go{font-size:20px;color:#6ee7b7;font-weight:900;line-height:1}
+.doc-hero{border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:12px;
+  background:linear-gradient(150deg,rgba(52,211,153,.16),rgba(255,255,255,.03))}
+.dh-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#d1fae5}
+.dh-row b{color:#fff;font-variant-numeric:tabular-nums}
+.dh-badge{background:linear-gradient(92deg,#34d399,#22d3ee);color:#04140f;border-radius:999px;padding:2px 9px;
+  font-size:10.5px;letter-spacing:.06em;font-weight:900}
+.dh-bar{height:7px;border-radius:999px;background:rgba(0,0,0,.38);overflow:hidden;margin:9px 0 7px}
+.dh-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(92deg,#34d399,#67e8f9);transition:width .3s}
+.dh-note{margin:0;font-size:10.5px;color:var(--muted2);line-height:1.65}
+.doc-bsec{margin:0 0 15px}
+.doc-bhead{display:flex;align-items:center;gap:7px;margin:2px 0 8px}
+.doc-blogo{flex:0 0 auto;font-size:10px;font-weight:900;letter-spacing:.05em;color:#04140f;
+  background:linear-gradient(150deg,#a7f3d0,#67e8f9);border-radius:8px;padding:3px 8px}
+.doc-bhead b{font-size:14px;font-weight:900;color:#f5e8ff}
+.doc-bhead span{font-size:10px;color:var(--muted2);font-weight:800;margin-left:auto}
+.doc-ch{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px 11px;margin-bottom:9px;
+  background:linear-gradient(150deg,rgba(34,211,238,.10),rgba(255,255,255,.02))}
+.doc-ch-r{display:flex;align-items:center;gap:8px}
+.doc-ch-r+.doc-ch-r{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.08)}
+.doc-ch-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.doc-ch-t b{font-size:12px;font-weight:800;color:#a5f3fc;line-height:1.3}
+.doc-ch-t span{font-size:10px;color:var(--muted);line-height:1.45}
+.doc-ch-go{flex:0 0 auto;border:1px solid rgba(103,232,249,.45);background:rgba(34,211,238,.14);
+  color:#a5f3fc;border-radius:999px;padding:6px 11px;font-family:inherit;font-size:10.5px;font-weight:900;
+  text-decoration:none;white-space:nowrap;line-height:1.2}
+.doc-ch-go:active{transform:scale(.96)}
+.docx .lec-n{color:#6ee7b7}
+.docx .lec-t b{color:#f0fdfa}
+.docx .lec-play{color:#6ee7b7}
+.docx .lec-t .docx-meta{font-size:9.5px;color:#8b80bd;font-weight:700}
+.docx.done .lec-t b{color:#a7f3d0}
 /* ---------- 📻 매일 라디오 ---------- */
 .radio-entry{display:flex;align-items:center;gap:11px;width:100%;text-align:left;cursor:pointer;
   border:1px solid rgba(34,211,238,.40);border-radius:16px;padding:12px 14px;margin:0 0 12px;
@@ -840,6 +882,12 @@ body.radio-on.script-on .rscript{display:flex}
       <span class="re-go">›</span>
     </button>
 
+    <button id="btnDocs" class="docs-entry" type="button" data-doc="open">
+      <span class="re-emoji">🎬</span>
+      <span class="re-t"><b>방송 4사 다큐 다시보기 (KBS · MBC · SBS · EBS)</b><span>다큐멘터리 3일 · 다큐 인사이트 · MBC 스페셜 · SBS 스페셜 · 다큐프라임 · 한국기행 · 극한직업</span></span>
+      <span class="re-go">›</span>
+    </button>
+
     <button id="btnRadio" class="radio-entry" type="button" data-radio="open">
       <span class="re-emoji">📻</span>
       <span class="re-t"><b>매일 라디오 다시듣기 (CNN · BBC · 굿모닝팝스 · 시사)</b><span>8개 프로그램 최신 회차 · 앱에서 바로 재생 · 0.8~1.5배속 · 15초 넘기기</span></span>
@@ -912,6 +960,29 @@ body.radio-on.script-on .rscript{display:flex}
 
     <p class="room-legend">▶ 누르면 유튜브 강의 · 📝 누르면 그 강의 퀴즈(1강 끝나면 다음 강으로) · ✓ 를 누르면 수강 완료 기록</p>
     <p class="foot">강의 제목은 옥토(성장·공부) 학습자료와 2026년 현행 기준이에요<br>진도는 이 폰에만 저장돼요</p>
+  </section>
+
+  <!-- ================= 🎬 방송 4사 다큐 다시보기 ================= -->
+  <section id="screen-docs" class="screen">
+    <div class="subhead">
+      <button class="back" type="button" data-go="home" aria-label="뒤로">←</button>
+      <div class="t">
+        <h2 id="docsTitle">🎬 방송 4사 다큐 다시보기</h2>
+        <p id="docsSub">KBS · MBC · SBS · EBS 공식 채널의 다큐를 골라 보기</p>
+      </div>
+    </div>
+
+    <div class="doc-hero">
+      <div class="dh-row"><span class="dh-badge">다큐 아카이브</span><span id="docCount">0 / 0편</span></div>
+      <div class="dh-bar"><i id="docBar" style="width:0%"></i></div>
+      <p class="dh-note" id="docNote">TV 다큐를 보고 싶을 때 바로 꺼내 보는 서가예요 · 공부방 84강 진도와는 따로 쌓여요</p>
+    </div>
+
+    <div class="seg" id="docTabs"></div>
+    <div id="docsBody"></div>
+
+    <p class="room-legend">▶ 누르면 유튜브에서 그 다큐가 바로 열려요 · ✓ 는 '봤어요' 표시(이 폰에만 저장 · 공부방 진도와 별개)</p>
+    <p class="foot">링크는 각 방송사 공식 유튜브 채널의 실제 영상이에요<br>영상은 유튜브에서 재생되고 앱에는 저장되지 않아요 (데이터 요금 나요)</p>
   </section>
 
   <!-- ================= BATTLE ================= -->
@@ -3042,7 +3113,7 @@ function speakLines(lines){
 try{ if(speechOK){ window.speechSynthesis.getVoices(); if(window.speechSynthesis.onvoiceschanged!==undefined){ window.speechSynthesis.onvoiceschanged=function(){ try{window.speechSynthesis.getVoices();}catch(e){} }; } } }catch(e){}
 
 /* ---------------- 화면 ---------------- */
-var SCREENS=["home","stages","study","battle","result","studyroom","radio"];
+var SCREENS=["home","stages","study","battle","result","studyroom","docs","radio"];
 function show(name){
   for(var i=0;i<SCREENS.length;i++){
     var el=$("screen-"+SCREENS[i]);
@@ -4338,10 +4409,127 @@ function toggleRoomDone(id){
   toast(roomDone[id] ? "✓ "+L.n+"강 완료! ("+L.topic+")" : "완료 취소 — 다시 볼 수 있어요");
 }
 
+/* ---------------- 🎬 방송 4사 다큐 다시보기 (KBS·MBC·SBS·EBS) ----------------
+   · 링크는 전부 각 방송사 '공식 유튜브 채널'의 실제 영상입니다.
+     2026-11-24 YouTube oEmbed로 영상 제목·채널명·채널주소를 하나씩 확인했습니다.
+   · 공부방 84강 진도(roomDone)와는 완전히 분리된 키를 씁니다 — 편하게 골라 보는 서가입니다. */
+var LS_DOC="tmq_docs_v1";
+var docSeen = load(LS_DOC,{}) || {};
+if(typeof docSeen!=="object" || !docSeen) docSeen={};
+var DOC_BC=[
+  {id:"kbs", logo:"KBS", name:"KBS", chans:[
+    {n:"KBS 다큐", h:"@KBSDocumentary", url:"https://www.youtube.com/@KBSDocumentary",
+     d:"다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜 · 명견만리 · 인간극장"}
+  ]},
+  {id:"mbc", logo:"MBC", name:"MBC", chans:[
+    {n:"MBC PLAYGROUND", h:"@MBC플레이그라운드", url:"https://www.youtube.com/@MBC플레이그라운드",
+     d:"MBC 시사교양 공식 — MBC 스페셜 · 다큐스페셜 다시보기"},
+    {n:"MBClife", h:"@MBClife", url:"https://www.youtube.com/@MBClife",
+     d:"MBC 교양 공식 — 휴먼다큐 사랑 · 너를 만났다"}
+  ]},
+  {id:"sbs", logo:"SBS", name:"SBS", chans:[
+    {n:"달리 [SBS DALI]", h:"@sbs_dali", url:"https://www.youtube.com/@sbs_dali",
+     d:"SBS 공식 교양 채널 — SBS 스페셜 · 국과수 · 육채전쟁"},
+    {n:"SBS STORY", h:"@SBSstory.official", url:"https://www.youtube.com/@SBSstory.official",
+     d:"SBS 스토리 — 다큐·교양 다시보기"}
+  ]},
+  {id:"ebs", logo:"EBS", name:"EBS", chans:[
+    {n:"EBS 다큐", h:"@EBSDocumentary", url:"https://www.youtube.com/@EBSDocumentary",
+     d:"다큐프라임 · 한국기행 · 극한직업 · 건축탐구 집"},
+    {n:"EBS 지식", h:"@EBSKnowledge", url:"https://www.youtube.com/@EBSKnowledge",
+     d:"문명과 수학 같은 EBS 지식 다큐 모음"},
+    {n:"EBS 지식채널e", h:"@ebs_jisike", url:"https://www.youtube.com/@ebs_jisike",
+     d:"5분 지식 다큐 — 공부·뇌·경제 상식"}
+  ]}
+];
+var DOC_LIST=[
+  /* KBS */
+  {id:"kbs-1", b:"kbs", series:"다큐멘터리 3일", title:"잠실야구장 마지막 72시간", meta:"2026.11.02 방송 · 46분", v:"qTAHbYya7mA"},
+  {id:"kbs-2", b:"kbs", series:"다큐 인사이트", title:"공실시대, 상가의 몰락 — 폐업 100만 시대", meta:"2025.05.22 방송 · 48분", v:"Y4aCWQnVos8"},
+  {id:"kbs-3", b:"kbs", series:"다큐 인사이트", title:"병든 거인, 위기의 유럽", meta:"2026.11.19 방송 · 48분", v:"EXOeE_2Kqiw"},
+  {id:"kbs-4", b:"kbs", series:"명견만리", title:"인구쇼크, 청년이 사라진다", meta:"2015.04.02 방송 · 53분", v:"nqcAnsYcqrE"},
+  {id:"kbs-5", b:"kbs", series:"역사스페셜", title:"백제 고대 무덤, 뚜껑을 열자", meta:"2011.05.19 방송 · 42분", v:"77WIm29xkAk"},
+  {id:"kbs-6", b:"kbs", series:"인간극장", title:"학부모 상담에서 만난 담임 선생님이 며느리로", meta:"2024.01.15 방송 · 2시간 32분", v:"OfRrt9p02Y8"},
+  /* MBC */
+  {id:"mbc-1", b:"mbc", series:"MBC 스페셜", title:"요트로 상어와 폭풍을 마주하다 — 무기항 무원조 세계일주", meta:"2015.06.29 방송 · 34분", v:"S3mmQB8mgcU"},
+  {id:"mbc-2", b:"mbc", series:"MBC 다큐스페셜", title:"해외 입양 40년, 드디어 엄마를 찾았다", meta:"2014.07.28 방송 · 30분", v:"dqj-YO_36yQ"},
+  {id:"mbc-3", b:"mbc", series:"MBC 스페셜", title:"로스쿨 졸업까지 반년, 암은 다시 커졌다", meta:"2019.06.18 방송 · 24분", v:"z2As_raTvEU"},
+  {id:"mbc-4", b:"mbc", series:"VR 휴먼다큐 너를 만났다", title:"세상 떠난 딸과 VR로 재회한 모녀", meta:"10분", v:"uflTK8c4w0c"},
+  {id:"mbc-5", b:"mbc", series:"휴먼다큐 사랑", title:"너는 내 운명 — 대한민국을 울린 다큐 명작", meta:"2006.05.03 방송 · 30분", v:"RY6cXFCE3NA"},
+  /* SBS */
+  {id:"sbs-1", b:"sbs", series:"SBS 스페셜 국과수", title:"죽음의 순간을 추적하는 과학 — EP.01", meta:"21분", v:"H50GAhRn06k"},
+  {id:"sbs-2", b:"sbs", series:"SBS 스페셜 마약 중독자입니다", title:"스물여덟 살 마약 중독자의 절규 — EP.01", meta:"21분", v:"CaWAxPM21Go"},
+  {id:"sbs-3", b:"sbs", series:"SBS 스페셜 육채전쟁", title:"평생 고기만 먹기 VS 채소만 먹기 — Ep.01", meta:"20분", v:"VtiE4rew2Ys"},
+  {id:"sbs-4", b:"sbs", series:"SBS 스페셜", title:"우리들의 히어로, 영원한 6번 유상철", meta:"20분", v:"NEuBcx93MnI"},
+  {id:"sbs-5", b:"sbs", series:"SBS 스페셜", title:"마지막 선물 — 산악인 고미영 이야기 (1/3)", meta:"20분", v:"UKypr8hHsaI"},
+  /* EBS */
+  {id:"ebs-1", b:"ebs", series:"다큐프라임 자본주의", title:"한방에 몰아보기 (전편)", meta:"4시간 40분", v:"ahNyJgDZmkc"},
+  {id:"ebs-2", b:"ebs", series:"다큐프라임 문명과 수학", title:"문명과 수학 완결편", meta:"3시간 30분", v:"MA4OGmIFBoQ"},
+  {id:"ebs-3", b:"ebs", series:"한국기행", title:"전국 특이한 국밥 모아보기", meta:"41분", v:"mqzgkExW1YQ"},
+  {id:"ebs-4", b:"ebs", series:"극한직업", title:"3,000원 대왕 토스트 — 베트남 며느리의 40년 손맛", meta:"13분", v:"SJw-80hXjEw"},
+  {id:"ebs-5", b:"ebs", series:"건축탐구 집", title:"집 가운데를 뻥 뚫어버린 대형 주택", meta:"19분", v:"QGio7DEGs30"},
+  {id:"ebs-6", b:"ebs", series:"지식채널e", title:"성적표가 측정하지 못한 능력 — 공부머리와 일머리", meta:"5분", v:"PvrRhEH19LA"}
+];
+var docState={b:"all"};
+function docUrl(v){ return "https://www.youtube.com/watch?v="+v; }
+function docSeenN(){ var n=0,i; for(i=0;i<DOC_LIST.length;i++){ if(docSeen[DOC_LIST[i].id]) n++; } return n; }
+function renderDocTabs(){
+  var h='<button type="button" data-docseg="all" class="'+(docState.b==="all"?"on":"")+'">전체</button>', i;
+  for(i=0;i<DOC_BC.length;i++){
+    h+='<button type="button" data-docseg="'+DOC_BC[i].id+'" class="'+(docState.b===DOC_BC[i].id?"on":"")+'">'+DOC_BC[i].logo+'</button>';
+  }
+  $("docTabs").innerHTML=h;
+}
+function docCardRow(L, idx){
+  var on=!!docSeen[L.id];
+  return '<li class="lec docx'+(on?" done":"")+'">'
+    +'<a class="lec-go" href="'+docUrl(L.v)+'" target="_blank" rel="noopener noreferrer">'
+    +'<span class="lec-n">'+(idx<10?"0":"")+idx+'</span>'
+    +'<span class="lec-t"><b>'+esc(L.series)+'</b><span>'+esc(L.title)+'</span>'
+    +'<span class="docx-meta">'+esc(L.meta)+'</span></span>'
+    +'<span class="lec-play">▶</span></a>'
+    +'<button class="lec-chk" type="button" data-docdone="'+L.id+'" aria-label="'+esc(L.title)+' 봤어요 표시">'+(on?"봤음":"✓")+'</button>'
+    +'</li>';
+}
+function docSectionHtml(b){
+  var ch="", i, n=0, cards="";
+  for(i=0;i<b.chans.length;i++){
+    var c=b.chans[i];
+    ch+='<div class="doc-ch-r"><div class="doc-ch-t"><b>'+esc(c.n)+' <span style="color:#8b80bd;font-weight:800">'+esc(c.h)+'</span></b><span>'+esc(c.d)+'</span></div>'
+      +'<a class="doc-ch-go" href="'+esc(c.url)+'" target="_blank" rel="noopener noreferrer">공식 채널 ›</a></div>';
+  }
+  for(i=0;i<DOC_LIST.length;i++){ var L=DOC_LIST[i]; if(L.b!==b.id) continue; n++; cards+=docCardRow(L,n); }
+  return '<div class="doc-bsec"><div class="doc-bhead"><span class="doc-blogo">'+b.logo+'</span><b>'+esc(b.name)+' 다큐</b><span>'+n+'편</span></div>'
+    +'<div class="doc-ch">'+ch+'</div>'
+    +'<ol class="lec-list">'+cards+'</ol></div>';
+}
+function renderDocs(){
+  renderDocTabs();
+  var html="", i;
+  for(i=0;i<DOC_BC.length;i++){
+    if(docState.b!=="all" && DOC_BC[i].id!==docState.b) continue;
+    html+=docSectionHtml(DOC_BC[i]);
+  }
+  $("docsBody").innerHTML=html;
+  var seen=docSeenN(), tot=DOC_LIST.length;
+  $("docCount").textContent=seen+" / "+tot+"편";
+  $("docBar").style.width=(tot? Math.round(seen/tot*100):0)+"%";
+}
+function openDocs(){ renderDocs(); show("docs"); }
+function toggleDocSeen(id){
+  var L=null,i;
+  for(i=0;i<DOC_LIST.length;i++){ if(DOC_LIST[i].id===id){ L=DOC_LIST[i]; break; } }
+  if(!L) return;
+  if(docSeen[id]) delete docSeen[id]; else docSeen[id]=Date.now();
+  save(LS_DOC,docSeen);
+  renderDocs();
+  toast(docSeen[id] ? "✓ "+L.series+" — 봤어요로 표시했어요" : "표시 취소 — 다시 볼 수 있어요");
+}
+
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-qzstagecat")||t.getAttribute("data-roundnext")||t.getAttribute("data-spd")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-doc")||t.getAttribute("data-docseg")||t.getAttribute("data-docdone")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-qzstagecat")||t.getAttribute("data-roundnext")||t.getAttribute("data-spd")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
@@ -4369,6 +4557,11 @@ document.addEventListener("click", function(ev){
     return;
   }
 
+  if(t.hasAttribute && t.hasAttribute("data-doc")){ openDocs(); return; }
+  if(t.hasAttribute && t.hasAttribute("data-docseg")){
+    docState.b=t.getAttribute("data-docseg"); renderDocs(); return;
+  }
+  if(t.hasAttribute && t.hasAttribute("data-docdone")){ toggleDocSeen(t.getAttribute("data-docdone")); return; }
   if(t.hasAttribute && t.hasAttribute("data-room")){ openRoom(); return; }
   if(t.hasAttribute && t.hasAttribute("data-rseg")){
     roomState.g=parseInt(t.getAttribute("data-rseg"),10); roomState.t=0; renderRoom(); return;
@@ -4808,7 +5001,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v23";
+var APP_VER="v24";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
