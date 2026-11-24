@@ -30,8 +30,22 @@ from datetime import datetime, timedelta, timezone
 
 KST = timezone(timedelta(hours=9))
 PER_PROGRAM = 8        # 프로그램별로 저장하는 최신 회차 수
+
 UA = ("Mozilla/5.0 (Linux; Android 13; SM-S911N) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36")
+
+# 재생목록·채널 RSS에서 빠진 회차 보정 목록.
+# 2026-11-24 확인: [시사기획 창] 풀영상 재생목록에 569회(11/03)가 들어 있지 않아,
+# 유튜브에 실제로 있는 영상을 oEmbed로 확인한 뒤 직접 넣었습니다.
+# 날짜가 오래되면 PER_PROGRAM(8편) 밖으로 밀려나 자동으로 사라집니다.
+EXTRA = {
+    "kbs-window": [
+        {"v": "ukXf42b3NfA",
+         "title": "1초 뒤를 아는 자들 : 두배 ETF와 외국인 [풀영상] | 창 569회 (KBS 26.11.3.)",
+         "published": "2026-11-03T22:00:09+09:00"},
+    ],
+}
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_OUT = os.path.join(os.path.dirname(HERE), "docs_episodes.json")
@@ -239,6 +253,21 @@ def parse_feed(root, p, seen):
     return out[:PER_PROGRAM]
 
 
+def extra_items(p, have):
+    """EXTRA에 적어 둔 보정 회차 — 이미 받은 영상은 건너뜁니다."""
+    out = []
+    for x in EXTRA.get(p["id"], []):
+        if x["v"] in have:
+            continue
+        dt = parse_date(x["published"])
+        if dt is None:
+            continue
+        out.append({"v": x["v"], "title": x["title"], "dt": dt,
+                    "date": dt.strftime("%Y-%m-%d"),
+                    "thumb": "https://i.ytimg.com/vi/%s/mqdefault.jpg" % x["v"]})
+    return out
+
+
 def main():
     out_path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_OUT
     old = {}
@@ -256,6 +285,8 @@ def main():
     for p in PROGRAMS:
         try:
             items = feed_entries(p)
+            items = sorted(items + extra_items(p, {i["v"] for i in items}),
+                           key=lambda x: x["dt"], reverse=True)[:PER_PROGRAM]
             if not items:
                 raise RuntimeError("RSS에 항목이 없음")
             ok.append(p["id"])

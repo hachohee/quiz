@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-24T12:34:16+09:00",
+ "updated_at": "2026-11-24T12:35:46+09:00",
  "source": "YouTube channel RSS (official channels)",
  "per_program": 8,
  "failed": [],
@@ -977,6 +977,17 @@
    "thumb": "https://i2.ytimg.com/vi/MndcLX9j6Gc/hqdefault.jpg"
   },
   {
+   "v": "ukXf42b3NfA",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "1초 뒤를 아는 자들 : 두배 ETF와 외국인 [풀영상] | 창 569회 (KBS 26.11.3.)",
+   "date": "2026-11-03",
+   "dt": "2026-11-03T22:00:09+09:00",
+   "thumb": "https://i.ytimg.com/vi/ukXf42b3NfA/mqdefault.jpg"
+  },
+  {
    "v": "0sHlcmDBUjs",
    "pid": "kbs-window",
    "b": "kbs",
@@ -1052,17 +1063,6 @@
    "date": "2026-09-22",
    "dt": "2026-09-22T22:00:07+09:00",
    "thumb": "https://i2.ytimg.com/vi/I6oDuD6rQVo/hqdefault.jpg"
-  },
-  {
-   "v": "Wp9mFBBIDwE",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "시사기획 창",
-   "title": "대한민국 특구1281 [풀영상] | 창 563회 (KBS 26.9.15.)",
-   "date": "2026-09-15",
-   "dt": "2026-09-15T22:00:11+09:00",
-   "thumb": "https://i4.ytimg.com/vi/Wp9mFBBIDwE/hqdefault.jpg"
   },
   {
    "v": "yGFzITrjT4k",
