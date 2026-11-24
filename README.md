@@ -30,7 +30,9 @@
 - 데이터: `hotcho_monitor.json` — 이 저장소의 앱은 이 파일만 읽습니다.
 - 수집: `python3 scripts/update_hotcho_monitor.py` (표준 라이브러리만, API 키·비용 없음).
   한 출처가 실패하면 그 출처의 **이전 항목을 그대로 살립니다**. 최근 10일치만 남깁니다.
-- 자동 갱신: `.github/workflows/update-monitor.yml` — 하루 8번(06·09·12·15·18·21·00·03 KST).
+- 자동 갱신: 아침 6시 **미라클모닝 action**이 `scripts/update_hotcho_live.sh`를 돌릴 때 함께 갱신되고,
+  같은 스크립트를 아무 때나 직접 돌려도 됩니다. `.github/workflows/update-monitor.yml`(하루 8번, 06·09·12·15·18·21·00·03 KST)도
+  준비해 두었지만 GitHub App 권한에 **workflows**가 없어 아직 올리지 못했습니다 — 권한을 켜면 그때부터 자동 반영됩니다.
   국회 갈래를 켜려면 저장소 **Settings → Secrets and variables → Actions** 에 `ASSEMBLY_API_KEY`
   (open.assembly.go.kr 무료 인증키)를 넣으면 됩니다. 없으면 그 갈래만 빠집니다.
 - 고지: 공개 출처의 **원문제목·요약만** 모은 목록입니다(보도·판단 전 원문 사실관계 확인 필요).
