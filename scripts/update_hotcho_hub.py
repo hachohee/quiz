@@ -9,10 +9,12 @@
 2) 카르텔워치 요약            → `hotcho_hub.json`
    - 카르텔워치 공개 데이터(수집 건수 · 총액 · 이상징후 · 최근 이상징후 3건)만 담습니다.
 
-    python3 scripts/update_hotcho_hub.py [저장폴더]
+    python3 scripts/update_hotcho_hub.py [저장폴더] [--set-brief brief.json]
 
 - 표준 라이브러리만 씁니다(추가 설치·비용 없음).
 - 한 갈래가 실패해도 그 갈래의 **이전 데이터를 그대로 살립니다**(빈 화면이 나오지 않게).
+- 📌 오늘의 뉴스 브리핑(`daily_brief`)은 **지우지 않고 그대로 보존**합니다.
+  새 날짜로 갈아끼우려면 `--set-brief`(또는 scripts/build_news_brief.py)를 씁니다.
 - 화면(hotcho_modes.js)은 이 JSON을 그대로 읽어 그립니다.
 """
 
@@ -116,6 +118,9 @@ def parse_items(xml_bytes):
 def build_news(prev):
     categories = {}
     prev_cats = (prev or {}).get("categories") or {}
+    # 📌 오늘의 뉴스 브리핑은 수집기가 건드리지 않습니다.
+    #    (오늘 날짜면 그대로 살리고, 지난 날짜여도 화면이 '최근 정리본'으로 표시하며 남겨 둡니다)
+    prev_brief = (prev or {}).get("daily_brief") or {}
     for key, meta in FEEDS.items():
         try:
             items = parse_items(fetch(meta["url"]))
@@ -130,7 +135,41 @@ def build_news(prev):
             print(f"[keep] {meta['label']} 이전 데이터 유지")
         else:
             categories[key] = {"label": meta["label"], "items": []}
-    return {"updated": kst_now().strftime("%Y-%m-%d %H:%M"), "categories": categories}
+    out = {"updated": kst_now().strftime("%Y-%m-%d %H:%M")}
+    if prev_brief:
+        out["daily_brief"] = prev_brief
+    out["categories"] = categories
+    return out
+
+
+# ---------------------------------------------------------------- daily brief
+def merge_brief(path, news):
+    """`--set-brief` JSON({'date','context','questions'})을 방금 만든 news 에 심습니다."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            src = json.load(f)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[warn] set-brief 읽기 실패: {exc}", file=sys.stderr)
+        return news
+    if not isinstance(src, dict):
+        print("[warn] set-brief 는 JSON 객체여야 합니다", file=sys.stderr)
+        return news
+    ctx = src.get("context")
+    qs = src.get("questions") or src.get("question")
+    ctx = ctx if isinstance(ctx, list) else ([ctx] if ctx else [])
+    qs = qs if isinstance(qs, list) else ([qs] if qs else [])
+    ctx = [str(c).strip() for c in ctx if str(c or "").strip()]
+    qs = [str(q).strip() for q in qs if str(q or "").strip()]
+    if not ctx and not qs:
+        print("[warn] set-brief 가 비었습니다 — 기존 daily_brief 유지", file=sys.stderr)
+        return news
+    news["daily_brief"] = {
+        "date": str(src.get("date") or kst_now().strftime("%Y-%m-%d"))[:10],
+        "context": ctx,
+        "questions": qs,
+    }
+    print(f"[ok] daily_brief 교체 · {news['daily_brief']['date']} · 맥락 {len(ctx)}줄 · 질문 {len(qs)}개")
+    return news
 
 
 # ---------------------------------------------------------------- cartelwatch
@@ -197,13 +236,34 @@ def save_json(path, data):
         f.write("\n")
 
 
+def parse_args(argv):
+    """저장폴더(위치 인자) + --set-brief 파일 경로."""
+    out_dir, set_brief, i = "", "", 1
+    while i < len(argv):
+        a = argv[i]
+        if a == "--set-brief":
+            i += 1
+            set_brief = argv[i] if i < len(argv) else ""
+        elif a.startswith("--set-brief="):
+            set_brief = a.split("=", 1)[1]
+        elif a in ("-h", "--help"):
+            print(__doc__)
+            sys.exit(0)
+        elif not a.startswith("-"):
+            out_dir = a
+        i += 1
+    return out_dir, set_brief
+
+
 def main():
-    out_dir = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "..")
-    out_dir = os.path.abspath(out_dir)
+    out_dir, set_brief = parse_args(sys.argv)
+    out_dir = os.path.abspath(out_dir or os.path.join(os.path.dirname(__file__), ".."))
     news_path = os.path.join(out_dir, "hotcho_news.json")
     hub_path = os.path.join(out_dir, "hotcho_hub.json")
 
     news = build_news(load_json(news_path, {}))
+    if set_brief:
+        news = merge_brief(set_brief, news)
     save_json(news_path, news)
     print(f"저장: {news_path}")
 

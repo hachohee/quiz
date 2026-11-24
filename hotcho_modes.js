@@ -300,9 +300,49 @@
     el.innerHTML = html;
   }
 
+  /* 📌 오늘의 뉴스 브리핑 — hotcho_news.json 의 daily_brief 를 그대로 그립니다.
+     { date, context(줄 배열 또는 줄바꿈 문자열), questions: [..] } · 없으면 카드를 조용히 숨깁니다. */
+  function briefLines(ctx) {
+    if (ctx == null) return [];
+    var arr = (Object.prototype.toString.call(ctx) === '[object Array]') ? ctx : String(ctx).split(/\n+/);
+    var out = [];
+    for (var i = 0; i < arr.length; i++) {
+      var s = String(arr[i] == null ? '' : arr[i]).replace(/\s+$/, '');
+      if (s.replace(/\s/g, '')) out.push(s);
+    }
+    return out;
+  }
+
+  function renderDailyBrief() {
+    var el = $('hcDailyBrief');
+    if (!el) return;
+    var b = S.news && S.news.daily_brief;
+    var lines = b ? briefLines(b.context) : [];
+    var qs = b ? briefLines(b.questions) : [];
+    var date = b ? String(b.date || '').slice(0, 10) : '';
+    if (!b || (!lines.length && !qs.length)) { el.hidden = true; el.innerHTML = ''; return; }
+    var today = kstToday();
+    var title = date ? date : today;
+    var html = '<div class="hc-card-head"><h3>📌 오늘의 뉴스 브리핑</h3>' +
+      '<span class="hc-tiny">' + esc(title) + (date && date !== today ? ' · 최근 정리본' : '') + '</span></div>';
+    if (lines.length) {
+      html += '<div class="hc-lines">';
+      for (var i = 0; i < lines.length; i++) html += '<p class="hc-line">' + esc(lines[i]) + '</p>';
+      html += '</div>';
+    }
+    if (qs.length) {
+      html += '<div class="hc-q"><div class="hc-q-h">🤔 생각해 볼 문제</div><ol>';
+      for (var j = 0; j < qs.length; j++) html += '<li>' + esc(qs[j]) + '</li>';
+      html += '</ol></div>';
+    }
+    el.innerHTML = html;
+    el.hidden = false;
+  }
+
   function renderNews() {
     var listEl = $('hcNewsList');
     var updEl = $('hcNewsUpd');
+    renderDailyBrief();
     if (!listEl) return;
     if (updEl) updEl.textContent = S.news && S.news.updated ? S.news.updated + ' 기준' : '불러오는 중…';
     renderNewsTabs();
@@ -2054,6 +2094,7 @@
       '</nav>' +
 
       '<div class="hc-sec" id="hcSec-news">' +
+      '<section class="hc-card hc-dbrief" id="hcDailyBrief" hidden></section>' +
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📰 실시간 주요뉴스</h3><span class="hc-tiny" id="hcNewsUpd">불러오는 중…</span></div>' +
       '<div class="hc-seg" id="hcNewsTabs"></div>' +

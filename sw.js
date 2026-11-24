@@ -26,8 +26,10 @@
         언론 모니터(일일브리핑 = 날짜별 달력·문단 요약·기타 출처·보도 흐름 막대 / 뉴스데이터 누적·추가취재 제안)
         + 정책 모니터(오늘의 변화·정책브리핑·국회·국가데이터처·정책 히스토리·실시간 소식) — hotcho_briefings.json.
    v33: 🍳 행복핫초 → 냉파 탭에 1,018개 레시피 매칭 내장(recipes.json + fridge_engine.js, AI·키 없이 동작)
-        + 🤖 Gemini AI 추천(선택, 무료 키는 hotcho_gemini_key_v1) · 재료는 hotcho_fridge_ing_v1에 자동 저장. */
-const CACHE = 'toeic-bts-v33';
+        + 🤖 Gemini AI 추천(선택, 무료 키는 hotcho_gemini_key_v1) · 재료는 hotcho_fridge_ing_v1에 자동 저장.
+   v34: 📌 뿌듯핫초 → 실시간 뉴스 맨 위에 '오늘의 뉴스 브리핑' 카드 — 그날 하루 맥락 3~4줄 +
+        취재기자·시민 시선의 '생각해 볼 문제' 1~2개(hotcho_news.json daily_brief). 없으면 조용히 숨김. */
+const CACHE = 'toeic-bts-v34';
 const SHELL = [
   './',
   './index.html',
