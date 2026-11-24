@@ -799,8 +799,11 @@
     toast('기록 코드 만드는 중…');
     makeSyncCode().then(function (code) {
       return copyText(code).then(function (ok) {
+        var kb = Math.max(1, Math.round(code.length / 1024));
         if (ok) {
-          toast('기록 코드를 복사했어요 (' + Math.max(1, Math.round(code.length / 1024)) + 'KB) — 카톡·메모로 보내세요');
+          toast(code.length > 6000
+            ? '기록 코드를 복사했어요 (' + kb + 'KB) — 길어서 카톡에선 잘릴 수 있어요. 메모·메일로 보내 주세요'
+            : '기록 코드를 복사했어요 (' + kb + 'KB) — 카톡·메모로 보내세요');
         } else {
           openSyncBox(code);
           toast('복사가 안 됐어요 — 아래 칸의 코드를 길게 눌러 복사해 주세요');
@@ -822,7 +825,7 @@
       try { ta.focus(); } catch (e) {}
     }
     var info = $('hcSyncInfo');
-    if (info && prefill) info.textContent = '위 코드를 전부 선택해 복사한 뒤, 옮길 기기에서 [📥 기록 코드 붙여넣기]에 넣어 주세요.';
+    if (info && prefill) info.innerHTML = '위 코드를 전부 선택해 복사한 뒤, 옮길 기기에서 [📥 기록 코드 붙여넣기]에 넣어 주세요.<br>코드가 길면 카톡이 중간에 자를 수 있으니 메모·메일이 안전해요.';
   }
   function applySyncText() {
     var ta = $('hcSyncText');
@@ -984,7 +987,7 @@
       '<textarea class="hc-ta" id="hcSyncText" rows="4" spellcheck="false" placeholder="폰에서 복사한 기록 코드를 여기에 붙여넣고 [✅ 이 기기에 적용]을 눌러 주세요"></textarea>' +
       '<div class="hc-row" style="margin-top:8px"><button type="button" class="hc-btn primary" data-act="code-apply">✅ 이 기기에 적용</button>' +
       '<button type="button" class="hc-btn ghost" data-act="code-close">닫기</button></div>' +
-      '<p class="hc-note" id="hcSyncInfo">폰에서 [📋 기록 코드 복사] → 카톡·메모로 태블릿에 보내기 → 태블릿에서 위 칸에 붙여넣고 [✅ 이 기기에 적용].</p>' +
+      '<p class="hc-note" id="hcSyncInfo">폰에서 [📋 기록 코드 복사] → 메모·메일(또는 카톡)로 태블릿에 보내기 → 태블릿에서 위 칸에 붙여넣고 [✅ 이 기기에 적용].<br>코드가 길면 카톡이 중간에 자를 수 있으니 메모·메일이 안전해요.</p>' +
       '</div>' +
       '<div class="hc-row" style="margin-top:10px"><button type="button" class="hc-btn" data-act="export">⬇️ 파일로 내보내기</button>' +
       '<button type="button" class="hc-btn" data-act="import">⬆️ 파일에서 불러오기</button>' +
