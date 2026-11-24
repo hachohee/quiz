@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-25T06:01:18+09:00",
- "updatedLabel": "11/25 06:01",
+ "updated": "2026-11-25T07:31:17+09:00",
+ "updatedLabel": "11/25 07:31",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,16 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "Jensen Huang Apologizes to Staff",
+     "guid": "5bf7d3a2-b04d-11f0-a7a7-0fe045c2407f",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY9325509805.mp3",
+     "dateISO": "2026-11-25T06:54:00+09:00",
+     "dateLabel": "11/25(수) 06:54",
+     "dateShort": "11/25(수)",
+     "durationSec": 466,
+     "durationLabel": "7분 46초"
+    },
     {
      "title": "Thanksgiving Sticker Shock",
      "guid": "a6f3610a-b04d-11f0-b754-b779c90b8c34",
@@ -83,16 +93,6 @@
      "dateShort": "11/21(토)",
      "durationSec": 1054,
      "durationLabel": "17분 34초"
-    },
-    {
-     "title": "Wall Street’s AI Wipeout",
-     "guid": "5b25b624-b04d-11f0-a7a7-4f1ddb478f16",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY3912534144.mp3",
-     "dateISO": "2026-11-21T07:11:00+09:00",
-     "dateLabel": "11/21(토) 07:11",
-     "dateShort": "11/21(토)",
-     "durationSec": 420,
-     "durationLabel": "7분 00초"
     }
    ],
    "ok": true,
@@ -300,6 +300,16 @@
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/I0000-2014-goodmorningpops",
    "episodes": [
     {
+     "title": "11/25(수) New Soul - Yael Naim",
+     "guid": "gid://kbs-podcast/6b060a3508062234165a95c5",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b060a3508062234165a95c5.mp3",
+     "dateISO": "2026-11-25T07:05:30+09:00",
+     "dateLabel": "11/25(수) 07:05",
+     "dateShort": "11/25(수)",
+     "durationSec": 581,
+     "durationLabel": "9분 41초"
+    },
+    {
      "title": "11/24(화) Good to Go - Daphne Willis and LÒNIS",
      "guid": "gid://kbs-podcast/6b04b91f08062234165a81ab",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b04b91f08062234165a81ab.mp3",
@@ -368,16 +378,6 @@
      "dateShort": "11/16(월)",
      "durationSec": 656,
      "durationLabel": "10분 56초"
-    },
-    {
-     "title": "11/13(금) For Us - DAUL (feat. THAMA)",
-     "guid": "gid://kbs-podcast/6af63873990ef67d4af07388",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af63873990ef67d4af07388.mp3",
-     "dateISO": "2026-11-13T07:06:30+09:00",
-     "dateLabel": "11/13(금) 07:06",
-     "dateShort": "11/13(금)",
-     "durationSec": 594,
-     "durationLabel": "9분 54초"
     }
    ],
    "ok": true,
