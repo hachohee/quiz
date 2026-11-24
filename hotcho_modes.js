@@ -30,7 +30,8 @@
     frPrio: 'hotcho_fridge_prio_v1',
     frKey: 'hotcho_gemini_key_v1',
     myart: 'hotcho_my_articles_v1',
-    fin: 'hotcho_finance_v1'      /* 💰 재정 — 예산·지출·마감일(이 폰에만) */
+    fin: 'hotcho_finance_v1',     /* 💰 재정 — 예산·지출·마감일(이 폰에만) */
+    finCharts: 'hotcho_fin_charts_v1'  /* 📊 가계부 그래프 — 복호화된 숫자만(비밀번호는 저장 안 함) */
   };
 
   /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
@@ -2341,12 +2342,247 @@
     return (ci[id] == null || ci[id] === '') ? (d == null ? '' : d) : ci[id];
   }
 
+  /* ============================================================ 📊 가계부 그래프 (v44)
+     초희 요청(11/25): 💰 재정 탭 맨 위에 '내 가계부 그래프 보기' 잠금 카드.
+       · 공개 저장소(hachohee/quiz)라 숫자는 절대 평문으로 두지 않는다.
+         finance_charts.enc.json = PBKDF2-SHA256(60만 회) + AES-GCM-256 암호문.
+       · 비밀번호는 코드·저장소 어디에도 없다. 이 폰에서 WebCrypto 로만 풀린다.
+       · 성공하면 ① 월별 수입 vs 순수지출 막대 ② 11월 지출 비중 원그래프를 SVG 로 그린다.
+       · '이 폰에 기억하기'를 켜면 비밀번호가 아니라 **복호화된 숫자만** localStorage에 남는다.
+         (비밀번호를 저장하지 않는 이유: 다른 곳과 같은 번호를 쓸 수 있어서) */
+  var FIN_CHARTS_SRC = './finance_charts.enc.json';
+  var CHART_DATA = null;        /* 복호화된 가계부 숫자 — 메모리에만 */
+  var CHART_BUSY = false;
+  var CHART_PIE_COLORS = ['#8b5cf6', '#f472b6', '#fbbf24', '#34d399', '#60a5fa', '#fb923c',
+    '#a3e635', '#22d3ee', '#c084fc', '#f87171', '#fde047', '#38bdf8', '#94a3b8'];
+
+  function finChartLoad() {
+    try { return JSON.parse(localStorage.getItem(K.finCharts) || 'null'); } catch (e) { return null; }
+  }
+  function finChartSave(data) {
+    try { localStorage.setItem(K.finCharts, JSON.stringify(data)); } catch (e) {}
+  }
+  function finChartForget() {
+    try { localStorage.removeItem(K.finCharts); } catch (e) {}
+  }
+  function finChartB64(s) {
+    var bin = atob(String(s || '').replace(/\s+/g, '')), out = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+  function finChartErr(msg) {
+    var el = $('hcFinChartErr');
+    if (!el) { if (msg) toast(msg); return; }
+    el.textContent = msg || '';
+    el.hidden = !msg;
+  }
+  function finChartBusy(on) {
+    var b = $('hcFinChartOpenBtn');
+    if (b) { b.disabled = !!on; b.textContent = on ? '푸는 중…' : '열기'; }
+    var inp = $('hcFinChartPw');
+    if (inp) inp.disabled = !!on;
+  }
+
+  /* 암호문 풀기 — 서버로 아무것도 보내지 않는다(전부 이 폰 안에서) */
+  function finChartDecrypt(pw) {
+    if (!(window.crypto && crypto.subtle && crypto.subtle.importKey)) {
+      return Promise.reject(new Error('이 브라우저는 암호 풀기를 지원하지 않아 (주소가 https 인지 확인해줘)'));
+    }
+    return fetch(FIN_CHARTS_SRC + '?v=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('암호 파일을 못 받았어 (' + r.status + ')');
+        return r.json();
+      })
+      .then(function (env) {
+        var salt = finChartB64(env.salt), iv = finChartB64(env.iv), ct = finChartB64(env.ct);
+        var bytes = new TextEncoder().encode(pw);
+        return crypto.subtle.importKey('raw', bytes, { name: 'PBKDF2' }, false, ['deriveKey'])
+          .then(function (base) {
+            return crypto.subtle.deriveKey(
+              { name: 'PBKDF2', salt: salt, iterations: env.iter || 600000, hash: 'SHA-256' },
+              base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+          })
+          .then(function (key) {
+            return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+          })
+          .then(function (buf) {
+            return JSON.parse(new TextDecoder().decode(buf));
+          });
+      })
+      .catch(function (e) {
+        if (e && (e.name === 'OperationError' || e.name === 'DataError')) {
+          throw new Error('비밀번호가 맞지 않아');
+        }
+        throw e;
+      });
+  }
+
+  function finChartUnlock() {
+    var inp = $('hcFinChartPw');
+    if (!inp || CHART_BUSY) return;
+    var pw = (inp.value || '').trim();
+    finChartErr('');
+    if (!pw) { finChartErr('비밀번호를 넣어줘'); inp.focus(); return; }
+    CHART_BUSY = true; finChartBusy(true);
+    finChartDecrypt(pw).then(function (data) {
+      CHART_BUSY = false; finChartBusy(false);
+      CHART_DATA = data;
+      var rem = $('hcFinChartRemember');
+      if (!rem || rem.checked) finChartSave(data); else finChartForget();
+      renderFinCharts();
+      toast('가계부 그래프를 열었어 · 이 폰에서만 보여');
+    }).catch(function (e) {
+      CHART_BUSY = false; finChartBusy(false);
+      finChartErr((e && e.message) ? e.message : '열리지 않았어 — 비밀번호를 확인해줘');
+      if (inp) { try { inp.select(); } catch (err) {} }
+    });
+  }
+
+  function finChartLock() {
+    CHART_DATA = null; finChartForget(); renderFinCharts();
+    toast('가계부 그래프를 다시 잠갔어 · 이 폰에 남긴 숫자도 지웠어');
+  }
+
+  function finChartMan(v) { return String(Math.round((+v || 0) / 10000)); }
+
+  /* ① 월별 막대 — 순수 지출(분홍) vs 들어온 돈(초록) */
+  function finChartBarSvg(data) {
+    var rows = (data && data.monthly) || [];
+    if (!rows.length) return '';
+    var W = 340, H = 186, padL = 24, padR = 4, padT = 18, padB = 40;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var max = 0;
+    for (var i = 0; i < rows.length; i++) max = Math.max(max, +rows[i].pure || 0, +rows[i].inc || 0);
+    var top = Math.max(1000000, Math.ceil(max / 500000) * 500000);
+    var y = function (v) { return padT + plotH - (Math.max(0, +v || 0) / top) * plotH; };
+    var slot = plotW / rows.length;
+    var bw = Math.max(5, Math.min(9, slot * 0.32));
+    var s = '<svg class="hc-chart-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="월별 수입과 순수 지출 막대그래프">';
+    /* 가로 눈금 50만원 간격 */
+    for (var g = 0; g <= top; g += 500000) {
+      var gy = y(g).toFixed(1);
+      s += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (W - padR) + '" y2="' + gy + '" stroke="rgba(255,255,255,' + (g === 0 ? '.22' : '.07') + ')" stroke-width=".8"/>';
+      s += '<text x="' + (padL - 3) + '" y="' + (+gy + 2.1) + '" font-size="5.4" fill="#8f85bd" text-anchor="end">' + Math.round(g / 10000) + '</text>';
+    }
+    var janAt = -1, firstYear = String(rows[0].m).slice(2, 4);
+    for (var j = 0; j < rows.length; j++) {
+      var r = rows[j], cx = padL + slot * j + slot / 2;
+      var px = cx - bw - 1, ix = cx + 1;
+      var ph = padT + plotH - y(r.pure), ih = padT + plotH - y(r.inc);
+      s += '<rect x="' + px.toFixed(1) + '" y="' + y(r.pure).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(0.8, ph).toFixed(1) + '" rx="1.2" fill="#fb7185"/>';
+      if ((+r.inc || 0) > 0) {
+        s += '<rect x="' + ix.toFixed(1) + '" y="' + y(r.inc).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(0.8, ih).toFixed(1) + '" rx="1.2" fill="#34d399"/>';
+        if (+r.inc >= 200000) {
+          s += '<text x="' + (ix + bw / 2).toFixed(1) + '" y="' + (y(r.inc) - 2).toFixed(1) + '" font-size="5" fill="#6ee7b7" text-anchor="middle">' + finChartMan(r.inc) + '</text>';
+        }
+      }
+      s += '<text x="' + (px + bw / 2).toFixed(1) + '" y="' + (y(r.pure) - 2).toFixed(1) + '" font-size="5" fill="#c9c1ea" text-anchor="middle">' + finChartMan(r.pure) + '</text>';
+      s += '<text x="' + cx.toFixed(1) + '" y="' + (padT + plotH + 11) + '" font-size="5.6" fill="#b9b0e0" text-anchor="middle">' + String(r.m).slice(5) + '</text>';
+      if (String(r.m).slice(5) === '01' && janAt < 0) janAt = j;
+    }
+    /* 연도 줄 */
+    var mid25 = padL + (slot * (janAt < 0 ? rows.length : janAt)) / 2;
+    s += '<text x="' + mid25.toFixed(1) + '" y="' + (padT + plotH + 21) + '" font-size="5.2" fill="#8f85bd" text-anchor="middle">20' + firstYear + '년</text>';
+    if (janAt >= 0) {
+      var mid26 = padL + slot * janAt + (slot * (rows.length - janAt)) / 2;
+      s += '<text x="' + mid26.toFixed(1) + '" y="' + (padT + plotH + 21) + '" font-size="5.2" fill="#8f85bd" text-anchor="middle">20' + String(rows[janAt].m).slice(2, 4) + '년</text>';
+    }
+    s += '<text x="' + padL + '" y="' + (padT - 6) + '" font-size="5.6" fill="#8f85bd">만원</text>';
+    s += '</svg>';
+    return s;
+  }
+
+  /* ② 11월 원그래프 */
+  function finChartPieSvg(nov) {
+    var cats = (nov && nov.cats) || [];
+    var total = (nov && nov.total) || 0;
+    if (!cats.length || !total) return '';
+    var W = 300, H = 170, cx = W / 2, cy = H / 2, r = 56, sw = 26;
+    var C = 2 * Math.PI * r, off = 0;
+    var s = '<svg class="hc-chart-svg" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="11월 지출 비중 원그래프">';
+    s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="' + sw + '"/>';
+    for (var i = 0; i < cats.length; i++) {
+      var frac = (+cats[i].v || 0) / total;
+      var len = Math.max(0, frac * C - 1.1);   /* 조각 사이 1px 틈 */
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + CHART_PIE_COLORS[i % CHART_PIE_COLORS.length] + '"' +
+        ' stroke-width="' + sw + '" stroke-dasharray="' + len.toFixed(2) + ' ' + (C - len).toFixed(2) + '"' +
+        ' stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>';
+      off += frac * C;
+    }
+    s += '<text x="' + cx + '" y="' + (cy - 7) + '" font-size="8" fill="#a79cd4" text-anchor="middle">순수 지출</text>';
+    s += '<text x="' + cx + '" y="' + (cy + 8) + '" font-size="12.5" fill="#f3f0ff" text-anchor="middle" font-weight="700">' + num(Math.round(total)) + '원</text>';
+    s += '<text x="' + cx + '" y="' + (cy + 21) + '" font-size="6.4" fill="#8f85bd" text-anchor="middle">' + esc((nov.range || '') + ' · ' + (nov.n || 0) + '건') + '</text>';
+    s += '</svg>';
+    return s;
+  }
+
+  function finChartOpenHtml(d) {
+    var nov = d.nov || {};
+    var cats = nov.cats || [];
+    var total = +nov.total || 0;
+    var h = '';
+    h += '<div class="hc-chart-top"><span class="hc-tiny">' + esc(d.range || '') + ' · ' + esc(d.source || '') + '</span>' +
+      '<button type="button" class="hc-btn ghost sm" data-act="fin-charts-lock">🔒 잠그기</button></div>';
+    if (d.headline && d.headline.length) {
+      h += '<ul class="hc-chart-head">';
+      for (var i = 0; i < d.headline.length; i++) h += '<li>' + esc(d.headline[i]) + '</li>';
+      h += '</ul>';
+    }
+    /* ① 월별 */
+    h += '<div class="hc-chart-block"><div class="hc-chart-title">① 월별 수입 vs 순수 지출 <span>큰 덩어리 제외 · 만원</span></div>';
+    h += finChartBarSvg(d);
+    h += '<div class="hc-chart-legend"><span><i style="background:#fb7185"></i>순수 지출</span><span><i style="background:#34d399"></i>들어온 돈</span></div>';
+    var last = (d.monthly || [])[(d.monthly || []).length - 1] || {};
+    if (last.m) {
+      h += '<p class="hc-chart-cap">맨 끝 ' + esc(String(last.m).replace('-', '년 ') + '월' + (last.part ? ' (' + last.part + ')' : '')) +
+        ' — 순수 지출 <b>' + num(last.pure) + '원</b>' + (last.inc ? ' · 들어온 돈 <b>' + num(last.inc) + '원</b>' : '') + '</p>';
+    }
+    h += '</div>';
+    /* ② 11월 비중 */
+    h += '<div class="hc-chart-block"><div class="hc-chart-title">② 11월 지출 비중 <span>순수 지출 기준</span></div>';
+    h += finChartPieSvg(nov);
+    h += '<div class="hc-chart-pie-leg">';
+    for (var k = 0; k < cats.length; k++) {
+      var pct = total ? ((+cats[k].v || 0) / total * 100) : 0;
+      h += '<div class="hc-chart-pie-row"><i style="background:' + CHART_PIE_COLORS[k % CHART_PIE_COLORS.length] + '"></i>' +
+        '<span class="n">' + esc(cats[k].k) + '</span>' +
+        '<span class="a">' + num(cats[k].v) + '</span>' +
+        '<span class="p">' + pct.toFixed(1) + '%</span></div>';
+    }
+    h += '</div>';
+    if (nov.reclass) h += '<p class="hc-chart-cap">※ ' + esc(nov.reclass) + '</p>';
+    h += '</div>';
+    h += '<p class="hc-note">이 숫자는 이 폰에서만 풀립니다 · 서버로는 아무것도 보내지 않아요 · 🔒 잠그기를 누르면 이 폰에 남긴 숫자도 지워요</p>';
+    return h;
+  }
+
+  function renderFinCharts() {
+    var el = $('hcFinChartBody');
+    if (!el) return;
+    var meta = $('hcFinChartMeta');
+    if (!CHART_DATA) CHART_DATA = finChartLoad();
+    if (CHART_DATA) {
+      el.innerHTML = finChartOpenHtml(CHART_DATA);
+      if (meta) meta.textContent = '열림 · ' + (CHART_DATA.updated || '');
+      return;
+    }
+    if (meta) meta.textContent = '암호화 · 이 폰에서만';
+    el.innerHTML =
+      '<p class="hc-chart-lead">뱅크샐러드 1년 원장을 그래프로 담아 뒀어. 공개 저장소라 숫자는 <b>AES 암호</b>로 잠가 두고, 이 폰에서만 풀려.</p>' +
+      '<div class="hc-add-row" style="margin-top:0">' +
+      '<input class="hc-input" id="hcFinChartPw" type="password" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="뱅샐 비밀번호 4자리">' +
+      '<button type="button" class="hc-btn primary" id="hcFinChartOpenBtn" data-act="fin-charts-open" style="flex:0 0 auto">열기</button></div>' +
+      '<label class="hc-chart-remember"><input type="checkbox" id="hcFinChartRemember" checked>' +
+      '<span>이 폰에 기억하기 <em>(비밀번호는 저장하지 않고 그래프 숫자만)</em></span></label>' +
+      '<div class="hc-chart-err" id="hcFinChartErr" hidden></div>';
+  }
+
   function renderMoney() {
     var mk = finMonthKey();
     var mEl = $('hcFinMonth'); if (mEl) mEl.textContent = finMonthName(mk) + ' 기준';
     var bi = $('hcFinBudgetIn'); if (bi) bi.value = finBudget(mk) ? String(finBudget(mk)) : '';
     var dd = $('hcFinDDate'); if (dd && !dd.value) dd.value = kstToday();
-    finGauge(); finSpendList(); finDDayList(); finCalc();
+    finGauge(); finSpendList(); finDDayList(); finCalc(); renderFinCharts();
   }
 
   /* ② 이번 달 누적 · 남은 예산 게이지 */
@@ -2773,6 +3009,12 @@
 
       '<div class="hc-sec" id="hcHSec-money" hidden>' +
 
+      /* 📊 내 가계부 그래프(잠금) — v44 */
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📊 내 가계부 그래프</h3><span class="hc-tiny" id="hcFinChartMeta">암호화 · 이 폰에서만</span></div>' +
+      '<div id="hcFinChartBody"></div>' +
+      '</section>' +
+
       /* ① 노션 가계부 바로가기 */
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📒 노션 가계부 · 소비 분석</h3><span class="hc-tiny">내 계정 전용</span></div>' +
@@ -3112,6 +3354,8 @@
       }
       if (act === 'export') { exportAll(); return; }
       if (act === 'sync-jump') { openSyncPanel(true); return; }
+      if (act === 'fin-charts-open') { finChartUnlock(); return; }
+      if (act === 'fin-charts-lock') { finChartLock(); return; }
       if (act === 'fin-budget') { finSetBudget(); return; }
       if (act === 'fin-add') { finAddSpend(); return; }
       if (act === 'fin-del') { finDelSpend(t.getAttribute('data-fin-del')); return; }
@@ -3237,6 +3481,7 @@
     var id = e.target.id;
     if (id === 'hcMemoInput') { e.preventDefault(); addMemo(); }
     if (id === 'hcFinLabel' || id === 'hcFinAmt') { e.preventDefault(); finAddSpend(); }
+    if (id === 'hcFinChartPw') { e.preventDefault(); finChartUnlock(); }
     if (id === 'hcFinBudgetIn') { e.preventDefault(); finSetBudget(); try { e.target.blur(); } catch (err) {} }
     if (id === 'hcFinDLabel') { e.preventDefault(); finAddDDay(); }
     if (id === 'hcShopInput') { e.preventDefault(); addShop(); }

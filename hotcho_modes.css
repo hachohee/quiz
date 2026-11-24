@@ -570,3 +570,33 @@ body.radio-on.radio-open #hcShared { padding-bottom: calc(var(--rph, 206px) + 16
   .hc-share > summary { font-size: 12px; gap: 6px; }
   .hc-share-tt { flex: 1 1 auto; }
 }
+
+/* ============================================================ 📊 가계부 그래프 (v44)
+   💰 재정 탭 맨 위 잠금 카드 — 암호를 풀면 그 자리에서 SVG 로 그립니다.
+   숫자는 복호화된 뒤에만 DOM 에 닿고, 서버로는 아무것도 보내지 않습니다. */
+.hc-chart-lead { font-size: 12.5px; line-height: 1.5; color: #b9b0e0; margin: 0 2px 10px; }
+.hc-chart-lead b { color: #f3f0ff; }
+.hc-chart-remember { display: flex; align-items: center; gap: 7px; margin: 10px 2px 0; font-size: 11.5px; color: #b9b0e0; line-height: 1.4; cursor: pointer; }
+.hc-chart-remember input { width: 15px; height: 15px; accent-color: #8b5cf6; flex: 0 0 auto; }
+.hc-chart-remember em { font-style: normal; color: #8f85bd; font-size: 10.5px; }
+.hc-chart-err { margin: 9px 2px 0; font-size: 11.5px; color: #fb7185; line-height: 1.4; }
+.hc-chart-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.hc-chart-head { margin: 0 0 12px; padding: 0 0 0 15px; }
+.hc-chart-head li { font-size: 12px; line-height: 1.55; color: #cfc8ee; margin: 0 0 3px; }
+.hc-chart-head li::marker { color: #8b5cf6; }
+.hc-chart-block { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .08); }
+.hc-chart-title { font-size: 12.5px; font-weight: 700; color: #f3f0ff; margin: 0 2px 6px; }
+.hc-chart-title span { font-size: 10.5px; font-weight: 500; color: #8f85bd; margin-left: 5px; }
+.hc-chart-svg { display: block; width: 100%; height: auto; margin: 2px 0 0; }
+.hc-chart-legend { display: flex; gap: 14px; justify-content: center; margin-top: 4px; }
+.hc-chart-legend span { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #b9b0e0; }
+.hc-chart-legend i { width: 9px; height: 9px; border-radius: 2.5px; display: inline-block; }
+.hc-chart-cap { font-size: 11px; line-height: 1.5; color: #8f85bd; margin: 7px 2px 0; }
+.hc-chart-cap b { color: #cfc8ee; font-weight: 700; }
+.hc-chart-pie-leg { margin-top: 6px; }
+.hc-chart-pie-row { display: flex; align-items: center; gap: 7px; padding: 3.5px 2px; border-bottom: 1px solid rgba(255, 255, 255, .045); font-size: 11.5px; }
+.hc-chart-pie-row:last-child { border-bottom: 0; }
+.hc-chart-pie-row i { width: 9px; height: 9px; border-radius: 2.5px; flex: 0 0 auto; }
+.hc-chart-pie-row .n { flex: 1 1 auto; color: #cfc8ee; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hc-chart-pie-row .a { color: #b9b0e0; font-variant-numeric: tabular-nums; }
+.hc-chart-pie-row .p { width: 42px; text-align: right; color: #f3f0ff; font-weight: 700; font-variant-numeric: tabular-nums; }

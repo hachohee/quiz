@@ -59,8 +59,15 @@
         몇 번째 회차인지 세어 1~12강을 돌리고 12강 넘으면 '2회독 1강'. 강의 이름은 공부방 목록이 만든
         ROOM 인덱스에서 그대로 가져옴(공부방을 고치면 스케줄도 같이 바뀜), 실제 영상 제목은 그 아래 한 줄.
         체크 저장 키(hotcho_study_schedule_v1)·접기 펼치기·주 이동은 v42 그대로.
-        (index.html ?v=43 · APP_VER v43 · hotcho_modes.js·css?v=43) */
-const CACHE = 'toeic-bts-v43';
+        (index.html ?v=43 · APP_VER v43 · hotcho_modes.js·css?v=43)
+   v44: 📊 💰 재정 탭 맨 위 '내 가계부 그래프' 잠금 카드 — 비밀번호를 넣으면 그 자리에서
+        월별 수입 vs 순수지출 막대 + 11월 지출 비중 원그래프(SVG)를 그린다.
+        숫자는 finance_charts.enc.json 에 PBKDF2-SHA256(60만 회)+AES-GCM-256 으로만 있고,
+        복호화는 이 폰의 WebCrypto 안에서만(서버 전송 0). 비밀번호는 코드에 없다.
+        '이 폰에 기억하기'를 켜면 비밀번호가 아니라 복호화된 숫자만 hotcho_fin_charts_v1 에 남고,
+        🔒 잠그기를 누르면 그 숫자도 지운다.
+        (index.html ?v=44 · APP_VER v44 · hotcho_modes.js·css?v=44) */
+const CACHE = 'toeic-bts-v44';
 const SHELL = [
   './',
   './index.html',
