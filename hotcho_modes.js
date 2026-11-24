@@ -2473,10 +2473,10 @@
       if ((+r.inc || 0) > 0) {
         s += '<rect x="' + ix.toFixed(1) + '" y="' + y(r.inc).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + Math.max(0.8, ih).toFixed(1) + '" rx="1.2" fill="#34d399"/>';
         if (+r.inc >= 200000) {
-          s += '<text x="' + (ix + bw / 2).toFixed(1) + '" y="' + (y(r.inc) - 2).toFixed(1) + '" font-size="5" fill="#6ee7b7" text-anchor="middle">' + finChartMan(r.inc) + '</text>';
+          s += '<text x="' + (ix + bw / 2).toFixed(1) + '" y="' + (y(r.inc) - 2).toFixed(1) + '" font-size="5" fill="#a7f3d0" text-anchor="middle" stroke="#160f2b" stroke-width="1.5" paint-order="stroke">' + finChartMan(r.inc) + '</text>';
         }
       }
-      s += '<text x="' + (px + bw / 2).toFixed(1) + '" y="' + (y(r.pure) - 2).toFixed(1) + '" font-size="5" fill="#c9c1ea" text-anchor="middle">' + finChartMan(r.pure) + '</text>';
+      s += '<text x="' + (px + bw / 2).toFixed(1) + '" y="' + (y(r.pure) - 2).toFixed(1) + '" font-size="5" fill="#e6e1f7" text-anchor="middle" stroke="#160f2b" stroke-width="1.5" paint-order="stroke">' + finChartMan(r.pure) + '</text>';
       s += '<text x="' + cx.toFixed(1) + '" y="' + (padT + plotH + 11) + '" font-size="5.6" fill="#b9b0e0" text-anchor="middle">' + String(r.m).slice(5) + '</text>';
       if (String(r.m).slice(5) === '01' && janAt < 0) janAt = j;
     }
