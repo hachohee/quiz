@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-24T12:35:46+09:00",
+ "updated_at": "2026-11-25T06:01:32+09:00",
  "source": "YouTube channel RSS (official channels)",
  "per_program": 8,
  "failed": [],
@@ -163,15 +163,246 @@
  ],
  "episodes": [
   {
-   "v": "kRi3QTOGI8U",
+   "v": "iN397Y3xIU0",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "외부인 출입이 엄격히 금지됐던 비밀의 정원. 궁에 깃든 모성과 자연의 교감을 만난다 | KBS 자연의 타임캡슐 20170223 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T23:00:26+09:00",
+   "thumb": "https://i2.ytimg.com/vi/iN397Y3xIU0/hqdefault.jpg"
+  },
+  {
+   "v": "uEU_SNqyROA",
+   "pid": "mbc-pd",
+   "b": "mbc",
+   "cat": "news",
+   "program": "PD수첩",
+   "title": "[PD수첩] \"한강버스와 1,523억 스캔들\" - 2026년 11월 10일 밤 10시 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T22:58:13+09:00",
+   "thumb": "https://i2.ytimg.com/vi/uEU_SNqyROA/hqdefault.jpg"
+  },
+  {
+   "v": "L1NJIhA-V_k",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "화장실 문 열자 나타난 충격 장면.. 여자 노숙인의 삶 취재 갔더니 | KBS 시사기획 창 20240227 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T22:00:17+09:00",
+   "thumb": "https://i1.ytimg.com/vi/L1NJIhA-V_k/hqdefault.jpg"
+  },
+  {
+   "v": "hGJV_1olPQw",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "병사는 도박 중 [풀영상] | 창 572회 (KBS 26.11.24.)",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T22:00:11+09:00",
+   "thumb": "https://i1.ytimg.com/vi/hGJV_1olPQw/hqdefault.jpg"
+  },
+  {
+   "v": "Sow003TUAeE",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "대형마트 하나 들어서면 골목상점 수십 개, 재래시장 세 개 사라진다? | KBS 의뢰인 K 20120830 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T21:15:10+09:00",
+   "thumb": "https://i4.ytimg.com/vi/Sow003TUAeE/hqdefault.jpg"
+  },
+  {
+   "v": "d8AzSoY2N_c",
    "pid": "ebs-docu",
    "b": "ebs",
    "cat": "edu",
    "program": "EBS 다큐",
-   "title": "서로만 바라보기 위해 지은 집, 사랑하는 마음 하나로 부부가 선택한 삶｜애처가 남편의 인생 선물｜건축탐구 집｜#골라듄다큐",
+   "title": "평생 안 맞았던 자매가 60 넘어 노후를 함께 보내기로 결심한 이유｜언니는 양옥, 동생은 한옥. 남편과 함께 사는 대신 자매가 지은 극과 극 전원주택｜건축탐구 집｜#골라듄다큐",
    "date": "2026-11-24",
-   "dt": "2026-11-24T12:00:23+09:00",
-   "thumb": "https://i4.ytimg.com/vi/kRi3QTOGI8U/hqdefault.jpg"
+   "dt": "2026-11-24T21:00:33+09:00",
+   "thumb": "https://i1.ytimg.com/vi/d8AzSoY2N_c/hqdefault.jpg"
+  },
+  {
+   "v": "Jm2ZnRTM3Eg",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "🥶겨울 길거리에서 파는 만두만 보면 참을 수가 없다🥟｜공장부터 시장 만두까지｜극한직업 만두 모음｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T20:30:37+09:00",
+   "thumb": "https://i3.ytimg.com/vi/Jm2ZnRTM3Eg/hqdefault.jpg"
+  },
+  {
+   "v": "_v-U2FhVNNo",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "말이 안 될 정도로 대박 난 선장님이 선상 회파티를 열었다｜만선 모음집｜극한직업｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T20:15:31+09:00",
+   "thumb": "https://i4.ytimg.com/vi/_v-U2FhVNNo/hqdefault.jpg"
+  },
+  {
+   "v": "wzTGsxTmg9A",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "11억 감정이 8억 몇 천으로, 낙찰가율 80% 이하 2008년 말 이후 처음이라는 경매장 분위기 | KBS 취재파일 4321 20100725 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T20:15:26+09:00",
+   "thumb": "https://i4.ytimg.com/vi/wzTGsxTmg9A/hqdefault.jpg"
+  },
+  {
+   "v": "dUQwR6PKVQc",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "겉바속촉의 정석! 무려 이틀에 걸쳐 만드는 양고기 구이. 고기 천국 우즈베키스탄에서 꼭 먹어야 할 '탄드르 고쉬트' ｜극한직업｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T20:00:08+09:00",
+   "thumb": "https://i1.ytimg.com/vi/dUQwR6PKVQc/hqdefault.jpg"
+  },
+  {
+   "v": "eB9Zn9nIJm4",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "근대화 시대의 유적같은 그곳, 을지로 50년 넘게 자리한 상인들은 밥 먹으러 어디로 갈까?｜한국기행｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T19:45:25+09:00",
+   "thumb": "https://i2.ytimg.com/vi/eB9Zn9nIJm4/hqdefault.jpg"
+  },
+  {
+   "v": "_dFaGItcGQI",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "추워지면 생각난다. 직접 만들어서 끓여먹는 겨울 간식 1위 어묵 모음｜극한직업｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T19:30:27+09:00",
+   "thumb": "https://i4.ytimg.com/vi/_dFaGItcGQI/hqdefault.jpg"
+  },
+  {
+   "v": "UCQqHDRtTCw",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "학교 수업은 입시 준비에 도움이 안됐다 '선택적 자퇴'를 선택한 뒤 엄청난 변화를 겪은 학생｜다큐멘터리K｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T19:15:11+09:00",
+   "thumb": "https://i2.ytimg.com/vi/UCQqHDRtTCw/hqdefault.jpg"
+  },
+  {
+   "v": "FeHebICx-38",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "우리가 주 52시간을 추진할 때 일본은 왜 주 58시간을 얘기한 걸까? | KBS 시사기획 창 20181002 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T19:15:08+09:00",
+   "thumb": "https://i3.ytimg.com/vi/FeHebICx-38/hqdefault.jpg"
+  },
+  {
+   "v": "yiFHadd5HtM",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "배고파 죽겠다는 스탭들 위해서 특식 준비했다. 1박 2일 밤샘 촬영장 밥차 오는 날｜극한직업｜#골라듄다큐",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T19:01:39+09:00",
+   "thumb": "https://i2.ytimg.com/vi/yiFHadd5HtM/hqdefault.jpg"
+  },
+  {
+   "v": "tJ8DXpmzkgc",
+   "pid": "ebs-jisik",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "지식채널e",
+   "title": "🎧 이어폰 필수! 1억 6,500만 년 만에 다시 울리는 노래 | 화석과 AI로 복원한 쥐라기 곤충들의 소리 | #지식채널e",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T18:00:38+09:00",
+   "thumb": "https://i1.ytimg.com/vi/tJ8DXpmzkgc/hqdefault.jpg"
+  },
+  {
+   "v": "pxfb9RatTlo",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "미미미누가 책을 안 읽자 김용만이 반가워한 이유",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T18:00:32+09:00",
+   "thumb": "https://i1.ytimg.com/vi/pxfb9RatTlo/hqdefault.jpg"
+  },
+  {
+   "v": "jVz0-iMvVG4",
+   "pid": "sbs-dali",
+   "b": "sbs",
+   "cat": "edu",
+   "program": "SBS 교양",
+   "title": "할아버지만 보인단 말이야😭 #동물농장 #달리",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T17:00:37+09:00",
+   "thumb": "https://i3.ytimg.com/vi/jVz0-iMvVG4/hqdefault.jpg"
+  },
+  {
+   "v": "tg8ANL3c5x4",
+   "pid": "sbs-geal",
+   "b": "sbs",
+   "cat": "news",
+   "program": "그것이 알고싶다",
+   "title": "당신의 도파민은 얼마입니까?, 사이버 룸살롱 비즈니스 | 짧은 그알",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T16:59:37+09:00",
+   "thumb": "https://i1.ytimg.com/vi/tg8ANL3c5x4/hqdefault.jpg"
+  },
+  {
+   "v": "xtyJAvqXCOU",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "아버지와 연락 없이 무려 8년.. 다가오는 결혼에 결국 아버지를 만나러 가는데.. | KBS 인간극장 20261117 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T16:00:24+09:00",
+   "thumb": "https://i1.ytimg.com/vi/xtyJAvqXCOU/hqdefault.jpg"
+  },
+  {
+   "v": "XRLewpZTJOg",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "물가 대란과 고물가 시대에 점심 먹기도 고민, 서민도 상인도 힘든 날들 | KBS VJ 특공대 20110826 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T15:15:15+09:00",
+   "thumb": "https://i1.ytimg.com/vi/XRLewpZTJOg/hqdefault.jpg"
+  },
+  {
+   "v": "5MNPq_vHnrw",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "한족 밀어내고 금나라를 세운 왕, 아골타는 사실 신라의 후예였다 | KBS 역사스페셜 20090905 방송",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T14:00:08+09:00",
+   "thumb": "https://i2.ytimg.com/vi/5MNPq_vHnrw/hqdefault.jpg"
   },
   {
    "v": "h6kzzVt8_tM",
@@ -185,61 +416,6 @@
    "thumb": "https://i1.ytimg.com/vi/h6kzzVt8_tM/hqdefault.jpg"
   },
   {
-   "v": "V4FCe1K6P9o",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "한국 아파트 숨 막힌다는 일본 아내 말에 단 3억으로 집 지었다｜평수는 아파트 두배인데 공과금 인테리어는 반값 됐다고｜건축탐구 집｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:30:20+09:00",
-   "thumb": "https://i3.ytimg.com/vi/V4FCe1K6P9o/hqdefault.jpg"
-  },
-  {
-   "v": "uEU_SNqyROA",
-   "pid": "mbc-pd",
-   "b": "mbc",
-   "cat": "news",
-   "program": "PD수첩",
-   "title": "[PD수첩/LIVE] \"한강버스와 1,523억 스캔들\" - 2026년 11월 10일 밤 10시 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:22:51+09:00",
-   "thumb": "https://i2.ytimg.com/vi/uEU_SNqyROA/hqdefault.jpg"
-  },
-  {
-   "v": "0txX8JNVgWM",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "“이런 거까지” 흉악범까지 혼자서 150명 민원 처리하는 여자 교도소의 하루｜선 넘는 민원에 보면서도 기가 막힌다｜국가 보안시설｜사회 격리 청주 여자 교도소｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:16:55+09:00",
-   "thumb": "https://i1.ytimg.com/vi/0txX8JNVgWM/hqdefault.jpg"
-  },
-  {
-   "v": "1MTXVLPjza0",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "밤새 대관령을 넘는 것부터 시작이었다. 8박 9일 혹한기 훈련 버틴 특전사 최고 팀의 결말｜육군 최강부대 특전사의 전투력｜흑표부대｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:00:29+09:00",
-   "thumb": "https://i2.ytimg.com/vi/1MTXVLPjza0/hqdefault.jpg"
-  },
-  {
-   "v": "F_DbLtGLyDY",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "건물이 왜 저러지..? 사찰 건물이 완전히 무너져 있는 이유| KBS 걸어서 세계 속으로 20260321 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:00:04+09:00",
-   "thumb": "https://i3.ytimg.com/vi/F_DbLtGLyDY/hqdefault.jpg"
-  },
-  {
    "v": "Tnu-YGtkWPY",
    "pid": "ebs-jisik",
    "b": "ebs",
@@ -249,50 +425,6 @@
    "date": "2026-11-24",
    "dt": "2026-11-24T10:54:20+09:00",
    "thumb": "https://i1.ytimg.com/vi/Tnu-YGtkWPY/hqdefault.jpg"
-  },
-  {
-   "v": "Q7RwV1SbRD0",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "폐허를 이렇게 만든 실력도 대단한데, 입담까지 너무 좋은 스님｜신자 3명 겨우있던 절의 대변신｜직접가꾼 정원에 제철채소까지 요리까지 뚝딱하더니｜한국기행｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T10:30:03+09:00",
-   "thumb": "https://i2.ytimg.com/vi/Q7RwV1SbRD0/hqdefault.jpg"
-  },
-  {
-   "v": "oy9cR5_UNrg",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "손가락도 못 보던 시각장애 환자의 1분 뒤 변화, 기적과 뇌의 미스터리가 맞물린 현장 | KBS 파노라마 20140411 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T10:15:29+09:00",
-   "thumb": "https://i4.ytimg.com/vi/oy9cR5_UNrg/hqdefault.jpg"
-  },
-  {
-   "v": "bXAUFykovks",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "'기특하기도 하지' 한국인 사라지는 제조업 생산직 공장에 25살 딸이 첫 출근하더니｜남들 보다 편한 길 부모님께 감사하다며 매일 밥 챙기는 20대 딸｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T10:00:34+09:00",
-   "thumb": "https://i3.ytimg.com/vi/bXAUFykovks/hqdefault.jpg"
-  },
-  {
-   "v": "ugGUpNsU0Vg",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "우리가 알던 허준은 대부분 허구였다, 드라마가 감춘 충격적인 진실과 오해 | KBS 역사저널 그날 20140913 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T09:15:20+09:00",
-   "thumb": "https://i2.ytimg.com/vi/ugGUpNsU0Vg/hqdefault.jpg"
   },
   {
    "v": "EP6z3xJ63Kk",
@@ -317,72 +449,6 @@
    "thumb": "https://i3.ytimg.com/vi/2xJAdop60-w/hqdefault.jpg"
   },
   {
-   "v": "hfnjL1IkwPg",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "낯설고 기묘한 풍경 속 사람들의 일상?!ㅣ여기 산다고? 중국ㅣ세계테마기행ㅣTV로 보는 #골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T02:00:33+09:00",
-   "thumb": "https://i1.ytimg.com/vi/hfnjL1IkwPg/hqdefault.jpg"
-  },
-  {
-   "v": "1WH-Orgl0TI",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "가장 높은 권력이 머물던 곳에서 야생의 숨결이 이어지기까지, 600년 창덕궁이 품은 진짜 주인들 | KBS 자연의 타임캡슐 20170216 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T23:00:16+09:00",
-   "thumb": "https://i2.ytimg.com/vi/1WH-Orgl0TI/hqdefault.jpg"
-  },
-  {
-   "v": "eFGL47AUKBk",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "\"이게 도대체 무슨..\" 마약으로 외화벌이, 북한산 마약의 충격적인 진실이 밝혀졌다 | KBS 시사기획 창 20220705 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:00:20+09:00",
-   "thumb": "https://i2.ytimg.com/vi/eFGL47AUKBk/hqdefault.jpg"
-  },
-  {
-   "v": "K3QcKmrDl04",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "블랙홀처럼 빨려 든 청약 열기와 10년 뒤 폭탄이 된 공공임대, 신도시 뒤에 감춰진 구조 | KBS 시사기획 창 20190514 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T21:15:36+09:00",
-   "thumb": "https://i4.ytimg.com/vi/K3QcKmrDl04/hqdefault.jpg"
-  },
-  {
-   "v": "bvd18biP36g",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "썩은내 진동하는 집 이웃들 신고 받고 출동했더니 충격｜부검의가 직접 겪은 미스터리 죽음의 비밀｜방배동 미라 남편 사건｜취미는 과학｜#골라듄다큐",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:40:06+09:00",
-   "thumb": "https://i3.ytimg.com/vi/bvd18biP36g/hqdefault.jpg"
-  },
-  {
-   "v": "JgTNVJJzGdg",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "1년에 3000억 원이 흘러가는 비밀 경로, 중국 옌지 인력과 외화 소득원의 감춰진 구조 | KBS 9층 시사국 20230625 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:15:17+09:00",
-   "thumb": "https://i3.ytimg.com/vi/JgTNVJJzGdg/hqdefault.jpg"
-  },
-  {
    "v": "OS5n0S2yldg",
    "pid": "mbc-docu",
    "b": "mbc",
@@ -403,17 +469,6 @@
    "date": "2026-11-23",
    "dt": "2026-11-23T20:00:16+09:00",
    "thumb": "https://i4.ytimg.com/vi/GYOthKF_AyE/hqdefault.jpg"
-  },
-  {
-   "v": "2YfWDeaWw7k",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "166개 중 33개 누락과 삭제된 도면,... 그때 놓친 경고등과 은폐 의혹의 전말 | KBS 시사기획 창 20181127 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T19:15:27+09:00",
-   "thumb": "https://i3.ytimg.com/vi/2YfWDeaWw7k/hqdefault.jpg"
   },
   {
    "v": "JfoqcFywj54",
@@ -559,17 +614,6 @@
    "thumb": "https://i1.ytimg.com/vi/4GMsJN7tZ_k/hqdefault.jpg"
   },
   {
-   "v": "3rxYTfBaXRU",
-   "pid": "sbs-dali",
-   "b": "sbs",
-   "cat": "edu",
-   "program": "SBS 교양",
-   "title": "그런 거 아니었나?ㅎ #달리 #DALI",
-   "date": "2026-11-21",
-   "dt": "2026-11-21T17:00:32+09:00",
-   "thumb": "https://i4.ytimg.com/vi/3rxYTfBaXRU/hqdefault.jpg"
-  },
-  {
    "v": "hVhilO_XtxA",
    "pid": "sbs-geal",
    "b": "sbs",
@@ -623,17 +667,6 @@
    "date": "2026-11-20",
    "dt": "2026-11-20T18:00:18+09:00",
    "thumb": "https://i2.ytimg.com/vi/yzlAcUjMlVI/hqdefault.jpg"
-  },
-  {
-   "v": "Mh2bF1vRQAs",
-   "pid": "kbs-sisa",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "호황의 그늘Ⅱ, 비행낭인 | 더 보다 3회 클립영상 (KBS 2024.3.3)",
-   "date": "2026-11-20",
-   "dt": "2026-11-20T17:06:45+09:00",
-   "thumb": "https://i2.ytimg.com/vi/Mh2bF1vRQAs/hqdefault.jpg"
   },
   {
    "v": "1DoNk1ulUkg",
@@ -711,17 +744,6 @@
    "date": "2026-11-17",
    "dt": "2026-11-17T22:00:06+09:00",
    "thumb": "https://i4.ytimg.com/vi/O4npwpJIZHY/hqdefault.jpg"
-  },
-  {
-   "v": "z2As_raTvEU",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "로스쿨 졸업까지 반년, 암은 다시 커졌다ㅣ[MBC스페셜] 20190618 방송",
-   "date": "2026-11-17",
-   "dt": "2026-11-17T20:00:08+09:00",
-   "thumb": "https://i3.ytimg.com/vi/z2As_raTvEU/hqdefault.jpg"
   },
   {
    "v": "L2PNQP2mMYE",
@@ -922,17 +944,6 @@
    "thumb": "https://i3.ytimg.com/vi/VKLDfE5usSE/hqdefault.jpg"
   },
   {
-   "v": "aAxYZg0Tlp4",
-   "pid": "sbs-geal",
-   "b": "sbs",
-   "cat": "news",
-   "program": "그것이 알고싶다",
-   "title": "악독한 재회 시나리오, 김성우는 왜 장모를 살해했나? | 짧은 그알",
-   "date": "2026-11-10",
-   "dt": "2026-11-10T17:00:08+09:00",
-   "thumb": "https://i2.ytimg.com/vi/aAxYZg0Tlp4/hqdefault.jpg"
-  },
-  {
    "v": "qTAHbYya7mA",
    "pid": "kbs-3il",
    "b": "kbs",
@@ -953,17 +964,6 @@
    "date": "2026-11-08",
    "dt": "2026-11-08T21:56:10+09:00",
    "thumb": "https://i2.ytimg.com/vi/iQe4i9NNTic/hqdefault.jpg"
-  },
-  {
-   "v": "L2a5-OgtOqk",
-   "pid": "ebs-jisik",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "지식채널e",
-   "title": "겉으론 유능해 보이지만 이미 방전된 사람들 | 소리 없는 아우성, '고기능 우울증' | #지식채널e",
-   "date": "2026-11-07",
-   "dt": "2026-11-07T18:00:01+09:00",
-   "thumb": "https://i1.ytimg.com/vi/L2a5-OgtOqk/hqdefault.jpg"
   },
   {
    "v": "MndcLX9j6Gc",
@@ -1052,17 +1052,6 @@
    "date": "2026-09-29",
    "dt": "2026-09-29T22:00:07+09:00",
    "thumb": "https://i1.ytimg.com/vi/LnD4AzxUgek/hqdefault.jpg"
-  },
-  {
-   "v": "I6oDuD6rQVo",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "시사기획 창",
-   "title": "죄와 병: 사라진 사람들 [풀영상] | 창 564회 (KBS 26.9.22.)",
-   "date": "2026-09-22",
-   "dt": "2026-09-22T22:00:07+09:00",
-   "thumb": "https://i2.ytimg.com/vi/I6oDuD6rQVo/hqdefault.jpg"
   },
   {
    "v": "yGFzITrjT4k",
