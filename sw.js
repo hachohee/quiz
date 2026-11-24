@@ -31,8 +31,12 @@
         취재기자·시민 시선의 '생각해 볼 문제' 1~2개(hotcho_news.json daily_brief). 없으면 조용히 숨김.
    v35: 🎬 뿌듯핫초 → '내 기사' 탭 — 2014~2026년 KBS 보도 목록 474편(my_articles.json)을
         연도·분류 칩 + 제목 검색 + 다시보기 링크로. 복직 뒤 앱에서 바로 새 기사를 쌓으면
-        hotcho_my_articles_v1(백업·기기 이동 포함)에 저장됨. */
-const CACHE = 'toeic-bts-v35';
+        hotcho_my_articles_v1(백업·기기 이동 포함)에 저장됨.
+   v36: 💰 행복핫초 → '재정' 탭 — 📒 노션 가계부 바로가기 · 💸 이번 달 예산/오늘 지출(게이지·삭제) ·
+        ⏰ 마감일 D-day(체크·추가·삭제) · 🧮 예·적금/대출/ISA·연금 계산기.
+        예산·지출·마감일은 hotcho_finance_v1(이 폰에만, 기기 옮기기 코드 포함) · 잔액·계좌/카드번호·
+        기프티콘 바코드는 공개 저장소라 코드에도 데이터에도 넣지 않음. */
+const CACHE = 'toeic-bts-v36';
 const SHELL = [
   './',
   './index.html',

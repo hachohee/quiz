@@ -450,3 +450,52 @@ a.hc-ma-t:active { opacity: .7; }
 .hc-ma-minerow:first-of-type { border-top: 0; }
 .hc-ma-mt { flex: 1; font-size: 12.6px; color: #ded7f5; line-height: 1.35; }
 .hc-ma-del { flex: 0 0 auto; border: 0; background: rgba(251, 113, 133, .14); color: #fb7185; border-radius: 8px; padding: 3px 8px; font: inherit; font-size: 11px; cursor: pointer; }
+
+/* =====================================================================
+   v36 — 💰 재정 (예산·지출 · 마감일 D-day · 이자/대출/절세 계산기)
+   ===================================================================== */
+.hc-menu.home button.wide { flex: 1 1 100%; font-size: 11.5px; padding: 8px 6px; opacity: .82; }
+
+.hc-fin-budget > label { display: block; font-size: 11.5px; color: var(--muted, #a89ddb); margin: 0 2px 5px; font-weight: 600; }
+.hc-fin-top { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; margin: 0 2px 8px; }
+.hc-fin-top b { font-size: 21px; letter-spacing: -.7px; color: #fff; font-variant-numeric: tabular-nums; }
+.hc-fin-top .of { font-size: 11.5px; color: var(--muted, #a89ddb); }
+.hc-fin-top .pct { margin-left: auto; font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.hc-fin-bar { height: 10px; border-radius: 999px; background: rgba(255, 255, 255, .08); overflow: hidden; }
+.hc-fin-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #8b5cf6, #f472b6); transition: width .25s ease; }
+.hc-fin-bar i.warn { background: linear-gradient(90deg, #f59e0b, #fb7185); }
+.hc-fin-bar i.over { background: linear-gradient(90deg, #ef4444, #f97316); }
+.hc-fin-sub { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 11.5px; color: var(--muted, #a89ddb); margin-top: 8px; line-height: 1.45; }
+.hc-fin-sub b { color: #f4efff; font-variant-numeric: tabular-nums; }
+.hc-fin-form { margin-top: 13px; padding-top: 12px; border-top: 1px dashed rgba(255, 255, 255, .1); }
+
+.hc-fin-row { display: flex; align-items: center; gap: 8px; padding: 8px 2px; border-top: 1px solid rgba(255, 255, 255, .06); }
+.hc-fin-row:first-child { border-top: 0; }
+.hc-fin-row .cat { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; white-space: nowrap; }
+.hc-fin-row .lb { flex: 1; min-width: 0; font-size: 12.8px; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hc-fin-row .lb .d { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-left: 3px; }
+.hc-fin-row .amt { flex: 0 0 auto; font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.hc-fin-row .x { flex: 0 0 auto; border: 0; background: transparent; color: #6f65a0; font-size: 15px; cursor: pointer; padding: 2px 4px; }
+
+.hc-dday { display: flex; align-items: center; gap: 9px; padding: 9px 2px; border-top: 1px solid rgba(255, 255, 255, .06); }
+.hc-dday:first-child { border-top: 0; }
+.hc-dday input { width: 18px; height: 18px; accent-color: #8b5cf6; flex: 0 0 auto; }
+.hc-dday .b { flex: 1; min-width: 0; }
+.hc-dday .t { font-size: 13px; font-weight: 600; line-height: 1.35; }
+.hc-dday .t.done { text-decoration: line-through; color: var(--muted2, #7f74b3); }
+.hc-dday .m { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-top: 2px; }
+.hc-dday .dd { flex: 0 0 auto; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; font-variant-numeric: tabular-nums; }
+.hc-dday .dd.soon { background: rgba(251, 191, 36, .18); color: #fbbf24; }
+.hc-dday .dd.today { background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff; }
+.hc-dday .dd.past { background: rgba(255, 255, 255, .05); color: #6f65a0; }
+.hc-dday .x { border: 0; background: transparent; color: #6f65a0; font-size: 15px; cursor: pointer; padding: 2px 4px; flex: 0 0 auto; }
+
+.hc-fin-out { margin-top: 12px; border-radius: 14px; padding: 11px 12px; background: linear-gradient(150deg, rgba(139, 92, 246, .18), rgba(244, 114, 182, .1)); border: 1px solid rgba(196, 181, 253, .26); }
+.hc-fin-out-t { font-size: 10.5px; font-weight: 800; color: #c4b5fd; letter-spacing: .3px; margin-bottom: 7px; }
+.hc-fin-or { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; border-top: 1px solid rgba(255, 255, 255, .06); }
+.hc-fin-out-t + .hc-fin-or { border-top: 0; }
+.hc-fin-or .k { flex: 0 0 auto; font-size: 11.5px; color: var(--muted, #a89ddb); }
+.hc-fin-or .v { flex: 1; text-align: right; font-size: 12.8px; font-weight: 700; font-variant-numeric: tabular-nums; word-break: break-all; }
+.hc-fin-or.hl .v { color: #6ee7b7; }
+.hc-fin-or.big { padding: 7px 0 3px; }
+.hc-fin-or.big .v { font-size: 17px; letter-spacing: -.3px; color: #fff; }

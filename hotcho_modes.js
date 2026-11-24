@@ -15,6 +15,8 @@
   var FRIDGE_APP = 'https://mission-fridge.mission-fridge.workers.dev';
   var CARTEL_APP = 'https://hachohee.github.io/cartelwatch/';
   var NOTION_ARTICLES_URL = 'https://app.notion.com/p/f33ae0409ae9400babd69e72f7afdcd0';
+  /* 📒 노션 '월별 가계부 · 내 돈 흐름' — 초희 로그인에서만 열리는 페이지라 주소만 둔다 */
+  var NOTION_LEDGER_URL = 'https://app.notion.com/p/41ac701f951a81078ee1d60ab9b4c28f';
 
   var K = {
     items: 'hotcho_items_v1',
@@ -27,7 +29,8 @@
     frIng: 'hotcho_fridge_ing_v1',
     frPrio: 'hotcho_fridge_prio_v1',
     frKey: 'hotcho_gemini_key_v1',
-    myart: 'hotcho_my_articles_v1'
+    myart: 'hotcho_my_articles_v1',
+    fin: 'hotcho_finance_v1'      /* 💰 재정 — 예산·지출·마감일(이 폰에만) */
   };
 
   /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
@@ -43,6 +46,25 @@
   var MON_ORDER = ['press', 'law', 'assembly', 'mods', 'local', 'gangwon', 'nation'];
 
   var CATS = ['강원', '전국', '탐사', '생활'];
+
+  /* 💰 재정 — 카테고리·세율·처음 열 때 담아 두는 마감일(날짜와 이름만, 금액·바코드는 넣지 않음) */
+  var FIN_CATS = ['식비', '아이', '생활', '기타'];
+  var FIN_CAT_E = { '식비': '🍚', '아이': '🎒', '생활': '🧺', '기타': '🧾' };
+  var FIN_INT_TAX = 0.154;   /* 이자소득세 = 소득세 14% + 지방소득세 1.4% */
+  /* 계산기 처음 값(예시 숫자 — 초희 실제 값이 아니다) */
+  var FIN_CALC_DEF = {
+    hcFinSvMode: 'lump', hcFinSvAmt: '100', hcFinSvRate: '3.5', hcFinSvMon: '12',
+    hcFinLoAmt: '3000', hcFinLoRate: '4.5', hcFinLoMon: '60',
+    hcFinTxSal: '5000', hcFinTxPen: '600', hcFinTxIrp: '300', hcFinTxIsa: '300', hcFinTxIsaType: 'normal'
+  };
+  var FIN_SEED_DDAY = [
+    { d: '2026-11-29', label: '편의점 할인권(CU) 마감' },
+    { d: '2026-11-30', label: '스타벅스 1+1 종료' },
+    { d: '2026-11-30', label: '춘천 입학축하금 신청 마감' },
+    { d: '2026-12-12', label: '컴포즈 1+1 종료' },
+    { d: '2026-12-20', label: '네이버페이 고객확인(KYC)' },
+    { d: '2026-12-24', label: '이마트 상품권' }
+  ];
   var STATUS = [
     { k: '아이디어', cls: 's-idea' },
     { k: '취재중', cls: 's-work' },
@@ -160,6 +182,29 @@
   if (!S.home.fridge) S.home.fridge = { memo: '', shop: [] };
   if (!S.home.fridge.shop) S.home.fridge.shop = [];
   if (!S.home.checks) S.home.checks = {};
+
+  /* 💰 재정 — 예산·지출·마감일은 이 폰(localStorage)에만. hotcho_ 로 시작하니
+     ⚙️ 백업·기기 옮기기 코드에도 그대로 담긴다. 처음 한 번은 마감일 몇 개를 담아 둔다. */
+  S.fin = (function () {
+    var f = load(K.fin, null) || {};
+    if (!f.budgets || typeof f.budgets !== 'object') f.budgets = {};
+    if (!Array.isArray(f.spend)) f.spend = [];
+    if (!Array.isArray(f.ddays)) f.ddays = [];
+    if (!f.calcIn || typeof f.calcIn !== 'object') f.calcIn = {};
+    if (!f.calc) f.calc = 'saving';
+    if (!f.seeded) {
+      /* 2027년에 처음 열면 이미 지난 쿠폰을 넣지 않는다 */
+      if (kstToday() <= '2026-12-31') {
+        for (var i = 0; i < FIN_SEED_DDAY.length; i++) {
+          f.ddays.push({ id: uid(), d: FIN_SEED_DDAY[i].d, label: FIN_SEED_DDAY[i].label, done: false });
+        }
+      }
+      f.seeded = 1;
+      try { localStorage.setItem(K.fin, JSON.stringify(f)); } catch (e) {}
+    }
+    return f;
+  })();
+  function finSave() { save(K.fin, S.fin); }
 
   /* ------------------------------------------------------------ helpers */
   function $(id) { return document.getElementById(id); }
@@ -546,7 +591,7 @@
 
   /* ============================================================ 메뉴 버튼 전환 */
   var WORK_SECS = ['news', 'monitor', 'cartel', 'items', 'article', 'myart'];
-  var HOME_SECS = ['events', 'kids', 'fridge', 'backup'];
+  var HOME_SECS = ['events', 'kids', 'money', 'fridge', 'backup'];
 
   function showWorkSec(sec) {
     if (WORK_SECS.indexOf(sec) < 0) sec = 'news';
@@ -583,6 +628,7 @@
     }
     if (sec === 'events') { renderEvents(); renderMemos(); }
     if (sec === 'kids') renderKids();
+    if (sec === 'money') renderMoney();
     if (sec === 'fridge') { renderShop(); frEnter(); }
     if (sec === 'backup') renderSyncSummary();
     try { window.scrollTo(0, 0); } catch (e) {}
@@ -1852,6 +1898,7 @@
     var items = j('hotcho_items_v1', []);
     var drafts = j('hotcho_drafts_v1', []);
     var myart = j('hotcho_my_articles_v1', []);
+    var fin = j('hotcho_finance_v1', {});
     var keys = 0, bytes = 0;
     for (var k in store) {
       if (!Object.prototype.hasOwnProperty.call(store, k)) continue;
@@ -1863,12 +1910,14 @@
       items: (items && items.length) || 0,
       drafts: (drafts && drafts.length) || 0,
       myart: (myart && myart.length) || 0,
+      spend: (fin && fin.spend && fin.spend.length) || 0,
+      dday: (fin && fin.ddays && fin.ddays.length) || 0,
       keys: keys,
       kb: Math.max(1, Math.round(bytes / 1024))
     };
   }
   function summaryText(st) {
-    return 'BTS ' + st.deck + '/7 · 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개 · 내 기사 ' + (st.myart || 0) + '편 · 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)';
+    return 'BTS ' + st.deck + '/7 · 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개 · 내 기사 ' + (st.myart || 0) + '편 · 지출 ' + (st.spend || 0) + '건 · 마감일 ' + (st.dday || 0) + '개 · 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)';
   }
 
   /* 코드 글자 ↔ 기록: base64(가능하면 gzip) */
@@ -2224,12 +2273,314 @@
     toast('내 기사에 담았어요 · 이 폰에 저장');
   }
 
+  /* ============================================================ 💰 재정 (v36)
+     초희 승인: 🏠 행복핫초 → 💰 재정 (4개 기능)
+       ① 노션 가계부 바로가기  ② 이번 달 예산 · 오늘 지출  ③ 마감일 D-day  ④ 이자/대출/절세 계산기
+     · 공개 저장소라 통장 잔액·순자산·계좌/카드번호·기프티콘 바코드는 코드에도 JSON에도 넣지 않는다.
+     · 숫자는 이 폰의 localStorage(hotcho_finance_v1)에만 저장되고, hotcho_ 접두사라
+       ⚙️ 백업·기기 옮기기 코드·파일에도 그대로 담긴다. */
+  function finMonthKey(d) { return String(d || kstToday()).slice(0, 7); }
+  function finMonthName(mk) { var p = String(mk).split('-'); return p[0] + '년 ' + (+p[1]) + '월'; }
+  function finNum(v) {
+    var n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.\-]/g, ''));
+    return isFinite(n) ? n : 0;
+  }
+  function finWon(n) { return num(Math.round(n || 0)) + '원'; }
+  function finDiffDays(fromIso, toIso) {
+    function t(s) { var p = String(s).split('-'); return Date.UTC(+p[0], (+p[1]) - 1, +p[2]); }
+    return Math.round((t(toIso) - t(fromIso)) / 86400000);
+  }
+  function finDaysLeftInMonth(today) {
+    var p = String(today || kstToday()).split('-');
+    var last = new Date(Date.UTC(+p[0], +p[1], 0)).getUTCDate();
+    return Math.max(1, last - (+p[2]) + 1);
+  }
+  function finBudget(mk) { return +S.fin.budgets[mk] || 0; }
+  function finMonthSpend(mk) {
+    var out = [], a = S.fin.spend || [];
+    for (var i = 0; i < a.length; i++) if (finMonthKey(a[i].d) === mk) out.push(a[i]);
+    return out;
+  }
+  function finIn(id, d) {
+    var ci = S.fin.calcIn || {};
+    if (d == null) d = FIN_CALC_DEF[id];
+    return (ci[id] == null || ci[id] === '') ? (d == null ? '' : d) : ci[id];
+  }
+
+  function renderMoney() {
+    var mk = finMonthKey();
+    var mEl = $('hcFinMonth'); if (mEl) mEl.textContent = finMonthName(mk) + ' 기준';
+    var bi = $('hcFinBudgetIn'); if (bi) bi.value = finBudget(mk) ? String(finBudget(mk)) : '';
+    var dd = $('hcFinDDate'); if (dd && !dd.value) dd.value = kstToday();
+    finGauge(); finSpendList(); finDDayList(); finCalc();
+  }
+
+  /* ② 이번 달 누적 · 남은 예산 게이지 */
+  function finGauge() {
+    var el = $('hcFinGauge'); if (!el) return;
+    var mk = finMonthKey(), today = kstToday();
+    var budget = finBudget(mk), list = finMonthSpend(mk);
+    var used = 0, todayUsed = 0;
+    for (var i = 0; i < list.length; i++) {
+      var a = +(list[i].amt) || 0;
+      used += a;
+      if (list[i].d === today) todayUsed += a;
+    }
+    var left = budget - used;
+    var pct = budget > 0 ? Math.round(used / budget * 100) : 0;
+    var cls = (budget > 0 && used > budget) ? 'over' : (pct >= 80 ? 'warn' : '');
+    var h = '<div class="hc-fin-top"><b>' + num(used) + '원</b>' +
+      '<span class="of">' + (budget > 0 ? '/ ' + num(budget) + '원' : '/ 예산 미설정') + '</span>' +
+      '<span class="pct" style="color:' + (budget > 0 && used > budget ? '#fb7185' : (pct >= 80 ? '#fbbf24' : '#6ee7b7')) + '">' +
+      (budget > 0 ? pct + '%' : '—') + '</span></div>' +
+      '<div class="hc-fin-bar"><i class="' + cls + '" style="width:' + Math.min(100, Math.max(0, pct)) + '%"></i></div>' +
+      '<div class="hc-fin-sub">';
+    if (budget > 0) {
+      h += left >= 0
+        ? '<span>남은 돈 <b>' + num(left) + '원</b></span>'
+        : '<span style="color:#fb7185">예산 <b style="color:#fb7185">' + num(-left) + '원</b> 넘었어</span>';
+    }
+    h += '<span>오늘 <b>' + num(todayUsed) + '원</b></span>';
+    if (budget > 0 && left > 0) h += '<span>이번 달 ' + finDaysLeftInMonth() + '일 남아 하루 <b>' + num(Math.round(left / finDaysLeftInMonth())) + '원</b>씩</span>';
+    if (!list.length) h += '<span>아직 적은 지출이 없어</span>';
+    h += '</div>';
+    el.innerHTML = h;
+  }
+
+  function finSpendList() {
+    var el = $('hcFinList'); if (!el) return;
+    var mk = finMonthKey();
+    var list = finMonthSpend(mk).slice().sort(function (a, b) {
+      if (a.d !== b.d) return a.d < b.d ? 1 : -1;
+      return (b.ts || 0) - (a.ts || 0);
+    });
+    if (!list.length) {
+      el.innerHTML = '<div class="hc-empty">이번 달 지출이 아직 없어요.<br>위에 적고 ＋추가를 누르면 이 폰에만 저장돼요</div>';
+      return;
+    }
+    var h = '', sum = 0;
+    for (var i = 0; i < list.length; i++) {
+      var it = list[i], amt = +(it.amt) || 0;
+      sum += amt;
+      h += '<div class="hc-fin-row">' +
+        '<span class="cat">' + (FIN_CAT_E[it.cat] || '🧾') + ' ' + esc(it.cat || '기타') + '</span>' +
+        '<span class="lb">' + esc(it.label || '지출') +
+        '<span class="d">' + esc(String(it.d || '').slice(5).replace('-', '/')) + '</span></span>' +
+        '<span class="amt">' + num(amt) + '</span>' +
+        '<button type="button" class="x" data-act="fin-del" data-fin-del="' + it.id + '" aria-label="이 지출 지우기">✕</button></div>';
+    }
+    h += '<p class="hc-note">이번 달 ' + list.length + '건 · 합계 ' + finWon(sum) + '</p>';
+    el.innerHTML = h;
+  }
+
+  function finSetBudget() {
+    var el = $('hcFinBudgetIn'); if (!el) return;
+    var v = Math.max(0, Math.round(finNum(el.value)));
+    var mk = finMonthKey();
+    if (!S.fin.budgets) S.fin.budgets = {};
+    if (v > 0) S.fin.budgets[mk] = v; else delete S.fin.budgets[mk];
+    finSave(); finGauge();
+    toast(v > 0 ? finMonthName(mk) + ' 예산 ' + finWon(v) + '으로 잡았어' : '이번 달 예산을 비웠어');
+  }
+
+  function finAddSpend() {
+    var li = $('hcFinLabel'), ai = $('hcFinAmt'), ci = $('hcFinCat');
+    var label = ((li && li.value) || '').replace(/^\s+|\s+$/g, '');
+    var amt = Math.round(finNum(ai && ai.value));
+    var cat = (ci && ci.value) || '기타';
+    if (!amt) { toast('금액을 적어 주세요'); if (ai) ai.focus(); return; }
+    if (!label) label = cat + ' 지출';
+    S.fin.spend.unshift({ id: uid(), d: kstToday(), label: label, amt: amt, cat: cat, ts: Date.now() });
+    if (S.fin.spend.length > 3000) S.fin.spend = S.fin.spend.slice(0, 3000);   /* 오래된 것 정리 */
+    finSave();
+    if (li) li.value = '';
+    if (ai) ai.value = '';
+    finGauge(); finSpendList();
+    toast(finWon(amt) + ' 담았어 · 이 폰에만 저장');
+  }
+
+  function finDelSpend(id) {
+    var before = (S.fin.spend || []).length;
+    S.fin.spend = (S.fin.spend || []).filter(function (x) { return x.id !== id; });
+    if (S.fin.spend.length === before) return;
+    finSave(); finGauge(); finSpendList();
+  }
+
+  /* ③ 마감일 D-day */
+  function finDDayList() {
+    var el = $('hcFinDDayList'); if (!el) return;
+    var today = kstToday();
+    var list = (S.fin.ddays || []).slice().sort(function (a, b) {
+      if (!!a.done !== !!b.done) return a.done ? 1 : -1;
+      return a.d < b.d ? -1 : (a.d > b.d ? 1 : 0);
+    });
+    var cnt = $('hcFinDDayCnt');
+    if (cnt) {
+      var soon = 0;
+      for (var k = 0; k < list.length; k++) {
+        var dd0 = finDiffDays(today, list[k].d);
+        if (!list[k].done && dd0 >= 0 && dd0 <= 7) soon++;
+      }
+      cnt.textContent = soon ? '이번 주 ' + soon + '건' : (list.length ? list.length + '건' : '');
+    }
+    if (!list.length) {
+      el.innerHTML = '<div class="hc-empty">마감일이 비어 있어요.<br>아래에 날짜와 이름을 적으면 D-day로 세어 드려요</div>';
+      return;
+    }
+    var h = '';
+    for (var i = 0; i < list.length; i++) {
+      var it = list[i];
+      var diff = finDiffDays(today, it.d);
+      var badge, bcls;
+      if (it.done) { badge = '완료'; bcls = 'past'; }
+      else if (diff === 0) { badge = 'D-day'; bcls = 'today'; }
+      else if (diff > 0) { badge = 'D-' + diff; bcls = diff <= 7 ? 'soon' : ''; }
+      else { badge = (diff === -1 ? '어제' : Math.abs(diff) + '일 지남'); bcls = 'past'; }
+      h += '<div class="hc-dday">' +
+        '<input type="checkbox" data-fin-ddone="' + it.id + '"' + (it.done ? ' checked' : '') + ' aria-label="마감 챙김">' +
+        '<span class="b"><span class="t' + (it.done ? ' done' : '') + '">' + esc(it.label) + '</span>' +
+        '<span class="m" style="display:block">' + esc(it.d) + '</span></span>' +
+        '<span class="dd ' + bcls + '">' + badge + '</span>' +
+        '<button type="button" class="x" data-act="fin-dday-del" data-fin-dday-del="' + it.id + '" aria-label="지우기">✕</button></div>';
+    }
+    el.innerHTML = h;
+  }
+
+  function finAddDDay() {
+    var li = $('hcFinDLabel'), di = $('hcFinDDate');
+    var label = ((li && li.value) || '').replace(/^\s+|\s+$/g, '');
+    var d = (di && di.value) || '';
+    if (!label) { toast('무엇인지 적어 주세요'); if (li) li.focus(); return; }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) { toast('날짜를 골라 주세요'); if (di) di.focus(); return; }
+    S.fin.ddays.push({ id: uid(), d: d, label: label, done: false });
+    finSave();
+    if (li) li.value = '';
+    finDDayList();
+    toast('마감일 담았어 · D-' + Math.max(0, finDiffDays(kstToday(), d)));
+  }
+
+  function finToggleDDay(id, done) {
+    var a = S.fin.ddays || [];
+    for (var i = 0; i < a.length; i++) if (a[i].id === id) a[i].done = !!done;
+    finSave(); finDDayList();
+  }
+
+  function finDelDDay(id) {
+    S.fin.ddays = (S.fin.ddays || []).filter(function (x) { return x.id !== id; });
+    finSave(); finDDayList();
+  }
+
+  /* ④ 계산기 — 2026년 현행 세율만 쓴다(바뀌면 이 화면 문구부터 고친다) */
+  function finCalc() {
+    var tab = S.fin.calc || 'saving';
+    var tabs = $('hcFinCalcTabs');
+    if (tabs) {
+      var bs = tabs.querySelectorAll('[data-fin-calc]');
+      for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-fin-calc') === tab);
+    }
+    var body = $('hcFinCalcBody'); if (!body) return;
+    var h = '', fieldW = 'flex:1;min-width:82px;margin-bottom:0';
+    if (tab === 'saving') {
+      h += '<div class="hc-field"><label>넣는 방식</label><select class="hc-sel fin-cin" id="hcFinSvMode">' +
+        '<option value="lump"' + (finIn('hcFinSvMode', 'lump') === 'lump' ? ' selected' : '') + '>거치식 — 한 번에 넣고 만기까지</option>' +
+        '<option value="monthly"' + (finIn('hcFinSvMode', 'lump') === 'monthly' ? ' selected' : '') + '>적립식 — 매달 같은 금액</option></select></div>' +
+        '<div class="hc-row">' +
+        '<div class="hc-field" style="' + fieldW + '"><label>금액 (만원 · 적립식은 매달)</label><input class="hc-input fin-cin" id="hcFinSvAmt" type="number" inputmode="decimal" value="' + esc(finIn('hcFinSvAmt', '100')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>연이율 (%)</label><input class="hc-input fin-cin" id="hcFinSvRate" type="number" inputmode="decimal" value="' + esc(finIn('hcFinSvRate', '3.5')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>기간 (개월)</label><input class="hc-input fin-cin" id="hcFinSvMon" type="number" inputmode="numeric" value="' + esc(finIn('hcFinSvMon', '12')) + '"></div></div>' +
+        '<p class="hc-note">이자소득세 15.4%(소득세 14% + 지방세 1.4%)를 떼고 알려 줘요 · 적립식은 은행 적금처럼 매달 넣은 돈에 월 단리로 붙여요</p>';
+    } else if (tab === 'loan') {
+      h += '<div class="hc-row">' +
+        '<div class="hc-field" style="' + fieldW + '"><label>빌린 원금 (만원)</label><input class="hc-input fin-cin" id="hcFinLoAmt" type="number" inputmode="decimal" value="' + esc(finIn('hcFinLoAmt', '3000')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>연이율 (%)</label><input class="hc-input fin-cin" id="hcFinLoRate" type="number" inputmode="decimal" value="' + esc(finIn('hcFinLoRate', '4.5')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>기간 (개월)</label><input class="hc-input fin-cin" id="hcFinLoMon" type="number" inputmode="numeric" value="' + esc(finIn('hcFinLoMon', '60')) + '"></div></div>' +
+        '<p class="hc-note">원리금균등(매달 같은 금액) 기준이에요 · 중도상환·인지세·보증료는 빼고 계산했어요</p>';
+    } else {
+      h += '<div class="hc-row">' +
+        '<div class="hc-field" style="flex:1;min-width:120px;margin-bottom:0"><label>총급여 (만원)</label><input class="hc-input fin-cin" id="hcFinTxSal" type="number" inputmode="decimal" value="' + esc(finIn('hcFinTxSal', '5000')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>연금저축 (만원/년)</label><input class="hc-input fin-cin" id="hcFinTxPen" type="number" inputmode="decimal" value="' + esc(finIn('hcFinTxPen', '600')) + '"></div>' +
+        '<div class="hc-field" style="' + fieldW + '"><label>IRP (만원/년)</label><input class="hc-input fin-cin" id="hcFinTxIrp" type="number" inputmode="decimal" value="' + esc(finIn('hcFinTxIrp', '300')) + '"></div></div>' +
+        '<div class="hc-row" style="margin-top:8px">' +
+        '<div class="hc-field" style="' + fieldW + '"><label>ISA 순이익 (만원)</label><input class="hc-input fin-cin" id="hcFinTxIsa" type="number" inputmode="decimal" value="' + esc(finIn('hcFinTxIsa', '300')) + '"></div>' +
+        '<div class="hc-field" style="flex:1;min-width:110px;margin-bottom:0"><label>ISA 종류</label><select class="hc-sel fin-cin" id="hcFinTxIsaType">' +
+        '<option value="normal"' + (finIn('hcFinTxIsaType', 'normal') === 'normal' ? ' selected' : '') + '>일반형 (200만)</option>' +
+        '<option value="seomin"' + (finIn('hcFinTxIsaType', 'normal') === 'seomin' ? ' selected' : '') + '>서민형 (400만)</option></select></div></div>' +
+        '<p class="hc-note">2026년 현행 기준 — 연금저축 600만·IRP 합산 900만 한도, 총급여 5,500만 이하면 16.5% · 넘으면 13.2% · ISA 비과세 200만(서민 400만), 넘는 이익은 9.9%</p>';
+    }
+    h += '<div class="hc-fin-out" id="hcFinCalcOut"></div>';
+    body.innerHTML = h;
+    var outEl = $('hcFinCalcOut');
+    if (outEl) outEl.innerHTML = finCalcOutHTML();   /* 화면에 실제로 들어간 값으로 계산 */
+  }
+
+  function finCalcOutHTML() {
+    var tab = S.fin.calc || 'saving';
+    function g(id, d) { var el = $(id); return el ? el.value : finIn(id, d); }
+    var rows = [], i;
+    if (tab === 'saving') {
+      var mode = g('hcFinSvMode', FIN_CALC_DEF.hcFinSvMode);
+      var per = Math.max(0, finNum(g('hcFinSvAmt', FIN_CALC_DEF.hcFinSvAmt || '100'))) * 10000;
+      var rate = Math.max(0, finNum(g('hcFinSvRate', FIN_CALC_DEF.hcFinSvRate || '3.5')));
+      var mon = Math.max(0, Math.round(finNum(g('hcFinSvMon', FIN_CALC_DEF.hcFinSvMon || '12'))));
+      var principal = mode === 'monthly' ? per * mon : per;
+      var interest = mode === 'monthly'
+        ? per * (rate / 100 / 12) * (mon * (mon + 1) / 2)   /* 매달 넣은 돈 × 남은 개월 */
+        : per * (rate / 100) * (mon / 12);
+      var tax = interest * FIN_INT_TAX;
+      rows = [
+        ['넣는 원금', finWon(principal)],
+        ['세전 이자', finWon(interest)],
+        ['이자소득세 15.4%', '-' + finWon(tax)],
+        ['세후 이자', finWon(interest - tax), 'hl'],
+        ['만기 수령액 (세후)', finWon(principal + interest - tax), 'big']
+      ];
+    } else if (tab === 'loan') {
+      var p = Math.max(0, finNum(g('hcFinLoAmt', FIN_CALC_DEF.hcFinLoAmt || '3000'))) * 10000;
+      var r = Math.max(0, finNum(g('hcFinLoRate', FIN_CALC_DEF.hcFinLoRate || '4.5')));
+      var n = Math.max(1, Math.round(finNum(g('hcFinLoMon', FIN_CALC_DEF.hcFinLoMon || '60'))));
+      var mi = r / 100 / 12;
+      var m = mi > 0 ? p * mi / (1 - Math.pow(1 + mi, -n)) : p / n;
+      rows = [
+        ['빌린 원금', finWon(p)],
+        ['매달 갚는 돈', finWon(m), 'big'],
+        ['총 갚는 돈', finWon(m * n)],
+        ['그중 이자', finWon(m * n - p), 'hl']
+      ];
+    } else {
+      var sal = Math.max(0, finNum(g('hcFinTxSal', FIN_CALC_DEF.hcFinTxSal || '5000'))) * 10000;
+      var pen = Math.max(0, finNum(g('hcFinTxPen', FIN_CALC_DEF.hcFinTxPen || '0'))) * 10000;
+      var irp = Math.max(0, finNum(g('hcFinTxIrp', FIN_CALC_DEF.hcFinTxIrp || '0'))) * 10000;
+      var crate = sal <= 55000000 ? 0.165 : 0.132;
+      var base = Math.min(Math.min(pen, 6000000) + irp, 9000000);
+      var isaP = Math.max(0, finNum(g('hcFinTxIsa', FIN_CALC_DEF.hcFinTxIsa || '300'))) * 10000;
+      var isaLim = (g('hcFinTxIsaType', FIN_CALC_DEF.hcFinTxIsaType) === 'seomin') ? 4000000 : 2000000;
+      var isaTax = Math.max(0, isaP - isaLim) * 0.099;
+      var normTax = isaP * FIN_INT_TAX;
+      rows = [
+        ['세액공제 받는 납입액', finWon(base) + ' / 900만'],
+        ['공제율', Math.round(crate * 1000) / 10 + '% · 총급여 ' + (sal <= 55000000 ? '5,500만 이하' : '5,500만 초과')],
+        ['돌려받는 세금', finWon(base * crate), 'big'],
+        ['한도까지 더 넣을 돈', finWon(Math.max(0, 9000000 - base))],
+        ['ISA 비과세 한도', finWon(isaLim)],
+        ['ISA 이익에 붙는 세금', finWon(isaTax) + ' (9.9%)'],
+        ['같은 돈을 일반계좌에 넣으면', finWon(normTax) + ' (15.4%)'],
+        ['ISA로 아끼는 세금', finWon(Math.max(0, normTax - isaTax)), 'hl']
+      ];
+    }
+    var h = '<div class="hc-fin-out-t">결과</div>';
+    for (i = 0; i < rows.length; i++) {
+      h += '<div class="hc-fin-or' + (rows[i][2] ? ' ' + rows[i][2] : '') + '">' +
+        '<span class="k">' + esc(rows[i][0]) + '</span><span class="v">' + rows[i][1] + '</span></div>';
+    }
+    return h;
+  }
+
   /* ------------------------------------------------------------ 뼈대 그리기 */
   /* 상단 서브메뉴는 '버튼'으로만 두고, 고른 메뉴 한 칸만 화면에 남긴다.
      (길게 나열하면 폰에서 스크롤 지옥이 된다 — 초희 요청) */
-  function menuBtn(group, key, emoji, label) {
+  function menuBtn(group, key, emoji, label, cls) {
     var on = (group === 'work' ? S.workSec : S.homeSec) === key;
-    return '<button type="button" class="' + (on ? 'on' : '') + '" data-' + group + '-sec="' + key + '">' +
+    return '<button type="button" class="' + (on ? 'on ' : '') + (cls || '') + '" data-' + group + '-sec="' + key + '">' +
       '<span class="e">' + emoji + '</span>' + esc(label) + '</button>';
   }
 
@@ -2332,8 +2683,9 @@
       '<nav class="hc-menu home" id="hcHomeMenu" aria-label="행복핫초 메뉴">' +
       menuBtn('home', 'events', '📅', '가족일정') +
       menuBtn('home', 'kids', '🎒', '찬우학업') +
+      menuBtn('home', 'money', '💰', '재정') +
       menuBtn('home', 'fridge', '🍳', '냉파') +
-      menuBtn('home', 'backup', '⚙️', '백업/이동') +
+      menuBtn('home', 'backup', '⚙️', '백업/이동', 'wide') +
       '</nav>' +
 
       '<div class="hc-sec" id="hcHSec-events">' +
@@ -2392,6 +2744,59 @@
       '<div class="hc-add-row"><input class="hc-input" id="hcShopInput" placeholder="예: 두부 1모">' +
       '<button type="button" class="hc-btn primary" data-act="shop-add">추가</button></div>' +
       '<button type="button" class="hc-btn ghost sm" data-act="shop-clear" style="margin-top:8px">산 것 지우기</button>' +
+      '</section></div>' +
+
+      '<div class="hc-sec" id="hcHSec-money" hidden>' +
+
+      /* ① 노션 가계부 바로가기 */
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>📒 노션 가계부 · 소비 분석</h3><span class="hc-tiny">내 계정 전용</span></div>' +
+      '<a class="hc-open" href="' + NOTION_LEDGER_URL + '" target="_blank" rel="noopener">' +
+      '<span class="e">📊</span><span class="b"><b>월별 가계부 · 내 돈 흐름 열기</b>' +
+      '<span>2025~2026 통합 가계부 · 신한은행 13년 원장 · 맨 위 3줄 요약</span></span><span class="go">↗</span></a>' +
+      '<p class="hc-note">노션은 초희가 로그인한 브라우저에서만 열려요 · 앱에는 주소만 있고 잔액·계좌 같은 숫자는 담지 않아요</p>' +
+      '</section>' +
+
+      /* ② 이번 달 예산 · 오늘 지출 */
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>💸 이번 달 예산 · 오늘 지출</h3><span class="hc-tiny" id="hcFinMonth"></span></div>' +
+      '<div class="hc-fin-budget">' +
+      '<label for="hcFinBudgetIn">이번 달 목표 예산 (원)</label>' +
+      '<div class="hc-add-row" style="margin-top:0">' +
+      '<input class="hc-input" id="hcFinBudgetIn" type="number" inputmode="numeric" placeholder="예: 2000000">' +
+      '<button type="button" class="hc-btn primary" data-act="fin-budget">저장</button></div></div>' +
+      '<div id="hcFinGauge" style="margin-top:13px"></div>' +
+      '<div class="hc-fin-form">' +
+      '<input class="hc-input" id="hcFinLabel" placeholder="무엇에 썼어? (예: 점심 김치찌개)" autocomplete="off" enterkeyhint="next">' +
+      '<div class="hc-row" style="margin-top:7px">' +
+      '<input class="hc-input" id="hcFinAmt" type="number" inputmode="numeric" placeholder="금액(원)" style="flex:1 1 110px;width:auto">' +
+      '<select class="hc-sel" id="hcFinCat" style="flex:0 0 auto;width:auto;min-width:92px">' +
+      FIN_CATS.map(function (c) { return '<option value="' + c + '">' + FIN_CAT_E[c] + ' ' + c + '</option>'; }).join('') + '</select>' +
+      '<button type="button" class="hc-btn primary" data-act="fin-add" style="flex:0 0 auto">＋ 추가</button></div></div>' +
+      '<div id="hcFinList" style="margin-top:10px"></div>' +
+      '<p class="hc-note">예산·지출은 이 폰에만 저장돼요 · ⚙️ 백업/이동 기록 코드에 함께 담겨요</p>' +
+      '</section>' +
+
+      /* ③ 마감일 D-day */
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>⏰ 마감일 챙기기</h3><span class="hc-tiny" id="hcFinDDayCnt"></span></div>' +
+      '<div id="hcFinDDayList"></div>' +
+      '<div class="hc-add-row" style="margin-top:10px">' +
+      '<input class="hc-input" id="hcFinDLabel" placeholder="예: 스타벅스 1+1" autocomplete="off" style="flex:1 1 120px">' +
+      '<input class="hc-input" id="hcFinDDate" type="date" style="flex:0 0 auto;width:auto">' +
+      '<button type="button" class="hc-btn primary" data-act="fin-dday-add" style="flex:0 0 auto">＋</button></div>' +
+      '<p class="hc-note">7일 안에 닥친 마감은 노란 빛으로 떠요 · 바코드·금액은 넣지 않고 날짜와 이름만 적어 두세요</p>' +
+      '</section>' +
+
+      /* ④ 이자 · 대출 · 절세 계산기 */
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>🧮 이자 · 대출 · 절세 계산기</h3><span class="hc-tiny">2026 현행 세율</span></div>' +
+      '<div class="hc-seg" id="hcFinCalcTabs">' +
+      '<button type="button" data-act="fin-calc" data-fin-calc="saving" class="on">예·적금</button>' +
+      '<button type="button" data-act="fin-calc" data-fin-calc="loan">대출</button>' +
+      '<button type="button" data-act="fin-calc" data-fin-calc="tax">ISA·연금</button></div>' +
+      '<div id="hcFinCalcBody"></div>' +
+      '<p class="hc-note">숫자만 넣으면 바로 다시 계산해요 · 결과는 어림값이라 실제 상품 약관을 한 번 더 확인하세요</p>' +
       '</section></div>' +
 
       '<div class="hc-sec" id="hcHSec-backup" hidden>' +
@@ -2663,6 +3068,12 @@
         return;
       }
       if (act === 'export') { exportAll(); return; }
+      if (act === 'fin-budget') { finSetBudget(); return; }
+      if (act === 'fin-add') { finAddSpend(); return; }
+      if (act === 'fin-del') { finDelSpend(t.getAttribute('data-fin-del')); return; }
+      if (act === 'fin-dday-add') { finAddDDay(); return; }
+      if (act === 'fin-dday-del') { finDelDDay(t.getAttribute('data-fin-dday-del')); return; }
+      if (act === 'fin-calc') { S.fin.calc = t.getAttribute('data-fin-calc') || 'saving'; finSave(); finCalc(); return; }
       if (act === 'import') { var f = $('hcImportFile'); if (f) f.click(); return; }
       if (act === 'code-copy') { copySyncCode(); return; }
       if (act === 'code-open') { openSyncBox(''); return; }
@@ -2692,6 +3103,9 @@
       for (var j = 0; j < S.home.fridge.shop.length; j++) if (S.home.fridge.shop[j].id === sid) S.home.fridge.shop[j].done = cb.checked;
       save(K.home, S.home); renderShop(); return;
     }
+    /* 💰 재정 — 마감일 체크 */
+    var fd = cb.getAttribute && cb.getAttribute('data-fin-ddone');
+    if (fd) { finToggleDDay(fd, cb.checked); return; }
     var ck = cb.getAttribute && cb.getAttribute('data-check');
     if (ck) {
       var today = kstToday();
@@ -2729,6 +3143,18 @@
 
   function onHomeInput(e) {
     var fid = e.target && e.target.id;
+
+    /* 💰 재정 — 계산기 입력: 숫자만 저장하고 결과만 다시 그린다(입력 중 포커스 안 잃게) */
+    if (e.target && e.target.classList && e.target.classList.contains('fin-cin')) {
+      if (!S.fin.calcIn) S.fin.calcIn = {};
+      S.fin.calcIn[fid] = e.target.value;
+      clearTimeout(onHomeInput._fin);
+      onHomeInput._fin = setTimeout(finSave, 500);
+      var out = $('hcFinCalcOut');
+      if (out) out.innerHTML = finCalcOutHTML();
+      return;
+    }
+
     if (fid === 'hcFrHeld' || fid === 'hcFrPrio' || fid === 'hcFrQ') {
       var v = e.target.value || '';
       if (fid === 'hcFrHeld') FR.ing = v;
@@ -2753,6 +3179,9 @@
     if (e.key !== 'Enter') return;
     var id = e.target.id;
     if (id === 'hcMemoInput') { e.preventDefault(); addMemo(); }
+    if (id === 'hcFinLabel' || id === 'hcFinAmt') { e.preventDefault(); finAddSpend(); }
+    if (id === 'hcFinBudgetIn') { e.preventDefault(); finSetBudget(); try { e.target.blur(); } catch (err) {} }
+    if (id === 'hcFinDLabel') { e.preventDefault(); finAddDDay(); }
     if (id === 'hcShopInput') { e.preventDefault(); addShop(); }
     if (id === 'hcFrHeld' || id === 'hcFrPrio' || id === 'hcFrQ') {
       e.preventDefault();
