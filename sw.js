@@ -24,8 +24,10 @@
    v32: 메뉴를 전부 버튼(탭 전환)으로 — 💼 실시간 뉴스·언론·정책 모니터·카르텔워치·아이템 구상·기사작성,
         🏠 가족일정·찬우학업·냉파·백업/이동에서 고른 한 칸만 보임. 🛰 옥토 구조 이식:
         언론 모니터(일일브리핑 = 날짜별 달력·문단 요약·기타 출처·보도 흐름 막대 / 뉴스데이터 누적·추가취재 제안)
-        + 정책 모니터(오늘의 변화·정책브리핑·국회·국가데이터처·정책 히스토리·실시간 소식) — hotcho_briefings.json. */
-const CACHE = 'toeic-bts-v32';
+        + 정책 모니터(오늘의 변화·정책브리핑·국회·국가데이터처·정책 히스토리·실시간 소식) — hotcho_briefings.json.
+   v33: 🍳 행복핫초 → 냉파 탭에 1,018개 레시피 매칭 내장(recipes.json + fridge_engine.js, AI·키 없이 동작)
+        + 🤖 Gemini AI 추천(선택, 무료 키는 hotcho_gemini_key_v1) · 재료는 hotcho_fridge_ing_v1에 자동 저장. */
+const CACHE = 'toeic-bts-v33';
 const SHELL = [
   './',
   './index.html',
@@ -40,7 +42,9 @@ const SHELL = [
   './members/v.jpg',
   './members/jungkook.jpg',
   './hotcho_modes.css',
-  './hotcho_modes.js'
+  './hotcho_modes.js',
+  './fridge_engine.js',
+  './recipes.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -118,6 +122,16 @@ self.addEventListener('fetch', (event) => {
   if (path.endsWith('/hotcho_news.json') || path.endsWith('/hotcho_hub.json') || path.endsWith('/hotcho_family.json')
       || path.endsWith('/hotcho_monitor.json') || path.endsWith('/hotcho_briefings.json')) {
     event.respondWith(networkFirst(req, '{}'));
+    return;
+  }
+  /* 🍳 냉파 레시피 데이터: 잘 안 바뀌는 큰 파일(전송 47KB)이라 캐시 먼저 — 새 판(v34+)에서 캐시 이름을 올리면 갱신됨 */
+  if (path.endsWith('/recipes.json')) {
+    event.respondWith(
+      caches.match(req).then((hit) => hit || fresh(req).then((res) => {
+        if (res && res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {}); }
+        return res;
+      }).catch(() => new Response('[]', { status: 503, headers: { 'Content-Type': 'application/json; charset=utf-8' } })))
+    );
     return;
   }
   /* 앱 화면(HTML): 네트워크 우선 + HTTP 캐시 무시 */

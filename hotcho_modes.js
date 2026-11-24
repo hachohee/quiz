@@ -22,7 +22,10 @@
     home: 'hotcho_home_v1',
     mode: 'hotcho_mode_v1',
     mon: 'hotcho_mon_v1',
-    ui: 'hotcho_ui_v1'
+    ui: 'hotcho_ui_v1',
+    frIng: 'hotcho_fridge_ing_v1',
+    frPrio: 'hotcho_fridge_prio_v1',
+    frKey: 'hotcho_gemini_key_v1'
   };
 
   /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
@@ -530,7 +533,7 @@
     }
     if (sec === 'events') { renderEvents(); renderMemos(); }
     if (sec === 'kids') renderKids();
-    if (sec === 'fridge') renderShop();
+    if (sec === 'fridge') { renderShop(); frEnter(); }
     if (sec === 'backup') renderSyncSummary();
     try { window.scrollTo(0, 0); } catch (e) {}
   }
@@ -1370,6 +1373,401 @@
     el.innerHTML = html;
   }
 
+  /* ------------------------------------------------------------ 🍳 냉파 — 재료로 요리 찾기
+     1,018개 레시피(recipes.json)를 이 앱 안에서 바로 매칭합니다. AI·인터넷 없이도 100% 동작.
+     
+     저장 키(기기 옮기기 hotcho_* 에 자동 포함):
+       hotcho_fridge_ing_v1  — 마지막에 적은 재료
+       hotcho_fridge_prio_v1 — '먼저 먹어야 할 재료'
+       hotcho_gemini_key_v1  — 구글 Gemini 무료 키(선택) */
+  var FR_TOP = ['대파', '계란', '양파', '두부', '김치', '감자', '당근', '밥', '돼지고기', '닭고기', '우유', '치즈', '버터', '밀가루', '마요네즈', '오이'];
+  var FR_BASIC_TXT = '소금, 후추, 간장, 설탕, 식용유, 참기름, 고춧가루, 다진마늘, 고추장, 된장, 물, 식초, 맛술';
+  var FR_MODELS = ['gemini-3.5-flash-lite', 'gemini-2.5-flash-lite', 'gemini-2.5-flash'];
+  var FR_PAGE = 20;
+
+  var FR = {
+    recipes: null, loading: false, fail: '',
+    ing: '', prio: '', filter: 'all', q: '', shown: FR_PAGE, open: -1, results: [],
+    ai: { busy: false, outHTML: '', err: '', editing: false, model: '' }
+  };
+
+  function rawGet(k, d) { try { var v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
+  function rawSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function frInit() {
+    /* 저장해 둔 재료는 앞뒤 공백만 다듬어 그대로 살립니다(잃지 않게). */
+    FR.ing = String(rawGet(K.frIng, '') || '').trim();
+    FR.prio = String(rawGet(K.frPrio, '') || '').trim();
+  }
+
+  function frTokens() {
+    return String(FR.ing || '').split(/[,\n;，、·\/]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function frHasChip(name) {
+    var toks = frTokens();
+    for (var i = 0; i < toks.length; i++) if (toks[i].replace(/\s+/g, '') === name) return true;
+    return false;
+  }
+
+  function frSaveIng() {
+    rawSet(K.frIng, FR.ing || '');
+    rawSet(K.frPrio, FR.prio || '');
+  }
+
+  /* 냉파 탭에 들어올 때 */
+  function frEnter() {
+    var a = $('hcFrHeld'), b = $('hcFrPrio'), c = $('hcFrQ');
+    if (a && document.activeElement !== a) a.value = FR.ing;
+    if (b && document.activeElement !== b) b.value = FR.prio;
+    if (c && document.activeElement !== c) c.value = FR.q;
+    frRenderChips();
+    frRenderAi();
+    if (FR.recipes) frRender();
+    else {
+      frRenderCount();
+      frRenderList();
+      frLoad();
+    }
+  }
+
+  function frLoad() {
+    if (FR.recipes || FR.loading) return;
+    if (!window.FridgeEngine) { FR.fail = '엔진을 못 읽었어요'; frRender(); return; }
+    FR.loading = true;
+    frRenderCount();
+    frRenderList();
+    fetch('recipes.json')
+      .then(function (r) { if (!r || !r.ok) throw new Error('HTTP ' + (r && r.status)); return r.json(); })
+      .then(function (rows) {
+        FR.recipes = window.FridgeEngine.parseRecipes(rows);
+        FR.loading = false; FR.fail = '';
+        var bd = $('hcFrBadge');
+        if (bd) bd.textContent = '레시피 ' + FR.recipes.length.toLocaleString('ko-KR');
+        frRender();
+      })
+      .catch(function (e) {
+        FR.loading = false;
+        FR.fail = '레시피를 못 받았어요 (' + String((e && e.message) || e) + ') — 인터넷이 되면 다시 열어 주세요';
+        frRender();
+      });
+  }
+
+  function frRenderChips() {
+    var el = $('hcFrChips');
+    if (!el) return;
+    var h = '';
+    for (var i = 0; i < FR_TOP.length; i++) {
+      var on = frHasChip(FR_TOP[i]);
+      h += '<button type="button" class="hc-fr-chip' + (on ? ' on' : '') + '" data-act="fr-chip" data-n="' + esc(FR_TOP[i]) + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(FR_TOP[i]) + '</button>';
+    }
+    el.innerHTML = h;
+  }
+
+  function frRenderFilters() {
+    var box = $('hcFrFilters');
+    if (!box) return;
+    var bs = box.querySelectorAll('[data-fr-f]');
+    for (var i = 0; i < bs.length; i++) bs[i].classList.toggle('on', bs[i].getAttribute('data-fr-f') === FR.filter);
+  }
+
+  function frRenderCount() {
+    var el = $('hcFrCount');
+    if (!el) return;
+    if (!FR.recipes) {
+      el.textContent = FR.loading ? '레시피 1,018개를 준비하고 있어요…' : (FR.fail || '레시피를 불러오는 중…');
+      return;
+    }
+    if (!frTokens().length && !FR.q) {
+      el.textContent = '재료를 적으면 만들 수 있는 요리를 찾아 드려요. (요리 이름으로만 찾아도 돼요)';
+      return;
+    }
+    if (!FR.results.length) {
+      el.textContent = FR.filter === 'ready'
+        ? '지금 있는 재료로 바로 되는 요리가 없어요. “전체”로 바꾸면 부족한 재료를 알려 드려요.'
+        : '조건에 맞는 요리가 없어요. 재료를 줄이거나 “전체”로 바꿔 보세요.';
+      return;
+    }
+    var ready = 0;
+    for (var i = 0; i < FR.results.length; i++) if (FR.results[i].missingCount === 0) ready++;
+    el.textContent = '추천 ' + FR.results.length + '개 · 지금 바로 만들 수 있는 요리 ' + ready + '개';
+  }
+
+  function frRenderList() {
+    var el = $('hcFrList');
+    if (!el) return;
+    if (!FR.recipes) {
+      el.innerHTML = '<div class="hc-empty">' + esc(FR.loading ? '레시피 1,018개를 준비하고 있어요…' : (FR.fail || '준비 중…')) + '</div>';
+      var mb0 = $('hcFrMore'); if (mb0) mb0.hidden = true;
+      return;
+    }
+    if (!FR.results.length) {
+      el.innerHTML = '<div class="hc-empty">' + (frTokens().length || FR.q ? '맞는 요리가 없어요.' : '위에 재료를 적거나 자주 쓰는 재료를 눌러 주세요.') + '</div>';
+    } else {
+      var h = '';
+      var n = Math.min(FR.shown, FR.results.length);
+      for (var i = 0; i < n; i++) h += frCardHTML(FR.results[i], i);
+      el.innerHTML = h;
+    }
+    var mb = $('hcFrMore');
+    if (mb) {
+      if (FR.results.length > FR.shown) { mb.hidden = false; mb.textContent = '더 보기 (' + FR.shown + '/' + FR.results.length + ')'; }
+      else mb.hidden = true;
+    }
+  }
+
+  function frCardHTML(r, i) {
+    var open = FR.open === i;
+    var h = '<div class="hc-fr-card' + (open ? ' open' : '') + '">';
+    h += '<button type="button" class="hc-fr-btn" data-act="fr-open" data-i="' + i + '" aria-expanded="' + (open ? 'true' : 'false') + '">';
+    h += '<span class="hc-fr-nm">' + esc(r.recipe.name) +
+      (i === 0 && r.missingCount === 0 && !FR.q ? ' <span class="cr">👑 오늘 추천</span>' : '') + '</span>';
+    h += '<span class="hc-fr-meta">⏱ ' + r.recipe.minutes + '분 · ' + esc(r.recipe.difficulty) +
+      ' · 보유 ' + r.have.length + '개 · ' + (open ? '접기' : '조리법') + '</span>';
+    h += '<span class="hc-fr-ing">';
+    if (r.have.length) h += '<b class="have">보유 ' + esc(r.have.join(', ')) + '</b>';
+    if (r.need.length) h += '<b class="need">' + (r.have.length ? ' · ' : '') + '부족 ' + esc(r.need.join(', ')) + '</b>';
+    else if (r.have.length) h += ' <b class="have">· 재료 다 있어요!</b>';
+    h += '</span></button>';
+    if (open) {
+      h += '<div class="hc-fr-steps">';
+      if (r.recipe.steps.length) {
+        h += '<ol>';
+        for (var j = 0; j < r.recipe.steps.length; j++) h += '<li>' + esc(r.recipe.steps[j]) + '</li>';
+        h += '</ol>';
+      } else {
+        h += '<p class="hc-fr-note">조리법이 짧게 정리돼 있지 않아요. 유튜브에서 확인해 보세요.</p>';
+      }
+      if (r.viaSub && r.viaSub.length) h += '<p class="hc-fr-note">대체 재료: ' + esc(r.viaSub.join(', ')) + '</p>';
+      h += '<a class="hc-fr-yt" href="https://www.youtube.com/results?search_query=' +
+        encodeURIComponent(r.recipe.name + ' 만드는 법') + '" target="_blank" rel="noopener noreferrer">▶ 유튜브에서 ' +
+        esc(r.recipe.name) + ' 만드는 법</a></div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function frRender() {
+    frRenderFilters();
+    frRenderChips();
+    if (FR.recipes) {
+      FR.results = window.FridgeEngine.recommend(FR.recipes, FR.ing, FR.prio, {
+        query: FR.q, onlyReady: FR.filter === 'ready', maxMinutes: FR.filter === 'quick' ? 15 : 0,
+        /* 재료를 적었으면 그 재료가 하나라도 드는 요리만(1,018개를 다 늘어놓지 않게).
+           요리 이름으로만 찾을 땐 이름이 걸린 요리를 모두 보여 줍니다. */
+        allowEmpty: frTokens().length === 0
+      });
+    } else {
+      FR.results = [];
+    }
+    frRenderCount();
+    frRenderList();
+  }
+
+  function frToggleChip(name) {
+    var toks = frTokens(), at = -1;
+    for (var i = 0; i < toks.length; i++) if (toks[i].replace(/\s+/g, '') === name) { at = i; break; }
+    if (at >= 0) toks.splice(at, 1); else toks.push(name);
+    FR.ing = toks.join(', ');
+    var el = $('hcFrHeld');
+    if (el) el.value = FR.ing;
+    FR.shown = FR_PAGE; FR.open = -1;
+    frSaveIng();
+    frRender();
+  }
+
+  /* ---------- 🤖 Gemini AI 추천(선택) ---------- */
+  function frKey() { return String(rawGet(K.frKey, '') || '').trim(); }
+
+  function frRenderAi() {
+    var box = $('hcFrAiKey');
+    if (!box) return;
+    var key = frKey(), h = '';
+    if (!key || FR.ai.editing) {
+      h += '<div class="hc-fr-ai-in"><input class="hc-input" id="hcFrAiKeyIn" type="password" placeholder="AIza… (붙여넣기)" autocomplete="off" spellcheck="false" enterkeyhint="done"></div>';
+      h += '<div class="hc-row" style="margin-top:8px"><button type="button" class="hc-btn primary sm" data-act="fr-ai-save">🔑 키 저장</button>' +
+        '<a class="hc-btn ghost sm" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">무료 키 발급 ↗</a>' +
+        (key ? '<button type="button" class="hc-btn ghost sm" data-act="fr-ai-cancel">취소</button>' : '') + '</div>';
+      h += '<p class="hc-fr-note">키를 넣으면 구글 Gemini가 1,018개에 없는 다른 요리도 제안해 줘요. 키는 이 폰에만 저장되고 기기 옮기기에도 따라가요. <b>키가 없어도 위 1,018개 추천은 그대로 동작해요.</b></p>';
+    } else {
+      h += '<p class="hc-fr-note" style="margin-top:0">🔑 키 저장됨 <b>…' + esc(key.slice(-4)) + '</b> · 이 폰에만 저장 · 기기 옮기기에 포함</p>';
+      h += '<div class="hc-row"><button type="button" class="hc-btn primary sm" data-act="fr-ai-run"' + (FR.ai.busy ? ' disabled' : '') + '>🤖 AI 추천 받기</button>' +
+        '<button type="button" class="hc-btn ghost sm" data-act="fr-ai-key">🔑 키 바꾸기</button>' +
+        '<button type="button" class="hc-btn ghost sm danger" data-act="fr-ai-del">지우기</button></div>';
+    }
+    box.innerHTML = h;
+    var out = $('hcFrAiOut');
+    if (out) {
+      if (FR.ai.busy) out.innerHTML = '<div class="hc-empty">🤖 AI가 재료를 보고 요리를 고르는 중… (5~15초)</div>';
+      else out.innerHTML = (FR.ai.err ? '<p class="hc-fr-note err">' + esc(FR.ai.err) + '</p>' : '') + (FR.ai.outHTML || '');
+    }
+  }
+
+  function frAiPrompt() {
+    var toks = frTokens();
+    var p = [];
+    p.push('너는 냉장고 재료로 한국 집밥을 추천하는 요리 도우미야.');
+    p.push('보유 재료: ' + (toks.length ? toks.join(', ') : '(없음)'));
+    if (FR.prio) p.push('먼저 먹어야 할 재료: ' + FR.prio);
+    p.push('집에 있다고 가정할 기본 양념: ' + FR_BASIC_TXT);
+    p.push('조건: 지금 바로 만들 수 있는 요리 3~5가지, 20분 안쪽 위주, 초보도 가능한 가정식, 요리 이름은 실제로 쓰는 한국어 이름.');
+    p.push('출력은 아래 형식의 JSON 배열만. 설명·인사말·코드블록 표시 없이 JSON만.');
+    p.push('[{"name":"요리 이름","minutes":15,"have":["보유 재료"],"need":["더 필요한 재료"],"steps":["1단계","2단계","3단계"]}]');
+    return p.join('\n');
+  }
+
+  function frAiErrMsg(status, msg) {
+    if (status === 400) return '키가 올바르지 않거나 요청이 거부됐어요. 키를 다시 확인해 주세요.';
+    if (status === 403) return '이 키로는 쓸 수 없어요 (Generative Language API 사용 설정 필요).';
+    if (status === 429) return '무료 사용량을 다 썼어요. 1분 뒤(또는 내일) 다시 시도해 주세요.';
+    if (status >= 500) return '구글 AI가 잠시 바쁘대요. 조금 뒤 다시 시도해 주세요.';
+    return 'AI 오류: ' + String(msg || ('HTTP ' + status)).slice(0, 140);
+  }
+
+  function frAiRun() {
+    var key = frKey();
+    if (!key) { FR.ai.editing = true; frRenderAi(); return; }
+    if (!frTokens().length) {
+      toast('먼저 냉장고 재료를 적어 주세요');
+      var el = $('hcFrHeld'); if (el) { try { el.scrollIntoView({ block: 'center' }); el.focus(); } catch (e) {} }
+      return;
+    }
+    if (FR.ai.busy) return;
+    FR.ai.busy = true; FR.ai.err = ''; FR.ai.outHTML = '';
+    frRenderAi();
+    frAiCall(key, 0);
+  }
+
+  function frAiCall(key, mi) {
+    var model = FR_MODELS[mi];
+    var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent';
+    var body = {
+      contents: [{ role: 'user', parts: [{ text: frAiPrompt() }] }],
+      generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
+    };
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+      body: JSON.stringify(body)
+    }).then(function (res) {
+      return res.text().then(function (txt) {
+        var data = null;
+        try { data = JSON.parse(txt); } catch (e) {}
+        if (!res.ok) {
+          var msg = (data && data.error && data.error.message) || txt.slice(0, 160);
+          if ((res.status === 404 || /not found|not supported|unsupported/i.test(String(msg))) && mi + 1 < FR_MODELS.length) {
+            return frAiCall(key, mi + 1);
+          }
+          throw new Error(frAiErrMsg(res.status, msg));
+        }
+        var cand = data && data.candidates && data.candidates[0];
+        var text = cand && cand.content && cand.content.parts
+          ? cand.content.parts.map(function (p) { return p.text || ''; }).join('') : '';
+        if (!text) {
+          if (cand && cand.finishReason) throw new Error('AI가 답을 끝까지 못 만들었어요 (' + cand.finishReason + '). 다시 시도해 주세요.');
+          throw new Error('AI가 답을 비워 보냈어요. 다시 시도해 주세요.');
+        }
+        FR.ai.model = model;
+        FR.ai.outHTML = frAiRenderResult(text);
+        FR.ai.busy = false;
+        frRenderAi();
+      });
+    }).catch(function (e) {
+      if (!FR.ai.busy) return;   /* 이미 성공한 뒤라면 건드리지 않음 */
+      FR.ai.busy = false;
+      FR.ai.err = (e && e.message) || 'AI 추천에 실패했어요. 조금 뒤 다시 시도해 주세요.';
+      frRenderAi();
+    });
+  }
+
+  function frAiPickJSON(text) {
+    var s = String(text || '').replace(/```json/gi, '').replace(/```/g, '').trim();
+    var a = s.indexOf('['), b = s.lastIndexOf(']');
+    if (a >= 0 && b > a) {
+      try {
+        var arr = JSON.parse(s.slice(a, b + 1));
+        if (arr && arr.length) return arr;
+      } catch (e) {}
+    }
+    return null;
+  }
+
+  function frAiRenderResult(text) {
+    var arr = frAiPickJSON(text);
+    if (!arr) {
+      return '<div class="hc-fr-ai-txt">' + esc(String(text).slice(0, 1600)).replace(/\n/g, '<br>') + '</div>';
+    }
+    var h = '<div class="hc-fr-ai-head">🤖 AI 추천 ' + arr.length + '가지</div><div class="hc-fr-list">';
+    for (var i = 0; i < Math.min(arr.length, 6); i++) {
+      var it = arr[i] || {};
+      var name = String(it.name || it.title || ('추천 ' + (i + 1)));
+      var mins = it.minutes || it.time || '';
+      var have = Array.isArray(it.have) ? it.have : [];
+      var need = Array.isArray(it.need) ? it.need : [];
+      var steps = Array.isArray(it.steps) ? it.steps : [];
+      h += '<div class="hc-fr-card open ai"><div class="hc-fr-ai-c">';
+      h += '<div class="hc-fr-nm">' + esc(name) + '</div>';
+      h += '<div class="hc-fr-meta">' + (mins ? '⏱ ' + esc(String(mins)) + '분' : '⏱ 시간 미정') + '</div>';
+      h += '<div class="hc-fr-ing">';
+      if (have.length) h += '<b class="have">보유 ' + esc(have.join(', ')) + '</b>';
+      if (need.length) h += '<b class="need">' + (have.length ? ' · ' : '') + '부족 ' + esc(need.join(', ')) + '</b>';
+      else if (have.length) h += ' <b class="have">· 재료 다 있어요!</b>';
+      h += '</div>';
+      if (steps.length) {
+        h += '<ol class="hc-fr-ai-steps">';
+        for (var j = 0; j < steps.length; j++) h += '<li>' + esc(String(steps[j])) + '</li>';
+        h += '</ol>';
+      }
+      h += '<a class="hc-fr-yt" href="https://www.youtube.com/results?search_query=' +
+        encodeURIComponent(name + ' 만드는 법') + '" target="_blank" rel="noopener noreferrer">▶ 유튜브에서 만드는 법</a>';
+      h += '</div></div>';
+    }
+    h += '</div><p class="hc-fr-note">AI가 만든 참고용 제안이에요. 재료 상태·알레르기·익힘 정도는 직접 확인해 주세요.</p>';
+    return h;
+  }
+
+  function frAct(act, t) {
+    if (act === 'fr-chip') { frToggleChip(t.getAttribute('data-n')); return; }
+    if (act === 'fr-f') {
+      FR.filter = t.getAttribute('data-fr-f') || 'all';
+      FR.shown = FR_PAGE; FR.open = -1;
+      frRender();
+      return;
+    }
+    if (act === 'fr-open') {
+      var i = parseInt(t.getAttribute('data-i'), 10);
+      FR.open = (FR.open === i ? -1 : i);
+      frRenderList();
+      if (FR.open >= 0) {
+        var cards = $('hcFrList') ? $('hcFrList').querySelectorAll('.hc-fr-card') : null;
+        if (cards && cards[FR.open]) { try { cards[FR.open].scrollIntoView({ block: 'nearest' }); } catch (e) {} }
+      }
+      return;
+    }
+    if (act === 'fr-more') { FR.shown += FR_PAGE; frRenderList(); return; }
+    if (act === 'fr-ai-save') {
+      var inp = $('hcFrAiKeyIn');
+      var k = (inp && inp.value || '').trim().replace(/^["']|["']$/g, '');
+      if (k.length < 20 || k.indexOf(' ') >= 0) { toast('키를 다시 확인해 주세요'); if (inp) inp.focus(); return; }
+      rawSet(K.frKey, k);
+      FR.ai.editing = false; FR.ai.err = '';
+      if (inp) inp.value = '';
+      frRenderAi();
+      toast('키를 저장했어요 — AI 추천 받기를 눌러 보세요');
+      return;
+    }
+    if (act === 'fr-ai-key') { FR.ai.editing = true; frRenderAi(); return; }
+    if (act === 'fr-ai-cancel') { FR.ai.editing = false; frRenderAi(); return; }
+    if (act === 'fr-ai-del') {
+      try { localStorage.removeItem(K.frKey); } catch (e) {}
+      FR.ai.editing = false; FR.ai.err = ''; FR.ai.outHTML = '';
+      frRenderAi();
+      toast('키를 지웠어요');
+      return;
+    }
+    if (act === 'fr-ai-run') { frAiRun(); return; }
+  }
+
   /* ------------------------------------------------------------ 백업 · 기기 옮기기 */
   /* 똑똑핫초(tmq_*) + 뿌듯·행복핫초(hotcho_*) 기록을 한 번에 담는다.
      기기마다 다른 '화면 취향'(보던 모드·소리)만 빼고 나머지는 전부 옮긴다. */
@@ -1737,9 +2135,31 @@
 
       '<div class="hc-sec" id="hcHSec-fridge" hidden>' +
       '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>🍳 냉파 · 미션! 건강 냉파</h3><span class="hc-tiny">냉장고 정리</span></div>' +
+      '<div class="hc-card-head"><h3>🍳 냉파 · 재료로 요리 찾기</h3><span class="hc-tiny" id="hcFrBadge">레시피 1,018</span></div>' +
+      '<div class="hc-field"><label>냉장고에 있는 재료</label>' +
+      '<input class="hc-input" id="hcFrHeld" placeholder="예: 두부, 양파, 계란, 김치" autocomplete="off" enterkeyhint="done"></div>' +
+      '<div class="hc-fr-chips" id="hcFrChips"></div>' +
+      '<div class="hc-field" style="margin-top:12px"><label>먼저 먹어야 할 재료 (선택)</label>' +
+      '<input class="hc-input" id="hcFrPrio" placeholder="예: 두부, 시금치" autocomplete="off" enterkeyhint="done"></div>' +
+      '<div class="hc-seg" id="hcFrFilters">' +
+      '<button type="button" data-act="fr-f" data-fr-f="all" class="on">전체</button>' +
+      '<button type="button" data-act="fr-f" data-fr-f="ready">재료 다 있어요</button>' +
+      '<button type="button" data-act="fr-f" data-fr-f="quick">15분 이내</button></div>' +
+      '<input class="hc-input" id="hcFrQ" type="search" placeholder="요리 이름으로 찾기 (예: 김치찌개)" autocomplete="off">' +
+      '<p class="hc-fr-count" id="hcFrCount">재료를 적으면 만들 수 있는 요리를 찾아 드려요.</p>' +
+      '<div class="hc-fr-list" id="hcFrList"></div>' +
+      '<button type="button" class="hc-btn ghost sm" data-act="fr-more" id="hcFrMore" style="width:100%;margin-top:10px" hidden></button>' +
+      '<p class="hc-note">AI·인터넷 없이 <b>레시피 1,018개</b>에서 바로 찾아요. 소금·간장·설탕·식용유 같은 기본 양념은 있다고 보고 계산해요.</p>' +
+      '</section>' +
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>🤖 AI에게 더 폭넓게 추천받기</h3><span class="hc-tiny">선택 · 구글 무료 키</span></div>' +
+      '<div id="hcFrAiKey"></div>' +
+      '<div id="hcFrAiOut"></div>' +
+      '</section>' +
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>🧊 미션! 건강 냉파 앱</h3><span class="hc-tiny">냉장고 정리</span></div>' +
       '<a class="hc-open" href="' + FRIDGE_APP + '" target="_blank" rel="noopener">' +
-      '<span class="e">🧊</span><span class="b"><b>냉파 앱 열기</b><span>재료 넣으면 만들 수 있는 반찬을 알려 줘요</span></span><span class="go">›</span></a>' +
+      '<span class="e">🧊</span><span class="b"><b>냉파 앱 열기</b><span>재료·유통기한 관리·장보기까지</span></span><span class="go">›</span></a>' +
       '<div class="hc-field"><label>냉장고 메모</label><textarea class="hc-ta" id="hcFridgeMemo" rows="3" placeholder="먼저 먹어야 할 것, 남은 재료…"></textarea></div>' +
       '<div class="hc-card-head" style="margin:12px 0 4px"><h3 style="font-size:13px">🛒 장보기</h3></div>' +
       '<div id="hcShopList"></div>' +
@@ -1981,6 +2401,7 @@
     var t = e.target.closest ? e.target.closest('[data-act],[data-memo-del],[data-shop-del]') : null;
     if (t) {
       var act = t.getAttribute('data-act');
+      if (act && act.indexOf('fr-') === 0) { frAct(act, t); return; }
       if (act === 'refresh') { refreshData(false, t); return; }
       if (act === 'memo-add') { addMemo(); return; }
       if (act === 'shop-add') { addShop(); return; }
@@ -2055,6 +2476,20 @@
   }
 
   function onHomeInput(e) {
+    var fid = e.target && e.target.id;
+    if (fid === 'hcFrHeld' || fid === 'hcFrPrio' || fid === 'hcFrQ') {
+      var v = e.target.value || '';
+      if (fid === 'hcFrHeld') FR.ing = v;
+      else if (fid === 'hcFrPrio') FR.prio = v;
+      else FR.q = v;
+      FR.shown = FR_PAGE; FR.open = -1;
+      if (fid !== 'hcFrQ') frSaveIng();      /* 재료는 바로 저장(앱을 닫아도 남게) */
+      clearTimeout(onHomeInput._fr);
+      onHomeInput._fr = setTimeout(function () {
+        frRender();
+      }, 180);
+      return;
+    }
     if (e.target && e.target.id === 'hcFridgeMemo') {
       S.home.fridge.memo = e.target.value;
       clearTimeout(onHomeInput._t);
@@ -2067,6 +2502,14 @@
     var id = e.target.id;
     if (id === 'hcMemoInput') { e.preventDefault(); addMemo(); }
     if (id === 'hcShopInput') { e.preventDefault(); addShop(); }
+    if (id === 'hcFrHeld' || id === 'hcFrPrio' || id === 'hcFrQ') {
+      e.preventDefault();
+      clearTimeout(onHomeInput._fr);
+      if (id !== 'hcFrQ') frSaveIng();
+      frRender();
+      try { e.target.blur(); } catch (err) {}
+    }
+    if (id === 'hcFrAiKeyIn') { e.preventDefault(); frAct('fr-ai-save', e.target); }
     if (id === 'hcItemTitle') { e.preventDefault(); submitItem(); }
     if (id === 'hcAccQ') {
       e.preventDefault();
@@ -2104,6 +2547,8 @@
       imp.value = '';
     });
 
+    frInit();
+    frRenderAi();
     fillItemForm(null);
     renderArticle();
     renderDrafts();

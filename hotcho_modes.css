@@ -345,3 +345,42 @@
 .hc-hist-m { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-bottom: 3px; }
 .hc-hist-b .hc-src-link { font-size: 10.5px; }
 
+/* ---------- 🍳 냉파 — 재료로 요리 찾기 (1,018 레시피 + Gemini) ---------- */
+.hc-fr-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.hc-fr-chip {
+  border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05);
+  color: #c9c0ea; border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 11.5px;
+  font-weight: 600; cursor: pointer; flex: 0 0 auto;
+}
+.hc-fr-chip.on { background: linear-gradient(135deg, rgba(139, 92, 246, .42), rgba(244, 114, 182, .34)); color: #fff; border-color: rgba(196, 181, 253, .55); }
+.hc-fr-chip:active { transform: scale(.97); }
+.hc-fr-count { font-size: 11.5px; color: var(--muted, #a89ddb); margin: 10px 2px 6px; line-height: 1.45; }
+.hc-fr-list { display: flex; flex-direction: column; gap: 8px; }
+.hc-fr-card { background: rgba(255, 255, 255, .045); border: 1px solid rgba(255, 255, 255, .08); border-radius: 14px; overflow: hidden; }
+.hc-fr-card.open { border-color: rgba(196, 181, 253, .38); background: rgba(139, 92, 246, .1); }
+.hc-fr-btn { display: block; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; padding: 11px 12px; cursor: pointer; }
+.hc-fr-btn:active { background: rgba(255, 255, 255, .04); }
+.hc-fr-nm { display: block; font-size: 14.3px; font-weight: 800; letter-spacing: -.25px; line-height: 1.32; color: #f4efff; }
+.hc-fr-nm .cr { font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 999px; background: rgba(251, 191, 36, .18); color: #fbbf24; white-space: nowrap; }
+.hc-fr-meta { display: block; font-size: 11px; color: var(--muted2, #7f74b3); margin-top: 3px; }
+.hc-fr-ing { display: block; font-size: 11.4px; line-height: 1.45; margin-top: 4px; }
+.hc-fr-ing .have { color: #6ee7b7; font-weight: 600; }
+.hc-fr-ing .need { color: #fbbf24; font-weight: 600; }
+.hc-fr-steps { border-top: 1px solid rgba(255, 255, 255, .07); padding: 10px 12px 12px; }
+.hc-fr-steps ol { margin: 0 0 10px; padding-left: 18px; font-size: 12.4px; line-height: 1.6; color: #ded7f5; }
+.hc-fr-steps li { margin-bottom: 3px; }
+.hc-fr-note { font-size: 11px; color: var(--muted2, #7f74b3); line-height: 1.45; margin: 6px 0; }
+.hc-fr-note.err { color: #fb7185; }
+.hc-fr-yt {
+  display: block; text-align: center; text-decoration: none;
+  border: 1px solid rgba(251, 113, 133, .35); background: rgba(251, 113, 133, .1);
+  color: #fda4af; border-radius: 10px; padding: 8px; font-size: 12px; font-weight: 700;
+}
+/* 🤖 AI 추천 */
+.hc-fr-ai-in { flex: 1; }
+.hc-fr-ai-head { font-size: 12px; font-weight: 800; color: #c4b5fd; margin: 4px 2px 7px; }
+.hc-fr-ai-c { padding: 11px 12px 12px; }
+.hc-fr-ai-c .hc-fr-yt { margin-top: 9px; }
+.hc-fr-ai-steps { margin: 8px 0 0; padding-left: 18px; font-size: 12.2px; line-height: 1.6; color: #ded7f5; }
+.hc-fr-ai-steps li { margin-bottom: 3px; }
+.hc-fr-ai-txt { font-size: 12.2px; line-height: 1.6; color: #ded7f5; background: rgba(255, 255, 255, .04); border-radius: 12px; padding: 10px 11px; }
