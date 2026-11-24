@@ -887,7 +887,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=38">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=39">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -5081,7 +5081,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v38";
+var APP_VER="v39";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5719,7 +5719,7 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=38"></script>
+<script src="hotcho_modes.js?v=39"></script>
 <script>
 /* PWA: 홈 화면 설치 조건 충족용 서비스 워커 등록 (페이지 동작에는 영향 없음) */
 if ('serviceWorker' in navigator) {

@@ -960,6 +960,7 @@
     { k: 'press', l: '정책브리핑' },
     { k: 'assembly', l: '국회' },
     { k: 'mods', l: '국가데이터처' },
+    { k: 'local', l: '🏔 춘천·강원' },
     { k: 'history', l: '정책 히스토리' },
     { k: 'live', l: '실시간 소식' }
   ];
@@ -981,6 +982,7 @@
       var p = src[i];
       if (filter === 'all') out.push(p);
       else if (filter === 'today') { if (p.date === today) out.push(p); }
+      else if (filter === 'local') { if ((String(p.org || '') + ' ' + String(p.source || '')).search(/춘천|강원/) >= 0) out.push(p); }
       else if (p.tab === filter) out.push(p);
     }
     out.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
