@@ -615,12 +615,12 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
 .doc-day b{color:#c4b5fd;font-weight:900}
 .doc-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .docrow{display:flex;align-items:stretch;gap:5px}
-.dbadge{flex:0 0 33px;align-self:center;text-align:center;font-size:9px;font-weight:900;letter-spacing:.02em;
-  border-radius:7px;padding:3px 0;line-height:1.3}
-.dbadge.kbs{background:rgba(147,197,253,.18);color:#bfdbfe;border:1px solid rgba(147,197,253,.38)}
-.dbadge.mbc{background:rgba(249,168,212,.18);color:#fbcfe8;border:1px solid rgba(249,168,212,.38)}
-.dbadge.sbs{background:rgba(252,211,77,.18);color:#fde68a;border:1px solid rgba(252,211,77,.38)}
-.dbadge.ebs{background:rgba(110,231,183,.18);color:#a7f3d0;border:1px solid rgba(110,231,183,.38)}
+.docs-bc{flex:0 0 34px;align-self:center;text-align:center;font-size:9px;font-weight:900;letter-spacing:.02em;
+  border-radius:7px;padding:4px 0;line-height:1.2}
+.docs-bc.kbs{background:rgba(147,197,253,.18);color:#bfdbfe;border:1px solid rgba(147,197,253,.38)}
+.docs-bc.mbc{background:rgba(249,168,212,.18);color:#fbcfe8;border:1px solid rgba(249,168,212,.38)}
+.docs-bc.sbs{background:rgba(252,211,77,.18);color:#fde68a;border:1px solid rgba(252,211,77,.38)}
+.docs-bc.ebs{background:rgba(110,231,183,.18);color:#a7f3d0;border:1px solid rgba(110,231,183,.38)}
 .docrow .lec-go{align-items:flex-start;padding:9px 9px 9px 7px}
 .docrow .lec-t b{font-size:12px;line-height:1.35}
 .docrow .lec-t span{font-size:10.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;
@@ -4494,7 +4494,7 @@ function renderDocChips(){
 }
 function docRowHtml(e){
   return '<li class="docrow"><a class="lec-go" href="https://www.youtube.com/watch?v='+esc(e.v)+'" target="_blank" rel="noopener noreferrer">'
-    +'<span class="dbadge '+esc(e.b)+'">'+esc(String(e.b||"").toUpperCase())+'</span>'
+    +'<span class="docs-bc '+esc(e.b)+'">'+esc(String(e.b||"").toUpperCase())+'</span>'
     +'<span class="lec-t"><b>'+esc(e.program)+'</b><span>'+esc(e.title)+'</span></span>'
     +'<span class="lec-play">▶</span></a></li>';
 }
