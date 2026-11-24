@@ -592,7 +592,9 @@
 
   /* ============================================================ 메뉴 버튼 전환 */
   var WORK_SECS = ['news', 'policy', 'cartel', 'items', 'article', 'myart'];
-  var HOME_SECS = ['events', 'kids', 'money', 'fridge', 'backup'];
+  var HOME_SECS = ['events', 'kids', 'money', 'fridge'];
+  /* ⚙️ 백업/이동은 11/24부터 세 모드 공통 맨 아래 바(#hcShared)로 나갔습니다.
+     예전에 저장된 homeSec 이 'backup' 이어도 그 바를 열어 주기만 하게 처리. */
 
   function showWorkSec(sec) {
     if (WORK_SECS.indexOf(sec) < 0) sec = 'news';
@@ -616,6 +618,8 @@
   }
 
   function showHomeSec(sec) {
+    var jumpSync = (sec === 'backup');
+    if (jumpSync) sec = 'events';
     if (HOME_SECS.indexOf(sec) < 0) sec = 'events';
     S.homeSec = sec; saveUi();
     var menu = $('hcHomeMenu');
@@ -631,7 +635,7 @@
     if (sec === 'kids') renderKids();
     if (sec === 'money') renderMoney();
     if (sec === 'fridge') renderShop();
-    if (sec === 'backup') renderSyncSummary();
+    if (jumpSync) { openSyncPanel(true); return; }
     try { window.scrollTo(0, 0); } catch (e) {}
   }
 
@@ -2077,6 +2081,7 @@
     }, function () { toast('기록 코드를 만들지 못했어요 — 백업 파일을 써 주세요'); });
   }
   function openSyncBox(prefill) {
+    var det = $('hcSyncDetails'); if (det) det.open = true;   /* 접힌 채로는 칸이 안 보이니 펴 준다 */
     var box = $('hcSyncBox'); if (!box) return;
     box.hidden = false;
     var ta = $('hcSyncText');
@@ -2721,7 +2726,7 @@
       menuBtn('home', 'kids', '🎒', '찬우학업') +
       menuBtn('home', 'money', '💰', '재정') +
       menuBtn('home', 'fridge', '🍳', '냉파') +
-      menuBtn('home', 'backup', '⚙️', '백업/이동', 'wide') +
+      '<button type="button" class="wide" data-act="sync-jump" aria-label="내 기록 백업 · 기기 옮기기 (전체) — 화면 맨 아래로"><span class="e">⚙️</span>백업/이동 ↓</button>' +
       '</nav>' +
 
       '<div class="hc-sec" id="hcHSec-events">' +
@@ -2817,11 +2822,19 @@
       '<button type="button" data-act="fin-calc" data-fin-calc="tax">ISA·연금</button></div>' +
       '<div id="hcFinCalcBody"></div>' +
       '<p class="hc-note">숫자만 넣으면 바로 다시 계산해요 · 결과는 어림값이라 실제 상품 약관을 한 번 더 확인하세요</p>' +
-      '</section></div>' +
+      '</section></div>';
+  }
 
-      '<div class="hc-sec" id="hcHSec-backup" hidden>' +
-      '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>⚙️ 내 기록 백업 · 기기 옮기기</h3><span class="hc-tiny">전체</span></div>' +
+  /* ------------------------------------------------------------ 공통 맨 아래 백업 바 */
+  /* 초희 요청(11/24): ⚙️ 내 기록 백업 · 기기 옮기기를 🏠행복핫초 메뉴 안에만 두지 않고
+     📚똑똑·💼뿌듯·🏠행복 세 모드 어디서든 페이지 맨 아래 같은 자리(한 줄 접힘)에 보이게.
+     저장 키(tmq_*·hotcho_*)와 복원 로직은 한 줄도 바꾸지 않고 그릇만 옮겼습니다. */
+  function sharedHTML() {
+    return '' +
+      '<details class="hc-share" id="hcSyncDetails">' +
+      '<summary><span class="hc-share-tt">⚙️ 내 기록 백업 · 기기 옮기기 <em>(전체)</em></span>' +
+      '<span class="hc-share-sub">폰 ↔ 태블릿</span></summary>' +
+      '<div class="hc-share-body">' +
       '<p class="hc-note" id="hcSyncSummary" style="margin:0 2px 10px"></p>' +
       '<div class="hc-row"><button type="button" class="hc-btn primary" data-act="code-copy">📋 기록 코드 복사</button>' +
       '<button type="button" class="hc-btn" data-act="code-open">📥 기록 코드 붙여넣기</button></div>' +
@@ -2832,10 +2845,22 @@
       '<p class="hc-note" id="hcSyncInfo">폰에서 [📋 기록 코드 복사] → 메모·메일(또는 카톡)로 태블릿에 보내기 → 태블릿에서 위 칸에 붙여넣고 [✅ 이 기기에 적용].<br>코드가 길면 카톡이 중간에 자를 수 있으니 메모·메일이 안전해요.</p>' +
       '</div>' +
       '<div class="hc-row" style="margin-top:10px"><button type="button" class="hc-btn" data-act="export">⬇️ 파일로 내보내기</button>' +
-      '<button type="button" class="hc-btn" data-act="import">⬆️ 파일에서 불러오기</button>' +
-      '<input type="file" id="hcImportFile" accept="application/json,.json" hidden></div>' +
+      '<button type="button" class="hc-btn" data-act="import">⬆️ 파일에서 불러오기</button></div>' +
       '<p class="hc-note">BTS 도감·공부방 진도·오답노트·아이템·초안·메모까지 한 번에 옮겨요. 보던 모드·소리 설정은 이 기기 것을 그대로 둡니다.</p>' +
-      '</section></div>';
+      '</div></details>' +
+      '<input type="file" id="hcImportFile" accept="application/json,.json" hidden>';
+  }
+
+  /* 백업 바를 펴고(원하면 그 자리로 스크롤) 지금 기록 요약을 새로 채운다 */
+  function openSyncPanel(scroll) {
+    var d = $('hcSyncDetails');
+    if (!d) return;
+    d.open = true;
+    renderSyncSummary();
+    if (scroll) {
+      try { d.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      catch (e) { try { d.scrollIntoView(); } catch (e2) {} }
+    }
   }
 
   /* ------------------------------------------------------------ 새로고침 */
@@ -3086,6 +3111,7 @@
         return;
       }
       if (act === 'export') { exportAll(); return; }
+      if (act === 'sync-jump') { openSyncPanel(true); return; }
       if (act === 'fin-budget') { finSetBudget(); return; }
       if (act === 'fin-add') { finAddSpend(); return; }
       if (act === 'fin-del') { finDelSpend(t.getAttribute('data-fin-del')); return; }
@@ -3137,6 +3163,19 @@
       }
       save(K.home, S.home); renderKids();
     }
+  }
+
+  /* 세 모드 공통 맨 아래 백업 바(#hcShared) — #hcWork·#hcHome 바깥이라 따로 받습니다 */
+  function onSharedClick(e) {
+    var t = e.target.closest ? e.target.closest('[data-act]') : null;
+    if (!t) return;
+    var act = t.getAttribute('data-act');
+    if (act === 'export') { exportAll(); return; }
+    if (act === 'import') { var f = $('hcImportFile'); if (f) f.click(); return; }
+    if (act === 'code-copy') { copySyncCode(); return; }
+    if (act === 'code-open') { openSyncBox(''); return; }
+    if (act === 'code-apply') { applySyncText(); return; }
+    if (act === 'code-close') { var bx = $('hcSyncBox'); if (bx) bx.hidden = true; return; }
   }
 
   function addMemo() {
@@ -3225,6 +3264,15 @@
     if (!work || !home) return;
     work.innerHTML = workHTML();
     home.innerHTML = homeHTML();
+
+    /* ⚙️ 백업 바 — 세 모드 공통, 페이지 맨 아래 한 자리 */
+    var shared = $('hcShared');
+    if (shared) {
+      shared.innerHTML = sharedHTML();
+      shared.addEventListener('click', onSharedClick);
+      var sdet = $('hcSyncDetails');
+      if (sdet) sdet.addEventListener('toggle', function () { if (sdet.open) renderSyncSummary(); });
+    }
 
     var bar = $('hcBar');
     if (bar) {
