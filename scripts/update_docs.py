@@ -42,9 +42,9 @@ PROGRAMS = [
     # ---------------- 📰 시사·보도 ----------------
     {
         "id": "kbs-window", "b": "kbs", "cat": "news",
-        "name": "KBS 시사기획 창", "short": "시사기획 창",
+        "name": "KBS 시사 (시사기획 창 · 사사건건 · 9층 시사국)", "short": "KBS 시사",
         "channel": "KBS시사", "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
-        "note": "KBS 기자들이 만드는 탐사보도 — 매주 화요일 밤",
+        "note": "KBS 기자들이 만드는 시사 프로그램 통합 채널 — 시사기획 창 · 사사건건",
     },
     {
         "id": "kbs-chu60", "b": "kbs", "cat": "news",
@@ -78,22 +78,10 @@ PROGRAMS = [
         "note": "KBS 공식 다큐 채널 — 다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜 · 명견만리",
     },
     {
-        "id": "kbs-kyoyang", "b": "kbs", "cat": "edu",
-        "name": "KBS 교양 (인간극장 · 이웃집 찰스)", "short": "KBS 교양",
-        "channel": "KBS 교양", "channel_id": "UCHlSeJxRIXZWMARC2oMwmcQ",
-        "note": "따뜻한 감동, 알찬 정보 — 인간극장 · 이웃집 찰스",
-    },
-    {
         "id": "mbc-docu", "b": "mbc", "cat": "edu",
         "name": "MBC 다큐·교양 (MBC 스페셜 · 다큐플렉스)", "short": "MBC 다큐",
         "channel": "MBC PLAYGROUND", "channel_id": "UCVHf2Ne1-jZwlvYgTcfL7jw",
         "note": "MBC 시사교양 공식 — 다시 꺼내 본 MBC 다큐와 인물 인터뷰",
-    },
-    {
-        "id": "mbc-life", "b": "mbc", "cat": "edu",
-        "name": "MBClife (휴먼다큐 사랑 · 너를 만났다)", "short": "MBClife",
-        "channel": "MBClife", "channel_id": "UCfWZnsdfiKvOyHDGfzMT3Cg",
-        "note": "MBC 교양 공식 채널 — 휴먼다큐 · 생활 정보",
     },
     {
         "id": "sbs-dali", "b": "sbs", "cat": "edu",

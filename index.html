@@ -587,6 +587,10 @@ a.cta{display:flex;align-items:center;justify-content:center;text-decoration:non
   background:linear-gradient(150deg,rgba(52,211,153,.16),rgba(255,255,255,.03))}
 .dh-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:#d1fae5}
 .dh-row b{color:#fff;font-variant-numeric:tabular-nums}
+.dh-row #docUpdated{flex:1;min-width:0;font-size:10.5px;font-weight:800;color:#d1fae5;text-align:right}
+.dh-re{flex:0 0 auto;border:1px solid rgba(110,231,183,.40);background:rgba(52,211,153,.15);color:#a7f3d0;
+  border-radius:999px;width:26px;height:26px;font-family:inherit;font-size:13px;font-weight:900;line-height:1;cursor:pointer}
+.dh-re:active{transform:scale(.94)}
 .dh-badge{background:linear-gradient(92deg,#34d399,#22d3ee);color:#04140f;border-radius:999px;padding:2px 9px;
   font-size:10.5px;letter-spacing:.06em;font-weight:900}
 .dh-bar{height:7px;border-radius:999px;background:rgba(0,0,0,.38);overflow:hidden;margin:9px 0 7px}
@@ -987,7 +991,7 @@ body.radio-on.script-on .rscript{display:flex}
     </div>
 
     <div class="doc-hero">
-      <div class="dh-row"><span class="dh-badge">최신순</span><span id="docUpdated">최신 회차를 불러오는 중…</span></div>
+      <div class="dh-row"><span class="dh-badge">최신순</span><span id="docUpdated">최신 회차를 불러오는 중…</span><button class="dh-re" id="docReload" type="button" data-docreload="1" aria-label="최신 회차 새로 고침">↻</button></div>
       <p class="dh-note" id="docNote">시사·보도와 교양·다큐를 나눠서, 방송사 공식 유튜브에 올라온 최신 회차부터 보여 줘요 · 매일 아침 7:30 자동 갱신</p>
     </div>
 
@@ -4544,7 +4548,7 @@ function openDocs(){
 /* ---------------- 이벤트 ---------------- */
 document.addEventListener("click", function(ev){
   var t=ev.target;
-  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-doc")||t.getAttribute("data-docseg")||t.getAttribute("data-docmode")||t.getAttribute("data-docmore")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-qzstagecat")||t.getAttribute("data-roundnext")||t.getAttribute("data-spd")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
+  while(t && t!==document && !(t.getAttribute && (t.getAttribute("data-cat")||t.getAttribute("data-quiz")||t.getAttribute("data-study")||t.getAttribute("data-go")||t.getAttribute("data-opt")||t.getAttribute("data-say")||t.getAttribute("data-room")||t.getAttribute("data-rseg")||t.getAttribute("data-rsub")||t.getAttribute("data-done")||t.getAttribute("data-doc")||t.getAttribute("data-docseg")||t.getAttribute("data-docmode")||t.getAttribute("data-docmore")||t.getAttribute("data-docreload")||t.getAttribute("data-lecq")||t.getAttribute("data-lecqnext")||t.getAttribute("data-qzstage")||t.getAttribute("data-qzstagecat")||t.getAttribute("data-roundnext")||t.getAttribute("data-spd")||t.getAttribute("data-roomgo")||t.getAttribute("data-subj-quiz")||t.hasAttribute("data-subj-review")))){
     t=t.parentNode;
   }
   if(!t || t===document) return;
@@ -4582,6 +4586,7 @@ document.addEventListener("click", function(ev){
   if(t.hasAttribute && t.hasAttribute("data-docmore")){
     docUI.limit+=40; renderDocBody(); return;
   }
+  if(t.hasAttribute && t.hasAttribute("data-docreload")){ loadDocs(true); toast("최신 회차를 다시 받아 왔어요"); return; }
   if(t.hasAttribute && t.hasAttribute("data-room")){ openRoom(); return; }
   if(t.hasAttribute && t.hasAttribute("data-rseg")){
     roomState.g=parseInt(t.getAttribute("data-rseg"),10); roomState.t=0; renderRoom(); return;

@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-24T12:14:46+09:00",
+ "updated_at": "2026-11-24T12:16:53+09:00",
  "source": "YouTube channel RSS (official channels)",
  "per_program": 8,
  "failed": [],
@@ -8,12 +8,12 @@
    "id": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "name": "KBS 시사기획 창",
-   "short": "시사기획 창",
+   "name": "KBS 시사 (시사기획 창 · 사사건건 · 9층 시사국)",
+   "short": "KBS 시사",
    "channel": "KBS시사",
    "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
    "url": "https://www.youtube.com/channel/UCEb31RoX5RnfYENmnyokN8A",
-   "note": "KBS 기자들이 만드는 탐사보도 — 매주 화요일 밤"
+   "note": "KBS 기자들이 만드는 시사 프로그램 통합 채널 — 시사기획 창 · 사사건건"
   },
   {
    "id": "kbs-chu60",
@@ -71,17 +71,6 @@
    "note": "KBS 공식 다큐 채널 — 다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜 · 명견만리"
   },
   {
-   "id": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "name": "KBS 교양 (인간극장 · 이웃집 찰스)",
-   "short": "KBS 교양",
-   "channel": "KBS 교양",
-   "channel_id": "UCHlSeJxRIXZWMARC2oMwmcQ",
-   "url": "https://www.youtube.com/channel/UCHlSeJxRIXZWMARC2oMwmcQ",
-   "note": "따뜻한 감동, 알찬 정보 — 인간극장 · 이웃집 찰스"
-  },
-  {
    "id": "mbc-docu",
    "b": "mbc",
    "cat": "edu",
@@ -91,17 +80,6 @@
    "channel_id": "UCVHf2Ne1-jZwlvYgTcfL7jw",
    "url": "https://www.youtube.com/channel/UCVHf2Ne1-jZwlvYgTcfL7jw",
    "note": "MBC 시사교양 공식 — 다시 꺼내 본 MBC 다큐와 인물 인터뷰"
-  },
-  {
-   "id": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "name": "MBClife (휴먼다큐 사랑 · 너를 만났다)",
-   "short": "MBClife",
-   "channel": "MBClife",
-   "channel_id": "UCfWZnsdfiKvOyHDGfzMT3Cg",
-   "url": "https://www.youtube.com/channel/UCfWZnsdfiKvOyHDGfzMT3Cg",
-   "note": "MBC 교양 공식 채널 — 휴먼다큐 · 생활 정보"
   },
   {
    "id": "sbs-dali",
@@ -150,6 +128,17 @@
    "thumb": "https://i4.ytimg.com/vi/kRi3QTOGI8U/hqdefault.jpg"
   },
   {
+   "v": "h6kzzVt8_tM",
+   "pid": "sbs-dali",
+   "b": "sbs",
+   "cat": "edu",
+   "program": "SBS 교양",
+   "title": "SNS를 뜨겁게 달군 붕어빵 굽는 붕은우🔥붕어빵 청년 달인 #생활의달인 #달리",
+   "date": "2026-11-24",
+   "dt": "2026-11-24T12:00:01+09:00",
+   "thumb": "https://i1.ytimg.com/vi/h6kzzVt8_tM/hqdefault.jpg"
+  },
+  {
    "v": "V4FCe1K6P9o",
    "pid": "ebs-docu",
    "b": "ebs",
@@ -170,17 +159,6 @@
    "date": "2026-11-24",
    "dt": "2026-11-24T11:22:51+09:00",
    "thumb": "https://i2.ytimg.com/vi/uEU_SNqyROA/hqdefault.jpg"
-  },
-  {
-   "v": "_-0oITMtLTs",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "아들 호진 씨가 양조장에 들러, 기보 씨의 일을 돕고. 손주들의 생일 파티에서도 자신이 직접 번 돈으로 밥을 사니, 뿌듯함이 느껴진다. [인간극장] KBS 261124 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T11:19:08+09:00",
-   "thumb": "https://i4.ytimg.com/vi/_-0oITMtLTs/hqdefault.jpg"
   },
   {
    "v": "0txX8JNVgWM",
@@ -297,7 +275,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "[사사건건] 이 대통령, 국정원장·통일·외교·문체·행안부 장관 등 중폭 개각 단행 (이정헌, 최은석, 정철진)",
    "date": "2026-11-24",
    "dt": "2026-11-24T05:06:56+09:00",
@@ -326,61 +304,6 @@
    "thumb": "https://i2.ytimg.com/vi/1WH-Orgl0TI/hqdefault.jpg"
   },
   {
-   "v": "DwU_R9fqG9M",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "소중한 사람들을 잃지 않겠다는 다짐으로 [다큐멘터리 3일] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:29:58+09:00",
-   "thumb": "https://i1.ytimg.com/vi/DwU_R9fqG9M/hqdefault.jpg"
-  },
-  {
-   "v": "6kSIw8UGXCo",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "흘린 땀방울만큼 진정한 소방관이 되어 갑니다 [다큐멘터리 3일] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:24:07+09:00",
-   "thumb": "https://i3.ytimg.com/vi/6kSIw8UGXCo/hqdefault.jpg"
-  },
-  {
-   "v": "WB1qDMZa6Gc",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "‘진짜’ 소방관이 된 날 [다큐멘터리 3일] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:21:56+09:00",
-   "thumb": "https://i4.ytimg.com/vi/WB1qDMZa6Gc/hqdefault.jpg"
-  },
-  {
-   "v": "llQ9t8oXbO0",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "내가 받은 도움의 손길은 다른 이의 손을 잡아줄 용기가 됩니다 [다큐멘터리 3일] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:16:16+09:00",
-   "thumb": "https://i1.ytimg.com/vi/llQ9t8oXbO0/hqdefault.jpg"
-  },
-  {
-   "v": "O1wxGVmlyfU",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "멋진 사랑을 위해 소방을 선택한 사람들 [다큐멘터리 3일] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T22:12:39+09:00",
-   "thumb": "https://i4.ytimg.com/vi/O1wxGVmlyfU/hqdefault.jpg"
-  },
-  {
    "v": "eFGL47AUKBk",
    "pid": "kbs-docu",
    "b": "kbs",
@@ -403,17 +326,6 @@
    "thumb": "https://i4.ytimg.com/vi/K3QcKmrDl04/hqdefault.jpg"
   },
   {
-   "v": "wehB5rDMieQ",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "[우리말 달인 문제] 박준석 도전자의 우리말 달인 도전! [우리말 겨루기] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:48:26+09:00",
-   "thumb": "https://i4.ytimg.com/vi/wehB5rDMieQ/hqdefault.jpg"
-  },
-  {
    "v": "bvd18biP36g",
    "pid": "ebs-docu",
    "b": "ebs",
@@ -423,17 +335,6 @@
    "date": "2026-11-23",
    "dt": "2026-11-23T20:40:06+09:00",
    "thumb": "https://i3.ytimg.com/vi/bvd18biP36g/hqdefault.jpg"
-  },
-  {
-   "v": "lSYewLYwD_M",
-   "pid": "kbs-kyoyang",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 교양",
-   "title": "[2단계 - 4인전] ○○○, 끊임이 없이 [우리말 겨루기] | KBS 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:38:17+09:00",
-   "thumb": "https://i1.ytimg.com/vi/lSYewLYwD_M/hqdefault.jpg"
   },
   {
    "v": "JgTNVJJzGdg",
@@ -495,7 +396,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "[사사건건] 외교·안보라인 전면 교체 의미는? (이정헌, 최은석)",
    "date": "2026-11-23",
    "dt": "2026-11-23T18:27:33+09:00",
@@ -506,7 +407,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "[사사건건] 국정원과 4개 부처 개각, 여야 평가는? (이정헌, 최은석)",
    "date": "2026-11-23",
    "dt": "2026-11-23T18:27:28+09:00",
@@ -517,7 +418,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "[사사건건] 우리 코스피는 3%대 하락, 대만 증시는 2%대 상승…왜? (정철진)",
    "date": "2026-11-23",
    "dt": "2026-11-23T18:13:24+09:00",
@@ -528,7 +429,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "[사사건건] 정부 '증안펀드' 가동 준비 …언제 어떻게 사용할까? (정철진)",
    "date": "2026-11-23",
    "dt": "2026-11-23T18:13:20+09:00",
@@ -579,72 +480,6 @@
    "thumb": "https://i4.ytimg.com/vi/kRPg1UKEhdQ/hqdefault.jpg"
   },
   {
-   "v": "ZVI6Qbibo6Y",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[우리말 나들이] 우리말 나들이 - 배추꼬랑이/배추꼬랑지/배추꽁지, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:51:04+09:00",
-   "thumb": "https://i3.ytimg.com/vi/ZVI6Qbibo6Y/hqdefault.jpg"
-  },
-  {
-   "v": "38cDXZR2gH4",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[기분 좋은 날] 목욕 바구니 긴급 점검! 피부 보호막이 망가질 수 있는 목욕 습관, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:46:01+09:00",
-   "thumb": "https://i4.ytimg.com/vi/38cDXZR2gH4/hqdefault.jpg"
-  },
-  {
-   "v": "YYsH2lDbR_k",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[기분 좋은 날] 10살 더 젊어지려면 등을 살펴라! 굽은 등 해결할 W 따봉 운동법, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:41:46+09:00",
-   "thumb": "https://i2.ytimg.com/vi/YYsH2lDbR_k/hqdefault.jpg"
-  },
-  {
-   "v": "Sds5QLSicnc",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[기분 좋은 날] 배우자 상처 주는 외모 지적 말말말, 밥 먹는 아내에게 막말하는 남편?, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:37:40+09:00",
-   "thumb": "https://i4.ytimg.com/vi/Sds5QLSicnc/hqdefault.jpg"
-  },
-  {
-   "v": "hYLnCov50L4",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[기분 좋은 날] 남편의 충격 외도 상대 정체는 AI? 아내 몰래 AI와 바람난 남편, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:37:08+09:00",
-   "thumb": "https://i1.ytimg.com/vi/hYLnCov50L4/hqdefault.jpg"
-  },
-  {
-   "v": "iebwuq9m8jE",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[기분 좋은 날] 아들의 월급으로 사기당한 어머니! 아들 돈을 물어줘야 할까?, MBC 261123 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T10:31:48+09:00",
-   "thumb": "https://i2.ytimg.com/vi/iebwuq9m8jE/hqdefault.jpg"
-  },
-  {
    "v": "M1_mpZmaxzY",
    "pid": "sbs-dali",
    "b": "sbs",
@@ -693,7 +528,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "미·중·러 정상회담 “시진핑 몸값 한층 올려”",
    "date": "2026-11-22",
    "dt": "2026-11-22T11:38:21+09:00",
@@ -704,7 +539,7 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "‘정년 연장’ 정부안 “27일 전후 발표할 수도”",
    "date": "2026-11-22",
    "dt": "2026-11-22T11:38:07+09:00",
@@ -715,33 +550,11 @@
    "pid": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "program": "시사기획 창",
+   "program": "KBS 시사",
    "title": "미·중·러 정상 ‘북 비핵화’ 소극적이었던 이유?",
    "date": "2026-11-22",
    "dt": "2026-11-22T11:38:07+09:00",
    "thumb": "https://i3.ytimg.com/vi/VnrGl0d4sCM/hqdefault.jpg"
-  },
-  {
-   "v": "DDWYPrJrleQ",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[엄마를 부탁해] 초저분자로 흡수율을 높인 어린 콜라겐, 섭취 후 나타난 피부 변화는?, MBC 261122 방송",
-   "date": "2026-11-22",
-   "dt": "2026-11-22T11:21:48+09:00",
-   "thumb": "https://i1.ytimg.com/vi/DDWYPrJrleQ/hqdefault.jpg"
-  },
-  {
-   "v": "D7YIVcEG-N0",
-   "pid": "mbc-life",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBClife",
-   "title": "[엄마를 부탁해] 피부 탄력·수분 보충·주름 개선에 도움을 주는 어린 콜라겐, MBC 261122 방송",
-   "date": "2026-11-22",
-   "dt": "2026-11-22T11:21:44+09:00",
-   "thumb": "https://i1.ytimg.com/vi/D7YIVcEG-N0/hqdefault.jpg"
   },
   {
    "v": "4GMsJN7tZ_k",
@@ -764,17 +577,6 @@
    "date": "2026-11-21",
    "dt": "2026-11-21T17:00:32+09:00",
    "thumb": "https://i4.ytimg.com/vi/3rxYTfBaXRU/hqdefault.jpg"
-  },
-  {
-   "v": "hShxO73HYKs",
-   "pid": "sbs-dali",
-   "b": "sbs",
-   "cat": "edu",
-   "program": "SBS 교양",
-   "title": "팔랑팔랑팔랑팔랑 #달리 #DALI",
-   "date": "2026-11-21",
-   "dt": "2026-11-21T17:00:18+09:00",
-   "thumb": "https://i1.ytimg.com/vi/hShxO73HYKs/hqdefault.jpg"
   },
   {
    "v": "hVhilO_XtxA",
