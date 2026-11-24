@@ -629,7 +629,7 @@
     if (sec === 'events') { renderEvents(); renderMemos(); }
     if (sec === 'kids') renderKids();
     if (sec === 'money') renderMoney();
-    if (sec === 'fridge') { renderShop(); frEnter(); }
+    if (sec === 'fridge') renderShop();
     if (sec === 'backup') renderSyncSummary();
     try { window.scrollTo(0, 0); } catch (e) {}
   }
@@ -2711,40 +2711,24 @@
       '<p class="hc-note">체크는 오늘 날짜로만 남고, 날이 바뀌면 새로 시작해요</p>' +
       '</section></div>' +
 
+      /* 🍳 냉파 — 초희 요청(11/24): 잡다한 블록은 다 빼고 '미션! 건강 냉파!' 앱으로 바로 가는 카드만 */
       '<div class="hc-sec" id="hcHSec-fridge" hidden>' +
-      '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>🍳 냉파 · 재료로 요리 찾기</h3><span class="hc-tiny" id="hcFrBadge">레시피 1,018</span></div>' +
-      '<div class="hc-field"><label>냉장고에 있는 재료</label>' +
-      '<input class="hc-input" id="hcFrHeld" placeholder="예: 두부, 양파, 계란, 김치" autocomplete="off" enterkeyhint="done"></div>' +
-      '<div class="hc-fr-chips" id="hcFrChips"></div>' +
-      '<div class="hc-field" style="margin-top:12px"><label>먼저 먹어야 할 재료 (선택)</label>' +
-      '<input class="hc-input" id="hcFrPrio" placeholder="예: 두부, 시금치" autocomplete="off" enterkeyhint="done"></div>' +
-      '<div class="hc-seg" id="hcFrFilters">' +
-      '<button type="button" data-act="fr-f" data-fr-f="all" class="on">전체</button>' +
-      '<button type="button" data-act="fr-f" data-fr-f="ready">재료 다 있어요</button>' +
-      '<button type="button" data-act="fr-f" data-fr-f="quick">15분 이내</button></div>' +
-      '<input class="hc-input" id="hcFrQ" type="search" placeholder="요리 이름으로 찾기 (예: 김치찌개)" autocomplete="off">' +
-      '<p class="hc-fr-count" id="hcFrCount">재료를 적으면 만들 수 있는 요리를 찾아 드려요.</p>' +
-      '<div class="hc-fr-list" id="hcFrList"></div>' +
-      '<button type="button" class="hc-btn ghost sm" data-act="fr-more" id="hcFrMore" style="width:100%;margin-top:10px" hidden></button>' +
-      '<p class="hc-note">AI·인터넷 없이 <b>레시피 1,018개</b>에서 바로 찾아요. 소금·간장·설탕·식용유 같은 기본 양념은 있다고 보고 계산해요.</p>' +
+      '<section class="hc-card hc-fr-hero">' +
+      '<div class="hc-card-head"><h3>🍳 냉파</h3><span class="hc-tiny">냉장고 정리 앱으로 바로</span></div>' +
+      '<a class="hc-fr-open" href="' + FRIDGE_APP + '" target="_blank" rel="noopener">' +
+      '<span class="e">🧊</span>' +
+      '<span class="b"><b>미션! 건강 냉파!</b><span>재료 · 유통기한 관리 · 메뉴 추천 · 장보기까지 앱에서 한 번에</span></span>' +
+      '<span class="go">열기 ↗</span></a>' +
+      '<p class="hc-note">누르면 냉파 앱이 새 화면으로 열려요 · 기록은 앱 안에만 저장돼요</p>' +
       '</section>' +
-      '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>🤖 AI에게 더 폭넓게 추천받기</h3><span class="hc-tiny">선택 · 구글 무료 키</span></div>' +
-      '<div id="hcFrAiKey"></div>' +
-      '<div id="hcFrAiOut"></div>' +
-      '</section>' +
-      '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>🧊 미션! 건강 냉파 앱</h3><span class="hc-tiny">냉장고 정리</span></div>' +
-      '<a class="hc-open" href="' + FRIDGE_APP + '" target="_blank" rel="noopener">' +
-      '<span class="e">🧊</span><span class="b"><b>냉파 앱 열기</b><span>재료·유통기한 관리·장보기까지</span></span><span class="go">›</span></a>' +
-      '<div class="hc-field"><label>냉장고 메모</label><textarea class="hc-ta" id="hcFridgeMemo" rows="3" placeholder="먼저 먹어야 할 것, 남은 재료…"></textarea></div>' +
-      '<div class="hc-card-head" style="margin:12px 0 4px"><h3 style="font-size:13px">🛒 장보기</h3></div>' +
+      '<details class="hc-fold">' +
+      '<summary>🛒 장보기 · 냉장고 메모 (접힘)</summary>' +
+      '<div class="hc-field" style="margin-top:8px"><textarea class="hc-ta" id="hcFridgeMemo" rows="3" placeholder="먼저 먹어야 할 것, 남은 재료…"></textarea></div>' +
       '<div id="hcShopList"></div>' +
       '<div class="hc-add-row"><input class="hc-input" id="hcShopInput" placeholder="예: 두부 1모">' +
       '<button type="button" class="hc-btn primary" data-act="shop-add">추가</button></div>' +
       '<button type="button" class="hc-btn ghost sm" data-act="shop-clear" style="margin-top:8px">산 것 지우기</button>' +
-      '</section></div>' +
+      '</details></div>' +
 
       '<div class="hc-sec" id="hcHSec-money" hidden>' +
 
