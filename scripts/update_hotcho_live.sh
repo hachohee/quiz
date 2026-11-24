@@ -37,7 +37,7 @@ if git diff --quiet -- hotcho_news.json hotcho_hub.json hotcho_family.json; then
 fi
 
 git add hotcho_news.json hotcho_hub.json hotcho_family.json
-git -c user.name="봇똑핫초" -c user.email="hachohee@users.noreply.github.com" commit -q \
+git -c user.name="똑똑핫초" -c user.email="hachohee@users.noreply.github.com" commit -q \
   -m "💼🏠 뿌듯·행복핫초 데이터 자동 갱신 ($(TZ=Asia/Seoul date +'%m/%d %H:%M') KST)"
 git push --quiet origin HEAD:main
 echo "올렸습니다 — GitHub Pages에 1분 안에 반영됩니다."
