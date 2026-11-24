@@ -172,7 +172,6 @@ def rebuild_meta(doc):
 
 def notion_add(item):
     props = {
-        "제목": item["title"],
         "방송일자": item["date"],
         "분류": item["cat"],
     }
@@ -181,6 +180,7 @@ def notion_add(item):
     print("노션에 추가:", item["date"], item["title"])
     run_notion([
         "pages", "create", "--parent-data-source", DATA_SOURCE,
+        "--title", item["title"],
         "--set", json.dumps(props, ensure_ascii=False),
         "--allow-new-options",
         "--write-request-summary",
@@ -188,7 +188,7 @@ def notion_add(item):
     ])
 
 
-def from_phone(path, push_to_notion):
+def from_phone(path, dry_run=False):
     """폰 백업/내 기사 목록에서 기사를 꺼내 노션에 올린다(이미 있는 건 건너뜀)."""
     with open(path, encoding="utf-8") as f:
         raw = json.load(f)
@@ -220,7 +220,10 @@ def from_phone(path, push_to_notion):
             continue
         if key(it) in have:
             continue
-        notion_add(it)
+        if dry_run:
+            print("[dry-run] 노션에 올릴 기사:", it["date"], it["title"])
+        else:
+            notion_add(it)
         have.add(key(it))
         added += 1
     print("새로 올린 기사:", added, "편")
@@ -252,13 +255,17 @@ def main():
     a = ap.parse_args()
 
     if a.from_phone:
-        from_phone(a.from_phone, not a.dry_run)
+        from_phone(a.from_phone, a.dry_run)
     if a.add:
         if not a.title or not a.date:
             raise SystemExit("--add 에는 --title 과 --date 가 필요해요")
         if not re.match(r"^\d{4}-\d{2}-\d{2}$", a.date):
             raise SystemExit("--date 는 2027-03-02 형식으로 주세요")
-        notion_add({"title": a.title.strip(), "date": a.date, "cat": canon(a.cat), "url": a.url.strip()})
+        item = {"title": a.title.strip(), "date": a.date, "cat": canon(a.cat), "url": a.url.strip()}
+        if a.dry_run:
+            print("[dry-run] 노션에 추가할 기사:", item["date"], item["title"], "·", item["cat"])
+        else:
+            notion_add(item)
 
     doc = load_doc()
     before = len(doc["items"])
