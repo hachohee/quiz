@@ -8,8 +8,9 @@
    v18: index.html·라디오 JSON 은 HTTP 캐시(GitHub Pages 10분)까지 건너뛰고
         항상 새 파일을 받아 옵니다. 고친 코드가 폰에 바로 내려오게.
    v23: Day 12(2026-11-23) 토익 단어 7개·3초 문법 2문제·상식 '그린워싱' 반영.
-   v24: 🎬 방송 4사 다큐 다시보기(KBS·MBC·SBS·EBS) 화면 추가 — 공식 유튜브 채널·영상 22편. */
-const CACHE = 'toeic-bts-v24';
+   v24: 🎬 방송 4사 다큐 다시보기(KBS·MBC·SBS·EBS) 화면 추가 — 공식 유튜브 채널·영상 22편.
+   v25: 시사·보도 / 교양·다큐 두 갈래 + 방송사 필터 + 최신순 · docs_episodes.json(RSS 매일 갱신) 읽기. */
+const CACHE = 'toeic-bts-v25';
 const SHELL = [
   './',
   './index.html',
@@ -89,6 +90,11 @@ self.addEventListener('fetch', (event) => {
   }
   if (path.endsWith('/radio_transcripts.json')) {
     event.respondWith(networkFirst(req, '{}'));
+    return;
+  }
+  /* 📰 시사·교양 최신 회차 목록: 온라인일 때만 새 JSON, 오프라인일 때만 캐시 */
+  if (path.endsWith('/docs_episodes.json')) {
+    event.respondWith(networkFirst(req, '{"episodes":[]}'));
     return;
   }
   /* 앱 화면(HTML): 네트워크 우선 + HTTP 캐시 무시 */
