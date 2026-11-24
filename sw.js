@@ -15,7 +15,7 @@
    v27: 💼뿌듯핫초(일) · 🏠행복핫초(집) · 📚똑똑핫초(공부) 3모드 통합 — 상단 전환 바 + hotcho_modes.js/.css
         + hotcho_news.json(세계·전국·강원 헤드라인) · hotcho_hub.json(카르텔워치) · hotcho_family.json(가족일정·찬우학업).
         기존 똑똑핫초 화면·퀴즈·공부방·라디오·localStorage 키는 그대로. */
-const CACHE = 'toeic-bts-v28';
+const CACHE = 'toeic-bts-v29';
 const SHELL = [
   './',
   './index.html',
