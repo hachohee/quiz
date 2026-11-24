@@ -265,8 +265,65 @@ data = {
     "policy": policy,
 }
 
-out = os.path.join(ROOT, "hotcho_briefings.json")
-with io.open(out, "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=1)
-print("wrote", out, "days", len(data["days"]), "items",
-      sum(len(d["items"]) for d in data["days"]), "policy", len(policy))
+
+def _write(path, data):
+    with io.open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+
+
+def rebuild():
+    """기본(박혀 있는 11/23·11/24)으로 통째로 다시 만든다."""
+    out = os.path.join(ROOT, "hotcho_briefings.json")
+    _write(out, data)
+    print("wrote", out, "days", len(data["days"]), "items",
+          sum(len(d["items"]) for d in data["days"]), "policy", len(data["policy"]))
+
+
+# ---------------------------------------------------------------- 매일 누적용 CLI
+# python3 scripts/build_briefings.py --add-day  /tmp/day.json
+#   { "date":"2026-11-25", "label":"11/25 (수)", "generated":"...",
+#     "narrative":"✈ 국제 종합 — ...\n\n⚑ 국내 종합 — ...", "items":[{...}, ...] }
+# python3 scripts/build_briefings.py --add-policy /tmp/policy.json   (카드 1개 또는 배열)
+# 같은 날짜가 이미 있으면 덮어쓰고, 날짜 최신순으로 정렬한다. 하루 60일치만 남긴다.
+def main(argv):
+    path = os.path.join(ROOT, "hotcho_briefings.json")
+    if len(argv) < 2 or argv[1] not in ("--add-day", "--add-policy"):
+        rebuild()
+        return
+    mode, src = argv[1], argv[2]
+    base = json.load(io.open(path, encoding="utf-8")) if os.path.exists(path) else {
+        "updated": "", "note": data["note"], "days": [], "policy": []}
+    base.setdefault("days", []); base.setdefault("policy", [])
+    with io.open(src, encoding="utf-8") as f:
+        new = json.load(f)
+
+    if mode == "--add-day":
+        day = new
+        if not day.get("date") or not day.get("items"):
+            raise SystemExit("day.json 에 date 와 items 가 있어야 합니다")
+        base["days"] = [d for d in base["days"] if d.get("date") != day["date"]]
+        base["days"].append(day)
+        base["days"].sort(key=lambda d: d["date"], reverse=True)
+        base["days"] = base["days"][:60]
+        note = "day %s (%d items)" % (day["date"], len(day["items"]))
+    else:
+        cards = new if isinstance(new, list) else [new]
+        for c in cards:
+            if not c.get("id") or not c.get("url"):
+                raise SystemExit("policy 카드에 id·url 이 필요합니다")
+        ids = {c["id"] for c in cards}
+        base["policy"] = [c for c in base["policy"] if c.get("id") not in ids] + cards
+        base["policy"].sort(key=lambda c: c.get("date", ""), reverse=True)
+        note = "policy +%d" % len(cards)
+
+    base["updated"] = new.get("updated") or base.get("updated", "")
+    _write(path, base)
+    allitems = sum(len(d.get("items", [])) for d in base["days"])
+    print("updated", path, note, "| days", len(base["days"]), "items", allitems,
+          "policy", len(base["policy"]))
+
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv)
+

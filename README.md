@@ -30,7 +30,10 @@
   - 심층 카드 = 출처 배지 + 분야 배지 + 기관·날짜 + 제목 + **[원문 사실]** + **[전후 비교·장단점]** + **[추가 취재 방향]** + 원문 보기 ↗ + 💡 담기
   - `실시간 소식` = 기존 `hotcho_monitor.json`(186건) 갈래 탭·키워드 필터를 그대로 여기서.
 - 데이터: `hotcho_briefings.json` — `days[]`(날짜별 narrative·items) + `policy[]`(심층 카드).
-  생성: `python3 scripts/build_briefings.py` (스크립트 안의 `W`를 그날 날짜로, `days`에 하루치를 더하고 다시 실행).
+  - 처음 만들기·되돌리기: `python3 scripts/build_briefings.py` (스크립트 안의 하루치 자료로 통째로 다시 씀)
+  - **매일 한 칸씩 더하기(권장)**: 그날 브리핑을 `/tmp/day.json`(`date`·`label`·`narrative`·`items[]`)으로 만들어
+    `python3 scripts/build_briefings.py --add-day /tmp/day.json`, 정책 카드는 `--add-policy /tmp/policy.json`.
+    같은 날짜는 덮어쓰고, 날짜 최신순 정렬 · 최근 60일치만 남깁니다. → `hotcho_briefings.json`도 같은 커밋에 넣으면 1분 뒤 라이브.
   보도 흐름 막대는 저장된 `items`의 날짜·주제를 그때그때 세어 그리므로, 하루치만 쌓이면 자동으로 늘어납니다.
 - 모든 카드의 `원문 보기 ↗`는 `target="_blank"`로 새 창에서 열리고, 2026-11-24 기준 36개 링크 전부 HTTP 200을 확인했습니다.
 
