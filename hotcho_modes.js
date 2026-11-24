@@ -80,7 +80,8 @@
     home: load(K.home, null) || { memos: [], fridge: { memo: '', shop: [] }, checks: {} },
     editing: '',
     pickedNews: {},
-    linkedItem: ''
+    linkedItem: '',
+    linkedUrl: ''
   };
   if (!S.article.brief) S.article.brief = {};
   if (!S.article.report) S.article.report = {};
@@ -272,8 +273,10 @@
       title: it.title,
       cat: catName,
       status: '아이디어',
-      facts: '출처: ' + it.source + ' · ' + it.when,
-      sources: '원문: ' + it.link,
+      facts: '',
+      sources: '',
+      url: it.link,
+      from: it.source + ' · ' + it.when,
       createdAt: Date.now(),
       updatedAt: Date.now()
     };
@@ -303,7 +306,8 @@
       '<div class="hc-stat" title="' + esc(money(c.total_amount)) + '"><b>' + moneyShort(c.total_amount) + '</b><span>계약 총액</span></div>' +
       '<div class="hc-stat"><b>' + num(c.anomaly_count) + '</b><span>이상징후</span></div>' +
       '</div>' +
-      '<div class="hc-tiny" style="font-size:11px;color:var(--muted2,#7f74b3);margin:-6px 2px 8px">총액 ' + money(c.total_amount) + ' · ' + esc(c.updated || '') + ' 수집분</div>';
+      '<div class="hc-tiny" style="font-size:11px;color:var(--muted2,#7f74b3);margin:-6px 2px 8px">총액 ' + money(c.total_amount) +
+      (c.period && c.period.from ? ' · ' + esc(c.period.from) + '~' + esc(c.period.to) : '') + '</div>';
     if (recent.length) {
       html += '<div class="hc-tiny" style="font-size:11px;color:var(--muted2,#7f74b3);margin:0 2px 4px">최근 이상징후 ' + recent.length + '건</div>';
       for (var i = 0; i < recent.length; i++) {
@@ -348,8 +352,10 @@
         '<div class="hc-item-top"><div class="hc-item-t">' + esc(it.title) + '</div></div>' +
         '<div class="hc-item-tags"><span class="hc-tag">' + esc(it.cat || '강원') + '</span>' +
         '<span class="hc-tag ' + st.cls + '">' + esc(st.k) + '</span></div>' +
+        (it.from ? '<div class="hc-item-memo"><span class="k">출처</span> ' + esc(it.from) + '</div>' : '') +
         (it.facts ? '<div class="hc-item-memo"><span class="k">팩트</span> ' + esc(it.facts) + '</div>' : '') +
         (it.sources ? '<div class="hc-item-memo"><span class="k">취재처</span> ' + esc(it.sources) + '</div>' : '') +
+        (it.url ? '<div class="hc-item-memo"><a href="' + esc(it.url) + '" target="_blank" rel="noopener" style="color:#c4b5fd">🔗 원문 열기</a></div>' : '') +
         '<div class="hc-item-act">' +
         '<button type="button" class="hc-btn sm" data-item-write="' + it.id + '">✍️ 기사로 쓰기</button>' +
         '<button type="button" class="hc-btn sm" data-item-next="' + it.id + '">→ ' + esc(nextStatus(it.status)) + '</button>' +
@@ -387,6 +393,7 @@
         if (S.items[i].id === S.editing) {
           for (var k in rec) S.items[i][k] = rec[k];
           S.items[i].updatedAt = Date.now();
+          delete S.items[i].from; delete S.items[i].url;   /* 직접 고친 소재는 출처 표시를 지움 */
         }
       }
       toast('소재를 고쳤어요');
@@ -417,6 +424,7 @@
       body: (it.facts || ''),
       check: (it.sources || '')
     };
+    S.linkedUrl = it.url || '';
     save(K.article, S.article);
     if (it.status === '아이디어') {
       it.status = '작성중';
@@ -456,7 +464,11 @@
     }
     fieldsEl.innerHTML = html;
     var link = $('hcArtLink');
-    if (link) link.textContent = S.linkedItem ? '소재: ' + S.linkedItem : '';
+    if (link) {
+      link.innerHTML = S.linkedItem
+        ? '소재: ' + esc(S.linkedItem) + (S.linkedUrl ? ' · <a href="' + esc(S.linkedUrl) + '" target="_blank" rel="noopener" style="color:#c4b5fd">🔗 원문</a>' : '')
+        : '';
+    }
     updateArticleCount();
   }
 
@@ -469,7 +481,7 @@
     var bodyLen = (data.body || '').length + (data.anchor || '').length;
     var sec = Math.round((bodyLen / READ_CHARS_PER_MIN) * 60);
     var mm = Math.floor(sec / 60), ss = sec % 60;
-    var est = bodyLen ? (' · 예상 방송 길이 약 ' + (mm ? mm + '분 ' : '') + ss + '초') : '';
+    var est = (bodyLen && S.artTab === 'report') ? (' · 예상 방송 길이 약 ' + (mm ? mm + '분 ' : '') + ss + '초') : '';
     el.textContent = '전체 ' + num(total) + '자' + est;
   }
 
