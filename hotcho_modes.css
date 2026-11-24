@@ -45,6 +45,9 @@
 /* 갈래가 많을 때(언론·정책 모니터)는 두 줄로 흘려보냅니다 */
 .hc-seg.wrap { flex-wrap: wrap; }
 .hc-seg.wrap button { flex: 0 0 auto; padding: 7px 10px; font-size: 12px; }
+/* 📰 뉴스·언론모니터 하위 3탭 — 폭에 맞춰 고르게 늘어나고, 좁으면 두 줄 */
+#hcNewsSeg { margin: 0 0 12px; }
+#hcNewsSeg button { flex: 1 1 auto; }
 
 /* ---------- 언론·정책 모니터 ---------- */
 .hc-mon-kws { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 10px; }
@@ -230,6 +233,8 @@
   overflow: hidden; text-overflow: ellipsis; line-height: 1.2;
 }
 .hc-menu button .e { font-size: 13px; }
+/* 메뉴 이름이 길어도(예: '뉴스 · 언론모니터') 잘리지 않게 두 줄로 흘려보냅니다 */
+.hc-menu.work button { white-space: normal; word-break: keep-all; line-height: 1.18; padding: 8px 5px; min-height: 42px; }
 .hc-menu button.on {
   background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff;
   border-color: transparent; box-shadow: 0 8px 20px rgba(139, 92, 246, .28);

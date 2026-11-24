@@ -144,8 +144,7 @@
     brief: null,
     workSec: 'news',
     homeSec: 'events',
-    mgGroup: 'press',
-    mgSub: 'daily',
+    newsSub: 'live',   /* 📰 뉴스·언론모니터 하위 탭 — live(실시간 뉴스) | daily(일일브리핑) | acc(누적·추가취재) */
     polTab: 'today',
     briefDate: '',
     calY: -1,
@@ -157,14 +156,16 @@
   /* 지난번에 보던 메뉴를 그대로 열어 준다 */
   (function () {
     var u = load(K.ui, null) || {};
-    ['workSec', 'homeSec', 'mgGroup', 'mgSub', 'polTab', 'trendKind'].forEach(function (k) {
+    ['workSec', 'homeSec', 'newsSub', 'polTab', 'trendKind'].forEach(function (k) {
       if (typeof u[k] === 'string' && u[k]) S[k] = u[k];
     });
+    /* v37에서 '언론·정책 모니터'(monitor)를 뉴스 쪽으로 합쳤어요 → 저장돼 있던 자리는 뉴스 화면으로 */
+    if (S.workSec === 'monitor') S.workSec = 'news';
   })();
   function saveUi() {
     save(K.ui, {
-      workSec: S.workSec, homeSec: S.homeSec, mgGroup: S.mgGroup,
-      mgSub: S.mgSub, polTab: S.polTab, trendKind: S.trendKind
+      workSec: S.workSec, homeSec: S.homeSec, newsSub: S.newsSub,
+      polTab: S.polTab, trendKind: S.trendKind
     });
   }
   /* 관심 키워드는 이 폰에만 저장(hotcho_ 로 시작 → 백업·기기 옮기기에도 함께 감) */
@@ -332,7 +333,7 @@
     document.body.classList.toggle('hc-mode-alt', mode !== 'study');
     if (remember !== false) { try { localStorage.setItem(K.mode, mode); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
-    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderMyArt(); renderDrafts(); if (S.workSec === 'monitor') renderMg(); }
+    if (mode === 'work') { renderNewsBody(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderMyArt(); renderDrafts(); if (S.workSec === 'policy') renderPolicy(); }
     if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); renderSyncSummary(); }
   }
 
@@ -590,7 +591,7 @@
   }
 
   /* ============================================================ 메뉴 버튼 전환 */
-  var WORK_SECS = ['news', 'monitor', 'cartel', 'items', 'article', 'myart'];
+  var WORK_SECS = ['news', 'policy', 'cartel', 'items', 'article', 'myart'];
   var HOME_SECS = ['events', 'kids', 'money', 'fridge', 'backup'];
 
   function showWorkSec(sec) {
@@ -605,8 +606,8 @@
       var el = $('hcSec-' + WORK_SECS[j]);
       if (el) el.hidden = (WORK_SECS[j] !== sec);
     }
-    if (sec === 'news') renderNews();
-    if (sec === 'monitor') renderMg();
+    if (sec === 'news') renderNewsBody();
+    if (sec === 'policy') renderPolicy();
     if (sec === 'cartel') renderCartel();
     if (sec === 'items') renderItems();
     if (sec === 'article') renderArticle();
@@ -668,35 +669,53 @@
     return '<a class="hc-src-link" href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(label) + ' ↗</a>';
   }
 
-  /* ============================================================ 🛰 모니터 (1단) */
-  function renderMg() {
-    var tabs = $('hcMgTabs');
-    if (!tabs) return;
-    tabs.innerHTML =
-      '<button type="button" data-mg="press" class="' + (S.mgGroup === 'press' ? 'on' : '') + '">📰 언론 모니터</button>' +
-      '<button type="button" data-mg="policy" class="' + (S.mgGroup === 'policy' ? 'on' : '') + '">🏛 정책 모니터</button>';
-    var body = $('hcMgBody');
-    if (!body) return;
-    if (S.mgGroup === 'policy') {
-      body.innerHTML = '<div class="hc-seg wrap" id="hcPolTabs"></div><div id="hcPolBody"></div>';
-      renderPolTabs();
-      renderPolBody();
-      return;
-    }
-    body.innerHTML = '<div class="hc-seg wrap" id="hcMgSub"></div><div id="hcMgSubBody"></div>';
-    renderPressSub();
+  /* ============================================================ 📰 뉴스 · 언론모니터 (하위 3탭) */
+  /* 실시간 뉴스 · 일일브리핑(옛 언론 모니터) · 누적/추가취재를 한 메뉴 안에서 탭으로 오갑니다.
+     🏛 정책 모니터는 따로 떼어 낸 메뉴라 renderPolicy()가 그립니다. */
+  var NEWS_SUBS = [
+    { k: 'live', l: '📰 실시간 뉴스' },
+    { k: 'daily', l: '📅 일일브리핑' },
+    { k: 'acc', l: '🔁 누적·추가취재' }
+  ];
+
+  function newsSubKey(k) {
+    for (var i = 0; i < NEWS_SUBS.length; i++) if (NEWS_SUBS[i].k === k) return k;
+    return 'live';
   }
 
-  function renderPressSub() {
-    var tabs = $('hcMgSub');
-    if (!tabs) return;
-    tabs.innerHTML =
-      '<button type="button" data-mg-sub="daily" class="' + (S.mgSub === 'daily' ? 'on' : '') + '">📅 일일브리핑</button>' +
-      '<button type="button" data-mg-sub="acc" class="' + (S.mgSub === 'acc' ? 'on' : '') + '">🔁 뉴스데이터 누적/추가취재 제안</button>';
-    var body = $('hcMgSubBody');
-    if (!body) return;
-    body.innerHTML = (S.mgSub === 'acc') ? accHTML() : dailyHTML();
-    if (S.mgSub !== 'acc') renderDailyParts();
+  function renderNewsSeg() {
+    var el = $('hcNewsSeg');
+    if (!el) return;
+    var h = '';
+    for (var i = 0; i < NEWS_SUBS.length; i++) {
+      var t = NEWS_SUBS[i];
+      h += '<button type="button" data-news-sub="' + t.k + '" class="' + (S.newsSub === t.k ? 'on' : '') + '">' + t.l + '</button>';
+    }
+    el.innerHTML = h;
+  }
+
+  /* 지금 고른 하위 탭 한 칸만 그린다(달력·목록은 그때그때 새로) */
+  function renderNewsBody() {
+    S.newsSub = newsSubKey(S.newsSub);
+    renderNewsSeg();
+    var live = $('hcNewsPane-live'), daily = $('hcNewsPane-daily'), acc = $('hcNewsPane-acc');
+    if (live) live.hidden = (S.newsSub !== 'live');
+    if (daily) {
+      daily.hidden = (S.newsSub !== 'daily');
+      if (!daily.hidden) { daily.innerHTML = dailyHTML(); renderDailyParts(); }
+    }
+    if (acc) {
+      acc.hidden = (S.newsSub !== 'acc');
+      if (!acc.hidden) acc.innerHTML = accHTML();
+    }
+    renderNews();
+  }
+
+  /* ============================================================ 🏛 정책 모니터 (메뉴 하나) */
+  function renderPolicy() {
+    if (!$('hcPolTabs')) return;
+    renderPolTabs();
+    renderPolBody();
   }
 
   /* ---------- 📅 일일브리핑 ---------- */
@@ -714,12 +733,12 @@
 
     return '' +
       '<section class="hc-card">' +
-      '<div class="hc-card-head"><h3>📡 실시간 뉴스</h3><span class="hc-tiny" id="hcDailyUpd">' +
+      '<div class="hc-card-head"><h3>📡 오늘의 실시간 헤드라인</h3><span class="hc-tiny" id="hcDailyUpd">' +
       ((S.news && S.news.updated) ? esc(S.news.updated) + ' 기준' : '') + '</span></div>' +
       head +
       '<div class="hc-row" style="margin-top:8px">' +
       '<button type="button" class="hc-btn sm" data-act="refresh">↻ 새로고침</button>' +
-      '<button type="button" class="hc-btn sm ghost" data-work-sec="news">📰 실시간 뉴스 전체</button></div>' +
+      '<button type="button" class="hc-btn sm ghost" data-news-sub="live">📰 실시간 뉴스 전체</button></div>' +
       '</section>' +
 
       '<section class="hc-card">' +
@@ -936,6 +955,7 @@
 
   /* ============================================================ 🏛 정책 모니터 (2단) */
   var POL_TABS = [
+    { k: 'all', l: '전체' },
     { k: 'today', l: '오늘의 변화' },
     { k: 'press', l: '정책브리핑' },
     { k: 'assembly', l: '국회' },
@@ -1014,6 +1034,11 @@
       return;
     }
     var list = polCards(S.polTab);
+    var fallback = '';
+    if (!list.length && S.polTab === 'today') {
+      list = polCards('all');
+      fallback = '<p class="hc-note" style="margin:0 2px 10px">오늘 새로 나온 항목은 아직 없어서, 최근 정책 카드를 보여 드려요.</p>';
+    }
     if (!list.length) {
       body.innerHTML = '<div class="hc-empty">이 탭에 해당하는 정책 카드가 없어요.</div>';
       return;
@@ -1021,7 +1046,8 @@
     var out = '';
     for (var j = 0; j < list.length; j++) out += polCardHTML(list[j]);
     if (S.polTab === 'today') {
-      out = '<p class="hc-note" style="margin:0 2px 10px">' + esc(monDay(kstToday())) + ' 기준으로 새로 나온 정책·입법·통계·지자체 항목입니다. 카드마다 [원문 사실] · [전후 비교·장단점] · [추가 취재 방향]이 붙어 있어요.</p>' + out;
+      out = (fallback || ('<p class="hc-note" style="margin:0 2px 10px">' + esc(monDay(kstToday())) +
+        ' 기준으로 새로 나온 정책·입법·통계·지자체 항목입니다. 카드마다 [원문 사실] · [전후 비교·장단점] · [추가 취재 방향]이 붙어 있어요.</p>')) + out;
     }
     body.innerHTML = out;
   }
@@ -1069,9 +1095,10 @@
     }
   }
 
+  /* 아이템으로 담은 뒤, 담긴 자리 화면만 새로 그린다 */
   function renderMgBodyIfNeeded() {
-    if (S.workSec !== 'monitor') return;
-    if (S.mgGroup === 'policy') renderPolBody(); else renderPressSub();
+    if (S.workSec === 'news' && (S.newsSub === 'acc' || S.newsSub === 'daily')) renderNewsBody();
+    else if (S.workSec === 'policy') renderPolBody();
   }
 
   function addMonitorItem(idx) {
@@ -2589,16 +2616,19 @@
       '<div class="hc-head"><div><h2>💼 뿌듯핫초</h2><p class="hc-sub">취재기자 업무 허브 · 일</p></div>' +
       '<button type="button" class="hc-refresh" data-act="refresh">↻ 새로고침</button></div>' +
 
-      '<nav class="hc-menu" id="hcWorkMenu" aria-label="뿌듯핫초 메뉴">' +
-      menuBtn('work', 'news', '📰', '실시간 뉴스') +
-      menuBtn('work', 'monitor', '🛰', '언론·정책 모니터') +
+      '<nav class="hc-menu work" id="hcWorkMenu" aria-label="뿌듯핫초 메뉴">' +
+      menuBtn('work', 'news', '📰', '뉴스 · 언론모니터') +
+      menuBtn('work', 'policy', '🏛', '정책 모니터') +
       menuBtn('work', 'cartel', '🕵️', '카르텔워치') +
       menuBtn('work', 'items', '🧩', '아이템 구상') +
       menuBtn('work', 'article', '✍️', '기사작성') +
       menuBtn('work', 'myart', '🎬', '내 기사') +
       '</nav>' +
 
+      /* ---------------- 📰 뉴스 · 언론모니터 (실시간 뉴스 | 일일브리핑 | 누적·추가취재) ---------------- */
       '<div class="hc-sec" id="hcSec-news">' +
+      '<div class="hc-seg wrap" id="hcNewsSeg" role="tablist" aria-label="뉴스·언론모니터 하위 메뉴"></div>' +
+      '<div id="hcNewsPane-live">' +
       '<section class="hc-card hc-dbrief" id="hcDailyBrief" hidden></section>' +
       '<section class="hc-card">' +
       '<div class="hc-card-head"><h3>📰 실시간 주요뉴스</h3><span class="hc-tiny" id="hcNewsUpd">불러오는 중…</span></div>' +
@@ -2606,10 +2636,14 @@
       '<div class="hc-news-list" id="hcNewsList"></div>' +
       '<p class="hc-note">기사 제목을 누르면 원문이 열려요 · 💡를 누르면 아이템 구상에 그대로 담겨요</p>' +
       '</section></div>' +
+      '<div id="hcNewsPane-daily" hidden></div>' +
+      '<div id="hcNewsPane-acc" hidden></div>' +
+      '</div>' +
 
-      '<div class="hc-sec" id="hcSec-monitor" hidden>' +
-      '<div class="hc-seg" id="hcMgTabs"></div>' +
-      '<div id="hcMgBody"></div>' +
+      /* ---------------- 🏛 정책 모니터 (전용) ---------------- */
+      '<div class="hc-sec" id="hcSec-policy" hidden>' +
+      '<div class="hc-seg wrap" id="hcPolTabs"></div>' +
+      '<div id="hcPolBody"></div>' +
       '</div>' +
 
       '<div class="hc-sec" id="hcSec-cartel" hidden>' +
@@ -2815,7 +2849,7 @@
     ]).then(function () {
         if (btn) btn.textContent = '↻ 새로고침';
       renderNews(); renderMonitor(); renderCartel(); renderEvents(); renderKids(); renderMyArt();
-      if (S.workSec === 'monitor') renderMg();
+      if (S.workSec === 'policy') renderPolicy();
       if (!silent) {
         var ok = S.news || S.family;
         toast(ok ? '최신으로 맞췄어요' : '데이터를 못 받았어요 — 잠시 뒤 다시');
@@ -2825,18 +2859,16 @@
 
   /* ------------------------------------------------------------ 이벤트 */
   function onWorkClick(e) {
-    var t = e.target.closest ? e.target.closest('[data-work-sec],[data-mg],[data-mg-sub],[data-pol-tab],[data-cal-nav],[data-cal-day],[data-trend],[data-acc-topic],[data-acc-search],[data-brief-add],[data-pol-add],[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-ma-year],[data-ma-cat],[data-ma-more],[data-ma-del],[data-act]') : null;
+    var t = e.target.closest ? e.target.closest('[data-work-sec],[data-news-sub],[data-pol-tab],[data-cal-nav],[data-cal-day],[data-trend],[data-acc-topic],[data-acc-search],[data-brief-add],[data-pol-add],[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-ma-year],[data-ma-cat],[data-ma-more],[data-ma-del],[data-act]') : null;
     if (!t) return;
 
     /* --- 메뉴 버튼 전환 --- */
     var wsec = t.getAttribute('data-work-sec');
     if (wsec) { showWorkSec(wsec); return; }
 
-    var mg = t.getAttribute('data-mg');
-    if (mg) { S.mgGroup = mg; saveUi(); renderMg(); return; }
-
-    var mgs = t.getAttribute('data-mg-sub');
-    if (mgs) { S.mgSub = mgs; saveUi(); renderPressSub(); return; }
+    /* --- 📰 뉴스·언론모니터 하위 탭 --- */
+    var nsub = t.getAttribute('data-news-sub');
+    if (nsub) { S.newsSub = newsSubKey(nsub); saveUi(); renderNewsBody(); try { window.scrollTo(0, 0); } catch (err) {} return; }
 
     var polt = t.getAttribute('data-pol-tab');
     if (polt) { S.polTab = polt; saveUi(); renderPolTabs(); renderPolBody(); return; }
@@ -2867,7 +2899,7 @@
     var acct = t.getAttribute('data-acc-topic');
     if (acct !== null) {
       S.accTopic = acct;
-      var box = $('hcMgSubBody');
+      var box = $('hcNewsPane-acc');
       if (box) {
         box.innerHTML = accHTML();
       }
