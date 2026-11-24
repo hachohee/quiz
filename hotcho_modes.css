@@ -564,3 +564,9 @@ body.radio-on.radio-open #hcShared { padding-bottom: calc(var(--rph, 206px) + 16
 .hc-share[open] > summary { border-bottom: 1px solid rgba(255, 255, 255, .07); }
 .hc-share-body { padding: 12px 13px 14px; }
 .hc-share-body .hc-note { margin: 8px 2px 0; }
+/* 좁은 폰(≈400px 이하)에서는 오른쪽 힌트를 빼고 한 줄로 */
+@media (max-width: 400px) {
+  .hc-share-sub { display: none; }
+  .hc-share > summary { font-size: 12px; gap: 6px; }
+  .hc-share-tt { flex: 1 1 auto; }
+}
