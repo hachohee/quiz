@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-24T12:23:15+09:00",
+ "updated_at": "2026-11-24T12:31:26+09:00",
  "source": "YouTube channel RSS (official channels)",
  "per_program": 8,
  "failed": [],
@@ -8,12 +8,27 @@
    "id": "kbs-window",
    "b": "kbs",
    "cat": "news",
-   "name": "KBS 시사 (시사기획 창 · 사사건건 · 9층 시사국)",
+   "name": "KBS 시사기획 창",
+   "short": "시사기획 창",
+   "channel": "KBS시사",
+   "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
+   "playlist_id": "PLjESAf4PvYLnOz4aIAExMPmz0kSQwv-93",
+   "source": "playlist",
+   "url": "https://www.youtube.com/playlist?list=PLjESAf4PvYLnOz4aIAExMPmz0kSQwv-93",
+   "note": "매주 화요일 밤 9시 40분 KBS 1TV — 공식 '[시사기획 창] 풀영상' 재생목록에서 회차만 받습니다"
+  },
+  {
+   "id": "kbs-sisa",
+   "b": "kbs",
+   "cat": "news",
+   "name": "KBS 시사 채널 (9층 시사국 · 시사멘터리 추적 · 더 보다)",
    "short": "KBS 시사",
    "channel": "KBS시사",
    "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCEb31RoX5RnfYENmnyokN8A",
-   "note": "KBS 기자들이 만드는 시사 프로그램 통합 채널 — 시사기획 창 · 사사건건"
+   "note": "KBS 기자들이 만드는 시사 채널 — 매일 쏟아지는 [사사건건] 토크는 빼고 다큐·탐사 클립만"
   },
   {
    "id": "kbs-chu60",
@@ -23,6 +38,8 @@
    "short": "추적 60분",
    "channel": "KBS 추적60분",
    "channel_id": "UCy-6oZwPwrR_W-zYnqLD8dg",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCy-6oZwPwrR_W-zYnqLD8dg",
    "note": "1983년부터 이어온 탐사 프로그램 — 매주 금요일 밤 10시"
   },
@@ -34,6 +51,8 @@
    "short": "PD수첩",
    "channel": "MBC PD수첩",
    "channel_id": "UCawCv9kO2UXbTtsK4EammRQ",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCawCv9kO2UXbTtsK4EammRQ",
    "note": "MBC 대표 탐사보도 — 매주 화요일 밤 10시"
   },
@@ -45,6 +64,8 @@
    "short": "스트레이트",
    "channel": "탐사기획 스트레이트",
    "channel_id": "UCSnghwknYf04dRFBtOtY8xA",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCSnghwknYf04dRFBtOtY8xA",
    "note": "MBC 탐사기획 — 매주 일요일 밤"
   },
@@ -56,19 +77,36 @@
    "short": "그것이 알고싶다",
    "channel": "그것이 알고싶다",
    "channel_id": "UC_U34UlsS9Mp5ZgvsEA7irw",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UC_U34UlsS9Mp5ZgvsEA7irw",
    "note": "SBS 대표 탐사보도 — 매주 토요일 밤 11시"
+  },
+  {
+   "id": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "name": "KBS 다큐멘터리 3일",
+   "short": "다큐 3일",
+   "channel": "KBS 다큐 🍿ON AIR🍿",
+   "channel_id": "UC4LW3sOslC14Vn5bcoNUBkg",
+   "playlist_id": "PLk1KtKgGi_E6hrjPY4vwqYnpHbWU78BoK",
+   "source": "playlist",
+   "url": "https://www.youtube.com/playlist?list=PLk1KtKgGi_E6hrjPY4vwqYnpHbWU78BoK",
+   "note": "어느 공간에서든 72시간 — 최신 회차부터 (같은 회차는 1부/풀버전 하나만)"
   },
   {
    "id": "kbs-docu",
    "b": "kbs",
    "cat": "edu",
-   "name": "KBS 다큐 (다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜)",
+   "name": "KBS 다큐 (레전드 다시보기 — 역사저널 그날 · 파노라마 · 걸어서 세계 속으로)",
    "short": "KBS 다큐",
    "channel": "KBS 다큐",
    "channel_id": "UC4LW3sOslC14Vn5bcoNUBkg",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UC4LW3sOslC14Vn5bcoNUBkg",
-   "note": "KBS 공식 다큐 채널 — 다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜 · 명견만리"
+   "note": "KBS 공식 다큐 채널 — 매일 한 편씩 명작 다큐를 다시 올립니다"
   },
   {
    "id": "mbc-docu",
@@ -78,6 +116,8 @@
    "short": "MBC 다큐",
    "channel": "MBC PLAYGROUND",
    "channel_id": "UCVHf2Ne1-jZwlvYgTcfL7jw",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCVHf2Ne1-jZwlvYgTcfL7jw",
    "note": "MBC 시사교양 공식 — 다시 꺼내 본 MBC 다큐와 인물 인터뷰"
   },
@@ -89,6 +129,8 @@
    "short": "SBS 교양",
    "channel": "달리 [SBS DALI]",
    "channel_id": "UCPx-7AKiN1Z_qEVKhLQ5pAw",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCPx-7AKiN1Z_qEVKhLQ5pAw",
    "note": "SBS 교양 공식 채널 '달리' — SBS 스페셜 · 꼬꼬무 · 과몰입 인생사"
   },
@@ -100,6 +142,8 @@
    "short": "EBS 다큐",
    "channel": "EBSDocumentary (EBS 다큐)",
    "channel_id": "UCFCtZJTuJhE18k8IXwmXTYQ",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCFCtZJTuJhE18k8IXwmXTYQ",
    "note": "국내 최대 다큐 채널 '골라듄다큐' — 다큐프라임 · 한국기행 · 극한직업"
   },
@@ -111,6 +155,8 @@
    "short": "지식채널e",
    "channel": "EBS 지식채널e",
    "channel_id": "UCL44YGs2BXxtM4GZRH-wnrQ",
+   "playlist_id": "",
+   "source": "channel",
    "url": "https://www.youtube.com/channel/UCL44YGs2BXxtM4GZRH-wnrQ",
    "note": "5분 지식 다큐 — 하루 한 편이면 충분한 상식"
   }
@@ -271,17 +317,6 @@
    "thumb": "https://i3.ytimg.com/vi/2xJAdop60-w/hqdefault.jpg"
   },
   {
-   "v": "Gipu_-ZCzuc",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "[사사건건] 이 대통령, 국정원장·통일·외교·문체·행안부 장관 등 중폭 개각 단행 (이정헌, 최은석, 정철진)",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T05:06:56+09:00",
-   "thumb": "https://i4.ytimg.com/vi/Gipu_-ZCzuc/hqdefault.jpg"
-  },
-  {
    "v": "hfnjL1IkwPg",
    "pid": "ebs-docu",
    "b": "ebs",
@@ -392,50 +427,6 @@
    "thumb": "https://i3.ytimg.com/vi/JfoqcFywj54/hqdefault.jpg"
   },
   {
-   "v": "Dl8DmIvtf9Q",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "[사사건건] 외교·안보라인 전면 교체 의미는? (이정헌, 최은석)",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T18:27:33+09:00",
-   "thumb": "https://i1.ytimg.com/vi/Dl8DmIvtf9Q/hqdefault.jpg"
-  },
-  {
-   "v": "2AjHNhVJ-P4",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "[사사건건] 국정원과 4개 부처 개각, 여야 평가는? (이정헌, 최은석)",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T18:27:28+09:00",
-   "thumb": "https://i3.ytimg.com/vi/2AjHNhVJ-P4/hqdefault.jpg"
-  },
-  {
-   "v": "Uy4ItU3aOrQ",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "[사사건건] 우리 코스피는 3%대 하락, 대만 증시는 2%대 상승…왜? (정철진)",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T18:13:24+09:00",
-   "thumb": "https://i2.ytimg.com/vi/Uy4ItU3aOrQ/hqdefault.jpg"
-  },
-  {
-   "v": "1zyOfii03IY",
-   "pid": "kbs-window",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "[사사건건] 정부 '증안펀드' 가동 준비 …언제 어떻게 사용할까? (정철진)",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T18:13:20+09:00",
-   "thumb": "https://i2.ytimg.com/vi/1zyOfii03IY/hqdefault.jpg"
-  },
-  {
    "v": "rxekdNU6x2w",
    "pid": "mbc-docu",
    "b": "mbc",
@@ -525,7 +516,7 @@
   },
   {
    "v": "iOq2qW969Y8",
-   "pid": "kbs-window",
+   "pid": "kbs-sisa",
    "b": "kbs",
    "cat": "news",
    "program": "KBS 시사",
@@ -536,7 +527,7 @@
   },
   {
    "v": "ApO0YOMV3rk",
-   "pid": "kbs-window",
+   "pid": "kbs-sisa",
    "b": "kbs",
    "cat": "news",
    "program": "KBS 시사",
@@ -547,7 +538,7 @@
   },
   {
    "v": "VnrGl0d4sCM",
-   "pid": "kbs-window",
+   "pid": "kbs-sisa",
    "b": "kbs",
    "cat": "news",
    "program": "KBS 시사",
@@ -634,6 +625,17 @@
    "thumb": "https://i2.ytimg.com/vi/yzlAcUjMlVI/hqdefault.jpg"
   },
   {
+   "v": "Mh2bF1vRQAs",
+   "pid": "kbs-sisa",
+   "b": "kbs",
+   "cat": "news",
+   "program": "KBS 시사",
+   "title": "호황의 그늘Ⅱ, 비행낭인 | 더 보다 3회 클립영상 (KBS 2024.3.3)",
+   "date": "2026-11-20",
+   "dt": "2026-11-20T17:06:45+09:00",
+   "thumb": "https://i2.ytimg.com/vi/Mh2bF1vRQAs/hqdefault.jpg"
+  },
+  {
    "v": "1DoNk1ulUkg",
    "pid": "sbs-geal",
    "b": "sbs",
@@ -643,6 +645,17 @@
    "date": "2026-11-20",
    "dt": "2026-11-20T17:00:23+09:00",
    "thumb": "https://i2.ytimg.com/vi/1DoNk1ulUkg/hqdefault.jpg"
+  },
+  {
+   "v": "mcuylJ3BxfU",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "오고 가는 사이 – 영월시외버스터미널 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20261116 방송",
+   "date": "2026-11-20",
+   "dt": "2026-11-20T16:00:15+09:00",
+   "thumb": "https://i2.ytimg.com/vi/mcuylJ3BxfU/hqdefault.jpg"
   },
   {
    "v": "xYYRbKpY2Nw",
@@ -687,6 +700,17 @@
    "date": "2026-11-18",
    "dt": "2026-11-18T17:00:27+09:00",
    "thumb": "https://i1.ytimg.com/vi/4oL-YaxAUWI/hqdefault.jpg"
+  },
+  {
+   "v": "O4npwpJIZHY",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "런던의 평양 사람들 [풀영상] | 창 571회 (KBS 26.11.17.)",
+   "date": "2026-11-17",
+   "dt": "2026-11-17T22:00:06+09:00",
+   "thumb": "https://i4.ytimg.com/vi/O4npwpJIZHY/hqdefault.jpg"
   },
   {
    "v": "z2As_raTvEU",
@@ -876,6 +900,17 @@
    "thumb": "https://i1.ytimg.com/vi/PDCfJhjeySs/hqdefault.jpg"
   },
   {
+   "v": "Sam0QrBsQdg",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "그 여자의 월급 [풀영상] | 창 570회 (KBS 26.11.10.)",
+   "date": "2026-11-10",
+   "dt": "2026-11-10T22:00:07+09:00",
+   "thumb": "https://i4.ytimg.com/vi/Sam0QrBsQdg/hqdefault.jpg"
+  },
+  {
    "v": "VKLDfE5usSE",
    "pid": "ebs-jisik",
    "b": "ebs",
@@ -896,6 +931,17 @@
    "date": "2026-11-10",
    "dt": "2026-11-10T17:00:08+09:00",
    "thumb": "https://i2.ytimg.com/vi/aAxYZg0Tlp4/hqdefault.jpg"
+  },
+  {
+   "v": "qTAHbYya7mA",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "우리가 사랑한 모든 순간 - 잠실야구장 마지막 72시간 [풀버전] | KBS 다큐멘터리 3일 20261102 방송",
+   "date": "2026-11-09",
+   "dt": "2026-11-09T22:00:02+09:00",
+   "thumb": "https://i2.ytimg.com/vi/qTAHbYya7mA/hqdefault.jpg"
   },
   {
    "v": "iQe4i9NNTic",
@@ -929,6 +975,138 @@
    "date": "2026-11-06",
    "dt": "2026-11-06T22:00:10+09:00",
    "thumb": "https://i2.ytimg.com/vi/MndcLX9j6Gc/hqdefault.jpg"
+  },
+  {
+   "v": "0sHlcmDBUjs",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "재난 상속 [풀영상] | 창 568회 (KBS 26.10.27.)",
+   "date": "2026-10-27",
+   "dt": "2026-10-27T22:00:09+09:00",
+   "thumb": "https://i1.ytimg.com/vi/0sHlcmDBUjs/hqdefault.jpg"
+  },
+  {
+   "v": "9qQs4tINlBY",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "숨은 보물찾기 - 서울 남대문시장 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20261019 방송",
+   "date": "2026-10-21",
+   "dt": "2026-10-21T16:00:06+09:00",
+   "thumb": "https://i2.ytimg.com/vi/9qQs4tINlBY/hqdefault.jpg"
+  },
+  {
+   "v": "jusX3vquFtU",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "삶을 잇다 - 서울역 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20261012 방송",
+   "date": "2026-10-16",
+   "dt": "2026-10-16T16:00:32+09:00",
+   "thumb": "https://i3.ytimg.com/vi/jusX3vquFtU/hqdefault.jpg"
+  },
+  {
+   "v": "cf_-SX8o8Aw",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "가장 가까운 살인자 [풀영상] | 창 567회 (KBS 26.10.13.)",
+   "date": "2026-10-13",
+   "dt": "2026-10-13T22:00:07+09:00",
+   "thumb": "https://i4.ytimg.com/vi/cf_-SX8o8Aw/hqdefault.jpg"
+  },
+  {
+   "v": "IkrBWm7EvtU",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "미국회사 쿠팡, 그리고 로비 [풀영상] | 창 566회 (KBS 26.10.6.)",
+   "date": "2026-10-06",
+   "dt": "2026-10-06T22:00:07+09:00",
+   "thumb": "https://i2.ytimg.com/vi/IkrBWm7EvtU/hqdefault.jpg"
+  },
+  {
+   "v": "LnD4AzxUgek",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "히말라야 쇼크 : 재난 사슬 [풀영상] | 창 565회 (KBS 26.9.29.)",
+   "date": "2026-09-29",
+   "dt": "2026-09-29T22:00:07+09:00",
+   "thumb": "https://i1.ytimg.com/vi/LnD4AzxUgek/hqdefault.jpg"
+  },
+  {
+   "v": "I6oDuD6rQVo",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "죄와 병: 사라진 사람들 [풀영상] | 창 564회 (KBS 26.9.22.)",
+   "date": "2026-09-22",
+   "dt": "2026-09-22T22:00:07+09:00",
+   "thumb": "https://i2.ytimg.com/vi/I6oDuD6rQVo/hqdefault.jpg"
+  },
+  {
+   "v": "Wp9mFBBIDwE",
+   "pid": "kbs-window",
+   "b": "kbs",
+   "cat": "news",
+   "program": "시사기획 창",
+   "title": "대한민국 특구1281 [풀영상] | 창 563회 (KBS 26.9.15.)",
+   "date": "2026-09-15",
+   "dt": "2026-09-15T22:00:11+09:00",
+   "thumb": "https://i4.ytimg.com/vi/Wp9mFBBIDwE/hqdefault.jpg"
+  },
+  {
+   "v": "yGFzITrjT4k",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "잠시 쉬어가도 괜찮아 - 인천국제공항 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20260907 방송",
+   "date": "2026-09-10",
+   "dt": "2026-09-10T16:00:11+09:00",
+   "thumb": "https://i2.ytimg.com/vi/yGFzITrjT4k/hqdefault.jpg"
+  },
+  {
+   "v": "afVGfXh5Bg8",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "이 맛에 삽니다 - 속초관광수산시장 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20260831 방송",
+   "date": "2026-09-01",
+   "dt": "2026-09-01T16:00:24+09:00",
+   "thumb": "https://i2.ytimg.com/vi/afVGfXh5Bg8/hqdefault.jpg"
+  },
+  {
+   "v": "AMda9dxhvwg",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "억수로 괴로워도 - 거제 수해 현장 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20260824 방송",
+   "date": "2026-08-25",
+   "dt": "2026-08-25T16:00:16+09:00",
+   "thumb": "https://i2.ytimg.com/vi/AMda9dxhvwg/hqdefault.jpg"
+  },
+  {
+   "v": "nruZLbfWq0E",
+   "pid": "kbs-3il",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "다큐 3일",
+   "title": "미드나잇 인 홍대 - 마포 홍익지구대 72시간 [하이라이트 1부] | KBS 다큐멘터리 3일 20260727 방송",
+   "date": "2026-07-28",
+   "dt": "2026-07-28T16:00:35+09:00",
+   "thumb": "https://i3.ytimg.com/vi/nruZLbfWq0E/hqdefault.jpg"
   }
  ]
 }

@@ -9,6 +9,9 @@
     python3 scripts/update_docs.py [출력경로]
 
 - 시사·보도(news) / 교양·다큐(edu) 두 갈래로 나눠 담고, 화면에서는 날짜 내림차순.
+- 채널 전체 RSS 대신 **공식 재생목록(playlist_id) RSS**를 쓸 수 있습니다. 시사기획 창처럼
+  같은 채널에서 매일 다른 프로그램이 쏟아지는 경우, 재생목록이 회차만 깔끔하게 줍니다.
+- 프로그램별 include/exclude 정규식으로 제목을 걸러 냅니다([사사건건] 데일리 토크, 하이라이트 2부 등).
 - 한 채널이 RSS를 못 주면(일시 장애) 기존 JSON의 그 채널 회차를 그대로 살립니다.
 - 쇼츠(#Shorts)로 보이는 항목은 걸러 냅니다 — '다시보기'에 1분 클립이 섞이지 않게.
 - 프로그램 목록(PROGRAMS)의 channel_id 는 2026-11-24 채널 페이지에서 직접 확인한
@@ -41,10 +44,22 @@ MEDIA = "{http://search.yahoo.com/mrss/}"
 PROGRAMS = [
     # ---------------- 📰 시사·보도 ----------------
     {
+        # KBS시사 채널은 [사사건건] 데일리 클립이 하루에도 수십 편씩 올라와 채널 RSS(최신 8편)를
+        # 통째로 덮어 버립니다. 그래서 시사기획 창 본편은 채널이 공식으로 만든
+        # '[시사기획 창] 풀영상' 재생목록(362편)을 따로 받아 옵니다.
         "id": "kbs-window", "b": "kbs", "cat": "news",
-        "name": "KBS 시사 (시사기획 창 · 사사건건 · 9층 시사국)", "short": "KBS 시사",
+        "name": "KBS 시사기획 창", "short": "시사기획 창",
+        "channel": "KBS시사",
+        "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
+        "playlist_id": "PLjESAf4PvYLnOz4aIAExMPmz0kSQwv-93",
+        "note": "매주 화요일 밤 9시 40분 KBS 1TV — 공식 '[시사기획 창] 풀영상' 재생목록에서 회차만 받습니다",
+    },
+    {
+        "id": "kbs-sisa", "b": "kbs", "cat": "news",
+        "name": "KBS 시사 채널 (9층 시사국 · 시사멘터리 추적 · 더 보다)", "short": "KBS 시사",
         "channel": "KBS시사", "channel_id": "UCEb31RoX5RnfYENmnyokN8A",
-        "note": "KBS 기자들이 만드는 시사 프로그램 통합 채널 — 시사기획 창 · 사사건건",
+        "exclude": r"\[\s*사사건건\s*\]",
+        "note": "KBS 기자들이 만드는 시사 채널 — 매일 쏟아지는 [사사건건] 토크는 빼고 다큐·탐사 클립만",
     },
     {
         "id": "kbs-chu60", "b": "kbs", "cat": "news",
@@ -72,10 +87,24 @@ PROGRAMS = [
     },
     # ---------------- 🎬 교양·다큐 ----------------
     {
+        # 다큐멘터리 3일 본편은 KBS 다큐 채널의 '🍿ON AIR🍿' 재생목록에 가장 먼저 올라옵니다
+        # (2026-11-16 영월시외버스터미널 편까지 확인). '돌아온 다큐 3일' 재생목록은 10월 이후가 비어 있어
+        # ON AIR 쪽을 쓰고, 제목에 '다큐멘터리 3일'이 든 것만 남깁니다.
+        "id": "kbs-3il", "b": "kbs", "cat": "edu",
+        "name": "KBS 다큐멘터리 3일", "short": "다큐 3일",
+        "channel": "KBS 다큐 🍿ON AIR🍿", "channel_id": "UC4LW3sOslC14Vn5bcoNUBkg",
+        "playlist_id": "PLk1KtKgGi_E6hrjPY4vwqYnpHbWU78BoK",
+        "playlist_ids": ["PLk1KtKgGi_E6hrjPY4vwqYnpHbWU78BoK",
+                         "PLk1KtKgGi_E6cwk-S3nMjcavCjFieH1qj"],
+        "include": r"다큐멘터리\s*3일",
+        "exclude": r"하이라이트\s*2부",
+        "note": "어느 공간에서든 72시간 — 최신 회차부터 (같은 회차는 1부/풀버전 하나만)",
+    },
+    {
         "id": "kbs-docu", "b": "kbs", "cat": "edu",
-        "name": "KBS 다큐 (다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜)", "short": "KBS 다큐",
+        "name": "KBS 다큐 (레전드 다시보기 — 역사저널 그날 · 파노라마 · 걸어서 세계 속으로)", "short": "KBS 다큐",
         "channel": "KBS 다큐", "channel_id": "UC4LW3sOslC14Vn5bcoNUBkg",
-        "note": "KBS 공식 다큐 채널 — 다큐멘터리 3일 · 다큐 인사이트 · 역사스페셜 · 명견만리",
+        "note": "KBS 공식 다큐 채널 — 매일 한 편씩 명작 다큐를 다시 올립니다",
     },
     {
         "id": "mbc-docu", "b": "mbc", "cat": "edu",
@@ -142,9 +171,41 @@ def fetch(url, tries=3):
     raise last
 
 
-def feed_entries(channel_id):
-    url = "https://www.youtube.com/feeds/videos.xml?channel_id=" + channel_id
-    root = ET.fromstring(fetch(url))
+def feed_urls(p):
+    """재생목록이 있으면 재생목록 RSS, 없으면 채널 RSS. 재생목록은 여러 개 합칠 수 있습니다."""
+    ids = p.get("playlist_ids") or ([p["playlist_id"]] if p.get("playlist_id") else [])
+    if ids:
+        return ["https://www.youtube.com/feeds/videos.xml?playlist_id=" + i for i in ids]
+    return ["https://www.youtube.com/feeds/videos.xml?channel_id=" + p["channel_id"]]
+
+
+def title_ok(p, title):
+    """프로그램별 include/exclude 정규식 판정."""
+    title = title or ""
+    if p.get("include") and not re.search(p["include"], title, re.IGNORECASE):
+        return False
+    if p.get("exclude") and re.search(p["exclude"], title, re.IGNORECASE):
+        return False
+    return True
+
+
+def feed_entries(p):
+    out = []
+    seen = set()
+    for url in feed_urls(p):
+        try:
+            root = ET.fromstring(fetch(url))
+        except Exception as e:      # noqa: BLE001 — 한 재생목록만 실패해도 나머지는 살립니다
+            if len(feed_urls(p)) == 1:
+                raise
+            print("    (하위 피드 실패 %s: %s)" % (url[-40:], e))
+            continue
+        out.extend(parse_feed(root, p, seen))
+    out.sort(key=lambda x: x["dt"], reverse=True)
+    return out[:PER_PROGRAM]
+
+
+def parse_feed(root, p, seen):
     out = []
     for e in root.findall(ATOM + "entry"):
         vid = e.findtext(YT + "videoId") or ""
@@ -162,6 +223,11 @@ def feed_entries(channel_id):
             continue
         if TEASE_RE.search(title):
             continue
+        if not title_ok(p, title):
+            continue
+        if vid in seen:
+            continue
+        seen.add(vid)
         out.append({
             "v": vid,
             "title": title,
@@ -189,7 +255,7 @@ def main():
     ok, failed = [], []
     for p in PROGRAMS:
         try:
-            items = feed_entries(p["channel_id"])
+            items = feed_entries(p)
             if not items:
                 raise RuntimeError("RSS에 항목이 없음")
             ok.append(p["id"])
@@ -208,7 +274,8 @@ def main():
             print("  ✓ %-28s %2d편" % (p["short"], len(items)))
         except Exception as e:      # noqa: BLE001
             failed.append(p["id"])
-            kept = old.get(p["id"], [])
+            kept = [ep for ep in old.get(p["id"], [])
+                    if title_ok(p, ep.get("title"))][:PER_PROGRAM]
             episodes.extend(kept)
             print("  ! %-28s 실패(%s) — 이전 %d편 유지" % (p["short"], e, len(kept)))
         time.sleep(0.3)
@@ -230,7 +297,11 @@ def main():
         "programs": [{
             "id": p["id"], "b": p["b"], "cat": p["cat"], "name": p["name"],
             "short": p["short"], "channel": p["channel"], "channel_id": p["channel_id"],
-            "url": "https://www.youtube.com/channel/" + p["channel_id"],
+            "playlist_id": p.get("playlist_id", ""),
+            "source": "playlist" if p.get("playlist_id") else "channel",
+            "url": ("https://www.youtube.com/playlist?list=" + p["playlist_id"]
+                    if p.get("playlist_id") else
+                    "https://www.youtube.com/channel/" + p["channel_id"]),
             "note": p["note"],
         } for p in PROGRAMS],
         "episodes": uniq,
