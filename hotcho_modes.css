@@ -354,8 +354,11 @@
 .hc-pol-blk > p { margin: 0; font-size: 11.9px; line-height: 1.55; color: #ddd7f5; white-space: pre-wrap; }
 .hc-pol-blk.cmp { background: rgba(139, 92, 246, .13); border-radius: 11px; padding: 8px 9px; }
 .hc-pol-blk.cmp > b { color: #c4b5fd; }
-.hc-pol-blk.rep > b { color: #fdba74; }
-.hc-pol-blk.rep > p { color: #f6d2ae; }
+.hc-pol-blk.rep-b { background: rgba(251, 146, 60, .09); border-radius: 11px; padding: 8px 9px; }
+.hc-pol-blk.rep-b > b { color: #fdba74; }
+.hc-pol-blk.rep-b > p { color: #f6d2ae; }
+/* 🚨 클래스 이름을 'rep' 하나로 두면 똑똑핫초 목록 카드용 .rep(display:flex)를 물려받아
+   [추가 취재 방향] 제목이 좁은 칸에 갇힙니다 — 그래서 rep-b 로 바꿔 두었어요. */
 .hc-pol .hc-mon-act { margin-top: 9px; }
 
 /* ---------- 정책 히스토리 ---------- */

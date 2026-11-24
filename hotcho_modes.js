@@ -998,7 +998,7 @@
       '<div class="hc-pol-t">' + esc(p.title) + '</div>' +
       (p.summary ? '<div class="hc-pol-blk"><b>[원문 사실]</b><p>' + esc(p.summary) + '</p></div>' : '') +
       (p.analysis ? '<div class="hc-pol-blk cmp"><b>[전후 비교·장단점]</b><p>' + esc(p.analysis) + '</p></div>' : '') +
-      (p.reporting ? '<div class="hc-pol-blk rep"><b>[추가 취재 방향]</b><p>' + esc(p.reporting) + '</p></div>' : '') +
+      (p.reporting ? '<div class="hc-pol-blk rep-b"><b>[추가 취재 방향]</b><p>' + esc(p.reporting) + '</p></div>' : '') +
       '<div class="hc-mon-act">' + srcLink(p.url, '원문 보기') +
       '<button type="button" class="hc-btn sm' + (picked ? ' picked' : '') + '" data-pol-add="' + esc(p.id) + '">' +
       (picked ? '✓ 담았어요' : '💡 아이템으로 담기') + '</button></div></div>';
