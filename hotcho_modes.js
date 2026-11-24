@@ -834,8 +834,8 @@
           S.artTab = S.drafts[k].kind;
           S.article[S.artTab] = JSON.parse(JSON.stringify(S.drafts[k].fields || {}));
           save(K.article, S.article);
+          S.linkedItem = ''; S.linkedUrl = '';
           renderArticle();
-          S.linkedItem = '';
           toast('초안을 불러왔어요');
         }
       }
@@ -863,7 +863,8 @@
     if (act === 'art-save') { saveDraft(); return; }
     if (act === 'art-clear') {
       if (!window.confirm('지금 쓰고 있는 ' + DRAFT_DEFS[S.artTab].label + ' 내용을 비울까요?')) return;
-      S.article[S.artTab] = {}; save(K.article, S.article); renderArticle(); toast('비웠어요');
+      S.article[S.artTab] = {}; S.linkedItem = ''; S.linkedUrl = '';
+      save(K.article, S.article); renderArticle(); toast('비웠어요');
       return;
     }
   }
