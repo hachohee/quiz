@@ -2363,7 +2363,7 @@
       var it = list[i], amt = +(it.amt) || 0;
       sum += amt;
       h += '<div class="hc-fin-row">' +
-        '<span class="cat">' + (FIN_CAT_E[it.cat] || '🧾') + ' ' + esc(it.cat || '기타') + '</span>' +
+        '<span class="hc-fin-cat">' + (FIN_CAT_E[it.cat] || '🧾') + ' ' + esc(it.cat || '기타') + '</span>' +
         '<span class="lb">' + esc(it.label || '지출') +
         '<span class="d">' + esc(String(it.d || '').slice(5).replace('-', '/')) + '</span></span>' +
         '<span class="amt">' + num(amt) + '</span>' +

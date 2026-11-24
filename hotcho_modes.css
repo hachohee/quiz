@@ -471,7 +471,7 @@ a.hc-ma-t:active { opacity: .7; }
 
 .hc-fin-row { display: flex; align-items: center; gap: 8px; padding: 8px 2px; border-top: 1px solid rgba(255, 255, 255, .06); }
 .hc-fin-row:first-child { border-top: 0; }
-.hc-fin-row .cat { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; white-space: nowrap; }
+.hc-fin-row .hc-fin-cat { flex: 0 0 auto; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; white-space: nowrap; }
 .hc-fin-row .lb { flex: 1; min-width: 0; font-size: 12.8px; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hc-fin-row .lb .d { font-size: 10.5px; color: var(--muted2, #7f74b3); margin-left: 3px; }
 .hc-fin-row .amt { flex: 0 0 auto; font-size: 13px; font-weight: 800; font-variant-numeric: tabular-nums; }
