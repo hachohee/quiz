@@ -1382,7 +1382,8 @@
        hotcho_gemini_key_v1  — 구글 Gemini 무료 키(선택) */
   var FR_TOP = ['대파', '계란', '양파', '두부', '김치', '감자', '당근', '밥', '돼지고기', '닭고기', '우유', '치즈', '버터', '밀가루', '마요네즈', '오이'];
   var FR_BASIC_TXT = '소금, 후추, 간장, 설탕, 식용유, 참기름, 고춧가루, 다진마늘, 고추장, 된장, 물, 식초, 맛술';
-  var FR_MODELS = ['gemini-3.5-flash-lite', 'gemini-2.5-flash-lite', 'gemini-2.5-flash'];
+  /* 모델 이름이 바뀌거나 내 계정에서 막힐 때를 대비한 순서(2026-11 확인: 3.5-flash-lite → 200) */
+  var FR_MODELS = ['gemini-3.5-flash-lite', 'gemini-flash-lite-latest', 'gemini-flash-latest'];
   var FR_PAGE = 20;
 
   var FR = {
@@ -1521,7 +1522,7 @@
     var h = '<div class="hc-fr-card' + (open ? ' open' : '') + '">';
     h += '<button type="button" class="hc-fr-btn" data-act="fr-open" data-i="' + i + '" aria-expanded="' + (open ? 'true' : 'false') + '">';
     h += '<span class="hc-fr-nm">' + esc(r.recipe.name) +
-      (i === 0 && r.missingCount === 0 && !FR.q ? ' <span class="cr">👑 오늘 추천</span>' : '') + '</span>';
+      (i === 0 && r.missingCount === 0 && r.have.length >= 2 && !FR.q ? ' <span class="cr">👑 오늘 추천</span>' : '') + '</span>';
     h += '<span class="hc-fr-meta">⏱ ' + r.recipe.minutes + '분 · ' + esc(r.recipe.difficulty) +
       ' · 보유 ' + r.have.length + '개 · ' + (open ? '접기' : '조리법') + '</span>';
     h += '<span class="hc-fr-ing">';
