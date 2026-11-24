@@ -5919,7 +5919,8 @@ show("home");
       var cls = 'wk-day' + (isToday ? ' today' : '') + (on ? ' done' : '') + (pre ? ' off' : '');
 
       var tr = '';
-      if (pre) tr = '<span class="wk-tr">시작 전</span>';
+      if (pre) tr = '<span class="wk-tr">' +
+        (isToday ? '<span class="now">오늘</span> · ' : '') + '시작 전</span>';
       else tr = '<span class="wk-tr">' +
         (isToday ? '<span class="now">오늘</span> · ' : '') +
         (d === START_N && !isToday ? '<span class="st">시작</span> · ' : '') +
