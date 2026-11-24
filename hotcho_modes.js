@@ -982,7 +982,7 @@
       var p = src[i];
       if (filter === 'all') out.push(p);
       else if (filter === 'today') { if (p.date === today) out.push(p); }
-      else if (filter === 'local') { if ((String(p.org || '') + ' ' + String(p.source || '')).search(/춘천|강원/) >= 0) out.push(p); }
+      else if (filter === 'local') { if (String(p.org || '').search(/춘천|강원/) >= 0) out.push(p); }
       else if (p.tab === filter) out.push(p);
     }
     out.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
