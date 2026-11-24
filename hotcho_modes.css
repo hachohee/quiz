@@ -51,7 +51,7 @@
 .hc-kw {
   position: relative; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05);
   color: #c9c0ea; border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 11.5px;
-  font-weight: 600; cursor: pointer; white-space: nowrap;
+  font-weight: 600; cursor: pointer; white-space: nowrap; flex: 0 0 auto;
 }
 .hc-kw.on { background: linear-gradient(135deg, rgba(139, 92, 246, .38), rgba(244, 114, 182, .34)); color: #fff; border-color: rgba(196, 181, 253, .55); }
 .hc-kw.add { border-style: dashed; color: var(--muted2, #7f74b3); }
