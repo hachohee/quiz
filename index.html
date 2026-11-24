@@ -865,9 +865,34 @@ body.radio-on.script-on .rscript{display:flex}
   .mframe .m-emoji{line-height:126px;font-size:64px}
 }
 </style>
+<!-- ============ 💼뿌듯 · 🏠행복 · 📚똑똑 상단 3모드 바 (hotcho_modes.js 가 동작) ============ -->
+<style>
+body{padding-top:calc(54px + env(safe-area-inset-top))}
+#hcBar{position:fixed;top:0;left:0;right:0;z-index:200;padding-top:env(safe-area-inset-top);
+  background:rgba(12,8,25,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+#hcBar .hc-bar-in{max-width:520px;margin:0 auto;display:flex;gap:6px;padding:7px 10px}
+.hc-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;border:0;background:transparent;
+  color:#a89ddb;font:inherit;font-size:11.5px;font-weight:700;letter-spacing:-.2px;padding:5px 2px;
+  border-radius:12px;cursor:pointer;transition:background .18s ease,color .18s ease}
+.hc-tab .e{font-size:16px;line-height:1.15}
+.hc-tab.on{background:linear-gradient(135deg,#8b5cf6,#f472b6);color:#fff;box-shadow:0 6px 18px rgba(139,92,246,.35)}
+.hc-tab:active{transform:scale(.98)}
+@media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
+</style>
+<link rel="stylesheet" href="hotcho_modes.css">
 </head>
 <body>
-<div class="app">
+<nav id="hcBar" aria-label="핫초 모드 전환">
+  <div class="hc-bar-in">
+    <button class="hc-tab" type="button" data-hc-mode="work"><span class="e">💼</span><span class="l">뿌듯핫초</span></button>
+    <button class="hc-tab" type="button" data-hc-mode="home"><span class="e">🏠</span><span class="l">행복핫초</span></button>
+    <button class="hc-tab on" type="button" data-hc-mode="study"><span class="e">📚</span><span class="l">똑똑핫초</span></button>
+  </div>
+</nav>
+<div id="hcWork" hidden></div>
+<div id="hcHome" hidden></div>
+<div class="app" id="hcStudy">
 
   <!-- ================= HOME ================= -->
   <section id="screen-home" class="screen on">
@@ -5026,7 +5051,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v26";
+var APP_VER="v27";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5663,6 +5688,7 @@ renderHome();
 show("home");
 })();
 </script>
+<script src="hotcho_modes.js"></script>
 <script>
 /* PWA: 홈 화면 설치 조건 충족용 서비스 워커 등록 (페이지 동작에는 영향 없음) */
 if ('serviceWorker' in navigator) {

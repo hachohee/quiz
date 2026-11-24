@@ -11,8 +11,11 @@
    v24: 🎬 방송 4사 다큐 다시보기(KBS·MBC·SBS·EBS) 화면 추가 — 공식 유튜브 채널·영상 22편.
    v25: 시사·보도 / 교양·다큐 두 갈래 + 방송사 필터 + 최신순 · docs_episodes.json(RSS 매일 갱신) 읽기.
    v26: KBS 시사기획 창 복구 — [사사건건] 데일리 클립에 밀려 사라지던 회차를 공식 '[시사기획 창] 풀영상'
-        재생목록에서 받고, KBS 시사 채널에선 [사사건건]을 빼고(9층 시사국·더 보다만), 다큐멘터리 3일을 따로 세움. */
-const CACHE = 'toeic-bts-v26';
+        재생목록에서 받고, KBS 시사 채널에선 [사사건건]을 빼고(9층 시사국·더 보다만), 다큐멘터리 3일을 따로 세움.
+   v27: 💼뿌듯핫초(일) · 🏠행복핫초(집) · 📚똑똑핫초(공부) 3모드 통합 — 상단 전환 바 + hotcho_modes.js/.css
+        + hotcho_news.json(세계·전국·강원 헤드라인) · hotcho_hub.json(카르텔워치) · hotcho_family.json(가족일정·찬우학업).
+        기존 똑똑핫초 화면·퀴즈·공부방·라디오·localStorage 키는 그대로. */
+const CACHE = 'toeic-bts-v27';
 const SHELL = [
   './',
   './index.html',
@@ -25,7 +28,9 @@ const SHELL = [
   './members/jhope.jpg',
   './members/jimin.jpg',
   './members/v.jpg',
-  './members/jungkook.jpg'
+  './members/jungkook.jpg',
+  './hotcho_modes.css',
+  './hotcho_modes.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -97,6 +102,11 @@ self.addEventListener('fetch', (event) => {
   /* 📰 시사·교양 최신 회차 목록: 온라인일 때만 새 JSON, 오프라인일 때만 캐시 */
   if (path.endsWith('/docs_episodes.json')) {
     event.respondWith(networkFirst(req, '{"episodes":[]}'));
+    return;
+  }
+  /* 💼🏠 뿌듯·행복핫초 데이터: 온라인일 때 항상 새 JSON, 오프라인일 때만 캐시 */
+  if (path.endsWith('/hotcho_news.json') || path.endsWith('/hotcho_hub.json') || path.endsWith('/hotcho_family.json')) {
+    event.respondWith(networkFirst(req, '{}'));
     return;
   }
   /* 앱 화면(HTML): 네트워크 우선 + HTTP 캐시 무시 */

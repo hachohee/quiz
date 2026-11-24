@@ -1,0 +1,47 @@
+{
+ "updated": "2026-11-24 14:22",
+ "cartelwatch": {
+  "updated": "2026-11-24 12:31",
+  "collected": 1202,
+  "total_amount": 39149156460,
+  "period": {
+   "from": "2026-08-10",
+   "to": "2026-11-25"
+  },
+  "anomaly_count": 13,
+  "by_type": {
+   "SPLIT": 5,
+   "NEWCOMER": 8
+  },
+  "recent": [
+   {
+    "type_label": "쪼개기 수의계약",
+    "severity": "중",
+    "agency": "평창군",
+    "title": "평창군  · 계촌6리(예심이) 둠벙 보수 정비공사",
+    "summary": "한성토건이 7일 안에 2건을 나눠 받음 · 합산 2,924만 원 (건별 최대 1,695만 원)",
+    "amount": 29242000,
+    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600113138"
+   },
+   {
+    "type_label": "쪼개기 수의계약",
+    "severity": "중",
+    "agency": "평창군",
+    "title": "평창군  · 입탄리(산52번지 일원) 세천 수해복구공사",
+    "summary": "정화건설(합)이 7일 안에 2건을 나눠 받음 · 합산 2,881만 원 (건별 최대 1,512만 원)",
+    "amount": 28808000,
+    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600113174"
+   },
+   {
+    "type_label": "쪼개기 수의계약",
+    "severity": "중",
+    "agency": "평창군",
+    "title": "평창군  · 수항리(252) 세천 수해복구공사",
+    "summary": "(주)다우가 7일 안에 2건을 나눠 받음 · 합산 2,623만 원 (건별 최대 1,462만 원)",
+    "amount": 26230000,
+    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600112960"
+   }
+  ],
+  "url": "https://hachohee.github.io/cartelwatch/"
+ }
+}
