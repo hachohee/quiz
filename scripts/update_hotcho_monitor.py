@@ -391,6 +391,16 @@ def parse_rss(xml_bytes):
         try:
             dt = parsedate_to_datetime(pub).astimezone(KST) if pub else kst_now()
         except Exception:
+            dt = None
+        if dt is None and pub:
+            # 강원도민일보처럼 RFC 형식이 아니라 "2026-11-24 16:29:03"(KST)로 주는 곳이 있습니다.
+            for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d"):
+                try:
+                    dt = datetime.strptime(pub.strip(), fmt).replace(tzinfo=KST)
+                    break
+                except Exception:
+                    continue
+        if dt is None:
             dt = kst_now()
         out.append({"title": unescape(title), "link": link, "desc": desc, "dt": dt})
     return out
