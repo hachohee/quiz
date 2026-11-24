@@ -90,6 +90,68 @@ body{
 .hero-num small{font-size:12px;color:var(--muted);font-weight:600}
 .hero-sub{font-size:11.5px;color:var(--muted2);text-align:right;max-width:52%}
 
+/* ---------- 📅 주간 공부 스케줄 (2026-11-25 시작) ---------- */
+.wk{
+  border:1px solid rgba(196,181,253,.30);border-radius:18px;padding:11px 12px 9px;margin-bottom:12px;
+  background:
+    linear-gradient(158deg, rgba(139,92,246,.22), rgba(34,211,238,.07) 58%, rgba(30,20,63,.92));
+  box-shadow:0 12px 26px -22px rgba(0,0,0,.95);
+}
+.wk-top{display:flex;align-items:center;gap:8px}
+.wk-h{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:800;letter-spacing:-.01em;color:#e9d5ff}
+.wk-h .e{font-size:15px;line-height:1}
+.wk-toggle{flex:0 0 auto;font:inherit;font-size:10.5px;font-weight:800;color:#c4b5fd;
+  border:1px solid rgba(196,181,253,.35);background:rgba(139,92,246,.16);border-radius:999px;
+  padding:4px 8px;line-height:1.2;cursor:pointer;white-space:nowrap}
+.wk-toggle:active{transform:scale(.96)}
+.wk-sum{margin-top:5px;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:-.01em}
+.wk-sum b{color:#fde68a;font-weight:800;font-variant-numeric:tabular-nums}
+.wk-sum .start{color:#a5f3fc;font-weight:800}
+.wk-pbar{height:4px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;margin-top:6px}
+.wk-pbar i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,#8b5cf6,#f472b6,#fbbf24);transition:width .35s ease}
+.wk-nav{display:flex;align-items:center;gap:6px;margin-top:9px}
+.wk-nav button{flex:0 0 auto;width:30px;height:30px;border-radius:10px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05);color:#ddd6fe;font-size:15px;font-weight:900;line-height:1;
+  cursor:pointer;font-family:inherit;padding:0}
+.wk-nav button:active{transform:scale(.94)}
+.wk-nav button[disabled]{opacity:.28;cursor:default}
+.wk-nav button[disabled]:active{transform:none}
+.wk-range{flex:1 1 auto;min-width:0;text-align:center;font-size:11.5px;font-weight:800;color:#ddd6fe;
+  letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.wk-range small{display:block;font-size:9.5px;font-weight:700;color:var(--muted2);letter-spacing:.02em;margin-top:1px}
+.wk-days{display:flex;flex-direction:column;gap:5px;margin-top:9px}
+.wk-day{
+  display:grid;grid-template-columns:38px minmax(0,1fr) 24px;align-items:center;gap:9px;
+  width:100%;text-align:left;font-family:inherit;color:var(--ink);cursor:pointer;
+  border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:7px 9px;
+  background:rgba(0,0,0,.22);transition:background .18s ease,border-color .18s ease,opacity .18s ease;
+}
+.wk-day:active{transform:scale(.99)}
+.wk-day.today{border-color:rgba(251,191,36,.55);
+  background:linear-gradient(150deg,rgba(251,191,36,.16),rgba(139,92,246,.16))}
+.wk-day.done{border-color:rgba(52,211,153,.45);
+  background:linear-gradient(150deg,rgba(52,211,153,.16),rgba(139,92,246,.10))}
+.wk-day.off{opacity:.45;cursor:default}
+.wk-day.off:active{transform:none}
+.wk-dl{display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.15}
+.wk-dl b{font-size:13px;font-weight:900;color:#ddd6fe;letter-spacing:0}
+.wk-day.today .wk-dl b{color:#fde68a}
+.wk-dl small{font-size:9.5px;font-weight:700;color:var(--muted2);font-variant-numeric:tabular-nums}
+.wk-m{min-width:0;display:flex;flex-direction:column;gap:1px}
+.wk-tr{font-size:9.5px;font-weight:800;color:#a5b4fc;letter-spacing:.01em}
+.wk-tr .now{color:#fbbf24}
+.wk-tr .st{color:#67e8f9}
+.wk-it{font-size:11.5px;font-weight:700;color:#ece7ff;line-height:1.35;letter-spacing:-.01em}
+.wk-day.done .wk-it{color:#d1fae5}
+.wk-ck{flex:0 0 auto;width:22px;height:22px;border-radius:8px;border:1.5px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.04);display:grid;place-items:center;font-size:13px;font-weight:900;
+  line-height:1;color:transparent;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.wk-day.done .wk-ck{border-color:transparent;color:#06231a;
+  background:linear-gradient(150deg,#34d399,#22d3ee);transform:scale(1.04)}
+.wk-foot{margin:8px 0 1px;font-size:9.5px;line-height:1.5;color:var(--muted2);text-align:center;letter-spacing:-.01em}
+
 /* ---------- BTS 도감 ---------- */
 .deck{
   border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:12px;
@@ -887,7 +949,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=41">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=42">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -916,6 +978,25 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
       <div class="hero-num"><span id="homeKills">0</span><small>명 잡음</small></div>
       <div class="hero-sub">문제를 맞혀서<br>BTS를 내 편으로 잡아라! 💜</div>
     </div>
+
+    <!-- ============ 📅 주간 공부 스케줄 (2026-11-25 시작) — 스크립트가 그립니다 ============ -->
+    <section class="wk" id="hcWeek" aria-label="주간 공부 스케줄">
+      <div class="wk-top">
+        <div class="wk-h"><span class="e">📅</span><span>주간 공부 스케줄</span></div>
+        <button class="wk-toggle" id="wkToggle" type="button" aria-expanded="true" aria-controls="wkFold">접기 ▲</button>
+      </div>
+      <div class="wk-sum" id="wkSum"></div>
+      <div class="wk-pbar"><i id="wkPbar"></i></div>
+      <div id="wkFold">
+        <div class="wk-nav">
+          <button type="button" id="wkPrev" aria-label="지난 주">‹</button>
+          <span class="wk-range" id="wkRange"></span>
+          <button type="button" id="wkNext" aria-label="다음 주">›</button>
+        </div>
+        <div class="wk-days" id="wkDays"></div>
+        <p class="wk-foot">하루 한 칸 눌러 체크 · 이 폰에 저장되고 ⚙️ 내 기록 백업(전체)에도 함께 담겨요</p>
+      </div>
+    </section>
 
     <div class="deck">
       <div class="deck-t"><span>💜 내가 잡은 BTS 도감</span>
@@ -5085,7 +5166,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v41";
+var APP_VER="v42";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5723,7 +5804,204 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=41"></script>
+<script src="hotcho_modes.js?v=42"></script>
+<script>
+/* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
+   초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."
+   · 저장 키: hotcho_study_schedule_v1  →  { days:{"YYYY-MM-DD":1}, open:true }
+     (hotcho_ 접두사라 ⚙️ 내 기록 백업·기기 옮기기(HOTCHO-SYNC-G1:)에 그대로 담깁니다)
+   · 요일 트랙은 scheduled-actions/📚-낮-1시-2개월-공부방-추천-강의/action.md 와 같게 맞췄습니다.
+   · 날짜 계산은 폰 시간대와 상관없이 한국 시간(KST) 기준입니다. */
+(function () {
+  'use strict';
+
+  var KEY = 'hotcho_study_schedule_v1';
+  var START = '2026-11-25';        /* 공부 시작일 — 수요일 */
+  var LAST_DAY = '2027-02-21';     /* 복직(2027-02-22) 전날까지는 넘겨 볼 수 있게 */
+  var DOW = ['일', '월', '화', '수', '목', '금', '토'];
+  var PLAN = {
+    0: { track: '재테크·복습 데이', items: '💎 재테크 1~2강 · 오답 복습 · 🎧 토익 10분' },
+    1: { track: '역사 데이',       items: '📜 세계사·한국사 1강 · 🎧 토익 10분' },
+    2: { track: '경제 데이',       items: '💰 기초경제·최신트렌드 1강 · 🎧 토익 10분' },
+    3: { track: '시사·영어 데이',   items: '📰 시사상식·📘 영어 1강 · 🎧 토익 10분' },
+    4: { track: '역사 데이',       items: '📜 세계사·한국사 1강 · 🎧 토익 10분' },
+    5: { track: '경제 데이',       items: '💰 기초경제·최신트렌드 1강 · 🎧 토익 10분' },
+    6: { track: '시사·영어 데이',   items: '📰 시사상식·📘 영어 1강 · 🎧 토익 10분' }
+  };
+
+  /* ---- 날짜: '일 수'(UTC 자정 기준 날짜 번호)로 계산 ---- */
+  function p2(n) { return (n < 10 ? '0' : '') + n; }
+  function dayNum(iso) {
+    var p = String(iso || '').split('-');
+    return Math.round(Date.UTC(+p[0], (+p[1] || 1) - 1, +p[2] || 1) / 86400000);
+  }
+  function isoOf(n) {
+    var d = new Date(n * 86400000);
+    return d.getUTCFullYear() + '-' + p2(d.getUTCMonth() + 1) + '-' + p2(d.getUTCDate());
+  }
+  function dowOf(n) { return new Date(n * 86400000).getUTCDay(); }
+  function kstTodayN() {
+    var t = new Date(Date.now() + 9 * 3600 * 1000);
+    return Math.round(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()) / 86400000);
+  }
+  function mondayOf(n) { return n - ((dowOf(n) + 6) % 7); }   /* 그 주 월요일 */
+  function md(n) { var d = new Date(n * 86400000); return (d.getUTCMonth() + 1) + '/' + d.getUTCDate(); }
+  function mdw(n) { return md(n) + '(' + DOW[dowOf(n)] + ')'; }
+
+  /* ---- 저장 ---- */
+  function loadState() {
+    var st = null;
+    try { st = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { st = null; }
+    if (!st || typeof st !== 'object') st = {};
+    if (!st.days || typeof st.days !== 'object') st.days = {};
+    if (st.open !== false) st.open = true;
+    return st;
+  }
+  function saveState() {
+    try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+  }
+
+  var st = loadState();
+  var START_N = dayNum(START);
+  var LAST_N = dayNum(LAST_DAY);
+  var START_WEEK = mondayOf(START_N);
+  var LAST_WEEK = mondayOf(LAST_N);
+  var todayN = kstTodayN();
+  var thisWeek = mondayOf(todayN);
+  var week = thisWeek;
+  if (week < START_WEEK) week = START_WEEK;
+  if (week > LAST_WEEK) week = LAST_WEEK;
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---- 그리기 ---- */
+  function weekTag() {
+    if (week === thisWeek) return '이번 주';
+    if (week === START_WEEK) return '시작 주';
+    if (week === thisWeek - 7) return '지난 주';
+    if (week === thisWeek + 7) return '다음 주';
+    var gap = Math.round((week - thisWeek) / 7);
+    return gap > 0 ? Math.abs(gap) + '주 뒤' : Math.abs(gap) + '주 전';
+  }
+
+  function render() {
+    var sumEl = $('wkSum'), rangeEl = $('wkRange'), daysEl = $('wkDays'), pbar = $('wkPbar');
+    if (!sumEl || !daysEl) return;
+
+    /* 이번 주 현황 */
+    var done = 0, total = 0, html = '';
+    for (var i = 0; i < 7; i++) {
+      var n = week + i;
+      if (n < START_N || n > LAST_N) continue;
+      total++;
+      if (st.days[isoOf(n)]) done++;
+    }
+    sumEl.innerHTML = '<span class="start">' + mdw(START_N) + ' 시작</span> · ' +
+      weekTag() + ' <b>' + done + '/' + total + '일</b> 완료';
+    if (pbar) pbar.style.width = (total ? Math.round(done / total * 100) : 0) + '%';
+
+    /* 주 범위 · 앞뒤 이동 */
+    var mon = week, sun = week + 6;
+    var yPrefix = (new Date(mon * 86400000).getUTCFullYear() !== new Date(thisWeek * 86400000).getUTCFullYear())
+      ? new Date(mon * 86400000).getUTCFullYear() + '년 ' : '';
+    if (rangeEl) rangeEl.innerHTML = yPrefix + md(mon) + ' ~ ' + md(sun) + ' · ' + weekTag();
+    var prev = $('wkPrev'), next = $('wkNext');
+    if (prev) prev.disabled = (week <= START_WEEK);
+    if (next) next.disabled = (week >= LAST_WEEK);
+
+    /* 날짜별 칸 */
+    for (var j = 0; j < 7; j++) {
+      var d = week + j, iso = isoOf(d), dow = dowOf(d);
+      var plan = PLAN[dow] || { track: '', items: '' };
+      var pre = (d < START_N) || (d > LAST_N);
+      var isToday = (d === todayN);
+      var on = !!st.days[iso];
+      var cls = 'wk-day' + (isToday ? ' today' : '') + (on ? ' done' : '') + (pre ? ' off' : '');
+
+      var tr = '';
+      if (pre) tr = '<span class="wk-tr">시작 전</span>';
+      else tr = '<span class="wk-tr">' +
+        (isToday ? '<span class="now">오늘</span> · ' : '') +
+        (d === START_N && !isToday ? '<span class="st">시작</span> · ' : '') +
+        plan.track + '</span>';
+      var it = pre
+        ? '<span class="wk-it" style="color:var(--muted2)">' + mdw(START_N) + '부터 시작해요</span>'
+        : '<span class="wk-it">' + plan.items + '</span>';
+
+      var inner = '<span class="wk-dl"><b>' + DOW[dow] + '</b><small>' + md(d) + '</small></span>' +
+        '<span class="wk-m">' + tr + it + '</span>' +
+        '<span class="wk-ck" aria-hidden="true">✓</span>';
+
+      html += pre
+        ? '<div class="' + cls + '">' + inner + '</div>'
+        : '<button type="button" class="' + cls + '" data-d="' + iso + '" aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + mdw(d) + ' ' + plan.track + ' 공부 완료">' + inner + '</button>';
+    }
+    daysEl.innerHTML = html;
+  }
+
+  function applyFold() {
+    var fold = $('wkFold'), btn = $('wkToggle');
+    if (!fold || !btn) return;
+    fold.hidden = !st.open;
+    btn.textContent = st.open ? '접기 ▲' : '펼치기 ▼';
+    btn.setAttribute('aria-expanded', st.open ? 'true' : 'false');
+  }
+
+  /* ---- 움직임 ---- */
+  function toggleDay(iso) {
+    if (!iso) return;
+    if (st.days[iso]) delete st.days[iso];
+    else st.days[iso] = 1;
+    saveState();
+    render();
+    try { if (navigator.vibrate) navigator.vibrate(st.days[iso] ? 12 : [8]); } catch (e) {}
+  }
+
+  function boot() {
+    var daysEl = $('wkDays');
+    if (!daysEl) return;
+    render();
+    applyFold();
+
+    daysEl.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target.closest('[data-d]') : null;
+      if (!t || t.classList.contains('off')) return;
+      toggleDay(t.getAttribute('data-d'));
+    });
+    var tg = $('wkToggle');
+    if (tg) tg.addEventListener('click', function () {
+      st.open = !st.open;
+      saveState();
+      applyFold();
+    });
+    var pv = $('wkPrev'), nx = $('wkNext');
+    if (pv) pv.addEventListener('click', function () {
+      if (week - 7 < START_WEEK) return;
+      week -= 7; render();
+    });
+    if (nx) nx.addEventListener('click', function () {
+      if (week + 7 > LAST_WEEK) return;
+      week += 7; render();
+    });
+
+    /* 날짜가 바뀌었으면(밤새 켜 둔 경우) 이번 주로 다시 */
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState !== 'visible') return;
+      var now = kstTodayN();
+      if (now !== todayN) {
+        todayN = now; thisWeek = mondayOf(todayN); week = thisWeek;
+        render();
+      } else {
+        render();
+      }
+    });
+  }
+
+  /* 백업 코드를 붙여넣어 기록을 옮긴 뒤 새로고침되므로, 매번 새로 읽습니다 */
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
 <script>
 /* PWA: 홈 화면 설치 조건 충족용 서비스 워커 등록 (페이지 동작에는 영향 없음) */
 if ('serviceWorker' in navigator) {
