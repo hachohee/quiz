@@ -401,3 +401,52 @@
 .hc-fr-ai-steps { margin: 8px 0 0; padding-left: 18px; font-size: 12.2px; line-height: 1.6; color: #ded7f5; }
 .hc-fr-ai-steps li { margin-bottom: 3px; }
 .hc-fr-ai-txt { font-size: 12.2px; line-height: 1.6; color: #ded7f5; background: rgba(255, 255, 255, .04); border-radius: 12px; padding: 10px 11px; }
+
+/* ---------- 🎬 내 기사 아카이브 (v35) ---------- */
+.hc-ma-sum { background: linear-gradient(160deg, rgba(139, 92, 246, .18), rgba(56, 189, 248, .10)); border-color: rgba(196, 181, 253, .28); }
+.hc-ma-big { font-size: 12.5px; color: var(--muted, #a89ddb); letter-spacing: -.2px; }
+.hc-ma-big b { font-size: 27px; color: #fff; letter-spacing: -1px; margin-right: 3px; }
+.hc-ma-sub { font-size: 11.5px; color: var(--muted2, #7f74b3); margin-top: 2px; }
+
+.hc-ma-chips { display: flex; gap: 5px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 1px 1px 6px; margin-bottom: 4px; scrollbar-width: none; }
+.hc-ma-chips::-webkit-scrollbar { display: none; }
+.hc-ma-chips button {
+  flex: 0 0 auto; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .05);
+  color: #c9c0ea; border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 11.5px;
+  font-weight: 600; white-space: nowrap; cursor: pointer;
+}
+.hc-ma-chips button.on { background: linear-gradient(135deg, #8b5cf6, #f472b6); color: #fff; border-color: transparent; }
+.hc-ma-chips button .n { opacity: .7; font-weight: 500; font-size: 10px; margin-left: 4px; }
+
+.hc-ma-list { margin-top: 8px; }
+.hc-ma { padding: 11px 2px; border-top: 1px solid rgba(255, 255, 255, .07); }
+.hc-ma:first-child { border-top: 0; padding-top: 4px; }
+.hc-ma-top { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-bottom: 5px; }
+.hc-ma-d { font-size: 11px; color: var(--muted2, #7f74b3); font-weight: 700; font-variant-numeric: tabular-nums; }
+.hc-ma-cat { font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: rgba(255, 255, 255, .08); color: #c9c0ea; }
+.hc-ma-cat.c1 { background: rgba(96, 165, 250, .18); color: #93c5fd; }
+.hc-ma-cat.c2 { background: rgba(167, 139, 250, .2); color: #c4b5fd; }
+.hc-ma-cat.c3 { background: rgba(52, 211, 153, .17); color: #6ee7b7; }
+.hc-ma-cat.c4 { background: rgba(244, 114, 182, .18); color: #f9a8d4; }
+.hc-ma-cat.c5 { background: rgba(251, 146, 60, .18); color: #fdba74; }
+.hc-ma-cat.c6 { background: rgba(56, 189, 248, .18); color: #7dd3fc; }
+.hc-ma-cat.c7 { background: rgba(74, 222, 128, .16); color: #86efac; }
+.hc-ma-cat.c8 { background: rgba(250, 204, 21, .17); color: #fde68a; }
+.hc-ma-cat.c9 { background: rgba(148, 163, 184, .2); color: #cbd5e1; }
+.hc-ma-cat.c10 { background: rgba(255, 255, 255, .07); color: #b9b0dd; }
+.hc-ma-prog { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(139, 92, 246, .2); color: #c4b5fd; font-weight: 600; }
+.hc-ma-re { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(251, 191, 36, .14); color: #fbbf24; font-weight: 600; }
+.hc-ma-mine { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(244, 114, 182, .22); color: #f9a8d4; font-weight: 700; }
+.hc-ma-body { display: flex; align-items: flex-start; gap: 8px; }
+.hc-ma-t { flex: 1; color: var(--ink, #f4efff); font-size: 13.6px; font-weight: 600; line-height: 1.42; letter-spacing: -.2px; text-decoration: none; }
+a.hc-ma-t:active { opacity: .7; }
+.hc-ma-go {
+  flex: 0 0 auto; font-size: 11px; font-weight: 700; color: #c4b5fd; text-decoration: none;
+  border: 1px solid rgba(196, 181, 253, .32); border-radius: 8px; padding: 3px 7px; white-space: nowrap;
+}
+.hc-ma-nolink { flex: 0 0 auto; font-size: 10.5px; color: #7f74b3; }
+.hc-ma-minehead { font-size: 11.5px; font-weight: 700; color: #c4b5fd; margin: 0 2px 6px; }
+.hc-ma-minerow { display: flex; align-items: center; gap: 7px; padding: 6px 2px; border-top: 1px solid rgba(255, 255, 255, .06); }
+.hc-ma-minerow:first-of-type { border-top: 0; }
+.hc-ma-mt { flex: 1; font-size: 12.6px; color: #ded7f5; line-height: 1.35; }
+.hc-ma-del { flex: 0 0 auto; border: 0; background: rgba(251, 113, 133, .14); color: #fb7185; border-radius: 8px; padding: 3px 8px; font: inherit; font-size: 11px; cursor: pointer; }

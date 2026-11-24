@@ -14,6 +14,7 @@
   var STUDY_APP = 'https://hachohee.github.io/studywithfriends/';
   var FRIDGE_APP = 'https://mission-fridge.mission-fridge.workers.dev';
   var CARTEL_APP = 'https://hachohee.github.io/cartelwatch/';
+  var NOTION_ARTICLES_URL = 'https://app.notion.com/p/f33ae0409ae9400babd69e72f7afdcd0';
 
   var K = {
     items: 'hotcho_items_v1',
@@ -25,7 +26,8 @@
     ui: 'hotcho_ui_v1',
     frIng: 'hotcho_fridge_ing_v1',
     frPrio: 'hotcho_fridge_prio_v1',
-    frKey: 'hotcho_gemini_key_v1'
+    frKey: 'hotcho_gemini_key_v1',
+    myart: 'hotcho_my_articles_v1'
   };
 
   /* 언론·정책 모니터 — 갈래 표시용(JSON에 kinds가 없을 때 대신 씀) */
@@ -95,6 +97,13 @@
     artTab: 'brief',
     items: load(K.items, []) || [],
     drafts: load(K.drafts, []) || [],
+    /* 🎬 내 기사 — 서버 목록(my_articles.json) + 이 폰에서 추가한 기사 */
+    myart: null,
+    myArticles: load(K.myart, []) || [],
+    maCat: 'all',
+    maYear: 'all',
+    maQ: '',
+    maShown: 40,
     article: load(K.article, null) || { brief: {}, report: {} },
     home: load(K.home, null) || { memos: [], fridge: { memo: '', shop: [] }, checks: {} },
     editing: '',
@@ -278,7 +287,7 @@
     document.body.classList.toggle('hc-mode-alt', mode !== 'study');
     if (remember !== false) { try { localStorage.setItem(K.mode, mode); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
-    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderDrafts(); if (S.workSec === 'monitor') renderMg(); }
+    if (mode === 'work') { renderNews(); renderMonitor(); renderCartel(); renderItems(); renderArticle(); renderMyArt(); renderDrafts(); if (S.workSec === 'monitor') renderMg(); }
     if (mode === 'home') { renderEvents(); renderMemos(); renderKids(); renderShop(); renderSyncSummary(); }
   }
 
@@ -536,7 +545,7 @@
   }
 
   /* ============================================================ 메뉴 버튼 전환 */
-  var WORK_SECS = ['news', 'monitor', 'cartel', 'items', 'article'];
+  var WORK_SECS = ['news', 'monitor', 'cartel', 'items', 'article', 'myart'];
   var HOME_SECS = ['events', 'kids', 'fridge', 'backup'];
 
   function showWorkSec(sec) {
@@ -556,6 +565,7 @@
     if (sec === 'cartel') renderCartel();
     if (sec === 'items') renderItems();
     if (sec === 'article') renderArticle();
+    if (sec === 'myart') renderMyArt();
     try { window.scrollTo(0, 0); } catch (e) {}
   }
 
@@ -1841,6 +1851,7 @@
     var wrong = j('tmq_wrong_v1', {});
     var items = j('hotcho_items_v1', []);
     var drafts = j('hotcho_drafts_v1', []);
+    var myart = j('hotcho_my_articles_v1', []);
     var keys = 0, bytes = 0;
     for (var k in store) {
       if (!Object.prototype.hasOwnProperty.call(store, k)) continue;
@@ -1851,12 +1862,13 @@
       wrong: (wrong && typeof wrong === 'object') ? Object.keys(wrong).length : 0,
       items: (items && items.length) || 0,
       drafts: (drafts && drafts.length) || 0,
+      myart: (myart && myart.length) || 0,
       keys: keys,
       kb: Math.max(1, Math.round(bytes / 1024))
     };
   }
   function summaryText(st) {
-    return 'BTS ' + st.deck + '/7 · 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개 · 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)';
+    return 'BTS ' + st.deck + '/7 · 오답 ' + st.wrong + '개 · 소재 ' + st.items + '개 · 초안 ' + st.drafts + '개 · 내 기사 ' + (st.myart || 0) + '편 · 저장 항목 ' + st.keys + '개 (' + st.kb + 'KB)';
   }
 
   /* 코드 글자 ↔ 기록: base64(가능하면 gzip) */
@@ -2071,6 +2083,147 @@
     reader.readAsText(file);
   }
 
+  /* ============================================================ 🎬 내 기사 */
+  var MA_PAGE = 40;
+  var MA_CAT_ORDER = ['교육', '지방자치행정', '지역경제', '의료보건', '사회안전', '날씨재난', '환경재해', '문화축제', '정치선거', '기타'];
+
+  function maNorm(s) { return String(s || '').replace(/[^0-9a-z가-힣]/g, '').toLowerCase(); }
+  function maDate(d) { var p = String(d || '').split('-'); return p.length === 3 ? p[0] + '.' + p[1] + '.' + p[2] : String(d || ''); }
+  function maCatCls(c) { var i = MA_CAT_ORDER.indexOf(c); return 'hc-ma-cat c' + (i < 0 ? 10 : i + 1); }
+
+  /* 서버 목록 + 이 폰에서 추가한 기사 합치기 (같은 날 같은 제목은 내가 적은 것 우선) */
+  function maAll() {
+    var base = (S.myart && S.myart.items) || [];
+    var out = [], seen = {}, i;
+    for (i = 0; i < S.myArticles.length; i++) {
+      var m = S.myArticles[i];
+      out.push({ date: m.date, title: m.title, cat: m.cat || '기타', url: m.url || '', rerun: m.rerun || 0, prog: m.prog || '', mine: true, id: m.id });
+      seen[maNorm(m.title) + '|' + m.date] = 1;
+    }
+    for (i = 0; i < base.length; i++) {
+      var b = base[i];
+      if (seen[maNorm(b.title) + '|' + b.date]) continue;
+      out.push({ date: b.date, title: b.title, cat: b.cat || '기타', url: b.url || '', rerun: b.rerun || 0, prog: b.prog || '' });
+    }
+    out.sort(function (a, b) { return a.date < b.date ? 1 : (a.date > b.date ? -1 : (a.title < b.title ? 1 : -1)); });
+    return out;
+  }
+
+  function maFiltered() {
+    var all = maAll(), out = [], q = maNorm(S.maQ);
+    for (var i = 0; i < all.length; i++) {
+      var it = all[i];
+      if (S.maYear !== 'all' && it.date.slice(0, 4) !== S.maYear) continue;
+      if (S.maCat !== 'all' && it.cat !== S.maCat) continue;
+      if (q && maNorm(it.title).indexOf(q) < 0) continue;
+      out.push(it);
+    }
+    return out;
+  }
+
+  function maItemHTML(it) {
+    var url = esc(it.url || '');
+    return '<div class="hc-ma">' +
+      '<div class="hc-ma-top">' +
+      '<span class="hc-ma-d">' + esc(maDate(it.date)) + '</span>' +
+      '<span class="' + maCatCls(it.cat) + '">' + esc(it.cat) + '</span>' +
+      (it.prog ? '<span class="hc-ma-prog">' + esc(it.prog) + '</span>' : '') +
+      (it.rerun ? '<span class="hc-ma-re">재방송 ' + num(it.rerun) + '회</span>' : '') +
+      (it.mine ? '<span class="hc-ma-mine">내가 추가</span>' : '') +
+      '</div>' +
+      (url
+        ? '<div class="hc-ma-body"><a class="hc-ma-t" href="' + url + '" target="_blank" rel="noopener">' + esc(it.title) + '</a>' +
+          '<a class="hc-ma-go" href="' + url + '" target="_blank" rel="noopener">다시보기 ↗</a></div>'
+        : '<div class="hc-ma-body"><span class="hc-ma-t">' + esc(it.title) + '</span>' +
+          '<span class="hc-ma-nolink">링크 없음</span></div>') +
+      '</div>';
+  }
+
+  function renderMyLocal() {
+    var el = $('hcMaMine');
+    if (!el) return;
+    if (!S.myArticles.length) {
+      el.innerHTML = '<div class="hc-empty">아직 직접 추가한 기사가 없어요.<br>위 [＋ 새 기사 추가]에서 담으면 여기에 쌓여요.</div>';
+      return;
+    }
+    var h = '<div class="hc-ma-minehead">내가 추가한 기사 ' + num(S.myArticles.length) + '편</div>';
+    for (var i = 0; i < S.myArticles.length; i++) {
+      var m = S.myArticles[i];
+      h += '<div class="hc-ma-minerow"><span class="hc-ma-d">' + esc(maDate(m.date)) + '</span>' +
+        '<span class="hc-ma-mt">' + esc(m.title) + '</span>' +
+        '<button type="button" class="hc-ma-del" data-ma-del="' + esc(m.id) + '" aria-label="지우기">✕</button></div>';
+    }
+    el.innerHTML = h;
+  }
+
+  function renderMyArt() {
+    var kpi = $('hcMaKpi');
+    if (!kpi) return;
+    var yrs = $('hcMaYears'), cats = $('hcMaCats'), list = $('hcMaList'), cnt = $('hcMaCnt'), upd = $('hcMaUpd'), more = $('hcMaMore');
+    var all = maAll(), years = {}, catN = {}, i;
+    for (i = 0; i < all.length; i++) {
+      var y = all[i].date.slice(0, 4);
+      years[y] = (years[y] || 0) + 1;
+      catN[all[i].cat] = (catN[all[i].cat] || 0) + 1;
+    }
+    var range = all.length ? maDate(all[all.length - 1].date) + ' ~ ' + maDate(all[0].date) : '';
+    if (upd) upd.textContent = (S.myart && S.myart.updated) ? S.myart.updated + ' 기준' : '이 폰 기록만';
+    kpi.innerHTML = '<div class="hc-ma-big"><b>' + num(all.length) + '</b>편</div>' +
+      '<div class="hc-ma-sub">' + esc(range) + (S.myArticles.length ? ' · 내가 추가 ' + num(S.myArticles.length) + '편' : '') + '</div>';
+
+    var ykeys = Object.keys(years).sort().reverse();
+    var yh = '<button type="button" data-ma-year="all" class="' + (S.maYear === 'all' ? 'on' : '') + '">전체<span class="n">' + num(all.length) + '</span></button>';
+    for (i = 0; i < ykeys.length; i++) {
+      yh += '<button type="button" data-ma-year="' + ykeys[i] + '" class="' + (S.maYear === ykeys[i] ? 'on' : '') + '">' + ykeys[i] + '<span class="n">' + num(years[ykeys[i]]) + '</span></button>';
+    }
+    if (yrs) yrs.innerHTML = yh;
+
+    var ch = '<button type="button" data-ma-cat="all" class="' + (S.maCat === 'all' ? 'on' : '') + '">전체 분류<span class="n">' + num(all.length) + '</span></button>';
+    for (i = 0; i < MA_CAT_ORDER.length; i++) {
+      var k = MA_CAT_ORDER[i];
+      if (!catN[k]) continue;
+      ch += '<button type="button" data-ma-cat="' + k + '" class="' + (S.maCat === k ? 'on' : '') + '">' + k + '<span class="n">' + num(catN[k]) + '</span></button>';
+    }
+    if (cats) cats.innerHTML = ch;
+
+    var f = maFiltered();
+    if (cnt) cnt.textContent = num(f.length) + '편';
+    if (!list) return;
+    if (!f.length) {
+      list.innerHTML = '<div class="hc-empty">조건에 맞는 기사가 없어요.<br>검색어를 지우거나 다른 분류를 골라 보세요.</div>';
+      if (more) more.hidden = true;
+      renderMyLocal();
+      return;
+    }
+    var show = Math.min(f.length, S.maShown || MA_PAGE), h = '';
+    for (i = 0; i < show; i++) h += maItemHTML(f[i]);
+    list.innerHTML = h;
+    if (more) {
+      more.hidden = !(f.length > show);
+      more.textContent = '더 보기 (' + num(f.length - show) + '편) — 누적 ' + num(show) + '/' + num(f.length);
+    }
+    renderMyLocal();
+  }
+
+  function addMyArticle() {
+    var di = $('hcMaDate'), ti = $('hcMaTitle'), ci = $('hcMaCat'), ui = $('hcMaUrl');
+    var d = (di && di.value) || '';
+    var t = ((ti && ti.value) || '').replace(/^\s+|\s+$/g, '');
+    var c = (ci && ci.value) || '기타';
+    var u = ((ui && ui.value) || '').replace(/^\s+|\s+$/g, '');
+    if (!t) { toast('기사 제목을 적어 주세요'); if (ti) ti.focus(); return; }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) { toast('방송 날짜를 골라 주세요'); if (di) di.focus(); return; }
+    if (u && !/^https?:\/\//i.test(u)) { toast('다시보기 주소는 http로 시작해야 해요'); if (ui) ui.focus(); return; }
+    S.myArticles.unshift({ id: uid(), date: d, title: t, cat: c, url: u, rerun: 0, ts: Date.now() });
+    save(K.myart, S.myArticles);
+    if (ti) ti.value = '';
+    if (ui) ui.value = '';
+    S.maYear = 'all'; S.maCat = 'all'; S.maQ = ''; S.maShown = MA_PAGE;
+    var q = $('hcMaQ'); if (q) q.value = '';
+    renderMyArt();
+    toast('내 기사에 담았어요 · 이 폰에 저장');
+  }
+
   /* ------------------------------------------------------------ 뼈대 그리기 */
   /* 상단 서브메뉴는 '버튼'으로만 두고, 고른 메뉴 한 칸만 화면에 남긴다.
      (길게 나열하면 폰에서 스크롤 지옥이 된다 — 초희 요청) */
@@ -2091,6 +2244,7 @@
       menuBtn('work', 'cartel', '🕵️', '카르텔워치') +
       menuBtn('work', 'items', '🧩', '아이템 구상') +
       menuBtn('work', 'article', '✍️', '기사작성') +
+      menuBtn('work', 'myart', '🎬', '내 기사') +
       '</nav>' +
 
       '<div class="hc-sec" id="hcSec-news">' +
@@ -2137,6 +2291,36 @@
       '<button type="button" class="hc-btn ghost" data-act="art-clear">비우기</button></div>' +
       '<details class="hc-fold"><summary>💾 저장한 초안 (<span id="hcDraftCnt">0</span>)</summary><div id="hcDraftList"></div></details>' +
       '<p class="hc-note">초안은 이 폰에만 저장돼요 · 리포트는 1분에 ' + READ_CHARS_PER_MIN + '자 기준으로 방송 길이를 계산해요</p>' +
+      '</section></div>' +
+
+      /* ---------------- 🎬 내 기사 아카이브 ---------------- */
+      '<div class="hc-sec" id="hcSec-myart" hidden>' +
+      '<section class="hc-card hc-ma-sum">' +
+      '<div class="hc-card-head"><h3>🎬 내 기사 아카이브</h3><span class="hc-tiny" id="hcMaUpd">불러오는 중…</span></div>' +
+      '<div id="hcMaKpi"></div>' +
+      '<p class="hc-note">노션에 정리해 둔 2014~2026년 보도 목록을 그대로 담았어요. 복직하면 아래 [＋ 새 기사 추가]로 바로 쌓으면 돼요.</p>' +
+      '</section>' +
+
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>🔎 연도 · 분류로 찾기</h3><span class="hc-tiny" id="hcMaCnt"></span></div>' +
+      '<div class="hc-ma-chips" id="hcMaYears"></div>' +
+      '<div class="hc-ma-chips" id="hcMaCats"></div>' +
+      '<input class="hc-input" id="hcMaQ" type="search" placeholder="제목으로 찾기 (예: 교육예산·폐교·산불·의료공백)" autocomplete="off" enterkeyhint="search">' +
+      '<div class="hc-ma-list" id="hcMaList"></div>' +
+      '<button type="button" class="hc-btn ghost sm" data-ma-more="1" id="hcMaMore" style="width:100%;margin-top:10px" hidden></button>' +
+      '<p class="hc-note">제목을 누르면 다시보기가 열려요 · 같은 곳을 두 번 눌러도 안전해요</p>' +
+      '</section>' +
+
+      '<section class="hc-card">' +
+      '<div class="hc-card-head"><h3>＋ 새 기사 추가</h3><span class="hc-tiny">복직 후 계속</span></div>' +
+      '<div class="hc-field"><label>방송 날짜</label><input class="hc-input" id="hcMaDate" type="date" value="' + kstToday() + '"></div>' +
+      '<div class="hc-field"><label>제목</label><input class="hc-input" id="hcMaTitle" placeholder="예: ○○군 교육예산 30% 삭감…왜?" autocomplete="off"></div>' +
+      '<div class="hc-field"><label>분류</label><select class="hc-sel" id="hcMaCat">' + MA_CAT_ORDER.map(function (c) { return '<option>' + c + '</option>'; }).join('') + '</select></div>' +
+      '<div class="hc-field"><label>다시보기 링크 (선택)</label><input class="hc-input" id="hcMaUrl" type="url" placeholder="https://news.kbs.co.kr/..." autocomplete="off" inputmode="url"></div>' +
+      '<div class="hc-row"><button type="button" class="hc-btn primary" data-act="ma-add">＋ 내 기사에 담기</button>' +
+      '<a class="hc-btn ghost" href="' + NOTION_ARTICLES_URL + '" target="_blank" rel="noopener">노션 목록 열기 ↗</a></div>' +
+      '<div id="hcMaMine" style="margin-top:12px"></div>' +
+      '<p class="hc-note">여기서 담은 기사는 이 폰에만 먼저 저장되고(⚙️ 백업·기기 옮기기에도 함께 가요), 노션에 한 번에 옮기려면 <b>scripts/sync_my_articles.py</b>를 돌리면 돼요.</p>' +
       '</section></div>';
   }
 
@@ -2237,10 +2421,11 @@
       fetchJSON('hotcho_hub.json').then(function (d) { S.hub = d; }, function () { return null; }),
       fetchJSON('hotcho_family.json').then(function (d) { S.family = d; }, function () { return null; }),
       fetchJSON('hotcho_monitor.json').then(function (d) { S.mon = d; }, function () { return null; }),
-      fetchJSON('hotcho_briefings.json').then(function (d) { S.brief = d; }, function () { return null; })
+      fetchJSON('hotcho_briefings.json').then(function (d) { S.brief = d; }, function () { return null; }),
+      fetchJSON('my_articles.json').then(function (d) { S.myart = d; }, function () { return null; })
     ]).then(function () {
         if (btn) btn.textContent = '↻ 새로고침';
-      renderNews(); renderMonitor(); renderCartel(); renderEvents(); renderKids();
+      renderNews(); renderMonitor(); renderCartel(); renderEvents(); renderKids(); renderMyArt();
       if (S.workSec === 'monitor') renderMg();
       if (!silent) {
         var ok = S.news || S.family;
@@ -2251,7 +2436,7 @@
 
   /* ------------------------------------------------------------ 이벤트 */
   function onWorkClick(e) {
-    var t = e.target.closest ? e.target.closest('[data-work-sec],[data-mg],[data-mg-sub],[data-pol-tab],[data-cal-nav],[data-cal-day],[data-trend],[data-acc-topic],[data-acc-search],[data-brief-add],[data-pol-add],[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-act]') : null;
+    var t = e.target.closest ? e.target.closest('[data-work-sec],[data-mg],[data-mg-sub],[data-pol-tab],[data-cal-nav],[data-cal-day],[data-trend],[data-acc-topic],[data-acc-search],[data-brief-add],[data-pol-add],[data-news-tab],[data-add-news],[data-item-write],[data-item-next],[data-item-edit],[data-item-del],[data-art-tab],[data-draft-load],[data-draft-del],[data-mon-tab],[data-mon-add],[data-mon-kw],[data-mon-kwdel],[data-mon-kwadd],[data-mon-only],[data-ma-year],[data-ma-cat],[data-ma-more],[data-ma-del],[data-act]') : null;
     if (!t) return;
 
     /* --- 메뉴 버튼 전환 --- */
@@ -2372,6 +2557,23 @@
     var at = t.getAttribute('data-art-tab');
     if (at) { S.artTab = at; renderArticle(); return; }
 
+    /* --- 🎬 내 기사 --- */
+    var may = t.getAttribute('data-ma-year');
+    if (may) { S.maYear = may; S.maShown = MA_PAGE; renderMyArt(); return; }
+
+    var mac = t.getAttribute('data-ma-cat');
+    if (mac) { S.maCat = mac; S.maShown = MA_PAGE; renderMyArt(); return; }
+
+    if (t.getAttribute('data-ma-more')) { S.maShown = (S.maShown || MA_PAGE) + MA_PAGE; renderMyArt(); return; }
+
+    var mad = t.getAttribute('data-ma-del');
+    if (mad) {
+      if (!window.confirm('이 기사를 내 목록에서 지울까요?\n(내가 추가한 기사만 지워져요)')) return;
+      S.myArticles = S.myArticles.filter(function (x) { return x.id !== mad; });
+      save(K.myart, S.myArticles); renderMyArt(); toast('지웠어요');
+      return;
+    }
+
     var dload = t.getAttribute('data-draft-load');
     if (dload) {
       for (var k = 0; k < S.drafts.length; k++) {
@@ -2406,6 +2608,7 @@
       return;
     }
     if (act === 'art-save') { saveDraft(); return; }
+    if (act === 'ma-add') { addMyArticle(); return; }
     if (act === 'art-clear') {
       if (!window.confirm('지금 쓰고 있는 ' + DRAFT_DEFS[S.artTab].label + ' 내용을 비울까요?')) return;
       S.article[S.artTab] = {}; S.linkedItem = ''; S.linkedUrl = '';
@@ -2416,6 +2619,13 @@
 
   function onWorkInput(e) {
     var t = e.target;
+    if (t.id === 'hcMaQ') {
+      S.maQ = t.value || '';
+      S.maShown = MA_PAGE;
+      clearTimeout(onWorkInput._ma);
+      onWorkInput._ma = setTimeout(function () { renderMyArt(); }, 160);
+      return;
+    }
     if (t.id === 'hcAccQ') {
       S.accQ = t.value || '';
       clearTimeout(onWorkInput._q);
@@ -2595,6 +2805,7 @@
     renderArticle();
     renderDrafts();
     renderItems();
+    renderMyArt();
     renderMonitor();
     renderMemos();
     renderShop();

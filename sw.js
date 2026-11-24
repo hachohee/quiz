@@ -28,8 +28,11 @@
    v33: 🍳 행복핫초 → 냉파 탭에 1,018개 레시피 매칭 내장(recipes.json + fridge_engine.js, AI·키 없이 동작)
         + 🤖 Gemini AI 추천(선택, 무료 키는 hotcho_gemini_key_v1) · 재료는 hotcho_fridge_ing_v1에 자동 저장.
    v34: 📌 뿌듯핫초 → 실시간 뉴스 맨 위에 '오늘의 뉴스 브리핑' 카드 — 그날 하루 맥락 3~4줄 +
-        취재기자·시민 시선의 '생각해 볼 문제' 1~2개(hotcho_news.json daily_brief). 없으면 조용히 숨김. */
-const CACHE = 'toeic-bts-v34';
+        취재기자·시민 시선의 '생각해 볼 문제' 1~2개(hotcho_news.json daily_brief). 없으면 조용히 숨김.
+   v35: 🎬 뿌듯핫초 → '내 기사' 탭 — 2014~2026년 KBS 보도 목록 474편(my_articles.json)을
+        연도·분류 칩 + 제목 검색 + 다시보기 링크로. 복직 뒤 앱에서 바로 새 기사를 쌓으면
+        hotcho_my_articles_v1(백업·기기 이동 포함)에 저장됨. */
+const CACHE = 'toeic-bts-v35';
 const SHELL = [
   './',
   './index.html',
@@ -45,6 +48,7 @@ const SHELL = [
   './members/jungkook.jpg',
   './hotcho_modes.css',
   './hotcho_modes.js',
+  './my_articles.json',
   './fridge_engine.js',
   './recipes.json'
 ];
@@ -124,6 +128,11 @@ self.addEventListener('fetch', (event) => {
   if (path.endsWith('/hotcho_news.json') || path.endsWith('/hotcho_hub.json') || path.endsWith('/hotcho_family.json')
       || path.endsWith('/hotcho_monitor.json') || path.endsWith('/hotcho_briefings.json')) {
     event.respondWith(networkFirst(req, '{}'));
+    return;
+  }
+  /* 🎬 내 기사 목록: 고칠 때 바로 반영되게 온라인 우선, 오프라인이면 캐시 */
+  if (path.endsWith('/my_articles.json')) {
+    event.respondWith(networkFirst(req, '{"items":[]}'));
     return;
   }
   /* 🍳 냉파 레시피 데이터: 잘 안 바뀌는 큰 파일(전송 47KB)이라 캐시 먼저 — 새 판(v34+)에서 캐시 이름을 올리면 갱신됨 */
