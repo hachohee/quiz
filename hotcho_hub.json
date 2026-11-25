@@ -1,45 +1,46 @@
 {
- "updated": "2026-11-25 06:02",
+ "updated": "2026-11-25 14:36",
  "cartelwatch": {
-  "updated": "2026-11-24 12:31",
-  "collected": 1202,
-  "total_amount": 39149156460,
+  "updated": "2026-11-25 10:30",
+  "collected": 10129,
+  "total_amount": 778702378890,
   "period": {
    "from": "2026-08-10",
    "to": "2026-11-25"
   },
-  "anomaly_count": 13,
+  "anomaly_count": 260,
   "by_type": {
-   "SPLIT": 5,
-   "NEWCOMER": 8
+   "CONCENTRATION": 3,
+   "SPLIT": 232,
+   "NEWCOMER": 25
   },
   "recent": [
    {
-    "type_label": "쪼개기 수의계약",
-    "severity": "중",
-    "agency": "평창군",
-    "title": "평창군  · 계촌6리(예심이) 둠벙 보수 정비공사",
-    "summary": "한성토건이 7일 안에 2건을 나눠 받음 · 합산 2,924만 원 (건별 최대 1,695만 원)",
-    "amount": 29242000,
-    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600113138"
+    "type_label": "일감 몰아주기",
+    "severity": "상",
+    "agency": "고성군",
+    "title": "상하수도사업소 · 주식회사 넥스트워터 점유율 70.9%",
+    "summary": "상하수도사업소 계약 129.3억 원 중 주식회사 넥스트워터가 91.7억 원 (70.9%, 3건 / 모집단 39건)",
+    "amount": 9167888960,
+    "url": "https://www.g2b.go.kr/link/FIUA027_01/single/?ctrtNo=R25TA01302178&ctrtChgOrd=02&prcmBsneSeCd=조070003&srchName=ctrtCrst&openUrl=Y"
+   },
+   {
+    "type_label": "일감 몰아주기",
+    "severity": "상",
+    "agency": "춘천시",
+    "title": "농업정책과 농정기획 · 춘천시산림조합 점유율 70.2%",
+    "summary": "농업정책과 농정기획 계약 46.1억 원 중 춘천시산림조합이 32.4억 원 (70.2%, 13건 / 모집단 66건)",
+    "amount": 3235199340,
+    "url": "https://www.g2b.go.kr/link/FIUA027_01/single/?ctrtNo=R26TA01791418&ctrtChgOrd=01&prcmBsneSeCd=조070004&srchName=ctrtCrst&openUrl=Y"
    },
    {
     "type_label": "쪼개기 수의계약",
-    "severity": "중",
-    "agency": "평창군",
-    "title": "평창군  · 입탄리(산52번지 일원) 세천 수해복구공사",
-    "summary": "정화건설(합)이 7일 안에 2건을 나눠 받음 · 합산 2,881만 원 (건별 최대 1,512만 원)",
-    "amount": 28808000,
-    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600113174"
-   },
-   {
-    "type_label": "쪼개기 수의계약",
-    "severity": "중",
-    "agency": "평창군",
-    "title": "평창군  · 수항리(252) 세천 수해복구공사",
-    "summary": "(주)다우가 7일 안에 2건을 나눠 받음 · 합산 2,623만 원 (건별 최대 1,462만 원)",
-    "amount": 26230000,
-    "url": "https://www.pc.go.kr/contract/continfo/status/conconst?ctrtAcctBookMngNo=202600112960"
+    "severity": "상",
+    "agency": "원주시",
+    "title": "원주시 회계과 · 2026~2027년 동절기 제설장비(굴삭기 0.6W) 임차용역(고동권)",
+    "summary": "대호건기가 7일 안에 13건을 나눠 받음 · 합산 1.9억 원 (건별 최대 1,468만 원)",
+    "amount": 188751620,
+    "url": "https://www.g2b.go.kr/link/FIUA027_01/single/?ctrtNo=R26TA02357562&ctrtChgOrd=00&prcmBsneSeCd=조070003&srchName=ctrtCrst&openUrl=Y"
    }
   ],
   "url": "https://hachohee.github.io/cartelwatch/"
