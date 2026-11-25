@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-25T07:31:17+09:00",
- "updatedLabel": "11/25 07:31",
+ "updated": "2026-11-25T13:01:58+09:00",
+ "updatedLabel": "11/25 13:01",
  "perProgram": 8,
  "programs": [
   {
@@ -395,6 +395,46 @@
    "rss": "https://minicast.imbc.com/PodCast/pod.aspx?code=1000674100000100000",
    "episodes": [
     {
+     "title": "11/25(수) [사법어때] 수상한 한덕수 판결문? 제대로 살펴 보니 (임재성 변호사)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261125_11.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261125_11.mp3",
+     "dateISO": "2026-11-25T08:30:00+09:00",
+     "dateLabel": "11/25(수) 08:30",
+     "dateShort": "11/25(수)",
+     "durationSec": 1743,
+     "durationLabel": "29분 03초"
+    },
+    {
+     "title": "11/25(수) 3부 최고위, 제발 단결의 목소리를 내야 (권미경 더불어민주당 최고위원) | [6분집중] 중-고등학교, AI부정은 퇴학?",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261125_3.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261125_3.mp3",
+     "dateISO": "2026-11-25T08:00:00+09:00",
+     "dateLabel": "11/25(수) 08:00",
+     "dateShort": "11/25(수)",
+     "durationSec": 1440,
+     "durationLabel": "24분 00초"
+    },
+    {
+     "title": "11/25(수) 2부 '전장연 방지법' 조속히 처리해야 (김재섭 국민의힘 의원) | 명예훼손과 모욕 혐의 등 깁재섭 고소 (박경석 전국장애인차별철폐연대 대표)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261125_2.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261125_2.mp3",
+     "dateISO": "2026-11-25T07:30:00+09:00",
+     "dateLabel": "11/25(수) 07:30",
+     "dateShort": "11/25(수)",
+     "durationSec": 1351,
+     "durationLabel": "22분 31초"
+    },
+    {
+     "title": "11/25(수) 1부 [JB TIMES] 안철수 “강금실 지명, ‘중국 간첩’의 국정원 접수로 볼 것” | 대통령 \"종교활동 빙자 불법행위… 실효적 조치 검토해야\" | 오세훈, 특검·탄핵 발언하려 하자… \"회의 마치겠습니다\" | “공소취소 않겠다는 말 못하나”… 이용철 “예, 그렇습니다” | 조희대 탄핵 사유된 ‘격려금’…그 심판맡는 헌재소장도 받아 | 장동혁·한동훈 ‘조작 징계’ 정면 충돌 (더 막내작가)",
+     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261125_1.mp3",
+     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261125_1.mp3",
+     "dateISO": "2026-11-25T07:05:00+09:00",
+     "dateLabel": "11/25(수) 07:05",
+     "dateShort": "11/25(수)",
+     "durationSec": 1242,
+     "durationLabel": "20분 42초"
+    },
+    {
      "title": "11/24(화) [안보어때] 외교안보 라인 교체 대미관계 좋아지나? (노규덕 한라대 교수, 조용근 한국군사문제연구원 군사전략연구실장)",
      "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261124_11.mp3",
      "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261124_11.mp3",
@@ -433,46 +473,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 1243,
      "durationLabel": "20분 43초"
-    },
-    {
-     "title": "11/23(월) [여야어때] 김민석 취임 100일 어떤 깃발 올라오나? (김은지 시사IN 기자,곽우신 오마이뉴스 기자)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261123_11.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261123_11.mp3",
-     "dateISO": "2026-11-23T08:30:00+09:00",
-     "dateLabel": "11/23(월) 08:30",
-     "dateShort": "11/23(월)",
-     "durationSec": 1843,
-     "durationLabel": "30분 43초"
-    },
-    {
-     "title": "11/23(월) 3부 조희대 탄핵, 현실적인 가능성은? (양부남 더불어민주당 의원) | [6분집중] '충성론'? 대부업체 찾는 병사들 (유승민 작가)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261123_3.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_3/LOOK_20261123_3.mp3",
-     "dateISO": "2026-11-23T08:00:00+09:00",
-     "dateLabel": "11/23(월) 08:00",
-     "dateShort": "11/23(월)",
-     "durationSec": 1455,
-     "durationLabel": "24분 15초"
-    },
-    {
-     "title": "11/23(월) 2부 AI위기론 속 미래대응기금 문제 없을까? (류덕현 대통령 비서실 재정기획보좌관)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261123_2.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_2/LOOK_20261123_2.mp3",
-     "dateISO": "2026-11-23T07:30:00+09:00",
-     "dateLabel": "11/23(월) 07:30",
-     "dateShort": "11/23(월)",
-     "durationSec": 1305,
-     "durationLabel": "21분 45초"
-    },
-    {
-     "title": "11/23(월) 1부 [JB TIMES] 與 “판결 내용 아닌 절차상 하자가 조희대 탄핵 사유” | 이 대통령, 최교진 교육장관 사의 수락 | ‘6·3 선거사범’ 공소시효 D-10 앞두고 속도전 | 종묘 앞 ‘145m 아파트’ 못 짓는다... 유적 심의 ‘부결’ | \"정년연장, 27일 與 특위서 결론 안 나면 정부안 발표\" (더 막내작가)",
-     "guid": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261123_1.mp3",
-     "mp3": "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/look_1/LOOK_20261123_1.mp3",
-     "dateISO": "2026-11-23T07:05:00+09:00",
-     "dateLabel": "11/23(월) 07:05",
-     "dateShort": "11/23(월)",
-     "durationSec": 1241,
-     "durationLabel": "20분 41초"
     }
    ],
    "ok": true,
@@ -489,6 +489,56 @@
    "desc": "아침 7시 30분, 뉴스 뒤 이야기",
    "rss": "https://www.omnycontent.com/d/playlist/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/b28168e2-c100-4ce4-92b3-af56000e0f7a/podcast.rss",
    "episodes": [
+    {
+     "title": "[2026/11/25] [뉴스쇼 방송 전체듣기]",
+     "guid": "48ac1918-34fc-4627-a7c0-b50d001a408f",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/48ac1918-34fc-4627-a7c0-b50d001a408f/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-25T10:43:43+09:00",
+     "dateLabel": "11/25(수) 10:43",
+     "dateShort": "11/25(수)",
+     "durationSec": 5926,
+     "durationLabel": "1시간 38분"
+    },
+    {
+     "title": "[2026/11/25] [월간 이유불문 1부] \"강금실 논란은 남녀차별이야!\" 20여 년 지켜본 유인태의 일갈! | 유인태 전 국회 사무총장, 이재오 국민의힘 상임고문",
+     "guid": "f4b685a9-556b-45fb-9c2d-b50d0005d456",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/f4b685a9-556b-45fb-9c2d-b50d0005d456/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-25T10:35:36+09:00",
+     "dateLabel": "11/25(수) 10:35",
+     "dateShort": "11/25(수)",
+     "durationSec": 1445,
+     "durationLabel": "24분 05초"
+    },
+    {
+     "title": "[2026/11/25] [뉴스 연구소 2부] \"장동혁에게 10억 요구했다?\" 최 교수의 최후통첩 내막 취재 | 하헌기 이재영 김준일 박순봉",
+     "guid": "04ee11da-7857-4614-8872-b50c01852187",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/04ee11da-7857-4614-8872-b50c01852187/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-25T10:18:28+09:00",
+     "dateLabel": "11/25(수) 10:18",
+     "dateShort": "11/25(수)",
+     "durationSec": 1310,
+     "durationLabel": "21분 50초"
+    },
+    {
+     "title": "[2026/11/25] [월간 이유불문 2부] \"김민석 정청래 당을 쪼개라!\" 보수 원로 이재오의 폭탄발언! | 유인태 전 국회 사무총장, 이재오 국민의힘 상임고문",
+     "guid": "46ad01b4-e2ff-41eb-bda5-b50d0005d457",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/46ad01b4-e2ff-41eb-bda5-b50d0005d457/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-25T09:39:47+09:00",
+     "dateLabel": "11/25(수) 09:39",
+     "dateShort": "11/25(수)",
+     "durationSec": 1307,
+     "durationLabel": "21분 47초"
+    },
+    {
+     "title": "[2026/11/25] [뉴스 연구소 1부] \"정청래의 깃발은 깽값 요구!\" 하헌기 분노한 친청계 계획 | 하헌기 이재영 김준일 박순봉",
+     "guid": "34601409-7229-456a-8504-b50c01852188",
+     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/34601409-7229-456a-8504-b50c01852188/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
+     "dateISO": "2026-11-25T09:15:22+09:00",
+     "dateLabel": "11/25(수) 09:15",
+     "dateShort": "11/25(수)",
+     "durationSec": 1727,
+     "durationLabel": "28분 47초"
+    },
     {
      "title": "[2026/11/24] [고란의 금융치료] 가죽 재킷 벗고 복귀한 젠슨 황! 트럼프의 '면죄부' 통했나? | 고란 경제전문기자",
      "guid": "05108cf5-7b84-4779-9adf-b50c00086289",
@@ -518,56 +568,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 1378,
      "durationLabel": "22분 58초"
-    },
-    {
-     "title": "[2026/11/24] \"김민석 경고, 수용합니다!\" 민주당 화합 약속한 박선원 | 박선원 더불어민주당 의원",
-     "guid": "e7b36013-220e-4435-990e-b50c0002565c",
-     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/e7b36013-220e-4435-990e-b50c0002565c/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
-     "dateISO": "2026-11-24T09:54:47+09:00",
-     "dateLabel": "11/24(화) 09:54",
-     "dateShort": "11/24(화)",
-     "durationSec": 1656,
-     "durationLabel": "27분 36초"
-    },
-    {
-     "title": "[2026/11/24] [뉴스 연구소 1부] \"한준호 장관되면 추미애는?\" 서용주의 치밀한 靑 개각 분석 | 서용주 정광재 김준일 박순봉",
-     "guid": "77a12fb2-4ad7-489f-869f-b50c0002565a",
-     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/77a12fb2-4ad7-489f-869f-b50c0002565a/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
-     "dateISO": "2026-11-24T09:32:32+09:00",
-     "dateLabel": "11/24(화) 09:32",
-     "dateShort": "11/24(화)",
-     "durationSec": 1698,
-     "durationLabel": "28분 18초"
-    },
-    {
-     "title": "[2026/11/23] [뉴스쇼 방송 전체듣기]",
-     "guid": "ec4119a1-4ef9-4ba9-a920-b50b0019672c",
-     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/ec4119a1-4ef9-4ba9-a920-b50b0019672c/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
-     "dateISO": "2026-11-23T10:36:52+09:00",
-     "dateLabel": "11/23(월) 10:36",
-     "dateShort": "11/23(월)",
-     "durationSec": 5924,
-     "durationLabel": "1시간 38분"
-    },
-    {
-     "title": "[2026/11/23] \"아부꾼들의 조희대 탄핵!\" 민주당 직격한 김재원 인터뷰 | 김재원 국민의힘 최고위원",
-     "guid": "a9283ef5-a1bd-4458-9ad3-b50b000ce068",
-     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/a9283ef5-a1bd-4458-9ad3-b50b000ce068/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
-     "dateISO": "2026-11-23T10:31:37+09:00",
-     "dateLabel": "11/23(월) 10:31",
-     "dateShort": "11/23(월)",
-     "durationSec": 1512,
-     "durationLabel": "25분 12초"
-    },
-    {
-     "title": "[2026/11/23] \"2040년엔 수능이 없어진다?\" 정근식 교육감회장의 파격제안! | 정근식 대한민국교육감협의회 회장",
-     "guid": "6fc6a9b2-ade4-4348-90fc-b50b000ce06a",
-     "mp3": "https://traffic.omny.fm/d/clips/53ac8cb6-b299-4f93-8280-af50012ddab0/cb1b4f42-acae-4db3-a7e0-af56000e0f71/6fc6a9b2-ade4-4348-90fc-b50b000ce06a/audio.mp3?utm_source=Podcast&in_playlist=b28168e2-c100-4ce4-92b3-af56000e0f7a",
-     "dateISO": "2026-11-23T10:24:39+09:00",
-     "dateLabel": "11/23(월) 10:24",
-     "dateShort": "11/23(월)",
-     "durationSec": 1264,
-     "durationLabel": "21분 04초"
     }
    ],
    "ok": true,
