@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-25T13:01:58+09:00",
- "updatedLabel": "11/25 13:01",
+ "updated": "2026-11-26T06:01:19+09:00",
+ "updatedLabel": "11/26 06:01",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,26 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "The Army Blew Up Unstable Bomb-Making Chemicals. Now What?",
+     "guid": "a6b11994-b04d-11f0-b754-3b1719a2bc7d",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY2877681127.mp3",
+     "dateISO": "2026-11-26T01:42:00+09:00",
+     "dateLabel": "11/26(목) 01:42",
+     "dateShort": "11/26(목)",
+     "durationSec": 452,
+     "durationLabel": "7분 32초"
+    },
+    {
+     "title": "Kilmar Abrego Garcia Self-deports to Spain",
+     "guid": "0208d8d6-b04e-11f0-adaa-8fc08a7c5d08",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY5059001713.mp3",
+     "dateISO": "2026-11-25T21:03:00+09:00",
+     "dateLabel": "11/25(수) 21:03",
+     "dateShort": "11/25(수)",
+     "durationSec": 555,
+     "durationLabel": "9분 15초"
+    },
     {
      "title": "Jensen Huang Apologizes to Staff",
      "guid": "5bf7d3a2-b04d-11f0-a7a7-0fe045c2407f",
@@ -73,26 +93,6 @@
      "dateShort": "11/23(월)",
      "durationSec": 531,
      "durationLabel": "8분 51초"
-    },
-    {
-     "title": "Revisiting: “This Lost a Lot of People”: RFK Jr.’s Broken Pesticide Promise",
-     "guid": "295f41cc-af7c-11f0-9be7-1ff499c2e503",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY2873037639.mp3",
-     "dateISO": "2026-11-22T18:30:00+09:00",
-     "dateLabel": "11/22(일) 18:30",
-     "dateShort": "11/22(일)",
-     "durationSec": 1125,
-     "durationLabel": "18분 45초"
-    },
-    {
-     "title": "She Clocked in as a Nurse and Clocked Out With a Newborn",
-     "guid": "08492ca0-af72-11f0-8a77-c744b16f6e7b",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY4478676606.mp3",
-     "dateISO": "2026-11-21T18:30:00+09:00",
-     "dateLabel": "11/21(토) 18:30",
-     "dateShort": "11/21(토)",
-     "durationSec": 1054,
-     "durationLabel": "17분 34초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "US announces new tariffs on China and other countries",
+     "guid": "urn:bbc:podcast:p0ppwqrn",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppwplz.mp3",
+     "dateISO": "2026-11-26T01:47:00+09:00",
+     "dateLabel": "11/26(목) 01:47",
+     "dateShort": "11/26(목)",
+     "durationSec": 1781,
+     "durationLabel": "29분 41초"
+    },
+    {
+     "title": "Huawei has been found guilty of bank fraud in the US",
+     "guid": "urn:bbc:podcast:p0pprc4x",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppr6k6.mp3",
+     "dateISO": "2026-11-25T15:05:00+09:00",
+     "dateLabel": "11/25(수) 15:05",
+     "dateShort": "11/25(수)",
+     "durationSec": 1799,
+     "durationLabel": "29분 59초"
+    },
     {
      "title": "Is Jensen Huang's reinstatement good news for China?",
      "guid": "urn:bbc:podcast:p0ppp111",
@@ -168,26 +188,6 @@
      "dateShort": "11/22(일)",
      "durationSec": 1658,
      "durationLabel": "27분 38초"
-    },
-    {
-     "title": "The Happy Pod: The 'amazing’ device that controls Tourette's",
-     "guid": "urn:bbc:podcast:p0pp4d5y",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp4c96.mp3",
-     "dateISO": "2026-11-21T21:00:00+09:00",
-     "dateLabel": "11/21(토) 21:00",
-     "dateShort": "11/21(토)",
-     "durationSec": 1589,
-     "durationLabel": "26분 29초"
-    },
-    {
-     "title": "Man found guilty of starting deadly LA wildfire",
-     "guid": "urn:bbc:podcast:p0pp66wy",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp66mc.mp3",
-     "dateISO": "2026-11-21T14:00:00+09:00",
-     "dateLabel": "11/21(토) 14:00",
-     "dateShort": "11/21(토)",
-     "durationSec": 1469,
-     "durationLabel": "24분 29초"
     }
    ],
    "ok": true,
@@ -585,6 +585,26 @@
    "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
    "episodes": [
     {
+     "title": "오늘의 경제 뉴스 - '젠슨 황 복귀 효과' 하루만에 주춤",
+     "guid": "gid://kbs-podcast/6b0662e913134bfa93ad3d8b",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0662e913134bfa93ad3d8b.mp3",
+     "dateISO": "2026-11-25T13:24:30+09:00",
+     "dateLabel": "11/25(수) 13:24",
+     "dateShort": "11/25(수)",
+     "durationSec": 1206,
+     "durationLabel": "20분 06초"
+    },
+    {
+     "title": "11/25(수) - [미래생활사전] 드론 상용화, 미중 패권경쟁... 드론 산업 현주소",
+     "guid": "gid://kbs-podcast/6b0662dcfaec22a01452dee8",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0662dcfaec22a01452dee8.mp3",
+     "dateISO": "2026-11-25T13:23:30+09:00",
+     "dateLabel": "11/25(수) 13:23",
+     "dateShort": "11/25(수)",
+     "durationSec": 5984,
+     "durationLabel": "1시간 39분"
+    },
+    {
      "title": "원탁의 기자들K - '젠슨 황 복귀' 주가 폭등... 코스피 다시 오르나",
      "guid": "gid://kbs-podcast/6b0510eefaec22a01452c980",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0510eefaec22a01452c980.mp3",
@@ -643,26 +663,6 @@
      "dateShort": "11/20(금)",
      "durationSec": 2266,
      "durationLabel": "37분 46초"
-    },
-    {
-     "title": "11/20(금) - [뿌리 깊은 제조업] ‘비만치료제' 속에 숨은 과학과 기술",
-     "guid": "gid://kbs-podcast/6affcf68c29f64c502ea8978",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affcf68c29f64c502ea8978.mp3",
-     "dateISO": "2026-11-20T13:41:30+09:00",
-     "dateLabel": "11/20(금) 13:41",
-     "dateShort": "11/20(금)",
-     "durationSec": 5975,
-     "durationLabel": "1시간 39분"
-    },
-    {
-     "title": "오늘의 경제 뉴스 - 수능일 주식시장 1시간 늦게 개장… 코스피 5천 회복",
-     "guid": "gid://kbs-podcast/6afe93fbaa2542d293205815",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afe93fbaa2542d293205815.mp3",
-     "dateISO": "2026-11-19T15:15:30+09:00",
-     "dateLabel": "11/19(목) 15:15",
-     "dateShort": "11/19(목)",
-     "durationSec": 1066,
-     "durationLabel": "17분 46초"
     }
    ],
    "ok": true,
@@ -679,6 +679,16 @@
    "desc": "국제 정세를 기자들이 풀어 주는 45분",
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
    "episodes": [
+    {
+     "title": "11/25(수) - [글로벌 이슈] AI 폭락에도 웃은 인도 '돈은 몰리는데 청년은 화났다' 바퀴벌레 운동 재점화",
+     "guid": "gid://kbs-podcast/6b06609008062234165a9b6c",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b06609008062234165a9b6c.mp3",
+     "dateISO": "2026-11-25T13:14:30+09:00",
+     "dateLabel": "11/25(수) 13:14",
+     "dateShort": "11/25(수)",
+     "durationSec": 2870,
+     "durationLabel": "47분 50초"
+    },
     {
      "title": "11/24(화) - [글로벌 이슈] 트럼프의 중·러 틈 벌리기… 미·중·러 정상회담은 '역키신저' 전략?",
      "guid": "gid://kbs-podcast/6b050d6d13134bfa93ad280f",
@@ -748,16 +758,6 @@
      "dateShort": "11/16(월)",
      "durationSec": 2851,
      "durationLabel": "47분 31초"
-    },
-    {
-     "title": "11/13(금) - [수상한 GPS] 젠슨 황 결국 사임, ‘테크 히어로'의 몰락… ‘젠슨 황 스캔들' 트럼프와 백악관도 흔든다.",
-     "guid": "gid://kbs-podcast/6af6903e290654b506644ba2",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6af6903e290654b506644ba2.mp3",
-     "dateISO": "2026-11-13T13:21:30+09:00",
-     "dateLabel": "11/13(금) 13:21",
-     "dateShort": "11/13(금)",
-     "durationSec": 2814,
-     "durationLabel": "46분 54초"
     }
    ],
    "ok": true,
