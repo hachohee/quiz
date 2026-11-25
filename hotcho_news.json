@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26 06:30",
+ "updated": "2026-11-26 06:38",
  "daily_brief": {
   "date": "2026-11-26",
   "context": [
@@ -18,80 +18,87 @@
    "label": "세계",
    "items": [
     {
-     "title": "北, 스위스 외교사무소 전격 폐쇄…김여정 담화 하루 만",
-     "source": "연합뉴스TV",
-     "when": "11/25 14:21",
-     "ts": "2026-11-25T14:21+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9SaDZPcTZLNTNYVnFmMjRySWowZG1tdThBZjE1RlFxd0JaV1BPZjhFVU5sdkR1eWNDVUNKV1locHRELWh4MGZZZEJvMENXeXFGbFNab1Z0X01CVmpVT3ZzMXpuNENRTjA?oc=5"
+     "title": "‘중국군의 민낯?’ 불량 무기에 훈련 기록 조작까지…美 보고서 분석",
+     "source": "문화일보",
+     "when": "11/26 05:00",
+     "ts": "2026-11-26T05:00+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBWY1R2U0h3anNjZG1oN3VTS2R3aERWQ0ZqVGZTa19uX3FDY21SVFBPdEhMRnNTZXh6SENBLWlLTlVUTGNVZklYWk9KVHJiOFlM?oc=5"
     },
     {
-     "title": "망한 건가, 살린 건가… 지구촌 ‘기후 조별과제’, 개혁 가능할까",
-     "source": "한겨레",
-     "when": "11/25 14:13",
-     "ts": "2026-11-25T14:13+09:00",
-     "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE5Hc0ZPdTdxTDlDNVZfOFBndjR2ZkxhWHRoSWtFY0RNN3NSckdBbXNUaWYtdS1qVzJMazJvTEcxVHhrU0VWNVV4WU1IQUhlUnVibHBOUEw1ckdWbGtveldGeVVzVUQ0Rm14aFR3blFfRVJSdw?oc=5"
+     "title": "후티 반군, 사우디아라비아 최대 정유시설 공격 주장",
+     "source": "VOA 한국어 홈페이지",
+     "when": "11/26 04:52",
+     "ts": "2026-11-26T04:52+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE02TUxXV1hnWVdqczVpdEVGZmh4dUtXbHMyZzZQeEZ1X1RGS3JEdk52ZE9ZZ0lHMHBmU3NVSjdSY0dQakRzTDFwS3hBNmtMMk9W0gFTQVVfeXFMUEZ5c1N4aTJOVlJQUDdCYzBQQnA1bjROcFU5eWJfM3FXeGVVckUtVDc3NjhTa0dFa2dCbFdEYmFhblpidlh1Tk5IbXhSMW5NNUJfY0E?oc=5"
     },
     {
-     "title": "北김주애 '명품 스키' 사진에… 美국무부 \"대북 반입 금지 사치품\"",
-     "source": "대전일보",
-     "when": "11/25 11:00",
-     "ts": "2026-11-25T11:00+09:00",
-     "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1ST0F4MmY0MWZ0cXQ1Y0piZWJ5OXF4dU5RNnVKSTkzZTdPbnoyeEtyUUNaSW5KWXJoME82elBkN0VaS1EtNzFjSkdROTJ0b3FvbXBZSG5GN1BsdTNjeU5aQ2E3NWlmZ2xSekJMOUpFcw?oc=5"
+     "title": "화웨이, 美서 8년만에 유죄 평결… 美中 기술패권 갈등 새 변수될듯",
+     "source": "동아일보",
+     "when": "11/26 04:30",
+     "ts": "2026-11-26T04:30+09:00",
+     "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9qVFdlYnFpVWFNR3ZPRXUyZWI3ZWhBc1hMdU1QSnZRT0t6SEZmbFMxS3hoUV9Zd2JzNHJkb2dLOWw4OFVrNEVvTjExb29fSTB2NjFxNTVzNHFsMUV6OFo2Q29qT0JGZjd0WF95V3N6WVBCcUXSAWZBVV95cUxPeDlGZTdkellaTVYwWm54UkdlbmdCVi0xNGZvbmdjNDZuRDN4YnJjcU9xbmY1c3NQQUU5MTJ3UjJNcTI4WXhzU3RWTUdVNmtZMUd3Ykl0dXAxcFpDenpVanA4VWtpUFE?oc=5"
     },
     {
-     "title": "트럼프 “김정은과의 ‘러브 레터’ 당장이라도 시작 가능”",
-     "source": "경향신문",
-     "when": "11/25 10:56",
-     "ts": "2026-11-25T10:56+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1VUXRiWVJ5SzFLSmVMT3RpNDFqcFl6WXB4NnRlZ0xWU21VTmVxWnVkM1dnNHRjRWZJeTNqYWJTWUVtU2dxQW1UWmV0cllGRWR5YTNmSkZmUVJpd9IBX0FVX3lxTFA4QllEVUxZbDU1RWk0WV9ORGdpQVNuWE5uREt1bFBEZldqV0lkOWRFQzZjbXg3VlZsTkZMRFRJWERfLXk5RGsxTzFBTUY3MEdkOFMzUDNBQ2Q4MFJUT1ln?oc=5"
+     "title": "EU, 북한 핵무기 포기 촉구…북러 군사협력 규탄",
+     "source": "VOA 한국어 홈페이지",
+     "when": "11/26 03:31",
+     "ts": "2026-11-26T03:31+09:00",
+     "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPX1RxWkpOZXQ1b0oyZVIzblAxMHdEWV9ZUW03T3Y4ZFpTbHMxMFpuT1dTbWpKck9xaG9wUHJZYU16RGhCOXdBLUtnakVZTTdYZm1WdkFvYTVXTFM1c3hHRmprRkxHbi1UWWZfNjVVeWFUOGt2MkZHVzF1OXpDNHV3aDByQmYxa29Bd1lhRE9Scy1KcmU0a1hzdE9hSGxUQdIBoAFBVV95cUxQMWpKY1VuZjNudVpXX0x5ZXp1cFBLMlJETFl1eEY0R3ZJNVhyR1czVTZ1aFl6S2lTMHZJTzZDMzJxNkhQMG15R0NSajJjTXNEQm1uNFctelJsMXpfZVU1YU1JUW1kc0VZOE1ZRnlweE9PbFZfZy15Q05SR1JIWk1mSjEzTzVMV1FwZ1E5TnVHMHJES1hXYkhIeWd6LW8ybk1a?oc=5"
     },
     {
-     "title": "중국 우주정거장, 외국인에 첫 개방…우주협력 새 거점 포석",
-     "source": "한겨레",
-     "when": "11/25 10:55",
-     "ts": "2026-11-25T10:55+09:00",
-     "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE9YLWhZTUNkQjcxUTNIOWZFQXlmbkEzTnlqLTJqdVVSY2hfOHhHb05JbjFmd1NDSzhTNGtBeTRhVWk0ZUpIRld2MmRlcDkyYTh2YjY3RTJSMGMzU3JZNW9nOUxDNkpBUmVFV25ydVl5VUQ1dw?oc=5"
+     "title": "이란군 \"호르무즈서 LNG선·유조선 기뢰 충돌 화재\"",
+     "source": "MBC 뉴스",
+     "when": "11/26 02:01",
+     "ts": "2026-11-26T02:01+09:00",
+     "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9hdXJKTVQ3SHVLOHJVcjlyNjFmRFptVzd0TnFxOXlOQ2hXSWNXWjcwRXhQRG9rWUNWcXpXZDNpQUhaYWJ0QU9vcXotVVNVUGhfNFl0YUc0bDl5SW4wVHF6enpSRnVQQUJ0OUxTMHJ6UVpGdkFB0gF0QVVfeXFMTm90VXNNcUN2YjFEWkVEZWFIZHFaNXo5Y3dDS0lwZzlYUnlNdU16aDgzcnNHNE5jREpzaWdYSWNLR0wtaElDQkhrN3BzenVRRnpJN0R3UFoyaGpDTnYwZHN2bHc1OG52dDBOSHJxbGtXLU85ZVc?oc=5"
     },
     {
-     "title": "“문 열자 똥물이…” 폭우 감당 못한 ‘첨단 도시’ 샌프란시스코의 굴욕",
-     "source": "한겨레",
-     "when": "11/25 10:10",
-     "ts": "2026-11-25T10:10+09:00",
-     "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTE8zSlVuNXE2eFZ4OV8xZlNsU1NvX2V3dzR1Ujk2bC1iZ1NINWUteE9aRkFsSWh0ZXBTVkdlNmpIU0Rsd3lvNTlaZHlGakFjSjlma1VsdkFnb0ZpY25hLWxPdTdlbUt3S2xYMjlidjhyYw?oc=5"
+     "title": "페르난데스 추기경: “『일기』는 프란치스코 교황의 마음과 영성을 드러낸다”",
+     "source": "Vatican News",
+     "when": "11/26 01:22",
+     "ts": "2026-11-26T01:22+09:00",
+     "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4zTjIyZ2xic2x1cVB6enAtR2tBTHdpcFpoLUZvRVFvVmRhV1Z2bk5MSk4wR0c4ZnlHREx5N1RnYUFBSDV5QzJyWFpVUkNsQ0RTNy0wRVdaMHB5WWEwd3FaYUkyRHZSc2FXeE1NdEhGbV9TY0p4ZjluMDFpSVB2bFU?oc=5"
     },
     {
-     "title": "현금차 탈취 실패하자 대형마트 침입 인질극 “27억 달라”··· 콜롬비아 무장강도들 경찰 특공대와 대치 중",
-     "source": "경향신문",
-     "when": "11/25 08:52",
-     "ts": "2026-11-25T08:52+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1FOWxjSXdqZ0tjd2oxR3Y0OC03dTJ5b21YcWhHQ3dZcXFFMEhiSUJ2SXNramFOVnFxZ3VSSlNoMTZPa250MktzN0QxeFBKRzNEV0ZjU21GOUZNZ9IBX0FVX3lxTE94ekZHX0R3U0kwQnI1UmhRQXRIUi03NFlxNzV5WU9NTHp3Ynl5UkZhOXljTWx4R1JVMlVwUjFiYVRQWFBadlBMMEQ2eWU2S2s1cm5kQ0gwUVFYa3lhSG5V?oc=5"
+     "title": "北, 김여정 담화 하루만에 스위스 외교사무소 전격폐쇄(종합)",
+     "source": "연합뉴스",
+     "when": "11/26 00:49",
+     "ts": "2026-11-26T00:49+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBYSTFKS3ExVDgzWk9YRmdickduM1liXzZwS2lfWU93eGxkbHVISGY2aHVwb2U4ZU5ZUkktMDNDMHJWU0tWV1RCeVZRMV9KcnJVRV9nU1ZTdVozeXfSAWBBVV95cUxPR1FKOEVRTEVRSzdKd0N4Rmc1WnpreW9DWXRnQXA4YUtWU3BPaFZyR0xfS1VsZ2NuQ1lQdVd2ZkF3UnhqZmtwWWFyM1NucDdOS0k1TFJpRk95R0pFd1hYOUo?oc=5"
     },
     {
-     "title": "반도체 호황에 전국민 보너스…조건 없이 '1인당 80만원' 지급",
-     "source": "한국경제",
-     "when": "11/25 08:27",
-     "ts": "2026-11-25T08:27+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9NRkM5cHdTS1pyV3RlbmpneHlkVDk4aEhWYThhX3dYMGxiY3YzV2VBaGNXSG5mNzdxRy03dnAwamxDVFA4bGY2QmpJb1Z3aGtzZFQ2R25lMjJyQQ?oc=5"
+     "title": "우크라軍 \"국경서 700㎞ 떨어진 러 공군기지 타격… MiG-31 전투기 등 5대에 손상\"",
+     "source": "뉴스핌",
+     "when": "11/26 00:48",
+     "ts": "2026-11-26T00:48+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5hYU4wZnJYaGJCdlhZdlk1ZkNrUW5LU3dDNUN6Z1RkVE8zaGtqYkRGaXV0SHJTLXNXdGZQWnlrZmtVRkRvNDcwVThXRkVrZFh1SnctaE5taHNqZjhP?oc=5"
     },
     {
-     "title": "“먹을 게 없다“…페루 바다사자 1만마리 ’떼죽음’ 이유는",
-     "source": "연합뉴스TV",
-     "when": "11/25 08:00",
-     "ts": "2026-11-25T08:00+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFB1SVFjY3IwcDdFSi1PNlVBb3l0VlJLY3l6U2tFTTNRZElnNzJPdmI2WXJlX2pOS1h1Z05SOTg1bXJTa3Y2QzlTdE9Uc3JxaFN5aDIwU1lTQnd6QXQ2a3FJTHVyS3dLUms?oc=5"
+     "title": "‘다카이치 홀대’ 논란 中공항 트랩 단차…“높낮이 기능 고장 탓인 듯”",
+     "source": "동아일보",
+     "when": "11/25 23:58",
+     "ts": "2026-11-25T23:58+09:00",
+     "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBkMmc2UWk1ZkNqcTUtbkVLaXZ4R3dOcERmSGFVSnlKRXpJUWNIRXNhQmxadWtQTFRaV0w4LVUwM3hXenNhekU1eElXMjJKZjVlRnZMbVd5ZGQza2YyckhNeDNUck1TX0ZMSUh4SDNwZlc0ckXSAWZBVV95cUxNbFFiVlRxalBCWFhINHN5ZHN0SHRMdzRuUVFkVTVOdk54Yk1JYzBENUdNUzlrTnhBYnJXbGRCMkxVbHVpRGJwV1pYQnlFWU1uZml5OHJlTnFFM0JwQkFZendwTy1PUVE?oc=5"
     },
     {
-     "title": "21세기 맞나…히잡 벗고 노래했다고 '태형 74대'",
-     "source": "한국경제",
-     "when": "11/25 07:57",
-     "ts": "2026-11-25T07:57+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE52YVdJWGxPMDN0YVZOMWlQdVJaVEFlZklVUl93RDhaR0ZyYThVeVhBR25ha1VMcUFUc2lZWERIYU50WjJyWTJkbUxOWkRTdVRKWFcyM3AtdzN5QQ?oc=5"
+     "title": "콜롬비아 마트 무장 인질극, 권총 찬 대통령이 진압 지휘",
+     "source": "조선일보",
+     "when": "11/25 22:26",
+     "ts": "2026-11-25T22:26+09:00",
+     "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSjFub0RUTlBYYkRoSmhmcEgzMEowel82bTRpVFRyZ3Z6QzdFYS1OUUprbWFLWHp2dTdLN1dqYko5WHdfNmpwQ3p4SDZNbXhuUUZ2VzQ4QVloWnhQekpfRlBUeVZJNUxjVjhfdkMxTWc5SGdFcXJtdi13dHlINlN1b2d0WFptVS1XVFlMSjlRUlNDMFAtbktzdHpVUEI?oc=5"
     }
    ]
   },
   "nation": {
    "label": "전국",
    "items": [
+    {
+     "title": "윤석열 전 대통령, ‘위증 혐의’ 대법원 오늘 선고",
+     "source": "KBS 뉴스",
+     "when": "11/26 01:01",
+     "ts": "2026-11-26T01:01+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YSVBaR0Fpczc0UnZmX2Ztc3haVVlsdndaU1doOVE0LWRhQzNsRXpIMkxzNUhCaVUzVmNWcWtYaE1QbE5sVzZsLTRlR2Q0SlIxQ1VIUDAzUlNzSEU?oc=5"
+    },
     {
      "title": "미 USTR, 한국 등 14개 경제주체에 과잉생산 관세…’15% 상한’ 유지",
      "source": "연합뉴스TV",
@@ -100,18 +107,11 @@
      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5YV0d5RXdPdzlIM0k0QmtUR3doMlRIYkZCanQza3dKcHh0am9BQ0NkWGNUdTZxQXp3OXQyLXlVSkhSY1lkVzg5OFJxR1lmSnZpLWViX1oxalBSX0tJbzRjcXZsdU12R00?oc=5"
     },
     {
-     "title": "배석자 오세훈, 국무회의 발언 어디까지 가능?…‘국무에 관하여’만",
+     "title": "조희대 고향 간 장동혁 “이재명은 대한민국 무너뜨리는 독재자”",
      "source": "한겨레",
      "when": "11/25 22:23",
      "ts": "2026-11-25T22:23+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBESndvX2dwR3c0SE9sLUp0ZXFBb3dkU2dmVjE3eHlUTWRMRmdWMlJiQkdCekFfd2ZfYVk2Q1F0YTRQR0ZnODNodzBWRjMzQ1NPUzhTZ25BNFdERlRlRHZ2blVKOA?oc=5"
-    },
-    {
-     "title": "전·현직에 위원장까지 폭로전 가세…국힘 윤리위發 내홍 심화(종합2보)",
-     "source": "연합뉴스",
-     "when": "11/25 22:18",
-     "ts": "2026-11-25T22:18+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBKVVFDQkR3UDFGTmQ4YUFwbnE1bVRBMTZiR1RnWlZxc1FRMmhsQ3U1Nl9zT1BuUGFWbVVONTNlaEtpNVJPdk5YLVI1WHV3aE5ZSFBia1NHVVZOTU3SAWBBVV95cUxON0s3a0hrVjRDeFc0YVRjdU1MbXFpRkI2TWVTRkFsZ2pFenBtZkZtOW16T01XcEZXWTYzVlQwSm54a1hJTlo3Ui1kbGUwTEpwWUhtaTNnRWE5ZXluWV9GVWk?oc=5"
+     "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9ZWk93bnVLYlk1TXBuaXhOOWd3Vll3MnVFYkJENEwzaWxBWC01WnZmajMxa0RYNVpSdmhlN3FRVDBjeFF0eWF5WWRFMjlfUVFTLU42Z3ZjejBJNmdpdG1FYzlqNjhTd3RFcTZKU3MyNVVWU04y?oc=5"
     },
     {
      "title": "위성락 안보실장, 오만 외교장관 접견…중동 정세 의견 교환",
@@ -142,13 +142,6 @@
      "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE13MG9ERTFDcUdDTUQ3N1dBVmJXQ1lVZUVPbEhZNXBXLUVvbzI2eVR1SXlqd0Q0SjZ2aWV4ajd2bnN5X1VSVFF0cmZ3eHRQT1RGc3UzeA?oc=5"
     },
     {
-     "title": "국힘 “강금실 ‘친중·반미’” 지명 철회 촉구…민주 “낡은 색깔론”",
-     "source": "한겨레",
-     "when": "11/25 20:04",
-     "ts": "2026-11-25T20:04+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE90bTFjX1p2c0xVaC1QUzBsUFJnT1lvelIzdzNPVHhYY1Uxb1RFZEhTNjUycmxMU2JpVllTa2hGOGdTNlZNS2R3M0V5QjFobzEyZkF4WWJJcE9xdUY3YzU3TVF0amJVVWFOTmc?oc=5"
-    },
-    {
      "title": "[단독] \"무선이어폰 껴야 마음 편해\"…‘신의 직장’ 문턱 넘으려 별별 부정행위",
      "source": "JTBC",
      "when": "11/25 19:51",
@@ -156,11 +149,18 @@
      "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBjVkc2TVpLX08tYzJJWU5xeWxncjAwNmZqek1jdE44Uk5YSFNXUnBSSUtaaEdaRktUM082TFhGUWp5c0dDZXY3a1VoMEZiZDAtZlpSUA?oc=5"
     },
     {
-     "title": "[단독] \"2심 판결문 곳곳 오기·오타…면밀히 살핀 거 맞나\"",
-     "source": "JTBC",
-     "when": "11/25 18:59",
-     "ts": "2026-11-25T18:59+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1zaExFWDlxTkI2MXo5TWVFekFBYy1yMUFTcHdNVFE2elhNS05yR2hnWmFSaWRTX3RDV3dpMzFmclM1dG5DT1p1VG9HOTlCWDJtdV9zVQ?oc=5"
+     "title": "국힘, 경찰에 ‘조작징계 의혹 제기’ 황경성 윤리위원 고발",
+     "source": "조선일보",
+     "when": "11/25 19:32",
+     "ts": "2026-11-25T19:32+09:00",
+     "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQejJmWi1tWEhQOU1KLUdxU3AzMFZvVEhVeldYTkZUemdZOGx4Y1hFdjUtRk1VMEgtTEVRYmJuVlJXMWRwVVRPbWNnM2xGTnI2Y01Ka3MxWVNXYlRNbHZZWEJGMGE0XzV1S0ctOTB6ejEzaHU2M0VxYXJ0cUVWemk1Yjl4VDBvUlYxMFdTd0lxSEc?oc=5"
+    },
+    {
+     "title": "고속도로 곡선 구간서 6대 연쇄 추돌…6명 사상",
+     "source": "KBS 뉴스",
+     "when": "11/25 19:12",
+     "ts": "2026-11-25T19:12+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1qZnFGbm1xTG5Kc3R3VVZCVHdnTWloUWxPcDBsXzBCRm05bE1Qa29kNFR3NVdzV3VuLThNWkRRaWpKd0M3Z3ZfRXBETE94cVRZZFpGVUxlLU9sVmJDLVhENW84UWltUQ?oc=5"
     }
    ]
   },
@@ -168,11 +168,32 @@
    "label": "강원",
    "items": [
     {
+     "title": "윤순옥 경기도의원, 양평 지평~원주 전철 연장에 힘 싣는다 …경기도 협력 강조",
+     "source": "경기시사투데이",
+     "when": "11/26 06:26",
+     "ts": "2026-11-26T06:26+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE8yMnN5cDBLcWFvRUNvTVlDa2ZqbGttN1o4QmdVQmZoZXVKcjJPQm56Tkp6WjVLTEozUFN1aWtmZDJ3RDZBS2ZMTzFIUEcyZ21BbWkwYjVoQ3RJRUpLVDBhS05OODFDQkNI?oc=5"
+    },
+    {
+     "title": "최안나 강릉의료원장 “사법 리스크 해소 없인 지역 의사 못 구한다”",
+     "source": "의약뉴스",
+     "when": "11/26 05:58",
+     "ts": "2026-11-26T05:58+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9CcXl5SHl4eUx5UE9aRVFKdWs4a1BrR3RuNkdFVXVPb3k1ek9XaWtQVm85OHNvcWRaYm9CRnRyVUJkcTVfUmo3Uk9yMWJhODhpNDVCRXpHV0g1Z2NjbktrNlFNaURkc2c?oc=5"
+    },
+    {
      "title": "탁 트인 소양강 조망… 춘천 역세권 개발 대표 수혜 단지",
      "source": "조선일보",
      "when": "11/26 01:43",
      "ts": "2026-11-26T01:43+09:00",
      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaVNjVEtrRVA0RmwtTXVTYlNsZzJydTd3ZFNmNE5YUWhKSEJncEZBWUJ2LUVHUVhJaTNBcExGak1GRWZZcElQMkthdDdEM0hzZTZIcXFGZEIxdmVIeDU3ZGdacF9maXhqdm5mbXRlWjhQNWNpTUtXUHZTS09SRUNqMTdZS2I3d2xsQldMRmx3?oc=5"
+    },
+    {
+     "title": "이금선 춘천범죄피해자지원센터 이사장 동곡상 상금 2,000만원 전액 쾌척",
+     "source": "강원일보",
+     "when": "11/26 00:20",
+     "ts": "2026-11-26T00:20+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE16a080ZUI4TnZjaGgzdzV0Y09HNnpYN1BpLTR0RC1Qa01JazNUcm8zVEVWeWJuOXhjaDRFWkdxQy0zOGluMXJjRWVKUnhTUVFQdDhObE1VZlBIdWs?oc=5"
     },
     {
      "title": "춘천미래동행재단 신용준 이사장 연임",
@@ -187,6 +208,13 @@
      "when": "11/26 00:08",
      "ts": "2026-11-26T00:08+09:00",
      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5WemVHdjRXbWp4aVNMeEtyZDJncVNwMFZIQTZBRzRieGVfaFBCcGpmakRqdWNjUUo3dFE1U21IdVZSY2Y1LThHdU55Nm5WRlN0SFFFVmhOZ3BtSms?oc=5"
+    },
+    {
+     "title": "강릉~제진 철도 핵심 공사 ‘강릉터널’ 굴착 임박, 17㎞ 최장터널 건설 본격화",
+     "source": "강원일보",
+     "when": "11/26 00:05",
+     "ts": "2026-11-26T00:05+09:00",
+     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE02c001cVRfa3M3RlFhcWFfekt0OVNTajQ0VmNtUnNPTWxXSlpBVXI1YkRiZElqbDVLVEs3R0J5aGx1ZS1KbTBZb2VRUElBeHc3ejVGZ3NITkxMeFE?oc=5"
     },
     {
      "title": "원주생활문화축제 ‘우리들 놀:터’ 12월 5~6일 개최",
@@ -208,34 +236,6 @@
      "when": "11/26 00:05",
      "ts": "2026-11-26T00:05+09:00",
      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5PTzlCYmRNWkJOejdTT2c3a1F1dlp3a09WVmg1X0ItRnRzcGRLTzI5akVZTExmdzlxSlhnQ2tkVUs0cnM5VDNpM0lTSmNGS2pzc0l5ZEtVWjhtblU?oc=5"
-    },
-    {
-     "title": "삼성·LG·현대차 협업 논의⋯강원 ‘의료·바이오’ 투톱 원주· 춘천 ‘피지컬AI’ 전진기지로",
-     "source": "강원일보",
-     "when": "11/26 00:02",
-     "ts": "2026-11-26T00:02+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5aN1NzOFFDajQwcnE3dS1NX2lMWlpiRTNtWUhwdkVqNlNTWDd0RnprVy16bXFXT0VNczhtUldGaUJTaTNZSzd4QWNmRV9EYnYyVzhtYUJVdXFVb1U?oc=5"
-    },
-    {
-     "title": "강원 ‘보수 우세’ 변화…강릉 보선 “국힘 당선” 44%",
-     "source": "강원도민일보",
-     "when": "11/26 00:02",
-     "ts": "2026-11-26T00:02+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9kbVFCTXhVdmFSU3IzQjFtY1VhdEE2QmZvbC0za1hINjlmLTAwQlpETlNOUTAzWERxcU1OX3MzdFZvS1JaV2xUN0Q3Y0RBQ1ZhSGlrWklYRUZnQzlvbkRyVTU5bnBlMWc?oc=5"
-    },
-    {
-     "title": "[단독] ‘1조원’ 투입, 국책프로젝트 ‘AX대전환’ ⋯강원 예타면제 7부 능선 넘었다",
-     "source": "강원일보",
-     "when": "11/26 00:02",
-     "ts": "2026-11-26T00:02+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA0LURJdzZ5V2F6N0p1blB4T1RuT2VyWThIQUFrcGEzSzhJV0RGaV92SE54ejZtSkpfT3V6MTMwQldJUVpvR1RrRlQ1SEg4cUl4SUlLVnpKX050Nm8?oc=5"
-    },
-    {
-     "title": "하늘·바닷길로 강원도 세계화",
-     "source": "강원도민일보",
-     "when": "11/26 00:02",
-     "ts": "2026-11-26T00:02+09:00",
-     "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9aVmlJNHlUVzgwY2djeUFEWWxHMC1IXzg3bThRZWZrOEpGMDhvVV9QeUl2UEFhR3NPLVN2WXhNUE9iUndLdGxCZVpDQ3A1SWM0Q0otU3FBUlNkNnRvX1BPWUpvZVhxYTR0?oc=5"
     }
    ]
   }
