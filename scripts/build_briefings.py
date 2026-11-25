@@ -316,7 +316,7 @@ def main(argv):
         base["policy"].sort(key=lambda c: c.get("date", ""), reverse=True)
         note = "policy +%d" % len(cards)
 
-    base["updated"] = new.get("updated") or base.get("updated", "")
+    base["updated"] = (new.get("updated") if isinstance(new, dict) else None) or base.get("updated", "")
     _write(path, base)
     allitems = sum(len(d.get("items", [])) for d in base["days"])
     print("updated", path, note, "| days", len(base["days"]), "items", allitems,
