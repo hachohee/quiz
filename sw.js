@@ -85,8 +85,11 @@
    v49: 🐛 강의 퀴즈에서 크리티컬(3연속 정답)로 하트가 2개씩 차면, 문제를 다 풀기 전에 BTS가 포획돼
         '완료'로 기록되지 않던 문제 수정 — 강의 퀴즈는 이제 정답 1개당 하트 1개(문제 수 = 하트 수).
         한국사 1강 12문제·3강 9문제처럼 긴 강의 퀴즈도 끝까지 풀립니다.
-        (index.html ?v=49 · APP_VER v49 · hotcho_modes.js·css?v=49) */
-const CACHE = 'toeic-bts-v49';
+        (index.html ?v=49 · APP_VER v49 · hotcho_modes.js·css?v=49)
+   v50: 📚 Day 14(2026-11-25) 토익 단어 7개·3초 문법 1문제·상식 '피그말리온 효과' 반영
+        (+ Day 13(11/24) 미반영분 단어 8개·상식 '아킬레스건' 함께 채움).
+        (index.html ?v=50 · APP_VER v50 · hotcho_modes.js·css?v=50) */
+const CACHE = 'toeic-bts-v50';
 const SHELL = [
   './',
   './index.html',

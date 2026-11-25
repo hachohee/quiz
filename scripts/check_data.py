@@ -99,6 +99,19 @@ for target in ["compensate", "guarantee", "estimate", "alternative",
         errors.append(f"Day 12에 '{target}' 없음")
 print("Day 12:", len(d12), "개")
 
+# 2026-11-24(Day 13)·11-25(Day 14) 회차 발송분 — 앱에 빠지지 않고 들어갔는지
+for day, targets in (
+    (13, ["dedicate", "revenue", "obtain", "prohibit",
+          "substantial", "capable", "acknowledge", "briefly"]),
+    (14, ["collaborate", "authorize", "inventory", "verify",
+          "sufficient", "strategy", "urgent", "specifically"]),
+):
+    names = [w["w"] for w in words if w.get("d") == day]
+    for target in targets:
+        if target not in names:
+            errors.append(f"Day {day}에 '{target}' 없음")
+    print(f"Day {day}:", len(names), "개")
+
 # --- GRAMMAR 무결성 ---
 for i, g in enumerate(grammar):
     opts = list(g["opts"])

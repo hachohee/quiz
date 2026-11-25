@@ -960,7 +960,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=49">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=50">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -1575,11 +1575,20 @@ var WORDS = [
 {d:13,w:"target",p:"타깃",pos:"동사",m:"겨냥하다, 목표로 하다",s:"타깃(target)은 과녁 — 손님을 '겨냥하다'.",c:"target young customers (젊은 고객을 겨냥하다)"},
 {d:13,w:"market",p:"마킷",pos:"동사",m:"판매하다, 마케팅하다",s:"마켓(market)에 내놓는 '판매'.",c:"market a new line (신제품군을 판매하다)"},
 {d:13,w:"pitch",p:"피치",pos:"명사",m:"영업 제안, 세일즈 피치",s:"피치(pitch)를 던지듯 내미는 '영업 제안'.",c:"make a sales pitch (영업 제안을 하다)"},
+/* --- 매일 18:00 발송분 (Day 13 · 2026-11-24) — 11/24 회차 반영이 빠져 있어 뒤늦게 채움 --- */
+{d:13,w:"dedicate",p:"데디케이트",pos:"동사",m:"바치다, 전념하다",s:"데디(아빠)가 케이크(cake) 만들기에 온 힘을 '바치다'!",c:"dedicate time to (~에 시간을 쏟다)"},
+{d:13,w:"revenue",p:"레버뉴",pos:"명사",m:"수익, 매출",s:"레버(lever) 당기니 새(new) 돈이 쏟아져 '수익'이 쑥!",c:"annual revenue (연간 매출)"},
+{d:13,w:"obtain",p:"옵테인",pos:"동사",m:"얻다, 구하다",s:"원하던 티켓을 '업(옵)테인' — 손에 꽉 '얻다'!",c:"obtain approval (승인을 얻다)"},
+{d:13,w:"prohibit",p:"프로히빗",pos:"동사",m:"금지하다",s:"프로(pro)가 '휘빗' 호루라기 불며 딱 '금지하다'!",c:"strictly prohibit (엄격히 금지하다)"},
+{d:13,w:"substantial",p:"서브스탠셜",pos:"형용사",m:"상당한, 실질적인",s:"서브웨이 샌드위치가 스탠다드보다 '상당한' 크기!",c:"substantial increase (상당한 증가)"},
+{d:13,w:"capable",p:"케이퍼블",pos:"형용사",m:"유능한, ~할 수 있는",s:"케이프(망토) 두른 히어로처럼 뭐든 해내는 '유능한'!",c:"capable of (~할 수 있는)"},
+{d:13,w:"acknowledge",p:"액날리지",pos:"동사",m:"인정하다, 확인하다",s:"엑스표 말고 '알리지(날리지)' — 사실 맞다고 '인정하다'!",c:"acknowledge receipt (수령을 확인하다)"},
+{d:13,w:"briefly",p:"브리플리",pos:"부사",m:"간단히, 잠시",s:"브리핑(briefing)할 땐 요점만 '간단히'!",c:"speak briefly (짧게 말하다)"},
 {d:14,w:"shipment",p:"십먼트",pos:"명사",m:"배송 (물품)",s:"십(ship·배)에 실어 보내는 '배송품'.",c:"track the shipment (배송을 추적하다)"},
 {d:14,w:"freight",p:"프레이트",pos:"명사",m:"화물, 운송료",s:"프레이트(freight)는 배에 실린 무거운 '화물'.",c:"freight charges (운송료)"},
 {d:14,w:"cargo",p:"카고",pos:"명사",m:"화물 (적재물)",s:"카(차)에 고(가득) 실은 '화물'.",c:"a cargo ship (화물선)"},
 {d:14,w:"warehouse",p:"웨어하우스",pos:"명사",m:"창고",s:"웨어(물건) 하우스(집) = '창고'.",c:"the central warehouse (중앙 창고)"},
-{d:14,w:"inventory",p:"인벤토리",pos:"명사",m:"재고 (목록)",s:"인(in)벤토리(목록) — 안에 있는 물건 목록, '재고'.",c:"take inventory (재고 조사하다)"},
+{d:14,w:"inventory",p:"인벤토리",pos:"명사",m:"재고, 목록",s:"게임 가방 '인벤토리'(inventory)를 열어서 남은 물건 '재고'를 확인한다!",c:"check inventory (재고를 확인하다)"},
 {d:14,w:"stock",p:"스톡",pos:"명사",m:"재고, 주식",s:"스톡(stock)은 쌓아 둔 것 — 물건이면 '재고'.",c:"out of stock (재고 없음)"},
 {d:14,w:"supplier",p:"서플라이어",pos:"명사",m:"공급업체",s:"서플라이(supply·공급)하는 사람, '공급업체'.",c:"a reliable supplier (믿을 만한 공급업체)"},
 {d:14,w:"vendor",p:"벤더",pos:"명사",m:"판매업체, 납품업자",s:"벤드(vend·팔아 넘기는) 사람, '납품업자'.",c:"an approved vendor (승인된 납품업체)"},
@@ -1607,6 +1616,14 @@ var WORDS = [
 {d:14,w:"backlog",p:"백로그",pos:"명사",m:"밀린 일, 미처리 주문",s:"백(뒤에) 로그(쌓인 기록) — 밀린 '적체'.",c:"clear the backlog (밀린 주문을 처리하다)"},
 {d:14,w:"turnover",p:"턴오버",pos:"명사",m:"재고 회전, 이직률",s:"턴(돌아) 오버(넘어가는) — 사람이면 '이직률', 물건이면 '회전율'.",c:"a high turnover rate (높은 이직률)"},
 {d:14,w:"consignment",p:"컨사인먼트",pos:"명사",m:"위탁 (화물)",s:"컨사인(맡기는) 물건 = '위탁 화물'.",c:"a consignment of goods (위탁 화물)"},
+/* --- 매일 18:00 발송분 (Day 14 · 2026-11-25) — 회차에서 낸 8개 중 inventory는 위 물류 단어와 같은 날이라 썰만 교체 --- */
+{d:14,w:"collaborate",p:"컬래버레이트",pos:"동사",m:"협력하다, 공동 작업하다",s:"'콜라'를 함께 마시며 '보레이트'(collaborate) 머리를 맞대고 '협력하다'!",c:"collaborate with a team (팀과 협력하다)"},
+{d:14,w:"authorize",p:"오서라이즈",pos:"동사",m:"승인하다, 권한을 주다",s:"책의 저자(author)에게 출판 도장을 쾅 찍어 '승인하다'!",c:"authorize a payment (결제를 승인하다)"},
+{d:14,w:"verify",p:"베리파이",pos:"동사",m:"확인하다, 검증하다",s:"중요한 사실이 맞는지 '베리(매우) 파이'처럼 꼼꼼히 파헤쳐 '검증하다'!",c:"verify information (정보를 확인하다)"},
+{d:14,w:"sufficient",p:"서피션트",pos:"형용사",m:"충분한",s:"'서피(서핑)' 탈 파도가 부족하지 않고 딱 '충분한' 상태!",c:"sufficient time (충분한 시간)"},
+{d:14,w:"strategy",p:"스트래터지",pos:"명사",m:"전략",s:"'스트레스'를 날려버릴 치밀한 한 방, 승리 '전략'!",c:"marketing strategy (마케팅 전략)"},
+{d:14,w:"urgent",p:"어전트",pos:"형용사",m:"긴급한",s:"지금 당장 처리해야 해서 숨이 턱 막히게 '긴급한'!",c:"urgent request (긴급 요청)"},
+{d:14,w:"specifically",p:"스페시피컬리",pos:"부사",m:"구체적으로, 명확히",s:"'스페셜(특별)'하게 콕 집어서 '구체적으로'!",c:"state specifically (구체적으로 밝히다)"},
 {d:15,w:"software",p:"소프트웨어",pos:"명사",m:"소프트웨어",s:"부드러운(soft) 옷(ware)처럼 유연하게 움직이는 프로그램.",c:"install the software (소프트웨어를 설치하다)"},
 {d:15,w:"hardware",p:"하드웨어",pos:"명사",m:"하드웨어",s:"딱딱한(hard) 장비(ware) = '하드웨어'.",c:"hardware upgrades (하드웨어 업그레이드)"},
 {d:15,w:"network",p:"네트워크",pos:"명사",m:"네트워크, 연결망",s:"네트(net·그물) 워크(일) — 그물처럼 이어진 '연결망'.",c:"a secure network (보안 네트워크)"},
@@ -1911,7 +1928,9 @@ var GRAMMAR = [
 {tag:"a / the + [ ] + 명사",q:"Our company offers a ___ schedule for working parents.",opts:["flexible","flexibly","flexibility","flex"],a:0,
  tip:"a 다음, schedule(명사) 앞 = 명사를 꾸며 주는 자리! -ly는 부사, -ity는 명사, flex는 동사라 안 돼요. 정답은 <b>flexible</b>!"},
 {tag:"be + [ ] + p.p. = -ly 부사",q:"Please make sure the equipment is ___ installed before tomorrow.",opts:["proper","properly","property","appropriateness"],a:1,
- tip:"is와 installed(과거분사) 사이 = 동사를 꾸며 주는 자리! 형용사 proper·명사 property·명사 appropriateness는 자리가 안 맞아요. 정답은 <b>properly</b>!"}
+ tip:"is와 installed(과거분사) 사이 = 동사를 꾸며 주는 자리! 형용사 proper·명사 property·명사 appropriateness는 자리가 안 맞아요. 정답은 <b>properly</b>!"},
+{tag:"a / the + [ ] + 명사",q:"The marketing team will review a ___ strategy before the launch.",opts:["comprehensive","comprehensively","comprehension","comprehend"],a:0,
+ tip:"a와 strategy(명사) 사이 빈칸은 명사를 꾸며 주는 형용사 자리! -ive로 끝나는 <b>comprehensive</b>(포괄적인)가 정답. -ly는 부사, -ion은 명사, comprehend는 동사라 자리가 안 맞아요."}
 ];
 
 /* ============================================================
@@ -2858,7 +2877,13 @@ var SENSE = [
 /* ---------- 추가: '🧠 오늘의 상식 한 조각' (매일 1개씩, 문제 배열 뒤에 덧붙임 — 기존 문제 번호 유지) ---------- */
 {st:3,term:"그린워싱",k:"d2t",line:"실제로는 친환경이 아니면서 겉만 초록색으로 꾸며 친환경인 척 홍보하는 눈속임.",
  q:"실제로는 친환경이 아니면서 친환경인 척 포장해 홍보하는 눈속임을 무엇이라 할까요?",opts:["그린워싱(Greenwashing)","그린뉴딜","탄소중립","업사이클링"],a:0,
- tip:"green(초록) + whitewashing(겉만 칠하기) = '그린워싱'. 기사에 '친환경 마케팅'이 나오면 이 눈속임부터 의심! (11/23 상식 한 조각)"}
+ tip:"green(초록) + whitewashing(겉만 칠하기) = '그린워싱'. 기사에 '친환경 마케팅'이 나오면 이 눈속임부터 의심! (11/23 상식 한 조각)"},
+{st:3,term:"아킬레스건",k:"d2t",line:"겉으로는 완벽해 보이는 사람이나 계획에 숨어 있는 유일하고 치명적인 약점.",
+ q:"완벽해 보이는 사람이나 계획의 유일하고 치명적인 약점을 무엇에 비유할까요?",opts:["아킬레스건(Achilles' heel)","판도라의 상자","트로이의 목마","스톡홀름 증후군"],a:0,
+ tip:"불사신 영웅 아킬레우스가 불사신의 물에 담길 때 엄마가 발뒤꿈치만 잡고 있어서, 거기만 유일한 약점이 됐다는 신화에서 나왔어요. 기사에서 '정책의 아킬레스건은 예산'처럼 결정적 빈틈을 짚을 때 단골! (11/24 상식 한 조각)"},
+{st:3,term:"피그말리온 효과",k:"d2t",line:"누군가의 믿음과 기대가 상대를 실제로 그렇게 성장시키는 현상. 그리스 신화의 조각가 피그말리온에서 이름을 땄다.",
+ q:"사람들의 믿음과 기대가 그 대상의 실제 성장을 이끌어 내는 현상을 무엇이라고 할까요?",opts:["피그말리온 효과(Pygmalion Effect)","플라시보 효과","스톡홀름 증후군","선택적 지각"],a:0,
+ tip:"조각가 피그말리온이 자기가 만든 조각상을 진심으로 사랑하고 믿었더니 진짜 사람이 됐다는 신화에서 나왔어요. 아이·후배에게 '잘할 거야'를 콕 집어 말해 주는 게 이 효과의 시작! (11/25 상식 한 조각)"}
 ];
 
 /* ============================================================
@@ -5235,7 +5260,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v49";
+var APP_VER="v50";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5873,7 +5898,7 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=49"></script>
+<script src="hotcho_modes.js?v=50"></script>
 <script>
 /* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
    초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."

@@ -193,7 +193,7 @@
   재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
 - **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
   Mixed Content로 재생이 막히지 않게 했습니다.
-- **서비스 워커**: `toeic-bts-v23` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
+- **서비스 워커**: `toeic-bts-v50` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
   `cache: no-store` 까지 써서, 고친 코드·데이터가 GitHub Pages 의 10분 HTTP 캐시에 가로막히지 않고 바로 내려옵니다.
   앱 화면(라디오 하단 문구·대본 시트 헤더)에 `v23` 처럼 버전이 찍혀서 폰이 새 코드를 받았는지 눈으로 확인할 수 있습니다.
 
@@ -304,6 +304,22 @@
 - **다시 재는 법**: `python3 scripts/scan_ads.py --audio ep.mp3 --key "cnn5things::<guid>" [--write]`
   (오디오를 받아 적어 문장별 오차의 '계단'을 찾아 `adBreaks` 를 냅니다). `align_transcripts.py --write` 도 정합이 끝나면 같은 값을 자동으로 다시 계산해 넣습니다.
   `check_data.py` 는 `adBreaks` 의 형식·순서·범위(`at` ≤ `audioDur`, `add` −2~180초)까지 검사합니다.
+
+## 📚 매일 18:00 자동 반영 — Day 14 (2026-11-25) · Day 13 (2026-11-24) 보충
+
+18:00 '저녁 토익 10분' 회차에서 낸 내용을 앱 데이터에 넣었습니다. 11/24(Day 13) 회차는 앱 반영이 빠져 있어
+오늘 함께 채웠습니다.
+
+- **📜 도파민 단어 → Day 14(📦 물류·생산)**: 오늘 새 단어 8개 중 이미 있던 **inventory**는 그대로 두고 3초 암기 썰만
+  오늘 회차 것으로 바꿨습니다. **collaborate · authorize · verify · sufficient · strategy · urgent · specifically**
+  7개를 이어 붙였습니다(Day 14 = 39단어).
+- **📜 도파민 단어 → Day 13(📣 마케팅·영업) 보충**: 11/24 회차의 **dedicate · revenue · obtain · prohibit ·
+  substantial · capable · acknowledge · briefly** 8개를 이어 붙였습니다(Day 13 = 44단어).
+- **⚡ 3초 문법**: 1문제 추가 (77개). "The marketing team will review a ___ strategy before the launch."
+  → a와 strategy(명사) 사이는 꾸며 주는 자리, 정답 comprehensive.
+- **🌍 상식**: **피그말리온 효과(11/25)** 와 **아킬레스건(11/24)** 을 3단계 시사상식에 문항으로 추가 (121개).
+- 현재 규모: 단어 **404**(424항목) · 문법 **77** · 해석 47 · LC 76 · 상식 **121**
+- `scripts/check_data.py` 가 Day 13·14 발송분 단어가 실제로 들어갔는지도 검사합니다.
 
 ## 📚 매일 18:00 자동 반영 — Day 12 (2026-11-23)
 
