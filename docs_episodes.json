@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-25T06:02:30+09:00",
+ "updated_at": "2026-11-26T06:01:30+09:00",
  "source": "YouTube channel RSS (official channels)",
  "per_program": 8,
  "failed": [],
@@ -163,15 +163,367 @@
  ],
  "episodes": [
   {
-   "v": "iN397Y3xIU0",
+   "v": "XC-EIz7eUaU",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "계절을 채우는 풍경, 맛, 사람들의 '찬란한 가을빛'?!ㅣ찬란하다, 가을빛ㅣ한국기행ㅣTV로 보는 #골라듄다큐",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T02:00:33+09:00",
+   "thumb": "https://i1.ytimg.com/vi/XC-EIz7eUaU/hqdefault.jpg"
+  },
+  {
+   "v": "nhf9QKoTV10",
+   "pid": "ebs-jisik",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "지식채널e",
+   "title": "그것에 대하여 2부 AI는 알지만 당신은 모르고 있다 | #지식채널e",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T01:00:06+09:00",
+   "thumb": "https://i3.ytimg.com/vi/nhf9QKoTV10/hqdefault.jpg"
+  },
+  {
+   "v": "7vMtwrjPMsM",
    "pid": "kbs-docu",
    "b": "kbs",
    "cat": "edu",
    "program": "KBS 다큐",
-   "title": "외부인 출입이 엄격히 금지됐던 비밀의 정원. 궁에 깃든 모성과 자연의 교감을 만난다 | KBS 자연의 타임캡슐 20170223 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T23:00:26+09:00",
-   "thumb": "https://i2.ytimg.com/vi/iN397Y3xIU0/hqdefault.jpg"
+   "title": "호랑이 줄무늬는 바코드가 아니다 [KBS생명대기획-죽음의 비즈니스] | KBS 261125 방송",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T00:54:04+09:00",
+   "thumb": "https://i4.ytimg.com/vi/7vMtwrjPMsM/hqdefault.jpg"
+  },
+  {
+   "v": "riaNdbfx6fk",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "호랑이 밀거래, 충격의 현장 추적 [KBS생명대기획-죽음의 비즈니스] | KBS 261125 방송",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T00:45:25+09:00",
+   "thumb": "https://i3.ytimg.com/vi/riaNdbfx6fk/hqdefault.jpg"
+  },
+  {
+   "v": "61H443UwASE",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "멈추지 않는 욕망의 민낯, 호랑이 밀거래 [KBS생명대기획-죽음의 비즈니스] | KBS 261125 방송",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T00:45:19+09:00",
+   "thumb": "https://i3.ytimg.com/vi/61H443UwASE/hqdefault.jpg"
+  },
+  {
+   "v": "h4EQzuK5QMs",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "천연 정력제? 호랑이 뼈로 빚은 술, 호골주 [KBS생명대기획-죽음의 비즈니스] | KBS 261125 방송",
+   "date": "2026-11-26",
+   "dt": "2026-11-26T00:36:12+09:00",
+   "thumb": "https://i1.ytimg.com/vi/h4EQzuK5QMs/hqdefault.jpg"
+  },
+  {
+   "v": "WXsYa5CQ5Jo",
+   "pid": "kbs-chu60",
+   "b": "kbs",
+   "cat": "news",
+   "program": "추적 60분",
+   "title": "9시간 수면 마취 시키고 연속으로 시술한 피부과... 잠든 사이 1,600만 원 추가 결제시킨 한 피부과의 수법 | 추적60분 KBS 261120 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T23:58:52+09:00",
+   "thumb": "https://i4.ytimg.com/vi/WXsYa5CQ5Jo/hqdefault.jpg"
+  },
+  {
+   "v": "ALY4FJNOluU",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "죽음을 기념품으로 남기는 사람들, 트로피 헌팅 [KBS생명대기획-죽음의 비즈니스] | KBS 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T23:36:14+09:00",
+   "thumb": "https://i2.ytimg.com/vi/ALY4FJNOluU/hqdefault.jpg"
+  },
+  {
+   "v": "qeycUgKYsYk",
+   "pid": "ebs-jisik",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "지식채널e",
+   "title": "그것에 대하여 1부 당신의 아이는 괜찮지 않다 | #지식채널e",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T23:10:43+09:00",
+   "thumb": "https://i2.ytimg.com/vi/qeycUgKYsYk/hqdefault.jpg"
+  },
+  {
+   "v": "BWXEagKxEmU",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "찻길 바로 밑 8m 아래 숨겨진 어둠의 호수와 지하동굴에 남겨진 비밀의 흔적 | KBS 자연의 타임캡슐 20170302 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T23:00:06+09:00",
+   "thumb": "https://i3.ytimg.com/vi/BWXEagKxEmU/hqdefault.jpg"
+  },
+  {
+   "v": "4fxivx-IvH0",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "[책책책! 책을 읽읍시다 리턴즈] 교실 밖으로 떠난 책 소풍! 아이들은 어떤 책을 읽고 있을까?, MBC 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T22:06:53+09:00",
+   "thumb": "https://i1.ytimg.com/vi/4fxivx-IvH0/hqdefault.jpg"
+  },
+  {
+   "v": "Uq-yXgtbhUQ",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "[책책책! 책을 읽읍시다 리턴즈] 미미미누의 북 퀴즈 타임~ 각종 책 퀴즈도 단 번에 맞추는 초등학생들, MBC 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:52:28+09:00",
+   "thumb": "https://i2.ytimg.com/vi/Uq-yXgtbhUQ/hqdefault.jpg"
+  },
+  {
+   "v": "we4PA9zlMfk",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "[책책책! 책을 읽읍시다 리턴즈] 저학년들의 독서를 위해 미미미누가 나섰다! '강아지똥' 낭독하는 미미미누, MBC 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:36:32+09:00",
+   "thumb": "https://i4.ytimg.com/vi/we4PA9zlMfk/hqdefault.jpg"
+  },
+  {
+   "v": "N__KHXPNXHo",
+   "pid": "mbc-pd",
+   "b": "mbc",
+   "cat": "news",
+   "program": "PD수첩",
+   "title": "미국이 다시 위대해진다면, 미국인의 삶도 나아질까? | MBC 창사특집 다큐멘터리 아메리카쇼크",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:33:14+09:00",
+   "thumb": "https://i3.ytimg.com/vi/N__KHXPNXHo/hqdefault.jpg"
+  },
+  {
+   "v": "5fykdZVmDzQ",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "[책책책! 책을 읽읍시다 리턴즈] 1년에 책을 몇 권이나 읽을까?! 솔직하고 귀여운 초등학생들의 인터뷰, MBC 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:22:53+09:00",
+   "thumb": "https://i2.ytimg.com/vi/5fykdZVmDzQ/hqdefault.jpg"
+  },
+  {
+   "v": "jkLvIfsCb8k",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "[책책책! 책을 읽읍시다 리턴즈] 책과 친해지는 가장 즐거운 시작, 청소년 독서 문화 증진을 위한 뜻깊은 첫 선정 도서는?, MBC 261125 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:17:39+09:00",
+   "thumb": "https://i3.ytimg.com/vi/jkLvIfsCb8k/hqdefault.jpg"
+  },
+  {
+   "v": "MFe1E_3kfj4",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "10명 중 6명은 정규직 탈락! 인턴만 전전하다 다시 무직이 되는 2009 신데렐라 청춘들 | KBS 취재파일 4321 20091004 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T21:15:14+09:00",
+   "thumb": "https://i2.ytimg.com/vi/MFe1E_3kfj4/hqdefault.jpg"
+  },
+  {
+   "v": "-ld44zRM-RQ",
+   "pid": "kbs-docu",
+   "b": "kbs",
+   "cat": "edu",
+   "program": "KBS 다큐",
+   "title": "50억을 줘도 100억을 줘도 안 판다는 소문, 압수수색 하루 전 사라진 국보급 고구려 벽화 | KBS 취재파일 4321 20100314 방송",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T20:15:23+09:00",
+   "thumb": "https://i2.ytimg.com/vi/-ld44zRM-RQ/hqdefault.jpg"
+  },
+  {
+   "v": "dmQb9K4-aUk",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "유방암에 걸린 아내를 위한 남편의 선택. 노부부의 건강과 행복 두 마리 토끼를 잡았다! 중목구조로 만든 방 한 개 필요한 것만 챙긴 실속 있는 집｜건축탐구 집｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T20:00:05+09:00",
+   "thumb": "https://i1.ytimg.com/vi/dmQb9K4-aUk/hqdefault.jpg"
+  },
+  {
+   "v": "ex_gbPa6ro0",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "\"막내야 칼 갈아라, 회 뜨자!\" 갓 잡은 대방어로 벌인 호화 선상 파티｜특대방어 선원들의 진짜 선상 회식｜그 귀한 대방어를 구워먹는다. 무슨 맛인가 했더니｜극한직업｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T19:30:22+09:00",
+   "thumb": "https://i2.ytimg.com/vi/ex_gbPa6ro0/hqdefault.jpg"
+  },
+  {
+   "v": "j1Cr2LoqH0U",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "“미국을 다시 위대하게” 그 약속은 누구를 위한 걸까? | MBC 창사특집 다큐멘터리 아메리카쇼크",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T19:00:20+09:00",
+   "thumb": "https://i3.ytimg.com/vi/j1Cr2LoqH0U/hqdefault.jpg"
+  },
+  {
+   "v": "hRq0Ul4o6j0",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "화재로 초토화된 농장 다시 짓고 빚만 26억. 닭 7,500마리를 산에 풀어 키웠더니 벌어진 놀라운 일｜극한직업｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T19:00:14+09:00",
+   "thumb": "https://i1.ytimg.com/vi/hRq0Ul4o6j0/hqdefault.jpg"
+  },
+  {
+   "v": "3g8JT2r3VLo",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "어둡고 칙칙했던 노후 주택의 대반전. 의사 아내가 미적 감각 쏟아부었더니｜산토리니 닮은 감성 주택｜건축탐구집｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T18:45:30+09:00",
+   "thumb": "https://i4.ytimg.com/vi/3g8JT2r3VLo/hqdefault.jpg"
+  },
+  {
+   "v": "FlQ8cNbquC0",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "한국에 전공자 0명일 때 시작한 남자｜교사까지 그만두고 국내 유일 리코더 제작 장인이 된 사연｜직업의 세계｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T18:30:26+09:00",
+   "thumb": "https://i3.ytimg.com/vi/FlQ8cNbquC0/hqdefault.jpg"
+  },
+  {
+   "v": "zQIOQ84lvDg",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "🐟겨울 찬바람 맞고 단단히 살 오른 고기의 행렬! 방어부터 고등어, 양미리부터 과메기까지! 새벽부터 조업 나가 만선하는 겨울 어선🐟 1시간 몰아보기｜한국기행｜#tv로보는골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T18:00:29+09:00",
+   "thumb": "https://i3.ytimg.com/vi/zQIOQ84lvDg/hqdefault.jpg"
+  },
+  {
+   "v": "2USp0sDmGSc",
+   "pid": "mbc-pd",
+   "b": "mbc",
+   "cat": "news",
+   "program": "PD수첩",
+   "title": "[PD수첩 10분 컷] \"이걸 파기하면 나도 공범이 된다\" 그는 왜 공익신고자가 됐나",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:30:15+09:00",
+   "thumb": "https://i3.ytimg.com/vi/2USp0sDmGSc/hqdefault.jpg"
+  },
+  {
+   "v": "gwwrDVhRQEk",
+   "pid": "ebs-docu",
+   "b": "ebs",
+   "cat": "edu",
+   "program": "EBS 다큐",
+   "title": "\"원래 기질이 소심해요\" 어머니의 말과는 달리 일상 생활을 지켜보던 전문가의 뜻밖의 이야기｜다큐프라임｜#골라듄다큐",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:30:04+09:00",
+   "thumb": "https://i4.ytimg.com/vi/gwwrDVhRQEk/hqdefault.jpg"
+  },
+  {
+   "v": "tN7IQvq7O4Q",
+   "pid": "sbs-geal",
+   "b": "sbs",
+   "cat": "news",
+   "program": "그것이 알고싶다",
+   "title": "지하철 2호선 괴담, 멈추지 않는 잔혹 열차 | 그알로 보는",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:00:37+09:00",
+   "thumb": "https://i1.ytimg.com/vi/tN7IQvq7O4Q/hqdefault.jpg"
+  },
+  {
+   "v": "6AKEMEesV8Y",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "열띤 토론에 당황한 김용만 X 서경석",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:00:24+09:00",
+   "thumb": "https://i3.ytimg.com/vi/6AKEMEesV8Y/hqdefault.jpg"
+  },
+  {
+   "v": "beH3k4DkfA4",
+   "pid": "sbs-dali",
+   "b": "sbs",
+   "cat": "edu",
+   "program": "SBS 교양",
+   "title": "8.3m 아래로 추락한 어머니와 차량.. #맨인블랙박스 #달리",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:00:16+09:00",
+   "thumb": "https://i3.ytimg.com/vi/beH3k4DkfA4/hqdefault.jpg"
+  },
+  {
+   "v": "o8UoYuMqR88",
+   "pid": "sbs-dali",
+   "b": "sbs",
+   "cat": "edu",
+   "program": "SBS 교양",
+   "title": "길 가다 간택당해서 강제 집사 취직한 썰 풉니다 #동물농장 #달리",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T17:00:12+09:00",
+   "thumb": "https://i4.ytimg.com/vi/o8UoYuMqR88/hqdefault.jpg"
+  },
+  {
+   "v": "3cid2a5uV9w",
+   "pid": "mbc-docu",
+   "b": "mbc",
+   "cat": "edu",
+   "program": "MBC 다큐",
+   "title": "미미미누가 질문할 때 마다 \"아니요\"로 받아치는 노는 게 제일 좋은 초3",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T15:00:26+09:00",
+   "thumb": "https://i4.ytimg.com/vi/3cid2a5uV9w/hqdefault.jpg"
+  },
+  {
+   "v": "iIdrjUCLsqA",
+   "pid": "sbs-dali",
+   "b": "sbs",
+   "cat": "edu",
+   "program": "SBS 교양",
+   "title": "겨울을 준비하는 곶감 가족, 45일의 정성으로 만드는 달콤한 결실 #모닝와이드 #달리",
+   "date": "2026-11-25",
+   "dt": "2026-11-25T08:00:34+09:00",
+   "thumb": "https://i2.ytimg.com/vi/iIdrjUCLsqA/hqdefault.jpg"
   },
   {
    "v": "uEU_SNqyROA",
@@ -179,21 +531,10 @@
    "b": "mbc",
    "cat": "news",
    "program": "PD수첩",
-   "title": "[PD수첩] \"한강버스와 1,523억 스캔들\" - 2026년 11월 10일 밤 10시 방송",
+   "title": "[PD수첩] \"한강버스와 1,523억 스캔들\" - 2026년 11월 24일 밤 10시 방송",
    "date": "2026-11-24",
    "dt": "2026-11-24T22:58:13+09:00",
    "thumb": "https://i2.ytimg.com/vi/uEU_SNqyROA/hqdefault.jpg"
-  },
-  {
-   "v": "L1NJIhA-V_k",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "화장실 문 열자 나타난 충격 장면.. 여자 노숙인의 삶 취재 갔더니 | KBS 시사기획 창 20240227 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T22:00:17+09:00",
-   "thumb": "https://i1.ytimg.com/vi/L1NJIhA-V_k/hqdefault.jpg"
   },
   {
    "v": "hGJV_1olPQw",
@@ -207,127 +548,6 @@
    "thumb": "https://i1.ytimg.com/vi/hGJV_1olPQw/hqdefault.jpg"
   },
   {
-   "v": "Sow003TUAeE",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "대형마트 하나 들어서면 골목상점 수십 개, 재래시장 세 개 사라진다? | KBS 의뢰인 K 20120830 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T21:15:10+09:00",
-   "thumb": "https://i4.ytimg.com/vi/Sow003TUAeE/hqdefault.jpg"
-  },
-  {
-   "v": "d8AzSoY2N_c",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "평생 안 맞았던 자매가 60 넘어 노후를 함께 보내기로 결심한 이유｜언니는 양옥, 동생은 한옥. 남편과 함께 사는 대신 자매가 지은 극과 극 전원주택｜건축탐구 집｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T21:00:33+09:00",
-   "thumb": "https://i1.ytimg.com/vi/d8AzSoY2N_c/hqdefault.jpg"
-  },
-  {
-   "v": "Jm2ZnRTM3Eg",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "🥶겨울 길거리에서 파는 만두만 보면 참을 수가 없다🥟｜공장부터 시장 만두까지｜극한직업 만두 모음｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T20:30:37+09:00",
-   "thumb": "https://i3.ytimg.com/vi/Jm2ZnRTM3Eg/hqdefault.jpg"
-  },
-  {
-   "v": "_v-U2FhVNNo",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "말이 안 될 정도로 대박 난 선장님이 선상 회파티를 열었다｜만선 모음집｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T20:15:31+09:00",
-   "thumb": "https://i4.ytimg.com/vi/_v-U2FhVNNo/hqdefault.jpg"
-  },
-  {
-   "v": "wzTGsxTmg9A",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "11억 감정이 8억 몇 천으로, 낙찰가율 80% 이하 2008년 말 이후 처음이라는 경매장 분위기 | KBS 취재파일 4321 20100725 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T20:15:26+09:00",
-   "thumb": "https://i4.ytimg.com/vi/wzTGsxTmg9A/hqdefault.jpg"
-  },
-  {
-   "v": "dUQwR6PKVQc",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "겉바속촉의 정석! 무려 이틀에 걸쳐 만드는 양고기 구이. 고기 천국 우즈베키스탄에서 꼭 먹어야 할 '탄드르 고쉬트' ｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T20:00:08+09:00",
-   "thumb": "https://i1.ytimg.com/vi/dUQwR6PKVQc/hqdefault.jpg"
-  },
-  {
-   "v": "eB9Zn9nIJm4",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "근대화 시대의 유적같은 그곳, 을지로 50년 넘게 자리한 상인들은 밥 먹으러 어디로 갈까?｜한국기행｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T19:45:25+09:00",
-   "thumb": "https://i2.ytimg.com/vi/eB9Zn9nIJm4/hqdefault.jpg"
-  },
-  {
-   "v": "_dFaGItcGQI",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "추워지면 생각난다. 직접 만들어서 끓여먹는 겨울 간식 1위 어묵 모음｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T19:30:27+09:00",
-   "thumb": "https://i4.ytimg.com/vi/_dFaGItcGQI/hqdefault.jpg"
-  },
-  {
-   "v": "UCQqHDRtTCw",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "학교 수업은 입시 준비에 도움이 안됐다 '선택적 자퇴'를 선택한 뒤 엄청난 변화를 겪은 학생｜다큐멘터리K｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T19:15:11+09:00",
-   "thumb": "https://i2.ytimg.com/vi/UCQqHDRtTCw/hqdefault.jpg"
-  },
-  {
-   "v": "FeHebICx-38",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "우리가 주 52시간을 추진할 때 일본은 왜 주 58시간을 얘기한 걸까? | KBS 시사기획 창 20181002 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T19:15:08+09:00",
-   "thumb": "https://i3.ytimg.com/vi/FeHebICx-38/hqdefault.jpg"
-  },
-  {
-   "v": "yiFHadd5HtM",
-   "pid": "ebs-docu",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "EBS 다큐",
-   "title": "배고파 죽겠다는 스탭들 위해서 특식 준비했다. 1박 2일 밤샘 촬영장 밥차 오는 날｜극한직업｜#골라듄다큐",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T19:01:39+09:00",
-   "thumb": "https://i2.ytimg.com/vi/yiFHadd5HtM/hqdefault.jpg"
-  },
-  {
    "v": "tJ8DXpmzkgc",
    "pid": "ebs-jisik",
    "b": "ebs",
@@ -337,17 +557,6 @@
    "date": "2026-11-24",
    "dt": "2026-11-24T18:00:38+09:00",
    "thumb": "https://i1.ytimg.com/vi/tJ8DXpmzkgc/hqdefault.jpg"
-  },
-  {
-   "v": "pxfb9RatTlo",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "미미미누가 책을 안 읽자 김용만이 반가워한 이유",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T18:00:32+09:00",
-   "thumb": "https://i1.ytimg.com/vi/pxfb9RatTlo/hqdefault.jpg"
   },
   {
    "v": "jVz0-iMvVG4",
@@ -370,39 +579,6 @@
    "date": "2026-11-24",
    "dt": "2026-11-24T16:59:37+09:00",
    "thumb": "https://i1.ytimg.com/vi/tg8ANL3c5x4/hqdefault.jpg"
-  },
-  {
-   "v": "xtyJAvqXCOU",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "아버지와 연락 없이 무려 8년.. 다가오는 결혼에 결국 아버지를 만나러 가는데.. | KBS 인간극장 20261117 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T16:00:24+09:00",
-   "thumb": "https://i1.ytimg.com/vi/xtyJAvqXCOU/hqdefault.jpg"
-  },
-  {
-   "v": "XRLewpZTJOg",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "물가 대란과 고물가 시대에 점심 먹기도 고민, 서민도 상인도 힘든 날들 | KBS VJ 특공대 20110826 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T15:15:15+09:00",
-   "thumb": "https://i1.ytimg.com/vi/XRLewpZTJOg/hqdefault.jpg"
-  },
-  {
-   "v": "5MNPq_vHnrw",
-   "pid": "kbs-docu",
-   "b": "kbs",
-   "cat": "edu",
-   "program": "KBS 다큐",
-   "title": "한족 밀어내고 금나라를 세운 왕, 아골타는 사실 신라의 후예였다 | KBS 역사스페셜 20090905 방송",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T14:00:08+09:00",
-   "thumb": "https://i2.ytimg.com/vi/5MNPq_vHnrw/hqdefault.jpg"
   },
   {
    "v": "h6kzzVt8_tM",
@@ -438,61 +614,6 @@
    "thumb": "https://i2.ytimg.com/vi/EP6z3xJ63Kk/hqdefault.jpg"
   },
   {
-   "v": "2xJAdop60-w",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "아이랑 눈높이 맞추려다… 쪼그려 앉기부터 버거운 두 아저씨ㅋㅋ",
-   "date": "2026-11-24",
-   "dt": "2026-11-24T07:00:26+09:00",
-   "thumb": "https://i3.ytimg.com/vi/2xJAdop60-w/hqdefault.jpg"
-  },
-  {
-   "v": "OS5n0S2yldg",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "서경석 화살코 기억나는 분? ‘책책책’이 돌아왔습니다",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:00:34+09:00",
-   "thumb": "https://i4.ytimg.com/vi/OS5n0S2yldg/hqdefault.jpg"
-  },
-  {
-   "v": "GYOthKF_AyE",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "20년 만에 돌아온 책책책!",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T20:00:16+09:00",
-   "thumb": "https://i4.ytimg.com/vi/GYOthKF_AyE/hqdefault.jpg"
-  },
-  {
-   "v": "JfoqcFywj54",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "25년 만에 돌아온 레전드 독서 예능 근황! 미미미누X김용만X서경석ㅣ[책책책! 책을 읽읍시다 리턴즈] 11월 25일(수) 밤 9시 첫 방송",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T19:00:28+09:00",
-   "thumb": "https://i3.ytimg.com/vi/JfoqcFywj54/hqdefault.jpg"
-  },
-  {
-   "v": "rxekdNU6x2w",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "[타임머신] 80년대 초능력 열풍부터 90년대 장독대 기우제까지, 믿음이 부른 대참사 모음",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T17:00:30+09:00",
-   "thumb": "https://i3.ytimg.com/vi/rxekdNU6x2w/hqdefault.jpg"
-  },
-  {
    "v": "fvtIb9qw6r4",
    "pid": "sbs-dali",
    "b": "sbs",
@@ -515,39 +636,6 @@
    "thumb": "https://i4.ytimg.com/vi/KzxmrvuHGhU/hqdefault.jpg"
   },
   {
-   "v": "kRPg1UKEhdQ",
-   "pid": "sbs-dali",
-   "b": "sbs",
-   "cat": "edu",
-   "program": "SBS 교양",
-   "title": "🐕서울에선 껌딱지, 시골에선 탈출견?! 영실&재용의 시끌벅적 시골 라이프💥 #동물농장 #달리",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T12:00:05+09:00",
-   "thumb": "https://i4.ytimg.com/vi/kRPg1UKEhdQ/hqdefault.jpg"
-  },
-  {
-   "v": "M1_mpZmaxzY",
-   "pid": "sbs-dali",
-   "b": "sbs",
-   "cat": "edu",
-   "program": "SBS 교양",
-   "title": "식당 안까지 돌진한 차량.. 운전자는 어디로 사라졌나? #모닝와이드 #달리",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T08:00:00+09:00",
-   "thumb": "https://i2.ytimg.com/vi/M1_mpZmaxzY/hqdefault.jpg"
-  },
-  {
-   "v": "sWz8F7VG0-4",
-   "pid": "sbs-dali",
-   "b": "sbs",
-   "cat": "edu",
-   "program": "SBS 교양",
-   "title": "Playlist | 국힙에 신입 들어왔는데 사람이 아님 (진짜 아님) #창사특집대기획나의이방인 #나의이방인 #달리",
-   "date": "2026-11-23",
-   "dt": "2026-11-23T00:15:24+09:00",
-   "thumb": "https://i4.ytimg.com/vi/sWz8F7VG0-4/hqdefault.jpg"
-  },
-  {
    "v": "Pz9Es8eJRRU",
    "pid": "kbs-chu60",
    "b": "kbs",
@@ -568,39 +656,6 @@
    "date": "2026-11-22",
    "dt": "2026-11-22T21:09:59+09:00",
    "thumb": "https://i3.ytimg.com/vi/naOUo1DoZSo/hqdefault.jpg"
-  },
-  {
-   "v": "iOq2qW969Y8",
-   "pid": "kbs-sisa",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "미·중·러 정상회담 “시진핑 몸값 한층 올려”",
-   "date": "2026-11-22",
-   "dt": "2026-11-22T11:38:21+09:00",
-   "thumb": "https://i2.ytimg.com/vi/iOq2qW969Y8/hqdefault.jpg"
-  },
-  {
-   "v": "ApO0YOMV3rk",
-   "pid": "kbs-sisa",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "‘정년 연장’ 정부안 “27일 전후 발표할 수도”",
-   "date": "2026-11-22",
-   "dt": "2026-11-22T11:38:07+09:00",
-   "thumb": "https://i2.ytimg.com/vi/ApO0YOMV3rk/hqdefault.jpg"
-  },
-  {
-   "v": "VnrGl0d4sCM",
-   "pid": "kbs-sisa",
-   "b": "kbs",
-   "cat": "news",
-   "program": "KBS 시사",
-   "title": "미·중·러 정상 ‘북 비핵화’ 소극적이었던 이유?",
-   "date": "2026-11-22",
-   "dt": "2026-11-22T11:38:07+09:00",
-   "thumb": "https://i3.ytimg.com/vi/VnrGl0d4sCM/hqdefault.jpg"
   },
   {
    "v": "4GMsJN7tZ_k",
@@ -636,17 +691,6 @@
    "thumb": "https://i3.ytimg.com/vi/nAhTMy3d7Gs/hqdefault.jpg"
   },
   {
-   "v": "mC0tOM81M8E",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "[다큐:너머] 피터팬 아빠가 남기고 간 마지막 꿈, 네버랜드로 초대합니다, MBC 261124 방송",
-   "date": "2026-11-20",
-   "dt": "2026-11-20T20:00:35+09:00",
-   "thumb": "https://i2.ytimg.com/vi/mC0tOM81M8E/hqdefault.jpg"
-  },
-  {
    "v": "A6QHmvac6p4",
    "pid": "mbc-pd",
    "b": "mbc",
@@ -656,17 +700,6 @@
    "date": "2026-11-20",
    "dt": "2026-11-20T20:00:18+09:00",
    "thumb": "https://i2.ytimg.com/vi/A6QHmvac6p4/hqdefault.jpg"
-  },
-  {
-   "v": "yzlAcUjMlVI",
-   "pid": "mbc-straight",
-   "b": "mbc",
-   "cat": "news",
-   "program": "스트레이트",
-   "title": "21세기판 '마루타'? 아직도 이런일이… | 탐사기획 스트레이트 356회 하이라이트",
-   "date": "2026-11-20",
-   "dt": "2026-11-20T18:00:18+09:00",
-   "thumb": "https://i2.ytimg.com/vi/yzlAcUjMlVI/hqdefault.jpg"
   },
   {
    "v": "1DoNk1ulUkg",
@@ -700,17 +733,6 @@
    "date": "2026-11-18",
    "dt": "2026-11-18T23:59:42+09:00",
    "thumb": "https://i1.ytimg.com/vi/xYYRbKpY2Nw/hqdefault.jpg"
-  },
-  {
-   "v": "Yo2Qj7Ja0j8",
-   "pid": "mbc-docu",
-   "b": "mbc",
-   "cat": "edu",
-   "program": "MBC 다큐",
-   "title": "암이 커지던 겨울, 그는 친구들을 불러 저녁을 차렸다ㅣ[MBC스페셜] 20190618 방송",
-   "date": "2026-11-18",
-   "dt": "2026-11-18T19:00:36+09:00",
-   "thumb": "https://i2.ytimg.com/vi/Yo2Qj7Ja0j8/hqdefault.jpg"
   },
   {
    "v": "pPB0sGBUTU4",
@@ -790,17 +812,6 @@
    "thumb": "https://i2.ytimg.com/vi/A8DhpsJx1Wg/hqdefault.jpg"
   },
   {
-   "v": "BSApOCxaSyg",
-   "pid": "ebs-jisik",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "지식채널e",
-   "title": "걸으면 집중이 되살아나는 데에는 이유가 있다 | 오감을 작동시키는 온전한 산책의 힘 | #지식채널e",
-   "date": "2026-11-14",
-   "dt": "2026-11-14T18:00:34+09:00",
-   "thumb": "https://i3.ytimg.com/vi/BSApOCxaSyg/hqdefault.jpg"
-  },
-  {
    "v": "oM1rk1JTtxs",
    "pid": "sbs-geal",
    "b": "sbs",
@@ -867,17 +878,6 @@
    "thumb": "https://i4.ytimg.com/vi/wgsSCmoAh1w/hqdefault.jpg"
   },
   {
-   "v": "f4Z_pGeqs_U",
-   "pid": "ebs-jisik",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "지식채널e",
-   "title": "관심이 화폐가 되는 시대 | 밈코인이 증명한 ‘0원'의 경제학 | #지식채널e",
-   "date": "2026-11-12",
-   "dt": "2026-11-12T18:00:15+09:00",
-   "thumb": "https://i3.ytimg.com/vi/f4Z_pGeqs_U/hqdefault.jpg"
-  },
-  {
    "v": "q0XWEJaXJng",
    "pid": "kbs-chu60",
    "b": "kbs",
@@ -889,39 +889,6 @@
    "thumb": "https://i2.ytimg.com/vi/q0XWEJaXJng/hqdefault.jpg"
   },
   {
-   "v": "P561pfAugIU",
-   "pid": "mbc-pd",
-   "b": "mbc",
-   "cat": "news",
-   "program": "PD수첩",
-   "title": "[PD수첩 10분 컷] 프랑스가 불타고 있다, 왜 분노하는가",
-   "date": "2026-11-11",
-   "dt": "2026-11-11T18:12:26+09:00",
-   "thumb": "https://i1.ytimg.com/vi/P561pfAugIU/hqdefault.jpg"
-  },
-  {
-   "v": "6by3UU8L5e8",
-   "pid": "sbs-geal",
-   "b": "sbs",
-   "cat": "news",
-   "program": "그것이 알고싶다",
-   "title": "꿀벌이 인류에게 보내는 경고, 꿀벌 연쇄 실종 사건 | 그알로 보는",
-   "date": "2026-11-11",
-   "dt": "2026-11-11T17:00:12+09:00",
-   "thumb": "https://i3.ytimg.com/vi/6by3UU8L5e8/hqdefault.jpg"
-  },
-  {
-   "v": "PDCfJhjeySs",
-   "pid": "mbc-pd",
-   "b": "mbc",
-   "cat": "news",
-   "program": "PD수첩",
-   "title": "[PD수첩] \"성난 민중들 : 흔들리는 프랑스에 가다\" - 2026년 11월 10일 밤 10시 20분 방송",
-   "date": "2026-11-10",
-   "dt": "2026-11-10T23:09:06+09:00",
-   "thumb": "https://i1.ytimg.com/vi/PDCfJhjeySs/hqdefault.jpg"
-  },
-  {
    "v": "Sam0QrBsQdg",
    "pid": "kbs-window",
    "b": "kbs",
@@ -931,17 +898,6 @@
    "date": "2026-11-10",
    "dt": "2026-11-10T22:00:07+09:00",
    "thumb": "https://i4.ytimg.com/vi/Sam0QrBsQdg/hqdefault.jpg"
-  },
-  {
-   "v": "VKLDfE5usSE",
-   "pid": "ebs-jisik",
-   "b": "ebs",
-   "cat": "edu",
-   "program": "지식채널e",
-   "title": "푸바오부터 부캉이까지, 우리는 왜 동물의 팬이 될까? | 귀여움만으로는 설명되지 않는 팬심 | #지식채널e",
-   "date": "2026-11-10",
-   "dt": "2026-11-10T18:00:37+09:00",
-   "thumb": "https://i3.ytimg.com/vi/VKLDfE5usSE/hqdefault.jpg"
   },
   {
    "v": "qTAHbYya7mA",
@@ -964,17 +920,6 @@
    "date": "2026-11-08",
    "dt": "2026-11-08T21:56:10+09:00",
    "thumb": "https://i2.ytimg.com/vi/iQe4i9NNTic/hqdefault.jpg"
-  },
-  {
-   "v": "MndcLX9j6Gc",
-   "pid": "kbs-chu60",
-   "b": "kbs",
-   "cat": "news",
-   "program": "추적 60분",
-   "title": "[full] 아파트가 있어서 가능한 사랑 | 추적60분 KBS 261106 방송",
-   "date": "2026-11-06",
-   "dt": "2026-11-06T22:00:10+09:00",
-   "thumb": "https://i2.ytimg.com/vi/MndcLX9j6Gc/hqdefault.jpg"
   },
   {
    "v": "ukXf42b3NfA",
