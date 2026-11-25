@@ -81,8 +81,12 @@
         기존 36문제를 주제에 맞는 강으로 다시 매핑하고 비어 있던 근현대 강에 10문제를 보강(한국사 46문제),
         1개월차 1~5강 · 2개월차 6~9강, 한국사 강 번호 참조(SENSE_YT·강의 퀴즈·주간 스케줄)를 1~9강에 맞춤.
         → 공부방 84강 → 81강.
-        (index.html ?v=48 · APP_VER v48 · hotcho_modes.js·css?v=48) */
-const CACHE = 'toeic-bts-v48';
+        (index.html ?v=48 · APP_VER v48 · hotcho_modes.js·css?v=48)
+   v49: 🐛 강의 퀴즈에서 크리티컬(3연속 정답)로 하트가 2개씩 차면, 문제를 다 풀기 전에 BTS가 포획돼
+        '완료'로 기록되지 않던 문제 수정 — 강의 퀴즈는 이제 정답 1개당 하트 1개(문제 수 = 하트 수).
+        한국사 1강 12문제·3강 9문제처럼 긴 강의 퀴즈도 끝까지 풀립니다.
+        (index.html ?v=49 · APP_VER v49 · hotcho_modes.js·css?v=49) */
+const CACHE = 'toeic-bts-v49';
 const SHELL = [
   './',
   './index.html',
