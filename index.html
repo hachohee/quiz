@@ -960,7 +960,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=45">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=46">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -2911,7 +2911,8 @@ var STAGE_DEFS = {
    - 주제·강의 제목·추천 채널은 옥토 학습자료 화면 그대로 (2026-11 기준)
    - 영어 탭 = 초희의 '2개월 토익 800 돌파' 로드맵 (2026-11-21 추가, 12강)
    - 재테크 탭 = 절세·투자·노후 12강 (2026-11-21 추가, 2026년 현행 세법 기준으로 제목·검색어 갱신) — 총 84강
-   - 강의마다 유튜브 검색 링크 = 제목 그대로 검색 (죽은 링크 없음)
+   - 강의마다 실제 유튜브 영상 직링크(vid) — 누르면 그 강의 영상이 바로 열립니다 (2026-11-25 전 강의 검증)
+   - 영상이 확인되지 않은 강의만 예전처럼 제목 검색 링크로 연결
    ============================================================ */
 var YT_SEARCH = "https://www.youtube.com/results?search_query=";
 var ROOM = [
@@ -2930,20 +2931,20 @@ var ROOM = [
        btn:"⚡ 지금 바로 토익 퀴즈 풀기"},
      months:[
       {label:"1개월차", sub:"1~6강 · 기초 뼈대 & 3초 문법 — 어휘 → 품사 → 수일치·태 → 전치사/접속사 → 관계대명사·분사 → Part 6", lec:[
-        {n:1,topic:"토익 빈출 어휘 & 짝꿍 표현(Collocation) 마스터",title:"해커스 토익 기초 영단어",ch:"시원스쿨 토익"},
-        {n:2,topic:"3초 품사 공식 1: a/the + [___] + 명사 (형용사·명사 자리 구별)",title:"해커스 토익 Part 5 품사",ch:"토익 3초 공식"},
-        {n:3,topic:"3초 품사 공식 2: 문장의 뼈대(주어·동사 수일치 & 능동/수동태)",title:"해커스 토익 수일치 태",ch:""},
-        {n:4,topic:"3초 품사 공식 3: 전치사 vs 접속사 구분",title:"토익 전치사 접속사 구별",ch:""},
-        {n:5,topic:"관계대명사·분사구문 한 번에 잡기",title:"토익 관계대명사 분사",ch:""},
-        {n:6,topic:"한 줄 끊어 읽기 & Part 6 문맥 흐름 잡기",title:"토익 Part 6 독해 끊어읽기",ch:""}
+        {n:1,topic:"토익 빈출 어휘 & 짝꿍 표현(Collocation) 마스터",title:"해커스 토익 기초 영단어",ch:"해커스토익",vid:"EnzwJ0X6EzI"},
+        {n:2,topic:"3초 품사 공식 1: a/the + [___] + 명사 (형용사·명사 자리 구별)",title:"해커스 토익 Part 5 품사",ch:"EBS 토목달",vid:"m70TAD-dVtA"},
+        {n:3,topic:"3초 품사 공식 2: 문장의 뼈대(주어·동사 수일치 & 능동/수동태)",title:"해커스 토익 수일치 태",ch:"서아쌤의 비밀과외",vid:"UbChz41U3bs"},
+        {n:4,topic:"3초 품사 공식 3: 전치사 vs 접속사 구분",title:"토익 전치사 접속사 구별",ch:"해커스토익",vid:"43KJoyjxJ5A"},
+        {n:5,topic:"관계대명사·분사구문 한 번에 잡기",title:"토익 관계대명사 분사",ch:"시원스쿨랩",vid:"cCLwJ2nmfq0"},
+        {n:6,topic:"한 줄 끊어 읽기 & Part 6 문맥 흐름 잡기",title:"토익 Part 6 독해 끊어읽기",ch:"구자연 토익",vid:"Gz7OgvifTzY"}
       ]},
       {label:"2개월차", sub:"7~12강 · 800점 실전 & 리스닝 셰도잉 — 가정법·도치 → LC 1·2 → LC 3·4 → Part 7 단일·다중 → 패러프레이징 → 실전 모의", lec:[
-        {n:7,topic:"가정법·비교급·부정어 도치 핵심 정리",title:"토익 가정법 도치 핵심",ch:""},
-        {n:8,topic:"LC Part 1·2 오답 소거 & 우회 답변 공략",title:"토익 LC 파트2 우회답변",ch:""},
-        {n:9,topic:"LC Part 3·4 스키밍(질문 먼저 읽기) & 셰도잉 연습",title:"토익 LC 파트3 4 스키밍 셰도잉",ch:""},
-        {n:10,topic:"Part 7 단일·다중 지문 시간 단축 전략",title:"토익 파트7 시간단축",ch:""},
-        {n:11,topic:"비즈니스 이메일·공고문 빈출 패러프레이징",title:"토익 파트7 패러프레이징",ch:""},
-        {n:12,topic:"실전 800+ 타임어택 모의고사 오답 정리법",title:"토익 800점 실전 모의고사 풀이법",ch:""}
+        {n:7,topic:"가정법·비교급·부정어 도치 핵심 정리",title:"토익 가정법 도치 핵심",ch:"YBM Books",vid:"5i0O-XBeye0"},
+        {n:8,topic:"LC Part 1·2 오답 소거 & 우회 답변 공략",title:"토익 LC 파트2 우회답변",ch:"서아쌤의 비밀과외",vid:"t55ocsuNzZ8"},
+        {n:9,topic:"LC Part 3·4 스키밍(질문 먼저 읽기) & 셰도잉 연습",title:"토익 LC 파트3 4 스키밍 셰도잉",ch:"해커스토익",vid:"aevfnUs36kw"},
+        {n:10,topic:"Part 7 단일·다중 지문 시간 단축 전략",title:"토익 파트7 시간단축",ch:"서아쌤의 비밀과외",vid:"HMwXQ2N_il0"},
+        {n:11,topic:"비즈니스 이메일·공고문 빈출 패러프레이징",title:"토익 파트7 패러프레이징",ch:"PAGODA파고다",vid:"eWyVBeRw6Jg"},
+        {n:12,topic:"실전 800+ 타임어택 모의고사 오답 정리법",title:"토익 800점 실전 모의고사 풀이법",ch:"예능토익연구소",vid:"Etigi9vA--8"}
       ]}
      ]}
   ]},
@@ -2954,20 +2955,20 @@ var ROOM = [
      flows:[["기원전 3000년경","메소포타미아·이집트 문명 성립"],["기원전 5세기","아테네 민주정 전성기(페리클레스)"],["기원전 27년","로마 제정 시작(아우구스투스)"],["610년경","무함마드, 이슬람교 창시"],["800년","샤를마뉴 서로마 황제 대관"]],
      months:[
       {label:"1개월차", sub:"1~6강 · 고대 문명 → 그리스·로마 → 이슬람 → 중세 → 르네상스·대항해", lec:[
-        {n:1,topic:"4대 문명",title:"[세계사강의] 02강 인류의 진화와 고대문명",ch:"류성완"},
-        {n:2,topic:"고대 그리스와 로마",title:"그리스부터 로마 제국까지",ch:"차이나는 클라스"},
-        {n:3,topic:"이슬람 문명의 성장",title:"[세계사강의] 16강 서아시아사(2)",ch:"류성완"},
-        {n:4,topic:"중세 유럽 봉건사회",title:"세 개의 장면, 세계의 민주주의",ch:"국회방송"},
-        {n:5,topic:"르네상스·종교개혁",title:"[뉴탐스런 세계사] 20강",ch:"류성완"},
-        {n:6,topic:"대항해시대",title:"[세계사강의] 27강 신항로의 개척",ch:"류성완"}
+        {n:1,topic:"4대 문명",title:"[세계사강의] 02강 인류의 진화와 고대문명",ch:"류성완TV",vid:"03UUlqQnYho"},
+        {n:2,topic:"고대 그리스와 로마",title:"그리스부터 로마 제국까지",ch:"류성완TV",vid:"W51zTigANyc"},
+        {n:3,topic:"이슬람 문명의 성장",title:"[세계사강의] 16강 서아시아사(2)",ch:"류성완TV",vid:"oB08hsRaT7w"},
+        {n:4,topic:"중세 유럽 봉건사회",title:"세 개의 장면, 세계의 민주주의",ch:"국회방송",vid:"aPVJLUxZcbk"},
+        {n:5,topic:"르네상스·종교개혁",title:"[뉴탐스런 세계사] 20강",ch:"EBSi",vid:"-_mwnGH96B4"},
+        {n:6,topic:"대항해시대",title:"[세계사강의] 27강 신항로의 개척",ch:"류성완TV",vid:"sZwf0xhfrd0"}
       ]},
       {label:"2개월차", sub:"7~12강 · 시민혁명 → 산업혁명 → 제국주의 → 세계대전 → 냉전", lec:[
-        {n:7,topic:"3대 시민혁명",title:"중2 역사 한번에 정리",ch:""},
-        {n:8,topic:"산업혁명",title:"영국 산업혁명의 계기와 발달",ch:"별거벗은 세계사"},
-        {n:9,topic:"제국주의",title:"[세계사강의] 36강 자본주의 발달과 제국주의",ch:"류성완"},
-        {n:10,topic:"1차 세계대전",title:"[세계사강의] 37강 1차 세계대전과 러시아 혁명",ch:"류성완"},
-        {n:11,topic:"2차 세계대전",title:"[세계사강의] 38강 2차 세계대전",ch:"류성완"},
-        {n:12,topic:"냉전",title:"[세계사강의] 39강 냉전의 형성과 붕괴",ch:"류성완"}
+        {n:7,topic:"3대 시민혁명",title:"중2 역사 한번에 정리",ch:"류성완TV",vid:"gpdbdavpU94"},
+        {n:8,topic:"산업혁명",title:"영국 산업혁명의 계기와 발달",ch:"tvN Joy",vid:"AhR5SbCScGA"},
+        {n:9,topic:"제국주의",title:"[세계사강의] 36강 자본주의 발달과 제국주의",ch:"류성완TV",vid:"g3DEGdt2jrs"},
+        {n:10,topic:"1차 세계대전",title:"[세계사강의] 37강 1차 세계대전과 러시아 혁명",ch:"류성완TV",vid:"1hkdYq1_65o"},
+        {n:11,topic:"2차 세계대전",title:"[세계사강의] 38강 2차 세계대전",ch:"류성완TV",vid:"M-vX2LiFxuM"},
+        {n:12,topic:"냉전",title:"[세계사강의] 39강 냉전의 형성과 붕괴",ch:"류성완TV",vid:"SGyXHvxT9fQ"}
       ]}
      ]},
     {id:"korea", name:"한국사", emoji:"🇰🇷",
@@ -2976,20 +2977,20 @@ var ROOM = [
      flows:[["기원전 2333년","고조선 건국(단군왕검)"],["676년","신라의 삼국통일"],["918년","고려 건국(왕건)"],["1392년","조선 건국(이성계)"],["1919년","3·1 운동 → 대한민국 임시정부"],["1945년","광복"]],
      months:[
       {label:"1개월차", sub:"1~6강 · 고조선 → 삼국 → 남북국 → 고려", lec:[
-        {n:1,topic:"고조선과 여러 나라",title:"1-4 여러나라의 성장",ch:"최태성 1TV"},
-        {n:2,topic:"삼국의 성립과 경쟁",title:"2-2 삼국의 성장",ch:"최태성 1TV"},
-        {n:3,topic:"삼국통일",title:"2-3 삼국의 항쟁과 신라의 삼국 통일",ch:"최태성 1TV"},
-        {n:4,topic:"남북국시대",title:"2-4 통일 신라와 발해의 발전",ch:"최태성 1TV"},
-        {n:5,topic:"고려의 건국",title:"4-1 고려의 건국과 통치 체제의 정비",ch:"최태성 1TV"},
-        {n:6,topic:"거란·여진의 침입",title:"5-1 고려의 대외 관계",ch:"최태성 1TV"}
+        {n:1,topic:"고조선과 여러 나라",title:"1-4 여러나라의 성장",ch:"최태성 1TV",vid:"sRWLKgHm4Xo"},
+        {n:2,topic:"삼국의 성립과 경쟁",title:"2-2 삼국의 성장",ch:"최태성 1TV",vid:"RrZPTQxncwk"},
+        {n:3,topic:"삼국통일",title:"2-3 삼국의 항쟁과 신라의 삼국 통일",ch:"최태성 1TV",vid:"PwkziPsbYgk"},
+        {n:4,topic:"남북국시대",title:"2-4 통일 신라와 발해의 발전",ch:"최태성 1TV",vid:"IDWVt-x0350"},
+        {n:5,topic:"고려의 건국",title:"4-1 고려의 건국과 통치 체제의 정비",ch:"최태성 1TV",vid:"9hWhQOzUeqc"},
+        {n:6,topic:"거란·여진의 침입",title:"5-1 고려의 대외 관계",ch:"최태성 1TV",vid:"Pln7qUDBHvA"}
       ]},
       {label:"2개월차", sub:"7~12강 · 조선 → 두 전란 → 개항 → 3·1운동 → 광복·현대", lec:[
-        {n:7,topic:"조선의 건국",title:"6-1 조선의 건국과 통치 체제의 정비",ch:"최태성 1TV"},
-        {n:8,topic:"세종대의 문물 정비",title:"10분으로 보는 조선 4대 왕 세종대왕",ch:"최태성 1TV"},
-        {n:9,topic:"임진왜란·병자호란",title:"6-3 조선의 대외 관계",ch:"최태성 1TV"},
-        {n:10,topic:"개항",title:"9-1 조선의 개항",ch:"최태성 1TV"},
-        {n:11,topic:"3·1운동과 독립운동",title:"15-2 3·1 운동",ch:"최태성 1TV"},
-        {n:12,topic:"광복과 현대사",title:"18-1 광복과 통일 정부 수립 노력",ch:"최태성 1TV"}
+        {n:7,topic:"조선의 건국",title:"6-1 조선의 건국과 통치 체제의 정비",ch:"최태성 1TV",vid:"JV1xPAANok4"},
+        {n:8,topic:"세종대의 문물 정비",title:"10분으로 보는 조선 4대 왕 세종대왕",ch:"최태성 1TV",vid:"zGbiFxTI6ns"},
+        {n:9,topic:"임진왜란·병자호란",title:"6-3 조선의 대외 관계",ch:"최태성 1TV",vid:"ZVgbUGm4qHY"},
+        {n:10,topic:"개항",title:"9-1 조선의 개항",ch:"최태성 1TV",vid:"dCQrkfBurmA"},
+        {n:11,topic:"3·1운동과 독립운동",title:"15-2 3·1 운동",ch:"최태성 1TV",vid:"23ffJhM_DL4"},
+        {n:12,topic:"광복과 현대사",title:"18-1 광복과 통일 정부 수립 노력",ch:"최태성 1TV",vid:"pf9Jn0ag5bA"}
       ]}
      ]}
   ]},
@@ -3000,20 +3001,20 @@ var ROOM = [
      flows:[["희소성","자원은 유한, 욕구는 무한 — 모든 경제문제의 출발점"],["기회비용","하나를 선택하면 포기해야 하는 것 중 가장 큰 가치"],["수요법칙","가격이 오르면 수요량은 줄어든다"],["공급법칙","가격이 오르면 공급량은 늘어난다"]],
      months:[
       {label:"1개월차", sub:"1~6강 · 희소성 → 수요·공급 → 시장경제 → 가격 → 금리 → 물가", lec:[
-        {n:1,topic:"희소성과 기회비용",title:"자원의 희소성과 합리적 선택",ch:"한국은행 한은런"},
-        {n:2,topic:"수요와 공급 법칙",title:"수요와 공급",ch:"한국은행 한은런"},
-        {n:3,topic:"시장경제 vs 계획경제",title:"자본주의 VS 사회주의 뭐가 다를까?",ch:""},
-        {n:4,topic:"가격의 역할",title:"수요공급과 가격의 의미",ch:"경제학팡 박사"},
-        {n:5,topic:"금리란 무엇인가",title:"금리 환율 쉽게 설명",ch:"지식인사이드, 오건영"},
-        {n:6,topic:"인플레이션과 디플레이션",title:"물가와 인플레이션",ch:"한국은행 알경 10편"}
+        {n:1,topic:"희소성과 기회비용",title:"자원의 희소성과 합리적 선택",ch:"한국은행",vid:"JTZkoKPh3ZU"},
+        {n:2,topic:"수요와 공급 법칙",title:"수요와 공급",ch:"한국은행",vid:"4-6zarcZGR8"},
+        {n:3,topic:"시장경제 vs 계획경제",title:"자본주의 VS 사회주의 뭐가 다를까?",ch:"비상교육 온리원",vid:"Rb_GF6DKA1g"},
+        {n:4,topic:"가격의 역할",title:"수요공급과 가격의 의미",ch:"한국은행",vid:"zJ2L_o-WBok"},
+        {n:5,topic:"금리란 무엇인가",title:"금리 환율 쉽게 설명",ch:"지식인사이드",vid:"OhkXR23v5s0"},
+        {n:6,topic:"인플레이션과 디플레이션",title:"물가와 인플레이션",ch:"한국은행",vid:"1G3AfR03MMk"}
       ]},
       {label:"2개월차", sub:"7~12강 · 환율 → 주식·채권 → GDP → 고용 → 재정·통화정책 → 경기순환", lec:[
-        {n:7,topic:"환율의 원리",title:"환율 결정과 변동 요인",ch:"한국은행 한은런"},
-        {n:8,topic:"주식과 채권의 차이",title:"주식과 채권",ch:"3분차이"},
-        {n:9,topic:"GDP란 무엇인가",title:"국내총생산(GDP)이란?",ch:"만화로 보는 펭귄의 경제학"},
-        {n:10,topic:"실업률과 고용",title:"헷갈리는 고용률 취업률",ch:"EBS"},
-        {n:11,topic:"재정정책과 통화정책",title:"통화정책과 재정정책",ch:"한국은행 알경 9편"},
-        {n:12,topic:"경기순환",title:"침체일까 회복일까?",ch:"한국은행"}
+        {n:7,topic:"환율의 원리",title:"환율 결정과 변동 요인",ch:"한국은행",vid:"zasHNhIPuSM"},
+        {n:8,topic:"주식과 채권의 차이",title:"주식과 채권",ch:"EBS뉴스",vid:"q7GV-LNgISA"},
+        {n:9,topic:"GDP란 무엇인가",title:"국내총생산(GDP)이란?",ch:"만화로 보는 맨큐의 경제학",vid:"68AOCg7iKgE"},
+        {n:10,topic:"실업률과 고용",title:"헷갈리는 고용률 취업률",ch:"국가데이터처",vid:"uuMTPBDZnLE"},
+        {n:11,topic:"재정정책과 통화정책",title:"통화정책과 재정정책",ch:"한국은행",vid:"XQ02JIXYvNQ"},
+        {n:12,topic:"경기순환",title:"침체일까 회복일까?",ch:"한국은행",vid:"YqdxeAzPajg"}
       ]}
      ]},
     {id:"trend", name:"최신트렌드", emoji:"📈",
@@ -3022,20 +3023,20 @@ var ROOM = [
      flows:[["기준금리 동결","이전 수준 그대로 유지, 오르지도 내리지도 않음"],["물가상승률 둔화","물가는 계속 오르지만 오르는 속도가 느려짐"]],
      months:[
       {label:"1개월차", sub:"1~6강 · 금리·물가·대출 뉴스 → 이달 이슈 → 환율 → 원화 약세", lec:[
-        {n:1,topic:"기준금리 뉴스 읽는 법",title:"한은 기준금리 2.5% 8회 연속 동결",ch:"KBS"},
-        {n:2,topic:"물가상승률 발표 이해하기",title:"10월 소비자물가 2.4%↑",ch:"KBS"},
-        {n:3,topic:"내 대출·예금에 미치는 영향",title:"기준금리 내렸는데 대출금리는 왜 오를까",ch:"YTN"},
-        {n:4,topic:"이번 달 경제 이슈 정리",title:"환율 1480원, 물가·양극화 위기",ch:"KBS"},
-        {n:5,topic:"환율이 오른다/내린다",title:"환율이 이상하다",ch:"전인구경제연구소"},
-        {n:6,topic:"원화 약세와 수출입",title:"고환율에 수입 수출 물가 상승 순서",ch:"YTN 사이언스"}
+        {n:1,topic:"기준금리 뉴스 읽는 법",title:"한은 기준금리 2.5% 8회 연속 동결",ch:"어피티",vid:"Scf3raJ2gpY"},
+        {n:2,topic:"물가상승률 발표 이해하기",title:"10월 소비자물가 2.4%↑",ch:"연합뉴스TV",vid:"Rl3jFAD4tjc"},
+        {n:3,topic:"내 대출·예금에 미치는 영향",title:"기준금리 내렸는데 대출금리는 왜 오를까",ch:"YTN",vid:"yytIXbTCCbc"},
+        {n:4,topic:"이번 달 경제 이슈 정리",title:"환율 1480원, 물가·양극화 위기",ch:"KBS News",vid:"e8im-jh1hkA"},
+        {n:5,topic:"환율이 오른다/내린다",title:"환율이 이상하다",ch:"전인구경제연구소",vid:"xvHoPlLPWpU"},
+        {n:6,topic:"원화 약세와 수출입",title:"고환율에 수입 수출 물가 상승 순서",ch:"경제맛집 박정호TV",vid:"3_BrsIxsmKw"}
       ]},
       {label:"2개월차", sub:"7~12강 · 무역수지 → 미국 금리 → 코스피 → 펀드 → 시장 용어 → 분기 전망", lec:[
-        {n:7,topic:"무역수지 흑자/적자",title:"무역수지·경상수지 차이",ch:"YTN"},
-        {n:8,topic:"미국 금리와 한국 경제",title:"美 기준금리 인하, 우리 경제는?",ch:"KBS"},
-        {n:9,topic:"코스피/코스닥이란",title:"코스피와 코스닥 차이",ch:"3분차이"},
-        {n:10,topic:"펀드와 분산투자",title:"주식·ETF·펀드 투자 전에 이것부터",ch:""},
-        {n:11,topic:"시장 용어(조정·반등 등)",title:"왕초보를 위한 주식기초용어 총정리",ch:"이효석아카데미"},
-        {n:12,topic:"이번 분기 투자 이슈",title:"2026 증시 1분기대전망",ch:"한국경제TV"}
+        {n:7,topic:"무역수지 흑자/적자",title:"무역수지·경상수지 차이",ch:"김광석TV",vid:"b6ra858-f2c"},
+        {n:8,topic:"미국 금리와 한국 경제",title:"美 기준금리 인하, 우리 경제는?",ch:"KBS 1라디오",vid:"jBCP-L5u2sM"},
+        {n:9,topic:"코스피/코스닥이란",title:"코스피와 코스닥 차이",ch:"매일경제TV",vid:"GBnnyX6hfj0"},
+        {n:10,topic:"펀드와 분산투자",title:"주식·ETF·펀드 투자 전에 이것부터",ch:"금융투자아카데미",vid:"aYb3RhIsK9c"},
+        {n:11,topic:"시장 용어(조정·반등 등)",title:"왕초보를 위한 주식기초용어 총정리",ch:"머니인사이드",vid:"ZzvwY5iZLMg"},
+        {n:12,topic:"이번 분기 투자 이슈",title:"2026 증시 1분기대전망",ch:"한국경제TV",vid:"CU9OyPgwRlk"}
       ]}
      ]}
   ]},
@@ -3046,20 +3047,20 @@ var ROOM = [
      flows:[["1개월차 테마","AI·기후·인구 — 지금 우리를 바꾸는 것들"],["2개월차 테마","지정학·법·언론·인문학 — 세상을 읽는 틀"],["매일 연결","'상식 한 조각'의 트로이의 목마·80/20 파레토 법칙이 12강과 이어져요"],["퀴즈 연결","시사상식 문제를 틀리면 설명 아래 '📺 관련 유튜브 강의 보기' 버튼"]],
      months:[
       {label:"1개월차", sub:"1~6강 · AI 반도체 · 플랫폼 규제 · 기후·탄소중립 · 에너지 · 저출생·고령화 · 연금개혁", lec:[
-        {n:1,topic:"AI 반도체와 산업 패권",title:"AI 반도체 전쟁의 승자는?",ch:"슈카월드"},
-        {n:2,topic:"플랫폼·빅테크 규제",title:"플랫폼 규제, 독점을 어떻게 볼까",ch:"삼프로TV"},
-        {n:3,topic:"기후위기와 탄소중립",title:"기후위기, 숫자로 보는 현실",ch:"KBS 시사기획 창"},
-        {n:4,topic:"에너지 전환과 전력",title:"AI 시대의 전력 대란",ch:"슈카월드"},
-        {n:5,topic:"저출생과 고령화",title:"저출생, 왜 이렇게 됐나",ch:"차이나는 클라스"},
-        {n:6,topic:"연금개혁",title:"연금개혁, 내 노후는 어떻게",ch:"삼프로TV"}
+        {n:1,topic:"AI 반도체와 산업 패권",title:"AI 반도체 전쟁의 승자는?",ch:"SBS 뉴스",vid:"7a6T95e_UEM"},
+        {n:2,topic:"플랫폼·빅테크 규제",title:"플랫폼 규제, 독점을 어떻게 볼까",ch:"삼프로TV",vid:"GxQNJ9L3IuE"},
+        {n:3,topic:"기후위기와 탄소중립",title:"기후위기, 숫자로 보는 현실",ch:"KBS시사",vid:"b6fud1_Nj94"},
+        {n:4,topic:"에너지 전환과 전력",title:"AI 시대의 전력 대란",ch:"슈카월드",vid:"Pi_t7XGoa14"},
+        {n:5,topic:"저출생과 고령화",title:"저출생, 왜 이렇게 됐나",ch:"EBS 다큐",vid:"r8diLMpvBME"},
+        {n:6,topic:"연금개혁",title:"연금개혁, 내 노후는 어떻게",ch:"삼프로TV",vid:"bZEoW_0joJ4"}
       ]},
       {label:"2개월차", sub:"7~12강 · 미중 패권 · 공급망 · 헌법·삼권분립 · 재판 · 언론·저널리즘 · 신화·철학·문화유산", lec:[
-        {n:7,topic:"미중 패권 경쟁",title:"미중 패권 경쟁의 역사",ch:"차이나는 클라스"},
-        {n:8,topic:"공급망과 자원 무기화",title:"공급망 재편, 희토류 전쟁",ch:"사피엔스 스튜디오"},
-        {n:9,topic:"헌법과 삼권분립",title:"헌법이 뭐길래",ch:"지식채널e"},
-        {n:10,topic:"재판과 사법",title:"재판은 어떻게 이뤄지나",ch:"지식채널e"},
-        {n:11,topic:"언론과 저널리즘",title:"팩트체크, 저널리즘이란 무엇인가",ch:"KBS 시사기획 창"},
-        {n:12,topic:"신화·철학·문화유산",title:"트로이의 목마, 실재했을까",ch:"사피엔스 스튜디오"}
+        {n:7,topic:"미중 패권 경쟁",title:"미중 패권 경쟁의 역사",ch:"서울대학교",vid:"4k0qvqpbKHQ"},
+        {n:8,topic:"공급망과 자원 무기화",title:"공급망 재편, 희토류 전쟁",ch:"국가과학기술연구회",vid:"GjF69gwZH3I"},
+        {n:9,topic:"헌법과 삼권분립",title:"헌법이 뭐길래",ch:"사회지연샘",vid:"cyXTeIA7ujo"},
+        {n:10,topic:"재판과 사법",title:"재판은 어떻게 이뤄지나",ch:"대한민국 대법원",vid:"ldKrOTeE1l0"},
+        {n:11,topic:"언론과 저널리즘",title:"팩트체크, 저널리즘이란 무엇인가",ch:"한국언론진흥재단",vid:"9HYvNR5lwIE"},
+        {n:12,topic:"신화·철학·문화유산",title:"트로이의 목마, 실재했을까",ch:"리뷰엉이",vid:"i5bIO2vLk9w"}
       ]}
      ]}
   ]},
@@ -3072,20 +3073,20 @@ var ROOM = [
        formulas:["연금저축 600만 + IRP 300만 = 900만원","ISA 연 2,000만·총 1억·비과세 200만","예금자보호 1억원 (2025.9.1부터)","금투세 폐지 (2025.1.1부터)","생산적금융 ISA·부동산 개편안은 국회 심사 중"]},
      months:[
       {label:"1개월차", sub:"1~6강 · 2026 절세 계좌(연금저축·IRP·ISA) → 비상금·예금자보호 1억 → ETF·채권 기초", lec:[
-        {n:1,topic:"2026 절세 기본: 세금 아끼는 순서",title:"2026 직장인 절세 계좌 총정리 연금저축 IRP ISA",ch:"삼프로TV"},
-        {n:2,topic:"연금저축 600·IRP 합산 900만 세액공제",title:"2026 연금저축 IRP 세액공제 900만원 한도 공제율",ch:"소수몽키"},
-        {n:3,topic:"ISA 2026: 연 2,000만·비과세 200만",title:"2026 ISA 계좌 비과세 200만 400만 9.9% 분리과세",ch:"삼프로TV"},
-        {n:4,topic:"비상금 6개월 & 예금자보호 1억",title:"예금자보호 1억 통장 쪼개기 비상금 통장 만들기",ch:"부읽남"},
-        {n:5,topic:"ETF 기초·세금: 지수·총보수·괴리율",title:"2026 ETF 기초 총정리 총보수 괴리율 ETF 세금",ch:"소수몽키"},
-        {n:6,topic:"채권 기초: 금리와 채권가격",title:"2026 채권 투자 기초 금리와 채권가격",ch:"전인구경제연구소"}
+        {n:1,topic:"2026 절세 기본: 세금 아끼는 순서",title:"2026 직장인 절세 계좌 총정리 연금저축 IRP ISA",ch:"부읽남TV",vid:"BhVnHlQ6pM0"},
+        {n:2,topic:"연금저축 600·IRP 합산 900만 세액공제",title:"2026 연금저축 IRP 세액공제 900만원 한도 공제율",ch:"삼프로TV",vid:"R43cj3usctg"},
+        {n:3,topic:"ISA 2026: 연 2,000만·비과세 200만",title:"2026 ISA 계좌 비과세 200만 400만 9.9% 분리과세",ch:"김짠부",vid:"U3bT7QL58c4"},
+        {n:4,topic:"비상금 6개월 & 예금자보호 1억",title:"예금자보호 1억 통장 쪼개기 비상금 통장 만들기",ch:"연금박사 이영주",vid:"IOynlqUaLTA"},
+        {n:5,topic:"ETF 기초·세금: 지수·총보수·괴리율",title:"2026 ETF 기초 총정리 총보수 괴리율 ETF 세금",ch:"머니투데이 부꾸미",vid:"2DrNFxecbqA"},
+        {n:6,topic:"채권 기초: 금리와 채권가격",title:"2026 채권 투자 기초 금리와 채권가격",ch:"김광석TV",vid:"lKaYltke_NQ"}
       ]},
       {label:"2개월차", sub:"7~12강 · S&P500·나스닥 적립식 → 리밸런싱 → 2026 부동산 세금 → 연금 인출·금융사기", lec:[
-        {n:7,topic:"S&P500·나스닥 적립식 & 해외투자 세금",title:"2026 S&P500 나스닥 적립식 투자 ETF 과세",ch:"소수몽키"},
-        {n:8,topic:"자산배분 & 리밸런싱",title:"2026 자산배분 리밸런싱 주기와 방법",ch:"삼프로TV"},
-        {n:9,topic:"부동산 입지 & 2026 취득세·보유세",title:"2026 부동산 세금 취득세 보유세 종부세 개편",ch:"월급쟁이부자들"},
-        {n:10,topic:"금리·환율이 내 자산에 미치는 영향",title:"2026 금리 환율이 자산에 미치는 영향",ch:"전인구경제연구소"},
-        {n:11,topic:"노후 월배당 & 연금 인출 전략",title:"2026 연금 인출 전략 연금소득세 월배당",ch:"삼프로TV"},
-        {n:12,topic:"금융사기·수수료 피하기",title:"2026 금융사기 예방 수수료 아끼는 법",ch:"KBS"}
+        {n:7,topic:"S&P500·나스닥 적립식 & 해외투자 세금",title:"2026 S&P500 나스닥 적립식 투자 ETF 과세",ch:"김짠부",vid:"VXpUleIos1k"},
+        {n:8,topic:"자산배분 & 리밸런싱",title:"2026 자산배분 리밸런싱 주기와 방법",ch:"홍춘욱의 경제강의노트",vid:"OWTFPMFyA6Q"},
+        {n:9,topic:"부동산 입지 & 2026 취득세·보유세",title:"2026 부동산 세금 취득세 보유세 종부세 개편",ch:"월급쟁이부자들TV",vid:"YmVZUPPY82c"},
+        {n:10,topic:"금리·환율이 내 자산에 미치는 영향",title:"2026 금리 환율이 자산에 미치는 영향",ch:"전인구경제연구소",vid:"urHbbMWE-Ec"},
+        {n:11,topic:"노후 월배당 & 연금 인출 전략",title:"2026 연금 인출 전략 연금소득세 월배당",ch:"김범곤의 연금수업",vid:"_uicSIaTZ0I"},
+        {n:12,topic:"금융사기·수수료 피하기",title:"2026 금융사기 예방 수수료 아끼는 법",ch:"금융감독원",vid:"MJTsJqy6naQ"}
       ]}
      ]}
   ]}
@@ -4399,7 +4400,8 @@ var ROOM_LEC={}, ROOM_TOTAL=0;
         for(var k=0;k<mo.lec.length;k++){
           var L=mo.lec[k], id=tr.id+"-"+L.n;
           L.id=id; L.track=tr.id; L.group=g.id; L.month=m;
-          L.url=YT_SEARCH+encodeURIComponent(L.title+(L.ch?" "+L.ch:""));
+          L.url = L.vid ? ("https://www.youtube.com/watch?v="+L.vid)
+                          : (YT_SEARCH+encodeURIComponent(L.title+(L.ch?" "+L.ch:"")));
           ROOM_LEC[id]=L; ROOM_TOTAL++;
         }
       }
@@ -5177,7 +5179,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v45";
+var APP_VER="v46";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5815,7 +5817,7 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=45"></script>
+<script src="hotcho_modes.js?v=46"></script>
 <script>
 /* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
    초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."

@@ -66,8 +66,12 @@
         복호화는 이 폰의 WebCrypto 안에서만(서버 전송 0). 비밀번호는 코드에 없다.
         '이 폰에 기억하기'를 켜면 비밀번호가 아니라 복호화된 숫자만 hotcho_fin_charts_v1 에 남고,
         🔒 잠그기를 누르면 그 숫자도 지운다.
-        (index.html ?v=45 · APP_VER v45 · hotcho_modes.js·css?v=45 — v45 는 막대 값 라벨 외곽선만) */
-const CACHE = 'toeic-bts-v45';
+        (index.html ?v=45 · APP_VER v45 · hotcho_modes.js·css?v=45 — v45 는 막대 값 라벨 외곽선만)
+   v46: 📺 2개월 공부방 84강 전부를 '유튜브 검색'에서 '실제 영상 직링크'(watch?v=)로 교체 — 누르면 그 강의
+        영상이 바로 열립니다. 강의마다 영상 ID(vid)를 넣고, 추천 채널(ch)도 실제 영상 채널로 맞춤.
+        영상 확인이 안 된 강의만 예전처럼 제목 검색 링크로 남김(2026-11-25 기준 84강 전부 확인 완료).
+        (index.html ?v=46 · APP_VER v46 · hotcho_modes.js·css?v=46) */
+const CACHE = 'toeic-bts-v46';
 const SHELL = [
   './',
   './index.html',
