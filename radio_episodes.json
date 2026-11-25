@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-26T06:01:19+09:00",
- "updatedLabel": "11/26 06:01",
+ "updated": "2026-11-26T07:32:39+09:00",
+ "updatedLabel": "11/26 07:32",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,16 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "100th Macy’s Thanksgiving Day Parade Rescheduled",
+     "guid": "2aae1c60-af7c-11f0-9be7-4b1e63bbfdb8",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY5141691410.mp3",
+     "dateISO": "2026-11-26T06:58:00+09:00",
+     "dateLabel": "11/26(목) 06:58",
+     "dateShort": "11/26(목)",
+     "durationSec": 457,
+     "durationLabel": "7분 37초"
+    },
     {
      "title": "The Army Blew Up Unstable Bomb-Making Chemicals. Now What?",
      "guid": "a6b11994-b04d-11f0-b754-3b1719a2bc7d",
@@ -83,16 +93,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 476,
      "durationLabel": "7분 56초"
-    },
-    {
-     "title": "Delta Fixes Glitch That Caused Massive Delays",
-     "guid": "01ca75aa-b04e-11f0-adaa-e757fda56659",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY2311599617.mp3",
-     "dateISO": "2026-11-23T20:54:00+09:00",
-     "dateLabel": "11/23(월) 20:54",
-     "dateShort": "11/23(월)",
-     "durationSec": 531,
-     "durationLabel": "8분 51초"
     }
    ],
    "ok": true,
@@ -300,6 +300,16 @@
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/I0000-2014-goodmorningpops",
    "episodes": [
     {
+     "title": "11/26(목) CREW - Ju Kaia",
+     "guid": "gid://kbs-podcast/6b075dae13134bfa93ad5337",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b075dae13134bfa93ad5337.mp3",
+     "dateISO": "2026-11-26T07:14:30+09:00",
+     "dateLabel": "11/26(목) 07:14",
+     "dateShort": "11/26(목)",
+     "durationSec": 697,
+     "durationLabel": "11분 37초"
+    },
+    {
      "title": "11/25(수) New Soul - Yael Naim",
      "guid": "gid://kbs-podcast/6b060a3508062234165a95c5",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b060a3508062234165a95c5.mp3",
@@ -368,16 +378,6 @@
      "dateShort": "11/17(화)",
      "durationSec": 642,
      "durationLabel": "10분 42초"
-    },
-    {
-     "title": "11/16(월) Gabriela - KATSEYE",
-     "guid": "gid://kbs-podcast/6afa2aa6990ef67d4af0a5cd",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afa2aa6990ef67d4af0a5cd.mp3",
-     "dateISO": "2026-11-16T06:56:30+09:00",
-     "dateLabel": "11/16(월) 06:56",
-     "dateShort": "11/16(월)",
-     "durationSec": 656,
-     "durationLabel": "10분 56초"
     }
    ],
    "ok": true,
