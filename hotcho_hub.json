@@ -1,17 +1,17 @@
 {
- "updated": "2026-11-27 06:01",
+ "updated": "2026-11-27 06:38",
  "cartelwatch": {
-  "updated": "2026-11-26 06:37",
-  "collected": 10694,
-  "total_amount": 839584582089,
+  "updated": "2026-11-27 06:37",
+  "collected": 11315,
+  "total_amount": 895596676208,
   "period": {
    "from": "2026-08-10",
    "to": "2026-12-03"
   },
-  "anomaly_count": 274,
+  "anomaly_count": 292,
   "by_type": {
    "CONCENTRATION": 3,
-   "SPLIT": 246,
+   "SPLIT": 264,
    "NEWCOMER": 25
   },
   "recent": [
@@ -19,8 +19,8 @@
     "type_label": "일감 몰아주기",
     "severity": "상",
     "agency": "고성군",
-    "title": "상하수도사업소 · 주식회사 넥스트워터 점유율 67.5%",
-    "summary": "상하수도사업소 계약 135.7억 원 중 주식회사 넥스트워터가 91.7억 원 (67.5%, 3건 / 모집단 47건)",
+    "title": "상하수도사업소 · 주식회사 넥스트워터 점유율 67.4%",
+    "summary": "상하수도사업소 계약 135.9억 원 중 주식회사 넥스트워터가 91.7억 원 (67.4%, 3건 / 모집단 49건)",
     "amount": 9167888960,
     "url": "https://www.g2b.go.kr/link/FIUA027_01/single/?ctrtNo=R25TA01302178&ctrtChgOrd=02&prcmBsneSeCd=조070003&srchName=ctrtCrst&openUrl=Y"
    },
@@ -28,8 +28,8 @@
     "type_label": "일감 몰아주기",
     "severity": "상",
     "agency": "춘천시",
-    "title": "농업정책과 농정기획 · 춘천시산림조합 점유율 69.7%",
-    "summary": "농업정책과 농정기획 계약 46.4억 원 중 춘천시산림조합이 32.4억 원 (69.7%, 13건 / 모집단 70건)",
+    "title": "농업정책과 농정기획 · 춘천시산림조합 점유율 69.4%",
+    "summary": "농업정책과 농정기획 계약 46.6억 원 중 춘천시산림조합이 32.4억 원 (69.4%, 13건 / 모집단 75건)",
     "amount": 3235199340,
     "url": "https://www.g2b.go.kr/link/FIUA027_01/single/?ctrtNo=R26TA01791418&ctrtChgOrd=01&prcmBsneSeCd=조070004&srchName=ctrtCrst&openUrl=Y"
    },
