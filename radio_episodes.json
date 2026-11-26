@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-26T13:02:58+09:00",
- "updatedLabel": "11/26 13:02",
+ "updated": "2026-11-27T06:01:04+09:00",
+ "updatedLabel": "11/27 06:01",
  "perProgram": 8,
  "programs": [
   {
@@ -110,6 +110,26 @@
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
     {
+     "title": "Net migration to UK at lowest level since 1997",
+     "guid": "urn:bbc:podcast:p0pq2ymt",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pq2tz0.mp3",
+     "dateISO": "2026-11-27T01:09:00+09:00",
+     "dateLabel": "11/27(금) 01:09",
+     "dateShort": "11/27(금)",
+     "durationSec": 1665,
+     "durationLabel": "27분 45초"
+    },
+    {
+     "title": "Trump approves Elon Musk's plan for data centres in space",
+     "guid": "urn:bbc:podcast:p0ppz1kd",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppz1cj.mp3",
+     "dateISO": "2026-11-26T14:34:00+09:00",
+     "dateLabel": "11/26(목) 14:34",
+     "dateShort": "11/26(목)",
+     "durationSec": 1816,
+     "durationLabel": "30분 16초"
+    },
+    {
      "title": "US announces new tariffs on China and other countries",
      "guid": "urn:bbc:podcast:p0ppwqrn",
      "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppwplz.mp3",
@@ -168,26 +188,6 @@
      "dateShort": "11/23(월)",
      "durationSec": 1654,
      "durationLabel": "27분 34초"
-    },
-    {
-     "title": "The Global Story: AI can imitate a human. But can it think like one?",
-     "guid": "urn:bbc:podcast:p0pp0406",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp03f4.mp3",
-     "dateISO": "2026-11-23T05:00:00+09:00",
-     "dateLabel": "11/23(월) 05:00",
-     "dateShort": "11/23(월)",
-     "durationSec": 1720,
-     "durationLabel": "28분 40초"
-    },
-    {
-     "title": "Deadlock at UN climate summit in Turkey",
-     "guid": "urn:bbc:podcast:p0pp9hxv",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pp9hr7.mp3",
-     "dateISO": "2026-11-22T13:48:00+09:00",
-     "dateLabel": "11/22(일) 13:48",
-     "dateShort": "11/22(일)",
-     "durationSec": 1658,
-     "durationLabel": "27분 38초"
     }
    ],
    "ok": true,
@@ -204,6 +204,16 @@
    "desc": "6분 안에 영단어·표현 하나 — 출퇴근·설거지용",
    "rss": "https://podcasts.files.bbci.co.uk/p02pc9tn.rss",
    "episodes": [
+    {
+     "title": "Is Gen Z getting less intelligent?",
+     "guid": "urn:bbc:podcast:p0ppzy2r",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppzxv4.mp3",
+     "dateISO": "2026-11-26T18:31:00+09:00",
+     "dateLabel": "11/26(목) 18:31",
+     "dateShort": "11/26(목)",
+     "durationSec": 402,
+     "durationLabel": "6분 42초"
+    },
     {
      "title": "Are microplastics harming us?",
      "guid": "urn:bbc:podcast:p0pnt62q",
@@ -273,16 +283,6 @@
      "dateShort": "10/8(목)",
      "durationSec": 409,
      "durationLabel": "6분 49초"
-    },
-    {
-     "title": "Why does heartbreak hurt so much?",
-     "guid": "urn:bbc:podcast:p0pdc9cq",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pdc7mz.mp3",
-     "dateISO": "2026-10-01T18:47:00+09:00",
-     "dateLabel": "10/1(목) 18:47",
-     "dateShort": "10/1(목)",
-     "durationSec": 393,
-     "durationLabel": "6분 33초"
     }
    ],
    "ok": true,
@@ -585,6 +585,26 @@
    "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
    "episodes": [
     {
+     "title": "오늘의 경제 뉴스 - 젠슨 황, ‘기존 경영 체제 유지하겠다'",
+     "guid": "gid://kbs-podcast/6b07b36afaec22a01452faca",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b07b36afaec22a01452faca.mp3",
+     "dateISO": "2026-11-26T13:19:30+09:00",
+     "dateLabel": "11/26(목) 13:19",
+     "dateShort": "11/26(목)",
+     "durationSec": 1097,
+     "durationLabel": "18분 17초"
+    },
+    {
+     "title": "11/26(목) - [돈쭐상담소] 신용카드 리볼빙에 빠진 40대 싱글 여성",
+     "guid": "gid://kbs-podcast/6b07b36408062234165ab58a",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b07b36408062234165ab58a.mp3",
+     "dateISO": "2026-11-26T13:19:29+09:00",
+     "dateLabel": "11/26(목) 13:19",
+     "dateShort": "11/26(목)",
+     "durationSec": 5991,
+     "durationLabel": "1시간 39분"
+    },
+    {
      "title": "오늘의 경제 뉴스 - '젠슨 황 복귀 효과' 하루만에 주춤",
      "guid": "gid://kbs-podcast/6b0662e913134bfa93ad3d8b",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b0662e913134bfa93ad3d8b.mp3",
@@ -643,26 +663,6 @@
      "dateShort": "11/23(월)",
      "durationSec": 1110,
      "durationLabel": "18분 30초"
-    },
-    {
-     "title": "11/23(월) - [개미스쿨] 코스피, 더 떨어질까? 급락장에서 지켜야 할 투자 원칙",
-     "guid": "gid://kbs-podcast/6b03c4bb13134bfa93ad11ee",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4bb13134bfa93ad11ee.mp3",
-     "dateISO": "2026-11-23T13:44:30+09:00",
-     "dateLabel": "11/23(월) 13:44",
-     "dateShort": "11/23(월)",
-     "durationSec": 5973,
-     "durationLabel": "1시간 39분"
-    },
-    {
-     "title": "원탁의 기자들 - 한중, 한중러 정상회담... APEC이 남긴 것",
-     "guid": "gid://kbs-podcast/6affd07a66294fb97158661a",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6affd07a66294fb97158661a.mp3",
-     "dateISO": "2026-11-20T13:45:30+09:00",
-     "dateLabel": "11/20(금) 13:45",
-     "dateShort": "11/20(금)",
-     "durationSec": 2266,
-     "durationLabel": "37분 46초"
     }
    ],
    "ok": true,
@@ -679,6 +679,16 @@
    "desc": "국제 정세를 기자들이 풀어 주는 45분",
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
    "episodes": [
+    {
+     "title": "11/26(목) - [글로벌 경제] AI 버블 논쟁 따져보니… \"버블 이미 터졌다\" vs \"아직 바닥 아니다\"",
+     "guid": "gid://kbs-podcast/6b07b2fd045adfc305c5b7d9",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b07b2fd045adfc305c5b7d9.mp3",
+     "dateISO": "2026-11-26T13:18:30+09:00",
+     "dateLabel": "11/26(목) 13:18",
+     "dateShort": "11/26(목)",
+     "durationSec": 2864,
+     "durationLabel": "47분 44초"
+    },
     {
      "title": "11/25(수) - [글로벌 이슈] AI 폭락에도 웃은 인도 '돈은 몰리는데 청년은 화났다' 바퀴벌레 운동 재점화",
      "guid": "gid://kbs-podcast/6b06609008062234165a9b6c",
@@ -748,16 +758,6 @@
      "dateShort": "11/17(화)",
      "durationSec": 2776,
      "durationLabel": "46분 16초"
-    },
-    {
-     "title": "11/16(월) - [글로벌 이슈] 사상 첫 미·중·러 정상회담… 핵 군축·이란 전쟁 해법 찾을 수 있을까",
-     "guid": "gid://kbs-podcast/6afa8130e61ae23f027ad035",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afa8130e61ae23f027ad035.mp3",
-     "dateISO": "2026-11-16T13:06:30+09:00",
-     "dateLabel": "11/16(월) 13:06",
-     "dateShort": "11/16(월)",
-     "durationSec": 2851,
-     "durationLabel": "47분 31초"
     }
    ],
    "ok": true,
