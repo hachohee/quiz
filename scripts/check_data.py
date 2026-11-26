@@ -99,12 +99,14 @@ for target in ["compensate", "guarantee", "estimate", "alternative",
         errors.append(f"Day 12에 '{target}' 없음")
 print("Day 12:", len(d12), "개")
 
-# 2026-11-24(Day 13)·11-25(Day 14) 회차 발송분 — 앱에 빠지지 않고 들어갔는지
+# 2026-11-24(Day 13)·11-25(Day 14)·11-26(Day 15) 회차 발송분 — 앱에 빠지지 않고 들어갔는지
 for day, targets in (
     (13, ["dedicate", "revenue", "obtain", "prohibit",
           "substantial", "capable", "acknowledge", "briefly"]),
     (14, ["collaborate", "authorize", "inventory", "verify",
           "sufficient", "strategy", "urgent", "specifically"]),
+    (15, ["contribute", "objective", "adequate", "recruit",
+          "clarify", "consistent", "precisely", "authority"]),
 ):
     names = [w["w"] for w in words if w.get("d") == day]
     for target in targets:

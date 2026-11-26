@@ -960,7 +960,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=50">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=51">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -1654,6 +1654,15 @@ var WORDS = [
 {d:15,w:"backup",p:"백업",pos:"명사",m:"백업, 예비",s:"뒤(back)에 세워 두는 예비, '백업'.",c:"make a backup (백업하다)"},
 {d:15,w:"download",p:"다운로드",pos:"동사",m:"내려받다",s:"다운(아래로) 로드(실어 오기) = '내려받기'.",c:"download the file (파일을 내려받다)"},
 {d:15,w:"upload",p:"업로드",pos:"동사",m:"올리다, 업로드하다",s:"업(위로) 로드(실어 보내기) = '업로드'.",c:"upload the data (데이터를 올리다)"},
+/* --- 매일 18:00 발송분 (Day 15 · 2026-11-26) — recruit·consistent는 다른 날(10·18)에 이미 있어 오늘 썰 그대로 이어 붙임 --- */
+{d:15,w:"contribute",p:"컨트리뷰트",pos:"동사",m:"기여하다, 공헌하다",s:"큰(con) 트리(tree)에 잎사귀가 모여 숲에 '기여하다'!",c:"contribute to success (성공에 기여하다)"},
+{d:15,w:"objective",p:"옵젝티브",pos:"명사/형용사",m:"목표 / 객관적인",s:"옵션(ob)을 젝(ject)하고 딱 하나만 바라보는 '목표', 내 감정 빼면 '객관적인'!",c:"achieve an objective (목표를 달성하다)"},
+{d:15,w:"adequate",p:"애더퀏",pos:"형용사",m:"충분한, 적절한",s:"애(ad)가 더 컸(equate)으니 이 정도면 양이 '충분한'!",c:"adequate space (충분한 공간)"},
+{d:15,w:"recruit",p:"리크루트",pos:"동사",m:"모집하다, 채용하다",s:"회사에 리(re)더가 될 크루(crew)를 '모집하다'!",c:"recruit new staff (새 직원을 모집하다)"},
+{d:15,w:"clarify",p:"클래러파이",pos:"동사",m:"명확히 하다, 분명히 설명하다",s:"안개를 걷어내듯 클리어(clear)하게 싹 밝혀서 '명확히 하다'!",c:"clarify the policy (정책을 명확히 하다)"},
+{d:15,w:"consistent",p:"컨시스턴트",pos:"형용사",m:"일관된, 한결같은",s:"컨디션이 시작부터 끝까지(stant) 흔들림 없이 '일관된'!",c:"consistent quality (일관된 품질)"},
+{d:15,w:"precisely",p:"프리사이슬리",pos:"부사",m:"정확히, 바로",s:"프리미엄 사이즈(size)를 1밀리 오차도 없이 '정확히' 재다!",c:"arrive precisely at 9 (정확히 9시에 도착하다)"},
+{d:15,w:"authority",p:"어쏘리티",pos:"명사",m:"권한, 당국",s:"어! 쏘는(author) 권총 같은 '권한'을 가진 '당국'!",c:"have the authority (권한을 가지다)"},
 {d:16,w:"agenda",p:"어젠다",pos:"명사",m:"안건, 의제",s:"회의 책상 위에 올려놓은 '안건' 목록.",c:"on the agenda (안건에 오른)"},
 {d:16,w:"minutes",p:"미닛츠",pos:"명사",m:"회의록",s:"회의 시간(minutes)을 적어 남긴 '회의록'.",c:"take the minutes (회의록을 작성하다)"},
 {d:16,w:"attendee",p:"어텐디",pos:"명사",m:"참석자",s:"attend(참석)하는 사람, '참석자'.",c:"all attendees (모든 참석자)"},
@@ -1930,7 +1939,11 @@ var GRAMMAR = [
 {tag:"be + [ ] + p.p. = -ly 부사",q:"Please make sure the equipment is ___ installed before tomorrow.",opts:["proper","properly","property","appropriateness"],a:1,
  tip:"is와 installed(과거분사) 사이 = 동사를 꾸며 주는 자리! 형용사 proper·명사 property·명사 appropriateness는 자리가 안 맞아요. 정답은 <b>properly</b>!"},
 {tag:"a / the + [ ] + 명사",q:"The marketing team will review a ___ strategy before the launch.",opts:["comprehensive","comprehensively","comprehension","comprehend"],a:0,
- tip:"a와 strategy(명사) 사이 빈칸은 명사를 꾸며 주는 형용사 자리! -ive로 끝나는 <b>comprehensive</b>(포괄적인)가 정답. -ly는 부사, -ion은 명사, comprehend는 동사라 자리가 안 맞아요."}
+ tip:"a와 strategy(명사) 사이 빈칸은 명사를 꾸며 주는 형용사 자리! -ive로 끝나는 <b>comprehensive</b>(포괄적인)가 정답. -ly는 부사, -ion은 명사, comprehend는 동사라 자리가 안 맞아요."},
+{tag:"[ ] + 명사 = 형용사",q:"The team delivered ___ results throughout the entire year.",opts:["consist","consistent","consistently","consistency"],a:1,
+ tip:"delivered(동사) 뒤, results(명사) 앞 = 명사를 꾸며 주는 형용사 자리! consist는 동사, consistently는 부사, consistency는 명사라 안 돼요. 정답은 <b>consistent</b>!"},
+{tag:"will + [ ] + 동사원형 = -ly",q:"The spokesperson will ___ explain the new safety guidelines.",opts:["precise","precision","precisely","preciseness"],a:2,
+ tip:"will(조동사)과 explain(동사) 사이에 쏙 = 동사를 꾸며 주는 <b>-ly</b> 부사 자리! precise는 형용사, precision·preciseness는 명사라 자리가 안 맞아요. 정답은 <b>precisely</b>!"}
 ];
 
 /* ============================================================
@@ -2883,7 +2896,10 @@ var SENSE = [
  tip:"불사신 영웅 아킬레우스가 불사신의 물에 담길 때 엄마가 발뒤꿈치만 잡고 있어서, 거기만 유일한 약점이 됐다는 신화에서 나왔어요. 기사에서 '정책의 아킬레스건은 예산'처럼 결정적 빈틈을 짚을 때 단골! (11/24 상식 한 조각)"},
 {st:3,term:"피그말리온 효과",k:"d2t",line:"누군가의 믿음과 기대가 상대를 실제로 그렇게 성장시키는 현상. 그리스 신화의 조각가 피그말리온에서 이름을 땄다.",
  q:"사람들의 믿음과 기대가 그 대상의 실제 성장을 이끌어 내는 현상을 무엇이라고 할까요?",opts:["피그말리온 효과(Pygmalion Effect)","플라시보 효과","스톡홀름 증후군","선택적 지각"],a:0,
- tip:"조각가 피그말리온이 자기가 만든 조각상을 진심으로 사랑하고 믿었더니 진짜 사람이 됐다는 신화에서 나왔어요. 아이·후배에게 '잘할 거야'를 콕 집어 말해 주는 게 이 효과의 시작! (11/25 상식 한 조각)"}
+ tip:"조각가 피그말리온이 자기가 만든 조각상을 진심으로 사랑하고 믿었더니 진짜 사람이 됐다는 신화에서 나왔어요. 아이·후배에게 '잘할 거야'를 콕 집어 말해 주는 게 이 효과의 시작! (11/25 상식 한 조각)"},
+{st:3,term:"도덕적 해이",k:"d2t",line:"보험에 들거나 누가 뒤를 봐줄 거라 믿을 때 스스로 조심하지 않고 방심하게 되는 현상.",
+ q:"보험에 들거나 누가 뒤를 봐줄 거라 믿어 스스로 조심하지 않고 방심하게 되는 현상을 무엇이라고 할까요?",opts:["도덕적 해이(Moral Hazard)","역선택","피그말리온 효과","매몰비용"],a:0,
+ tip:"영어로는 moral(도덕) + hazard(위험). 보험이 있으면 병원을 더 쉽게 찾거나, '어차피 세금으로 메워 주겠지' 하고 예산을 방만하게 쓰는 것도 여기에 해당해요. \"뒤에서 누가 받아 주겠지~\" 하고 안전띠 풀고 과속하는 마음! (11/26 상식 한 조각)"}
 ];
 
 /* ============================================================
@@ -5260,7 +5276,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v50";
+var APP_VER="v51";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5898,7 +5914,7 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=50"></script>
+<script src="hotcho_modes.js?v=51"></script>
 <script>
 /* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
    초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."

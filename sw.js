@@ -88,8 +88,11 @@
         (index.html ?v=49 · APP_VER v49 · hotcho_modes.js·css?v=49)
    v50: 📚 Day 14(2026-11-25) 토익 단어 7개·3초 문법 1문제·상식 '피그말리온 효과' 반영
         (+ Day 13(11/24) 미반영분 단어 8개·상식 '아킬레스건' 함께 채움).
-        (index.html ?v=50 · APP_VER v50 · hotcho_modes.js·css?v=50) */
-const CACHE = 'toeic-bts-v50';
+        (index.html ?v=50 · APP_VER v50 · hotcho_modes.js·css?v=50)
+   v51: 📚 Day 15(2026-11-26) 토익 단어 8개(contribute·objective·adequate·recruit·clarify·
+        consistent·precisely·authority)·3초 문법 2문제·상식 '도덕적 해이(Moral Hazard)' 반영.
+        (index.html ?v=51 · APP_VER v51 · hotcho_modes.js·css?v=51) */
+const CACHE = 'toeic-bts-v51';
 const SHELL = [
   './',
   './index.html',
