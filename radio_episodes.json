@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-27T13:03:51+09:00",
- "updatedLabel": "11/27 13:03",
+ "updated": "2026-11-28T06:00:30+09:00",
+ "updatedLabel": "11/28 06:00",
  "perProgram": 8,
  "programs": [
   {
@@ -14,6 +14,16 @@
    "desc": "매일 아침 미국·세계 핵심 뉴스 5개를 5분에",
    "rss": "https://feeds.megaphone.fm/WMHY2007701094",
    "episodes": [
+    {
+     "title": "Black Friday Deals as Holiday Retail Sales Climb",
+     "guid": "01017cc2-b04e-11f0-adaa-9fc7c237369a",
+     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY3778173172.mp3",
+     "dateISO": "2026-11-27T18:00:00+09:00",
+     "dateLabel": "11/27(금) 18:00",
+     "dateShort": "11/27(금)",
+     "durationSec": 520,
+     "durationLabel": "8분 40초"
+    },
     {
      "title": "100th Macy’s Thanksgiving Day Parade Rescheduled",
      "guid": "2aae1c60-af7c-11f0-9be7-4b1e63bbfdb8",
@@ -83,16 +93,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 467,
      "durationLabel": "7분 47초"
-    },
-    {
-     "title": "Nvidia Reinstates Jensen Huang",
-     "guid": "a7382434-b04d-11f0-b754-63a094d5b636",
-     "mp3": "https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/swap.fm/track/2nzGkisFXQswLYT5s325/traffic.megaphone.fm/WMHY6211546052.mp3",
-     "dateISO": "2026-11-24T01:56:00+09:00",
-     "dateLabel": "11/24(화) 01:56",
-     "dateShort": "11/24(화)",
-     "durationSec": 476,
-     "durationLabel": "7분 56초"
     }
    ],
    "ok": true,
@@ -109,6 +109,26 @@
    "desc": "하루 두 번, 세계 뉴스를 깊이 있게 (보통 25~30분)",
    "rss": "https://podcasts.files.bbci.co.uk/p02nq0gn.rss",
    "episodes": [
+    {
+     "title": "Can Pedro Sanchez hold on to Spain?",
+     "guid": "urn:bbc:podcast:p0pq8vbc",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pq8rz2.mp3",
+     "dateISO": "2026-11-28T01:13:00+09:00",
+     "dateLabel": "11/28(토) 01:13",
+     "dateShort": "11/28(토)",
+     "durationSec": 1818,
+     "durationLabel": "30분 18초"
+    },
+    {
+     "title": "President Zelensky voices his frustration with the US",
+     "guid": "urn:bbc:podcast:p0pq5lhm",
+     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pq5lc7.mp3",
+     "dateISO": "2026-11-27T14:20:00+09:00",
+     "dateLabel": "11/27(금) 14:20",
+     "dateShort": "11/27(금)",
+     "durationSec": 1573,
+     "durationLabel": "26분 13초"
+    },
     {
      "title": "Net migration to UK at lowest level since 1997",
      "guid": "urn:bbc:podcast:p0pq2ymt",
@@ -168,26 +188,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 1721,
      "durationLabel": "28분 41초"
-    },
-    {
-     "title": "Jensen Huang reinstated as Nvidia CEO",
-     "guid": "urn:bbc:podcast:p0pphgd5",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0pphdx7.mp3",
-     "dateISO": "2026-11-24T01:08:00+09:00",
-     "dateLabel": "11/24(화) 01:08",
-     "dateShort": "11/24(화)",
-     "durationSec": 1896,
-     "durationLabel": "31분 36초"
-    },
-    {
-     "title": "COP31 in Turkey ends without a deal",
-     "guid": "urn:bbc:podcast:p0ppdfkn",
-     "mp3": "https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/https/vpid/p0ppdf4f.mp3",
-     "dateISO": "2026-11-23T14:48:00+09:00",
-     "dateLabel": "11/23(월) 14:48",
-     "dateShort": "11/23(월)",
-     "durationSec": 1654,
-     "durationLabel": "27분 34초"
     }
    ],
    "ok": true,
@@ -585,6 +585,26 @@
    "rss": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/rss/R2018-0169-mightysuccess",
    "episodes": [
     {
+     "title": "원탁의 기자들 - ‘말짱 황'된 젠슨 황 효과… 첩첩산중 반도체",
+     "guid": "gid://kbs-podcast/6b09062c045adfc305c5ce7f",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b09062c045adfc305c5ce7f.mp3",
+     "dateISO": "2026-11-27T13:25:30+09:00",
+     "dateLabel": "11/27(금) 13:25",
+     "dateShort": "11/27(금)",
+     "durationSec": 2192,
+     "durationLabel": "36분 32초"
+    },
+    {
+     "title": "11/27(금) - [뿌리 깊은 제조업] 기후변화가 바꾸는 제조업의 미래",
+     "guid": "gid://kbs-podcast/6b090627faec22a0145311c7",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b090627faec22a0145311c7.mp3",
+     "dateISO": "2026-11-27T13:25:29+09:00",
+     "dateLabel": "11/27(금) 13:25",
+     "dateShort": "11/27(금)",
+     "durationSec": 5977,
+     "durationLabel": "1시간 39분"
+    },
+    {
      "title": "오늘의 경제 뉴스 - 젠슨 황, ‘기존 경영 체제 유지하겠다'",
      "guid": "gid://kbs-podcast/6b07b36afaec22a01452faca",
      "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b07b36afaec22a01452faca.mp3",
@@ -643,26 +663,6 @@
      "dateShort": "11/24(화)",
      "durationSec": 5982,
      "durationLabel": "1시간 39분"
-    },
-    {
-     "title": "개미스쿨 - 코스피, 더 떨어질까? 급락장에서 지켜야 할 투자 원칙",
-     "guid": "gid://kbs-podcast/6b03c4f813134bfa93ad120e",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4f813134bfa93ad120e.mp3",
-     "dateISO": "2026-11-23T13:45:30+09:00",
-     "dateLabel": "11/23(월) 13:45",
-     "dateShort": "11/23(월)",
-     "durationSec": 2742,
-     "durationLabel": "45분 42초"
-    },
-    {
-     "title": "오늘의 경제 뉴스 - 정부, 증시안정펀드 가동 준비 작업 착수",
-     "guid": "gid://kbs-podcast/6b03c4f2045adfc305c56f17",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b03c4f2045adfc305c56f17.mp3",
-     "dateISO": "2026-11-23T13:45:29+09:00",
-     "dateLabel": "11/23(월) 13:45",
-     "dateShort": "11/23(월)",
-     "durationSec": 1110,
-     "durationLabel": "18분 30초"
     }
    ],
    "ok": true,
@@ -679,6 +679,16 @@
    "desc": "국제 정세를 기자들이 풀어 주는 45분",
    "rss": "https://api.kbs.co.kr/mediafactory/v1/podcast/rss/todayworld",
    "episodes": [
+    {
+     "title": "11/27(금) - [수상한 GPS] 폴란드 '녹색 방패'… 숲으로 러시아를 막는다?",
+     "guid": "gid://kbs-podcast/6b09028008062234165acc10",
+     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6b09028008062234165acc10.mp3",
+     "dateISO": "2026-11-27T13:09:30+09:00",
+     "dateLabel": "11/27(금) 13:09",
+     "dateShort": "11/27(금)",
+     "durationSec": 2846,
+     "durationLabel": "47분 26초"
+    },
     {
      "title": "11/26(목) - [글로벌 경제] AI 버블 논쟁 따져보니… \"버블 이미 터졌다\" vs \"아직 바닥 아니다\"",
      "guid": "gid://kbs-podcast/6b07b2fd045adfc305c5b7d9",
@@ -748,16 +758,6 @@
      "dateShort": "11/18(수)",
      "durationSec": 2758,
      "durationLabel": "45분 58초"
-    },
-    {
-     "title": "11/17(화) - [글로벌 이슈] 젠슨 황 다음 타겟은 러트닉? 젠슨 황 퇴진, 대중 강경파의 승리?",
-     "guid": "gid://kbs-podcast/6afbd415e61ae23f027ae600",
-     "mp3": "https://static.api.kbs.co.kr/mediafactory/v1/podcast/play/6afbd415e61ae23f027ae600.mp3",
-     "dateISO": "2026-11-17T13:12:30+09:00",
-     "dateLabel": "11/17(화) 13:12",
-     "dateShort": "11/17(화)",
-     "durationSec": 2776,
-     "durationLabel": "46분 16초"
     }
    ],
    "ok": true,
