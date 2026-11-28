@@ -193,7 +193,7 @@
   재생 위치·배속은 `tmq_radio_pos_v1` / `tmq_radio_spd_v1`, 마지막으로 본 방송은 `tmq_radio_last_v1`에 이 폰에만 저장됩니다.
 - **HTTPS 음원**: BBC RSS는 `http://` enclosure만 주므로 `ppg:enclosureSecure`(또는 https 치환)를 써서
   Mixed Content로 재생이 막히지 않게 했습니다.
-- **서비스 워커**: `toeic-bts-v52` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
+- **서비스 워커**: `toeic-bts-v53` · `radio_episodes.json`·`radio_transcripts.json`·`index.html`은 Network-First 에
   `cache: no-store` 까지 써서, 고친 코드·데이터가 GitHub Pages 의 10분 HTTP 캐시에 가로막히지 않고 바로 내려옵니다.
   앱 화면(라디오 하단 문구·대본 시트 헤더)에 `v23` 처럼 버전이 찍혀서 폰이 새 코드를 받았는지 눈으로 확인할 수 있습니다.
 
@@ -304,6 +304,20 @@
 - **다시 재는 법**: `python3 scripts/scan_ads.py --audio ep.mp3 --key "cnn5things::<guid>" [--write]`
   (오디오를 받아 적어 문장별 오차의 '계단'을 찾아 `adBreaks` 를 냅니다). `align_transcripts.py --write` 도 정합이 끝나면 같은 값을 자동으로 다시 계산해 넣습니다.
   `check_data.py` 는 `adBreaks` 의 형식·순서·범위(`at` ≤ `audioDur`, `add` −2~180초)까지 검사합니다.
+
+## 📚 매일 18:00 자동 반영 — Day 17 (2026-11-28)
+
+18:00 '저녁 토익 10분' 회차에서 낸 내용을 앱 데이터에 그대로 넣었습니다.
+
+- **📜 도파민 단어 → Day 17(🏢 시설·안전)**: **analyze · assess · demonstrate · enhance · indicate · extensive ·
+  considerable · dramatically** 8개를 이어 붙였습니다. 오늘 회차에 나간 3초 썰·짝꿍 그대로입니다(Day 17 = 36단어).
+- **⚡ 3초 문법**: 2문제 추가 (83개). ① "The new training program will ___ enhance employee productivity."
+  → will과 enhance(동사원형) 사이 -ly 부사 자리, 정답 dramatically. ② "The audit team conducted an ___
+  review of the regional budget." → an과 review(명사) 사이 형용사 자리, 정답 extensive.
+- **🌍 상식**: **확증편향(Confirmation Bias)** — 3단계에 새 문항 1개를 넣었습니다. 내 생각에 맞는 정보만
+  골라 보는 습관, 취재할 때 '내 가설이 맞다'고 밀어붙이는 함정을 피하는 기본기 (상식 123개).
+- 현재 규모: 단어 **424**(448항목) · 문법 **83** · 해석 47 · LC 76 · 상식 **123**
+- `scripts/check_data.py` 가 Day 13·14·15·16·17 발송분 단어가 실제로 들어갔는지도 검사합니다.
 
 ## 📚 매일 18:00 자동 반영 — Day 16 (2026-11-27)
 

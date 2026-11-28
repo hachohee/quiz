@@ -94,8 +94,11 @@
         (index.html ?v=51 · APP_VER v51 · hotcho_modes.js·css?v=51)
    v52: 📚 Day 16(2026-11-27) 토익 단어 8개(accompany·accumulate·acquire·anticipate·competitive·
         comprehensive·eventually·incentive)·3초 문법 2문제·상식 '파레토 법칙(80:20)' 반영.
-        (index.html ?v=52 · APP_VER v52 · hotcho_modes.js·css?v=52) */
-const CACHE = 'toeic-bts-v52';
+        (index.html ?v=52 · APP_VER v52 · hotcho_modes.js·css?v=52)
+   v53: 📚 Day 17(2026-11-28) 토익 단어 8개(analyze·assess·demonstrate·enhance·indicate·extensive·
+        considerable·dramatically)·3초 문법 2문제·상식 '확증편향(Confirmation Bias)' 반영.
+        (index.html ?v=53 · APP_VER v53 · hotcho_modes.js·css?v=53) */
+const CACHE = 'toeic-bts-v53';
 const SHELL = [
   './',
   './index.html',

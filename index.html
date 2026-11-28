@@ -960,7 +960,7 @@ body{padding-top:calc(54px + env(safe-area-inset-top))}
 .hc-tab:active{transform:scale(.98)}
 @media(min-width:640px){#hcBar .hc-bar-in{max-width:600px}}
 </style>
-<link rel="stylesheet" href="hotcho_modes.css?v=52">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
+<link rel="stylesheet" href="hotcho_modes.css?v=53">   <!-- 버전 올릴 때 APP_VER·sw.js 와 함께 v= 도 올립니다 -->
 </head>
 <body>
 <nav id="hcBar" aria-label="핫초 모드 전환">
@@ -1732,6 +1732,15 @@ var WORDS = [
 {d:17,w:"guideline",p:"가이드라인",pos:"명사",m:"지침",s:"가이드(안내) 라인(선) = '지침'.",c:"follow the guidelines (지침을 따르다)"},
 {d:17,w:"protection",p:"프로텍션",pos:"명사",m:"보호",s:"프로텍트(protect) + ion = '보호'.",c:"protective equipment (보호 장비)"},
 {d:17,w:"extinguisher",p:"익스팅귀셔",pos:"명사",m:"소화기",s:"익스팅귀시(끄는) 장치 = '소화기'.",c:"a fire extinguisher (소화기)"},
+/* --- 매일 18:00 발송분 (Day 17 · 2026-11-28) — 오늘 회차에 나간 8단어를 3초 썰·짝꿍 그대로 이어 붙임 (Day 17 = 36단어) --- */
+{d:17,w:"analyze",p:"애널라이즈",pos:"동사",m:"분석하다",s:"안을('안'al) 샅샅이 뜯어 '아이즈'(eyes)로 살피며 '분석하다'!",c:"analyze data (데이터를 분석하다)"},
+{d:17,w:"assess",p:"어세스",pos:"동사",m:"평가하다",s:"'어, 세스(세수)' 깨끗이 했나 점수 매기듯 '평가하다'!",c:"assess the impact (영향을 평가하다)"},
+{d:17,w:"demonstrate",p:"데먼스트레이트",pos:"동사",m:"입증하다, 시연하다",s:"'대문'(demon) 앞에서 스트레이트로 실력을 딱 보여 주며 '입증하다'!",c:"demonstrate skills (실력을 입증하다)"},
+{d:17,w:"enhance",p:"인핸스",pos:"동사",m:"향상시키다, 높이다",s:"기분 '인(in) 한 스푼' 더 넣어서 품질을 쑥 '향상시키다'!",c:"enhance productivity (생산성을 향상시키다)"},
+{d:17,w:"indicate",p:"인디케이트",pos:"동사",m:"나타내다, 가리키다",s:"손가락으로 '이디(어디) 케이트' 저쪽이라고 콕 '가리키다'!",c:"indicate a trend (추세를 나타내다)"},
+{d:17,w:"extensive",p:"익스텐시브",pos:"형용사",m:"광범위한, 대규모의",s:"바깥(ex)으로 텐트(ten)를 끝없이 넓게 쳐서 '광범위한'!",c:"extensive review (광범위한 검토)"},
+{d:17,w:"considerable",p:"컨시더러블",pos:"형용사",m:"상당한, 많은",s:"'컨시더'(consider, 고려하다)를 수십 번이나 해야 할 만큼 양이 '상당한'!",c:"considerable amount (상당한 양)"},
+{d:17,w:"dramatically",p:"드라마티컬리",pos:"부사",m:"극적으로, 크게",s:"아침 '드라마'처럼 전개 확 바뀌듯 '극적으로'!",c:"increase dramatically (크게 증가하다)"},
 {d:18,w:"stationery",p:"스테이셔너리",pos:"명사",m:"문구류",s:"스테이션(자리)에 두는 종이·펜, '문구류'.",c:"office stationery (사무용 문구)"},
 {d:18,w:"envelope",p:"엔벨로프",pos:"명사",m:"봉투",s:"엔(안에) 벨로프(감싸는) = '봉투'.",c:"seal the envelope (봉투를 봉하다)"},
 {d:18,w:"folder",p:"폴더",pos:"명사",m:"서류철, 폴더",s:"종이를 폴드(fold·접어) 넣는 '서류철'.",c:"a blue folder (파란 서류철)"},
@@ -1956,7 +1965,11 @@ var GRAMMAR = [
 {tag:"a / the + [ ] + 명사",q:"The consultant prepared a ___ report on the regional budget.",opts:["comprehend","comprehension","comprehensive","comprehensively"],a:2,
  tip:"a(관사)와 report(명사) 사이 빈칸이라 명사를 꾸며 주는 형용사 자리! comprehend는 동사, comprehension은 명사, comprehensively는 부사라 자리가 안 맞아요. 정답은 <b>comprehensive</b>!"},
 {tag:"will + [ ] + 동사원형 = -ly",q:"With steady effort, the team will ___ acquire the necessary skills.",opts:["eventual","eventually","eventuality","events"],a:1,
- tip:"will(조동사)과 acquire(동사원형) 사이 빈칸이라 동사를 꾸미는 -ly 부사 자리! eventual은 형용사, eventuality·events는 명사라 안 돼요. 정답은 <b>eventually</b>!"}
+ tip:"will(조동사)과 acquire(동사원형) 사이 빈칸이라 동사를 꾸미는 -ly 부사 자리! eventual은 형용사, eventuality·events는 명사라 안 돼요. 정답은 <b>eventually</b>!"},
+{tag:"will + [ ] + 동사원형 = -ly",q:"The new training program will ___ enhance employee productivity.",opts:["dramatic","drama","dramatically","dramatize"],a:2,
+ tip:"will(조동사) + [빈칸] + enhance(동사원형) 자리라 동작을 꾸며 주는 <b>-ly</b> 부사 자리! dramatic은 형용사, drama·dramatize는 명사·동사라 자리가 안 맞아요. 정답은 <b>dramatically</b>!"},
+{tag:"an + [ ] + 명사",q:"The audit team conducted an ___ review of the regional budget.",opts:["extend","extensive","extensively","extension"],a:1,
+ tip:"an(관사)과 review(명사) 사이 빈칸이라 명사를 꾸며 주는 형용사 자리! extend는 동사, extensively는 부사, extension은 명사라 안 돼요. -ive로 끝나는 <b>extensive</b>(광범위한)가 정답!"}
 ];
 
 /* ============================================================
@@ -2912,7 +2925,10 @@ var SENSE = [
  tip:"조각가 피그말리온이 자기가 만든 조각상을 진심으로 사랑하고 믿었더니 진짜 사람이 됐다는 신화에서 나왔어요. 아이·후배에게 '잘할 거야'를 콕 집어 말해 주는 게 이 효과의 시작! (11/25 상식 한 조각)"},
 {st:3,term:"도덕적 해이",k:"d2t",line:"보험에 들거나 누가 뒤를 봐줄 거라 믿을 때 스스로 조심하지 않고 방심하게 되는 현상.",
  q:"보험에 들거나 누가 뒤를 봐줄 거라 믿어 스스로 조심하지 않고 방심하게 되는 현상을 무엇이라고 할까요?",opts:["도덕적 해이(Moral Hazard)","역선택","피그말리온 효과","매몰비용"],a:0,
- tip:"영어로는 moral(도덕) + hazard(위험). 보험이 있으면 병원을 더 쉽게 찾거나, '어차피 세금으로 메워 주겠지' 하고 예산을 방만하게 쓰는 것도 여기에 해당해요. \"뒤에서 누가 받아 주겠지~\" 하고 안전띠 풀고 과속하는 마음! (11/26 상식 한 조각)"}
+ tip:"영어로는 moral(도덕) + hazard(위험). 보험이 있으면 병원을 더 쉽게 찾거나, '어차피 세금으로 메워 주겠지' 하고 예산을 방만하게 쓰는 것도 여기에 해당해요. \"뒤에서 누가 받아 주겠지~\" 하고 안전띠 풀고 과속하는 마음! (11/26 상식 한 조각)"},
+{st:3,term:"확증편향",k:"d2t",line:"내 생각이나 믿음에 맞는 정보만 골라 보고, 반대되는 근거는 모른 척하는 마음의 습관.",
+ q:"내 생각이나 믿음에 맞는 정보만 골라 보고 반대되는 근거는 모른 척하는 마음의 습관을 무엇이라고 할까요?",opts:["확증편향(Confirmation Bias)","피그말리온 효과","도덕적 해이","매몰비용"],a:0,
+ tip:"영어로는 confirmation(확인) + bias(편향). 취재할 때나 뉴스 볼 때 '내 가설이 맞다'고 밀어붙이는 함정을 피하게 해 주는 기본기예요. 취재 현장에서는 안 맞는 자료도 일부러 찾아 읽어야 균형이 잡혀요. \"역시 내 말이 맞지?\" 하며 보고 싶은 댓글만 좋아요 누르는 내 모습! (11/28 상식 한 조각)"}
 ];
 
 /* ============================================================
@@ -5289,7 +5305,7 @@ var rsRafId=0, rsLineEls=[], rsBarIdx=-2;
     직접 움직이면 '내가 옮긴 위치'를 정확히 알 수 있어 오판이 없습니다.) */
 var rsScrollRAF=0, rsScrollFrom=0, rsScrollTo=-1, rsScrollT0=0, rsScrollDur=0, rsScrollCheck=0;
 var rsTouchY=0, rsTouchTop=0;
-var APP_VER="v52";
+var APP_VER="v53";
 
 function rsBodyEl(){ return $("rsBody"); }
 function rsOpenState(){ return document.body.classList.contains("script-on"); }
@@ -5927,7 +5943,7 @@ show("home");
 })();
 </script>
 <script src="fridge_engine.js"></script>
-<script src="hotcho_modes.js?v=52"></script>
+<script src="hotcho_modes.js?v=53"></script>
 <script>
 /* ================= 📅 주간 공부 스케줄 (2026-11-25 시작) =================
    초희 지시(11/24): "똑똑핫초에는 낼부터 공부 시작으로 잡고 상단에 스케쥴 주간으로 넣어줘 공부하면 체크할게."
